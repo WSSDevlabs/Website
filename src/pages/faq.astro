@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import NewsletterBand from '../components/sections/NewsletterBand.astro';
+import { SITE } from '../data/site';
+
+const categories = [
+  { id: 'general', label: 'General Information' },
+  { id: 'services', label: 'Services' },
+  { id: 'process', label: 'Process' },
+  { id: 'pricing', label: 'Pricing & Plans' },
+  { id: 'technical', label: 'Technical' },
+];
+
+const allFaqs = [
+  { cat: 'general', q: 'What does WSS DevLabs do?', a: 'We build custom websites, mobile apps, custom business systems (CMS/ERP), and AI-powered software for startups and growing companies — engineered from scratch, not assembled from templates.' },
+  { cat: 'general', q: 'Where are you based?', a: 'We are based in Kuala Lumpur, Malaysia, and work remotely with clients across Southeast Asia and beyond.' },
+  { cat: 'general', q: 'How do I start a project with you?', a: "Fill in our contact form or email us directly. We'll reply within one business day to schedule a discovery call where we scope your project and provide a fixed-price proposal." },
+  { cat: 'services', q: 'Do you build mobile apps?', a: "Yes. We build cross-platform apps (React Native / Flutter) and native iOS/Android when performance demands it. We'll advise which approach fits your scope and budget." },
+  { cat: 'services', q: 'Do you offer AI development?', a: "Yes — LLM-powered features, RAG pipelines, workflow automation, and AI integrations. We're precise about scope: we'll tell you clearly what's AI integration vs. custom ML." },
+  { cat: 'services', q: 'Can you take over an existing project?', a: "Yes. We begin with a code audit to assess the state of the codebase before committing to a scope. If it's salvageable, we'll work with it; if a rebuild is more cost-effective, we'll say so." },
+  { cat: 'process', q: 'How long does a typical project take?', a: 'Websites: 4–8 weeks. Mobile apps: 8–16 weeks. Custom systems vary by complexity and are scoped during our discovery call. AI projects depend on feasibility assessment outcomes.' },
+  { cat: 'process', q: 'What do I own at the end?', a: "Full source code, documentation, and all credentials. No vendor lock-in, no platform dependency. It's yours." },
+  { cat: 'process', q: 'Will I talk to the actual engineer?', a: "Yes. We don't have account managers between you and the work. You'll interact directly with the engineer building your project." },
+  { cat: 'pricing', q: 'How are projects priced?', a: "Fixed-price proposals after a scoping call. We don't do open-ended hourly billing for project work. See our Pricing page for starting points by service." },
+  { cat: 'pricing', q: 'Can I pay in milestones?', a: 'Yes. Standard terms are 50% on kickoff and 50% on delivery. Larger projects use milestone schedules outlined in the proposal.' },
+  { cat: 'pricing', q: 'Do you offer maintenance retainers?', a: 'Yes. Monthly Maintenance & Support retainers cover uptime monitoring, security patches, dependency updates, and a monthly content/feature update quota.' },
+  { cat: 'technical', q: 'What tech stack do you use?', a: 'It depends on the project. For marketing sites: Astro + TypeScript + Tailwind. For apps: React Native or Flutter. For systems: TypeScript / Node.js / PostgreSQL. For AI: LLM APIs, RAG, Python.' },
+  { cat: 'technical', q: 'Will I be able to update the site myself?', a: "Yes. If content management is a requirement, we'll include a CMS (headless or custom) so non-technical users can update content without touching code." },
+  { cat: 'technical', q: 'Do you host the site?', a: "We deploy to Cloudflare Pages by default — fast, global, and free on their starter tier. We can deploy to Vercel, AWS, or other platforms if you have an existing preference." },
+];
+---
+
+<BaseLayout
+  title="FAQs — WSS DevLabs"
+  description="Answers to common questions about WSS DevLabs — services, process, pricing, and technical approach."
+  path="/faq"
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
+    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
+    <Container class="relative">
+      <nav aria-label="Breadcrumb" class="mb-5 flex justify-center">
+        <ol class="flex items-center gap-2 text-xs text-ink-dim">
+          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
+          <li class="flex items-center gap-2">
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+            <span class="font-medium text-ink">FAQs</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="text-5xl font-bold tracking-tight text-ink md:text-6xl">FAQs</h1>
+    </Container>
+  </section>
+
+
+  <!-- FAQ body -->
+  <section class="border-b border-line">
+    <Container class="py-14">
+      <div class="text-center">
+        <Eyebrow label="FAQs" class="justify-center" />
+        <h2 class="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">Question? Look here.</h2>
+      </div>
+
+      <div class="mt-12 grid gap-8 lg:grid-cols-3">
+        <!-- Left sidebar -->
+        <aside class="lg:col-span-1">
+          <nav class="overflow-hidden rounded-2xl border border-line bg-paper shadow-sm" aria-label="FAQ categories">
+            {categories.map((cat, i) => (
+              <a
+                href={`#${cat.id}`}
+                class:list={[
+                  'block border-b border-line px-5 py-3.5 text-sm font-medium transition-colors last:border-0',
+                  i === 0
+                    ? 'bg-[#0a0a0c] font-bold text-white'
+                    : 'text-ink-dim hover:bg-paper-dim hover:text-accent',
+                ]}
+              >
+                {cat.label}
+              </a>
+            ))}
+          </nav>
+
+          <!-- CTA card -->
+          <div class="mt-5 overflow-hidden rounded-2xl bg-[#0a0a0c] p-6 text-white">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent">
+              <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg>
+            </div>
+            <h3 class="mt-3 text-sm font-bold text-white">You have different questions?</h3>
+            <p class="mt-1 text-xs text-white/50">Our team will answer all your questions. We ensure a quick response.</p>
+            <a href="/contact" class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-accent py-2.5 text-sm font-bold text-white transition-colors hover:bg-accent-dim">
+              Contact Us
+            </a>
+          </div>
+
+          <!-- 24/7 card -->
+          <div class="mt-4 flex items-center gap-3 rounded-2xl border border-line bg-paper p-4 shadow-sm">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10">
+              <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            </span>
+            <div>
+              <p class="text-xs font-bold text-ink">Your Growth, Our Mission</p>
+              <p class="text-xs text-ink-dim">24/7 Service</p>
+              <p class="text-xs font-medium text-accent">{SITE.phone}</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right: accordion by category -->
+        <div class="lg:col-span-2 space-y-10">
+          {categories.map((cat) => {
+            const items = allFaqs.filter((f) => f.cat === cat.id);
+            return (
+              <div id={cat.id}>
+                <h3 class="text-base font-bold text-ink border-b border-line pb-3">{cat.label}</h3>
+                <div class="mt-2 divide-y divide-line">
+                  {items.map((item) => (
+                    <details class="group py-4">
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-ink">
+                        <span>{item.q}</span>
+                        <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line transition-all group-open:rotate-45 group-open:border-accent group-open:bg-accent group-open:text-white">
+                          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </span>
+                      </summary>
+                      <div class="mt-3 rounded-xl bg-paper-dim px-4 py-3">
+                        <p class="text-sm leading-relaxed text-ink-dim">{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+
+  <NewsletterBand />
+</BaseLayout>

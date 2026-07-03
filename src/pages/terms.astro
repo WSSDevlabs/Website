@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import { SITE } from '../data/site';
+
+const lastUpdated = new Date('2026-01-01');
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="The terms governing use of the WSS DevLabs website and engagement with our services."
+  path="/terms"
+>
+  <Section>
+    <Container class="prose prose-neutral max-w-3xl">
+      <h1>Terms of Service</h1>
+      <p>
+        Last updated: {
+          lastUpdated.toLocaleDateString('en-MY', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+        }
+      </p>
+
+      <h2>1. Acceptance of terms</h2>
+      <p>By using this website, you agree to these Terms of Service.</p>
+
+      <h2>2. Services</h2>
+      <p>
+        Project engagements (web development, mobile app development, custom systems, AI
+        development, UI/UX design, maintenance) are governed by a separate written agreement or
+        proposal signed by both parties, which takes precedence over these general terms.
+      </p>
+
+      <h2>3. Website content</h2>
+      <p>
+        Content on this site, including case studies and capability descriptions, reflects work we
+        can credibly deliver and is provided for informational purposes only.
+      </p>
+
+      <h2>4. Intellectual property</h2>
+      <p>
+        Unless otherwise agreed in a project contract, site content and branding remain the property
+        of
+        {' '}{SITE.name}.
+      </p>
+
+      <h2>5. Limitation of liability</h2>
+      <p>
+        {SITE.name} is not liable for any indirect or consequential loss arising from use of this website.
+      </p>
+
+      <h2>6. Governing law</h2>
+      <p>These terms are governed by the laws of Malaysia.</p>
+
+      <h2>7. Contact</h2>
+      <p>Questions about these terms can be sent to {SITE.email || 'our contact email'}.</p>
+    </Container>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,66 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import type { FaqItem } from '../../data/faq';
+
+type Props = {
+  title?: string;
+  items: FaqItem[];
+};
+
+const { title = 'Frequently asked questions', items } = Astro.props;
+---
+
+<Section rule>
+  <Container>
+    <div class="flex flex-col gap-12 lg:flex-row lg:gap-24">
+      <!-- Left: heading + contact CTA -->
+      <div class="lg:w-80 lg:shrink-0">
+        <h2 class="h-section" data-split>{title}</h2>
+        <p class="mt-5 text-sm text-ink-dim">Can't find what you're looking for?</p>
+        <a
+          href="/contact"
+          class="mt-5 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+          </svg>
+          Ask us directly
+        </a>
+
+        <div class="card mt-10 flex items-center gap-4 !rounded-2xl border-accent/20 bg-accent/4 p-5">
+          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10">
+            <svg class="h-4.5 w-4.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-ink">We respond within</p>
+            <p class="text-sm text-ink-dim">1 business day</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: accordion -->
+      <div class="flex-1">
+        {
+          items.map((item, i) => (
+            <details class:list={['group py-6', i > 0 && 'border-t border-line']}>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-base font-semibold tracking-tight text-ink transition-colors hover:text-accent md:text-lg">
+                <span>{item.question}</span>
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-ink-dim transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] group-open:rotate-45 group-open:border-accent group-open:bg-accent group-open:text-white">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </span>
+              </summary>
+              <p class="mt-4 max-w-2xl pr-10 text-sm leading-relaxed text-ink-dim md:text-base">
+                {item.answer}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</Section>

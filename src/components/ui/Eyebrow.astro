@@ -1,0 +1,27 @@
+---
+type Tone = 'red' | 'blue' | 'yellow' | 'green' | 'neutral';
+
+type Props = {
+  label: string;
+  tone?: Tone;
+  class?: string;
+};
+
+const { label, tone = 'blue', class: className = '' } = Astro.props;
+
+const toneClass: Record<Tone, string> = {
+  red: 'text-accent-red',
+  blue: 'text-accent',
+  yellow: 'text-accent-yellow',
+  green: 'text-accent-green',
+  neutral: 'text-ink-dim'
+};
+---
+
+<p class:list={['mono-label flex items-center gap-2.5', toneClass[tone], className]}>
+  <span class="flex items-center gap-[3px]" aria-hidden="true">
+    <span class="h-3 w-[7px] rounded-[2px] bg-current"></span>
+    <span class="h-3 w-[7px] rounded-[2px] bg-current opacity-40"></span>
+  </span>
+  {label}
+</p>

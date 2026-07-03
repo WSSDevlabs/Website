@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import NewsletterBand from '../components/sections/NewsletterBand.astro';
+import { SITE } from '../data/site';
+import { SERVICES } from '../data/services';
+---
+
+<BaseLayout
+  title="Contact Us — WSS DevLabs"
+  description="Get in touch with WSS DevLabs. Start a project, ask a question, or request a free quote."
+  path="/contact"
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
+    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
+    <Container class="relative">
+      <nav aria-label="Breadcrumb" class="mb-4 flex justify-center">
+        <ol class="flex items-center gap-2 text-xs text-ink-dim">
+          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
+          <li class="flex items-center gap-2">
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+            <span class="font-medium text-ink">Contact Us</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="text-4xl font-bold tracking-tight text-ink md:text-5xl">Contact Us</h1>
+    </Container>
+  </section>
+
+
+  <!-- Contact form section -->
+  <section class="border-b border-line">
+    <Container class="py-12">
+      <div class="text-center">
+        <Eyebrow label="Contact Us" class="justify-center" />
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">Get Your Free Quote Today!</h2>
+      </div>
+
+      <div class="mt-8 grid gap-8 lg:grid-cols-5">
+        <!-- Form -->
+        <form id="contact-form" class="lg:col-span-3 space-y-4" onsubmit="return false;">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="c-name" class="mb-1.5 block text-xs font-semibold text-ink">Your Name <span class="text-accent">*</span></label>
+              <input id="c-name" type="text" placeholder="Ex. John Doe" required class="w-full rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm text-ink placeholder:text-ink-dim focus:border-accent focus:outline-none" />
+            </div>
+            <div>
+              <label for="c-email" class="mb-1.5 block text-xs font-semibold text-ink">Email <span class="text-accent">*</span></label>
+              <input id="c-email" type="email" placeholder="example@gmail.com" required class="w-full rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm text-ink placeholder:text-ink-dim focus:border-accent focus:outline-none" />
+            </div>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="c-phone" class="mb-1.5 block text-xs font-semibold text-ink">Phone <span class="text-accent">*</span></label>
+              <input id="c-phone" type="tel" placeholder="Enter Phone Number" class="w-full rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm text-ink placeholder:text-ink-dim focus:border-accent focus:outline-none" />
+            </div>
+            <div>
+              <label for="c-service" class="mb-1.5 block text-xs font-semibold text-ink">Service Interested In <span class="text-accent">*</span></label>
+              <select id="c-service" class="w-full rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm text-ink focus:border-accent focus:outline-none">
+                <option value="">Select Service</option>
+                {SERVICES.map((s) => <option value={s.slug}>{s.title}</option>)}
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="c-message" class="mb-1.5 block text-xs font-semibold text-ink">Your Message <span class="text-accent">*</span></label>
+            <textarea id="c-message" rows="5" placeholder="Enter here..." class="w-full resize-none rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm text-ink placeholder:text-ink-dim focus:border-accent focus:outline-none" />
+          </div>
+          <div id="c-success" class="hidden rounded-xl bg-accent-green/10 px-4 py-3 text-sm font-semibold text-accent-green">
+            Message sent! We will reply within one business day.
+          </div>
+          <button type="submit" id="c-submit" class="inline-flex items-center gap-2 rounded-xl bg-accent px-7 py-3 text-sm font-bold text-white shadow-md shadow-accent/20 transition-colors hover:bg-accent-dim active:scale-95">
+            Send Message
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </button>
+        </form>
+
+        <!-- Team image -->
+        <div class="relative hidden lg:col-span-2 lg:block">
+          <div class="overflow-hidden rounded-2xl h-full">
+            <img src="https://picsum.photos/seed/tech-office-team/500/480" alt="WSS DevLabs team" class="h-full w-full object-cover" loading="lazy" width="500" height="480" />
+          </div>
+          <div class="absolute -right-1 bottom-16 text-accent-yellow">
+            <svg class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41 24 12l-9.41 2.59L12 24l-2.59-9.41L0 12l9.41-2.59L12 0z"/></svg>
+          </div>
+          <div class="absolute -right-3 bottom-8 text-accent-yellow/50">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41 24 12l-9.41 2.59L12 24l-2.59-9.41L0 12l9.41-2.59L12 0z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact info cards -->
+      <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        {[
+          { icon: 'M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z', label: 'Address', value: SITE.address },
+          { icon: 'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z', label: 'Phone', value: SITE.phone },
+          { icon: 'M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75', label: 'Email', value: SITE.email },
+        ].map((item) => (
+          <div class="flex flex-col items-center gap-3 rounded-2xl border border-line bg-paper p-5 text-center shadow-sm">
+            <span class="flex h-12 w-12 items-center justify-center rounded-full bg-accent">
+              <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d={item.icon} /></svg>
+            </span>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wide text-ink-dim">{item.label}</p>
+              <p class="mt-0.5 text-sm font-medium text-ink">{item.value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Map -->
+  <div class="border-b border-line">
+    <Container class="py-6">
+      <div class="overflow-hidden rounded-2xl border border-line">
+        <iframe
+          title="WSS DevLabs location in Kuala Lumpur"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=101.62%2C3.08%2C101.78%2C3.22&layer=mapnik&marker=3.149%2C101.695"
+          width="100%"
+          height="360"
+          loading="lazy"
+          class="border-0"
+        />
+      </div>
+    </Container>
+  </div>
+
+
+  <NewsletterBand />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const success = document.getElementById('c-success');
+  if (form && success) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = (document.getElementById('c-name') as HTMLInputElement).value;
+      const email = (document.getElementById('c-email') as HTMLInputElement).value;
+      const phone = (document.getElementById('c-phone') as HTMLInputElement).value;
+      const service = (document.getElementById('c-service') as HTMLSelectElement).value;
+      const message = (document.getElementById('c-message') as HTMLTextAreaElement).value;
+      const subject = encodeURIComponent(`New enquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:hello@wssdevlabs.com?subject=${subject}&body=${body}`;
+      success.classList.remove('hidden');
+      form.reset();
+    });
+  }
+</script>

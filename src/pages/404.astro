@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+---
+
+<BaseLayout
+  title="Page Not Found — WSS DevLabs"
+  description="The page you are looking for cannot be found."
+  path="/404"
+>
+  <!-- 404 hero -->
+  <section class="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-paper py-16 text-center">
+    <!-- Sparkle decorations -->
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <svg class="absolute left-[10%] top-[18%] h-10 w-10 text-accent/25" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41 24 12l-9.41 2.59L12 24l-2.59-9.41L0 12l9.41-2.59L12 0z"/></svg>
+      <svg class="absolute right-[8%] top-[15%] h-5 w-5 text-accent-yellow/40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41 24 12l-9.41 2.59L12 24l-2.59-9.41L0 12l9.41-2.59L12 0z"/></svg>
+      <svg class="absolute bottom-[18%] left-[12%] h-6 w-6 text-accent-blue/25" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41 24 12l-9.41 2.59L12 24l-2.59-9.41L0 12l9.41-2.59L12 0z"/></svg>
+      <svg class="absolute bottom-[22%] right-[10%] h-9 w-9 text-accent/20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41 24 12l-9.41 2.59L12 24l-2.59-9.41L0 12l9.41-2.59L12 0z"/></svg>
+    </div>
+
+    <Container class="relative">
+      <p class="text-[8rem] font-black leading-none tracking-tighter text-ink md:text-[11rem]">404</p>
+      <h1 class="mt-2 text-2xl font-bold text-ink md:text-3xl">Oops! Page not Found</h1>
+      <p class="mx-auto mt-3 max-w-sm text-sm text-ink-dim">
+        The page you are looking for cannot be found. Take a break before trying again.
+      </p>
+      <a
+        href="/"
+        class="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-accent/20 transition-all hover:bg-accent-dim hover:shadow-lg"
+      >
+        Go To Home Page
+      </a>
+    </Container>
+  </section>
+
+</BaseLayout>

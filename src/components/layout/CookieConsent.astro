@@ -1,0 +1,52 @@
+<div
+  id="cookie-consent"
+  class="fixed inset-x-4 bottom-4 z-50 hidden max-w-xl rounded-2xl border border-line bg-paper p-5 shadow-lg md:inset-x-auto md:left-6"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Cookie consent"
+>
+  <p class="text-sm text-ink-dim">
+    We use privacy-friendly analytics to understand site usage. No tracking cookies, no cross-site
+    profiling. See our
+    <a href="/cookies" class="underline hover:text-accent">Cookie Policy</a>.
+  </p>
+  <div class="mt-4 flex gap-3">
+    <button
+      id="cookie-accept"
+      type="button"
+      class="rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper hover:bg-accent"
+    >
+      Accept
+    </button>
+    <button
+      id="cookie-dismiss"
+      type="button"
+      class="rounded-full px-4 py-2 text-sm font-medium text-ink-dim hover:text-ink"
+    >
+      Dismiss
+    </button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'wss-cookie-consent';
+  const banner = document.getElementById('cookie-consent');
+  const accept = document.getElementById('cookie-accept');
+  const dismiss = document.getElementById('cookie-dismiss');
+
+  if (banner && !localStorage.getItem(STORAGE_KEY)) {
+    banner.classList.remove('hidden');
+  }
+
+  const close = (value: string) => {
+    localStorage.setItem(STORAGE_KEY, value);
+    banner?.classList.add('hidden');
+  };
+
+  accept?.addEventListener('click', () => {
+    close('accepted');
+    window.dispatchEvent(new CustomEvent('cookie-consent-accepted'));
+  });
+
+  dismiss?.addEventListener('click', () => close('dismissed'));
+</script>

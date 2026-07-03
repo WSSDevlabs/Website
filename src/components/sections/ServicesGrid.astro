@@ -1,0 +1,118 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import { SERVICES } from '../../data/services';
+import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
+
+const serviceImages: Record<string, string> = {
+  'web-development':              'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=600&h=400&q=80',
+  'mobile-app-development':       'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&h=400&q=80',
+  'custom-systems':               'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=400&q=80',
+  'ai-development':               'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=600&h=400&q=80',
+  'ui-ux-design':                 'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=600&h=400&q=80',
+  'maintenance-support':          'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&h=400&q=80',
+  'digital-marketing':            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=400&q=80',
+  'business-growth':              'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=600&h=400&q=80',
+  'branding-services':            'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&h=400&q=80',
+  'product-photoshoot-marketing': 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=600&h=400&q=80',
+  'media-creation':               'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&h=400&q=80',
+};
+
+const INITIAL_COUNT = 6;
+---
+
+<Section>
+  <Container>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="h-section" data-split>Boost your brand with our expertise</h2>
+    </div>
+
+    <div
+      class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      data-stagger
+      id="services-grid"
+    >
+      {
+        SERVICES.map((service, i) => {
+          const img = serviceImages[service.slug] ?? `https://picsum.photos/seed/${service.slug}/600/400`;
+          const isHidden = i >= INITIAL_COUNT;
+          const tone = GROUP_TONE[service.group];
+
+          return (
+            <a
+              href={`/services/${service.slug}`}
+              data-stagger-child
+              data-service-card
+              class:list={[
+                'card card-lift spotlight-card group flex flex-col overflow-hidden !rounded-3xl p-0',
+                isHidden ? 'hidden' : ''
+              ]}
+            >
+              <div class="h-44 overflow-hidden">
+                <img
+                  src={img}
+                  alt=""
+                  class="h-full w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-105"
+                  loading="lazy"
+                  width="600"
+                  height="400"
+                />
+              </div>
+
+              <div class="flex flex-1 flex-col p-6">
+                <p class:list={['mono-label !text-[0.62rem]', TONE_TEXT_CLASS[tone]]}>{service.group}</p>
+                <h3 class="mt-2 text-lg font-semibold tracking-tight text-ink transition-colors group-hover:text-accent">
+                  {service.title}
+                </h3>
+                <p class="mt-1.5 flex-1 text-sm leading-relaxed text-ink-dim">
+                  {service.shortDescription}
+                </p>
+                <p class="mt-4 flex items-center gap-1.5 text-sm font-semibold text-accent">
+                  Learn more
+                  <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </p>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+
+    {
+      SERVICES.length > INITIAL_COUNT && (
+        <div id="load-more-wrap" class="mt-12 text-center">
+          <button
+            id="load-more-services"
+            type="button"
+            class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-8 py-3.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
+          >
+            Load more services
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+        </div>
+      )
+    }
+  </Container>
+</Section>
+
+<script>
+  function initLoadMore() {
+    const btn = document.getElementById('load-more-services');
+    const wrap = document.getElementById('load-more-wrap');
+    if (!btn || !wrap || btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-service-card].hidden').forEach((card) => {
+        card.classList.remove('hidden');
+      });
+      wrap.style.display = 'none';
+    });
+  }
+
+  initLoadMore();
+  document.addEventListener('astro:page-load', initLoadMore);
+</script>

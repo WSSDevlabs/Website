@@ -1,0 +1,40 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { SITE_NAME } from '../lib/seo';
+
+type Props = {
+  title: string;
+  description: string;
+  path: string;
+  author: string;
+  publishDate: Date;
+  updatedDate?: Date;
+  coverImage: string;
+};
+
+const { title, description, path, author, publishDate, updatedDate, coverImage } = Astro.props;
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  image: new URL(coverImage, siteUrl).toString(),
+  author: { '@type': 'Organization', name: author },
+  publisher: { '@type': 'Organization', name: SITE_NAME },
+  datePublished: publishDate.toISOString(),
+  dateModified: (updatedDate ?? publishDate).toISOString()
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  type="article"
+  ogImage={coverImage}
+  schema={schema}
+>
+  <slot />
+</BaseLayout>

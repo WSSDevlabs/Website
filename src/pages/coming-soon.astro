@@ -1,0 +1,445 @@
+---
+import { SITE } from '../data/site';
+import SEO from '../components/seo/SEO.astro';
+---
+
+<!doctype html>
+<html lang="en-MY">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <SEO
+      title="Coming Soon"
+      description="WSS DevLabs is launching soon. Get notified when we go live."
+      path="/coming-soon"
+      noindex
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        background: #ffffff;
+        color: #111110;
+        min-height: 100dvh;
+      }
+
+      .coming-soon-wrap {
+        display: grid;
+        grid-template-columns: 1fr;
+        min-height: 100dvh;
+      }
+
+      @media (min-width: 1024px) {
+        .coming-soon-wrap { grid-template-columns: 45% 1fr; }
+      }
+
+      /* Left: image + testimonial overlay */
+      .cs-left {
+        position: relative;
+        overflow: hidden;
+        display: none;
+        min-height: 100dvh;
+      }
+
+      @media (min-width: 1024px) {
+        .cs-left { display: block; }
+      }
+
+      .cs-left img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        inset: 0;
+      }
+
+      .cs-left::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(10,10,12,0.75) 0%, rgba(10,10,12,0.15) 45%, transparent 100%);
+      }
+
+      .cs-testimonial {
+        position: absolute;
+        bottom: 2rem;
+        left: 1.75rem;
+        right: 1.75rem;
+        z-index: 1;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255,255,255,0.22);
+        border-radius: 16px;
+        padding: 1.25rem 1.5rem;
+      }
+
+      .cs-stars { display: flex; gap: 3px; }
+      .cs-stars svg { width: 14px; height: 14px; fill: #f5c518; }
+
+      .cs-testimonial-quote {
+        margin-top: 0.625rem;
+        font-size: 0.8rem;
+        line-height: 1.6;
+        color: rgba(255,255,255,0.92);
+      }
+
+      .cs-testimonial-name {
+        margin-top: 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .cs-testimonial-role {
+        font-size: 0.7rem;
+        color: rgba(255,255,255,0.6);
+      }
+
+      /* Right: content */
+      .cs-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem 2.5rem;
+        max-width: 560px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .cs-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        text-decoration: none;
+      }
+
+      .cs-logo-mark { display: flex; gap: 2px; }
+
+      .cs-logo-mark span {
+        display: block;
+        width: 10px;
+        height: 20px;
+        border-radius: 4px;
+      }
+
+      .cs-logo-mark span:first-child { background: #5b45f0; }
+      .cs-logo-mark span:last-child { background: #4a7fd6; }
+
+      .cs-logo-text {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #111110;
+        letter-spacing: -0.02em;
+      }
+
+      .cs-eyebrow {
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #5b45f0;
+      }
+
+      .cs-eyebrow::before {
+        content: '';
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 2px;
+        background: #5b45f0;
+      }
+
+      .cs-headline {
+        margin-top: 0.875rem;
+        font-size: clamp(1.85rem, 4vw, 2.75rem);
+        font-weight: 800;
+        line-height: 1.12;
+        color: #111110;
+        letter-spacing: -0.03em;
+      }
+
+      .cs-headline span { color: #5b45f0; }
+
+      .cs-subtext {
+        margin-top: 0.875rem;
+        font-size: 0.875rem;
+        line-height: 1.65;
+        color: #6b6b70;
+        max-width: 42ch;
+      }
+
+      /* Countdown */
+      .cs-countdown {
+        margin-top: 1.75rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        max-width: 400px;
+      }
+
+      .cs-count-unit {
+        text-align: center;
+        background: #ffffff;
+        border: 1px solid #e8e7e5;
+        border-radius: 14px;
+        padding: 0.875rem 0.5rem;
+      }
+
+      .cs-count-value {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #111110;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .cs-count-label {
+        margin-top: 0.3rem;
+        font-size: 0.6rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #9ca3af;
+      }
+
+      /* Subscribe */
+      .cs-form-label {
+        margin-top: 1.75rem;
+        display: block;
+        font-size: 0.75rem;
+        color: #6b6b70;
+        margin-bottom: 0.5rem;
+      }
+
+      .cs-form {
+        display: flex;
+        gap: 0.5rem;
+        max-width: 400px;
+      }
+
+      .cs-input {
+        flex: 1;
+        border: 1.5px solid #e8e7e5;
+        border-radius: 9999px;
+        padding: 0.7rem 1.125rem;
+        font-size: 0.875rem;
+        color: #111110;
+        outline: none;
+        transition: border-color 0.15s;
+        min-width: 0;
+      }
+
+      .cs-input:focus { border-color: #5b45f0; }
+      .cs-input::placeholder { color: #9ca3af; }
+
+      .cs-btn {
+        border: none;
+        cursor: pointer;
+        background: #5b45f0;
+        color: white;
+        border-radius: 9999px;
+        padding: 0.7rem 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.375rem;
+        white-space: nowrap;
+        transition: background 0.15s;
+      }
+
+      .cs-btn:hover { background: #4529d4; }
+      .cs-btn:active { transform: scale(0.98); }
+
+      /* Socials */
+      .cs-socials {
+        margin-top: 1.75rem;
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .cs-social-link {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid #e8e7e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b6b70;
+        text-decoration: none;
+        transition: border-color 0.15s, color 0.15s;
+      }
+
+      .cs-social-link:hover { border-color: #5b45f0; color: #5b45f0; }
+
+      .cs-copyright {
+        margin-top: 2.5rem;
+        font-size: 0.75rem;
+        color: #9ca3af;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="coming-soon-wrap">
+      <!-- Left panel: image with testimonial overlay -->
+      <div class="cs-left">
+        <img
+          src="https://picsum.photos/seed/tech-startup-office/900/1300"
+          alt="WSS DevLabs workspace"
+          loading="eager"
+          width="900"
+          height="1300"
+        />
+        <div class="cs-testimonial">
+          <div class="cs-stars">
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z"/></svg>
+          </div>
+          <p class="cs-testimonial-quote">
+            "WSS DevLabs built our platform from scratch in 8 weeks. The code quality and attention
+            to performance was beyond what I expected."
+          </p>
+          <p class="cs-testimonial-name">Ahmad Razif</p>
+          <p class="cs-testimonial-role">Founder, Nexora Sdn Bhd</p>
+        </div>
+      </div>
+
+      <!-- Right panel: main content -->
+      <div class="cs-right">
+        <a href="/" class="cs-logo">
+          <span class="cs-logo-mark">
+            <span></span><span></span>
+          </span>
+          <span class="cs-logo-text">{SITE.name}</span>
+        </a>
+
+        <p class="cs-eyebrow">Coming Soon</p>
+
+        <h1 class="cs-headline">
+          Get Notified When<br />
+          We <span>Launch!</span>
+        </h1>
+
+        <p class="cs-subtext">
+          We are building something that will change how Southeast Asian businesses approach
+          software. Join the waitlist and be the first to know when we go live.
+        </p>
+
+        <!-- Countdown -->
+        <div class="cs-countdown" id="countdown">
+          <div class="cs-count-unit">
+            <div class="cs-count-value" id="cd-days">00</div>
+            <div class="cs-count-label">Days</div>
+          </div>
+          <div class="cs-count-unit">
+            <div class="cs-count-value" id="cd-hours">00</div>
+            <div class="cs-count-label">Hours</div>
+          </div>
+          <div class="cs-count-unit">
+            <div class="cs-count-value" id="cd-minutes">00</div>
+            <div class="cs-count-label">Minutes</div>
+          </div>
+          <div class="cs-count-unit">
+            <div class="cs-count-value" id="cd-seconds">00</div>
+            <div class="cs-count-label">Seconds</div>
+          </div>
+        </div>
+
+        <label class="cs-form-label" for="cs-email">Get notified when the site goes live:</label>
+        <form class="cs-form" onsubmit="return false;">
+          <input
+            id="cs-email"
+            type="email"
+            class="cs-input"
+            placeholder="Enter your email"
+            required
+          />
+          <button type="submit" class="cs-btn">
+            Subscribe
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </button>
+        </form>
+
+        <!-- Social links -->
+        {
+          (SITE.social.linkedin || SITE.social.instagram || SITE.social.github) && (
+            <div class="cs-socials">
+              {SITE.social.linkedin && (
+                <a href={SITE.social.linkedin} class="cs-social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+              )}
+              {SITE.social.instagram && (
+                <a href={SITE.social.instagram} class="cs-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                  </svg>
+                </a>
+              )}
+              {SITE.social.github && (
+                <a href={SITE.social.github} class="cs-social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          )
+        }
+
+        <p class="cs-copyright">&copy; {new Date().getFullYear()} {SITE.legalName || SITE.name}. All rights reserved.</p>
+      </div>
+    </div>
+
+    <script>
+      // Countdown to launch date (update this date when known)
+      const LAUNCH_DATE = new Date('2026-09-01T00:00:00+08:00');
+
+      function pad(n: number) { return String(n).padStart(2, '0'); }
+
+      function tick() {
+        const now = new Date();
+        const diff = LAUNCH_DATE.getTime() - now.getTime();
+
+        if (diff <= 0) {
+          document.getElementById('countdown')?.remove();
+          return;
+        }
+
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        const d = document.getElementById('cd-days');
+        const h = document.getElementById('cd-hours');
+        const m = document.getElementById('cd-minutes');
+        const s = document.getElementById('cd-seconds');
+
+        if (d) d.textContent = pad(days);
+        if (h) h.textContent = pad(hours);
+        if (m) m.textContent = pad(minutes);
+        if (s) s.textContent = pad(seconds);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>

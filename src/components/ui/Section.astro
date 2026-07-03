@@ -1,0 +1,15 @@
+---
+type Props = {
+  class?: string;
+  id?: string;
+  /** Draw an edge-faded hairline across the top of the section */
+  rule?: boolean;
+};
+
+const { class: className = '', id, rule = false } = Astro.props;
+---
+
+<section id={id} class:list={['relative py-20 md:py-28', className]}>
+  {rule && <div class="hairline absolute inset-x-6 top-0 md:inset-x-10" aria-hidden="true"></div>}
+  <slot />
+</section>

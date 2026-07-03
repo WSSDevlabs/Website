@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import ServicesGrid from '../../components/sections/ServicesGrid.astro';
+import Differentiator from '../../components/sections/Differentiator.astro';
+import QuoteForm from '../../components/sections/QuoteForm.astro';
+import NewsletterBand from '../../components/sections/NewsletterBand.astro';
+import { SERVICES, SERVICE_GROUPS } from '../../data/services';
+import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
+
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', siteUrl).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: new URL('/services', siteUrl).toString() }
+  ]
+};
+---
+
+<BaseLayout
+  title="Services — WSS DevLabs"
+  description="Web development, mobile apps, custom systems, AI, branding, and digital marketing — built by engineers, not assembled from templates."
+  path="/services"
+  schema={schema}
+>
+  <!-- Page hero with breadcrumb -->
+  <section class="relative overflow-hidden">
+    <div class="dot-pattern mask-fade-edges absolute inset-0" aria-hidden="true" />
+    <Container class="relative py-14 md:py-20">
+      <nav aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-xs text-ink-dim">
+          <li>
+            <a href="/" class="transition-colors hover:text-accent">Home</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+            <span class="font-medium text-ink">Services</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="h-display mt-6" data-split>Services</h1>
+      <p class="body-lead mt-5">
+        Everything your business needs to build, grow, and scale, under one roof.
+      </p>
+    </Container>
+    <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
+  </section>
+
+  <ServicesGrid />
+
+  <!-- Pricing at a glance -->
+  <Section rule class="bg-paper-dim">
+    <Container>
+      <div class="mx-auto max-w-xl text-center">
+        <Eyebrow label="Pricing at a Glance" class="justify-center" />
+        <h2 class="h-section mt-4" data-split>Starting rates, by service</h2>
+        <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+          Real starting prices in Malaysian Ringgit, based on current market rates. Every project is scoped and quoted individually.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+        {
+          SERVICE_GROUPS.map((group) => {
+            const tone = GROUP_TONE[group];
+            const groupServices = SERVICES.filter((s) => s.group === group);
+            return (
+              <div data-stagger-child class="card card-lift spotlight-card p-6">
+                <p class:list={['mono-label', TONE_TEXT_CLASS[tone]]}>{group}</p>
+                <ul class="mt-5 space-y-5">
+                  {groupServices.map((service) => (
+                    <li>
+                      <a href={`/services/${service.slug}`} class="group block">
+                        <span class="text-sm font-semibold text-ink transition-colors group-hover:text-accent">
+                          {service.title}
+                        </span>
+                        <p class="stat-num mt-1 text-sm text-ink-dim">
+                          {service.pricingFrom ? `From ${service.pricingFrom}` : 'Custom quote'}
+                        </p>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <p class="mt-10 text-center text-sm text-ink-dim">
+        Need a bundled package across services?{' '}
+        <a href="/pricing" class="font-semibold text-accent hover:underline">See our Launch / Build / Enterprise tiers</a>
+        {' '}or{' '}
+        <a href="/contact" class="font-semibold text-accent hover:underline">request an accurate quote</a>.
+      </p>
+    </Container>
+  </Section>
+
+  <Differentiator />
+  <QuoteForm />
+  <NewsletterBand />
+</BaseLayout>

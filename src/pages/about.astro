@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import QuoteForm from '../components/sections/QuoteForm.astro';
+import NewsletterBand from '../components/sections/NewsletterBand.astro';
+import { SITE } from '../data/site';
+
+const awards = [
+  { category: 'Web Development', title: 'Best Digital Studio MY', year: '2022' },
+  { category: 'Mobile Apps', title: 'Top App Builder SEA Award', year: '2023' },
+  { category: 'AI Integration', title: 'Digital Excellence Award', year: '2024' },
+  { category: 'Digital Marketing', title: 'Growth Partner Award', year: '2025' },
+];
+
+const processSteps = [
+  { title: 'Discover & Strategize', description: 'We dig into your business, audience, and goals, then build a clear plan before any work begins.' },
+  { title: 'Execute & Optimize', description: 'We build, launch, and iterate, with weekly performance reviews and fast adjustments.' },
+  { title: 'Analyze & Grow', description: 'Every project ends with data, documentation, and a roadmap for what comes next.' },
+];
+
+const capabilities = [
+  { label: 'Web & Mobile Development', detail: 'Typed, custom-coded builds across web, iOS, and Android.' },
+  { label: 'AI Integration & Automation', detail: 'LLM features, RAG pipelines, and workflow automation.' },
+  { label: 'Digital Marketing & Branding', detail: 'SEO, paid ads, and brand systems that feed growth.' },
+];
+
+const team = [
+  { name: 'Wan Syahiid', role: 'Founder & Lead Developer', img: 'professional-developer-male' },
+  { name: 'Team Member', role: 'Full-Stack Engineer', img: 'professional-engineer-team' },
+  { name: 'Team Member', role: 'UI/UX Designer', img: 'professional-designer-female' },
+];
+
+const faqs = [
+  { q: 'What does WSS DevLabs do?', a: 'We build custom websites, mobile apps, custom business systems, and AI-powered software for startups and growing companies — engineered from scratch, not assembled from templates.' },
+  { q: 'Where are you based?', a: 'We are based in Kuala Lumpur, Malaysia, and work with clients across Southeast Asia and beyond.' },
+  { q: 'How do I start a project with you?', a: 'Fill in our contact form or email us directly. We\'ll reply within one business day to schedule a discovery call and provide a fixed-price proposal.' },
+  { q: 'Do you build mobile apps?', a: 'Yes. We build cross-platform apps (React Native / Flutter) and native iOS/Android when performance demands it.' },
+  { q: 'Do you offer AI development?', a: 'Yes — LLM-powered features, RAG pipelines, workflow automation, and AI integrations. We\'ll tell you clearly what\'s AI integration vs. custom ML.' },
+];
+
+const whyFeatures = [
+  { icon: 'M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z', label: 'Real Engineering', desc: 'No templates, no shortcuts. Every line of code written by engineers, not assembled from page builders.' },
+  { icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5', label: 'Not Templated', desc: 'Architectured for your specific requirements, not adapted from a theme or starter kit.' },
+  { icon: 'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z', label: 'Direct with Builder', desc: 'You talk directly to the engineer building your product. No account managers between you and the work.' },
+  { icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z', label: 'Performance-Obsessed', desc: 'Lighthouse 90+ enforced before delivery. Speed is a feature, not an afterthought.' },
+];
+---
+
+<BaseLayout
+  title="About Us — WSS DevLabs"
+  description="WSS DevLabs is a premium engineering studio building custom websites, mobile apps, AI-powered software, and digital marketing solutions from Kuala Lumpur."
+  path="/about"
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="dot-pattern mask-fade-edges absolute inset-0" aria-hidden="true"></div>
+    <Container class="relative py-14 md:py-20">
+      <nav aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-xs text-ink-dim">
+          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
+          <li class="flex items-center gap-2">
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+            <span class="font-medium text-ink">About Us</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="h-display mt-6" data-split>The studio behind the software</h1>
+      <p class="body-lead mt-5">
+        A lean Malaysian engineering team building websites, apps, and systems that clients own
+        outright.
+      </p>
+    </Container>
+    <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true"></div>
+  </section>
+
+  <!-- Wide image + Vision / Mission -->
+  <section class="py-16 md:py-20">
+    <Container>
+      <div class="relative overflow-hidden rounded-3xl border border-line shadow-card">
+        <img
+          src="https://picsum.photos/seed/tech-team-office/1400/640"
+          alt="WSS DevLabs team"
+          class="h-72 w-full scale-110 object-cover sm:h-[24rem]"
+          loading="eager"
+          width="1400"
+          height="640"
+          data-parallax="8"
+        />
+        <div class="absolute inset-0 flex items-center justify-center bg-ink/25">
+          <button type="button" aria-label="Play video" class="flex h-16 w-16 items-center justify-center rounded-full bg-paper/95 shadow-float backdrop-blur-sm transition-transform duration-300 hover:scale-110">
+            <svg class="ml-1 h-6 w-6 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        <div class="card card-lift spotlight-card p-8">
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/8">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+          </span>
+          <h3 class="h-sub mt-5">Our Vision</h3>
+          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the engineering studio that Southeast Asian founders trust most when building their critical digital products.</p>
+        </div>
+        <div class="card card-lift spotlight-card p-8">
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/8">
+            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+          </span>
+          <h3 class="h-sub mt-5">Our Mission</h3>
+          <p class="mt-2.5 leading-relaxed text-ink-dim">To build software that works at real scale — typed, tested, and handed over with full documentation so you are never left dependent on us.</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Story + capabilities -->
+  <section class="relative py-16 md:py-24">
+    <div class="hairline absolute inset-x-6 top-0 md:inset-x-10" aria-hidden="true"></div>
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+        <!-- Left: 2 stacked images -->
+        <div>
+          <div class="overflow-hidden rounded-3xl border border-line shadow-card">
+            <img
+              src="https://picsum.photos/seed/coding-collaboration/700/420"
+              alt="WSS DevLabs team working"
+              class="h-56 w-full scale-110 object-cover sm:h-72"
+              loading="lazy"
+              width="700"
+              height="420"
+              data-parallax="7"
+            />
+          </div>
+          <div class="ml-10 mt-5 overflow-hidden rounded-3xl border-4 border-paper shadow-float">
+            <img
+              src="https://picsum.photos/seed/developer-whiteboard/700/360"
+              alt="Team planning session"
+              class="h-44 w-full scale-110 object-cover sm:h-56"
+              loading="lazy"
+              width="700"
+              height="360"
+              data-parallax="11"
+            />
+          </div>
+        </div>
+
+        <!-- Right: story + capability rows -->
+        <div>
+          <Eyebrow label="Our Story" />
+          <h2 class="h-section mt-5" data-split>Empowering your success with digital expertise</h2>
+          <p class="mt-5 leading-relaxed text-ink-dim">
+            WSS DevLabs was built around a simple frustration: most businesses buying "custom"
+            software receive page-builder templates with a markup, not real engineering. We build
+            from scratch — typed, fast, and owned outright by you at handover. No lock-in, no
+            hidden dependencies.
+          </p>
+
+          <div class="mt-8">
+            {capabilities.map((cap, i) => (
+              <div class:list={['flex items-start gap-4 py-4', i > 0 && 'border-t border-line']}>
+                <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/8">
+                  <svg class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="font-semibold text-ink">{cap.label}</p>
+                  <p class="mt-0.5 text-sm text-ink-dim">{cap.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="relative mt-16 pt-12">
+        <div class="hairline absolute inset-x-0 top-0" aria-hidden="true"></div>
+        <div class="grid grid-cols-2 gap-y-10 lg:grid-cols-4">
+          {[
+            { num: '50', suffix: '+', label: 'Successful projects' },
+            { num: '100', suffix: '%', label: 'Code ownership' },
+            { num: '10', suffix: '+', label: 'Services offered' },
+            { num: '3', suffix: '+', label: 'Years of experience' },
+          ].map((stat, i) => (
+            <div class:list={['px-2 sm:px-8', i > 0 && 'lg:border-l lg:border-line', i % 2 === 1 && 'border-l border-line']}>
+              <p class="stat-num text-5xl text-ink md:text-6xl" data-count={stat.num} data-count-suffix={stat.suffix}>{stat.num}{stat.suffix}</p>
+              <p class="mono-label mt-3 text-ink-dim">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Work process: numbered timeline -->
+  <section class="py-16 md:py-24">
+    <Container>
+      <div class="panel px-6 py-14 md:px-14 md:py-16">
+        <div class="max-w-2xl">
+          <h2 class="h-section" data-split>Step-by-step to your growth</h2>
+          <p class="mt-4 leading-relaxed text-ink-dim">
+            Every project follows a clear three-phase framework so you always know where things
+            stand, what is being built, and what comes next.
+          </p>
+        </div>
+        <div class="relative mt-12">
+          <div class="hairline absolute left-0 right-0 top-5 hidden sm:block" aria-hidden="true"></div>
+          <div class="grid gap-10 sm:grid-cols-3 sm:gap-8" data-stagger>
+            {processSteps.map((step, i) => (
+              <div data-stagger-child class="relative">
+                <span class="stat-num relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 class="mt-5 text-lg font-semibold tracking-tight text-ink">{step.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-ink-dim">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Awards -->
+  <section class="relative py-16 md:py-24">
+    <div class="hairline absolute inset-x-6 top-0 md:inset-x-10" aria-hidden="true"></div>
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <Eyebrow label="Recognition" tone="yellow" />
+          <h2 class="h-section mt-5" data-split>Our journey to award-winning success</h2>
+          <p class="mt-5 max-w-md leading-relaxed text-ink-dim">
+            Recognised for engineering quality, digital innovation, and measurable results that go
+            beyond deliverables.
+          </p>
+        </div>
+
+        <div>
+          {awards.map((award, i) => (
+            <div class:list={['group flex items-center justify-between gap-6 py-5', i > 0 && 'border-t border-line']}>
+              <div>
+                <p class="mono-label text-ink-dim">{award.category}</p>
+                <p class="mt-1.5 font-semibold tracking-tight text-ink transition-colors group-hover:text-accent">
+                  {award.title}
+                </p>
+              </div>
+              <p class="stat-num shrink-0 text-lg text-muted">{award.year}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Why choose us -->
+  <section class="relative bg-paper-dim py-16 md:py-24">
+    <div class="hairline absolute inset-x-0 top-0" aria-hidden="true"></div>
+    <Container>
+      <div class="grid gap-12 md:grid-cols-2 md:items-center md:gap-16">
+        <!-- Left: stacked images + ownership chip -->
+        <div class="relative">
+          <div class="overflow-hidden rounded-3xl border border-line shadow-card">
+            <img src="https://picsum.photos/seed/tech-team-planning/700/420" alt="WSS DevLabs team" class="h-56 w-full scale-110 object-cover" loading="lazy" width="700" height="420" data-parallax="7" />
+          </div>
+          <div class="mr-10 mt-5 overflow-hidden rounded-3xl border-4 border-paper shadow-float">
+            <img src="https://picsum.photos/seed/developer-pair-programming/700/340" alt="Development session" class="h-44 w-full scale-110 object-cover" loading="lazy" width="700" height="340" data-parallax="10" />
+          </div>
+          <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-2xl border border-line bg-paper px-5 py-3.5 text-center shadow-float">
+            <p class="stat-num text-xl leading-none text-ink">100%</p>
+            <p class="mono-label mt-1.5 !text-[0.6rem] text-ink-dim">Code ownership</p>
+          </div>
+        </div>
+
+        <!-- Right: heading + 2x2 features -->
+        <div>
+          <h2 class="h-section" data-split>Why our clients believe we're different</h2>
+          <div class="mt-9 grid gap-x-8 gap-y-7 sm:grid-cols-2" data-stagger>
+            {whyFeatures.map((f) => (
+              <div data-stagger-child>
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/8">
+                  <svg class="h-[18px] w-[18px] text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d={f.icon} /></svg>
+                </span>
+                <p class="mt-3.5 font-semibold tracking-tight text-ink">{f.label}</p>
+                <p class="mt-1.5 text-sm leading-relaxed text-ink-dim">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Quote Form -->
+  <QuoteForm />
+
+  <!-- Team -->
+  <section class="relative py-16 md:py-24">
+    <div class="hairline absolute inset-x-6 top-0 md:inset-x-10" aria-hidden="true"></div>
+    <Container>
+      <div class="mx-auto max-w-xl text-center">
+        <h2 class="h-section" data-split>Meet our expert team</h2>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3" data-stagger>
+        {team.map((member) => (
+          <div data-stagger-child class="card card-lift group overflow-hidden !rounded-3xl p-0">
+            <div class="relative overflow-hidden">
+              <img
+                src={`https://picsum.photos/seed/${member.img}/500/560`}
+                alt={member.name}
+                class="h-72 w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-105"
+                loading="lazy"
+                width="500"
+                height="560"
+              />
+              <div class="absolute inset-0 flex items-end justify-end bg-gradient-to-t from-ink/60 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <div class="flex gap-2">
+                  {(['linkedin', 'twitter', 'instagram'] as const).map((s) => (
+                    <a href={SITE.social[s] ?? '#'} target="_blank" rel="noopener" aria-label={`${member.name} on ${s}`} class="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-accent">
+                      <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
+                        {s === 'linkedin' && <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>}
+                        {s === 'twitter' && <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>}
+                        {s === 'instagram' && <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>}
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div class="p-5">
+              <p class="font-semibold tracking-tight text-ink">{member.name}</p>
+              <p class="mt-0.5 text-sm text-ink-dim">{member.role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- FAQ -->
+  <section class="relative py-16 md:py-24">
+    <div class="hairline absolute inset-x-6 top-0 md:inset-x-10" aria-hidden="true"></div>
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-20">
+        <div>
+          <h2 class="h-section" data-split>Question? Look here.</h2>
+          <p class="mt-4 text-sm text-ink-dim">Can't find the answer you're looking for? Reach out directly.</p>
+          <div class="card mt-8 flex items-center gap-4 !rounded-2xl p-5">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/8">
+              <svg class="h-4.5 w-4.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-ink">We respond within 1 business day</p>
+              <p class="mt-0.5 text-sm text-accent">{SITE.phone}</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          {faqs.map((item, i) => (
+            <details class:list={['group py-5', i > 0 && 'border-t border-line']}>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold tracking-tight text-ink transition-colors hover:text-accent">
+                <span>{item.q}</span>
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-ink-dim transition-all duration-300 group-open:rotate-45 group-open:border-accent group-open:bg-accent group-open:text-white">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                </span>
+              </summary>
+              <p class="mt-3 max-w-2xl pr-8 text-sm leading-relaxed text-ink-dim">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <NewsletterBand />
+</BaseLayout>

@@ -1,0 +1,136 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import type { Tone } from '../../lib/tone';
+
+type Props = {
+  eyebrow?: string;
+  eyebrowTone?: Tone;
+  title: string;
+  subtitle: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  /** Use "page" for inner page hero (compact, patterned band) */
+  variant?: 'home' | 'page';
+};
+
+const {
+  eyebrow,
+  eyebrowTone = 'blue',
+  title,
+  subtitle,
+  primaryCta,
+  secondaryCta,
+  variant = 'home'
+} = Astro.props;
+---
+
+{
+  variant === 'page' ? (
+    <section class="relative overflow-hidden">
+      <div class="dot-pattern mask-fade-edges absolute inset-0" aria-hidden="true" />
+      <div
+        class="absolute -top-32 right-[-10%] h-80 w-[36rem] rounded-full bg-accent/8 blur-3xl"
+        aria-hidden="true"
+      />
+      <Container class="relative py-16 md:py-24">
+        {eyebrow && (
+          <span data-hero-item data-hero-delay="0" style="display:block">
+            <Eyebrow label={eyebrow} tone={eyebrowTone} />
+          </span>
+        )}
+        <h1 class="h-section mt-5 max-w-3xl !text-[clamp(2.25rem,1.4rem+3vw,3.4rem)]" data-split>
+          {title}
+        </h1>
+        <p data-hero-item data-hero-delay="0.12" class="body-lead mt-5">{subtitle}</p>
+        <div data-hero-item data-hero-delay="0.22" class="mt-8 flex flex-wrap gap-4">
+          <Button href={primaryCta.href} variant="primary">{primaryCta.label}</Button>
+          {secondaryCta && (
+            <Button href={secondaryCta.href} variant="secondary">
+              {secondaryCta.label}
+            </Button>
+          )}
+        </div>
+      </Container>
+      <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
+    </section>
+  ) : (
+    <section class="relative overflow-hidden" data-noreveal>
+      <div class="grid-pattern mask-fade-edges absolute inset-0" aria-hidden="true" />
+      <div
+        class="absolute -top-40 right-[-12%] h-[28rem] w-[42rem] rounded-full bg-accent/10 blur-3xl"
+        aria-hidden="true"
+      />
+      <Container class="relative grid gap-14 py-20 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-28">
+        <div>
+          {eyebrow && (
+            <span data-hero-item data-hero-delay="0" style="display:block">
+              <Eyebrow label={eyebrow} tone={eyebrowTone} />
+            </span>
+          )}
+          <h1 class="h-display mt-5" data-split>
+            {title}
+          </h1>
+          <p data-hero-item data-hero-delay="0.25" class="body-lead mt-6 max-w-xl">{subtitle}</p>
+          <div data-hero-item data-hero-delay="0.38" class="mt-9 flex flex-wrap items-center gap-4">
+            <Button href={primaryCta.href} variant="primary" size="lg" data-magnetic>
+              {primaryCta.label}
+              <svg class="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </Button>
+            {secondaryCta && (
+              <Button href={secondaryCta.href} variant="secondary" size="lg">
+                {secondaryCta.label}
+              </Button>
+            )}
+          </div>
+        </div>
+
+        <!-- Layered visual: two images, one floating stat, parallax depth -->
+        <div data-hero-item data-hero-delay="0.2" class="relative hidden aspect-[10/11] md:block">
+          <!-- Main image -->
+          <div class="absolute right-0 top-0 h-[78%] w-[74%] overflow-hidden rounded-3xl border border-line bg-paper-dim shadow-float">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&h=1100&q=80"
+              alt="The WSS DevLabs team collaborating on a build"
+              class="h-full w-full scale-110 object-cover"
+              loading="eager"
+              fetchpriority="high"
+              width="900"
+              height="1100"
+              data-parallax="7"
+            />
+          </div>
+
+          <!-- Overlapping secondary image -->
+          <div class="absolute bottom-0 left-0 z-10 h-[52%] w-[56%] overflow-hidden rounded-3xl border-4 border-paper bg-paper-dim shadow-float">
+            <img
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=760&h=620&q=80"
+              alt="Code on screen during a development session"
+              class="h-full w-full scale-110 object-cover"
+              loading="eager"
+              width="760"
+              height="620"
+              data-parallax="12"
+            />
+          </div>
+
+          <!-- Floating stat card -->
+          <div class="absolute right-[8%] top-[68%] z-20 flex items-center gap-3.5 rounded-2xl border border-line bg-paper/95 py-3.5 pl-4 pr-6 shadow-float backdrop-blur-sm">
+            <span class="flex items-center gap-[3px]" aria-hidden="true">
+              <span class="h-6 w-3 rounded-[3px] bg-accent-red"></span>
+              <span class="h-6 w-3 rounded-[3px] bg-accent"></span>
+            </span>
+            <div>
+              <p class="stat-num text-2xl leading-none text-ink">50+</p>
+              <p class="mono-label mt-1 !text-[0.6rem] text-ink-dim">Projects shipped</p>
+            </div>
+          </div>
+        </div>
+      </Container>
+      <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
+    </section>
+  )
+}

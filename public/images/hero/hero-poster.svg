@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="">
+  <defs>
+    <radialGradient id="base" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#e8f0fb" />
+      <stop offset="55%" stop-color="#f5f5f7" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="30%">
+      <stop offset="0%" stop-color="#e2342a" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#e2342a" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="60%" cy="55%" r="25%">
+      <stop offset="0%" stop-color="#4a7fd6" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#4a7fd6" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="600" height="600" fill="#ffffff" />
+  <circle cx="300" cy="300" r="280" fill="url(#base)" />
+  <circle cx="300" cy="270" r="160" fill="url(#glow)" />
+  <circle cx="340" cy="320" r="140" fill="url(#glow2)" />
+  <circle cx="300" cy="300" r="270" fill="none" stroke="#e2342a" stroke-width="1.5" opacity="0.2" />
+  <circle cx="300" cy="300" r="200" fill="none" stroke="#4a7fd6" stroke-width="1" opacity="0.15" />
+  <circle cx="300" cy="300" r="130" fill="none" stroke="#e3a730" stroke-width="1" opacity="0.12" />
+  <circle cx="300" cy="300" r="60" fill="none" stroke="#e2342a" stroke-width="0.5" opacity="0.1" stroke-dasharray="4 6" />
+</svg>

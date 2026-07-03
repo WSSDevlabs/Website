@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Marquee from '../components/ui/Marquee.astro';
+import AboutSection from '../components/sections/AboutSection.astro';
+import HomepageServices from '../components/sections/HomepageServices.astro';
+import Differentiator from '../components/sections/Differentiator.astro';
+import ProcessOverview from '../components/sections/ProcessOverview.astro';
+import FeaturedWork from '../components/sections/FeaturedWork.astro';
+import ImpactStats from '../components/sections/ImpactStats.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import ContactTeaser from '../components/sections/ContactTeaser.astro';
+import { HOME_FAQ } from '../data/faq';
+
+const allProjects = await getCollection('projects', ({ data }) => !data.draft);
+const featuredProjects = allProjects.filter((p) => p.data.featured).slice(0, 4);
+
+const defaultTestimonials = [
+  {
+    quote: 'WSS DevLabs built our platform from scratch in 8 weeks. The code quality and attention to performance was well beyond what I expected from a studio this lean.',
+    author: 'Ahmad Razif',
+    role: 'Founder',
+    company: 'Nexora Sdn Bhd',
+    rating: 5,
+  },
+  {
+    quote: 'They handled our e-commerce migration with zero downtime and delivered SEO improvements we started seeing within the first month.',
+    author: 'Priya Nair',
+    role: 'Head of Digital',
+    company: 'RetailPlus MY',
+    rating: 5,
+  },
+  {
+    quote: 'The AI lead-qualification tool they built cut our response time by 70%. Solid engineers who actually understand product requirements.',
+    author: 'Marcus Tan',
+    role: 'CEO',
+    company: 'GrowthStack',
+    rating: 5,
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'WSS DevLabs',
+  url: Astro.site?.toString(),
+  description:
+    'Premium web & software studio building websites, mobile apps, custom business systems, and AI-powered software.'
+};
+---
+
+<BaseLayout
+  title="WSS DevLabs — Websites, Mobile Apps & AI-Powered Software"
+  description="A custom-built, performance-led web & software studio: websites, mobile apps, custom CMS/ERP systems, and AI-powered software for startups and growing companies."
+  path="/"
+  schema={schema}
+>
+  <Hero
+    eyebrow="Web · Mobile · Systems · AI"
+    title="Custom software, built for speed."
+    subtitle="We build websites, mobile apps, custom business systems, and AI-powered software — engineered from scratch, not assembled from templates."
+    primaryCta={{ label: 'Start a Project', href: '/contact' }}
+    secondaryCta={{ label: 'See our work', href: '/work' }}
+  />
+  <Marquee />
+  <AboutSection />
+  <HomepageServices />
+  <Differentiator />
+  <ProcessOverview />
+  <FeaturedWork projects={featuredProjects} />
+  <Testimonials testimonials={defaultTestimonials} />
+  <FAQ items={HOME_FAQ} />
+  <ImpactStats stats={[
+    { value: '50+', label: 'Projects delivered' },
+    { value: '100%', label: 'Client satisfaction' },
+    { value: '10', label: 'Service areas' },
+    { value: '3+', label: 'Years in business' }
+  ]} />
+  <CTABand
+    title="Have a project in mind?"
+    subtitle="Tell us what you're building — we'll respond within one business day."
+  />
+  <ContactTeaser />
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+type Props = {
+  items?: string[];
+  class?: string;
+};
+
+const {
+  items = [
+    'Web Development',
+    'Mobile Apps',
+    'Custom Systems',
+    'AI Development',
+    'UI/UX Design',
+    'Maintenance & Support'
+  ],
+  class: className = ''
+} = Astro.props;
+
+// Duplicate so the seamless loop works
+const doubled = [...items, ...items];
+---
+
+<div class:list={['marquee-pausable relative overflow-hidden py-5', className]} aria-hidden="true">
+  <div class="hairline absolute inset-x-0 top-0"></div>
+  <div class="hairline absolute inset-x-0 bottom-0"></div>
+  <div class="mask-fade-x">
+    <div class="animate-marquee flex w-max whitespace-nowrap">
+      {
+        doubled.map((item) => (
+          <span class="mono-label mx-7 flex items-center gap-7 !text-[0.8rem] text-ink-dim">
+            {item}
+            <span class="h-1.5 w-1.5 rounded-[2px] bg-accent/60" />
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>

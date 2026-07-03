@@ -1,0 +1,51 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import { PROCESS_PHASES } from '../../data/process';
+---
+
+<Section rule>
+  <Container>
+    <div class="max-w-2xl">
+      <h2 class="h-section" data-split>Step-by-step to your goal</h2>
+      <p class="mt-5 leading-relaxed text-ink-dim">
+        Every project follows a structured three-phase approach, so you always know where things
+        stand and what comes next.
+      </p>
+    </div>
+
+    <!-- Phase timeline: three columns over a connecting rule -->
+    <div class="relative mt-14">
+      <div class="hairline absolute left-0 right-0 top-5 hidden md:block" aria-hidden="true"></div>
+      <div class="grid gap-12 md:grid-cols-3 md:gap-8" data-stagger>
+        {
+          PROCESS_PHASES.map((phase, index) => (
+            <div data-stagger-child class="relative">
+              <!-- Sequence marker sitting on the rule -->
+              <span class="stat-num relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+
+              <h3 class="h-sub mt-6">{phase.phase}</h3>
+              <p class="mt-2.5 text-sm leading-relaxed text-ink-dim">{phase.summary}</p>
+
+              <ul class="mt-6 space-y-2.5">
+                {phase.steps.map((step) => (
+                  <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                    <svg class="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                    {step}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <Button href="/process" variant="secondary" class="mt-14">See the full process</Button>
+  </Container>
+</Section>

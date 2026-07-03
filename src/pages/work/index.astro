@@ -1,0 +1,253 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+
+const projects = await getCollection('projects', ({ data }) => !data.draft);
+
+const placeholders = [
+  { id: 'ph-1', title: 'Social Campaign for Real Estate Agency', category: 'Social Media', date: 'Jan 2025', img: 'social-real-estate', excerpt: 'Built and managed a hyper-local social campaign that increased qualified leads by 3x in 90 days.' },
+  { id: 'ph-2', title: 'SEO & PPC Setup for Dental Clinic', category: 'SEO, PPC', date: 'Dec 2024', img: 'seo-dental-clinic', excerpt: 'Combined on-page SEO with targeted Google Ads to rank #1 locally and cut cost-per-lead by 40%.' },
+  { id: 'ph-3', title: 'Instagram Ads Campaign for Fashion Brand', category: 'Paid Advertising', date: 'Nov 2024', img: 'fashion-instagram-ads', excerpt: '6-week campaign with 5.2x ROAS — creative-led short-form video ads on Instagram Reels.' },
+  { id: 'ph-4', title: 'Google Ads Setup for Yoga Studio', category: 'Paid Advertising', date: 'Oct 2024', img: 'yoga-google-ads', excerpt: 'New location launch driven by local campaigns — full bookings within 3 weeks of going live.' },
+  { id: 'ph-5', title: 'Ranking Local Bakery in Google Top 3', category: 'SEO', date: 'Sep 2024', img: 'bakery-local-seo', excerpt: 'Full local SEO audit, GMB optimisation, and content calendar — top 3 for 14 target keywords.' },
+  { id: 'ph-6', title: 'Content Funnel for Financial Advisor', category: 'Content Marketing', date: 'Aug 2024', img: 'finance-content-funnel', excerpt: 'Mapped and built a 6-month content series that now generates 40% of inbound consultation requests.' },
+  { id: 'ph-7', title: 'Landing Page Redesign for Lead Generation', category: 'Web Design', date: 'Jul 2024', img: 'landing-page-redesign', excerpt: 'Rebuilt a high-traffic landing page from scratch — conversion rate jumped from 1.8% to 5.3%.' },
+  { id: 'ph-8', title: 'Rebranding a Local Dental Clinic', category: 'Branding', date: 'Jun 2024', img: 'dental-rebrand', excerpt: 'Full brand identity refresh — new logo, colours, and photography that modernised trust signals.' },
+];
+
+const catColor: Record<string, string> = {
+  'Social Media': 'bg-accent-green',
+  'SEO, PPC': 'bg-accent-blue',
+  'Paid Advertising': 'bg-accent-yellow',
+  'SEO': 'bg-accent-blue',
+  'Content Marketing': 'bg-accent',
+  'Web Design': 'bg-accent-blue',
+  'Branding': 'bg-accent-green',
+  'Web': 'bg-accent-blue',
+  'Mobile': 'bg-accent-yellow',
+  'System': 'bg-ink-dim',
+  'AI': 'bg-accent',
+};
+
+const INITIAL_COUNT = 6;
+
+const processSteps = [
+  {
+    title: 'Discover & Strategize',
+    description: 'We dig into your business, audience, and goals — then build a clear plan before any work begins.',
+    accent: 'text-accent',
+  },
+  {
+    title: 'Execute & Optimize',
+    description: 'We build, launch, and iterate — with weekly performance reviews and fast adjustments.',
+    accent: 'text-accent-blue',
+  },
+  {
+    title: 'Analyze & Grow',
+    description: 'Every project ends with data, documentation, and a roadmap for what comes next.',
+    accent: 'text-accent-green',
+  },
+];
+
+const testimonials = [
+  { quote: 'WSS DevLabs built our platform from scratch in 8 weeks. The code quality and attention to performance was well beyond what I expected.', author: 'Ahmad Razif', role: 'Founder', company: 'Nexora Sdn Bhd', rating: 5 },
+  { quote: 'They handled our migration with zero downtime and delivered improvements we saw within the first month.', author: 'Priya Nair', role: 'Head of Digital', company: 'RetailPlus MY', rating: 5 },
+  { quote: 'The AI tool they built cut our response time by 70%. Solid engineers who understand product requirements.', author: 'Marcus Tan', role: 'CEO', company: 'GrowthStack', rating: 5 },
+];
+---
+
+<BaseLayout
+  title="Projects — WSS DevLabs"
+  description="Real builds, real outcomes — web, mobile, custom systems, AI, branding, and digital marketing."
+  path="/work"
+>
+  <!-- Page hero -->
+  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
+    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
+    <Container class="relative">
+      <nav aria-label="Breadcrumb" class="mb-5 flex justify-center">
+        <ol class="flex items-center gap-2 text-xs text-ink-dim">
+          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
+          <li class="flex items-center gap-2">
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+            <span class="font-medium text-ink">Projects</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 class="text-5xl font-bold tracking-tight text-ink md:text-6xl">Projects</h1>
+      <p class="mt-3 text-base text-ink-dim">Real builds, honest outcomes.</p>
+    </Container>
+  </section>
+
+
+  <!-- Projects grid -->
+  <Section class="border-b border-line">
+    <Container>
+      <div class="text-center">
+        <Eyebrow label="Our Work" class="justify-center" />
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl lg:text-[2.6rem]">
+          Work That Drives Results
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2" data-stagger id="projects-grid">
+        {
+          projects.length > 0
+            ? projects.map((project, i) => (
+                <a
+                  href={`/work/${project.id}`}
+                  data-stagger-child
+                  data-project-card
+                  class:list={['tilt-card group block overflow-hidden rounded-2xl border border-line bg-paper shadow-sm transition-all hover:border-accent/30 hover:shadow-lg', i >= INITIAL_COUNT ? 'hidden' : '']}
+                >
+                  <div class="relative overflow-hidden">
+                    <Image
+                      src={project.data.heroImage}
+                      alt={project.data.title}
+                      class="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      width={700}
+                      height={420}
+                    />
+                    <span class:list={[
+                      'absolute bottom-3 left-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white',
+                      catColor[project.data.category] ?? 'bg-accent',
+                    ]}>
+                      {project.data.category}
+                    </span>
+                    <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-white shadow-md">
+                      <svg class="h-4 w-4 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+                    </span>
+                  </div>
+                  <div class="p-5">
+                    <h3 class="text-base font-bold text-ink transition-colors group-hover:text-accent">{project.data.title}</h3>
+                    <p class="mt-2 text-sm text-ink-dim">{project.data.headlineResult}</p>
+                  </div>
+                </a>
+              ))
+            : placeholders.map((ph, i) => (
+                <div
+                  data-project-card
+                  data-stagger-child
+                  class:list={['tilt-card group overflow-hidden rounded-2xl border border-line bg-paper shadow-sm', i >= INITIAL_COUNT ? 'hidden' : '']}
+                >
+                  <div class="relative overflow-hidden">
+                    <img
+                      src={`https://picsum.photos/seed/${ph.img}/700/420`}
+                      alt={ph.title}
+                      class="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      width="700"
+                      height="420"
+                    />
+                    <span class:list={['absolute bottom-3 left-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white', catColor[ph.category] ?? 'bg-accent']}>
+                      {ph.category}
+                    </span>
+                    <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-white shadow-md">
+                      <svg class="h-4 w-4 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+                    </span>
+                  </div>
+                  <div class="p-5">
+                    <h3 class="text-base font-bold text-ink">{ph.title}</h3>
+                    <p class="mt-2 text-sm text-ink-dim">{ph.excerpt}</p>
+                  </div>
+                </div>
+              ))
+        }
+      </div>
+
+      <!-- Load More -->
+      <div id="load-more-wrap" class="mt-10 text-center">
+        <button
+          id="load-more-projects"
+          type="button"
+          class="inline-flex items-center gap-2 rounded-full bg-accent-blue px-8 py-3 text-sm font-semibold text-white shadow-md shadow-accent-blue/20 transition-colors hover:bg-accent-blue-dim"
+        >
+          Load More
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+        </button>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Process section -->
+  <Section class="border-b border-line">
+    <Container>
+      <div class="grid gap-6 md:grid-cols-2 md:items-end">
+        <div>
+          <Eyebrow label="Our Work Process" />
+          <h2 class="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            Step-by-Step to<br />Your Growth
+          </h2>
+        </div>
+        <p class="text-sm leading-relaxed text-ink-dim md:max-w-sm md:pb-1">
+          Every project follows a clear three-phase framework — so you always know where things stand, what's being built, and what's coming next.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 sm:grid-cols-3">
+        {
+          processSteps.map((step, i) => (
+            <div class="overflow-hidden rounded-2xl border border-line bg-paper shadow-sm">
+              <div class="p-6">
+                <h4 class="text-base font-bold text-ink">{step.title}</h4>
+                <p class="mt-2 text-sm leading-relaxed text-ink-dim">{step.description}</p>
+              </div>
+              <div class="flex items-center justify-between border-t border-line bg-ink px-5 py-3">
+                <span class="text-xs font-bold uppercase tracking-widest text-white/40">STEP</span>
+                <span class:list={['text-sm font-black', step.accent]}>0{i + 1}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Testimonials -->
+  <div class="border-b border-line">
+    <Container class="py-16 md:py-20">
+      <!-- Section header -->
+      <div class="grid gap-6 md:grid-cols-2 md:items-center">
+        <div>
+          <Eyebrow label="Testimonials" />
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            Testimonials: Trusted<br />by Our Clients
+          </h2>
+        </div>
+        <div class="flex flex-col items-start gap-4 md:items-end">
+          <p class="text-sm leading-relaxed text-ink-dim md:text-right">
+            Real feedback from startup founders, marketing leads, and business owners who've worked directly with our team.
+          </p>
+          <a
+            href="/testimonials"
+            class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
+          >
+            All Testimonials
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <Testimonials testimonials={testimonials} />
+    </Container>
+  </div>
+</BaseLayout>
+
+<script>
+  const btn = document.getElementById('load-more-projects');
+  const wrap = document.getElementById('load-more-wrap');
+  if (btn && wrap) {
+    const hidden = document.querySelectorAll('[data-project-card].hidden');
+    if (hidden.length === 0) { wrap.style.display = 'none'; }
+    btn.addEventListener('click', () => {
+      hidden.forEach((card) => card.classList.remove('hidden'));
+      wrap.style.display = 'none';
+    });
+  }
+</script>

@@ -1,0 +1,28 @@
+---
+type Tone = 'neutral' | 'red' | 'blue' | 'yellow' | 'green';
+
+type Props = {
+  tone?: Tone;
+  class?: string;
+};
+
+const { tone = 'neutral', class: className = '' } = Astro.props;
+
+const tones: Record<Tone, string> = {
+  neutral: 'border-line bg-paper-dim text-ink-dim',
+  red: 'border-accent-red/25 bg-accent-red/8 text-accent-red',
+  blue: 'border-accent/25 bg-accent/8 text-accent',
+  yellow: 'border-accent-yellow/25 bg-accent-yellow/8 text-accent-yellow',
+  green: 'border-accent-green/25 bg-accent-green/8 text-accent-green'
+};
+---
+
+<span
+  class:list={[
+    'mono-label inline-flex items-center rounded-md border px-2.5 py-1 !text-[0.66rem]',
+    tones[tone],
+    className
+  ]}
+>
+  <slot />
+</span>
