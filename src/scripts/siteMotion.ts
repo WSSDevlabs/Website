@@ -75,7 +75,7 @@ function initHeroStagger() {
     animate(
       el,
       { opacity: [0, 1], y: [18, 0] },
-      { duration: 0.65, delay, easing: [0.16, 1, 0.3, 1] }
+      { duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }
     );
   });
 }
@@ -142,7 +142,7 @@ function initStaggerGrids() {
           animate(
             k,
             { opacity: [0, 1], y: [20, 0] },
-            { duration: 0.55, delay: i * 0.07, easing: [0.16, 1, 0.3, 1] }
+            { duration: 0.55, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }
           );
         });
       },
@@ -175,7 +175,7 @@ function revealOnScroll(el: HTMLElement, variant: string, delay = 0) {
   inView(
     el,
     () => {
-      animate(el, keyframes, { duration: 0.6, delay, easing: [0.16, 1, 0.3, 1] });
+      animate(el, keyframes, { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] });
       el.style.willChange = 'auto';
     },
     { amount: 0.15 }
@@ -297,7 +297,7 @@ function initTilt() {
       animate(
         card,
         { rotateX: -y * 5, rotateY: x * 5, scale: 1.012 },
-        { duration: 0.12, easing: 'ease-out' }
+        { duration: 0.12, ease: 'easeOut' }
       );
     });
 
@@ -305,7 +305,7 @@ function initTilt() {
       animate(
         card,
         { rotateX: 0, rotateY: 0, scale: 1 },
-        { duration: 0.5, easing: [0.34, 1.56, 0.64, 1] }
+        { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }
       );
     });
   });
@@ -320,10 +320,10 @@ function initMagnetic() {
       const r = btn.getBoundingClientRect();
       const x = (e.clientX - r.left - r.width / 2) * pull;
       const y = (e.clientY - r.top - r.height / 2) * pull;
-      animate(btn, { x, y }, { duration: 0.18, easing: 'ease-out' });
+      animate(btn, { x, y }, { duration: 0.18, ease: 'easeOut' });
     });
     btn.addEventListener('mouseleave', () => {
-      animate(btn, { x: 0, y: 0 }, { duration: 0.5, easing: [0.34, 1.56, 0.64, 1] });
+      animate(btn, { x: 0, y: 0 }, { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] });
     });
   });
 }
@@ -335,7 +335,7 @@ function initPress() {
       animate(el, { scale: 0.97 }, { duration: 0.08 });
     });
     el.addEventListener('pointerup', () => {
-      animate(el, { scale: 1 }, { duration: 0.35, easing: [0.34, 1.56, 0.64, 1] });
+      animate(el, { scale: 1 }, { duration: 0.35, ease: [0.34, 1.56, 0.64, 1] });
     });
     el.addEventListener('pointerleave', () => {
       animate(el, { scale: 1 }, { duration: 0.2 });

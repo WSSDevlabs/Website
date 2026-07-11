@@ -20,55 +20,46 @@ const processSteps = [
 ];
 
 const capabilities = [
-  { label: 'Web & Mobile Development', detail: 'Typed, custom-coded builds across web, iOS, and Android.' },
-  { label: 'AI Integration & Automation', detail: 'LLM features, RAG pipelines, and workflow automation.' },
-  { label: 'Digital Marketing & Branding', detail: 'SEO, paid ads, and brand systems that feed growth.' },
+  { label: 'Websites, Apps & Systems', detail: 'Typed, custom-coded builds across web, mobile, and internal tools.' },
+  { label: 'Marketing, Branding & Media', detail: 'SEO, paid ads, social media, photography, and brand systems.' },
+  { label: 'Grants, Startups & Student Projects', detail: 'Whatever the brief, from grant-funded builds to a first business launch.' },
 ];
 
 const team = [
   { name: 'Wan Syahiid', role: 'Founder & Lead Developer', img: 'professional-developer-male' },
-  { name: 'Team Member', role: 'Full-Stack Engineer', img: 'professional-engineer-team' },
-  { name: 'Team Member', role: 'UI/UX Designer', img: 'professional-designer-female' },
+  { name: 'Farah Izzati', role: 'Full-Stack Engineer', img: 'professional-engineer-team' },
+  { name: 'Rin Takahara', role: 'UI/UX Designer', img: 'professional-designer-female' },
 ];
 
 const faqs = [
-  { q: 'What does WSS DevLabs do?', a: 'We build custom websites, mobile apps, custom business systems, and AI-powered software for startups and growing companies — engineered from scratch, not assembled from templates.' },
+  { q: 'What does WSS DevLabs do?', a: 'Whatever digital work you need: websites, mobile apps, custom systems, AI features, marketing, branding, product photography, even student projects and grant-funded builds. If it is digital, we probably do it.' },
   { q: 'Where are you based?', a: 'We are based in Kuala Lumpur, Malaysia, and work with clients across Southeast Asia and beyond.' },
   { q: 'How do I start a project with you?', a: 'Fill in our contact form or email us directly. We\'ll reply within one business day to schedule a discovery call and provide a fixed-price proposal.' },
-  { q: 'Do you build mobile apps?', a: 'Yes. We build cross-platform apps (React Native / Flutter) and native iOS/Android when performance demands it.' },
-  { q: 'Do you offer AI development?', a: 'Yes — LLM-powered features, RAG pipelines, workflow automation, and AI integrations. We\'ll tell you clearly what\'s AI integration vs. custom ML.' },
+  { q: 'What if my need doesn\'t fit neatly into one service?', a: 'Most projects don\'t. Tell us the outcome you want and we\'ll scope the right mix, whether that\'s a website plus ads, or a system plus a rebrand.' },
+  { q: 'Do you offer AI development?', a: 'Yes, including LLM-powered features, RAG pipelines, workflow automation, and AI integrations. We\'ll tell you clearly what\'s AI integration vs. custom ML.' },
 ];
 
 const whyFeatures = [
-  { icon: 'M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z', label: 'Real Engineering', desc: 'No templates, no shortcuts. Every line of code written by engineers, not assembled from page builders.' },
-  { icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5', label: 'Not Templated', desc: 'Architectured for your specific requirements, not adapted from a theme or starter kit.' },
-  { icon: 'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z', label: 'Direct with Builder', desc: 'You talk directly to the engineer building your product. No account managers between you and the work.' },
-  { icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z', label: 'Performance-Obsessed', desc: 'Lighthouse 90+ enforced before delivery. Speed is a feature, not an afterthought.' },
+  { icon: 'M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z', label: 'One Team, Every Need', desc: 'Website, app, marketing, and branding, handled by one team instead of five different vendors.' },
+  { icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5', label: 'Built Around Your Brief', desc: 'Every project, from a business system to a student capstone, is shaped around what you actually need.' },
+  { icon: 'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z', label: 'Direct with the Builder', desc: 'You talk directly to the person doing the work. No account managers relaying messages.' },
+  { icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z', label: 'Delivered Properly', desc: 'Fast sites, working systems, campaigns that convert. Whatever the deliverable, it meets the same bar.' },
 ];
 ---
 
 <BaseLayout
-  title="About Us — WSS DevLabs"
-  description="WSS DevLabs is a premium engineering studio building custom websites, mobile apps, AI-powered software, and digital marketing solutions from Kuala Lumpur."
+  title="About Us: WSS DevLabs"
+  description="WSS DevLabs is a Kuala Lumpur digital solutions team building websites, apps, systems, marketing, branding, and more for businesses, founders, and students."
   path="/about"
 >
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="dot-pattern mask-fade-edges absolute inset-0" aria-hidden="true"></div>
     <Container class="relative py-14 md:py-20">
-      <nav aria-label="Breadcrumb">
-        <ol class="flex items-center gap-2 text-xs text-ink-dim">
-          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
-          <li class="flex items-center gap-2">
-            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-            <span class="font-medium text-ink">About Us</span>
-          </li>
-        </ol>
-      </nav>
-      <h1 class="h-display mt-6" data-split>The studio behind the software</h1>
+      <h1 class="h-display mt-6" data-split>The team behind whatever you're building</h1>
       <p class="body-lead mt-5">
-        A lean Malaysian engineering team building websites, apps, and systems that clients own
-        outright.
+        A lean Malaysian team covering websites, apps, systems, marketing, and branding, so you
+        never need five different vendors.
       </p>
     </Container>
     <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true"></div>
@@ -100,14 +91,14 @@ const whyFeatures = [
             <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
           </span>
           <h3 class="h-sub mt-5">Our Vision</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the engineering studio that Southeast Asian founders trust most when building their critical digital products.</p>
+          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the first call Southeast Asian founders, businesses, and students make for anything digital they need built, marketed, or launched.</p>
         </div>
         <div class="card card-lift spotlight-card p-8">
           <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/8">
             <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
           </span>
           <h3 class="h-sub mt-5">Our Mission</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To build software that works at real scale — typed, tested, and handed over with full documentation so you are never left dependent on us.</p>
+          <p class="mt-2.5 leading-relaxed text-ink-dim">To handle any digital need, big or small, with the same care and follow-through, so you never have to piece it together across five different vendors.</p>
         </div>
       </div>
     </Container>
@@ -147,12 +138,13 @@ const whyFeatures = [
         <!-- Right: story + capability rows -->
         <div>
           <Eyebrow label="Our Story" />
-          <h2 class="h-section mt-5" data-split>Empowering your success with digital expertise</h2>
+          <h2 class="h-section mt-5" data-split>One team, whatever the digital need</h2>
           <p class="mt-5 leading-relaxed text-ink-dim">
-            WSS DevLabs was built around a simple frustration: most businesses buying "custom"
-            software receive page-builder templates with a markup, not real engineering. We build
-            from scratch — typed, fast, and owned outright by you at handover. No lock-in, no
-            hidden dependencies.
+            WSS DevLabs started as a small software team, then kept growing because clients kept
+            asking for more: not just a website, but the marketing to bring it traffic; not just an
+            app, but the brand behind it. So we built the team to match. Today we take on whatever a
+            business, a founder, or even a student needs built, marketed, or launched, all under one
+            roof, with no lock-in and no hidden dependencies.
           </p>
 
           <div class="mt-8">

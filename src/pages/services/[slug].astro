@@ -2,11 +2,14 @@
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
+import FAQ from '../../components/sections/FAQ.astro';
+import CTABand from '../../components/sections/CTABand.astro';
 import QuoteForm from '../../components/sections/QuoteForm.astro';
 import NewsletterBand from '../../components/sections/NewsletterBand.astro';
 import { SERVICES } from '../../data/services';
-import { GROUP_TONE } from '../../lib/tone';
+import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
 
 export function getStaticPaths() {
   return SERVICES.map((service) => ({
@@ -20,59 +23,74 @@ const tone = GROUP_TONE[service.group];
 
 const serviceImages: Record<string, [string, string, string]> = {
   'web-development': [
-    'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'mobile-app-development': [
-    'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'custom-systems': [
-    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'ai-development': [
-    'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1526378800951-0eb6b1e7e9e2?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1526378800951-0eb6b1e7e9e2?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'ui-ux-design': [
-    'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'maintenance-support': [
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'digital-marketing': [
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'business-growth': [
-    'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'branding-services': [
-    'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'product-photoshoot-marketing': [
-    'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'media-creation': [
-    'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1200&h=600&q=80',
-    'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?auto=format&fit=crop&w=600&h=400&q=80',
-    'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&h=400&q=80',
+    'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=700&h=380&q=80',
+  ],
+  'student-project-support': [
+    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=700&h=380&q=80',
+  ],
+  'grant-government-project-support': [
+    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=700&h=380&q=80',
+  ],
+  'business-startup-package': [
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&h=460&q=80',
+    'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=700&h=380&q=80',
   ],
 };
 const [heroImg, imgA, imgB] = serviceImages[service.slug] ?? serviceImages['web-development'];
@@ -102,174 +120,286 @@ const testimonials = [
 ];
 
 const toneAccent: Record<string, string> = {
-  red:    'bg-accent',
-  blue:   'bg-accent-blue',
+  red: 'bg-accent',
+  blue: 'bg-accent-blue',
   yellow: 'bg-accent-yellow',
-  green:  'bg-accent-green',
-  neutral:'bg-ink-dim',
+  green: 'bg-accent-green',
+  neutral: 'bg-ink-dim',
 };
-const toneText: Record<string, string> = {
-  red:    'text-accent',
-  blue:   'text-accent-blue',
-  yellow: 'text-accent-yellow',
-  green:  'text-accent-green',
-  neutral:'text-ink-dim',
-};
+
+const otherServices = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
 ---
 
 <ServiceLayout
-  title={`${service.title} — WSS DevLabs`}
+  title={`${service.title}: WSS DevLabs`}
   description={service.shortDescription}
   path={`/services/${service.slug}`}
   serviceName={service.title}
 >
-  <!-- ── Centered page hero ─────────────────────────────────── -->
-  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
-    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
-    <Container class="relative">
-      <nav aria-label="Breadcrumb" class="mb-5 flex justify-center">
-        <ol class="flex items-center gap-2 text-xs text-ink-dim">
-          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
-          <li class="flex items-center gap-2">
-            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-            <a href="/services" class="transition-colors hover:text-accent">Services</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
-            <span class="font-medium text-ink">Service Details</span>
-          </li>
-        </ol>
-      </nav>
-      <h1 class="text-5xl font-bold tracking-tight text-ink md:text-6xl">Service Details</h1>
-      <p class="mt-3 text-base text-ink-dim">{service.title}</p>
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section class="relative overflow-hidden">
+    <div class="dot-pattern mask-fade-edges absolute inset-0" aria-hidden="true" />
+    <Container class="relative py-14 md:py-20">
+      <Eyebrow label={service.group} tone={tone} />
+      <h1 class="h-display mt-5 max-w-3xl" data-split>{service.title}</h1>
+      <p class="body-lead mt-5">{service.shortDescription}</p>
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href="/contact"
+          data-magnetic
+          class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(45_91_227/0.5)] transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5 hover:bg-accent-dim"
+        >
+          Start a Project
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+        <a
+          href="/services"
+          class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-6 py-3.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
+        >
+          All Services
+        </a>
+      </div>
     </Container>
+    <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
   </section>
 
-  <!-- ── Hero image ────────────────────────────────────────── -->
-  <div class="border-b border-line bg-paper">
-    <Container class="py-8">
-      <div class="overflow-hidden rounded-2xl">
+  <!-- ── Hero image + pricing chip ──────────────────────────── -->
+  <section class="py-16 md:py-20">
+    <Container>
+      <div class="relative overflow-hidden rounded-3xl border border-line shadow-card">
         <img
           src={heroImg}
           alt={service.title}
-          class="h-72 w-full object-cover sm:h-96"
+          class="h-72 w-full scale-110 object-cover sm:h-[26rem]"
           loading="eager"
-          width="1200"
-          height="600"
+          fetchpriority="high"
+          width="1400"
+          height="800"
+          data-parallax="8"
         />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" aria-hidden="true" />
       </div>
+
+      {
+        service.pricingFrom && (
+          <div class="relative z-10 -mt-8 flex justify-start pl-6 md:pl-10">
+            <div class="flex items-center gap-4 rounded-2xl border border-line bg-paper px-6 py-4 shadow-float">
+              <span class:list={['flex h-10 w-10 items-center justify-center rounded-xl', toneAccent[tone]]}>
+                <svg class="h-4.5 w-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </span>
+              <div>
+                <p class="mono-label text-ink-dim">Pricing From</p>
+                <p class="stat-num text-xl leading-none text-ink">{service.pricingFrom}</p>
+              </div>
+            </div>
+          </div>
+        )
+      }
     </Container>
-  </div>
+  </section>
 
-  <!-- ── About section ─────────────────────────────────────── -->
-  <Section class="border-b border-line">
+  <!-- ── About / value prop ─────────────────────────────────── -->
+  <Section rule>
     <Container class="max-w-4xl">
-      <h2 class="text-2xl font-bold tracking-tight text-ink md:text-3xl">
-        About {service.title} Services
-      </h2>
-
-      <!-- Dropcap paragraph -->
-      <div class="mt-6 flex items-start gap-4">
-        <span class:list={[
-          'flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-xl font-black text-white',
-          toneAccent[tone],
-        ]}>
-          {service.valueProp.charAt(0)}
-        </span>
-        <p class="flex-1 text-sm leading-relaxed text-ink-dim">{service.valueProp}</p>
+      <div class="card p-8 md:p-10">
+        <div class="flex items-start gap-4">
+          <span class:list={[
+            'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg font-black text-white',
+            toneAccent[tone],
+          ]}>
+            {service.valueProp.charAt(0)}
+          </span>
+          <div class="flex-1">
+            <h2 class="h-sub">About {service.title}</h2>
+            <p class="mt-3 leading-relaxed text-ink-dim">{service.valueProp}</p>
+          </div>
+        </div>
+        <div class="hairline my-7" aria-hidden="true" />
+        <p class="leading-relaxed text-ink-dim">{service.problem}</p>
       </div>
-
-      <p class="mt-5 text-sm leading-relaxed text-ink-dim">{service.problem}</p>
     </Container>
   </Section>
 
-  <!-- ── Services Include (deliverables) ───────────────────── -->
-  <Section class="border-b border-line">
-    <Container class="max-w-4xl">
-      <h3 class="inline-flex items-center gap-2 text-xl font-bold text-ink">
-        Services Include:
-        <span class:list={['h-0.5 w-12 rounded-full', toneAccent[tone]]} aria-hidden="true" />
-      </h3>
-      <p class="mt-3 text-sm leading-relaxed text-ink-dim">{service.shortDescription}</p>
+  <!-- ── Deliverables ───────────────────────────────────────── -->
+  <Section rule class="bg-paper-dim">
+    <Container>
+      <div class="max-w-2xl">
+        <Eyebrow label="What's Included" tone={tone} />
+        <h2 class="h-section mt-4" data-split>Everything in {service.title}</h2>
+        <p class="mt-4 leading-relaxed text-ink-dim">{service.shortDescription}</p>
+      </div>
 
-      <!-- Checklist grid -->
-      <ul class="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
         {
           service.deliverables.map((item) => (
-            <li class="flex items-start gap-2.5 text-sm text-ink-dim">
-              <svg
-                class:list={['mt-0.5 h-4 w-4 shrink-0', toneText[tone]]}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-              {item}
+            <li data-stagger-child class="card card-lift spotlight-card flex items-start gap-3 p-5">
+              <span class:list={[
+                'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg',
+                toneAccent[tone],
+              ]}>
+                <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+              </span>
+              <span class="pt-1 text-sm leading-relaxed text-ink-dim">{item}</span>
             </li>
           ))
         }
       </ul>
 
-      <!-- Two supporting images -->
-      <div class="mt-10 grid grid-cols-2 gap-4">
-        <div class="overflow-hidden rounded-2xl">
+      <!-- Supporting images -->
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        <div class="overflow-hidden rounded-3xl border border-line shadow-card">
           <img
             src={imgA}
             alt=""
-            class="h-48 w-full object-cover sm:h-56"
+            class="h-52 w-full scale-110 object-cover sm:h-64"
             loading="lazy"
-            width="600"
-            height="400"
+            width="700"
+            height="460"
+            data-parallax="7"
           />
         </div>
-        <div class="overflow-hidden rounded-2xl">
+        <div class="mt-6 overflow-hidden rounded-3xl border border-line shadow-card sm:mt-0">
           <img
             src={imgB}
             alt=""
-            class="h-48 w-full object-cover sm:h-56"
+            class="h-52 w-full scale-110 object-cover sm:h-64"
             loading="lazy"
-            width="600"
-            height="400"
+            width="700"
+            height="380"
+            data-parallax="11"
           />
         </div>
       </div>
     </Container>
   </Section>
 
-  <!-- ── Our Expertise (approach steps as numbered cards) ───── -->
-  <Section class="border-b border-line">
+  <!-- ── Approach / expertise ───────────────────────────────── -->
+  <Section rule>
+    <Container>
+      <div class="panel px-6 py-14 md:px-14 md:py-16">
+        <div class="max-w-2xl">
+          <h2 class="h-section" data-split>Our expertise in {service.title}</h2>
+          <p class="mt-4 leading-relaxed text-ink-dim">
+            Our structured approach ensures every project delivers real outcomes: on time, on scope, and built to last.
+          </p>
+        </div>
+
+        <div class="relative mt-12">
+          <div class="hairline absolute left-0 right-0 top-5 hidden sm:block" aria-hidden="true" />
+          <div class="grid gap-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3" data-stagger>
+            {
+              service.approach.map((step, i) => {
+                const [head, ...rest] = step.split(':');
+                const title = rest.length ? head.trim() : step;
+                const desc = rest.length ? rest.join(':').trim() : '';
+
+                return (
+                  <div data-stagger-child class="relative">
+                    <span class="stat-num relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h4 class="mt-5 font-semibold tracking-tight text-ink">{title}</h4>
+                    {desc && <p class="mt-2 text-sm leading-relaxed text-ink-dim">{desc}</p>}
+                  </div>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ── Tools & methods ────────────────────────────────────── -->
+  <Section rule>
     <Container class="max-w-4xl">
-      <h2 class="text-2xl font-bold tracking-tight text-ink md:text-3xl">
-        Our Expertise In {service.title}
-      </h2>
-      <p class="mt-3 text-sm leading-relaxed text-ink-dim max-w-2xl">
-        Our structured approach ensures every project delivers real outcomes — on time, on scope, and built to last.
+      <h2 class="h-section" data-split>What we use to deliver {service.title}</h2>
+      <p class="mt-4 max-w-2xl leading-relaxed text-ink-dim">
+        We use proven, production-grade tools and methodologies to deliver outcomes you can measure, not just deliverables you can check off.
       </p>
 
-      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-8 flex flex-wrap gap-2.5">
         {
-          service.approach.map((step, i) => {
-            const [head, ...rest] = step.split(':');
-            const title = rest.length ? head.trim() : step;
-            const desc  = rest.length ? rest.join(':').trim() : '';
+          service.tools.map((tool) => (
+            <span class="rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-ink shadow-card">
+              {tool}
+            </span>
+          ))
+        }
+      </div>
 
+      {
+        service.pricingFrom && (
+          <div class:list={[
+            'mt-10 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center',
+            toneAccent[tone],
+          ]}>
+            <div>
+              <p class="mono-label text-white/70">Pricing From</p>
+              <p class="stat-num mt-2 text-3xl text-white">{service.pricingFrom}</p>
+            </div>
+            <a
+              href="/contact"
+              class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-float transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5"
+            >
+              Get a Quote
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+        )
+      }
+    </Container>
+  </Section>
+
+  <!-- ── Testimonials ───────────────────────────────────────── -->
+  <Testimonials testimonials={testimonials} />
+
+  <!-- ── Service-specific FAQ ───────────────────────────────── -->
+  {service.faq.length > 0 && <FAQ title={`${service.title} FAQ`} items={service.faq.map((f) => ({ question: f.question, answer: f.answer }))} />}
+
+  <!-- ── Explore other services ─────────────────────────────── -->
+  <Section rule class="bg-paper-dim">
+    <Container>
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <Eyebrow label="Keep Exploring" />
+          <h2 class="h-section mt-4" data-split>Other services you may need</h2>
+        </div>
+        <a
+          href="/services"
+          class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-dim"
+        >
+          View all services
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="mt-10 grid gap-5 sm:grid-cols-3" data-stagger>
+        {
+          otherServices.map((other) => {
+            const otherTone = GROUP_TONE[other.group];
             return (
-              <div class="relative rounded-2xl border border-line bg-paper-dim p-5 transition-all hover:border-accent/30 hover:shadow-md">
-                <span class:list={[
-                  'flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black text-white',
-                  toneAccent[tone],
-                ]}>
-                  0{i + 1}
-                </span>
-                <h4 class="mt-4 text-sm font-bold text-ink">{title}</h4>
-                {desc && <p class="mt-1.5 text-xs leading-relaxed text-ink-dim">{desc}</p>}
-              </div>
+              <a
+                href={`/services/${other.slug}`}
+                data-stagger-child
+                class="card card-lift spotlight-card group block p-6"
+              >
+                <p class:list={['mono-label', TONE_TEXT_CLASS[otherTone]]}>{other.group}</p>
+                <h3 class="mt-4 font-semibold tracking-tight text-ink transition-colors group-hover:text-accent">
+                  {other.title}
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-ink-dim">{other.shortDescription}</p>
+              </a>
             );
           })
         }
@@ -277,40 +407,11 @@ const toneText: Record<string, string> = {
     </Container>
   </Section>
 
-  <!-- ── Services Benefits (tools / stack) ─────────────────── -->
-  <Section class="border-b border-line">
-    <Container class="max-w-4xl">
-      <h3 class="inline-flex items-center gap-2 text-xl font-bold text-ink">
-        Services Benefits:
-        <span class:list={['h-0.5 w-12 rounded-full', toneAccent[tone]]} aria-hidden="true" />
-      </h3>
-      <p class="mt-3 text-sm leading-relaxed text-ink-dim max-w-2xl">
-        We use proven, production-grade tools and methodologies to deliver outcomes you can measure — not just deliverables you can check off.
-      </p>
-
-      <ul class="mt-6 space-y-3">
-        {
-          service.tools.map((tool) => (
-            <li class="flex items-center gap-3 text-sm text-ink-dim">
-              <span class:list={['h-2 w-2 shrink-0 rounded-full', toneAccent[tone]]} aria-hidden="true" />
-              {tool}
-            </li>
-          ))
-        }
-        {
-          service.pricingFrom && (
-            <li class="mt-4 flex items-center gap-3 text-sm font-semibold text-ink">
-              <span class:list={['h-2 w-2 shrink-0 rounded-full', toneAccent[tone]]} aria-hidden="true" />
-              Pricing from {service.pricingFrom}
-            </li>
-          )
-        }
-      </ul>
-    </Container>
-  </Section>
-
-  <!-- ── Testimonials ───────────────────────────────────────── -->
-  <Testimonials testimonials={testimonials} />
+  <!-- ── CTA band ────────────────────────────────────────────── -->
+  <CTABand
+    title={`Ready to start your ${service.title} project?`}
+    subtitle="Tell us what you're building, and we'll respond within one business day with a fixed-price proposal."
+  />
 
   <!-- ── Quote Form ────────────────────────────────────────── -->
   <QuoteForm />

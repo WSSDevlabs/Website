@@ -1,3 +1,5 @@
+import raw from './team.json';
+
 export type TeamMember = {
   slug: string;
   name: string;
@@ -14,7 +16,7 @@ export type TeamMember = {
   skills?: string[];
 };
 
-// Content gate: add real team members before this section ships
-export const TEAM: TeamMember[] = [];
+// Editable via the CMS at /data/team.json (see /wss-console/config.yml)
+export const TEAM: TeamMember[] = (raw as { members: TeamMember[] }).members;
 
 export const getTeamMemberBySlug = (slug: string) => TEAM.find((m) => m.slug === slug);

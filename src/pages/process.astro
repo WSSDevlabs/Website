@@ -11,18 +11,18 @@ const processFaq = [
   {
     question: 'How long does a typical project take?',
     answer:
-      'Most websites take 4–8 weeks; mobile apps and custom systems vary by scope, agreed during Strategize.'
+      'Most websites take 4-8 weeks; mobile apps and custom systems vary by scope, agreed during Strategize.'
   },
   {
     question: 'What do I own at the end?',
-    answer: 'Full source code, documentation, and credentials — no vendor lock-in.'
+    answer: 'Full source code, documentation, and credentials, with no vendor lock-in.'
   }
 ];
 ---
 
 <BaseLayout
-  title="Process"
-  description="How WSS DevLabs works: Strategize, Build, Evolve — clear scope, honest timelines, full ownership at handover."
+  title="Process: WSS DevLabs"
+  description="How WSS DevLabs works: Strategize, Build, and Evolve, with clear scope, honest timelines, and full ownership at handover."
   path="/process"
 >
   <Hero
@@ -32,41 +32,67 @@ const processFaq = [
     primaryCta={{ label: 'Start a Project', href: '/contact' }}
   />
 
-  {
-    PROCESS_PHASES.map((phase, index) => (
-      <Section class={index > 0 ? 'border-t border-line' : ''}>
-        <Container class="max-w-3xl">
-          <p class="text-sm font-medium text-accent">Phase 0{index + 1}</p>
-          <h2 class="mt-2 text-2xl font-semibold tracking-tight text-ink">{phase.phase}</h2>
-          <p class="mt-3 text-ink-dim">{phase.summary}</p>
-          <ul class="mt-6 space-y-2">
-            {phase.steps.map((step) => (
-              <li class="text-ink-dim">— {step}</li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-    ))
-  }
-
-  <Section class="border-t border-line">
-    <Container class="max-w-3xl">
-      <h2 class="text-2xl font-semibold tracking-tight text-ink">Timeline expectations</h2>
-      <p class="mt-4 text-ink-dim">
-        Timelines are scoped per project during Strategize and confirmed before Build begins — no
-        open-ended engagements.
-      </p>
+  <!-- Phase timeline -->
+  <Section rule>
+    <Container>
+      <div class="relative">
+        <div class="hairline absolute left-0 right-0 top-5 hidden md:block" aria-hidden="true" />
+        <div class="grid gap-12 md:grid-cols-3 md:gap-8" data-stagger>
+          {
+            PROCESS_PHASES.map((phase, index) => (
+              <div data-stagger-child class="relative">
+                <span class="stat-num relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h2 class="h-sub mt-6">{phase.phase}</h2>
+                <p class="mt-2.5 leading-relaxed text-ink-dim">{phase.summary}</p>
+                <ul class="mt-6 space-y-2.5">
+                  {phase.steps.map((step) => (
+                    <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink-dim">
+                      <svg class="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </Container>
   </Section>
 
-  <Section class="border-t border-line">
-    <Container class="max-w-3xl">
-      <h2 class="text-2xl font-semibold tracking-tight text-ink">What you get</h2>
-      <ul class="mt-6 space-y-2 text-ink-dim">
-        <li>— Full ownership of source code and assets at handover</li>
-        <li>— Documentation for whoever maintains the system next</li>
-        <li>— A clear path into ongoing maintenance, if you want it</li>
-      </ul>
+  <!-- Timeline expectations + what you get -->
+  <Section rule class="bg-paper-dim">
+    <Container>
+      <div class="panel grid gap-10 px-6 py-12 md:grid-cols-2 md:px-14 md:py-14">
+        <div>
+          <h2 class="h-sub">Timeline expectations</h2>
+          <p class="mt-3 leading-relaxed text-ink-dim">
+            Timelines are scoped per project during Strategize and confirmed before Build begins,
+            with no open-ended engagements.
+          </p>
+        </div>
+        <div>
+          <h2 class="h-sub">What you get</h2>
+          <ul class="mt-3 space-y-2.5">
+            {[
+              'Full ownership of source code and assets at handover',
+              'Documentation for whoever maintains the system next',
+              'A clear path into ongoing maintenance, if you want it',
+            ].map((item) => (
+              <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink-dim">
+                <svg class="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </Container>
   </Section>
 

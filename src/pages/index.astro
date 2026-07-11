@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
 import Marquee from '../components/ui/Marquee.astro';
+import WhateverYouNeed from '../components/sections/WhateverYouNeed.astro';
 import AboutSection from '../components/sections/AboutSection.astro';
 import HomepageServices from '../components/sections/HomepageServices.astro';
 import Differentiator from '../components/sections/Differentiator.astro';
@@ -48,24 +49,25 @@ const schema = {
   name: 'WSS DevLabs',
   url: Astro.site?.toString(),
   description:
-    'Premium web & software studio building websites, mobile apps, custom business systems, and AI-powered software.'
+    'Your one-stop digital solutions partner: websites, mobile apps, custom systems, AI, marketing, branding, and more.'
 };
 ---
 
 <BaseLayout
-  title="WSS DevLabs — Websites, Mobile Apps & AI-Powered Software"
-  description="A custom-built, performance-led web & software studio: websites, mobile apps, custom CMS/ERP systems, and AI-powered software for startups and growing companies."
+  title="WSS DevLabs: Your Digital Solutions Partner"
+  description="Websites, apps, systems, marketing, branding, student projects, grants, and business launches. Whatever the digital need, one team handles it."
   path="/"
   schema={schema}
 >
   <Hero
-    eyebrow="Web · Mobile · Systems · AI"
-    title="Custom software, built for speed."
-    subtitle="We build websites, mobile apps, custom business systems, and AI-powered software — engineered from scratch, not assembled from templates."
+    eyebrow="Every Digital Need, One Team"
+    title="Whatever you need, we can build it."
+    subtitle="Websites, apps, systems, marketing, branding, even student projects and grant-funded builds, one team, done properly."
     primaryCta={{ label: 'Start a Project', href: '/contact' }}
     secondaryCta={{ label: 'See our work', href: '/work' }}
   />
   <Marquee />
+  <WhateverYouNeed />
   <AboutSection />
   <HomepageServices />
   <Differentiator />
@@ -81,7 +83,7 @@ const schema = {
   ]} />
   <CTABand
     title="Have a project in mind?"
-    subtitle="Tell us what you're building — we'll respond within one business day."
+    subtitle="Tell us what you're building, and we'll respond within one business day."
   />
   <ContactTeaser />
 </BaseLayout>

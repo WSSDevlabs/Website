@@ -29,7 +29,7 @@ export const PROCESS_PHASES: ProcessPhase[] = [
   {
     phase: 'Evolve',
     summary:
-      'Launch, then ongoing optimisation, support, and — where AI is involved — tuning over time.',
+      'Launch, then ongoing optimisation, support, and, where AI is involved, tuning over time.',
     steps: [
       'Launch and handover with documentation',
       'Monitoring and performance optimisation',

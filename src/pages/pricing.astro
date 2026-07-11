@@ -1,118 +1,105 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
-import Eyebrow from '../components/ui/Eyebrow.astro';
+import Section from '../components/ui/Section.astro';
 import QuoteForm from '../components/sections/QuoteForm.astro';
 import NewsletterBand from '../components/sections/NewsletterBand.astro';
 import { PRICING_TIERS } from '../data/pricing';
 ---
 
 <BaseLayout
-  title="Pricing — WSS DevLabs"
+  title="Pricing: WSS DevLabs"
   description="Transparent project-based pricing for web development, mobile apps, custom systems, and AI-powered software. Fixed-price proposals, no surprises."
   path="/pricing"
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
-    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
-    <Container class="relative">
-      <nav aria-label="Breadcrumb" class="mb-5 flex justify-center">
-        <ol class="flex items-center gap-2 text-xs text-ink-dim">
-          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
-          <li class="flex items-center gap-2">
-            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-            <span class="font-medium text-ink">Pricing</span>
-          </li>
-        </ol>
-      </nav>
-      <h1 class="text-5xl font-bold tracking-tight text-ink md:text-6xl">Pricing</h1>
+  <section class="relative overflow-hidden">
+    <div class="dot-pattern mask-fade-edges absolute inset-0" aria-hidden="true" />
+    <Container class="relative py-14 md:py-20">
+      <h1 class="h-display mt-6" data-split>Pricing that scopes to the work</h1>
+      <p class="body-lead mt-5">
+        Three starting tiers, fixed-price proposals, and no surprises after kickoff.
+      </p>
     </Container>
+    <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
   </section>
 
-
   <!-- Pricing cards -->
-  <section class="border-b border-line">
-    <Container class="py-16">
-      <div class="text-center">
-        <Eyebrow label="Pricing" class="justify-center" />
-        <h2 class="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">Our Pricing Model</h2>
-      </div>
-
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        {PRICING_TIERS.map((tier) => (
-          <div
-            class:list={[
-              'relative flex flex-col rounded-2xl border p-7 transition-shadow hover:shadow-lg',
-              tier.highlight
-                ? 'border-accent bg-[#0a0a0c] text-white shadow-xl shadow-ink/20'
-                : 'border-line bg-paper shadow-sm',
-            ]}
-          >
-            {tier.badge && (
-              <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-md">
-                {tier.badge}
-              </span>
-            )}
-
-            <!-- Tier name -->
-            <p class:list={['text-xs font-bold uppercase tracking-widest', tier.highlight ? 'text-accent' : 'text-accent']}>
-              {tier.name}
-            </p>
-
-            <!-- Price -->
-            <div class="mt-3 flex items-baseline gap-1">
-              <span class:list={['text-4xl font-black', tier.highlight ? 'text-white' : 'text-ink']}>
-                {tier.price}
-              </span>
-            </div>
-
-            <p class:list={['mt-2 text-xs', tier.highlight ? 'text-white/60' : 'text-ink-dim']}>
-              {tier.description}
-            </p>
-
-            <!-- Features -->
-            <div class:list={['mt-5 pb-1 text-[10px] font-bold uppercase tracking-widest', tier.highlight ? 'text-white/40' : 'text-ink-dim']}>
-              What You'll Get
-            </div>
-            <ul class="mt-3 flex-1 space-y-2.5">
-              {tier.features.map((feature) => (
-                <li class:list={['flex items-start gap-2.5 text-xs', tier.highlight ? 'text-white/80' : 'text-ink-dim']}>
-                  <span class:list={['mt-0.5 h-3.5 w-3.5 shrink-0 rounded-full', tier.highlight ? 'bg-accent' : 'bg-accent/20']}>
-                    <svg class:list={['h-3.5 w-3.5', tier.highlight ? 'text-white' : 'text-accent']} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg>
-                  </span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-
-            <!-- CTA -->
-            <a
-              href={tier.ctaHref}
+  <Section rule>
+    <Container>
+      <div class="grid gap-6 md:grid-cols-3" data-stagger>
+        {
+          PRICING_TIERS.map((tier) => (
+            <div
+              data-stagger-child
               class:list={[
-                'mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all hover:shadow-md',
+                'relative flex flex-col rounded-3xl border p-8 transition-all duration-300 [transition-timing-function:var(--ease-out-expo)]',
                 tier.highlight
-                  ? 'bg-accent text-white hover:bg-accent-dim'
-                  : 'border-2 border-ink/20 text-ink hover:border-accent hover:text-accent',
+                  ? 'border-transparent bg-ink text-white shadow-[0_32px_80px_-40px_rgb(12_18_32/0.55)]'
+                  : 'card card-lift',
               ]}
             >
-              Choose Plan
-            </a>
-          </div>
-        ))}
+              {tier.badge && (
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-card">
+                  {tier.badge}
+                </span>
+              )}
+
+              <p class:list={['mono-label', tier.highlight ? 'text-white/60' : 'text-accent']}>
+                {tier.name}
+              </p>
+
+              <p class:list={['stat-num mt-3 text-4xl', tier.highlight ? 'text-white' : 'text-ink']}>
+                {tier.price}
+              </p>
+
+              <p class:list={['mt-2 text-sm leading-relaxed', tier.highlight ? 'text-white/60' : 'text-ink-dim']}>
+                {tier.description}
+              </p>
+
+              <div class:list={['hairline my-6', tier.highlight && '!bg-white/10']} aria-hidden="true" />
+
+              <ul class="flex-1 space-y-2.5">
+                {tier.features.map((feature) => (
+                  <li class:list={['flex items-start gap-2.5 text-sm', tier.highlight ? 'text-white/75' : 'text-ink-dim']}>
+                    <svg
+                      class:list={['mt-0.5 h-4 w-4 shrink-0', tier.highlight ? 'text-white' : 'text-accent']}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={tier.ctaHref}
+                class:list={[
+                  'mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5',
+                  tier.highlight
+                    ? 'bg-accent text-white hover:bg-accent-dim'
+                    : 'border border-line text-ink shadow-card hover:border-ink/25 hover:shadow-card-hover',
+                ]}
+              >
+                {tier.cta}
+              </a>
+            </div>
+          ))
+        }
       </div>
 
-      <p class="mt-8 text-center text-xs text-ink-dim">
-        All prices in Malaysian Ringgit (RM). Projects are scoped individually — these are starting points.{' '}
+      <p class="mt-10 text-center text-sm text-ink-dim">
+        All prices in Malaysian Ringgit (RM). Projects are scoped individually, so these are starting points.{' '}
         <a href="/contact" class="font-semibold text-accent hover:underline">Request an accurate quote</a>
       </p>
     </Container>
-  </section>
-
+  </Section>
 
   <QuoteForm />
-
 
   <NewsletterBand />
 </BaseLayout>
