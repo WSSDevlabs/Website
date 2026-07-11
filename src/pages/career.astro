@@ -4,100 +4,15 @@ import Container from '../components/ui/Container.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import QuoteForm from '../components/sections/QuoteForm.astro';
 import NewsletterBand from '../components/sections/NewsletterBand.astro';
+import { BENEFITS, JOB_OPENINGS, CAREER_GALLERY } from '../data/career';
 
-const benefits = [
-  { icon: 'M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z', title: 'Professional Team', desc: 'Work alongside experienced engineers, designers, and marketers who take craft seriously.' },
-  { icon: 'M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z', title: 'Performance Bonuses', desc: 'Performance rewards on successfully delivered projects, above your agreed contract rate.' },
-  { icon: 'M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z', title: 'Health Insurance', desc: 'Comprehensive health coverage for full-time team members and competitive packages for part-timers.' },
-  { icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5', title: 'Annual Tour', desc: 'Quarterly team meetups and an annual retreat to celebrate wins and plan the next chapter.' },
-  { icon: 'M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z', title: 'Competitive Salary', desc: 'Market rate and above, paid on time, every time. Freelance or part-time contracts available.' },
-  { icon: 'M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18', title: 'Problem Solving', desc: 'We tackle real engineering and business challenges. No busywork, no pointless meetings, ever.' },
-  { icon: 'M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z', title: 'Transportation', desc: 'Transport allowance for KL-based team members attending in-person sprints or client visits.' },
-  { icon: 'M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z', title: 'Free Snacks and Drinks', desc: 'Fully stocked kitchen at our KL workspace for team members working on-site sessions.' },
-];
-
-const openings = [
-  {
-    title: 'Frontend Developer (React / Astro)',
-    experience: '1 to 3 Years',
-    positions: '2 Positions',
-    type: 'Freelance',
-    responsibilities: [
-      'Build responsive UIs in React and Astro based on Figma designs',
-      'Implement pixel-perfect, accessible components with Tailwind CSS',
-      'Ensure Lighthouse performance score of 90 or above before delivery',
-      'Collaborate with designers and backend engineers via pull request workflow',
-      'Write clean TypeScript with proper types and no implicit any',
-    ],
-    skills: [
-      'React and TypeScript (required)',
-      'Tailwind CSS and component-based thinking',
-      'Astro knowledge is a strong advantage',
-      'Git workflow with feature branches and pull requests',
-      'Eye for detail and a performance-first mindset',
-    ],
-  },
-  {
-    title: 'Backend Developer (Node.js / Python)',
-    experience: '2 to 4 Years',
-    positions: '1 Position',
-    type: 'Part-time',
-    responsibilities: [
-      'Build REST and GraphQL APIs with TypeScript or Python',
-      'Design PostgreSQL schemas with proper indexing and migrations',
-      'Integrate third-party APIs and LLM pipelines into production systems',
-      'Write clean typed code with proper error handling and logging',
-    ],
-    skills: [
-      'Node.js or Python (required)',
-      'PostgreSQL and ORM tools',
-      'REST API design and documentation',
-      'Docker basics for local development',
-    ],
-  },
-  {
-    title: 'UI/UX Designer (Figma)',
-    experience: '1 to 3 Years',
-    positions: '1 Position',
-    type: 'Freelance',
-    responsibilities: [
-      'Create Figma wireframes and high-fidelity designs for web and mobile',
-      'Build and maintain component libraries and design tokens',
-      'Conduct user research to validate design decisions',
-      'Collaborate closely with developers on handoff and implementation',
-    ],
-    skills: [
-      'Figma with auto-layout and component variants',
-      'Design systems and token-based thinking',
-      'User research and usability testing basics',
-      'Basic understanding of CSS and responsive design',
-    ],
-  },
-  {
-    title: 'Digital Marketing Specialist',
-    experience: '1 to 2 Years',
-    positions: '1 Position',
-    type: 'Part-time',
-    responsibilities: [
-      'Manage SEO and content strategies for WSS DevLabs and its clients',
-      'Run Google Ads and Meta Ads campaigns with monthly performance reviews',
-      'Write compelling copy for ads, landing pages, and email campaigns',
-      'Assist with client onboarding and reporting',
-    ],
-    skills: [
-      'Google Ads and Meta Ads Manager',
-      'SEO fundamentals including on-page and technical',
-      'Google Analytics and Search Console',
-      'Basic copywriting and content calendar management',
-    ],
-  },
-];
-
-const galleryImgs = ['team-collab-a', 'dev-pair-session', 'team-whiteboard-tech', 'coworking-kl', 'team-standup', 'pair-programming-two'];
+const benefits = BENEFITS;
+const openings = JOB_OPENINGS;
+const galleryImgs = CAREER_GALLERY;
 ---
 
 <BaseLayout
-  title="Career — WSS DevLabs"
+  title="Career: WSS DevLabs"
   description="Join WSS DevLabs as a freelance or part-time contributor. We are looking for engineers, designers, and marketers who take craft seriously."
   path="/career"
 >
@@ -105,15 +20,6 @@ const galleryImgs = ['team-collab-a', 'dev-pair-session', 'team-whiteboard-tech'
   <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
     <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
     <Container class="relative">
-      <nav aria-label="Breadcrumb" class="mb-4 flex justify-center">
-        <ol class="flex items-center gap-2 text-xs text-ink-dim">
-          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
-          <li class="flex items-center gap-2">
-            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-            <span class="font-medium text-ink">Career</span>
-          </li>
-        </ol>
-      </nav>
       <h1 class="text-4xl font-bold tracking-tight text-ink md:text-5xl">Career</h1>
     </Container>
   </section>
@@ -158,8 +64,7 @@ const galleryImgs = ['team-collab-a', 'dev-pair-session', 'team-whiteboard-tech'
     <Container class="py-12">
       <div class="flex items-center justify-between">
         <div>
-          <Eyebrow label="Benefits" />
-          <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">Our Perks &amp; Benefits</h2>
+          <h2 class="text-3xl font-bold tracking-tight text-ink md:text-4xl">Our Perks &amp; Benefits</h2>
         </div>
         <a href="#openings" class="hidden shrink-0 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-accent-dim sm:inline-flex">
           View All Job Openings
@@ -183,8 +88,7 @@ const galleryImgs = ['team-collab-a', 'dev-pair-session', 'team-whiteboard-tech'
   <section id="openings" class="border-b border-line">
     <Container class="py-12">
       <div class="text-center">
-        <Eyebrow label="Job Opening" class="justify-center" />
-        <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">Current Openings</h2>
+        <h2 class="text-3xl font-bold tracking-tight text-ink md:text-4xl">Current Openings</h2>
       </div>
       <div class="mt-8 space-y-3">
         {openings.map((job, i) => (
@@ -245,12 +149,11 @@ const galleryImgs = ['team-collab-a', 'dev-pair-session', 'team-whiteboard-tech'
   </section>
 
   <!-- Life at WSS DevLabs -->
-  <section class="border-b border-line bg-[#0a0a0c]">
+  <section class="border-b border-line bg-ink">
     <Container class="py-12">
       <div class="flex items-center justify-between">
         <div>
-          <Eyebrow label="Glimpse" class="[&>*]:!text-white/60 [&>*:first-child]:!bg-accent" />
-          <h2 class="mt-3 text-2xl font-bold text-white md:text-3xl">Life at WSS DevLabs</h2>
+          <h2 class="text-2xl font-bold text-white md:text-3xl">Life at WSS DevLabs</h2>
         </div>
         <a href="#openings" class="shrink-0 rounded-full bg-accent-red px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-accent-red-dim">
           Apply Now

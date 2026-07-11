@@ -1,0 +1,7 @@
+name = "wss-cms-auth"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# After `wrangler login` and `wrangler deploy`, set these two secrets:
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET

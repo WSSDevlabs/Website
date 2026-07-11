@@ -1,0 +1,78 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+
+const clusters = [
+  {
+    title: 'Build It',
+    icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5',
+    items: [
+      'Want a website? We build it.',
+      'Want a mobile app? We build it.',
+      'Need your own custom system? We build it.',
+      "Working on a final year project? We build it with you.",
+    ],
+  },
+  {
+    title: 'Grow It',
+    icon: 'M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941',
+    items: [
+      'Want to run marketing or ads? We manage it.',
+      'Need someone to handle your social posts? We run it.',
+      'Need product photography and placement? We shoot it.',
+      'Need something designed or rebranded? We design it.',
+    ],
+  },
+  {
+    title: 'Launch It',
+    icon: 'M4.5 10.5 12 3l7.5 7.5M4.5 10.5v9a1.5 1.5 0 0 0 1.5 1.5h3v-6h6v6h3a1.5 1.5 0 0 0 1.5-1.5v-9',
+    items: [
+      'Applying for a government grant project? We deliver it.',
+      'Opening a small business from scratch? We help launch it.',
+      "Not sure which of these you need? We'll help you figure it out.",
+    ],
+  },
+];
+---
+
+<Section rule>
+  <Container>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="h-section" data-split>Whatever it is, we probably build it</h2>
+      <p class="mt-4 leading-relaxed text-ink-dim">
+        One team covering the full range of digital work a business, a founder, or a student
+        actually runs into.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-3" data-stagger>
+      {
+        clusters.map((cluster) => (
+          <div data-stagger-child class="card p-7">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/8">
+              <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d={cluster.icon} />
+              </svg>
+            </span>
+            <h3 class="mt-4 font-semibold tracking-tight text-ink">{cluster.title}</h3>
+            <ul class="mt-4 space-y-3">
+              {cluster.items.map((item) => (
+                <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink-dim">
+                  <svg class="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="mt-10 text-center text-sm text-ink-dim">
+      Don't see it listed?{' '}
+      <a href="/contact" class="font-semibold text-accent hover:underline">Tell us what you need</a>, chances are we can still help.
+    </p>
+  </Container>
+</Section>

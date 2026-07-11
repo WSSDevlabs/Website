@@ -1,0 +1,255 @@
+backend:
+  name: github
+  repo: WSSDevlabs/Website
+  branch: main
+  base_url: https://wss-cms-auth.wssdevlabs.workers.dev
+  auth_endpoint: auth
+
+# Shows a "draft, review, ready" workflow with previews before anything
+# merges to main. Turn off (delete this line) if you want direct-to-main saves.
+publish_mode: editorial_workflow
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: "en"
+
+collections:
+  # ---- Portfolio projects (src/content/projects/*.md) ----
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Client", name: "client", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Web", "Mobile", "System", "AI"]
+      - { label: "Headline Result", name: "headlineResult", widget: "string", hint: "One-line outcome, e.g. '40% faster checkout'" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Hero Image", name: "heroImage", widget: "image" }
+      - { label: "Industry", name: "industry", widget: "string" }
+      - { label: "Timeline", name: "timeline", widget: "string" }
+      - { label: "Services Used", name: "services", widget: "list" }
+      - { label: "Tech Stack", name: "techStack", widget: "list" }
+      - label: "Results"
+        name: "results"
+        widget: "list"
+        default: []
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Value", name: "value", widget: "string" }
+      - label: "Gallery"
+        name: "gallery"
+        widget: "list"
+        default: []
+        field: { label: "Image", name: "image", widget: "image" }
+      - label: "Testimonial"
+        name: "testimonial"
+        widget: "object"
+        required: false
+        collapsible: true
+        fields:
+          - { label: "Quote", name: "quote", widget: "text" }
+          - { label: "Author", name: "author", widget: "string" }
+          - { label: "Role", name: "role", widget: "string" }
+      - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false }
+      - { label: "Draft (hide from site)", name: "draft", widget: "boolean", default: true }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime" }
+      - { label: "Full Write-up", name: "body", widget: "markdown" }
+
+  # ---- Blog / Insights posts (src/content/posts/*.md) ----
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/content/posts"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Cover Image", name: "coverImage", widget: "image" }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Draft (hide from site)", name: "draft", widget: "boolean", default: true }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime" }
+      - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # ---- Services list (src/data/services.json) ----
+  - name: "services"
+    label: "Services"
+    files:
+      - name: "services"
+        label: "All Services"
+        file: "src/data/services.json"
+        fields:
+          - label: "Services"
+            name: "services"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Slug (used in the URL, no spaces)", name: "slug", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Group"
+                name: "group"
+                widget: "select"
+                options: ["Build", "Intelligence", "Design & Care", "Grow"]
+              - { label: "Short Description", name: "shortDescription", widget: "string" }
+              - { label: "Value Proposition", name: "valueProp", widget: "text" }
+              - { label: "Problem It Solves", name: "problem", widget: "text" }
+              - { label: "Deliverables", name: "deliverables", widget: "list" }
+              - { label: "Approach Steps", name: "approach", widget: "list" }
+              - { label: "Tools & Tech", name: "tools", widget: "list" }
+              - { label: "Pricing From", name: "pricingFrom", widget: "string", required: false }
+              - label: "Service-specific FAQ"
+                name: "faq"
+                widget: "list"
+                default: []
+                fields:
+                  - { label: "Question", name: "question", widget: "string" }
+                  - { label: "Answer", name: "answer", widget: "text" }
+
+  # ---- Pricing tiers (src/data/pricing.json) ----
+  - name: "pricing"
+    label: "Pricing Tiers"
+    files:
+      - name: "pricing"
+        label: "Pricing Tiers"
+        file: "src/data/pricing.json"
+        fields:
+          - label: "Tiers"
+            name: "tiers"
+            widget: "list"
+            summary: "{{name}}"
+            fields:
+              - { label: "Tier Name", name: "name", widget: "string" }
+              - { label: "Price", name: "price", widget: "string" }
+              - { label: "Highlight This Tier", name: "highlight", widget: "boolean", default: false }
+              - { label: "Badge (e.g. Most popular)", name: "badge", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Features", name: "features", widget: "list" }
+              - { label: "Button Label", name: "cta", widget: "string" }
+              - { label: "Button Link", name: "ctaHref", widget: "string" }
+
+  # ---- Team members (src/data/team.json) ----
+  - name: "team"
+    label: "Team"
+    files:
+      - name: "team"
+        label: "Team Members"
+        file: "src/data/team.json"
+        fields:
+          - label: "Members"
+            name: "members"
+            widget: "list"
+            summary: "{{name}}"
+            fields:
+              - { label: "Slug (used in the URL, no spaces)", name: "slug", widget: "string" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Bio", name: "bio", widget: "text" }
+              - { label: "Credentials", name: "credentials", widget: "string", required: false }
+              - { label: "Skills", name: "skills", widget: "list", required: false }
+              - label: "Social Links"
+                name: "social"
+                widget: "object"
+                required: false
+                collapsible: true
+                fields:
+                  - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
+                  - { label: "GitHub", name: "github", widget: "string", required: false }
+                  - { label: "Instagram", name: "instagram", widget: "string", required: false }
+                  - { label: "Twitter / X", name: "twitter", widget: "string", required: false }
+
+  # ---- Career page content (src/data/career.json) ----
+  - name: "career"
+    label: "Career Page"
+    files:
+      - name: "career"
+        label: "Benefits & Openings"
+        file: "src/data/career.json"
+        fields:
+          - label: "Perks & Benefits"
+            name: "benefits"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Icon (SVG path data, leave as-is unless you know SVG)", name: "icon", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+          - label: "Job Openings"
+            name: "openings"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Job Title", name: "title", widget: "string" }
+              - { label: "Experience Required", name: "experience", widget: "string" }
+              - { label: "Number of Positions", name: "positions", widget: "string" }
+              - { label: "Job Type", name: "type", widget: "string", hint: "e.g. Freelance, Part-time, Full Time" }
+              - { label: "Responsibilities", name: "responsibilities", widget: "list" }
+              - { label: "Required Skills", name: "skills", widget: "list" }
+          - label: "Gallery Image Seeds"
+            name: "galleryImages"
+            widget: "list"
+            hint: "Used as picsum.photos placeholder seeds. Replace with real photo uploads later."
+
+  # ---- FAQ content (src/data/faq.json) ----
+  - name: "faq"
+    label: "FAQ"
+    files:
+      - name: "faq"
+        label: "Homepage & Contact FAQ"
+        file: "src/data/faq.json"
+        fields:
+          - label: "Homepage FAQ"
+            name: "home"
+            widget: "list"
+            summary: "{{question}}"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
+          - label: "Contact Page FAQ"
+            name: "contact"
+            widget: "list"
+            summary: "{{question}}"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
+
+  # ---- Site-wide settings (src/data/site.json) ----
+  - name: "site"
+    label: "Site Settings"
+    files:
+      - name: "site"
+        label: "Company Info"
+        file: "src/data/site.json"
+        fields:
+          - { label: "Company Name", name: "name", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Legal Name", name: "legalName", widget: "string", required: false }
+          - { label: "SSM Number", name: "ssmNumber", widget: "string", required: false }
+          - { label: "SST Number", name: "sstNumber", widget: "string", required: false }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "WhatsApp Number (with country code, no symbols)", name: "whatsapp", widget: "string" }
+          - { label: "Phone (display format)", name: "phone", widget: "string" }
+          - { label: "Address", name: "address", widget: "string" }
+          - { label: "Business Hours", name: "hours", widget: "string" }
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "LinkedIn", name: "linkedin", widget: "string" }
+              - { label: "Instagram", name: "instagram", widget: "string" }
+              - { label: "GitHub", name: "github", widget: "string" }
+              - { label: "Facebook", name: "facebook", widget: "string" }
+              - { label: "Twitter / X", name: "twitter", widget: "string" }

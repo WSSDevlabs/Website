@@ -25,7 +25,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
 ---
 
 <BaseLayout
-  title={`${data.title} — WSS DevLabs`}
+  title={`${data.title}: WSS DevLabs`}
   description={data.summary ?? data.headlineResult}
   path={`/work/${project.id}`}
 >
@@ -33,19 +33,6 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
   <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
     <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
     <Container class="relative">
-      <nav aria-label="Breadcrumb" class="mb-5 flex justify-center">
-        <ol class="flex items-center gap-2 text-xs text-ink-dim">
-          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
-          <li class="flex items-center gap-2">
-            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-            <a href="/work" class="transition-colors hover:text-accent">Projects</a>
-          </li>
-          <li class="flex items-center gap-2">
-            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-            <span class="font-medium text-ink">Project Details</span>
-          </li>
-        </ol>
-      </nav>
       <h1 class="text-5xl font-bold tracking-tight text-ink md:text-6xl">Project Details</h1>
       <p class="mt-3 text-base text-ink-dim">{data.title}</p>
     </Container>
@@ -96,7 +83,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
 
         <!-- Sidebar -->
         <aside>
-          <div class="sticky top-28 overflow-hidden rounded-2xl bg-[#0a0a0c] text-white">
+          <div class="sticky top-28 overflow-hidden rounded-2xl bg-ink text-white">
             {[
               { label: 'Project Category', value: data.category },
               { label: 'Client', value: data.client },
@@ -119,7 +106,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
     <Container class="max-w-4xl py-14">
       <h2 class="text-2xl font-bold text-ink">The Challenge</h2>
       <p class="mt-4 text-sm leading-relaxed text-ink-dim">
-        Every project starts with a real business problem. For {data.client}, the challenge was clear: {data.headlineResult}. Our job was to understand the root cause, design the right solution, and execute with precision — no fluff, no over-engineering.
+        Every project starts with a real business problem. For {data.client}, the challenge was clear: {data.headlineResult}. Our job was to understand the root cause, design the right solution, and execute with precision, with no fluff and no over-engineering.
       </p>
     </Container>
   </section>
