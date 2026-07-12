@@ -10,136 +10,53 @@ type Props = {
 
 const { testimonials = [] } = Astro.props;
 
-const featured = testimonials[0];
+const markColors = ['text-accent', 'text-accent-blue', 'text-accent-green', 'text-accent-yellow'];
 ---
 
 {
-  testimonials.length > 0 && featured && (
+  testimonials.length > 0 && (
     <Section rule>
       <Container>
-        <div class="grid gap-6 lg:grid-cols-[300px_1fr]">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="h-section" data-split>What clients say</h2>
+        </div>
 
-          <!-- Left: overall rating panel -->
-          <div class="card flex flex-col items-center justify-center gap-6 p-10 text-center">
-            <p class="mono-label text-accent">Client reviews</p>
-            <div>
-              <p class="stat-num text-7xl leading-none text-ink">4.9</p>
-              <div class="mt-4 flex justify-center gap-1" aria-label="Rated 4.9 out of 5 stars">
-                {Array.from({ length: 5 }).map(() => (
-                  <svg class="h-4.5 w-4.5 text-accent-yellow" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-            <div class="hairline w-full" aria-hidden="true" />
-            <p class="text-sm text-ink-dim">
-              Based on <span class="font-semibold text-ink">40+ reviews</span> from clients across
-              Malaysia and beyond
-            </p>
-          </div>
-
-          <!-- Right: featured testimonial + navigation -->
-          <div class="card relative flex flex-col p-8 md:p-10">
-            <svg class="h-10 w-10 text-accent/25" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-              <path d="M10 8C5.6 8 2 11.6 2 16s3.6 8 8 8h1v4l6-4h1c4.4 0 8-3.6 8-8V8H10z" />
-            </svg>
-
-            <blockquote class="mt-5 flex-1 text-xl font-medium leading-relaxed tracking-tight text-ink md:text-2xl">
-              &ldquo;{featured.quote}&rdquo;
-            </blockquote>
-
-            <div class="mt-9 flex items-center justify-between">
-              <figcaption class="flex items-center gap-3.5">
-                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-sm font-bold text-accent">
-                  {featured.author.charAt(0)}
-                </span>
-                <div>
-                  <p class="text-sm font-bold text-ink">{featured.author}</p>
-                  <p class="text-xs text-ink-dim">{featured.role}{featured.company && `, ${featured.company}`}</p>
+        <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+          {
+            testimonials.map((t, i) => (
+              <div data-stagger-child class="flex flex-col rounded-3xl bg-paper-dim p-7">
+                <div class="flex items-center justify-between gap-3">
+                  <img
+                    src={`https://picsum.photos/seed/${t.author}/80/80`}
+                    alt={t.author}
+                    class="h-11 w-11 shrink-0 rounded-full object-cover"
+                    loading="lazy"
+                    width="80"
+                    height="80"
+                  />
+                  {t.company && (
+                    <span class="inline-flex min-w-0 items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-xs font-semibold text-ink">
+                      <svg class:list={['h-3.5 w-3.5 shrink-0', markColors[i % markColors.length]]} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m12 2 2.6 5.6L21 8.5l-4.6 4.2L17.6 19 12 15.9 6.4 19l1.2-6.3L3 8.5l6.4-.9Z" />
+                      </svg>
+                      <span class="truncate">{t.company}</span>
+                    </span>
+                  )}
                 </div>
-              </figcaption>
 
-              <div class="flex gap-2">
-                <button
-                  type="button"
-                  id="testimonial-prev"
-                  aria-label="Previous testimonial"
-                  class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:text-accent"
-                >
-                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  id="testimonial-next"
-                  aria-label="Next testimonial"
-                  class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:text-accent"
-                >
-                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                  </svg>
-                </button>
+                <p class="mt-6 text-3xl font-black leading-none text-accent" aria-hidden="true">&ldquo;</p>
+
+                <p class="mt-4 flex-1 text-lg font-semibold leading-snug tracking-tight text-ink">{t.quote}</p>
+
+                <div class="mt-7 border-l-2 border-line pl-3.5">
+                  <p class="font-semibold text-ink">{t.author}</p>
+                  <p class="mt-0.5 text-sm text-ink-dim">{t.role}{t.company && `, ${t.company}`}</p>
+                </div>
               </div>
-            </div>
-
-            <div class="mt-6 flex gap-1.5">
-              {testimonials.map((_, i) => (
-                <span
-                  class:list={[
-                    'h-1.5 rounded-full transition-all duration-300',
-                    i === 0 ? 'w-6 bg-accent' : 'w-1.5 bg-ink/15',
-                  ]}
-                  data-testimonial-dot={i}
-                />
-              ))}
-            </div>
-          </div>
+            ))
+          }
         </div>
       </Container>
     </Section>
   )
 }
-
-<script is:inline define:vars={{ testimonialsData: testimonials }}>
-  function initTestimonials() {
-    if (!testimonialsData || testimonialsData.length < 2) return;
-
-    let current = 0;
-    const blockquote = document.querySelector('blockquote');
-    const figcaption = document.querySelector('figcaption');
-    const dots = document.querySelectorAll('[data-testimonial-dot]');
-    const prevBtn = document.getElementById('testimonial-prev');
-    const nextBtn = document.getElementById('testimonial-next');
-
-    function render(idx) {
-      const t = testimonialsData[idx];
-      if (blockquote) blockquote.textContent = `“${t.quote}”`;
-      if (figcaption) {
-        const initial = figcaption.querySelector('span');
-        const name = figcaption.querySelectorAll('p');
-        if (initial) initial.textContent = t.author.charAt(0);
-        if (name[0]) name[0].textContent = t.author;
-        if (name[1]) name[1].textContent = t.role + (t.company ? `, ${t.company}` : '');
-      }
-      dots.forEach((dot, i) => {
-        dot.className = i === idx
-          ? 'h-1.5 rounded-full transition-all duration-300 w-6 bg-accent'
-          : 'h-1.5 rounded-full transition-all duration-300 w-1.5 bg-ink/15';
-      });
-    }
-
-    prevBtn?.addEventListener('click', () => {
-      current = (current - 1 + testimonialsData.length) % testimonialsData.length;
-      render(current);
-    });
-    nextBtn?.addEventListener('click', () => {
-      current = (current + 1) % testimonialsData.length;
-      render(current);
-    });
-  }
-
-  document.addEventListener('astro:page-load', initTestimonials);
-  initTestimonials();
-</script>

@@ -3,7 +3,6 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
-import NewsletterBand from '../../components/sections/NewsletterBand.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -189,7 +188,6 @@ const categories = [...new Set(allPosts.flatMap((p) => p.data.tags))];
   )}
 
 
-  <NewsletterBand />
 </BaseLayout>
 
 <script>

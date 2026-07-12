@@ -3,11 +3,34 @@ export type NavLink = {
   href: string;
 };
 
-export const PRIMARY_NAV: NavLink[] = [
-  { label: 'Services', href: '/services' },
-  { label: 'Projects', href: '/work' },
-  { label: 'About', href: '/about' },
-  { label: 'Pricing', href: '/pricing' },
+export type NavGroup = {
+  label: string;
+  links: NavLink[];
+};
+
+export const NAV_GROUPS: NavGroup[] = [
+  {
+    label: 'Work',
+    links: [
+      { label: 'Services', href: '/services' },
+      { label: 'Projects', href: '/work' },
+      { label: 'Process', href: '/process' },
+      { label: 'Pricing', href: '/pricing' }
+    ]
+  },
+  {
+    label: 'Company',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Team', href: '/team' },
+      { label: 'Career', href: '/career' },
+      { label: 'Testimonials', href: '/testimonials' },
+      { label: 'FAQ', href: '/faq' }
+    ]
+  }
+];
+
+export const NAV_LINKS: NavLink[] = [
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' }
 ];

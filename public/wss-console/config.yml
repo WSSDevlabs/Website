@@ -225,6 +225,13 @@ collections:
             fields:
               - { label: "Question", name: "question", widget: "string" }
               - { label: "Answer", name: "answer", widget: "text" }
+          - label: "Pricing Page FAQ"
+            name: "pricing"
+            widget: "list"
+            summary: "{{question}}"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
 
   # ---- Site-wide settings (src/data/site.json) ----
   - name: "site"

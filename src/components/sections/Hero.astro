@@ -8,6 +8,9 @@ type Props = {
   eyebrow?: string;
   eyebrowTone?: Tone;
   title: string;
+  /** A word or phrase within `title` to render in the accent color */
+  accentWord?: string;
+  accentTone?: 'blue' | 'red' | 'yellow' | 'green';
   subtitle: string;
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
@@ -19,11 +22,25 @@ const {
   eyebrow,
   eyebrowTone = 'blue',
   title,
+  accentWord,
+  accentTone = 'blue',
   subtitle,
   primaryCta,
   secondaryCta,
   variant = 'home'
 } = Astro.props;
+
+const accentClass = {
+  blue: 'text-accent',
+  red: 'text-accent-red',
+  yellow: 'text-accent-yellow',
+  green: 'text-accent-green'
+}[accentTone];
+
+const titleHtml =
+  accentWord && title.includes(accentWord)
+    ? title.replace(accentWord, `<span class="${accentClass}">${accentWord}</span>`)
+    : title;
 ---
 
 {
@@ -40,9 +57,11 @@ const {
             <Eyebrow label={eyebrow} tone={eyebrowTone} />
           </span>
         )}
-        <h1 class="h-section mt-5 max-w-3xl !text-[clamp(2.25rem,1.4rem+3vw,3.4rem)]" data-split>
-          {title}
-        </h1>
+        <h1
+          class="h-section mt-5 max-w-3xl !text-[clamp(2.25rem,1.4rem+3vw,3.4rem)]"
+          data-split
+          set:html={titleHtml}
+        />
         <p data-hero-item data-hero-delay="0.12" class="body-lead mt-5">{subtitle}</p>
         <div data-hero-item data-hero-delay="0.22" class="mt-8 flex flex-wrap gap-4">
           <Button href={primaryCta.href} variant="primary">{primaryCta.label}</Button>
@@ -69,9 +88,7 @@ const {
               <Eyebrow label={eyebrow} tone={eyebrowTone} />
             </span>
           )}
-          <h1 class="h-display mt-5" data-split>
-            {title}
-          </h1>
+          <h1 class="h-display mt-5" data-split set:html={titleHtml} />
           <p data-hero-item data-hero-delay="0.25" class="body-lead mt-6 max-w-xl">{subtitle}</p>
           <div data-hero-item data-hero-delay="0.38" class="mt-9 flex flex-wrap items-center gap-4">
             <Button href={primaryCta.href} variant="primary" size="lg" data-magnetic>
