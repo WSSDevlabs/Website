@@ -1,0 +1,130 @@
+---
+import Container from '../ui/Container.astro';
+
+type GrantCategory = {
+  icon: string;
+  title: string;
+  description: string;
+  badgeLabel: string;
+  colorClass: string;
+  features: string[];
+  ctaLabel: string;
+};
+
+const categories: GrantCategory[] = [
+  {
+    icon: 'M12 2.25c-1.5 3-1.5 6 0 9m0-9c1.5 3 1.5 6 0 9m0-9v13.5m-6.75-6c1.864-.517 3.71-.86 5.522-1.037M18.75 9.75c-1.864-.517-3.71-.86-5.522-1.037M4.5 20.25h15',
+    title: 'Agritech & Food Security',
+    description: 'Closed-house IoT automation, yield prediction dashboards, and blockchain supply chain traceability to reduce reliance on food imports.',
+    badgeLabel: 'KPKM & Cradle Fund',
+    colorClass: 'emerald',
+    features: ['Real-time soil/climate monitoring', 'Post-harvest traceability'],
+    ctaLabel: 'Explore Agritech'
+  },
+  {
+    icon: 'M2.25 21h19.5M4.5 3h6v18h-6zM10.5 8.25h6V21h-6zM16.5 12h4.5v9h-4.5z',
+    title: 'Smart Manufacturing (Industry 4.0)',
+    description: 'AI-driven predictive maintenance, real-time production analytics, and resource optimization to reduce manual labor reliance.',
+    badgeLabel: 'MDEC MDSG-MFG',
+    colorClass: 'sky',
+    features: ['Up to RM75k (70%) funding match', 'Machine downtime prediction'],
+    ctaLabel: 'Explore Industry 4.0'
+  },
+  {
+    icon: 'M12 21c-4.97 0-9-3.582-9-8 0-3.5 3-6.5 5-8.5.5 1.5 1.5 2.5 2.5 3 0-1.5.5-3.5 2-5 2 2 5 4.5 5 8.5 0 4.5-2.5 8-5.5 10z',
+    title: 'ESG & Corporate Compliance',
+    description: 'Automated carbon footprint accounting (Scope 1, 2, 3) and digital audit trails to help mid-tier companies meet strict global standards.',
+    badgeLabel: 'DIAF-ESG Grant',
+    colorClass: 'teal',
+    features: ['Carbon offset tracking', 'Automated compliance reporting'],
+    ctaLabel: 'Explore ESG Tech'
+  },
+  {
+    icon: 'M2.25 21h19.5M4.5 21V9.75l7.5-6 7.5 6V21M9.75 21v-6h4.5v6',
+    title: 'SME Digital Upgrades',
+    description: 'Custom cloud POS, automated HR/Payroll systems, and inventory management tailored for traditional brick-and-mortar retail and F&B.',
+    badgeLabel: 'PMKS Madani Grant 2026',
+    colorClass: 'violet',
+    features: ['50% matching up to RM5,000', 'MDEC TSP compliant solutions'],
+    ctaLabel: 'Check Eligibility'
+  }
+];
+
+const colorMap: Record<string, { chip: string; badge: string }> = {
+  emerald: { chip: 'bg-emerald-400/10 text-emerald-300', badge: 'bg-emerald-400/10 text-emerald-300 border-emerald-400/20' },
+  sky: { chip: 'bg-sky-400/10 text-sky-300', badge: 'bg-sky-400/10 text-sky-300 border-sky-400/20' },
+  teal: { chip: 'bg-teal-400/10 text-teal-300', badge: 'bg-teal-400/10 text-teal-300 border-teal-400/20' },
+  violet: { chip: 'bg-violet-400/10 text-violet-300', badge: 'bg-violet-400/10 text-violet-300 border-violet-400/20' }
+};
+---
+
+<section class="relative overflow-hidden bg-ink py-16 md:py-24">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:radial-gradient(circle,white_1px,transparent_1px)] [background-size:28px_28px]"
+    aria-hidden="true"
+  />
+  <Container class="relative">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-sky-400">
+        <span class="h-px w-6 bg-sky-400" aria-hidden="true" />
+        Strategic Funding Alignment
+      </p>
+      <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl" data-split>
+        Built for Impact. Aligned with 2026 Government Grants.
+      </h2>
+      <p class="mx-auto mt-5 max-w-3xl leading-relaxed text-white/60">
+        We don't just write code. We build digital solutions explicitly mapped to national priorities
+        like the New Industrial Master Plan (NIMP) 2030 and KPKM's food security agenda, making it
+        easier for you to secure funding.
+      </p>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4" data-stagger>
+      {
+        categories.map((cat) => {
+          const colors = colorMap[cat.colorClass];
+          return (
+            <div
+              data-stagger-child
+              class="group relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-black/40"
+            >
+              <span class:list={['flex h-11 w-11 items-center justify-center rounded-xl', colors.chip]}>
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={cat.icon} />
+                </svg>
+              </span>
+
+              <h3 class="mt-5 text-base font-semibold text-white">{cat.title}</h3>
+              <p class="mt-2.5 flex-1 text-sm leading-relaxed text-white/60">{cat.description}</p>
+
+              <span
+                class:list={['mt-5 inline-flex w-fit items-center rounded-full border px-3 py-1 text-[11px] font-semibold', colors.badge]}
+              >
+                {cat.badgeLabel}
+              </span>
+
+              <ul class="mt-4 space-y-2 border-t border-white/10 pt-4">
+                {cat.features.map((f) => (
+                  <li class="flex items-start gap-2 text-xs text-white/50">
+                    <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-white/30" aria-hidden="true" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="/contact"
+                class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-white/80 transition-colors group-hover:text-white"
+              >
+                {cat.ctaLabel}
+                <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+  </Container>
+</section>

@@ -3,6 +3,7 @@ import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
+import GrantSolutions from '../../components/sections/GrantSolutions.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import FAQ from '../../components/sections/FAQ.astro';
 import CTABand from '../../components/sections/CTABand.astro';
@@ -358,6 +359,9 @@ const otherServices = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3
       }
     </Container>
   </Section>
+
+  <!-- ── Grant-aligned solution verticals (this service only) ── -->
+  {service.slug === 'grant-government-project-support' && <GrantSolutions />}
 
   <!-- ── Testimonials ───────────────────────────────────────── -->
   <Testimonials testimonials={testimonials} />
