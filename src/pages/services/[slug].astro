@@ -8,7 +8,6 @@ import Testimonials from '../../components/sections/Testimonials.astro';
 import FAQ from '../../components/sections/FAQ.astro';
 import CTABand from '../../components/sections/CTABand.astro';
 import QuoteForm from '../../components/sections/QuoteForm.astro';
-import NewsletterBand from '../../components/sections/NewsletterBand.astro';
 import { SERVICES } from '../../data/services';
 import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
 
@@ -421,5 +420,4 @@ const otherServices = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3
   <QuoteForm />
 
   <!-- ── Newsletter ────────────────────────────────────────── -->
-  <NewsletterBand />
 </ServiceLayout>

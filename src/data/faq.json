@@ -26,5 +26,23 @@
       "question": "What should I include in my message?",
       "answer": "A short description of what you need, your rough timeline, and a budget range, since it helps us scope an honest answer faster."
     }
+  ],
+  "pricing": [
+    {
+      "question": "Are these prices fixed, or do they change after we start?",
+      "answer": "Every quote is fixed after scoping. We agree on deliverables and price upfront, so there are no surprise line items once the project is underway."
+    },
+    {
+      "question": "Do I need to pay everything upfront?",
+      "answer": "No. Projects are billed in milestones, typically a deposit to start, then progress payments tied to delivery stages."
+    },
+    {
+      "question": "What if my project doesn't fit neatly into one tier?",
+      "answer": "Most real projects blend tiers, like a Launch website with one Build feature. Tell us the outcome you want and we'll scope the right mix."
+    },
+    {
+      "question": "How long does a typical project take?",
+      "answer": "Launch sites usually run 2 to 4 weeks, Build projects 6 to 10 weeks, and Enterprise systems are scoped individually based on complexity."
+    }
   ]
 }
