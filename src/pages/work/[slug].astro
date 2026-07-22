@@ -28,15 +28,6 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
   description={data.summary ?? data.headlineResult}
   path={`/work/${project.id}`}
 >
-  <!-- Hero -->
-  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
-    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
-    <Container class="relative">
-      <h1 class="text-5xl font-bold tracking-tight text-ink md:text-6xl">Project Details</h1>
-      <p class="mt-3 text-base text-ink-dim">{data.title}</p>
-    </Container>
-  </section>
-
 
   <!-- Hero image -->
   <div class="border-b border-line bg-paper">
@@ -64,11 +55,11 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
 
   <!-- Content + sidebar -->
   <section class="border-b border-line">
-    <Container class="py-14">
+    <Container class="py-10">
       <div class="grid gap-10 lg:grid-cols-3">
         <!-- Main -->
         <div class="lg:col-span-2">
-          <h2 class="text-2xl font-bold tracking-tight text-ink md:text-3xl">{data.title}</h2>
+          <h1 class="text-2xl font-bold tracking-tight text-ink md:text-3xl">{data.title}</h1>
           <div class="mt-5 flex items-start gap-4">
             <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-xl font-black text-white">
               {firstLetter}
@@ -102,7 +93,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
 
   <!-- The Challenge -->
   <section class="border-b border-line bg-paper-dim">
-    <Container class="max-w-4xl py-14">
+    <Container class="max-w-4xl py-10">
       <h2 class="text-2xl font-bold text-ink">The Challenge</h2>
       <p class="mt-4 text-sm leading-relaxed text-ink-dim">
         Every project starts with a real business problem. For {data.client}, the challenge was clear: {data.headlineResult}. Our job was to understand the root cause, design the right solution, and execute with precision, with no fluff and no over-engineering.
@@ -112,7 +103,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
 
   <!-- Solution + gallery -->
   <section class="border-b border-line">
-    <Container class="max-w-4xl py-14">
+    <Container class="max-w-4xl py-10">
       <h2 class="text-2xl font-bold text-ink">The Solution</h2>
       <ul class="mt-6 grid gap-3 sm:grid-cols-2">
         {data.services.map((service) => (
@@ -139,7 +130,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
   <!-- Impact -->
   {data.results.length > 0 && (
     <section class="border-b border-line bg-paper-dim">
-      <Container class="py-14">
+      <Container class="py-10">
         <Eyebrow label="The Impact" />
         <h2 class="mt-3 text-2xl font-bold text-ink">Results That Speak for Themselves</h2>
         <div class="mt-8 grid gap-5 sm:grid-cols-3">
@@ -157,7 +148,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
   <!-- Testimonial -->
   {data.testimonial && (
     <section class="border-b border-line">
-      <Container class="max-w-3xl py-14">
+      <Container class="max-w-3xl py-10">
         <div class="rounded-2xl border border-line bg-paper-dim p-8 shadow-sm">
           <div class="flex gap-1">
             {Array.from({ length: 5 }).map(() => (
@@ -175,7 +166,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
 
   <!-- CTA band -->
   <section class="border-b border-line bg-accent">
-    <Container class="py-14">
+    <Container class="py-10">
       <div class="grid gap-6 md:grid-cols-2 md:items-center">
         <div>
           <p class="text-xs font-bold uppercase tracking-widest text-white/60">Contact Us</p>
@@ -194,7 +185,7 @@ const firstLetter = (data.summary ?? data.headlineResult ?? 'W').charAt(0).toUpp
   <!-- View other projects -->
   {others.length > 0 && (
     <section class="border-b border-line">
-      <Container class="py-14">
+      <Container class="py-10">
         <h2 class="text-xl font-bold text-ink">View Other Projects</h2>
         <div class="mt-6 grid gap-5 sm:grid-cols-2">
           {others.map((p) => (

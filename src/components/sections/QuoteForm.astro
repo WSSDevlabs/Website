@@ -6,7 +6,7 @@ const inputClass =
   'w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-muted shadow-card transition-all focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25';
 ---
 
-<section class="py-16 md:py-24">
+<section class="py-12 md:py-16">
   <Container>
     <div class="panel overflow-hidden">
       <div class="grid lg:grid-cols-2">
@@ -60,6 +60,7 @@ const inputClass =
                 <select id="qf-service" class:list={[inputClass, 'appearance-none']}>
                   <option value="" disabled selected>Select service</option>
                   {SERVICES.map((s) => <option value={s.slug}>{s.title}</option>)}
+                  <option value="others">Others</option>
                 </select>
               </div>
             </div>

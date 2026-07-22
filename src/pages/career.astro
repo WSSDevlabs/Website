@@ -1,13 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
-import Eyebrow from '../components/ui/Eyebrow.astro';
-import QuoteForm from '../components/sections/QuoteForm.astro';
-import { BENEFITS, JOB_OPENINGS, CAREER_GALLERY } from '../data/career';
+import { JOB_OPENINGS } from '../data/career';
 
-const benefits = BENEFITS;
 const openings = JOB_OPENINGS;
-const galleryImgs = CAREER_GALLERY;
 ---
 
 <BaseLayout
@@ -15,77 +11,10 @@ const galleryImgs = CAREER_GALLERY;
   description="Join WSS DevLabs as a freelance or part-time contributor. We are looking for engineers, designers, and marketers who take craft seriously."
   path="/career"
 >
-  <!-- Hero -->
-  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
-    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
-    <Container class="relative">
-      <h1 class="text-4xl font-bold tracking-tight text-ink md:text-5xl">Career</h1>
-    </Container>
-  </section>
-
-
-  <!-- Join team section -->
-  <section class="border-b border-line">
-    <Container class="py-12">
-      <div class="text-center">
-        <Eyebrow label="Join Our Team" class="justify-center" />
-        <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
-          Join Our Team and Shape<br />the Future of Tech
-        </h2>
-      </div>
-      <div class="relative mt-8 overflow-hidden rounded-2xl">
-        <img
-          src="https://picsum.photos/seed/tech-team-collaboration/1200/500"
-          alt="WSS DevLabs team at work"
-          class="h-64 w-full object-cover sm:h-80"
-          loading="eager"
-          width="1200"
-          height="500"
-        />
-        <div class="absolute inset-0 flex items-center justify-center bg-ink/20">
-          <button type="button" aria-label="Play video" class="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-xl backdrop-blur-sm transition-transform hover:scale-105">
-            <svg class="ml-1 h-5 w-5 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-          </button>
-        </div>
-      </div>
-      <div class="mt-6 text-center">
-        <a href="#openings" class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 text-sm font-bold text-white shadow-md transition-colors hover:bg-accent-dim">
-          View All Job Openings
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-        </a>
-      </div>
-    </Container>
-  </section>
-
-
-  <!-- Benefits -->
-  <section class="border-b border-line bg-paper-dim">
-    <Container class="py-12">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tight text-ink md:text-4xl">Our Perks &amp; Benefits</h2>
-        </div>
-        <a href="#openings" class="hidden shrink-0 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-accent-dim sm:inline-flex">
-          View All Job Openings
-        </a>
-      </div>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-        {benefits.map((b) => (
-          <div class="rounded-2xl border border-line bg-paper p-5 shadow-sm">
-            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10">
-              <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d={b.icon} /></svg>
-            </span>
-            <h4 class="mt-3 text-sm font-bold text-ink">{b.title}</h4>
-            <p class="mt-1.5 text-xs leading-relaxed text-ink-dim">{b.desc}</p>
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
 
   <!-- Job Openings -->
   <section id="openings" class="border-b border-line">
-    <Container class="py-12">
+    <Container class="py-8">
       <div class="text-center">
         <h2 class="text-3xl font-bold tracking-tight text-ink md:text-4xl">Current Openings</h2>
       </div>
@@ -146,36 +75,6 @@ const galleryImgs = CAREER_GALLERY;
       </div>
     </Container>
   </section>
-
-  <!-- Life at WSS DevLabs -->
-  <section class="border-b border-line bg-ink">
-    <Container class="py-12">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-2xl font-bold text-white md:text-3xl">Life at WSS DevLabs</h2>
-        </div>
-        <a href="#openings" class="shrink-0 rounded-full bg-accent-red px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-accent-red-dim">
-          Apply Now
-        </a>
-      </div>
-      <div class="mt-6 grid grid-cols-3 gap-3 md:grid-cols-5">
-        {galleryImgs.map((seed, i) => (
-          <div class:list={['overflow-hidden rounded-xl', i === 0 ? 'col-span-2 row-span-2' : '']}>
-            <img
-              src={`https://picsum.photos/seed/${seed}/${i === 0 ? '500/500' : '300/250'}`}
-              alt=""
-              class="h-full min-h-[8rem] w-full object-cover"
-              loading="lazy"
-              width={i === 0 ? 500 : 300}
-              height={i === 0 ? 500 : 250}
-            />
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
-
-  <QuoteForm />
 
 
 </BaseLayout>

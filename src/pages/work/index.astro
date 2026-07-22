@@ -34,7 +34,7 @@ const catColor: Record<string, string> = {
   'AI': 'bg-accent',
 };
 
-const INITIAL_COUNT = 6;
+const INITIAL_COUNT = 4;
 
 const processSteps = [
   {
@@ -66,15 +66,6 @@ const testimonials = [
   description="Real builds and real outcomes across web, mobile, custom systems, AI, branding, and digital marketing."
   path="/work"
 >
-  <!-- Page hero -->
-  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
-    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
-    <Container class="relative">
-      <h1 class="text-5xl font-bold tracking-tight text-ink md:text-6xl">Projects</h1>
-      <p class="mt-3 text-base text-ink-dim">Real builds, honest outcomes.</p>
-    </Container>
-  </section>
-
 
   <!-- Projects grid -->
   <Section class="border-b border-line">
@@ -94,7 +85,8 @@ const testimonials = [
                   href={`/work/${project.id}`}
                   data-stagger-child
                   data-project-card
-                  class:list={['tilt-card group block overflow-hidden rounded-2xl border border-line bg-paper shadow-sm transition-all hover:border-accent/30 hover:shadow-lg', i >= INITIAL_COUNT ? 'hidden' : '']}
+                  data-page={Math.floor(i / INITIAL_COUNT)}
+                  class:list={['tilt-card group block overflow-hidden rounded-2xl border border-line bg-paper shadow-sm transition-all hover:border-accent/30 hover:shadow-lg', i >= INITIAL_COUNT && 'hidden']}
                 >
                   <div class="relative overflow-hidden">
                     <Image
@@ -124,7 +116,8 @@ const testimonials = [
                 <div
                   data-project-card
                   data-stagger-child
-                  class:list={['tilt-card group overflow-hidden rounded-2xl border border-line bg-paper shadow-sm', i >= INITIAL_COUNT ? 'hidden' : '']}
+                  data-page={Math.floor(i / INITIAL_COUNT)}
+                  class:list={['tilt-card group overflow-hidden rounded-2xl border border-line bg-paper shadow-sm', i >= INITIAL_COUNT && 'hidden']}
                 >
                   <div class="relative overflow-hidden">
                     <img
@@ -151,15 +144,23 @@ const testimonials = [
         }
       </div>
 
-      <!-- Load More -->
-      <div id="load-more-wrap" class="mt-10 text-center">
+      <div class="mt-8 flex items-center justify-center gap-3">
         <button
-          id="load-more-projects"
           type="button"
-          class="inline-flex items-center gap-2 rounded-full bg-accent-blue px-8 py-3 text-sm font-semibold text-white shadow-md shadow-accent-blue/20 transition-colors hover:bg-accent-blue-dim"
+          id="projects-prev"
+          aria-label="Previous projects"
+          disabled
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-colors hover:border-accent hover:text-accent disabled:pointer-events-none disabled:opacity-30"
         >
-          Load More
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.5 7.5 12l7.5-7.5" /></svg>
+        </button>
+        <button
+          type="button"
+          id="projects-next"
+          aria-label="Next projects"
+          class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-colors hover:border-accent hover:text-accent disabled:pointer-events-none disabled:opacity-30"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="m9 4.5 7.5 7.5-7.5 7.5" /></svg>
         </button>
       </div>
     </Container>
@@ -175,9 +176,6 @@ const testimonials = [
             Step-by-Step to<br />Your Growth
           </h2>
         </div>
-        <p class="text-sm leading-relaxed text-ink-dim md:max-w-sm md:pb-1">
-          Every project follows a clear three-phase framework, so you always know where things stand, what's being built, and what's coming next.
-        </p>
       </div>
 
       <div class="mt-10 grid gap-5 sm:grid-cols-3">
@@ -201,44 +199,62 @@ const testimonials = [
 
   <!-- Testimonials -->
   <div class="border-b border-line">
-    <Container class="py-16 md:py-20">
+    <Container class="py-10 md:py-14">
       <!-- Section header -->
-      <div class="grid gap-6 md:grid-cols-2 md:items-center">
-        <div>
-          <Eyebrow label="Testimonials" />
-          <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            Testimonials: Trusted<br />by Our Clients
-          </h2>
-        </div>
-        <div class="flex flex-col items-start gap-4 md:items-end">
-          <p class="text-sm leading-relaxed text-ink-dim md:text-right">
-            Real feedback from startup founders, marketing leads, and business owners who've worked directly with our team.
-          </p>
-          <a
-            href="/testimonials"
-            class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
-          >
-            All Testimonials
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-          </a>
-        </div>
+      <div class="text-center">
+        <Eyebrow label="Testimonials" class="justify-center" />
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">
+          Testimonials: Trusted by Our Clients
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-dim">
+          Real feedback from startup founders, marketing leads, and business owners who've worked directly with our team.
+        </p>
       </div>
 
       <!-- Cards -->
       <Testimonials testimonials={testimonials} />
+
+      <div class="mt-4 text-center">
+        <a
+          href="/testimonials"
+          class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
+        >
+          All Testimonials
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+        </a>
+      </div>
     </Container>
   </div>
 </BaseLayout>
 
 <script>
-  const btn = document.getElementById('load-more-projects');
-  const wrap = document.getElementById('load-more-wrap');
-  if (btn && wrap) {
-    const hidden = document.querySelectorAll('[data-project-card].hidden');
-    if (hidden.length === 0) { wrap.style.display = 'none'; }
-    btn.addEventListener('click', () => {
-      hidden.forEach((card) => card.classList.remove('hidden'));
-      wrap.style.display = 'none';
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-card]'));
+  const prevBtn = document.getElementById('projects-prev') as HTMLButtonElement | null;
+  const nextBtn = document.getElementById('projects-next') as HTMLButtonElement | null;
+
+  if (cards.length > 0 && prevBtn && nextBtn) {
+    const totalPages = Math.max(...cards.map((c) => Number(c.dataset.page))) + 1;
+    let page = 0;
+
+    const render = () => {
+      cards.forEach((c) => {
+        c.classList.toggle('hidden', Number(c.dataset.page) !== page);
+      });
+      prevBtn.disabled = page === 0;
+      nextBtn.disabled = page === totalPages - 1;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      page = Math.max(0, page - 1);
+      render();
     });
+    nextBtn.addEventListener('click', () => {
+      page = Math.min(totalPages - 1, page + 1);
+      render();
+    });
+
+    if (totalPages <= 1) {
+      prevBtn.parentElement?.classList.add('hidden');
+    }
   }
 </script>

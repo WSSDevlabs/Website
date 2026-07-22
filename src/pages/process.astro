@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
-import CTABand from '../components/sections/CTABand.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import Container from '../components/ui/Container.astro';
 import Section from '../components/ui/Section.astro';
@@ -16,6 +15,26 @@ const processFaq = [
   {
     question: 'What do I own at the end?',
     answer: 'Full source code, documentation, and credentials, with no vendor lock-in.'
+  },
+  {
+    question: 'What happens at handover?',
+    answer:
+      'You get a walkthrough of the finished build, all source code and credentials, and a sign-off checklist covering everything scoped at the start. Nothing is marked complete until you confirm it.'
+  },
+  {
+    question: 'What documentation do I receive?',
+    answer:
+      'Setup and deployment notes, an overview of the system architecture, and instructions for whoever maintains or extends the project next, whether that is us or your own team.'
+  },
+  {
+    question: 'Is there support after launch?',
+    answer:
+      'Yes. Every project includes a post-launch window for fixes at no extra cost, and ongoing maintenance or feature work is available afterward on a retainer or ad-hoc basis.'
+  },
+  {
+    question: 'How do sign-offs work during the project?',
+    answer:
+      'Each phase, Strategize, Build, and Evolve, ends with a checkpoint where you review and approve the work before we move on, so nothing reaches handover as a surprise.'
   }
 ];
 ---
@@ -36,14 +55,15 @@ const processFaq = [
   <Section rule>
     <Container>
       <div class="relative">
-        <div class="hairline absolute left-0 right-0 top-5 hidden md:block" aria-hidden="true" />
+        <div class="absolute left-0 right-0 top-[7px] hidden h-px bg-line md:block" aria-hidden="true" />
         <div class="grid gap-12 md:grid-cols-3 md:gap-8" data-stagger>
           {
             PROCESS_PHASES.map((phase, index) => (
               <div data-stagger-child class="relative">
-                <span class="stat-num relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
+                <div class="relative z-10 flex items-center gap-3">
+                  <span class="h-3.5 w-3.5 shrink-0 rounded-full bg-accent ring-4 ring-paper" aria-hidden="true" />
+                  <span class="mono-label text-ink-dim">{String(index + 1).padStart(2, '0')}</span>
+                </div>
                 <h2 class="h-sub mt-6">{phase.phase}</h2>
                 <p class="mt-2.5 leading-relaxed text-ink-dim">{phase.summary}</p>
                 <ul class="mt-6 space-y-2.5">
@@ -64,39 +84,5 @@ const processFaq = [
     </Container>
   </Section>
 
-  <!-- Timeline expectations + what you get -->
-  <Section rule class="bg-paper-dim">
-    <Container>
-      <div class="panel grid gap-10 px-6 py-12 md:grid-cols-2 md:px-14 md:py-14">
-        <div>
-          <h2 class="h-sub">Timeline expectations</h2>
-          <p class="mt-3 leading-relaxed text-ink-dim">
-            Timelines are scoped per project during Strategize and confirmed before Build begins,
-            with no open-ended engagements.
-          </p>
-        </div>
-        <div>
-          <h2 class="h-sub">What you get</h2>
-          <ul class="mt-3 space-y-2.5">
-            {[
-              'Full ownership of source code and assets at handover',
-              'Documentation for whoever maintains the system next',
-              'A clear path into ongoing maintenance, if you want it',
-            ].map((item) => (
-              <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink-dim">
-                <svg class="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                </svg>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </Container>
-  </Section>
-
   <FAQ title="Process FAQ" items={processFaq} />
-
-  <CTABand title="Ready to start the conversation?" ctaLabel="Start a Project" ctaHref="/contact" />
 </BaseLayout>

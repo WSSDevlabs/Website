@@ -9,6 +9,7 @@ type Props = {
 };
 
 const { title = 'Frequently asked questions', items } = Astro.props;
+const groupName = `faq-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
 
 <Section rule>
@@ -45,7 +46,7 @@ const { title = 'Frequently asked questions', items } = Astro.props;
       <div class="flex-1">
         {
           items.map((item, i) => (
-            <details class:list={['group py-6', i > 0 && 'border-t border-line']}>
+            <details name={groupName} class:list={['group py-6', i > 0 && 'border-t border-line']}>
               <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-base font-semibold tracking-tight text-ink transition-colors hover:text-accent md:text-lg">
                 <span>{item.question}</span>
                 <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-ink-dim transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] group-open:rotate-45 group-open:border-accent group-open:bg-accent group-open:text-white">

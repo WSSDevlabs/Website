@@ -29,14 +29,6 @@ const categories = [...new Set(allPosts.flatMap((p) => p.data.tags))];
   description={data.description}
   path={`/insights/${post.id}`}
 >
-  <!-- Hero -->
-  <section class="relative overflow-hidden border-b border-line bg-paper-dim py-8 text-center">
-    <div class="dot-pattern absolute inset-0 opacity-50" aria-hidden="true" />
-    <Container class="relative">
-      <h1 class="sr-only">Blog Details</h1>
-      <p class="text-3xl font-bold text-ink">Blog Details</p>
-    </Container>
-  </section>
 
 
   <!-- Article + Sidebar -->
@@ -60,7 +52,7 @@ const categories = [...new Set(allPosts.flatMap((p) => p.data.tags))];
         <span class="text-xs text-ink-dim">{formattedDate}</span>
         <span class="text-xs text-ink-dim">{readingMinutes} min read</span>
       </div>
-      <h2 class="mt-3 text-2xl font-bold leading-snug tracking-tight text-ink md:text-3xl">{data.title}</h2>
+      <h1 class="mt-3 text-2xl font-bold leading-snug tracking-tight text-ink md:text-3xl">{data.title}</h1>
       <div class="mt-2 flex items-center gap-2">
         <div class="h-7 w-7 overflow-hidden rounded-full bg-accent/20">
           <img src={`https://picsum.photos/seed/${data.author}/56/56`} alt={data.author} class="h-full w-full object-cover" loading="lazy" width="56" height="56" />
