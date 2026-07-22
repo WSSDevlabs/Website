@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
-import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
 import { SITE } from '../data/site';
 
 const processSteps = [
@@ -36,52 +36,34 @@ const whyFeatures = [
   path="/about"
 >
 
-  <!-- Wide image + Vision / Mission -->
-  <section class="py-10 md:py-14">
-    <Container>
-      <div class="relative overflow-hidden rounded-3xl border border-line shadow-card">
-        <img
-          src="https://picsum.photos/seed/tech-team-office/1400/640"
-          alt="WSS DevLabs team"
-          class="h-72 w-full scale-110 object-cover sm:h-[24rem]"
-          loading="eager"
-          width="1400"
-          height="640"
-          data-parallax="8"
-        />
-        <div class="absolute inset-0 flex items-center justify-center bg-ink/25">
-          <button type="button" aria-label="Play video" class="flex h-16 w-16 items-center justify-center rounded-full bg-paper/95 shadow-float backdrop-blur-sm transition-transform duration-300 hover:scale-110">
-            <svg class="ml-1 h-6 w-6 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-          </button>
-        </div>
-      </div>
+  <!-- "About Us" intro block: banner, story, vision/mission + portrait -->
+  <section class="relative overflow-hidden">
+    <!-- Title banner with breadcrumb -->
+    <div class="relative flex h-56 items-center justify-center overflow-hidden md:h-64">
+      <img
+        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=500&q=80"
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+        width="1600"
+        height="500"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-charcoal/35" aria-hidden="true"></div>
+      <Container class="relative text-center">
+        <h1 class="h-display-xl text-white">About Us</h1>
+        <nav aria-label="Breadcrumb" class="mt-3 flex items-center justify-center gap-2 text-sm text-white/55">
+          <a href="/" class="hover:text-white">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-white">About Us</span>
+        </nav>
+      </Container>
+    </div>
 
-      <div class="mt-8 grid gap-5 sm:grid-cols-2">
-        <div class="card card-lift spotlight-card p-8">
-          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/8">
-            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
-          </span>
-          <h3 class="h-sub mt-5">Our Vision</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the first call Southeast Asian founders, businesses, and students make for anything digital they need built, marketed, or launched.</p>
-        </div>
-        <div class="card card-lift spotlight-card p-8">
-          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/8">
-            <svg class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-          </span>
-          <h3 class="h-sub mt-5">Our Mission</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To handle any digital need, big or small, with the same care and follow-through, so you never have to piece it together across five different vendors.</p>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- Story + capabilities -->
-  <section class="relative py-12 md:py-16">
-    <div class="hairline absolute inset-x-6 top-0 md:inset-x-10" aria-hidden="true"></div>
-    <Container>
+    <!-- About Us content block -->
+    <Container class="relative py-16 md:py-20">
       <div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
         <!-- Left: 2 stacked images -->
-        <div>
+        <div class="relative">
           <div class="overflow-hidden rounded-3xl border border-line shadow-card">
             <img
               src="https://picsum.photos/seed/coding-collaboration/700/420"
@@ -108,7 +90,13 @@ const whyFeatures = [
 
         <!-- Right: story + capability rows -->
         <div>
-          <Eyebrow label="Our Story" />
+          <p class="mono-label flex items-center gap-2.5 text-accent-yellow">
+            <span class="flex items-center gap-[3px]" aria-hidden="true">
+              <span class="h-3 w-[7px] rounded-[2px] bg-current"></span>
+              <span class="h-3 w-[7px] rounded-[2px] bg-current opacity-40"></span>
+            </span>
+            About Us
+          </p>
           <h2 class="h-section mt-5" data-split>One team, whatever the digital need</h2>
           <p class="mt-5 leading-relaxed text-ink-dim">
             WSS DevLabs started as a small software team, then kept growing because clients kept
@@ -133,6 +121,35 @@ const whyFeatures = [
               </div>
             ))}
           </div>
+
+          <Button href="/contact" variant="primary" class="mt-8">Discover More</Button>
+        </div>
+      </div>
+    </Container>
+
+    <!-- Vision / Mission with center portrait -->
+    <Container class="relative pb-16 md:pb-20">
+      <div class="grid gap-6 lg:grid-cols-3 lg:items-center">
+        <div class="card p-8">
+          <h3 class="h-sub text-ink">Our Vision</h3>
+          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the first call Southeast Asian founders, businesses, and students make for anything digital they need built, marketed, or launched.</p>
+        </div>
+
+        <!-- Center portrait: swap this seed for a real photo when ready -->
+        <div class="relative mx-auto aspect-[3/4] w-full max-w-xs overflow-hidden rounded-3xl border-4 border-paper shadow-float">
+          <img
+            src="https://picsum.photos/seed/wss-devlabs-founder-portrait/480/640"
+            alt="WSS DevLabs team portrait"
+            class="h-full w-full object-cover"
+            loading="lazy"
+            width="480"
+            height="640"
+          />
+        </div>
+
+        <div class="card p-8">
+          <h3 class="h-sub text-ink">Our Mission</h3>
+          <p class="mt-2.5 leading-relaxed text-ink-dim">To handle any digital need, big or small, with the same care and follow-through, so you never have to piece it together across five different vendors.</p>
         </div>
       </div>
     </Container>

@@ -17,33 +17,41 @@ import { PRICING_FAQ } from '../data/faq';
   <!-- Pricing cards -->
   <Section rule>
     <Container>
-      <div class="grid gap-6 md:grid-cols-3" data-stagger>
+      <div class="grid gap-6 md:grid-cols-3 md:items-start" data-stagger>
         {
           PRICING_TIERS.map((tier) => (
             <div
               data-stagger-child
+              data-reveal={tier.highlight ? 'tilt3d' : undefined}
               class:list={[
-                'relative flex flex-col rounded-3xl bg-paper-dim p-8 transition-all duration-300 [transition-timing-function:var(--ease-out-expo)]',
-                tier.highlight ? 'ring-2 ring-accent' : 'ring-1 ring-line',
+                'relative flex flex-col rounded-3xl p-8 transition-all duration-300 [transition-timing-function:var(--ease-out-expo)]',
+                tier.highlight
+                  ? 'bg-charcoal text-white shadow-2xl shadow-black/30 md:-translate-y-3'
+                  : 'bg-paper-dim text-ink ring-1 ring-line'
               ]}
             >
               {tier.badge && (
-                <span class="absolute -top-3 left-8 rounded-full bg-accent px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-card">
+                <span
+                  class:list={[
+                    'absolute -top-3 left-8 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wide shadow-card',
+                    tier.highlight ? 'bg-accent text-white' : 'bg-ink text-white'
+                  ]}
+                >
                   {tier.badge}
                 </span>
               )}
 
-              <p class="text-sm font-bold text-ink">{tier.name}</p>
+              <p class:list={['text-sm font-bold', tier.highlight ? 'text-white' : 'text-ink']}>{tier.name}</p>
 
-              <p class="stat-num mt-3 text-4xl text-ink">{tier.price}</p>
+              <p class:list={['num-feature mt-3 text-4xl', tier.highlight ? 'text-white' : 'text-ink']}>{tier.price}</p>
 
-              <p class="mt-2 text-sm italic leading-relaxed text-ink-dim">{tier.description}</p>
+              <p class:list={['mt-2 text-sm italic leading-relaxed', tier.highlight ? 'text-white/60' : 'text-ink-dim']}>{tier.description}</p>
 
-              <div class="hairline my-6" aria-hidden="true" />
+              <div class:list={['my-6 h-px', tier.highlight ? 'bg-white/10' : 'hairline']} aria-hidden="true" />
 
               <ul class="flex-1 space-y-2.5">
                 {tier.features.map((feature) => (
-                  <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                  <li class:list={['flex items-start gap-2.5 text-sm', tier.highlight ? 'text-white/75' : 'text-ink-dim']}>
                     <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
@@ -54,7 +62,10 @@ import { PRICING_FAQ } from '../data/faq';
 
               <a
                 href={tier.ctaHref}
-                class="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5 hover:bg-ink/85"
+                class:list={[
+                  'mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5',
+                  tier.highlight ? 'bg-accent text-white hover:bg-accent-dim' : 'bg-charcoal text-white hover:bg-charcoal-soft'
+                ]}
               >
                 {tier.cta}
               </a>

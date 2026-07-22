@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
-import { JOB_OPENINGS } from '../data/career';
+import Section from '../components/ui/Section.astro';
+import { JOB_OPENINGS, BENEFITS } from '../data/career';
 
 const openings = JOB_OPENINGS;
 ---
@@ -11,8 +12,115 @@ const openings = JOB_OPENINGS;
   description="Join WSS DevLabs as a freelance or part-time contributor. We are looking for engineers, designers, and marketers who take craft seriously."
   path="/career"
 >
+  <!-- Join our team: opening teasers + quick-apply form -->
+  <Section rule>
+    <Container>
+      <div class="mx-auto max-w-xl text-center">
+        <p class="mono-label justify-center text-accent-red">Vacancy / Career</p>
+        <h1 class="h-section mt-3" data-split>Join Our Team!</h1>
+        <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+          Freelance and part-time roles for engineers, designers, and marketers who take craft
+          seriously. See what's open below, or send a general application.
+        </p>
+      </div>
 
-  <!-- Job Openings -->
+      <div class="mt-12 grid gap-5 lg:grid-cols-[2fr_1fr]" data-stagger>
+        <!-- Opening teaser cards -->
+        <div class="grid gap-5 sm:grid-cols-2">
+          {
+            openings.map((job) => (
+              <div data-stagger-child class="tilt-card card flex flex-col p-6">
+                <span class="mono-label !text-[0.6rem] text-ink-dim">{job.type}</span>
+                <h3 class="mt-2 text-base font-bold tracking-tight text-ink">{job.title}</h3>
+                <p class="mt-2 flex-1 text-xs leading-relaxed text-ink-dim">
+                  {job.experience} &middot; {job.positions}
+                </p>
+                <a
+                  href={`#job-${job.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                  class="mt-5 inline-flex items-center justify-center rounded-full bg-accent-red px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-accent-red-dim"
+                >
+                  Apply Now
+                </a>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Quick apply form -->
+        <div data-stagger-child class="panel-charcoal flex flex-col overflow-hidden">
+          <div class="bg-ink px-6 py-4">
+            <h2 class="text-center text-sm font-bold uppercase tracking-wide text-white">Join Our Team</h2>
+          </div>
+          <form id="quick-apply-form" class="flex flex-1 flex-col gap-3 p-6" onsubmit="return false;">
+            <input
+              type="text"
+              id="qa-name"
+              placeholder="Your Name"
+              required
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-accent focus:outline-none"
+            />
+            <input
+              type="email"
+              id="qa-email"
+              placeholder="Your Email"
+              required
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-accent focus:outline-none"
+            />
+            <select
+              id="qa-position"
+              class="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white focus:border-accent focus:outline-none"
+            >
+              <option value="" class="text-ink">Your Position</option>
+              {openings.map((job) => (
+                <option value={job.title} class="text-ink">{job.title}</option>
+              ))}
+            </select>
+            <textarea
+              id="qa-message"
+              rows="4"
+              placeholder="Enter your message"
+              class="w-full flex-1 resize-none rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-accent focus:outline-none"
+            />
+            <button
+              type="submit"
+              id="qa-submit"
+              class="mt-1 inline-flex items-center justify-center rounded-full bg-accent-red px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-accent-red-dim"
+            >
+              Send Application
+            </button>
+          </form>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Benefits -->
+  <Section rule class="bg-paper-dim">
+    <Container>
+      <div class="mx-auto max-w-xl text-center">
+        <p class="mono-label justify-center text-accent-red">Our Benefits</p>
+        <h2 class="h-section mt-3" data-split>Why the team enjoys working here</h2>
+      </div>
+
+      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+        {
+          BENEFITS.map((b) => (
+            <div data-stagger-child class="flex flex-col items-center text-center">
+              <span class="flex h-14 w-14 items-center justify-center rounded-full bg-charcoal text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={b.icon} />
+                </svg>
+              </span>
+              <p class="mt-4 font-semibold tracking-tight text-ink">{b.title}</p>
+              <p class="mt-1.5 text-xs leading-relaxed text-ink-dim">{b.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Full job details -->
   <section id="openings" class="border-b border-line">
     <Container class="py-8">
       <div class="text-center">
@@ -20,7 +128,11 @@ const openings = JOB_OPENINGS;
       </div>
       <div class="mt-8 space-y-3">
         {openings.map((job, i) => (
-          <details class="group overflow-hidden rounded-2xl border border-line bg-paper shadow-sm" open={i === 0}>
+          <details
+            id={`job-${job.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+            class="group overflow-hidden rounded-2xl border border-line bg-paper shadow-sm"
+            open={i === 0}
+          >
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5">
               <div class="min-w-0">
                 <h3 class="text-sm font-bold text-ink">{job.title}</h3>
@@ -76,11 +188,22 @@ const openings = JOB_OPENINGS;
     </Container>
   </section>
 
-
 </BaseLayout>
 
 <script>
   document.querySelectorAll('[data-apply-link]').forEach((link) => {
     link.addEventListener('click', (e) => e.stopPropagation());
+  });
+
+  const form = document.getElementById('quick-apply-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = (document.getElementById('qa-name') as HTMLInputElement).value;
+    const email = (document.getElementById('qa-email') as HTMLInputElement).value;
+    const position = (document.getElementById('qa-position') as HTMLSelectElement).value;
+    const message = (document.getElementById('qa-message') as HTMLTextAreaElement).value;
+    const subject = encodeURIComponent(`Application: ${position || 'General enquiry'}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPosition: ${position}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:hello@wssdevlabs.com?subject=${subject}&body=${body}`;
   });
 </script>
