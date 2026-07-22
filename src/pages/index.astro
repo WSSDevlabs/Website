@@ -9,9 +9,7 @@ import HomepageServices from '../components/sections/HomepageServices.astro';
 import Differentiator from '../components/sections/Differentiator.astro';
 import ProcessOverview from '../components/sections/ProcessOverview.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
-import ImpactStats from '../components/sections/ImpactStats.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
-import CTABand from '../components/sections/CTABand.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import ContactTeaser from '../components/sections/ContactTeaser.astro';
 import { HOME_FAQ } from '../data/faq';
@@ -77,15 +75,5 @@ const schema = {
   <FeaturedWork projects={featuredProjects} />
   <Testimonials testimonials={defaultTestimonials} />
   <FAQ items={HOME_FAQ} />
-  <ImpactStats stats={[
-    { value: '50+', label: 'Projects delivered' },
-    { value: '100%', label: 'Client satisfaction' },
-    { value: '10', label: 'Service areas' },
-    { value: '3+', label: 'Years in business' }
-  ]} />
-  <CTABand
-    title="Have a project in mind?"
-    subtitle="Tell us what you're building, and we'll respond within one business day."
-  />
   <ContactTeaser />
 </BaseLayout>
