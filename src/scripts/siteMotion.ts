@@ -37,6 +37,7 @@ function initMotion() {
   initLenis();
   initHeroStagger();
   initSplitHeadlines();
+  initColorReveal();
   initParallax();
   initStaggerGrids();
   initScrollReveal();
@@ -109,6 +110,37 @@ function initSplitHeadlines() {
   });
 }
 
+/* ── Word-by-word colour reveal, scrubbed to scroll position ───
+   <p data-color-reveal>Plain words dim to ink; <span data-accent>this
+   phrase</span> dims to the accent colour instead.</p>                */
+function initColorReveal() {
+  const targets = document.querySelectorAll<HTMLElement>(
+    '[data-color-reveal]:not([data-color-reveal-done])'
+  );
+  if (!targets.length) return;
+
+  document.fonts.ready.then(() => {
+    targets.forEach((el) => {
+      if (el.dataset.colorRevealDone) return;
+      el.dataset.colorRevealDone = '1';
+
+      const split = SplitText.create(el, { type: 'words', wordsClass: 'cr-word' });
+      splits.push(split);
+
+      const accentWords = split.words.filter((w) => w.closest('[data-accent]'));
+      const plainWords = split.words.filter((w) => !w.closest('[data-accent]'));
+
+      gsap.set(split.words, { color: 'var(--color-muted)' });
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: el, start: 'top 82%', end: 'bottom 45%', scrub: true }
+      });
+      if (plainWords.length) tl.to(plainWords, { color: 'var(--color-ink)', stagger: 0.045, ease: 'none' }, 0);
+      if (accentWords.length) tl.to(accentWords, { color: 'var(--color-accent)', stagger: 0.045, ease: 'none' }, 0);
+    });
+  });
+}
+
 /* ── Scroll-scrubbed parallax for media ─────────────────────── */
 function initParallax() {
   document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
@@ -159,10 +191,12 @@ const REVEAL_VARIANTS: Record<string, RevealKeyframes> = {
   left: { opacity: [0, 1], x: [-24, 0] },
   right: { opacity: [0, 1], x: [24, 0] },
   zoom: { opacity: [0, 1], scale: [0.965, 1] },
-  blur: { opacity: [0, 1], y: [14, 0], filter: ['blur(6px)', 'blur(0px)'] }
+  blur: { opacity: [0, 1], y: [14, 0], filter: ['blur(6px)', 'blur(0px)'] },
+  // Depth entrance: card rotates up out of the page on a real 3-D axis
+  tilt3d: { opacity: [0, 1], rotateX: [-52, 0], y: [46, 0], z: [-140, 0] }
 };
 
-const SECTION_CYCLE = ['up', 'blur', 'zoom', 'up', 'blur'];
+const SECTION_CYCLE = ['up', 'tilt3d', 'blur', 'zoom', 'tilt3d'];
 
 function revealOnScroll(el: HTMLElement, variant: string, delay = 0) {
   if (el.dataset.revealBound) return;
@@ -172,10 +206,20 @@ function revealOnScroll(el: HTMLElement, variant: string, delay = 0) {
   el.style.opacity = '0';
   el.style.willChange = 'transform, opacity';
 
+  if (variant === 'tilt3d') {
+    const parent = el.parentElement;
+    if (parent) parent.style.perspective = '1400px';
+    el.style.transformStyle = 'preserve-3d';
+  }
+
   inView(
     el,
     () => {
-      animate(el, keyframes, { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] });
+      animate(el, keyframes, {
+        duration: variant === 'tilt3d' ? 0.85 : 0.6,
+        delay,
+        ease: variant === 'tilt3d' ? [0.22, 1, 0.36, 1] : [0.16, 1, 0.3, 1]
+      });
       el.style.willChange = 'auto';
     },
     { amount: 0.15 }

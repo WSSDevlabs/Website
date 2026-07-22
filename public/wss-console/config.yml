@@ -233,6 +233,22 @@ collections:
               - { label: "Question", name: "question", widget: "string" }
               - { label: "Answer", name: "answer", widget: "text" }
 
+  # ---- Partner / client logos (src/data/partners.json) ----
+  - name: "partners"
+    label: "Partner & Client Logos"
+    files:
+      - name: "partners"
+        label: "Partner & Client Logos"
+        file: "src/data/partners.json"
+        fields:
+          - label: "Partners"
+            name: "partners"
+            widget: "list"
+            summary: "{{name}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Logo", name: "logo", widget: "image" }
+
   # ---- Site-wide settings (src/data/site.json) ----
   - name: "site"
     label: "Site Settings"

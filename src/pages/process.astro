@@ -1,16 +1,64 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/sections/Hero.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import Container from '../components/ui/Container.astro';
-import Section from '../components/ui/Section.astro';
-import { PROCESS_PHASES } from '../data/process';
+
+const STEPS = [
+  {
+    n: 1,
+    title: 'Discovery call',
+    description:
+      'A call to walk through your goals, current setup, and budget, before anything is scoped or quoted.'
+  },
+  {
+    n: 2,
+    title: 'Proposal & quote',
+    description:
+      'A written proposal with scope, deliverables, timeline, and a fixed price, sent for you to review with no obligation.'
+  },
+  {
+    n: 3,
+    title: 'Contract & deposit',
+    description:
+      'A signed agreement and deposit lock in your start date and the scope agreed in the proposal.'
+  },
+  {
+    n: 4,
+    title: 'Kickoff & requirements',
+    description:
+      'A detailed requirements session, plus your brand assets, content, and account access handed over so we can start.'
+  },
+  {
+    n: 5,
+    title: 'Design sign-off',
+    description:
+      'Wireframes first, then high-fidelity UI, reviewed and approved by you before a single line of code is written.'
+  },
+  {
+    n: 6,
+    title: 'Development sprints',
+    description:
+      'Staged sprints with a staging link you can follow, so you see real progress and can redirect early.'
+  },
+  {
+    n: 7,
+    title: 'QA & client review',
+    description:
+      'Internal testing across devices, then your own review round with revisions before anything is called finished.'
+  },
+  {
+    n: 8,
+    title: 'Sign-off, launch & handover',
+    description:
+      'Formal approval, deployment to production, and full source code, credentials, and documentation handed over.'
+  }
+];
 
 const processFaq = [
   {
     question: 'How long does a typical project take?',
     answer:
-      'Most websites take 4-8 weeks; mobile apps and custom systems vary by scope, agreed during Strategize.'
+      'Most websites take 4-8 weeks; mobile apps and custom systems vary by scope, agreed once we send a proposal and quote.'
   },
   {
     question: 'What do I own at the end?',
@@ -34,55 +82,104 @@ const processFaq = [
   {
     question: 'How do sign-offs work during the project?',
     answer:
-      'Each phase, Strategize, Build, and Evolve, ends with a checkpoint where you review and approve the work before we move on, so nothing reaches handover as a surprise.'
+      'Design and QA each end with a review checkpoint where you approve the work before we move on, so nothing reaches final sign-off as a surprise.'
   }
 ];
 ---
 
 <BaseLayout
   title="Process: WSS DevLabs"
-  description="How WSS DevLabs works: Strategize, Build, and Evolve, with clear scope, honest timelines, and full ownership at handover."
+  description="How WSS DevLabs works, from the first discovery call through proposal, contract, development, sign-off, and post-launch support."
   path="/process"
 >
-  <Hero
-    eyebrow="Process"
-    title="Strategize. Build. Evolve."
-    subtitle="Clear scope, honest timelines, and a process that doesn't end at launch."
-    primaryCta={{ label: 'Start a Project', href: '/contact' }}
-  />
+  <!-- Eight-step scroll timeline: matte-dark, alternating, line fills as you scroll -->
+  <section class="relative overflow-hidden bg-charcoal py-16 md:py-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:radial-gradient(circle,white_1px,transparent_1px)] [background-size:26px_26px]"
+      aria-hidden="true"
+    />
+    <Container class="relative">
+      <div class="mx-auto max-w-2xl text-center">
+        <h1 class="h-display-xl !text-[clamp(2.1rem,1.5rem+2vw,3.1rem)] text-white" data-split>
+          How we get you to launch
+        </h1>
+        <p class="mt-4 leading-relaxed text-white/60">
+          From the first call to sign-off, here is exactly what happens and when.
+        </p>
+      </div>
 
-  <!-- Phase timeline -->
-  <Section rule>
-    <Container>
-      <div class="relative">
-        <div class="absolute left-0 right-0 top-[7px] hidden h-px bg-line md:block" aria-hidden="true" />
-        <div class="grid gap-12 md:grid-cols-3 md:gap-8" data-stagger>
+      <div class="relative mt-16" data-timeline-track>
+        <!-- Base rule + scroll-scrubbed fill, desktop -->
+        <div class="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 md:block" aria-hidden="true">
+          <div class="absolute inset-0 bg-white/10" />
+          <div class="absolute inset-0 bg-accent" style="transform-origin: top; transform: scaleY(0);" data-timeline-fill />
+        </div>
+        <!-- Mobile rule -->
+        <div class="absolute left-4 top-0 h-full w-px bg-white/10 md:hidden" aria-hidden="true" />
+
+        <div class="space-y-10 md:space-y-4">
           {
-            PROCESS_PHASES.map((phase, index) => (
-              <div data-stagger-child class="relative">
-                <div class="relative z-10 flex items-center gap-3">
-                  <span class="h-3.5 w-3.5 shrink-0 rounded-full bg-accent ring-4 ring-paper" aria-hidden="true" />
-                  <span class="mono-label text-ink-dim">{String(index + 1).padStart(2, '0')}</span>
-                </div>
-                <h2 class="h-sub mt-6">{phase.phase}</h2>
-                <p class="mt-2.5 leading-relaxed text-ink-dim">{phase.summary}</p>
-                <ul class="mt-6 space-y-2.5">
-                  {phase.steps.map((step) => (
-                    <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink-dim">
-                      <svg class="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                      </svg>
-                      {step}
-                    </li>
-                  ))}
-                </ul>
+            STEPS.map((s, i) => (
+              <div class="relative grid items-start gap-6 pl-12 md:grid-cols-[1fr_2.5rem_1fr] md:gap-x-8 md:pl-0">
+                <span
+                  class="stat-num absolute left-4 top-0 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-xs text-white ring-4 ring-charcoal md:relative md:left-auto md:top-auto md:col-start-2 md:mx-auto md:-translate-x-0"
+                >
+                  {s.n}
+                </span>
+
+                {i % 2 === 0 ? (
+                  <>
+                    <div
+                      class="rounded-3xl border border-white/10 bg-charcoal-soft p-6 md:col-start-1 md:row-start-1"
+                      data-reveal="tilt3d"
+                    >
+                      <h2 class="text-lg font-semibold tracking-tight text-white">{s.title}</h2>
+                      <p class="mt-2 text-sm leading-relaxed text-white/60">{s.description}</p>
+                    </div>
+                    <div class="hidden md:col-start-3 md:row-start-1 md:block" aria-hidden="true" />
+                  </>
+                ) : (
+                  <>
+                    <div class="hidden md:col-start-1 md:row-start-1 md:block" aria-hidden="true" />
+                    <div
+                      class="rounded-3xl border border-white/10 bg-charcoal-soft p-6 md:col-start-3 md:row-start-1"
+                      data-reveal="tilt3d"
+                    >
+                      <h2 class="text-lg font-semibold tracking-tight text-white">{s.title}</h2>
+                      <p class="mt-2 text-sm leading-relaxed text-white/60">{s.description}</p>
+                    </div>
+                  </>
+                )}
               </div>
             ))
           }
         </div>
       </div>
     </Container>
-  </Section>
+  </section>
 
   <FAQ title="Process FAQ" items={processFaq} />
 </BaseLayout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initTimelineFill() {
+    const track = document.querySelector<HTMLElement>('[data-timeline-track]');
+    const fill = document.querySelector<HTMLElement>('[data-timeline-fill]');
+    if (!track || !fill) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.to(fill, {
+      scaleY: 1,
+      ease: 'none',
+      scrollTrigger: { trigger: track, start: 'top 65%', end: 'bottom 65%', scrub: true }
+    });
+  }
+
+  initTimelineFill();
+  document.addEventListener('astro:page-load', initTimelineFill);
+</script>

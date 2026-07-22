@@ -12,6 +12,10 @@
   --color-muted: #94a0b4; /* placeholders, tertiary */
   --color-line: #e3e8f0; /* hairlines */
 
+  /* Matte neutral dark: premium accent surfaces, distinct from navy-tinted ink */
+  --color-charcoal: #17181b;
+  --color-charcoal-soft: #232427;
+
   /* Primary accent: cobalt */
   --color-accent: #2d5be3;
   --color-accent-dim: #2348c2;
@@ -31,6 +35,8 @@
     'Geist Mono Variable', ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', monospace;
   /* Bold geometric display face for headings; body copy stays on Geist */
   --font-display: 'Outfit Variable', var(--font-sans);
+  /* Angular geometric face reserved for pull quotes and hero numerals */
+  --font-feature: 'Space Grotesk Variable', var(--font-display);
 
   /* Tinted elevation */
   --shadow-card: 0 1px 2px rgb(12 18 32 / 0.05), 0 8px 24px -16px rgb(12 18 32 / 0.14);
@@ -99,6 +105,34 @@
     letter-spacing: -0.042em;
     font-weight: 650;
     color: var(--color-ink);
+  }
+
+  /* Wider display range for moments that want extra scale contrast */
+  .h-display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 1.2rem + 6.4vw, 5.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    font-weight: 660;
+    color: var(--color-ink);
+  }
+
+  /* Angular feature type for pull quotes and callouts */
+  .pull-quote {
+    font-family: var(--font-feature);
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  /* Oversized tabular numerals in the feature face */
+  .num-feature {
+    font-family: var(--font-feature);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+    font-weight: 600;
   }
 
   .h-section {
@@ -172,6 +206,32 @@
     border: 1px solid color-mix(in srgb, var(--color-ink) 88%, white);
     background-color: var(--color-ink);
     box-shadow: 0 32px 80px -40px rgb(12 18 32 / 0.55);
+  }
+
+  /* Matte neutral dark panel: premium touch, distinct from navy-tinted panel-ink */
+  .panel-charcoal {
+    border-radius: 2rem;
+    border: 1px solid color-mix(in srgb, var(--color-charcoal) 82%, white);
+    background-color: var(--color-charcoal);
+    box-shadow: 0 32px 80px -40px rgb(0 0 0 / 0.6);
+  }
+
+  /* Frosted card that floats over a map or photo */
+  .glass-float-card {
+    border-radius: 1.5rem;
+    border: 1px solid rgb(255 255 255 / 0.6);
+    background: rgb(255 255 255 / 0.82);
+    box-shadow: var(--shadow-float);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .glass-float-card {
+      background: var(--color-paper);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
   }
 
   /* ── Cards ──────────────────────────────────────────────── */
@@ -333,5 +393,34 @@
   /* 3-D card perspective container */
   .perspective-wrap {
     perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* JS-driven flip, independent of :hover; see ServicesGrid's auto-flip script */
+  .flip-inner.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  @keyframes float-y {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float-y 5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float {
+      animation: none;
+    }
   }
 }

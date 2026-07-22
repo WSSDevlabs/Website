@@ -7,45 +7,66 @@ import { PROCESS_PHASES } from '../../data/process';
 
 <Section rule>
   <Container>
-    <div class="max-w-2xl">
-      <h2 class="h-section" data-split>Step-by-step to your goal</h2>
-      <p class="mt-5 leading-relaxed text-ink-dim">
-        Every project follows a structured three-phase approach, so you always know where things
-        stand and what comes next.
-      </p>
-    </div>
-
-    <!-- Phase timeline: three columns over a connecting rule -->
-    <div class="relative mt-14">
-      <div class="hairline absolute left-0 right-0 top-5 hidden md:block" aria-hidden="true"></div>
-      <div class="grid gap-12 md:grid-cols-3 md:gap-8" data-stagger>
-        {
-          PROCESS_PHASES.map((phase, index) => (
-            <div data-stagger-child class="relative">
-              <!-- Sequence marker sitting on the rule -->
-              <span class="stat-num relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-
-              <h3 class="h-sub mt-6">{phase.phase}</h3>
-              <p class="mt-2.5 text-sm leading-relaxed text-ink-dim">{phase.summary}</p>
-
-              <ul class="mt-6 space-y-2.5">
-                {phase.steps.map((step) => (
-                  <li class="flex items-start gap-2.5 text-sm text-ink-dim">
-                    <svg class="mt-[3px] h-3.5 w-3.5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg>
-                    {step}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
+    <!-- Asymmetric bento: intro + tall photo + three phase cards -->
+    <div class="grid gap-5 lg:grid-cols-3 lg:grid-rows-2">
+      <!-- Intro cell -->
+      <div class="flex flex-col justify-between rounded-3xl border border-line bg-paper-dim p-8 lg:col-start-1 lg:row-start-1">
+        <div>
+          <h2 class="h-section" data-split>Step-by-step to your goal</h2>
+          <p class="mt-4 text-sm leading-relaxed text-ink-dim" data-color-reveal>
+            Every project follows a <span data-accent>structured three-phase approach</span>, so
+            you always know where things stand and what comes next.
+          </p>
+        </div>
+        <span
+          class="mt-8 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper text-ink"
+          aria-hidden="true"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </span>
       </div>
+
+      <!-- Tall photo cell -->
+      <div
+        class="relative hidden overflow-hidden rounded-3xl border border-line shadow-card lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:block"
+        data-reveal="tilt3d"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&h=1080&q=80"
+          alt="The team mapping out a project plan"
+          class="h-full w-full scale-110 object-cover"
+          loading="lazy"
+          width="800"
+          height="1080"
+          data-parallax="9"
+        />
+      </div>
+
+      <!-- Phase cards -->
+      {
+        PROCESS_PHASES.map((phase, index) => (
+          <div
+            class:list={[
+              'tilt-card spotlight-card card flex flex-col rounded-3xl p-7',
+              index === 0 && 'lg:col-start-3 lg:row-start-1',
+              index === 1 && 'lg:col-start-1 lg:row-start-2',
+              index === 2 && 'lg:col-start-3 lg:row-start-2'
+            ]}
+            data-reveal="tilt3d"
+            data-reveal-delay={index * 0.08}
+          >
+            <span class="stat-num inline-flex h-9 w-9 items-center justify-center rounded-full border border-line text-sm text-accent">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 class="h-sub mt-5">{phase.phase}</h3>
+            <p class="mt-2.5 flex-1 text-sm leading-relaxed text-ink-dim">{phase.summary}</p>
+          </div>
+        ))
+      }
     </div>
 
-    <Button href="/process" variant="secondary" class="mt-14">See the full process</Button>
+    <Button href="/process" variant="secondary" class="mt-10">See the full process</Button>
   </Container>
 </Section>

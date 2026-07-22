@@ -39,7 +39,7 @@ const parsed = stats.map((stat) => {
               i % 2 === 1 && 'border-l border-line lg:border-line'
             ]}
           >
-            <p class="stat-num text-6xl text-ink md:text-7xl" data-count={stat.num} data-count-suffix={stat.suffix}>
+            <p class="num-feature text-6xl text-ink md:text-7xl" data-count={stat.num} data-count-suffix={stat.suffix}>
               {stat.num}{stat.suffix}
             </p>
             <p class="mono-label mt-4 text-ink-dim">{stat.label}</p>

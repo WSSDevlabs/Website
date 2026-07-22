@@ -1,26 +1,117 @@
 ---
+import Container from '../ui/Container.astro';
+
 type Partner = { name: string; logo: string };
 
 type Props = {
   partners?: Partner[];
+  title?: string;
 };
 
-const { partners = [] } = Astro.props;
+const { partners = [], title = 'Partnering with businesses we believe in' } = Astro.props;
 ---
 
 {
   partners.length > 0 && (
-    <div class="border-t border-line py-10">
-      <div class="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-6 px-6 md:px-10">
-        {partners.map((partner) => (
-          <img
-            src={partner.logo}
-            alt={partner.name}
-            class="h-10 w-auto opacity-70 grayscale"
-            loading="lazy"
-          />
-        ))}
-      </div>
+    <div class="border-t border-line py-14 md:py-20">
+      <Container>
+        <h2 class="h-section max-w-lg" data-split>
+          {title}
+        </h2>
+
+        <div class="relative mt-10">
+          <div class="mask-fade-x -mx-6 px-6 md:-mx-10 md:px-10">
+            <div
+              class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              data-partner-track
+            >
+              {partners.map((partner, i) => (
+                <div
+                  class="card flex h-32 w-52 shrink-0 snap-start items-center justify-center p-6"
+                  data-partner-card
+                  data-partner-index={i}
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    class="h-9 w-auto max-w-[80%] object-contain opacity-70 grayscale transition-opacity duration-300 hover:opacity-100"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            aria-label="Previous partners"
+            data-partner-prev
+            class="absolute left-0 top-1/2 hidden h-10 w-10 -translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border border-line bg-paper text-ink shadow-float transition-colors hover:bg-ink hover:text-white sm:flex"
+          >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            aria-label="Next partners"
+            data-partner-next
+            class="absolute right-0 top-1/2 hidden h-10 w-10 -translate-y-1/2 translate-x-4 items-center justify-center rounded-full border border-line bg-paper text-ink shadow-float transition-colors hover:bg-ink hover:text-white sm:flex"
+          >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center gap-2" data-partner-dots aria-hidden="true">
+          {partners.map((_, i) => (
+            <span
+              data-partner-dot={i}
+              class="h-1.5 w-1.5 rounded-full bg-line transition-all duration-300 data-active:w-5 data-active:bg-accent"
+            />
+          ))}
+        </div>
+      </Container>
     </div>
   )
 }
+
+<script>
+  function initPartnerCarousels() {
+    document.querySelectorAll<HTMLElement>('[data-partner-track]:not([data-carousel-bound])').forEach((track) => {
+      track.dataset.carouselBound = '1';
+      const wrap = track.closest('.relative');
+      const prev = wrap?.querySelector<HTMLButtonElement>('[data-partner-prev]');
+      const next = wrap?.querySelector<HTMLButtonElement>('[data-partner-next]');
+      const dots = Array.from(
+        wrap?.parentElement?.querySelectorAll<HTMLElement>('[data-partner-dot]') ?? []
+      );
+      const cards = Array.from(track.querySelectorAll<HTMLElement>('[data-partner-card]'));
+      if (!cards.length) return;
+
+      const step = () => cards[0].getBoundingClientRect().width + 20;
+      prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+      if (dots.length) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const idx = (entry.target as HTMLElement).dataset.partnerIndex;
+              dots.forEach((d) => d.removeAttribute('data-active'));
+              const dot = dots.find((d) => d.dataset.partnerDot === idx);
+              dot?.setAttribute('data-active', '');
+            });
+          },
+          { root: track, threshold: 0.6 }
+        );
+        cards.forEach((c) => observer.observe(c));
+      }
+    });
+  }
+
+  initPartnerCarousels();
+  document.addEventListener('astro:page-load', initPartnerCarousels);
+</script>
