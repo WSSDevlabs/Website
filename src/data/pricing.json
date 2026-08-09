@@ -1,41 +1,178 @@
 {
   "tiers": [
     {
-      "name": "Starter",
-      "price": "From RM 500",
-      "segment": "sme",
+      "name": "1 Page",
+      "price": "RM 1,799",
+      "segment": "informative",
       "highlight": false,
-      "description": "For hawkers, traders, and traditional businesses getting online for the first time.",
+      "description": "A focused single-page site to get a small business online fast.",
       "features": [
-        "1-page website (up to 4 sections)",
-        "Mobile-first, fully responsive",
-        "WhatsApp click-to-chat button",
-        "Basic contact form",
-        "Cloudflare Pages deployment",
-        "1 round of revisions",
-        "5 business day turnaround"
+        "1 web page, custom layout & colours",
+        "Basic enquiry form",
+        "WhatsApp click-to-chat integration",
+        "Photo gallery, up to 5 sections",
+        "1 animated banner",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 10GB hosting, SSL (1st year)"
       ],
-      "note": "Eligible for the MSME Digital Grant MADANI (50% matching, up to RM5,000) — ask us how to claim it.",
-      "cta": "Get Started",
+      "note": "Grant-eligible — the MSME Digital Grant MADANI matches 50% of this package, up to RM5,000. Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
       "ctaHref": "/contact"
     },
     {
-      "name": "Business",
-      "price": "From RM 1,500",
-      "segment": "sme",
-      "highlight": true,
-      "badge": "Most popular for SMEs",
+      "name": "5 Pages",
+      "price": "RM 2,599",
+      "segment": "informative",
+      "highlight": false,
       "description": "A complete, credible website for a business ready to be found online.",
       "features": [
-        "Up to 5 pages (Home, About, Services, Gallery, Contact)",
-        "Custom section layout from our design system",
-        "SEO-ready structure & meta",
-        "Google Business Profile setup",
-        "WhatsApp click-to-chat button",
-        "2 rounds of revisions",
-        "7–10 business day turnaround"
+        "5 web pages, custom layout & colours",
+        "Enquiry form, WhatsApp click-to-chat",
+        "Photo galleries",
+        "2 animated banners",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 10GB hosting, SSL (1st year)"
       ],
-      "note": "Grant-eligible — the MSME Digital Grant MADANI matches 50% of this package, up to RM5,000.",
+      "note": "Grant-eligible — the MSME Digital Grant MADANI matches 50% of this package, up to RM5,000. Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "5+ Pages",
+      "price": "RM 2,799",
+      "segment": "informative",
+      "highlight": true,
+      "badge": "Most popular",
+      "description": "5-page site plus a product catalogue for businesses that sell physical goods but don't need full checkout.",
+      "features": [
+        "5 web pages, custom layout & colours",
+        "Product catalogue, 20 products upload",
+        "Enquiry form, WhatsApp click-to-chat",
+        "2 animated banners",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 10GB hosting, SSL (1st year)"
+      ],
+      "note": "Grant-eligible — the MSME Digital Grant MADANI matches 50% of this package, up to RM5,000. Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "10 Pages",
+      "price": "RM 3,299",
+      "segment": "informative",
+      "highlight": false,
+      "description": "A fuller site for businesses with more to say — services, team, resources.",
+      "features": [
+        "10 web pages, custom layout & colours",
+        "Enquiry form, WhatsApp click-to-chat",
+        "Photo galleries",
+        "3 animated banners",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 10GB hosting, SSL (1st year)"
+      ],
+      "note": "Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "10+ Pages",
+      "price": "RM 3,499",
+      "segment": "informative",
+      "highlight": false,
+      "description": "10-page site plus a product catalogue for a larger informative presence with a sales angle.",
+      "features": [
+        "10 web pages, custom layout & colours",
+        "Product catalogue, 20 products upload",
+        "Enquiry form, WhatsApp click-to-chat",
+        "3 animated banners",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 10GB hosting, SSL (1st year)"
+      ],
+      "note": "Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "1 Page Ecommerce",
+      "price": "RM 3,899",
+      "segment": "ecommerce",
+      "highlight": false,
+      "description": "A single-page online store to start selling with full checkout.",
+      "features": [
+        "1 web page, custom layout & colours",
+        "10 products upload, inventory management",
+        "Shipping setup & payment gateway integration",
+        "Sales reporting, coupon management",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 20GB hosting, SSL (1st year)"
+      ],
+      "note": "Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "5 Pages Ecommerce",
+      "price": "RM 4,799",
+      "segment": "ecommerce",
+      "highlight": true,
+      "badge": "Most popular",
+      "description": "A 5-page online store for a business ready to run a proper storefront.",
+      "features": [
+        "5 web pages, custom layout & colours",
+        "10 products upload, inventory management",
+        "Shipping setup & payment gateway integration",
+        "Sales reporting, coupon management",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 20GB hosting, SSL (1st year)"
+      ],
+      "note": "Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "10 Pages Ecommerce",
+      "price": "RM 5,799",
+      "segment": "ecommerce",
+      "highlight": false,
+      "description": "A larger storefront with delivery scheduling and product bundling.",
+      "features": [
+        "10 web pages, custom layout & colours",
+        "Products upload, inventory management",
+        "Shipping setup & payment gateway integration",
+        "Sales reporting, coupon management",
+        "Premium plugin: delivery scheduling & bundle add-on",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 20GB hosting, SSL (1st year)"
+      ],
+      "note": "Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "10+ Pages Ecommerce",
+      "price": "RM 6,799",
+      "segment": "ecommerce",
+      "highlight": false,
+      "description": "Our largest storefront package, with tiered pricing for wholesale or B2B customers.",
+      "features": [
+        "10+ web pages, custom layout & colours",
+        "Products upload, inventory management",
+        "Shipping setup & payment gateway integration",
+        "Sales reporting, coupon management",
+        "Multi-tier role pricing / dynamic discount pricing",
+        "Content management system (CMS)",
+        "3 SEO keywords submission",
+        "Free domain, 20GB hosting, SSL (1st year)"
+      ],
+      "note": "Excludes 8% SST; domain/hosting/SSL renew at RM549/year from year 2.",
       "cta": "Get a Quote",
       "ctaHref": "/contact"
     },

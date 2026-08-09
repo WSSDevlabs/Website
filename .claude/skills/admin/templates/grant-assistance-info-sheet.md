@@ -1,7 +1,7 @@
 # Using the MSME Digital Grant MADANI for Your Website — Info Sheet
 
-For clients considering the Starter or Business package, share this before the quote
-call — it often turns "RM 500/1,500 is still too much" into "let's start."
+For clients considering an Informative or Ecommerce Website Package, share this
+before the quote call — it can turn "that's still expensive" into "let's start."
 
 ## What the grant is
 The MSME Digital Grant MADANI (MDEC-administered) matches **50% of eligible digital
@@ -10,7 +10,7 @@ spending, up to RM5,000** — the client still pays the other half themselves. I
 RM50 million pool (~100,000 SMEs targeted), and each business can only claim it
 once. Budget 2026 also added a separate Digital Acceleration Grant (RM53 million,
 AI/blockchain/cybersecurity) for larger digital projects — not typically relevant to
-Starter/Business website clients.
+Informative/Ecommerce package clients.
 
 ## Who qualifies (typical criteria — verify against the current official terms before quoting)
 - Malaysian-registered business, at least 60% Malaysian-owned
@@ -21,8 +21,12 @@ Starter/Business website clients.
 - Tax filings up to date
 
 ## What this means for our pricing (be precise with clients)
-- Starter (RM 500): grant covers up to RM250 → client pays as little as ~RM250
-- Business (RM 1,500): grant covers up to RM750 → client pays as little as ~RM750
+- 1 Page (RM 1,799): grant covers up to RM899 → client pays as little as ~RM900
+- 5 Pages (RM 2,599): grant covers up to RM1,300 → client pays as little as ~RM1,300
+- 5+ Pages (RM 2,799): grant covers up to RM1,400 → client pays as little as ~RM1,400
+- Grant caps at RM5,000 — on packages priced under RM10,000, the 50% match is the
+  binding constraint, not the RM5,000 cap. Recalculate per package before quoting,
+  since prices are still being tuned (check `src/data/pricing.json` for current figures).
 - Never say "free" or "near-zero cost" — it's a 50% match, not full coverage.
 
 ## What we provide the client
