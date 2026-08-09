@@ -9,6 +9,7 @@ import FAQ from '../../components/sections/FAQ.astro';
 import CTABand from '../../components/sections/CTABand.astro';
 import QuoteForm from '../../components/sections/QuoteForm.astro';
 import { SERVICES } from '../../data/services';
+import { TESTIMONIALS } from '../../data/testimonials';
 import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
 
 export function getStaticPaths() {
@@ -94,30 +95,6 @@ const serviceImages: Record<string, [string, string, string]> = {
   ],
 };
 const [heroImg, imgA, imgB] = serviceImages[service.slug] ?? serviceImages['web-development'];
-
-const testimonials = [
-  {
-    quote: 'WSS DevLabs built our platform from scratch in 8 weeks. The code quality and attention to performance was well beyond what I expected from a studio this lean.',
-    author: 'Ahmad Razif',
-    role: 'Founder',
-    company: 'Nexora Sdn Bhd',
-    rating: 5,
-  },
-  {
-    quote: 'They handled our migration with zero downtime and delivered improvements we started seeing within the first month.',
-    author: 'Priya Nair',
-    role: 'Head of Digital',
-    company: 'RetailPlus MY',
-    rating: 5,
-  },
-  {
-    quote: 'The solution they built cut our response time by 70%. Solid engineers who actually understand product requirements.',
-    author: 'Marcus Tan',
-    role: 'CEO',
-    company: 'GrowthStack',
-    rating: 5,
-  },
-];
 
 const toneAccent: Record<string, string> = {
   red: 'bg-accent',
@@ -362,7 +339,7 @@ const otherServices = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3
   {service.slug === 'grant-government-project-support' && <GrantSolutions />}
 
   <!-- ── Testimonials ───────────────────────────────────────── -->
-  <Testimonials testimonials={testimonials} />
+  <Testimonials testimonials={TESTIMONIALS} />
 
   <!-- ── Service-specific FAQ ───────────────────────────────── -->
   {service.faq.length > 0 && <FAQ title={`${service.title} FAQ`} items={service.faq.map((f) => ({ question: f.question, answer: f.answer }))} />}

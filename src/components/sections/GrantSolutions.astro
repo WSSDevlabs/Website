@@ -9,6 +9,7 @@ type GrantCategory = {
   colorClass: string;
   features: string[];
   ctaLabel: string;
+  ctaHref?: string;
 };
 
 const categories: GrantCategory[] = [
@@ -45,8 +46,9 @@ const categories: GrantCategory[] = [
     description: 'Custom cloud POS, automated HR/Payroll systems, and inventory management tailored for traditional brick-and-mortar retail and F&B.',
     badgeLabel: 'PMKS Madani Grant 2026',
     colorClass: 'violet',
-    features: ['50% matching up to RM5,000', 'MDEC TSP compliant solutions'],
-    ctaLabel: 'Check Eligibility'
+    features: ['50% matching up to RM5,000', 'From RM500 — see SME pricing'],
+    ctaLabel: 'See SME Pricing',
+    ctaHref: '/pricing'
   }
 ];
 
@@ -113,7 +115,7 @@ const colorMap: Record<string, { chip: string; badge: string }> = {
               </ul>
 
               <a
-                href="/contact"
+                href={cat.ctaHref ?? '/contact'}
                 class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-white/80 transition-colors group-hover:text-white"
               >
                 {cat.ctaLabel}

@@ -42,7 +42,11 @@
     },
     {
       "question": "How long does a typical project take?",
-      "answer": "Launch sites usually run 2 to 4 weeks, Build projects 6 to 10 weeks, and Enterprise systems are scoped individually based on complexity."
+      "answer": "Starter sites run about 5 business days, Business sites 7 to 10 business days, Launch sites 2 to 4 weeks, Build projects 6 to 10 weeks, and Enterprise systems are scoped individually based on complexity."
+    },
+    {
+      "question": "Can I use a government grant to pay for my website?",
+      "answer": "Often, yes. The MSME Digital Grant MADANI matches 50% of eligible digital spending, up to RM5,000, for Malaysian SMEs registered at least 6 months with SSM. It's first-come, first-served, and a business can only claim it once, so we recommend checking eligibility early. We provide the invoice and documentation you need to apply, ask us during your quote."
     }
   ]
 }

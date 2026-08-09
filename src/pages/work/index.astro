@@ -6,19 +6,9 @@ import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
+import { TESTIMONIALS } from '../../data/testimonials';
 
 const projects = await getCollection('projects', ({ data }) => !data.draft);
-
-const placeholders = [
-  { id: 'ph-1', title: 'Social Campaign for Real Estate Agency', category: 'Social Media', date: 'Jan 2025', img: 'social-real-estate', excerpt: 'Built and managed a hyper-local social campaign that increased qualified leads by 3x in 90 days.' },
-  { id: 'ph-2', title: 'SEO & PPC Setup for Dental Clinic', category: 'SEO, PPC', date: 'Dec 2024', img: 'seo-dental-clinic', excerpt: 'Combined on-page SEO with targeted Google Ads to rank #1 locally and cut cost-per-lead by 40%.' },
-  { id: 'ph-3', title: 'Instagram Ads Campaign for Fashion Brand', category: 'Paid Advertising', date: 'Nov 2024', img: 'fashion-instagram-ads', excerpt: 'A 6-week campaign with 5.2x ROAS, using creative-led short-form video ads on Instagram Reels.' },
-  { id: 'ph-4', title: 'Google Ads Setup for Yoga Studio', category: 'Paid Advertising', date: 'Oct 2024', img: 'yoga-google-ads', excerpt: 'New location launch driven by local campaigns, reaching full bookings within 3 weeks of going live.' },
-  { id: 'ph-5', title: 'Ranking Local Bakery in Google Top 3', category: 'SEO', date: 'Sep 2024', img: 'bakery-local-seo', excerpt: 'Full local SEO audit, GMB optimisation, and content calendar, reaching top 3 for 14 target keywords.' },
-  { id: 'ph-6', title: 'Content Funnel for Financial Advisor', category: 'Content Marketing', date: 'Aug 2024', img: 'finance-content-funnel', excerpt: 'Mapped and built a 6-month content series that now generates 40% of inbound consultation requests.' },
-  { id: 'ph-7', title: 'Landing Page Redesign for Lead Generation', category: 'Web Design', date: 'Jul 2024', img: 'landing-page-redesign', excerpt: 'Rebuilt a high-traffic landing page from scratch, and the conversion rate jumped from 1.8% to 5.3%.' },
-  { id: 'ph-8', title: 'Rebranding a Local Dental Clinic', category: 'Branding', date: 'Jun 2024', img: 'dental-rebrand', excerpt: 'Full brand identity refresh with a new logo, colours, and photography that modernised trust signals.' },
-];
 
 const catColor: Record<string, string> = {
   'Social Media': 'bg-accent-green',
@@ -54,11 +44,6 @@ const processSteps = [
   },
 ];
 
-const testimonials = [
-  { quote: 'WSS DevLabs built our platform from scratch in 8 weeks. The code quality and attention to performance was well beyond what I expected.', author: 'Ahmad Razif', role: 'Founder', company: 'Nexora Sdn Bhd', rating: 5 },
-  { quote: 'They handled our migration with zero downtime and delivered improvements we saw within the first month.', author: 'Priya Nair', role: 'Head of Digital', company: 'RetailPlus MY', rating: 5 },
-  { quote: 'The AI tool they built cut our response time by 70%. Solid engineers who understand product requirements.', author: 'Marcus Tan', role: 'CEO', company: 'GrowthStack', rating: 5 },
-];
 ---
 
 <BaseLayout
@@ -77,92 +62,77 @@ const testimonials = [
         </h2>
       </div>
 
-      <div class="mt-12 grid gap-6 sm:grid-cols-2" data-stagger id="projects-grid">
-        {
-          projects.length > 0
-            ? projects.map((project, i) => (
-                <a
-                  href={`/work/${project.id}`}
-                  data-stagger-child
-                  data-project-card
-                  data-page={Math.floor(i / INITIAL_COUNT)}
-                  class:list={['tilt-card group block overflow-hidden rounded-2xl border border-line bg-paper shadow-sm transition-all hover:border-accent/30 hover:shadow-lg', i >= INITIAL_COUNT && 'hidden']}
-                >
-                  <div class="relative overflow-hidden">
-                    <Image
-                      src={project.data.heroImage}
-                      alt={project.data.title}
-                      class="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      width={700}
-                      height={420}
-                    />
-                    <span class:list={[
-                      'absolute bottom-3 left-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white',
-                      catColor[project.data.category] ?? 'bg-accent',
-                    ]}>
-                      {project.data.category}
-                    </span>
-                    <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-white shadow-md">
-                      <svg class="h-4 w-4 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-                    </span>
-                  </div>
-                  <div class="p-5">
-                    <h3 class="text-base font-bold text-ink transition-colors group-hover:text-accent">{project.data.title}</h3>
-                    <p class="mt-2 text-sm text-ink-dim">{project.data.headlineResult}</p>
-                  </div>
-                </a>
-              ))
-            : placeholders.map((ph, i) => (
-                <div
-                  data-project-card
-                  data-stagger-child
-                  data-page={Math.floor(i / INITIAL_COUNT)}
-                  class:list={['tilt-card group overflow-hidden rounded-2xl border border-line bg-paper shadow-sm', i >= INITIAL_COUNT && 'hidden']}
-                >
-                  <div class="relative overflow-hidden">
-                    <img
-                      src={`https://picsum.photos/seed/${ph.img}/700/420`}
-                      alt={ph.title}
-                      class="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      width="700"
-                      height="420"
-                    />
-                    <span class:list={['absolute bottom-3 left-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white', catColor[ph.category] ?? 'bg-accent']}>
-                      {ph.category}
-                    </span>
-                    <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-white shadow-md">
-                      <svg class="h-4 w-4 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-                    </span>
-                  </div>
-                  <div class="p-5">
-                    <h3 class="text-base font-bold text-ink">{ph.title}</h3>
-                    <p class="mt-2 text-sm text-ink-dim">{ph.excerpt}</p>
-                  </div>
-                </div>
-              ))
-        }
-      </div>
+      {
+        projects.length > 0 ? (
+          <Fragment>
+            <div class="mt-12 grid gap-6 sm:grid-cols-2" data-stagger id="projects-grid">
+              {
+                projects.map((project, i) => (
+                  <a
+                    href={`/work/${project.id}`}
+                    data-stagger-child
+                    data-project-card
+                    data-page={Math.floor(i / INITIAL_COUNT)}
+                    class:list={['tilt-card group block overflow-hidden rounded-2xl border border-line bg-paper shadow-sm transition-all hover:border-accent/30 hover:shadow-lg', i >= INITIAL_COUNT && 'hidden']}
+                  >
+                    <div class="relative overflow-hidden">
+                      <Image
+                        src={project.data.heroImage}
+                        alt={project.data.title}
+                        class="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        width={700}
+                        height={420}
+                      />
+                      <span class:list={[
+                        'absolute bottom-3 left-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white',
+                        catColor[project.data.category] ?? 'bg-accent',
+                      ]}>
+                        {project.data.category}
+                      </span>
+                      <span class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-white shadow-md">
+                        <svg class="h-4 w-4 -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+                      </span>
+                    </div>
+                    <div class="p-5">
+                      <h3 class="text-base font-bold text-ink transition-colors group-hover:text-accent">{project.data.title}</h3>
+                      <p class="mt-2 text-sm text-ink-dim">{project.data.headlineResult}</p>
+                    </div>
+                  </a>
+                ))
+              }
+            </div>
 
-      <div class="mt-8 flex items-center justify-center gap-3">
-        <button
-          type="button"
-          id="projects-prev"
-          aria-label="Previous projects"
-          disabled
-          class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-colors hover:border-accent hover:text-accent disabled:pointer-events-none disabled:opacity-30"
-        >
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.5 7.5 12l7.5-7.5" /></svg>
-        </button>
-        <button
-          type="button"
-          id="projects-next"
-          aria-label="Next projects"
-          class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-colors hover:border-accent hover:text-accent disabled:pointer-events-none disabled:opacity-30"
-        >
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="m9 4.5 7.5 7.5-7.5 7.5" /></svg>
-        </button>
-      </div>
+            <div class="mt-8 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                id="projects-prev"
+                aria-label="Previous projects"
+                disabled
+                class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-colors hover:border-accent hover:text-accent disabled:pointer-events-none disabled:opacity-30"
+              >
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.5 7.5 12l7.5-7.5" /></svg>
+              </button>
+              <button
+                type="button"
+                id="projects-next"
+                aria-label="Next projects"
+                class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink-dim transition-colors hover:border-accent hover:text-accent disabled:pointer-events-none disabled:opacity-30"
+              >
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="m9 4.5 7.5 7.5-7.5 7.5" /></svg>
+              </button>
+            </div>
+          </Fragment>
+        ) : (
+          <div class="mt-12 rounded-3xl border border-line bg-paper-dim p-10 text-center">
+            <p class="font-semibold text-ink">Our case studies are coming soon.</p>
+            <p class="mt-2 text-sm leading-relaxed text-ink-dim">
+              We're a lean team heads-down on client work right now.{' '}
+              <a href="/contact" class="font-semibold text-accent hover:underline">Talk to us directly</a>{' '}
+              about a project like yours.
+            </p>
+          </div>
+        )
+      }
     </Container>
   </Section>
 
@@ -212,7 +182,7 @@ const testimonials = [
       </div>
 
       <!-- Cards -->
-      <Testimonials testimonials={testimonials} />
+      <Testimonials testimonials={TESTIMONIALS} />
 
       <div class="mt-4 text-center">
         <a

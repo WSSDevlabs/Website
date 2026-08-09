@@ -4,10 +4,12 @@ export type PricingTier = {
   name: string;
   price: string;
   period?: string;
+  segment?: 'sme' | 'growth';
   highlight?: boolean;
   badge?: string;
   description: string;
   features: string[];
+  note?: string;
   cta: string;
   ctaHref: string;
 };

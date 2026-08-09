@@ -1,8 +1,48 @@
 {
   "tiers": [
     {
+      "name": "Starter",
+      "price": "From RM 500",
+      "segment": "sme",
+      "highlight": false,
+      "description": "For hawkers, traders, and traditional businesses getting online for the first time.",
+      "features": [
+        "1-page website (up to 4 sections)",
+        "Mobile-first, fully responsive",
+        "WhatsApp click-to-chat button",
+        "Basic contact form",
+        "Cloudflare Pages deployment",
+        "1 round of revisions",
+        "5 business day turnaround"
+      ],
+      "note": "Eligible for the MSME Digital Grant MADANI (50% matching, up to RM5,000) — ask us how to claim it.",
+      "cta": "Get Started",
+      "ctaHref": "/contact"
+    },
+    {
+      "name": "Business",
+      "price": "From RM 1,500",
+      "segment": "sme",
+      "highlight": true,
+      "badge": "Most popular for SMEs",
+      "description": "A complete, credible website for a business ready to be found online.",
+      "features": [
+        "Up to 5 pages (Home, About, Services, Gallery, Contact)",
+        "Custom section layout from our design system",
+        "SEO-ready structure & meta",
+        "Google Business Profile setup",
+        "WhatsApp click-to-chat button",
+        "2 rounds of revisions",
+        "7–10 business day turnaround"
+      ],
+      "note": "Grant-eligible — the MSME Digital Grant MADANI matches 50% of this package, up to RM5,000.",
+      "cta": "Get a Quote",
+      "ctaHref": "/contact"
+    },
+    {
       "name": "Launch",
       "price": "From RM 3,000",
+      "segment": "growth",
       "highlight": false,
       "description": "For startups and businesses that need a fast, credible web presence.",
       "features": [
@@ -20,6 +60,7 @@
     {
       "name": "Build",
       "price": "From RM 15,000",
+      "segment": "growth",
       "highlight": true,
       "badge": "Most popular",
       "description": "For growing businesses needing a mobile app, custom CMS, or AI-powered feature.",
@@ -39,6 +80,7 @@
     {
       "name": "Enterprise",
       "price": "Custom Quote",
+      "segment": "growth",
       "highlight": false,
       "description": "For complex systems, ERP, or AI-powered platforms requiring bespoke architecture.",
       "features": [
