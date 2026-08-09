@@ -5,7 +5,7 @@ type SocialLinks = {
   instagram: string;
   github: string;
   facebook: string;
-  twitter: string;
+  twitter?: string;
 };
 
 type SiteSettings = {

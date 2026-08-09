@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
-import FAQ from '../components/sections/FAQ.astro';
-import CTABand from '../components/sections/CTABand.astro';
+import Section from '../components/ui/Section.astro';
 
 const categories = [
   { id: 'general', label: 'General Information' },
@@ -67,44 +66,153 @@ const allFaqs = [
     </Container>
   </section>
 
-  <!-- Category sections -->
-  <div id="faq-search-scope">
-    {
-      categories.map((cat) => {
-        const items = allFaqs.filter((f) => f.cat === cat.id).map((f) => ({ question: f.q, answer: f.a }));
-        return <FAQ title={cat.label} items={items} />;
-      })
-    }
-  </div>
+  <!-- Combined FAQ card: tabs + single panel with transition -->
+  <Section rule>
+    <Container>
+      <div class="flex flex-col gap-12 lg:flex-row lg:gap-16">
+        <!-- Left: category tabs + contact CTA (shown once) -->
+        <div class="lg:w-72 lg:shrink-0">
+          <nav aria-label="FAQ categories" class="space-y-1">
+            {categories.map((cat, i) => (
+              <button
+                type="button"
+                data-faq-tab={cat.id}
+                aria-pressed={i === 0 ? 'true' : 'false'}
+                class:list={[
+                  'faq-tab block w-full rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors',
+                  i === 0 ? 'bg-accent/10 text-accent' : 'text-ink-dim hover:bg-paper-dim hover:text-ink'
+                ]}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </nav>
 
-  <CTABand title="Still have questions?" subtitle="Our team replies within one business day." ctaLabel="Ask us directly" />
+          <p class="mt-8 text-sm text-ink-dim">Can't find what you're looking for?</p>
+          <a
+            href="/contact"
+            class="mt-5 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
+          >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+            </svg>
+            Ask us directly
+          </a>
+
+          <div class="card mt-6 flex items-center gap-4 !rounded-2xl border-accent/20 bg-accent/4 p-5">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10">
+              <svg class="h-4.5 w-4.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-ink">We respond within</p>
+              <p class="text-sm text-ink-dim">1 business day</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: single combined card, one panel visible at a time -->
+        <div class="card flex-1 p-2 sm:p-4">
+          <div id="faq-panels">
+            {categories.map((cat, ci) => {
+              const items = allFaqs.filter((f) => f.cat === cat.id);
+              return (
+                <div data-faq-panel={cat.id} class:list={['faq-panel px-4 py-2 transition-opacity duration-300', ci !== 0 && 'hidden']}>
+                  <h2 class="px-0 py-3 text-sm font-bold uppercase tracking-wide text-ink-dim">{cat.label}</h2>
+                  {items.map((item, i) => (
+                    <details data-faq-item name={`faq-${cat.id}`} class:list={['group py-5', i > 0 && 'border-t border-line']}>
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-base font-semibold tracking-tight text-ink transition-colors hover:text-accent">
+                        <span data-faq-question>{item.q}</span>
+                        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-ink-dim transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] group-open:rotate-45 group-open:border-accent group-open:bg-accent group-open:text-white">
+                          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                          </svg>
+                        </span>
+                      </summary>
+                      <p class="mt-4 max-w-2xl pr-10 text-sm leading-relaxed text-ink-dim">{item.a}</p>
+                    </details>
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
 </BaseLayout>
 
 <script>
+  function initFaqTabs() {
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.faq-tab'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-faq-panel]'));
+    if (tabs.length === 0 || tabs[0].dataset.bound) return;
+    tabs.forEach((t) => (t.dataset.bound = '1'));
+
+    const showPanel = (id: string) => {
+      panels.forEach((panel) => {
+        const match = panel.dataset.faqPanel === id;
+        panel.classList.toggle('hidden', !match);
+        if (match) {
+          panel.classList.remove('opacity-0');
+          panel.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }], {
+            duration: 220,
+            easing: 'ease-out'
+          });
+        }
+      });
+      tabs.forEach((t) => {
+        const active = t.dataset.faqTab === id;
+        t.setAttribute('aria-pressed', String(active));
+        t.classList.toggle('bg-accent/10', active);
+        t.classList.toggle('text-accent', active);
+        t.classList.toggle('text-ink-dim', !active);
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.faqTab;
+        if (id) showPanel(id);
+      });
+    });
+  }
+
+  initFaqTabs();
+  document.addEventListener('astro:page-load', initFaqTabs);
+
   function initFaqSearch() {
     const input = document.getElementById('faq-search') as HTMLInputElement | null;
-    const scope = document.getElementById('faq-search-scope');
-    if (!input || !scope || input.dataset.bound) return;
+    if (!input || input.dataset.bound) return;
     input.dataset.bound = '1';
 
-    const sections = Array.from(scope.querySelectorAll<HTMLElement>(':scope > section'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-faq-panel]'));
 
     input.addEventListener('input', () => {
       const query = input.value.trim().toLowerCase();
+      const searching = query.length > 0;
 
-      sections.forEach((section) => {
-        const items = Array.from(section.querySelectorAll<HTMLDetailsElement>('details'));
+      panels.forEach((panel) => {
+        const items = Array.from(panel.querySelectorAll<HTMLDetailsElement>('[data-faq-item]'));
         let visibleCount = 0;
 
         items.forEach((item) => {
-          const question = item.querySelector('summary')?.textContent?.toLowerCase() ?? '';
-          const match = !query || question.includes(query);
+          const question = item.querySelector('[data-faq-question]')?.textContent?.toLowerCase() ?? '';
+          const match = !searching || question.includes(query);
           item.classList.toggle('hidden', !match);
           if (match) visibleCount += 1;
         });
 
-        section.classList.toggle('hidden', visibleCount === 0);
+        if (searching) {
+          panel.classList.toggle('hidden', visibleCount === 0);
+        }
       });
+
+      if (!searching) {
+        const activeTab = document.querySelector<HTMLButtonElement>('.faq-tab[aria-pressed="true"]');
+        panels.forEach((panel) => panel.classList.toggle('hidden', panel.dataset.faqPanel !== activeTab?.dataset.faqTab));
+      }
     });
   }
 

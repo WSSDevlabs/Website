@@ -12,7 +12,6 @@ import ProcessOverview from '../components/sections/ProcessOverview.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import FAQ from '../components/sections/FAQ.astro';
-import ContactTeaser from '../components/sections/ContactTeaser.astro';
 import { HOME_FAQ } from '../data/faq';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.draft);
@@ -40,18 +39,17 @@ const schema = {
     accentWord="build"
     accentTone="blue"
     subtitle="Websites, apps, systems, marketing, branding, even student projects and grant-funded builds, one team, done properly."
-    primaryCta={{ label: 'Start a Project', href: '/contact' }}
+    primaryCta={{ label: 'See our Services', href: '/services' }}
     secondaryCta={{ label: 'See our work', href: '/work' }}
   />
   <Marquee />
   <WhateverYouNeed />
-  <GrantSolutions />
   <AboutSection />
   <HomepageServices />
   <Differentiator />
   <ProcessOverview />
   <FeaturedWork projects={featuredProjects} />
   <Testimonials />
+  <GrantSolutions />
   <FAQ items={HOME_FAQ} />
-  <ContactTeaser />
 </BaseLayout>

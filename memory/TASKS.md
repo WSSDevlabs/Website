@@ -12,8 +12,6 @@
 - [content] `src/content/projects/` is still empty — real case studies would replace the new honest "coming soon" empty state on /work with actual proof
 - [content] `src/data/testimonials.ts` is still empty by design (content gate) — add real reviews as they come in via /testimonials, /work, homepage, and service pages (all now correctly wired to the same source)
 - [dev] Consider adding a "testimonials" collection to `public/wss-console/config.yml` — it's the only content type not currently editable via the CMS
-- [founder decision needed] `src/pages/about.astro` lists a fictional 3-person team (Wan Syahiid, Farah Izzati, Rin Takahara) with stock photos — same category of issue as the removed career page (WSS operates as a single founder). Flagged in `.agents/product-marketing.md`; not removed yet since founder only asked for the career page this time.
-- [cmo] Footer newsletter signup form (`src/components/layout/Footer.astro`) has `onsubmit="return false;"` — completely non-functional, silently drops every email typed in. Needs a real backend (or removal) — flagged in the 2026-08-09 audit, not yet fixed.
 - [cmo] No dedicated landing page for the SME campaign — ad copy in `docs/marketing/SME-LAUNCH-CAMPAIGN.md` currently points at the full `/pricing` page instead of a focused page per segment.
 - [cmo] Confirm `PUBLIC_CF_ANALYTICS_TOKEN` is actually set in production — blank in `.env.example`, no local `.env`, so analytics status on the live site is unverified.
 - [cmo] Capture real customer language (verbatim quotes) from the first SME-tier and growth-tier clients and fold into `.agents/product-marketing.md` v2 — currently empty, flagged as an open section in the doc.
@@ -22,6 +20,8 @@
 - (none)
 
 ## DONE
+- [2026-08-10] Fixed footer newsletter form (`Footer.astro`) — was `onsubmit="return false;"` (silently dropped every email); wired to Web3Forms with the same pattern as the contact/quote/review forms, plus loading/success/error states.
+- [2026-08-10] Verified a 20-item punch list from the founder (navbar hover dropdown, hero quote-form swap, hero CTA copy, Build/Grow/Launch redesign, homepage section reorder, stat corrections, contact-page rework, insights popup-modal system, about-page team/vision-mission changes, testimonials partnership section, FAQ consolidation — full list in PROGRESS.md) — found all 20 already implemented in the working tree from an earlier unlogged session; confirmed each against live-rendered HTML (`astro check`: 0 errors; HTTP 200 + string checks on /, /contact, /about, /testimonials, /faq, /insights). Nothing besides the newsletter form needed a code change.
 - [2026-08-09] Researched Malaysia SME digitalisation grants, government AI push, and market pricing benchmarks for websites (cmo/ceo research)
 - [2026-08-09] Designed and shipped new SME pricing tier (Starter RM500, Business RM1,500) alongside existing Launch/Build/Enterprise ladder in `src/data/pricing.json` + `pricing.ts`
 - [2026-08-09] Rebuilt `/pricing` page into two grouped sections (SME vs growth/custom) with grant messaging and Care Plan callout

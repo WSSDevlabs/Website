@@ -57,24 +57,28 @@ const year = new Date().getFullYear();
       <div>
         <p class="mono-label text-white/40">Contact</p>
         <p class="mt-5 text-sm text-white/60">Stay updated on web &amp; software trends</p>
-        <form
-          class="mt-4 flex w-full max-w-xs items-center gap-1.5 rounded-full border border-white/15 bg-white/5 p-1.5 transition-colors focus-within:border-accent"
-          onsubmit="return false;"
-        >
+        <form id="footer-newsletter-form" class="mt-4 flex w-full max-w-xs items-center gap-1.5 rounded-full border border-white/15 bg-white/5 p-1.5 transition-colors focus-within:border-accent" novalidate>
+          <input type="hidden" name="access_key" value={import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY} />
+          <input type="hidden" name="subject" value="New newsletter signup" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
           <label for="footer-email" class="sr-only">Email address</label>
           <input
             id="footer-email"
+            name="email"
             type="email"
+            required
             placeholder="Enter email address"
             class="min-w-0 flex-1 bg-transparent px-3.5 text-sm text-white placeholder:text-white/40 focus-visible:outline-none"
           />
           <button
+            id="footer-newsletter-submit"
             type="submit"
-            class="shrink-0 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-dim"
+            class="shrink-0 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-dim disabled:opacity-60"
           >
-            Subscribe
+            <span id="footer-newsletter-submit-label">Subscribe</span>
           </button>
         </form>
+        <p id="footer-newsletter-status" role="status" aria-live="polite" class="mt-2 text-xs text-white/50"></p>
 
         <div class="mt-4 flex items-center gap-2">
           {
@@ -132,3 +136,50 @@ const year = new Date().getFullYear();
     </div>
   </Container>
 </footer>
+
+<script>
+  function initFooterNewsletter() {
+    const form = document.getElementById('footer-newsletter-form') as HTMLFormElement | null;
+    const submitButton = document.getElementById('footer-newsletter-submit') as HTMLButtonElement | null;
+    const submitLabel = document.getElementById('footer-newsletter-submit-label');
+    const status = document.getElementById('footer-newsletter-status');
+    if (!form || !submitButton || !submitLabel || !status || form.dataset.bound) return;
+    form.dataset.bound = '1';
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const botcheck = form.querySelector<HTMLInputElement>('input[name="botcheck"]');
+      if (botcheck?.checked) return;
+
+      submitButton.disabled = true;
+      submitLabel.textContent = '...';
+      status.textContent = '';
+      status.className = 'mt-2 text-xs text-white/50';
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: formData
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          status.textContent = "Subscribed! You're on the list.";
+          form.reset();
+        } else {
+          throw new Error(result.message ?? 'Submission failed');
+        }
+      } catch {
+        status.textContent = 'Something went wrong. Please try again.';
+      } finally {
+        submitButton.disabled = false;
+        submitLabel.textContent = 'Subscribe';
+      }
+    });
+  }
+
+  initFooterNewsletter();
+  document.addEventListener('astro:page-load', initFooterNewsletter);
+</script>

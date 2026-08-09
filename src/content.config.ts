@@ -39,17 +39,18 @@ const projects = defineCollection({
 
 const posts = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      author: z.string(),
-      coverImage: image(),
-      tags: z.array(z.string()).default([]),
-      draft: z.boolean().default(true),
-      publishDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional()
-    })
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    author: z.string(),
+    coverImage: z.string(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(true),
+    publishDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    sourceUrl: z.string(),
+    sourceLabel: z.string()
+  })
 });
 
 export const collections = { projects, posts };
