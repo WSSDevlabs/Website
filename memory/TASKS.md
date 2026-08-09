@@ -12,6 +12,11 @@
 - [content] `src/content/projects/` is still empty — real case studies would replace the new honest "coming soon" empty state on /work with actual proof
 - [content] `src/data/testimonials.ts` is still empty by design (content gate) — add real reviews as they come in via /testimonials, /work, homepage, and service pages (all now correctly wired to the same source)
 - [dev] Consider adding a "testimonials" collection to `public/wss-console/config.yml` — it's the only content type not currently editable via the CMS
+- [founder decision needed] `src/pages/about.astro` lists a fictional 3-person team (Wan Syahiid, Farah Izzati, Rin Takahara) with stock photos — same category of issue as the removed career page (WSS operates as a single founder). Flagged in `.agents/product-marketing.md`; not removed yet since founder only asked for the career page this time.
+- [cmo] Footer newsletter signup form (`src/components/layout/Footer.astro`) has `onsubmit="return false;"` — completely non-functional, silently drops every email typed in. Needs a real backend (or removal) — flagged in the 2026-08-09 audit, not yet fixed.
+- [cmo] No dedicated landing page for the SME campaign — ad copy in `docs/marketing/SME-LAUNCH-CAMPAIGN.md` currently points at the full `/pricing` page instead of a focused page per segment.
+- [cmo] Confirm `PUBLIC_CF_ANALYTICS_TOKEN` is actually set in production — blank in `.env.example`, no local `.env`, so analytics status on the live site is unverified.
+- [cmo] Capture real customer language (verbatim quotes) from the first SME-tier and growth-tier clients and fold into `.agents/product-marketing.md` v2 — currently empty, flagged as an open section in the doc.
 
 ## BLOCKED
 - (none)
@@ -31,4 +36,7 @@
 - [2026-08-09] Fetched competitor SWOT's (swot.com.my) live pricing pages per founder's link share; replaced the Starter/Business SME tier with a 9-package ladder (5 "Informative Website Packages" + 4 new "Ecommerce Website Packages") mirroring SWOT's structure and prices exactly, per founder's explicit request — see DECISIONS.md for the supersession log
 - [2026-08-09] Extracted repeated pricing-card markup into `src/components/sections/PricingCard.astro` (now reused across 3 grouped sections instead of duplicated inline)
 - [2026-08-09] Confirmed WSS already has a live git-based CMS (Decap CMS at `/wss-console`, GitHub-backed via a working Cloudflare Worker OAuth proxy) covering 9 of 10 content types — testimonials is the one gap
+- [2026-08-09] Ran a full CMO audit of the website (`/cmo` skill) and gave a prioritized list of gaps: zero proof content, broken newsletter form, fictional career-page team/perks, no positioning doc, no dedicated campaign landing page, unconfirmed analytics, no booking link
+- [2026-08-09] Removed the career page per founder decision: deleted `src/pages/career.astro`, `src/data/career.json`, `src/data/career.ts`; removed its 2 nav links (`nav.ts`) and its CMS collection (`public/wss-console/config.yml`); verified `/career` now 404s cleanly and nothing else references it
+- [2026-08-09] Auto-drafted the product-marketing positioning doc at `.agents/product-marketing.md` (v1) from the codebase + this session's history, per founder request; added `memory/MARKETING.md` as the memory-system pointer to it. Flagged 3 open issues in the doc itself: zero proof content, the fictional About-page team roster, and placeholder SWOT-matched pricing
 - (earlier history predates this memory system; see git log: "update design", "update", "Reposition as a full digital solutions studio and add a git-based CMS")

@@ -171,38 +171,6 @@ collections:
                   - { label: "Instagram", name: "instagram", widget: "string", required: false }
                   - { label: "Twitter / X", name: "twitter", widget: "string", required: false }
 
-  # ---- Career page content (src/data/career.json) ----
-  - name: "career"
-    label: "Career Page"
-    files:
-      - name: "career"
-        label: "Benefits & Openings"
-        file: "src/data/career.json"
-        fields:
-          - label: "Perks & Benefits"
-            name: "benefits"
-            widget: "list"
-            summary: "{{title}}"
-            fields:
-              - { label: "Icon (SVG path data, leave as-is unless you know SVG)", name: "icon", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Description", name: "desc", widget: "text" }
-          - label: "Job Openings"
-            name: "openings"
-            widget: "list"
-            summary: "{{title}}"
-            fields:
-              - { label: "Job Title", name: "title", widget: "string" }
-              - { label: "Experience Required", name: "experience", widget: "string" }
-              - { label: "Number of Positions", name: "positions", widget: "string" }
-              - { label: "Job Type", name: "type", widget: "string", hint: "e.g. Freelance, Part-time, Full Time" }
-              - { label: "Responsibilities", name: "responsibilities", widget: "list" }
-              - { label: "Required Skills", name: "skills", widget: "list" }
-          - label: "Gallery Image Seeds"
-            name: "galleryImages"
-            widget: "list"
-            hint: "Used as picsum.photos placeholder seeds. Replace with real photo uploads later."
-
   # ---- FAQ content (src/data/faq.json) ----
   - name: "faq"
     label: "FAQ"

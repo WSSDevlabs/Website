@@ -22,7 +22,6 @@ export const NAV_GROUPS: NavGroup[] = [
     label: 'Company',
     links: [
       { label: 'About', href: '/about' },
-      { label: 'Career', href: '/career' },
       { label: 'Testimonials', href: '/testimonials' },
       { label: 'FAQ', href: '/faq' }
     ]
@@ -37,7 +36,6 @@ export const NAV_LINKS: NavLink[] = [
 export const FOOTER_COMPANY_LINKS: NavLink[] = [
   { label: 'About', href: '/about' },
   { label: 'Insights', href: '/insights' },
-  { label: 'Career', href: '/career' },
   { label: 'FAQ', href: '/faq' }
 ];
 
