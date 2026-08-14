@@ -6,6 +6,9 @@
 ## TODO
 - [founder] Confirm the 4-category service mapping is correct (see PROGRESS.md 2026-08-14) before shipping — it's my grouping, not founder-confirmed.
 - [uiux/founder] "Enhance my entire website" was scoped to a color-system pass (matte grey + red/yellow, see docs/DESIGN.md) — confirm whether founder wants more (layout, typography, motion, other icon-grid sections) or this covers it.
+- [cfo/founder] Confirm the new 5-package names (Launch/Expand/Grow/Scale/Custom) and prices (RM1,200 / RM4,500 / RM12,000 / From RM28,000 / Custom) — all placeholders I set, not confirmed. See DECISIONS.md 2026-08-14 supersession entry.
+- [media] Founder will source the real "laptop, komputer, mobile app real design" image from their media designer to replace the homepage placeholder in `WhateverYouNeed.astro`.
+- [pending] All work this session (services consolidation, color theme, pricing restructure, small UI fixes) is still uncommitted — founder said "don't push yet."
 - [cfo/founder] **Retune the 9 new package prices** — currently exact SWOT (competitor) figures shipped as placeholders per founder request ("put their price first, I will change later"). Update `src/data/pricing.json`, then sync `memory/FINANCE.md` and `grant-assistance-info-sheet.md`'s per-package grant math to match.
 - [cfo] Resolve the pricing/scope overlap between the new "10+ Pages" Informative package (RM3,499) and the existing "Launch" growth tier (from RM3,000, up to 8 pages) — not reconciled, flagged in DECISIONS.md
 - [uiux/dev] Deeper hero/ServicesGrid copy pass for SME audience (current fix added a grant section + pricing copy; a fuller homepage narrative rewrite is still open if wanted)

@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FAQ from '../components/sections/FAQ.astro';
 import Container from '../components/ui/Container.astro';
 
 const STEPS = [
@@ -54,37 +53,6 @@ const STEPS = [
   }
 ];
 
-const processFaq = [
-  {
-    question: 'How long does a typical project take?',
-    answer:
-      'Most websites take 4-8 weeks; mobile apps and custom systems vary by scope, agreed once we send a proposal and quote.'
-  },
-  {
-    question: 'What do I own at the end?',
-    answer: 'Full source code, documentation, and credentials, with no vendor lock-in.'
-  },
-  {
-    question: 'What happens at handover?',
-    answer:
-      'You get a walkthrough of the finished build, all source code and credentials, and a sign-off checklist covering everything scoped at the start. Nothing is marked complete until you confirm it.'
-  },
-  {
-    question: 'What documentation do I receive?',
-    answer:
-      'Setup and deployment notes, an overview of the system architecture, and instructions for whoever maintains or extends the project next, whether that is us or your own team.'
-  },
-  {
-    question: 'Is there support after launch?',
-    answer:
-      'Yes. Every project includes a post-launch window for fixes at no extra cost, and ongoing maintenance or feature work is available afterward on a retainer or ad-hoc basis.'
-  },
-  {
-    question: 'How do sign-offs work during the project?',
-    answer:
-      'Design and QA each end with a review checkpoint where you approve the work before we move on, so nothing reaches final sign-off as a surprise.'
-  }
-];
 ---
 
 <BaseLayout
@@ -157,8 +125,6 @@ const processFaq = [
       </div>
     </Container>
   </section>
-
-  <FAQ title="Process FAQ" items={processFaq} />
 </BaseLayout>
 
 <script>

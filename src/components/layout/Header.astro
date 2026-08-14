@@ -8,6 +8,7 @@ import { SERVICE_CATEGORIES } from '../../data/serviceCategories';
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+const isHome = currentPath === '/';
 ---
 
 <!-- Topbar: dark ink frame, mirrored by the footer -->
@@ -97,7 +98,10 @@ const isActive = (href: string) =>
 
 <header class="sticky top-3 z-50 px-3 sm:px-4">
   <div
-    class="mx-auto flex h-14 max-w-5xl items-center justify-between rounded-full border border-line/80 bg-paper/85 pl-5 pr-2 shadow-[0_8px_32px_-12px_rgb(12_18_32/0.18)] backdrop-blur-xl"
+    class:list={[
+      'mx-auto flex h-14 max-w-5xl items-center justify-between rounded-full border border-line/80 pl-5 pr-2 shadow-[0_8px_32px_-12px_rgb(12_18_32/0.18)] backdrop-blur-xl',
+      isHome ? 'bg-transparent' : 'bg-paper/85'
+    ]}
   >
     <a href="/" class="flex items-center gap-2.5">
       <span class="flex items-center gap-[3px]" aria-hidden="true">

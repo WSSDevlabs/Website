@@ -4,7 +4,9 @@ export type PricingTier = {
   name: string;
   price: string;
   period?: string;
-  segment?: 'informative' | 'ecommerce' | 'growth';
+  segment?: 'launch' | 'expand' | 'grow' | 'scale' | 'custom';
+  audience?: string;
+  services?: string[];
   highlight?: boolean;
   badge?: string;
   description: string;

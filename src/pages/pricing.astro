@@ -7,73 +7,35 @@ import FAQ from '../components/sections/FAQ.astro';
 import PricingCard from '../components/sections/PricingCard.astro';
 import { PRICING_TIERS } from '../data/pricing';
 import { PRICING_FAQ } from '../data/faq';
-
-const informativeTiers = PRICING_TIERS.filter((tier) => tier.segment === 'informative');
-const ecommerceTiers = PRICING_TIERS.filter((tier) => tier.segment === 'ecommerce');
-const growthTiers = PRICING_TIERS.filter((tier) => tier.segment === 'growth');
 ---
 
 <BaseLayout
   title="Pricing: WSS DevLabs"
-  description="Informative website packages, ecommerce website packages, and project-based pricing for apps, custom systems, and AI-powered software. Transparent, fixed-price proposals."
+  description="Five packages, matched to where your business actually is: Launch, Expand, Grow, Scale, and Custom. Transparent, fixed-price proposals."
   path="/pricing"
 >
 
-  <!-- Informative website packages -->
+  <!-- Five packages, by business stage -->
   <Section rule>
     <Container>
       <div class="mx-auto max-w-2xl text-center">
-        <p class="text-sm font-bold uppercase tracking-wide text-accent">Informative Website Packages</p>
-        <h2 class="mt-2 text-3xl font-bold text-ink">A website that tells your story, priced by page count</h2>
+        <p class="text-sm font-bold uppercase tracking-wide text-accent">Pricing</p>
+        <h2 class="mt-2 text-3xl font-bold text-ink">Five packages, matched to where you are</h2>
         <p class="mt-3 text-sm leading-relaxed text-ink-dim">
-          Built for SMEs and traditional businesses that want a credible online presence.
-          Some packages qualify for the government's MSME Digital Grant MADANI.
+          Every package bundles the services that actually make sense at your stage, from a first-ever
+          website to a full corporate system rebuild. Some qualify for the government's MSME Digital
+          Grant MADANI.
         </p>
       </div>
 
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:items-start" data-stagger>
-        {informativeTiers.map((tier) => <PricingCard tier={tier} />)}
+        {PRICING_TIERS.map((tier) => <PricingCard tier={tier} />)}
       </div>
 
       <p class="mt-8 text-center text-sm text-ink-dim">
-        Want us to handle hosting, updates, and small edits every month?{' '}
-        <a href="/contact" class="font-semibold text-accent hover:underline">Ask about our Care Plan add-on, from RM99/month</a>.
-      </p>
-    </Container>
-  </Section>
-
-  <!-- Ecommerce website packages -->
-  <Section rule>
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="text-sm font-bold uppercase tracking-wide text-accent">Ecommerce Website Packages</p>
-        <h2 class="mt-2 text-3xl font-bold text-ink">A full online store, ready to take orders</h2>
-        <p class="mt-3 text-sm leading-relaxed text-ink-dim">
-          Inventory, shipping, payment gateway, and reporting built in — for businesses ready to sell online.
-        </p>
-      </div>
-
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 md:items-start" data-stagger>
-        {ecommerceTiers.map((tier) => <PricingCard tier={tier} />)}
-      </div>
-    </Container>
-  </Section>
-
-  <!-- Growth / custom build tiers -->
-  <Section rule>
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="text-sm font-bold uppercase tracking-wide text-accent">For growing companies & custom builds</p>
-        <h2 class="mt-2 text-3xl font-bold text-ink">Custom software, apps, and AI-powered platforms</h2>
-      </div>
-
-      <div class="mt-10 grid gap-6 md:grid-cols-3 md:items-start" data-stagger>
-        {growthTiers.map((tier) => <PricingCard tier={tier} />)}
-      </div>
-
-      <p class="mt-10 text-center text-sm text-ink-dim">
-        All prices in Malaysian Ringgit (RM). Projects are scoped individually, so these are starting points.{' '}
-        <a href="/contact" class="font-semibold text-accent hover:underline">Request an accurate quote</a>
+        Project doesn't fit neatly into one package?{' '}
+        <a href="/contact" class="font-semibold text-accent hover:underline">Tell us what you need</a>{' '}
+        and we'll scope the right mix.
       </p>
     </Container>
   </Section>

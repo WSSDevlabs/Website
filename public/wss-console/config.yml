@@ -133,10 +133,18 @@ collections:
             fields:
               - { label: "Tier Name", name: "name", widget: "string" }
               - { label: "Price", name: "price", widget: "string" }
+              - label: "Stage"
+                name: "segment"
+                widget: "select"
+                options: ["launch", "expand", "grow", "scale", "custom"]
+                required: false
+              - { label: "Who it's for", name: "audience", widget: "string", required: false }
+              - { label: "Bundled service slugs", name: "services", widget: "list", required: false }
               - { label: "Highlight This Tier", name: "highlight", widget: "boolean", default: false }
               - { label: "Badge (e.g. Most popular)", name: "badge", widget: "string", required: false }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Features", name: "features", widget: "list" }
+              - { label: "Note (small print)", name: "note", widget: "text", required: false }
               - { label: "Button Label", name: "cta", widget: "string" }
               - { label: "Button Link", name: "ctaHref", widget: "string" }
 

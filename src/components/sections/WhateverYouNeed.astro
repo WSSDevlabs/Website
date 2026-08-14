@@ -1,47 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
-
-const clusters = [
-  {
-    title: 'Build It',
-    tone: 'red',
-    icon: 'M21.75 6.75a4.5 4.5 0 0 1-4.884 4.484c-1.076-.091-2.264.071-3.045.845l-6.5 6.5a3.183 3.183 0 0 1-4.5-4.5l6.5-6.5c.774-.781.936-1.969.845-3.045a4.5 4.5 0 0 1 6.336-4.486l-3.276 3.276a3.004 3.004 0 0 0 2.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852Z',
-    items: [
-      'Want a website? We build it.',
-      'Want a mobile app? We build it.',
-      'Need your own custom system? We build it.',
-      "Working on a final year project? We build it with you.",
-    ],
-  },
-  {
-    title: 'Grow It',
-    tone: 'blue',
-    icon: 'M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941',
-    items: [
-      'Want to run marketing or ads? We manage it.',
-      'Need someone to handle your social posts? We run it.',
-      'Need product photography and placement? We shoot it.',
-      'Need something designed or rebranded? We design it.',
-    ],
-  },
-  {
-    title: 'Launch It',
-    tone: 'green',
-    icon: 'M4.5 19.5 3 21m0 0 1.5-1.5M3 21l6-6m11.207-15.207-3.5 3.5m0 0L12 9l-3-3 4.207-4.207A6 6 0 0 1 21.75 8.25l-1.5 1.5M12 9l-3 3m9.75-4.5L15 12l3 3-6 6-3-3-6 6',
-    items: [
-      'Applying for a government grant project? We deliver it.',
-      'Opening a small business from scratch? We help launch it.',
-      "Not sure which of these you need? We'll help you figure it out.",
-    ],
-  },
-];
-
-const toneClasses: Record<string, { badge: string; ring: string; icon: string }> = {
-  red: { badge: 'bg-accent-red/10', ring: 'group-hover:border-accent-red/30', icon: 'text-accent-red' },
-  blue: { badge: 'bg-accent/10', ring: 'group-hover:border-accent/30', icon: 'text-accent' },
-  green: { badge: 'bg-accent-green/10', ring: 'group-hover:border-accent-green/30', icon: 'text-accent-green' },
-};
 ---
 
 <Section rule>
@@ -50,36 +9,17 @@ const toneClasses: Record<string, { badge: string; ring: string; icon: string }>
       <h2 class="h-section" data-split>Whatever it is, we probably build it</h2>
     </div>
 
-    <div class="mt-12 grid gap-5 sm:grid-cols-3" data-stagger>
-      {
-        clusters.map((cluster) => {
-          const tone = toneClasses[cluster.tone];
-          return (
-            <div
-              data-stagger-child
-              data-reveal="tilt3d"
-              class:list={['card card-lift spotlight-card group relative overflow-hidden p-7 transition-colors', tone.ring]}
-            >
-              <span class:list={['flex h-12 w-12 items-center justify-center rounded-2xl', tone.badge]}>
-                <svg class:list={['h-6 w-6', tone.icon]} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d={cluster.icon} />
-                </svg>
-              </span>
-              <h3 class="mt-5 text-lg font-semibold tracking-tight text-ink">{cluster.title}</h3>
-              <ul class="mt-4 space-y-3">
-                {cluster.items.map((item) => (
-                  <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink-dim">
-                    <svg class:list={['mt-[3px] h-3.5 w-3.5 shrink-0', tone.icon]} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        })
-      }
+    <!-- Image placeholder: swap for a real laptop/desktop/mobile product shot once available -->
+    <div class="mt-12 flex aspect-[16/9] flex-col items-center justify-center gap-4 rounded-3xl border-2 border-dashed border-line bg-paper-dim p-10 text-center sm:aspect-[21/9]">
+      <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-paper text-muted shadow-card">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75 8.69 9.31a2.25 2.25 0 0 1 3.182 0l5.658 5.658m-1.5-1.5 1.318-1.318a2.25 2.25 0 0 1 3.182 0l2.85 2.85M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Zm10.5-13.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+        </svg>
+      </span>
+      <p class="font-semibold text-ink">Image placeholder</p>
+      <p class="max-w-md text-sm leading-relaxed text-ink-dim">
+        Gambar laptop, komputer, mobile app yang ada real design
+      </p>
     </div>
   </Container>
 </Section>
