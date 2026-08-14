@@ -1,5 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
+import { serviceHref } from '../../data/serviceCategories';
 
 const services = [
   {
@@ -52,7 +53,7 @@ const [featured, ...rest] = services;
       <div class="mt-10 grid gap-5 lg:grid-cols-5" data-stagger>
         <!-- Featured card -->
         <a
-          href={`/services/${featured.slug}`}
+          href={serviceHref(featured.slug)}
           data-stagger-child
           class="card card-lift spotlight-card group relative flex min-h-[26rem] flex-col justify-end overflow-hidden !rounded-3xl !border-0 lg:col-span-3"
         >
@@ -85,7 +86,7 @@ const [featured, ...rest] = services;
           {
             rest.map((svc) => (
               <a
-                href={`/services/${svc.slug}`}
+                href={serviceHref(svc.slug)}
                 data-stagger-child
                 class="card card-lift spotlight-card group flex flex-col overflow-hidden !rounded-3xl p-0"
               >

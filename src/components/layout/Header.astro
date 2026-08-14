@@ -4,6 +4,7 @@ import Button from '../ui/Button.astro';
 import { NAV_GROUPS, NAV_LINKS, PRIMARY_CTA } from '../../data/nav';
 import { SITE } from '../../data/site';
 import { SERVICES } from '../../data/services';
+import { serviceHref } from '../../data/serviceCategories';
 
 const currentPath = Astro.url.pathname;
 const isActive = (href: string) =>
@@ -144,7 +145,7 @@ const isActive = (href: string) =>
                     <div class="grid grid-cols-2 gap-x-3 gap-y-0.5">
                       {SERVICES.slice(0, 10).map((service) => (
                         <a
-                          href={`/services/${service.slug}`}
+                          href={serviceHref(service.slug)}
                           class="flex items-center gap-2 rounded-xl px-2 py-2 text-sm font-medium text-ink-dim transition-colors hover:bg-paper-dim hover:text-ink"
                         >
                           <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />

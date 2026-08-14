@@ -1,0 +1,15 @@
+# Old individual service pages, consolidated into 4 category pages (2026-08-14)
+/services/web-development             /services/web-software-app-development#web-development             301
+/services/mobile-app-development      /services/web-software-app-development#mobile-app-development      301
+/services/custom-systems              /services/web-software-app-development#custom-systems               301
+/services/student-project-support     /services/web-software-app-development#student-project-support      301
+/services/ai-development              /services/artificial-intelligence-automation#ai-development          301
+/services/ui-ux-design                /services/digital-design-media-marketing#ui-ux-design                301
+/services/branding-services           /services/digital-design-media-marketing#branding-services           301
+/services/product-photoshoot-marketing /services/digital-design-media-marketing#product-photoshoot-marketing 301
+/services/media-creation              /services/digital-design-media-marketing#media-creation              301
+/services/digital-marketing           /services/digital-design-media-marketing#digital-marketing           301
+/services/business-growth             /services/digital-consulting-solutions#business-growth               301
+/services/grant-government-project-support /services/digital-consulting-solutions#grant-government-project-support 301
+/services/business-startup-package    /services/digital-consulting-solutions#business-startup-package      301
+/services/maintenance-support         /services/digital-consulting-solutions#maintenance-support           301

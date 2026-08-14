@@ -2,6 +2,7 @@
 import Container from '../ui/Container.astro';
 import Section from '../ui/Section.astro';
 import { SERVICES } from '../../data/services';
+import { serviceHref } from '../../data/serviceCategories';
 import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
 
 const serviceImages: Record<string, string> = {
@@ -35,7 +36,7 @@ const serviceImages: Record<string, string> = {
           const tone = GROUP_TONE[service.group];
 
           return (
-            <a href={`/services/${service.slug}`} data-stagger-child data-flip-card class="group block [perspective:1400px]">
+            <a href={serviceHref(service.slug)} data-stagger-child data-flip-card class="group block [perspective:1400px]">
               <div class="flip-inner relative h-72 transition-transform duration-700 [transform-style:preserve-3d] [transition-timing-function:var(--ease-out-expo)] group-hover:[transform:rotateY(180deg)]">
                 {/* Front face: image + category + title */}
                 <div class="card absolute inset-0 flex flex-col overflow-hidden !rounded-3xl p-0 [backface-visibility:hidden]">
