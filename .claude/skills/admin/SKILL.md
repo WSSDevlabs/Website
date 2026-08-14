@@ -28,31 +28,6 @@ memory-of-conversation).
 | Meeting minutes skeleton | template | `templates/meeting-minutes.md` |
 | Status report skeleton | template | `templates/status-report.md` |
 | Statement of Work skeleton | template | `templates/sow.md` |
-| Project contract (signed agreement) | template | `templates/service-agreement.md` |
-| Scope change form | template | `templates/change-request.md` |
-| Client content collection form | template | `templates/content-intake-form.md` |
-| Monthly maintenance retainer agreement | template | `templates/care-plan-agreement.md` |
-| SME digitalisation grant talking points | template | `templates/grant-assistance-info-sheet.md` |
-
-## Standby document set (have these ready before any client conversation)
-Every client, regardless of package size, moves through these documents in order.
-Nothing here is optional for the Starter/Business volume packages just because the
-ticket size is small — the paperwork is what protects both sides at RM500 as much
-as at RM15,000.
-
-1. Discovery → `ceo/templates/discovery-questions.md`
-2. Proposal → `ceo/templates/proposal.md`
-3. Quotation → `cfo/templates/quotation.md`
-4. Statement of Work → `templates/sow.md`
-5. Service Agreement (the contract) → `templates/service-agreement.md`
-6. Content Intake Form → `templates/content-intake-form.md` (sent right after deposit)
-7. Invoice(s) → `cfo/templates/invoice.md`
-8. Change Request (only if scope shifts mid-project) → `templates/change-request.md`
-9. Handover Checklist → `coo/templates/handover-checklist.md`
-10. Care Plan Agreement (only if client opts into ongoing maintenance) →
-    `templates/care-plan-agreement.md`
-11. Grant Assistance Info Sheet (share early for Starter/Business SME leads) →
-    `templates/grant-assistance-info-sheet.md`
 
 ## Workflows
 

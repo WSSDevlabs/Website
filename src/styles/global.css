@@ -4,28 +4,35 @@
 @theme {
   /* ── Light theme, ink-first ─────────────────────────────── */
   --color-paper: #ffffff; /* page background */
-  --color-paper-dim: #f4f6fa; /* soft surface */
-  --color-paper-deep: #eaeef6; /* inset panels, deepest light surface */
+  --color-paper-dim: #f4f3f1; /* soft surface — matte grey, warmed off blue */
+  --color-paper-deep: #e9e7e3; /* inset panels, deepest light surface — matte grey */
   --color-ink: #0c1220; /* primary text, near-black navy */
   --color-ink-soft: #1b2437; /* dark panel surface (footer, contrast blocks) */
   --color-ink-dim: #4b5565; /* body copy */
   --color-muted: #94a0b4; /* placeholders, tertiary */
-  --color-line: #e3e8f0; /* hairlines */
+  --color-line: #e5e3df; /* hairlines — matte grey */
 
   /* Matte neutral dark: premium accent surfaces, distinct from navy-tinted ink */
   --color-charcoal: #17181b;
   --color-charcoal-soft: #232427;
 
+  /* Matte grey scale: the site's neutral, used for surfaces, secondary UI, and
+     as a grounded backdrop for the red/yellow accents below */
+  --color-matte: #6e6c67;
+  --color-matte-dim: #4a4844;
+  --color-matte-soft: #d9d6d0;
+
   /* Primary accent: cobalt */
   --color-accent: #2d5be3;
   --color-accent-dim: #2348c2;
 
-  /* Categorical brand accents (service coding only) */
+  /* Categorical brand accents (service coding + deliberate highlight moments) */
   --color-accent-blue: #2d5be3;
   --color-accent-blue-dim: #2348c2;
   --color-accent-red: #d92d20;
   --color-accent-red-dim: #b42318;
-  --color-accent-yellow: #b45309;
+  --color-accent-yellow: #b45309; /* text-safe gold: labels, small type (AA on paper) */
+  --color-accent-yellow-vivid: #eab308; /* true saturated yellow: fills, badges, icon tiles */
   --color-accent-green: #15803d;
 
   /* Type */
