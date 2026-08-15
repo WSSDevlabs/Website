@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
 import Marquee from '../components/ui/Marquee.astro';
-import BrandTrustGrid from '../components/sections/BrandTrustGrid.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import WhateverYouNeed from '../components/sections/WhateverYouNeed.astro';
 import GrantSolutions from '../components/sections/GrantSolutions.astro';
@@ -45,7 +44,6 @@ const schema = {
     primaryCta={{ label: 'Explore Express & Marketplace', href: '/express' }}
     secondaryCta={{ label: 'Bespoke Enterprise', href: '/services/bespoke' }}
   />
-  <BrandTrustGrid />
   <Marquee />
   <MarketplaceAndExpressBanner />
   <WhateverYouNeed />
