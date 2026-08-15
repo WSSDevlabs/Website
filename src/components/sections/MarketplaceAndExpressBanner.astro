@@ -1,0 +1,129 @@
+---
+import Container from '../ui/Container.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import { MARKETPLACE_SYSTEMS } from '../../data/marketplace';
+import { EXPRESS_PACKAGES } from '../../data/express';
+
+const featuredSystems = MARKETPLACE_SYSTEMS.slice(0, 6);
+---
+
+<section class="relative overflow-hidden bg-paper-dim/40 py-16 md:py-24 border-y border-line">
+  <Container>
+    <!-- Section Header -->
+    <div class="mx-auto max-w-3xl text-center">
+      <Eyebrow label="Productized Service & Marketplace" tone="red" />
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
+        Eliminate Quote Friction. Ship in Days.
+      </h2>
+      <p class="mt-4 text-sm leading-relaxed text-ink-dim sm:text-base">
+        Say goodbye to opaque agency quotes and perpetual monthly SaaS taxes.
+        Choose ready-to-ship fixed-price packages or acquire production-ready PHP systems you own for life.
+      </p>
+    </div>
+
+    <!-- Dual Pillar Cards: Express & Marketplace -->
+    <div class="mt-12 grid gap-8 lg:grid-cols-2">
+      <!-- WSS Express Pillar -->
+      <div class="flex flex-col justify-between rounded-3xl border border-line bg-paper p-8 shadow-sm transition hover:border-accent hover:shadow-xl md:p-10">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="rounded-full bg-accent/10 border border-accent/20 px-3 py-1 font-mono text-xs font-bold text-accent">
+              WSS Express
+            </span>
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-500/10 px-2.5 py-0.5 rounded-full">
+              3–7 Day Ship
+            </span>
+          </div>
+
+          <h3 class="mt-5 font-display text-2xl font-bold text-ink sm:text-3xl">
+            Fixed-Price Web Design Packages
+          </h3>
+          <p class="mt-3 text-xs leading-relaxed text-ink-dim sm:text-sm">
+            Standardized, high-speed websites engineered for Answer Engine discovery and zero SaaS lock-in. Starting from RM 180/year.
+          </p>
+
+          <!-- Tiers snapshot -->
+          <div class="mt-6 space-y-3">
+            {
+              EXPRESS_PACKAGES.map((pkg) => (
+                <div class="flex items-center justify-between rounded-xl border border-line bg-paper-dim/50 p-3 text-xs">
+                  <div>
+                    <span class="font-bold text-ink">{pkg.name}</span>
+                    <span class="block text-[11px] text-ink-dim">{pkg.overview.slice(0, 55)}...</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="font-feature font-bold text-accent text-sm">{pkg.price}</span>
+                    {pkg.period && <span class="text-[10px] text-ink-dim">{pkg.period}</span>}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-line/60">
+          <a
+            href="/express"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-xs font-semibold text-white shadow-md transition hover:bg-accent-dim"
+          >
+            <span>Explore WSS Express Packages</span>
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- The WSS Marketplace Pillar -->
+      <div class="flex flex-col justify-between rounded-3xl border border-line bg-paper p-8 shadow-sm transition hover:border-emerald-500 hover:shadow-xl md:p-10">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 font-mono text-xs font-bold text-emerald-800">
+              The WSS Marketplace
+            </span>
+            <span class="text-xs font-bold text-emerald-700 bg-emerald-500/10 px-2.5 py-0.5 rounded-full">
+              Buy-Once, Own-Forever
+            </span>
+          </div>
+
+          <h3 class="mt-5 font-display text-2xl font-bold text-ink sm:text-3xl">
+            15 Production-Ready PHP Systems
+          </h3>
+          <p class="mt-3 text-xs leading-relaxed text-ink-dim sm:text-sm">
+            Self-hosted booking engines, CRMs, clinic queues, and e-commerce portals. Full unencrypted source code with Ed25519 offline licensing.
+          </p>
+
+          <!-- Featured systems sample -->
+          <div class="mt-6 grid grid-cols-2 gap-2.5">
+            {
+              featuredSystems.map((sys) => (
+                <a
+                  href={`/marketplace/${sys.slug}`}
+                  class="rounded-xl border border-line bg-paper-dim/50 p-2.5 transition hover:bg-paper-dim hover:border-line-hover"
+                >
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-ink">{sys.name}</span>
+                    <span class="font-feature text-xs font-bold text-accent">{sys.price}</span>
+                  </div>
+                  <p class="mt-0.5 text-[10px] text-ink-dim truncate">{sys.target}</p>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-line/60">
+          <a
+            href="/marketplace"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3 text-xs font-semibold text-white shadow-md transition hover:bg-ink/85"
+          >
+            <span>Browse All 15 Systems Catalog</span>
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,283 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import { MARKETPLACE_SYSTEMS } from '../../data/marketplace';
+
+const categories = [
+  'All Systems',
+  'Developer Tools',
+  'Venues & Hospitality',
+  'Health & Services',
+  'Commerce & Rental',
+  'Real Estate & CRM',
+  'Corporate Operations'
+];
+
+const totalSystems = MARKETPLACE_SYSTEMS.length;
+---
+
+<BaseLayout
+  title="The WSS Marketplace: Buy-Once, Own-Forever PHP Systems"
+  description="Production-ready, high-performance PHP business systems with full source code ownership. Zero monthly subscriptions, Ed25519 offline licensing, and integrated Malaysian payment gateways."
+  path="/marketplace"
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-ink py-20 text-white md:py-28">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute -left-40 top-1/4 h-96 w-96 rounded-full bg-accent-blue/20 blur-3xl"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="pointer-events-none absolute -right-40 top-0 h-96 w-96 rounded-full bg-accent/20 blur-3xl"
+      aria-hidden="true"
+    ></div>
+
+    <Container class="relative">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1 text-xs font-mono uppercase tracking-wider text-accent-yellow-vivid">
+          <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+          Buy-Once · Own-Forever · Zero SaaS Subscriptions
+        </div>
+        <h1 class="mt-6 font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+          The WSS Marketplace
+        </h1>
+        <p class="mt-4 font-display text-lg text-accent-yellow-vivid sm:text-xl">
+          Production-Ready Software Systems You Own For Life.
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-white/70">
+          Tired of paying RM 200–RM 800 every month in software subscriptions?
+          WSS Dev Labs delivers typed, clean PHP business systems with full unencrypted source code, Ed25519 offline licensing, and integrated Malaysian payment gateways.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-white/60">
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+            Full Source Code Included
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+            Host on Any cPanel or VPS
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <svg class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            </svg>
+            ToyyibPay / SenangPay / Stripe Ready
+          </span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Interactive Catalog Section -->
+  <Section rule class="bg-paper-dim/30">
+    <Container>
+      <!-- Filter Bar & Search -->
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-ink md:text-3xl">
+            Explore All {totalSystems} Production Systems
+          </h2>
+          <p class="mt-1 text-xs text-ink-dim">Filter by industry or operational requirement</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2" id="category-filter-buttons">
+          {
+            categories.map((cat, idx) => (
+              <button
+                type="button"
+                data-category={cat}
+                class:list={[
+                  'category-pill rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors duration-200',
+                  idx === 0
+                    ? 'active-pill bg-accent text-white shadow-sm'
+                    : 'bg-paper text-ink-dim border border-line hover:bg-paper-dim hover:text-ink'
+                ]}
+              >
+                {cat}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Systems Grid -->
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="marketplace-grid">
+        {
+          MARKETPLACE_SYSTEMS.map((system) => (
+            <div
+              data-system-category={system.category}
+              class="system-card group flex flex-col justify-between rounded-2xl border border-line bg-paper p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg"
+            >
+              <div>
+                <!-- Category & Price Badge -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="rounded-full border border-line bg-paper-dim px-2.5 py-0.5 text-[11px] font-medium text-ink-dim">
+                    {system.category}
+                  </span>
+                  <div class="text-right">
+                    <span class="font-feature text-2xl font-extrabold text-accent">{system.price}</span>
+                    <span class="block text-[10px] uppercase tracking-wider text-ink-dim">Buy Once</span>
+                  </div>
+                </div>
+
+                <!-- Title & Tagline -->
+                <h3 class="mt-4 text-xl font-bold text-ink group-hover:text-accent transition-colors">
+                  <a href={`/marketplace/${system.slug}`}>
+                    {system.name}
+                  </a>
+                </h3>
+                <p class="mt-1 text-xs font-semibold text-accent-yellow">{system.tagline}</p>
+                <p class="mt-3 text-xs leading-relaxed text-ink-dim">{system.summary}</p>
+
+                <!-- Under the hood highlight -->
+                <div class="mt-4 rounded-xl border border-line/80 bg-paper-dim/60 p-3 text-[11px]">
+                  <p class="font-mono font-bold uppercase tracking-wider text-ink text-[10px]">
+                    Under the Hood:
+                  </p>
+                  <p class="mt-1 text-ink-dim">
+                    {system.underTheHood.highlights[0]}
+                  </p>
+                </div>
+
+                <!-- Tech Stack tags -->
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  {system.techStack.map((tech) => (
+                    <span class="rounded-md bg-paper-deep/60 px-2 py-0.5 text-[10px] font-mono text-ink-dim">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="mt-6 flex items-center gap-2 border-t border-line/60 pt-4">
+                <a
+                  href={`/marketplace/${system.slug}`}
+                  class="flex-1 rounded-xl border border-line bg-paper-dim px-3.5 py-2 text-center text-xs font-semibold text-ink transition hover:bg-paper-deep"
+                >
+                  Technical Specs
+                </a>
+                <a
+                  href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs! I'd like to acquire the ${system.name} system (${system.price}). Please share the source code delivery steps.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 rounded-xl bg-accent px-3.5 py-2 text-center text-xs font-semibold text-white shadow-sm transition hover:bg-accent-dim"
+                >
+                  Buy Once ({system.price})
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <!-- The "Buy-Once" Philosophy & Why It Matters -->
+  <Section rule>
+    <Container>
+      <div class="rounded-3xl border border-line bg-ink p-8 text-white md:p-12">
+        <div class="grid items-center gap-8 lg:grid-cols-2">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-xs text-accent-yellow-vivid">
+              Zero SaaS Dependency
+            </div>
+            <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
+              Why Malaysian SMEs Are Escaping Subscription Lock-In.
+            </h2>
+            <p class="mt-4 text-sm leading-relaxed text-white/70">
+              When you build on SaaS platforms, you never own your software. If you stop paying your monthly bill, your store or booking system turns off instantly.
+              WSS Marketplace systems give you <strong>100% full source code ownership</strong> with no monthly taxes, no transaction commissions, and total data privacy under Malaysian PDPA.
+            </p>
+
+            <div class="mt-6 grid grid-cols-2 gap-4">
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5">
+                <p class="font-bold text-accent-yellow-vivid">Ed25519 License</p>
+                <p class="mt-1 text-xs text-white/60">Offline signature verification that never depends on third-party DRM servers.</p>
+              </div>
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5">
+                <p class="font-bold text-emerald-400">Zero Commission</p>
+                <p class="mt-1 text-xs text-white/60">100% of payments go straight through your ToyyibPay / SenangPay / Stripe merchant account.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-md">
+            <h3 class="font-mono text-sm font-bold text-white uppercase tracking-wider">What You Receive In Every Order:</h3>
+            <ul class="mt-4 space-y-3 text-xs text-white/80">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent font-bold">✓</span>
+                <span><strong>Full Unencrypted PHP 8.2+ Source Code</strong>: Clean, typed, and easily extendable.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent font-bold">✓</span>
+                <span><strong>Relational MySQL / SQLite Schemas</strong>: Pre-indexed for sub-50ms database performance.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent font-bold">✓</span>
+                <span><strong>One-Command Deployment Guide</strong>: Host easily on cPanel, CyberPanel, VPS, or Docker.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent font-bold">✓</span>
+                <span><strong>Direct Builder Technical Support</strong>: 30 days direct WhatsApp support with Razin Hakim.</span>
+              </li>
+            </ul>
+
+            <div class="mt-6 pt-4 border-t border-white/10">
+              <a
+                href="https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I'd%20like%20to%20ask%20about%20a%20Marketplace%20system%20license."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-accent-dim"
+              >
+                Questions? WhatsApp an Engineer Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<script>
+  function initMarketplaceFilters() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.category-pill');
+    const cards = document.querySelectorAll<HTMLElement>('.system-card');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.category || 'All Systems';
+
+        // Update active styles
+        buttons.forEach((b) => {
+          b.classList.remove('active-pill', 'bg-accent', 'text-white');
+          b.classList.add('bg-paper', 'text-ink-dim', 'border', 'border-line');
+        });
+
+        btn.classList.add('active-pill', 'bg-accent', 'text-white');
+        btn.classList.remove('bg-paper', 'text-ink-dim', 'border', 'border-line');
+
+        // Filter cards
+        cards.forEach((card) => {
+          const cardCat = card.dataset.systemCategory;
+          if (cat === 'All Systems' || cardCat === cat) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  initMarketplaceFilters();
+  document.addEventListener('astro:page-load', initMarketplaceFilters);
+</script>

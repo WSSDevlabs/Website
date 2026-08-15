@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
 import Marquee from '../components/ui/Marquee.astro';
+import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import WhateverYouNeed from '../components/sections/WhateverYouNeed.astro';
 import GrantSolutions from '../components/sections/GrantSolutions.astro';
 import AboutSection from '../components/sections/AboutSection.astro';
@@ -23,26 +24,27 @@ const schema = {
   name: 'WSS DevLabs',
   url: Astro.site?.toString(),
   description:
-    'Your one-stop digital solutions partner: websites, mobile apps, custom systems, AI, marketing, branding, and more.'
+    'SME productized tech & custom engineering partner: WSS Express websites, Buy-Once Marketplace systems, AI development, and Bespoke Enterprise solutions.'
 };
 ---
 
 <BaseLayout
-  title="WSS DevLabs: Your Digital Solutions Partner"
-  description="Websites, apps, systems, marketing, branding, student projects, grants, and business launches. Whatever the digital need, one team handles it."
+  title="WSS DevLabs: Productized Services, Marketplace & Bespoke Engineering"
+  description="High-performance websites, 15 Buy-Once PHP systems, AI automation, and custom enterprise engineering with 2026 Government Grant funding matching."
   path="/"
   schema={schema}
 >
   <Hero
-    eyebrow="Every Digital Need, One Team"
+    eyebrow="Direct with Builders · Zero SaaS Dependency"
     title="Whatever you need, we can build it."
     accentWord="build"
     accentTone="blue"
-    subtitle="Websites, apps, systems, marketing, branding, even student projects and grant-funded builds, one team, done properly."
-    primaryCta={{ label: 'See our Services', href: '/services' }}
-    secondaryCta={{ label: 'See our work', href: '/work' }}
+    subtitle="From RM 180 fixed-price websites and Buy-Once production systems to RM 15,000 bespoke enterprise platforms. Direct with senior engineers."
+    primaryCta={{ label: 'Explore Express & Marketplace', href: '/express' }}
+    secondaryCta={{ label: 'Bespoke Enterprise', href: '/services/bespoke' }}
   />
   <Marquee />
+  <MarketplaceAndExpressBanner />
   <WhateverYouNeed />
   <AboutSection />
   <HomepageServices />

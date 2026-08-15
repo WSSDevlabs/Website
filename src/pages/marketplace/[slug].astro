@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import { MARKETPLACE_SYSTEMS, type MarketplaceSystem } from '../../data/marketplace';
+
+export function getStaticPaths() {
+  return MARKETPLACE_SYSTEMS.map((system) => ({
+    params: { slug: system.slug },
+    props: { system }
+  }));
+}
+
+type Props = {
+  system: MarketplaceSystem;
+};
+
+const { system } = Astro.props;
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: system.name,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Linux, Windows, macOS, cPanel, Docker',
+  offers: {
+    '@type': 'Offer',
+    price: system.priceRaw.toString(),
+    priceCurrency: 'MYR',
+    description: 'Buy-Once, Own-Forever Perpetual License with Full Source Code'
+  },
+  description: system.summary
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: system.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title={`${system.name} (${system.price}): Buy-Once PHP System | WSS Marketplace`}
+  description={`${system.name} - ${system.tagline}. Full unencrypted PHP source code, Ed25519 offline licensing, and zero SaaS subscription fees. Built for Malaysian SMEs.`}
+  path={`/marketplace/${system.slug}`}
+  schema={{
+    '@context': 'https://schema.org',
+    '@graph': [softwareSchema, faqSchema]
+  }}
+>
+  <!-- System Hero -->
+  <section class="relative overflow-hidden bg-ink py-20 text-white md:py-28">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-accent/20 blur-3xl"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-accent-blue/20 blur-3xl"
+      aria-hidden="true"
+    ></div>
+
+    <Container class="relative">
+      <div class="mx-auto max-w-4xl">
+        <!-- Breadcrumb / Back to catalog -->
+        <a
+          href="/marketplace"
+          class="inline-flex items-center gap-2 text-xs font-mono text-white/60 transition hover:text-white"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+          Back to Marketplace Catalog
+        </a>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <span class="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-semibold text-accent-yellow-vivid">
+            {system.category}
+          </span>
+          <span class="rounded-full bg-emerald-500/20 border border-emerald-500/30 px-3 py-1 text-xs font-semibold text-emerald-300">
+            Buy-Once, Own-Forever
+          </span>
+          <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-mono text-white/70">
+            Target: {system.target}
+          </span>
+        </div>
+
+        <div class="mt-6 grid items-start gap-8 lg:grid-cols-[1.5fr_1fr]">
+          <div>
+            <h1 class="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+              {system.name}
+            </h1>
+            <p class="mt-3 text-lg font-medium text-accent-yellow sm:text-xl">
+              {system.tagline}
+            </p>
+            <p class="mt-5 text-sm leading-relaxed text-white/75 sm:text-base">
+              {system.summary}
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-2">
+              {system.techStack.map((tech) => (
+                <span class="rounded-lg border border-white/15 bg-white/5 px-2.5 py-1 text-xs font-mono text-white/80">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Pricing & Checkout Card -->
+          <div class="rounded-2xl border border-accent/40 bg-white/5 p-6 backdrop-blur-xl shadow-2xl">
+            <p class="text-xs font-mono uppercase tracking-wider text-white/60">Perpetual License Price</p>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="font-feature text-4xl font-extrabold text-white">{system.price}</span>
+              <span class="text-xs text-emerald-400 font-semibold">One-time payment</span>
+            </div>
+            <p class="mt-2 text-xs text-white/60">
+              Zero monthly SaaS fees. Deploy on your domain or client servers with full unencrypted source code.
+            </p>
+
+            <div class="mt-6 space-y-3">
+              <a
+                href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs! I want to acquire ${system.name} (${system.price}). Please share the instant download and payment invoice steps.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/30 transition hover:bg-accent-dim"
+              >
+                <span>Buy System ({system.price})</span>
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+
+              <a
+                href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs! Can I see a live demo walkthrough of ${system.name}?`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-white/10"
+              >
+                Request Live Demo Walkthrough
+              </a>
+            </div>
+
+            <div class="mt-4 border-t border-white/10 pt-4 text-[11px] text-white/50 space-y-1">
+              <p>✓ Instant ZIP source code package</p>
+              <p>✓ Complete SQL database setup file</p>
+              <p>✓ Direct builder WhatsApp support included</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Under the Hood Engineering Deep Dive -->
+  <Section rule>
+    <Container>
+      <div class="mx-auto max-w-4xl">
+        <Eyebrow label="Engineering Architecture" tone="red" />
+        <h2 class="mt-2 text-2xl font-bold tracking-tight text-ink md:text-3xl">
+          Under the Hood: {system.underTheHood.title}
+        </h2>
+        <p class="mt-3 text-sm text-ink-dim">
+          We don't sell bloated themes or generic wrappers. Here is the exact technical blueprint of how this system is constructed.
+        </p>
+
+        <!-- Highlights Grid -->
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {system.underTheHood.highlights.map((highlight) => (
+            <div class="flex items-start gap-3 rounded-2xl border border-line bg-paper-dim/60 p-4">
+              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
+                ⚡
+              </span>
+              <p class="text-xs font-medium leading-relaxed text-ink">
+                {highlight}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Architecture Breakdown Cards -->
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          <div class="rounded-2xl border border-line bg-paper p-5">
+            <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+              Core Technical Architecture
+            </h3>
+            <p class="mt-2 text-xs leading-relaxed text-ink-dim">
+              {system.underTheHood.technicalArchitecture}
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-5">
+            <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-accent-yellow">
+              Security &amp; Offline Licensing
+            </h3>
+            <p class="mt-2 text-xs leading-relaxed text-ink-dim">
+              {system.underTheHood.securityAndLicensing}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Complete Features Grid -->
+  <Section rule class="bg-paper-dim/40">
+    <Container>
+      <div class="mx-auto max-w-4xl">
+        <Eyebrow label="Production Capabilities" tone="blue" />
+        <h2 class="mt-2 text-2xl font-bold text-ink md:text-3xl">
+          Key Features &amp; Modules
+        </h2>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {system.features.map((feature, idx) => (
+            <div class="rounded-2xl border border-line bg-paper p-5 shadow-sm">
+              <span class="font-feature text-xs font-bold text-accent">0{idx + 1}</span>
+              <h3 class="mt-2 text-sm font-bold text-ink">{feature}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Deliverables & Installation Handover -->
+  <Section rule>
+    <Container>
+      <div class="mx-auto max-w-4xl">
+        <div class="rounded-3xl border border-line bg-ink p-8 text-white md:p-10">
+          <div class="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr]">
+            <div>
+              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-xs text-emerald-300">
+                Turnkey Handover Package
+              </div>
+              <h2 class="mt-3 font-display text-2xl font-bold text-white md:text-3xl">
+                Everything Included In Your Order
+              </h2>
+              <p class="mt-3 text-xs leading-relaxed text-white/70">
+                You receive full commercial rights to host, modify, brand, and deploy this software without restrictions.
+              </p>
+
+              <ul class="mt-5 space-y-2.5 text-xs text-white/80">
+                {system.includedDeliverables.map((item) => (
+                  <li class="flex items-center gap-2">
+                    <span class="text-accent font-bold">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="rounded-2xl border border-white/15 bg-white/5 p-6 text-center">
+              <p class="text-xs font-mono uppercase tracking-wider text-white/60">Ready to Deploy?</p>
+              <p class="mt-2 font-feature text-3xl font-extrabold text-accent-yellow-vivid">{system.price}</p>
+              <p class="mt-1 text-[11px] text-white/60">One-time payment · Instant source delivery</p>
+
+              <a
+                href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs! I want to acquire ${system.name} (${system.price}). Please send payment details.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-accent-dim"
+              >
+                Claim Source Code on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- System FAQ -->
+  {
+    system.faq && system.faq.length > 0 && (
+      <Section rule class="bg-paper-dim/30">
+        <Container>
+          <div class="mx-auto max-w-3xl">
+            <h2 class="text-center text-2xl font-bold text-ink">
+              Frequently Asked Questions about {system.name}
+            </h2>
+            <div class="mt-8 space-y-4">
+              {system.faq.map((item) => (
+                <div class="rounded-2xl border border-line bg-paper p-5">
+                  <h3 class="text-sm font-bold text-ink">{item.q}</h3>
+                  <p class="mt-2 text-xs leading-relaxed text-ink-dim">{item.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+</BaseLayout>

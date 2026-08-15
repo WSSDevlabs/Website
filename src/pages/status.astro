@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import { LIVE_SYSTEM_METRICS, STANDARD_BUILD_PIPELINE } from '../data/status';
+---
+
+<BaseLayout
+  title="Live Project & System Status | WSS DevLabs"
+  description="Real-time verification of project progress, system health, and direct engineering availability. Ensuring transparency, trust, and go-live calm for Malaysian SMEs."
+  path="/status"
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-ink py-20 text-white md:py-28">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-emerald-500/15 blur-3xl"
+      aria-hidden="true"
+    ></div>
+
+    <Container class="relative">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-mono uppercase tracking-wider text-emerald-300">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          All Systems Operational · Direct Engineering Access
+        </div>
+
+        <h1 class="mt-6 font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+          Live Build &amp; Studio Status
+        </h1>
+        <p class="mt-4 font-display text-lg text-emerald-400 sm:text-xl">
+          Delivering "Go-Live Calm" Through Uncompromising Transparency.
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-white/70">
+          We believe clients should never wonder what's happening with their software.
+          Track our live sprint capacity, SLA response times, and recent production shipments in real time.
+        </p>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="mt-12 grid grid-cols-2 gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:grid-cols-4">
+        <div class="text-center">
+          <p class="text-xs font-mono uppercase tracking-wider text-white/50">System Health</p>
+          <p class="mt-1 font-feature text-2xl font-bold text-emerald-400">
+            {LIVE_SYSTEM_METRICS.overallHealth}
+          </p>
+        </div>
+        <div class="text-center">
+          <p class="text-xs font-mono uppercase tracking-wider text-white/50">Average SLA</p>
+          <p class="mt-1 font-feature text-2xl font-bold text-white">
+            {LIVE_SYSTEM_METRICS.averageResponseTimeSLA}
+          </p>
+        </div>
+        <div class="text-center">
+          <p class="text-xs font-mono uppercase tracking-wider text-white/50">Mobile Lighthouse</p>
+          <p class="mt-1 font-feature text-2xl font-bold text-accent-yellow-vivid">
+            {LIVE_SYSTEM_METRICS.averageLighthouseScore}
+          </p>
+        </div>
+        <div class="text-center">
+          <p class="text-xs font-mono uppercase tracking-wider text-white/50">Sprint Slots Free</p>
+          <p class="mt-1 font-feature text-2xl font-bold text-accent">
+            {LIVE_SYSTEM_METRICS.activeSprintSlots.availableForBooking} of {LIVE_SYSTEM_METRICS.activeSprintSlots.total}
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Named Builders Real-Time Availability -->
+  <Section rule>
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <Eyebrow label="The Direct Builder Model" tone="red" />
+        <h2 class="mt-2 text-3xl font-bold text-ink md:text-4xl">
+          Direct Access to the Engineers Responsible for the Code
+        </h2>
+        <p class="mt-3 text-sm text-ink-dim">
+          No account managers or support tickets. When you message WSS Dev Labs, you talk directly with the senior specialists building your product.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2">
+        {
+          LIVE_SYSTEM_METRICS.directBuilders.map((builder) => (
+            <div class="rounded-2xl border border-line bg-paper p-6 shadow-sm">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h3 class="text-xl font-bold text-ink">{builder.name}</h3>
+                  <p class="text-xs font-semibold text-accent">{builder.role}</p>
+                </div>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                  {builder.status}
+                </span>
+              </div>
+
+              <p class="mt-4 text-xs leading-relaxed text-ink-dim">
+                <strong>Core Focus:</strong> {builder.specialty}
+              </p>
+
+              <div class="mt-6 flex items-center gap-3 pt-4 border-t border-line/60">
+                <a
+                  href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi ${builder.name}! I'm checking in from the WSS Status page.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 rounded-xl bg-accent px-4 py-2 text-center text-xs font-semibold text-white shadow-sm transition hover:bg-accent-dim"
+                >
+                  WhatsApp Directly
+                </a>
+                <a
+                  href={`mailto:${builder.email}`}
+                  class="rounded-xl border border-line bg-paper-dim px-4 py-2 text-center text-xs font-semibold text-ink hover:bg-paper-deep"
+                >
+                  Email
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <!-- 4-Stage Standard Build Pipeline -->
+  <Section rule class="bg-paper-dim/30">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <Eyebrow label="Go-Live Calm" tone="blue" />
+        <h2 class="mt-2 text-3xl font-bold text-ink md:text-4xl">
+          Our Standard 4-Stage Sprint Pipeline
+        </h2>
+        <p class="mt-3 text-sm text-ink-dim">
+          How every WSS Express and Bespoke build transitions safely from kick-off to production.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          STANDARD_BUILD_PIPELINE.map((stage) => (
+            <div class="flex flex-col justify-between rounded-2xl border border-line bg-paper p-6 shadow-sm">
+              <div>
+                <span class="font-feature text-2xl font-extrabold text-accent">{stage.stage}</span>
+                <h3 class="mt-2 text-base font-bold text-ink">{stage.label}</h3>
+                <p class="mt-3 text-xs leading-relaxed text-ink-dim">{stage.description}</p>
+              </div>
+              <div class="mt-6 border-t border-line/60 pt-3">
+                <p class="text-[11px] font-mono text-ink-dim">
+                  Duration: <strong class="text-ink">{stage.expectedDuration}</strong>
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Recent Shipments & Deployments -->
+  <Section rule>
+    <Container>
+      <div class="mx-auto max-w-3xl">
+        <div class="text-center">
+          <Eyebrow label="Live Verified Shipments" tone="yellow" />
+          <h2 class="mt-2 text-3xl font-bold text-ink">Recent Production Deployments</h2>
+        </div>
+
+        <div class="mt-8 space-y-4">
+          {
+            LIVE_SYSTEM_METRICS.recentDeployments.map((dep) => (
+              <div class="flex flex-col gap-4 rounded-2xl border border-line bg-paper p-5 sm:flex-row sm:items-center sm:justify-between shadow-sm">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-base font-bold text-ink">{dep.client}</h3>
+                    <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+                      {dep.status}
+                    </span>
+                  </div>
+                  <p class="mt-0.5 text-xs text-ink-dim">{dep.category} · {dep.date}</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="text-right">
+                    <span class="font-feature text-lg font-bold text-accent">{dep.lighthouseMobile}/100</span>
+                    <span class="block text-[10px] text-ink-dim">Mobile Lighthouse</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-10 rounded-2xl border border-line bg-paper-dim p-6 text-center">
+          <h3 class="text-base font-bold text-ink">Ready to Start a Production Sprint?</h3>
+          <p class="mt-1 text-xs text-ink-dim">
+            We currently have {LIVE_SYSTEM_METRICS.activeSprintSlots.availableForBooking} open sprint slots available this month.
+          </p>
+          <div class="mt-4">
+            <a
+              href="https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I'd%20like%20to%20reserve%20a%20production%20sprint%20slot."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-accent-dim"
+            >
+              Reserve a Sprint Slot
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
