@@ -5,7 +5,8 @@
 
 ## TODO
 - [founder] Confirm the 4-category service mapping is correct (see PROGRESS.md 2026-08-14) before shipping — it's my grouping, not founder-confirmed.
-- [uiux/founder] "Enhance my entire website" was scoped to a color-system pass (matte grey + red/yellow, see docs/DESIGN.md) — confirm whether founder wants more (layout, typography, motion, other icon-grid sections) or this covers it.
+- [uiux/founder] Superseded by the "Industrial Concrete" rebrand, now including the sharpened-corners + hero structural-motif follow-through — founder should visually confirm the new theme live (no screenshot/browser QA was possible this session — Windows Application Control policy still blocking gstack browse). This is the single most visually disruptive change made this session; worth checking before anything else.
+- [uiux/founder] Only remaining deferred design item: a genuine dark-mode variant/toggle (charcoal + grain as default surface) — real theme infrastructure, bigger scope, not built. See docs/DESIGN.md "Next candidates."
 - [cfo/founder] Confirm the new 5-package names (Launch/Expand/Grow/Scale/Custom) and prices (RM1,200 / RM4,500 / RM12,000 / From RM28,000 / Custom) — all placeholders I set, not confirmed. See DECISIONS.md 2026-08-14 supersession entry.
 - [media] Founder will source the real "laptop, komputer, mobile app real design" image from their media designer to replace the homepage placeholder in `WhateverYouNeed.astro`.
 - [pending] All work this session (services consolidation, color theme, pricing restructure, small UI fixes) is still uncommitted — founder said "don't push yet."

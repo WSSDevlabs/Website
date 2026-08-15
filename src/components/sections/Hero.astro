@@ -46,12 +46,17 @@ const titleHtml =
 {
   variant === 'page' ? (
     <section class="relative overflow-hidden">
+      <div class="grid-pattern mask-fade-edges absolute inset-0" aria-hidden="true" />
       <div
         class="absolute -top-32 right-[-10%] h-80 w-[36rem] rounded-full bg-accent/8 blur-3xl"
         aria-hidden="true"
       />
       <div
-        class="absolute -bottom-24 left-[-8%] h-64 w-[28rem] rounded-full bg-accent-yellow-vivid/8 blur-3xl"
+        class="absolute -bottom-24 left-[-8%] h-64 w-[28rem] rounded-full bg-matte/10 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        class="absolute right-[8%] top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-line to-transparent sm:block"
         aria-hidden="true"
       />
       <Container class="relative py-12 md:py-16">
@@ -85,7 +90,12 @@ const titleHtml =
         aria-hidden="true"
       />
       <div
-        class="absolute -bottom-32 left-[-10%] h-96 w-[34rem] rounded-full bg-accent-red/6 blur-3xl"
+        class="absolute -bottom-32 left-[-10%] h-96 w-[34rem] rounded-full bg-matte/8 blur-3xl"
+        aria-hidden="true"
+      />
+      <!-- Structural accent: a single sharp diagonal cut, like a concrete beam edge crossing the frame -->
+      <div
+        class="pointer-events-none absolute -right-24 top-0 hidden h-[140%] w-[2px] rotate-[14deg] bg-gradient-to-b from-transparent via-accent/25 to-transparent lg:block"
         aria-hidden="true"
       />
       <Container class="relative grid gap-14 py-14 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-20">
@@ -141,7 +151,7 @@ const titleHtml =
                 </div>
 
                 <button id="hero-quote-submit" type="submit"
-                  class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(45_91_227/0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-dim">
+                  class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(217_45_32/0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-dim">
                   <span id="hero-quote-submit-label">Get My Free Quote</span>
                 </button>
 

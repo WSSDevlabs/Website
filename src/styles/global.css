@@ -2,31 +2,39 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* ── Light theme, ink-first ─────────────────────────────── */
-  --color-paper: #ffffff; /* page background */
-  --color-paper-dim: #f4f3f1; /* soft surface — matte grey, warmed off blue */
-  --color-paper-deep: #e9e7e3; /* inset panels, deepest light surface — matte grey */
-  --color-ink: #0c1220; /* primary text, near-black navy */
+  /* ── Industrial concrete, red-first ─────────────────────────
+     Direction: raw-concrete architecture (Tadao Ando / Tamarind Square
+     Cyberjaya) matched to the founder's business card — grey concrete
+     surfaces, near-black steel/ink, red as the dominant signal color,
+     blue demoted to a thin structural stripe. Full rationale + palette
+     table in docs/DESIGN.md. */
+  --color-paper: #f2f0eb; /* page background — cast concrete, not white */
+  --color-paper-dim: #e6e3db; /* soft surface, one step into shadow */
+  --color-paper-deep: #d6d2c7; /* inset panels, deepest light surface */
+  --color-ink: #19191b; /* primary text — neutral near-black, like rebar/steel */
   --color-ink-soft: #1b2437; /* dark panel surface (footer, contrast blocks) */
-  --color-ink-dim: #4b5565; /* body copy */
-  --color-muted: #94a0b4; /* placeholders, tertiary */
-  --color-line: #e5e3df; /* hairlines — matte grey */
+  --color-ink-dim: #57585b; /* body copy — neutral grey, no navy tint */
+  --color-muted: #8d8d8a; /* placeholders, tertiary */
+  --color-line: #cac6bb; /* hairlines — visible, structural concrete joint */
 
   /* Matte neutral dark: premium accent surfaces, distinct from navy-tinted ink */
   --color-charcoal: #17181b;
   --color-charcoal-soft: #232427;
 
   /* Matte grey scale: the site's neutral, used for surfaces, secondary UI, and
-     as a grounded backdrop for the red/yellow accents below */
+     as a grounded backdrop for the red accent below */
   --color-matte: #6e6c67;
   --color-matte-dim: #4a4844;
   --color-matte-soft: #d9d6d0;
 
-  /* Primary accent: cobalt */
-  --color-accent: #2d5be3;
-  --color-accent-dim: #2348c2;
+  /* Primary accent: signal red — the dominant color on the business card
+     (logo mark, name, graphic). Drives every button, link, and focus state. */
+  --color-accent: #d92d20;
+  --color-accent-dim: #b42318;
 
-  /* Categorical brand accents (service coding + deliberate highlight moments) */
+  /* Categorical brand accents (service coding + deliberate highlight moments).
+     Blue is now a minor structural stripe only, per the card — never a
+     primary interactive color. */
   --color-accent-blue: #2d5be3;
   --color-accent-blue-dim: #2348c2;
   --color-accent-red: #d92d20;
@@ -46,16 +54,33 @@
   --font-feature: 'Space Grotesk Variable', var(--font-display);
 
   /* Tinted elevation */
-  --shadow-card: 0 1px 2px rgb(12 18 32 / 0.05), 0 8px 24px -16px rgb(12 18 32 / 0.14);
+  --shadow-card: 0 1px 2px rgb(25 25 27 / 0.06), 0 8px 24px -16px rgb(25 25 27 / 0.16);
   --shadow-card-hover:
-    0 2px 4px rgb(12 18 32 / 0.05), 0 24px 48px -20px rgb(45 91 227 / 0.22);
-  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 24px 64px -32px rgb(12 18 32 / 0.18);
-  --shadow-float: 0 12px 32px -12px rgb(12 18 32 / 0.22);
+    0 2px 4px rgb(25 25 27 / 0.06), 0 24px 48px -20px rgb(217 45 32 / 0.22);
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.6) inset, 0 24px 64px -32px rgb(25 25 27 / 0.2);
+  --shadow-float: 0 12px 32px -12px rgb(25 25 27 / 0.24);
 
   /* Easing */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Radius scale, sharpened for "Industrial Concrete" ──────
+     Overrides Tailwind's default --radius-* scale, so every existing
+     rounded-xl/2xl/3xl/etc. utility sitewide gets slab-edged rather than
+     soft-rounded, with zero per-file changes. Precision-formwork chamfer,
+     not a knife edge — small, not zero. rounded-full (pill buttons/badges)
+     is untouched on purpose: it's a fixed 9999px value outside this scale,
+     kept as the one deliberately soft/human shape against otherwise sharp
+     panels and cards. */
+  --radius-xs: 0.0625rem;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.1875rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.375rem;
+  --radius-2xl: 0.5rem;
+  --radius-3xl: 0.625rem;
+  --radius-4xl: 0.75rem;
 }
 
 @layer base {
@@ -69,6 +94,21 @@
   body {
     font-family: var(--font-sans);
     font-feature-settings: 'ss01' on, 'cv01' on;
+    position: relative;
+  }
+
+  /* Sitewide film-grain wash — the cast-concrete/photographic texture from
+     the business card and mood board, applied once so every surface (paper,
+     charcoal, red) reads as textured material rather than flat digital color. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   h1,
@@ -200,24 +240,24 @@
     );
   }
 
-  /* Inset rounded panel: the "section inside a frame" treatment */
+  /* Inset panel: the "section inside a frame" treatment */
   .panel {
-    border-radius: 2rem;
+    border-radius: 0.75rem;
     border: 1px solid var(--color-line);
     background-color: var(--color-paper-dim);
     box-shadow: var(--shadow-panel);
   }
 
   .panel-ink {
-    border-radius: 2rem;
+    border-radius: 0.75rem;
     border: 1px solid color-mix(in srgb, var(--color-ink) 88%, white);
     background-color: var(--color-ink);
-    box-shadow: 0 32px 80px -40px rgb(12 18 32 / 0.55);
+    box-shadow: 0 32px 80px -40px rgb(25 25 27 / 0.55);
   }
 
   /* Matte neutral dark panel: premium touch, distinct from navy-tinted panel-ink */
   .panel-charcoal {
-    border-radius: 2rem;
+    border-radius: 0.75rem;
     border: 1px solid color-mix(in srgb, var(--color-charcoal) 82%, white);
     background-color: var(--color-charcoal);
     box-shadow: 0 32px 80px -40px rgb(0 0 0 / 0.6);
@@ -225,7 +265,7 @@
 
   /* Frosted card that floats over a map or photo */
   .glass-float-card {
-    border-radius: 1.5rem;
+    border-radius: 0.5rem;
     border: 1px solid rgb(255 255 255 / 0.6);
     background: rgb(255 255 255 / 0.82);
     box-shadow: var(--shadow-float);
@@ -244,7 +284,7 @@
   /* ── Cards ──────────────────────────────────────────────── */
   .card {
     position: relative;
-    border-radius: 1.25rem;
+    border-radius: 0.5rem;
     border: 1px solid var(--color-line);
     background-color: var(--color-paper);
     box-shadow: var(--shadow-card);
@@ -330,15 +370,15 @@
 
   /* Dotted grid for page heroes */
   .dot-pattern {
-    background-image: radial-gradient(circle, rgb(12 18 32 / 0.08) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgb(25 25 27 / 0.09) 1px, transparent 1px);
     background-size: 22px 22px;
   }
 
-  /* Fine line grid for the home hero */
+  /* Fine line grid — a blueprint/structural-drawing motif, used on hero backgrounds */
   .grid-pattern {
     background-image:
-      linear-gradient(to right, rgb(12 18 32 / 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(12 18 32 / 0.045) 1px, transparent 1px);
+      linear-gradient(to right, rgb(25 25 27 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(25 25 27 / 0.06) 1px, transparent 1px);
     background-size: 56px 56px;
   }
 
