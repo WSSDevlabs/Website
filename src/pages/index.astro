@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
 import Marquee from '../components/ui/Marquee.astro';
+import BrandTrustGrid from '../components/sections/BrandTrustGrid.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import WhateverYouNeed from '../components/sections/WhateverYouNeed.astro';
 import GrantSolutions from '../components/sections/GrantSolutions.astro';
@@ -12,6 +13,7 @@ import Differentiator from '../components/sections/Differentiator.astro';
 import ProcessOverview from '../components/sections/ProcessOverview.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
+import SMEProjectCalculator from '../components/sections/SMEProjectCalculator.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import { HOME_FAQ } from '../data/faq';
 
@@ -43,6 +45,7 @@ const schema = {
     primaryCta={{ label: 'Explore Express & Marketplace', href: '/express' }}
     secondaryCta={{ label: 'Bespoke Enterprise', href: '/services/bespoke' }}
   />
+  <BrandTrustGrid />
   <Marquee />
   <MarketplaceAndExpressBanner />
   <WhateverYouNeed />
@@ -53,5 +56,6 @@ const schema = {
   <FeaturedWork projects={featuredProjects} />
   <Testimonials />
   <GrantSolutions />
+  <SMEProjectCalculator />
   <FAQ items={HOME_FAQ} />
 </BaseLayout>

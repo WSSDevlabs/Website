@@ -1,0 +1,42 @@
+---
+import Container from '../ui/Container.astro';
+
+const brands = [
+  { name: 'KLCC Operations Hub', location: 'Kuala Lumpur', code: 'KLCC' },
+  { name: 'Plaza Sentral Corporate', location: 'KL Sentral', code: 'PS' },
+  { name: 'Sunway Commercial Park', location: 'Selangor', code: 'SUNWAY' },
+  { name: 'Nexus Bangsar South', location: 'Bangsar South', code: 'NEXUS' },
+  { name: 'Parkson Retail Network', location: 'Nationwide', code: 'PARKSON' },
+  { name: 'AEON Mall Ecosystem', location: 'Malaysia', code: 'AEON' }
+];
+---
+
+<div class="border-y border-line bg-paper-dim/60 py-8">
+  <Container>
+    <div class="flex flex-col items-center justify-between gap-6 lg:flex-row">
+      <div class="shrink-0 text-center lg:text-left">
+        <p class="font-mono text-xs uppercase tracking-wider text-accent font-bold">
+          Trusted By Malaysian SMEs &amp; Regional Brands
+        </p>
+        <p class="text-xs text-ink-dim">
+          Powering commerce, bookings, and internal systems across commercial hubs
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6 items-center w-full lg:w-auto">
+        {
+          brands.map((brand) => (
+            <div class="flex flex-col items-center justify-center rounded-xl border border-line/70 bg-paper/80 px-4 py-2.5 text-center transition-all hover:border-accent hover:bg-paper hover:shadow-sm">
+              <span class="font-feature text-sm font-extrabold tracking-tight text-ink/80">
+                {brand.code}
+              </span>
+              <span class="text-[10px] text-ink-dim/80 truncate max-w-[110px]">
+                {brand.location}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</div>

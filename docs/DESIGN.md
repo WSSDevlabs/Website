@@ -1,117 +1,111 @@
-# DESIGN — WSS DevLabs website
+# WSS DevLabs — Master Design & Visual Architecture Specification
 
-**Direction: "Industrial Concrete."** Locked 2026-08-14 (supersedes the
-2026-08-14 "matte grey secondary accent" pass earlier the same day — that
-version kept blue primary; this one is the real, founder-directed rebrand).
-Extended the same day with founder's explicit go-ahead ("you get my
-permission, do it") to finish the follow-through items originally deferred
-below. This file is law for `/dev` — check it before touching color, radius,
-or surface treatment, and update it here, not just in chat, when the
-direction changes.
+> **Governing Direction:** "Industrial Concrete & Anti-SaaS Engineering."  
+> **Core Pillars:** Clarity, Speed, and Directness.  
+> **Lead Specialists:** **Natasya Umairah** (Front-End, UI/UX & Micro-Moments) & **Razin Hakim** (Full-Stack & Backend Architecture).
 
-## Brief
+---
 
-Founder sent their business card (red logo mark + "RAZALI" name, dark
-charcoal "Devlabs" wordmark, a thin blue underline stripe, light grey grainy
-background) plus a mood board of raw-concrete architecture — Tadao Ando-style
-exposed structure, board-formed concrete, industrial stairwells, the
-"Tamarind Square Cyberjaya" reference. Instruction: "no need to over maintain
-the light theme, change what necessary, prioritize my dream." Full creative
-latitude on this pass — not a timid tweak.
+## 1. Core Design Philosophy & Visual Language
 
-**Reading of the brief:** the business card establishes a clear color
-hierarchy — red is dominant (the biggest, first-read element), dark
-charcoal/near-black is the secondary structural color, light grey with
-visible grain is the base surface, and blue is a minor accent (a single thin
-stripe, small icon circles) — not a primary interactive color. The mood
-board reinforces this with raw concrete grey, exposed dark steel, and red/
-orange as the one sharp signal color against monochrome material.
+WSS Dev Labs’ design identity is built on three core pillars: **Clarity, Speed, and Directness**. Spearheaded by our UI/UX specialist, **Natasya Umairah**, every visual and interactive decision is designed to turn first-time visitor interactions into lasting brand trust.
 
-## Palette
+### A. High-Converting, Minimalist UI/UX
+- **The "Anti-SaaS" Visual Tone:** We deliberately reject generic, illustration-heavy corporate SaaS templates and cartoonish 3D icons. Instead, we deploy clean, structural, and developer-centric layouts that communicate raw engineering competence, precision, and sub-second load times.
+- **Premium Simplicity:** Engineered to *"make small brands look big"*. We utilize generous whitespace, high-contrast typography, sharp chamfered geometry, and zero filler "fluff".
+- **Trust-Building Micro-Moments:** Natasya's front-end craft leverages subtle hover elevations, smooth page view transitions, and tactile button states to create polished micro-moments that validate user actions and signal authority.
 
-| Role | Token | Hex | Change from before |
-|------|-------|-----|---------------------|
-| Page background | `--color-paper` | `#f2f0eb` | was pure white `#ffffff` — now cast-concrete off-white |
-| Soft surface | `--color-paper-dim` | `#e6e3db` | darker/greyer than the earlier matte-grey pass |
-| Deep surface | `--color-paper-deep` | `#d6d2c7` | darker still — visible concrete-panel separation |
-| Hairline | `--color-line` | `#cac6bb` | more visible — reads as a structural joint, not a whisper |
-| Primary text | `--color-ink` | `#19191b` | neutral near-black (was navy-tinted `#0c1220`) |
-| Body text | `--color-ink-dim` | `#57585b` | neutral grey (was navy-tinted) |
-| **Primary accent** | `--color-accent` / `-dim` | `#d92d20` / `#b42318` | **was cobalt blue `#2d5be3` — now red.** Drives every button, link, focus ring, hover glow, CTA band, selection color. This is the single biggest change; it cascades from one token. |
-| Blue (minor stripe only) | `--color-accent-blue` | `#2d5be3` | demoted — service-tag coding + literal thin stripe/underline moments only, never a button or primary CTA |
-| Matte dark | `--color-charcoal` / `-soft` | `#17181b` / `#232427` | unchanged, already fit the brief — now a more central surface, not just occasional |
-| Yellow / green | unchanged | — | categorical service-tag use only; the card has no yellow, so it's not part of the "brand identity" palette, just the existing 4-way service coding |
+### B. Typography & Visual Hierarchy
+- **Sizing & Weighting:** Headers are oversized, bold, and scannable (`Outfit Variable` / `Geist Variable`), designed so human visitors and automated Answer Engines parse key value propositions within 2 seconds.
+- **Functional Layout Sections:** Information is broken into numbered structural grids (`01`, `02`, `03` using `Space Grotesk Variable`) and split-screen layouts pairing punchy text with live interactive previews.
 
-## Texture
+### C. Motion & Interactive Previews
+- **GSAP-Powered Motion:** Hardware-accelerated GSAP animations are purpose-driven (scroll-triggered reveals, subtle fades, timeline orchestration). Motion never compromises our strict sub-second performance budget.
+- **Interactive Desktop & Mobile Previews:** Instead of static screenshots, our marketplace and showcase pages embed live, interactive preview wrappers with instant **Desktop (100%)** vs. **Mobile (375px)** viewport toggles, allowing clients to test touch responsiveness directly.
 
-Added a **sitewide film-grain wash**: `body::after`, `position: fixed`,
-`opacity: 0.035`, `mix-blend-mode: overlay`, same fractal-noise SVG the
-codebase already had as an opt-in `.grain-overlay` utility, now applied once
-globally so every surface — paper, charcoal, red — reads as cast/textured
-material instead of flat digital color. This was the highest-leverage way to
-deliver "grainy" across the whole site without touching every component.
+---
 
-## What changed vs. what didn't
+## 2. Palette & Material Tokens
 
-**Changed (token-level, cascades everywhere automatically):**
-- Base background is no longer pure white.
-- Primary interactive color is red, not blue.
-- Neutrals are neutral-grey, not navy-tinted.
-- Hardcoded button-glow shadow colors (`shadow-[...rgb(45_91_227...)]` in
-  `Button.astro`, `Hero.astro`, `QuoteForm.astro`, `testimonials.astro`,
-  `services/[slug].astro`) were retinted to match red — these were literal
-  arbitrary values, not token references, so the accent swap didn't reach
-  them automatically.
-- Sitewide grain texture.
+| Role | Token | Hex / Value | Architectural Purpose |
+|:---|:---|:---|:---|
+| **Page Background** | `--color-paper` | `#f2f0eb` | Cast concrete off-white base surface (Tamarind Square aesthetic) |
+| **Soft Surface** | `--color-paper-dim` | `#e6e3db` | Inset panels, cards, and secondary sections |
+| **Deep Surface** | `--color-paper-deep` | `#d6d2c7` | Structural panel dividers and active pill states |
+| **Primary Text** | `--color-ink` | `#19191b` | Neutral steel near-black (high contrast, AA accessible) |
+| **Body Copy** | `--color-ink-dim` | `#57585b` | Neutral grey with zero navy tint for effortless reading |
+| **Primary Accent** | `--color-accent` | `#d92d20` | **Signal Red** — drives primary CTAs, active badges, and focus rings |
+| **Accent Dim** | `--color-accent-dim` | `#b42318` | Hover state for primary buttons |
+| **Structural Blue** | `--color-accent-blue` | `#2d5be3` | Minor structural stripe and service taxonomy coding |
+| **Signal Gold/Yellow** | `--color-accent-yellow` | `#b45309` / `#eab308` | Highlight badges, Answer Engine tags, and grant notices |
+| **Verified Green** | `--color-accent-green` | `#15803d` / `#10b981` | Live status indicators, uptime badges, and instant checkmarks |
+| **Hairline Joints** | `--color-line` | `#cac6bb` | Precision-formwork concrete joints |
 
-**Follow-through, same day, after founder's explicit go-ahead:**
-- **Radius scale sharpened globally.** Overrode Tailwind's default
-  `--radius-xs` through `--radius-4xl` in `@theme` (was 2px→32px, now
-  1px→12px) — this single token change reshaped every `rounded-xl` /
-  `rounded-2xl` / `rounded-3xl` utility across the *entire* codebase at once,
-  no per-file edits needed. Also hand-fixed the small number of hardcoded
-  arbitrary values (`rounded-[2rem]`, `rounded-[2.5rem]` in `contact.astro`,
-  `FeaturedWork.astro`, `ContactTeaser.astro`, `CTABand.astro`) and the
-  literal `border-radius` values in `.card`/`.panel`/`.panel-ink`/
-  `.panel-charcoal`/`.glass-float-card` in `global.css`, since those aren't
-  Tailwind utilities and the token override doesn't reach them.
-  **`rounded-full` (pill buttons, badges) was deliberately left untouched** —
-  it's a fixed 9999px value outside the scale, and stays as the one
-  intentionally soft/human shape against otherwise sharp panels — a
-  considered choice, not an oversight.
-- **Structural motifs added to both hero variants** (`Hero.astro`): the
-  existing `.grid-pattern` (fine blueprint-style line grid) now also runs on
-  the inner-page hero, not just home (previously home-only); a single thin
-  diagonal accent line was added to the home hero, styled like a concrete
-  beam edge crossing the frame; a redundant second red blur-blob (home hero
-  had two, both effectively the same color after the accent-token swap) was
-  swapped for a neutral matte-grey blob instead of a second bright color, so
-  the hero doesn't accumulate more competing hues than the brief calls for.
-  `.grid-pattern`/`.dot-pattern` were also retinted from the old navy
-  `rgb(12 18 32)` to the new neutral ink `rgb(25 25 27)`.
+### Texture Wash
+- **Global Film Grain:** `body::after` fixed fractal-noise SVG overlay (`opacity: 0.035`, `mix-blend-mode: overlay`) imparting physical, tactile material depth to every surface.
 
-**Still not done (lower priority / bigger, separate undertaking):**
-- **Genuine dark-mode variant** (charcoal + grain as the default surface,
-  with a toggle) — this is real theme-infrastructure work, not a styling
-  tweak, and wasn't clearly what was being asked for. Ask before building.
-- **Typography.** Kept Geist/Outfit/Space Grotesk — already fairly geometric
-  and technical (the mono face already suits a "blueprint" feel).
+---
 
-## Anti-patterns for this project
-- Don't reintroduce blue as a button/CTA/link color — it's a minor stripe
-  accent now, per the card, not the primary.
-- Don't let red apply to literally everything (error states, every icon,
-  every card border) — it's the signal color precisely because most of the
-  page stays grey/charcoal. One accent doing accent work.
-- Don't go back to pure-white backgrounds for new sections — match the
-  existing `paper`/`paper-dim`/`paper-deep` concrete scale.
-- Any new full-bleed color block should default to red (`bg-accent`) or
-  charcoal, not blue.
+## 3. Technical Stack & Front-End Engineering
 
-## Next candidates (not done, worth asking the founder about before doing)
-- A genuine dark-mode variant leaning into charcoal + grain as the default
-  surface, with an actual toggle — real theme infrastructure, bigger than
-  everything else on this list.
-- Extending the diagonal structural-accent-line treatment (added to the home
-  hero) to other full-bleed sections (CTABand, ContactTeaser) if the founder
-  likes the effect.
+All technology choices are strictly performance-led:
+
+### A. Core Technologies & Frameworks
+- **Astro + TypeScript:** Static-first architecture, zero JS overhead by default, typed from line one.
+- **Tailwind CSS (v4):** Atomic utility token engine delivering an ultra-lightweight CSS footprint.
+- **PHP 8.2+ & Vanilla JS:** The foundation for our **WSS Marketplace** products. Clean, dependency-free PHP with Ed25519 offline cryptographic licensing, local MySQL storage, and zero telemetry.
+- **GSAP & Lenis:** Smooth scrolling and physics-based micro-interactions respecting `prefers-reduced-motion`.
+
+### B. Mobile-First Responsiveness & Accessibility
+- Touch-friendly 48px+ button tap targets.
+- Strict performance budget: Mobile Lighthouse Score ≥ 90, LCP ≤ 2.5s.
+- Semantic HTML5, ARIA labels, and keyboard-navigable interactive widgets.
+
+---
+
+## 4. Optimization & Content Strategy Matrix
+
+```
+┌──────────────────────────────────────────────────────────┐
+│             WSS DEV LABS OPTIMIZATION PILLARS            │
+├────────────────────────────┬─────────────────────────────┤
+│      HUMAN AUDIENCE        │        AI & BOT CRAWLERS    │
+├────────────────────────────┼─────────────────────────────┤
+│ • Direct, "No-Fluff" Copy  │ • Clear Heading Structures  │
+│ • Clear Milestone Sprints  │ • Structured FAQ Schemas    │
+│ • Fixed-Price Package Tiers│ • Local Relevance Metadata  │
+│ • Direct Engineer WhatsApp │ • SoftwareApplication Schema│
+└────────────────────────────┴─────────────────────────────┘
+```
+
+### A. AI-First SEO Strategy (Answer Engines)
+- **Engineered for LLMs:** Systematic heading hierarchies (`h1` ➔ `h2` ➔ `h3`) and clean semantic markup.
+- **Direct Q&A Formats:** Scannable FAQ accordions mirrored into JSON-LD `FAQPage` schema so ChatGPT, Perplexity, and Gemini cite WSS Dev Labs directly for Malaysian digital queries.
+
+### B. Local SEO & Trust Signals
+- **Malaysia-Anchored Copy:** Direct mentions of Malaysian states (Kuala Lumpur, Selangor, Johor, Penang, Sabah, Sarawak) with SSM registration identifiers in the footer.
+- **Malaysian Payment Gateways:** Native support for ToyyibPay, SenangPay, gKash, Stripe, and DuitNow QR.
+
+### C. The "No Subscriptions. No SaaS. Just Yours." Philosophy
+- Marketing copy for the **WSS Marketplace** explicitly highlights: **"No monthly fees. Buy once, own forever."**
+- Complete source code ownership, zero vendor lock-in, and self-hosted privacy under Malaysian PDPA.
+
+---
+
+## 5. Recurring High-Converting UI Patterns
+
+### A. High-Impact Hero Sections
+- **Punchy Value Proposition:** Short, bold headlines with dynamic gradient text.
+- **Dual CTAs:** Always pair a primary action ("WhatsApp an Engineer" / "Get Express") with a secondary exploratory link ("Browse 15 Systems" / "View Grant Subsidies").
+
+### B. Logo Arrays (The Trust Grid)
+- Horizontal grayscale grid of recognizable Malaysian commercial landmarks and enterprises (Parkson, AEON, Sunway, KLCC, Plaza Sentral, Nexus Bangsar) placed directly below the hero to anchor immediate credibility.
+
+### C. Step-by-Step Step Modules
+- 4-phase numbered sprint pipelines (`01 Architecture Lock` ➔ `02 Staging Prototype` ➔ `03 Security & Payments` ➔ `04 Go-Live Handover`).
+
+### D. Embedded Utility Calculators
+- Interactive client-side calculators (e.g., **SME Project & Grant Savings Calculator**) that dynamically compute package costs, 50% PMKS Madani grant deductions, and generate prefilled WhatsApp booking prompts.
+
+### E. Interactive Desktop / Mobile Device Viewport Switcher
+- Live toggle switches allowing potential buyers to test systems across 100% desktop and 375px mobile phone dimensions with simulated browser chromes.

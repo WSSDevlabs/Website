@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
+import InteractiveDevicePreview from '../../components/ui/InteractiveDevicePreview.astro';
 import { MARKETPLACE_SYSTEMS, type MarketplaceSystem } from '../../data/marketplace';
 
 export function getStaticPaths() {
@@ -203,6 +204,15 @@ const faqSchema = {
               {system.underTheHood.securityAndLicensing}
             </p>
           </div>
+        </div>
+
+        <!-- Interactive Live Desktop / Mobile Viewport Switcher -->
+        <div class="mt-10">
+          <InteractiveDevicePreview
+            title={`${system.name} Live Viewport Demo`}
+            urlPath={`https://demo.wssdevlabs.com/systems/${system.slug}`}
+            systemSlug={system.slug}
+          />
         </div>
       </div>
     </Container>

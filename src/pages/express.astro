@@ -4,6 +4,7 @@ import Container from '../components/ui/Container.astro';
 import Section from '../components/ui/Section.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
+import SMEProjectCalculator from '../components/sections/SMEProjectCalculator.astro';
 import { EXPRESS_PACKAGES, EXPRESS_FAQ } from '../data/express';
 
 const faqSchema = {
@@ -307,6 +308,9 @@ const faqSchema = {
       </div>
     </Container>
   </Section>
+
+  <!-- Interactive SME Grant & Project Calculator -->
+  <SMEProjectCalculator />
 
   <!-- Conversion FAQ -->
   <Section rule class="bg-paper-dim/40">
