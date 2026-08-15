@@ -98,14 +98,14 @@ const navIcons = [
 <aside
   id="desktop-icon-rail"
   aria-label="Quick Navigation Rail"
-  class="fixed left-3 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center justify-between rounded-full border border-line/80 bg-paper/95 py-4 px-2 shadow-[0_8px_32px_-8px_rgb(25_25_27/0.14)] backdrop-blur-2xl ring-1 ring-black/5"
+  class="fixed left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center justify-between rounded-[2.2rem] border border-line/75 bg-paper/85 py-3.5 px-2 shadow-[0_16px_45px_-12px_rgba(25,25,27,0.18)] backdrop-blur-xl ring-1 ring-black/5"
 >
   <!-- Top: Menu / Full Drawer Button -->
   <div class="relative group flex items-center justify-center pb-2 border-b border-line/60">
     <button
       id="drawer-open-btn"
       type="button"
-      class="flex h-11 w-11 items-center justify-center rounded-full text-ink transition-all duration-200 hover:bg-paper-dim hover:scale-105 active:scale-95"
+      class="flex h-10 w-10 items-center justify-center rounded-xl text-ink transition-all duration-200 hover:bg-paper-dim hover:scale-105 active:scale-95"
       aria-label="Open Full Navigation Menu"
     >
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -126,17 +126,17 @@ const navIcons = [
   </div>
 
   <!-- Center: Primary Icon Navigation Stack -->
-  <nav class="my-3 flex flex-col items-center gap-2" aria-label="Quick Links">
+  <nav class="my-2.5 flex flex-col items-center gap-1.5" aria-label="Quick Links">
     {
       navIcons.map((item) => (
         <div class="relative group flex items-center justify-center">
           <a
             href={item.href}
             class:list={[
-              'relative flex h-11 w-11 items-center justify-center rounded-2xl transition-all duration-200 hover:scale-105 active:scale-95',
+              'relative flex h-10 w-10 items-center justify-center rounded-xl transition-all duration-200 hover:scale-105 active:scale-95',
               item.active
-                ? 'bg-paper-dim text-accent shadow-sm ring-1 ring-line/80 font-bold'
-                : 'text-ink/75 hover:bg-paper-dim hover:text-ink'
+                ? 'bg-paper-dim/95 text-ink shadow-sm ring-1 ring-line/80 font-bold'
+                : 'text-ink/75 hover:bg-paper-dim/80 hover:text-ink'
             ]}
             aria-label={item.label}
           >
@@ -211,7 +211,7 @@ const navIcons = [
       href={PRIMARY_CTA.href}
       target="_blank"
       rel="noopener noreferrer"
-      class="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-600/10 text-emerald-600 transition-all duration-200 hover:bg-emerald-600 hover:text-white hover:scale-105 active:scale-95 shadow-sm"
+      class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600/10 text-emerald-600 transition-all duration-200 hover:bg-emerald-600 hover:text-white hover:scale-105 active:scale-95 shadow-sm"
       aria-label="WhatsApp an Engineer"
     >
       <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
