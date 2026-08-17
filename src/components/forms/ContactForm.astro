@@ -79,6 +79,34 @@ const REFERRAL_SOURCES = ['Google search', 'Social media', 'Referral', 'LinkedIn
     </div>
   </div>
 
+  <!-- Preferred Online Consultation Date & Time -->
+  <div class="rounded-2xl border border-line bg-paper-dim/40 p-4 sm:p-5">
+    <div class="mb-3 flex items-center justify-between">
+      <label class="text-sm font-semibold text-ink flex items-center gap-2">
+        <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Preferred Online Consultation Date &amp; Time (Optional)</span>
+      </label>
+      <span class="text-xs font-mono text-ink-dim uppercase">Google Meet</span>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="preferred_date" class="mb-1 block text-xs font-medium text-ink-dim">Preferred Date</label>
+        <input id="preferred_date" name="preferred_date" type="date" class="form-input !bg-white" />
+      </div>
+      <div>
+        <label for="preferred_time" class="mb-1 block text-xs font-medium text-ink-dim">Preferred Time Slot</label>
+        <select id="preferred_time" name="preferred_time" class="form-input !bg-white">
+          <option value="">Select a time slot</option>
+          <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM – 12:00 PM)</option>
+          <option value="Early Afternoon (02:00 PM - 04:00 PM)">Early Afternoon (02:00 PM – 04:00 PM)</option>
+          <option value="Late Afternoon (04:00 PM - 06:00 PM)">Late Afternoon (04:00 PM – 06:00 PM)</option>
+          <option value="Evening (08:00 PM - 10:00 PM)">Evening (08:00 PM – 10:00 PM)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
   <div>
     <label for="message" class="text-sm font-medium text-ink">Message</label>
     <textarea id="message" name="message" rows="5" required class="form-input"></textarea>

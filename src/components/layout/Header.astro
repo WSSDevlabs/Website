@@ -6,54 +6,271 @@ const currentPath = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 
-const navIcons = [
+type NavVisualCard = {
+  title: string;
+  desc: string;
+  href: string;
+  image: string;
+};
+
+type NavSubLink = {
+  label: string;
+  href: string;
+  desc: string;
+  badge?: string;
+};
+
+type NavGroup = {
+  label: string;
+  subtitle: string;
+  categoryTitle: string;
+  href: string;
+  badge: string | null;
+  active: boolean;
+  icon: string;
+  links: NavSubLink[];
+  cards: NavVisualCard[];
+};
+
+const masterDirectory = {
+  categoryTitle: 'DIRECTORIES',
+  links: [
+    { label: 'All Services Catalog', href: '/services', desc: 'Web, AI, Mobile & Enterprise' },
+    { label: 'WSS Express Web', href: '/express', desc: 'Fixed-price RM 180–RM 4,500', badge: '3–7d' },
+    { label: 'The Marketplace', href: '/marketplace', desc: '15 Buy-once PHP systems', badge: '15 Systems' },
+    { label: 'Bespoke Enterprise', href: '/services/bespoke', desc: 'Custom enterprise software', badge: 'Grant' },
+    { label: 'Projects & Work', href: '/work', desc: 'Delivered client results' },
+    { label: 'About Senior Builders', href: '/about', desc: 'Razin Hakim & Natasya Umairah' },
+    { label: 'Live Build Status', href: '/status', desc: '99.9% operational SLA', badge: 'Live' },
+    { label: 'Direct FAQ', href: '/faq', desc: 'Pricing & engineering answers' }
+  ],
+  cards: [
+    {
+      title: 'Productized Software',
+      desc: 'Fixed-price engineering shipped in 3–7 days with zero recurring lock-in.',
+      href: '/services',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=380&q=80'
+    },
+    {
+      title: 'Direct Senior Architects',
+      desc: 'Work directly with lead architects — zero middlemen or account managers.',
+      href: '/about',
+      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&h=380&q=80'
+    }
+  ]
+};
+
+const navGroups: NavGroup[] = [
   {
     label: 'Home',
     subtitle: 'Overview & Fast Entry',
+    categoryTitle: 'EXPLORE',
     href: '/',
     badge: null,
     active: currentPath === '/',
-    icon: 'home'
+    icon: 'home',
+    links: [
+      { label: 'Overview & Studio', href: '/', desc: 'Fast entry to all core offerings' },
+      { label: 'Browse All Services', href: '/services', desc: 'Web, AI, Mobile & Enterprise' },
+      { label: 'Pricing Calculator', href: '/pricing', desc: 'Transparent investment ranges' },
+      { label: 'Engineering Process', href: '/process', desc: 'Our engineering roadmap' },
+      { label: 'Direct Scoping', href: 'https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I%20would%20like%20to%20discuss%20a%20project', desc: 'Instant WhatsApp with builders' }
+    ],
+    cards: [
+      {
+        title: 'Bespoke Digital Platforms',
+        desc: 'High-contrast design systems built for Malaysian SMEs and fast-growing brands.',
+        href: '/express',
+        image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&h=380&q=80'
+      },
+      {
+        title: 'High-Speed SEO Engine',
+        desc: 'Sub-second page speeds and AI-first SEO architecture that drive search rankings.',
+        href: '/insights',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=380&q=80'
+      }
+    ]
   },
   {
-    label: 'About & Builders',
+    label: 'Services & Details',
+    subtitle: 'Web, AI, Mobile & Enterprise',
+    categoryTitle: 'CAPABILITIES',
+    href: '/services',
+    badge: 'Catalog',
+    active: isActive('/services') || isActive('/pricing'),
+    icon: 'services',
+    links: [
+      { label: 'WSS Express Web', href: '/express', badge: '3–7d', desc: 'Fixed-price RM 180–RM 4,500' },
+      { label: 'The Marketplace', href: '/marketplace', badge: '15 Systems', desc: '15 Buy-once PHP systems' },
+      { label: 'Bespoke Enterprise', href: '/services/bespoke', badge: 'Grant', desc: 'Custom enterprise software' },
+      { label: 'AI Agents & LLM', href: '/services/ai-development', desc: 'Smart workflow automation' },
+      { label: 'Mobile & Web Apps', href: '/services/web-development', desc: 'Full custom digital portals' },
+      { label: 'Pricing & Packages', href: '/pricing', desc: 'Transparent investment ranges' }
+    ],
+    cards: [
+      {
+        title: 'WSS Express Web',
+        desc: 'Turnkey landing pages and company platforms delivered in 3 to 7 business days.',
+        href: '/express',
+        image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&h=380&q=80'
+      },
+      {
+        title: 'The PHP Marketplace',
+        desc: '15 production-ready turnkey web systems. Buy once, host anywhere, own the code.',
+        href: '/marketplace',
+        image: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=600&h=380&q=80'
+      }
+    ]
+  },
+  {
+    label: 'About & Studio',
     subtitle: 'Razin Hakim & Natasya Umairah',
+    categoryTitle: 'STUDIO & TRUST',
     href: '/about',
     badge: 'Direct',
-    active: isActive('/about'),
-    icon: 'user'
+    active: isActive('/about') || isActive('/work') || isActive('/process'),
+    icon: 'user',
+    links: [
+      { label: 'About Senior Builders', href: '/about', desc: 'Direct with lead engineers' },
+      { label: 'Projects & Case Studies', href: '/work', desc: 'Production results & metrics' },
+      { label: 'How We Build (Process)', href: '/process', desc: 'Our engineering workflow' },
+      { label: 'Live Build Status', href: '/status', desc: 'Operational metrics & SLA', badge: 'Live' },
+      { label: 'Direct FAQ', href: '/faq', desc: 'Answers to common questions' },
+      { label: 'Contact Us', href: '/contact', desc: 'Get in touch directly' }
+    ],
+    cards: [
+      {
+        title: 'Direct Senior Architects',
+        desc: '10+ years combined shipping complex web apps, ERP systems, and cloud infrastructure.',
+        href: '/about',
+        image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&h=380&q=80'
+      },
+      {
+        title: 'Verified Production Results',
+        desc: 'Over RM 5M+ gross value transacted across 15+ custom software platforms.',
+        href: '/work',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=380&q=80'
+      }
+    ]
   },
   {
     label: 'Solutions & Express',
     subtitle: 'Fixed-Price RM180 - RM4,500',
+    categoryTitle: 'PACKAGES',
     href: '/express',
     badge: '3–7d',
-    active: isActive('/express') || isActive('/services'),
-    icon: 'code'
+    active: isActive('/express'),
+    icon: 'code',
+    links: [
+      { label: 'WSS Express Overview', href: '/express', badge: '3–7d', desc: 'Fast turnaround web design' },
+      { label: 'Starter Tier (RM 180)', href: '/express#packages', desc: 'One-page landing essentials' },
+      { label: 'Business Tier (RM 1,200)', href: '/express#packages', desc: 'Multi-page high-speed site' },
+      { label: 'Enterprise Tier (RM 4,500)', href: '/express#packages', desc: 'Full custom digital platform' },
+      { label: 'Compare All Features →', href: '/express#compare', desc: 'Detailed SLA breakdown' }
+    ],
+    cards: [
+      {
+        title: 'Rapid Web Launch',
+        desc: 'Production-ready website deployed with DNS, SSL, and mobile optimization in 3–7 days.',
+        href: '/express',
+        image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&h=380&q=80'
+      },
+      {
+        title: 'Built for Conversions',
+        desc: 'High-converting layout with WhatsApp direct integration and instant lead capture.',
+        href: '/express',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=380&q=80'
+      }
+    ]
   },
   {
     label: 'The Marketplace',
     subtitle: '15 Buy-Once PHP Systems',
+    categoryTitle: 'SYSTEMS',
     href: '/marketplace',
     badge: '15 Systems',
     active: isActive('/marketplace'),
-    icon: 'store'
+    icon: 'store',
+    links: [
+      { label: 'Clinic Queue & EMR', href: '/marketplace/clinic-queue-emr', desc: 'Patient management & queue' },
+      { label: 'Service Booking Engine', href: '/marketplace/service-booking-engine', desc: 'Automated appointments & sync' },
+      { label: 'Multi-Vendor Marketplace', href: '/marketplace/multi-vendor-marketplace', desc: 'E-commerce multivendor engine' },
+      { label: 'HR & Payroll Portal', href: '/marketplace/hr-payroll-portal', desc: 'Self-hosted staff & payroll' },
+      { label: 'Browse All 15 Systems →', href: '/marketplace', badge: 'PHP 8.2', desc: 'Full unencrypted source code' }
+    ],
+    cards: [
+      {
+        title: 'Clinic Queue & EMR',
+        desc: 'Live TV queue display, patient records, prescription tracking, and WhatsApp alerts.',
+        href: '/marketplace/clinic-queue-emr',
+        image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&h=380&q=80'
+      },
+      {
+        title: 'Service Booking Engine',
+        desc: 'Automated calendar slot reservations, deposit payments, and Google Calendar sync.',
+        href: '/marketplace/service-booking-engine',
+        image: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=600&h=380&q=80'
+      }
+    ]
   },
   {
     label: 'Live Build Status',
     subtitle: 'Operational & Direct SLA',
+    categoryTitle: 'RELIABILITY',
     href: '/status',
     badge: 'Live',
     active: isActive('/status'),
-    icon: 'status'
+    icon: 'status',
+    links: [
+      { label: 'Production API Status', href: '/status', badge: '99.9%', desc: 'Real-time uptime monitoring' },
+      { label: 'Server Edge Health', href: '/status', desc: 'Cloudflare global edge status' },
+      { label: 'Direct Builder SLA', href: '/status', desc: 'Sub-hour response guarantee' },
+      { label: 'Ed25519 Cryptographic', href: '/status', desc: 'Active key verification' }
+    ],
+    cards: [
+      {
+        title: '99.9% Production SLA',
+        desc: 'All systems running with sub-second response times across Cloudflare edge nodes.',
+        href: '/status',
+        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&h=380&q=80'
+      },
+      {
+        title: 'Direct Builder Access',
+        desc: 'Sub-hour response SLA directly from senior architects Razin and Natasya.',
+        href: '/status',
+        image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&h=380&q=80'
+      }
+    ]
   },
   {
     label: 'Insights & FAQ',
     subtitle: 'AI-First SEO & Answers',
+    categoryTitle: 'KNOWLEDGE',
     href: '/insights',
     badge: null,
     active: isActive('/insights') || isActive('/faq'),
-    icon: 'document'
+    icon: 'document',
+    links: [
+      { label: 'Insights & AI-SEO', href: '/insights', desc: 'Technical & growth guides' },
+      { label: 'E-Invoicing 2026 Guide', href: '/insights/do-you-need-einvoicing-yet', desc: 'LHDN compliance guide' },
+      { label: 'Page Speed & SEO', href: '/insights/why-page-speed-still-matters-for-seo', desc: 'Sub-second Lighthouse scores' },
+      { label: 'MSME MADANI Grant', href: '/insights/msme-digital-grant-madani-explained', desc: 'Gov grant requirements' },
+      { label: 'Direct Pricing FAQ', href: '/faq', desc: 'Transparent SME pricing Q&A' }
+    ],
+    cards: [
+      {
+        title: 'Engineering Blueprints',
+        desc: 'In-depth technical guides and business growth strategies for Malaysian founders.',
+        href: '/insights',
+        image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&h=380&q=80'
+      },
+      {
+        title: 'Transparent SME FAQ',
+        desc: 'Zero-jargon answers covering pricing, timelines, source code rights, and support.',
+        href: '/faq',
+        image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&h=380&q=80'
+      }
+    ]
   }
 ];
 ---
@@ -70,6 +287,12 @@ const navIcons = [
 
   <div class="flex items-center gap-2">
     <a
+      href="/services"
+      class="rounded-lg border border-line bg-paper px-3 py-1 text-xs font-semibold text-ink"
+    >
+      Services
+    </a>
+    <a
       href={PRIMARY_CTA.href}
       target="_blank"
       rel="noopener noreferrer"
@@ -80,55 +303,97 @@ const navIcons = [
         <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.072-2.072-.5-1.761-.733-2.887-2.526-2.975-2.644-.088-.117-.708-.942-.708-1.798s.446-1.277.607-1.452c.16-.175.349-.219.465-.219.117 0 .233 0 .335.006.107.005.25.04.388.373.145.349.495 1.209.539 1.297.044.088.073.19.015.305-.058.117-.087.19-.175.292-.087.102-.184.228-.263.307-.087.087-.179.182-.077.357.102.175.454.748.974 1.211.669.595 1.233.78 1.408.868.175.087.277.073.379-.044.102-.117.437-.51.554-.685.117-.175.233-.146.393-.087.16.058 1.018.48 1.193.568.175.087.291.131.335.204.044.073.044.423-.1 1.028z"/>
       </svg>
     </a>
-
-    <button
-      id="mobile-drawer-toggle"
-      type="button"
-      class="flex h-9 w-9 items-center justify-center rounded-xl border border-line bg-paper text-ink transition hover:bg-paper-dim"
-      aria-label="Toggle Full Menu"
-    >
-      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
-      </svg>
-    </button>
   </div>
 </header>
 
-<!-- Desktop / Tablet Floating Left Icon Navigation Rail -->
+<!-- Desktop / Tablet Floating Left Icon Navigation Rail with White/Grey Split Popups -->
 <aside
   id="desktop-icon-rail"
   aria-label="Quick Navigation Rail"
   class="fixed left-4 lg:left-7 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center justify-between rounded-[2.6rem] border border-line/80 bg-paper/90 py-5 px-3 shadow-[0_20px_50px_-12px_rgba(25,25,27,0.22)] backdrop-blur-2xl ring-1 ring-black/5"
 >
-  <!-- Top: Menu / Full Drawer Button -->
+  <!-- Top: Company Logo Button with Master White/Grey Popover -->
   <div class="relative group flex items-center justify-center pb-3 border-b border-line/70">
-    <button
-      id="drawer-open-btn"
-      type="button"
-      class="flex h-13 w-13 items-center justify-center rounded-2xl text-ink transition-all duration-200 hover:bg-paper-dim hover:scale-105 active:scale-95"
-      aria-label="Open Full Navigation Menu"
+    <a
+      href="/"
+      id="rail-logo-btn"
+      class="flex h-13 w-13 items-center justify-center rounded-2xl transition-all duration-200 hover:bg-paper-dim hover:scale-105 active:scale-95"
+      aria-label={`${SITE.name} Master Menu`}
     >
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
-      </svg>
-    </button>
+      <!-- Company Logo Placeholder / Mark -->
+      <span class="flex items-center justify-center gap-1" aria-hidden="true">
+        <span class="h-6 w-2.5 rounded-[3px] bg-accent-red"></span>
+        <span class="h-6 w-2.5 rounded-[3px] bg-accent"></span>
+      </span>
+    </a>
 
-    <!-- Hover Tooltip -->
+    <!-- Top Master White/Grey Mega Popover (Left Links + Right Image Cards) -->
     <div
-      role="tooltip"
-      class="pointer-events-none absolute left-full ml-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex items-center opacity-0 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-1"
+      class="pointer-events-none absolute left-full ml-1 top-0 z-50 hidden md:flex items-start opacity-0 -translate-x-3 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-x-0"
     >
-      <div class="rounded-2xl border border-line bg-ink px-4 py-2.5 text-left shadow-2xl">
-        <span class="block text-xs font-bold text-white">Full Menu</span>
-        <span class="block font-mono text-[10px] text-white/60">Click to explore all pages</span>
+      <div class="pl-3">
+        <div class="w-[42rem] lg:w-[46rem] rounded-[2.2rem] border border-black/10 bg-white p-6 text-left shadow-[0_25px_70px_-15px_rgba(0,0,0,0.18)] text-ink">
+          <div class="flex items-stretch gap-6">
+            <!-- Left Column: Menu Links -->
+            <div class="w-48 shrink-0 pr-5 border-r border-gray-100">
+              <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-dim/60 mb-2.5">
+                {masterDirectory.categoryTitle}
+              </p>
+              <div class="space-y-1">
+                {masterDirectory.links.map((sub, idx) => (
+                  <a
+                    href={sub.href}
+                    class:list={[
+                      'block rounded-xl px-3 py-2 text-xs transition-colors',
+                      idx === 0
+                        ? 'bg-[#f0efe9] font-bold text-ink'
+                        : 'font-medium text-ink-dim hover:text-ink hover:bg-[#f4f3f0] hover:font-semibold'
+                    ]}
+                  >
+                    <div class="flex items-center justify-between">
+                      <span>{sub.label}</span>
+                      {sub.badge && (
+                        <span class="rounded bg-accent/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-accent">
+                          {sub.badge}
+                        </span>
+                      )}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <!-- Right Area: Visual Image Cards -->
+            <div class="flex-1 grid grid-cols-2 gap-4.5">
+              {masterDirectory.cards.map((card) => (
+                <a href={card.href} class="group/card block text-left">
+                  <div class="overflow-hidden rounded-2xl aspect-[16/10] bg-[#f4f3f0] border border-black/5 mb-3">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      class="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h4 class="text-xs font-bold text-ink group-hover/card:text-accent transition-colors">
+                    {card.title}
+                  </h4>
+                  <p class="text-[11px] text-ink-dim/80 mt-1 leading-snug">
+                    {card.desc}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Center: Primary Icon Navigation Stack -->
+  <!-- Center: Primary Icon Navigation Stack with White/Grey Popups -->
   <nav class="my-3 flex flex-col items-center gap-2.5" aria-label="Quick Links">
     {
-      navIcons.map((item) => (
+      navGroups.map((item) => (
         <div class="relative group flex items-center justify-center">
           <a
             href={item.href}
@@ -144,6 +409,12 @@ const navIcons = [
             {item.icon === 'home' && (
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+            )}
+
+            {item.icon === 'services' && (
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
               </svg>
             )}
 
@@ -181,215 +452,71 @@ const navIcons = [
             )}
           </a>
 
-          <!-- Hover Details Popover / Tooltip -->
+          <!-- Rich Interactive Hover Popover (White/Grey Theme, Left Links + Right Cards) -->
           <div
-            role="tooltip"
-            class="pointer-events-none absolute left-full ml-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex items-center opacity-0 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-1"
+            class="pointer-events-none absolute left-full ml-1 top-1/2 -translate-y-1/2 z-50 hidden md:flex items-center opacity-0 -translate-x-3 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-x-0"
           >
-            <div class="min-w-[200px] rounded-2xl border border-line bg-ink p-3.5 text-left shadow-2xl backdrop-blur-xl">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-xs font-bold text-white">{item.label}</span>
-                {item.badge && (
-                  <span class="rounded bg-accent px-1.5 py-0.2 font-mono text-[9px] font-bold text-white">
-                    {item.badge}
-                  </span>
-                )}
+            <div class="pl-3">
+              <div class="w-[40rem] lg:w-[44rem] rounded-[2.2rem] border border-black/10 bg-white p-6 text-left shadow-[0_25px_70px_-15px_rgba(0,0,0,0.18)] text-ink">
+                <div class="flex items-stretch gap-6">
+                  <!-- Left Column: Menu Links -->
+                  <div class="w-48 shrink-0 pr-5 border-r border-gray-100">
+                    <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-dim/60 mb-2.5">
+                      {item.categoryTitle}
+                    </p>
+                    <div class="space-y-1">
+                      {item.links.map((sub, idx) => (
+                        <a
+                          href={sub.href}
+                          class:list={[
+                            'block rounded-xl px-3 py-2 text-xs transition-colors',
+                            idx === 0
+                              ? 'bg-[#f0efe9] font-bold text-ink'
+                              : 'font-medium text-ink-dim hover:text-ink hover:bg-[#f4f3f0] hover:font-semibold'
+                          ]}
+                        >
+                          <div class="flex items-center justify-between">
+                            <span>{sub.label}</span>
+                            {sub.badge && (
+                              <span class="rounded bg-accent/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-accent">
+                                {sub.badge}
+                              </span>
+                            )}
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  <!-- Right Area: Visual Image Cards -->
+                  <div class="flex-1 grid grid-cols-2 gap-4.5">
+                    {item.cards.map((card) => (
+                      <a href={card.href} class="group/card block text-left">
+                        <div class="overflow-hidden rounded-2xl aspect-[16/10] bg-[#f4f3f0] border border-black/5 mb-3">
+                          <img
+                            src={card.image}
+                            alt={card.title}
+                            class="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h4 class="text-xs font-bold text-ink group-hover/card:text-accent transition-colors">
+                          {card.title}
+                        </h4>
+                        <p class="text-[11px] text-ink-dim/80 mt-1 leading-snug">
+                          {card.desc}
+                        </p>
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <span class="mt-0.5 block font-mono text-[10px] text-white/60">
-                {item.subtitle}
-              </span>
             </div>
           </div>
         </div>
       ))
     }
   </nav>
-
-  <!-- Bottom: WhatsApp Action Icon -->
-  <div class="relative group flex items-center justify-center pt-3 border-t border-line/70">
-    <a
-      href={PRIMARY_CTA.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex h-13 w-13 items-center justify-center rounded-2xl bg-emerald-600/15 text-emerald-700 transition-all duration-200 hover:bg-emerald-600 hover:text-white hover:scale-105 active:scale-95 shadow-sm"
-      aria-label="WhatsApp an Engineer"
-    >
-      <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.072-2.072-.5-1.761-.733-2.887-2.526-2.975-2.644-.088-.117-.708-.942-.708-1.798s.446-1.277.607-1.452c.16-.175.349-.219.465-.219.117 0 .233 0 .335.006.107.005.25.04.388.373.145.349.495 1.209.539 1.297.044.088.073.19.015.305-.058.117-.087.19-.175.292-.087.102-.184.228-.263.307-.087.087-.179.182-.077.357.102.175.454.748.974 1.211.669.595 1.233.78 1.408.868.175.087.277.073.379-.044.102-.117.437-.51.554-.685.117-.175.233-.146.393-.087.16.058 1.018.48 1.193.568.175.087.291.131.335.204.044.073.044.423-.1 1.028z"/>
-      </svg>
-    </a>
-
-    <!-- Tooltip -->
-    <div
-      role="tooltip"
-      class="pointer-events-none absolute left-full ml-4 top-1/2 -translate-y-1/2 z-50 hidden md:flex items-center opacity-0 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-1"
-    >
-      <div class="min-w-[200px] rounded-2xl border border-line bg-emerald-950 p-3.5 text-left shadow-2xl text-white">
-        <div class="flex items-center gap-1.5">
-          <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-xs font-bold">WhatsApp an Engineer</span>
-        </div>
-        <span class="mt-0.5 block font-mono text-[10px] text-emerald-200/70">
-          Instant chat with Razin &amp; Natasya
-        </span>
-      </div>
-    </div>
-  </div>
 </aside>
 
-<!-- Full Flyout Navigation Drawer (Opens when clicking Hamburger icon) -->
-<div
-  id="full-nav-backdrop"
-  class="fixed inset-0 z-55 hidden bg-ink/60 backdrop-blur-md transition-opacity duration-300"
-  aria-hidden="true"
-></div>
 
-<div
-  id="full-nav-drawer"
-  class="fixed left-0 top-0 z-60 flex h-screen w-80 max-w-[85vw] -translate-x-full flex-col justify-between border-r border-line bg-paper/98 p-6 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-in-out"
->
-  <div>
-    <!-- Header -->
-    <div class="flex items-center justify-between border-b border-line pb-4">
-      <a href="/" class="flex items-center gap-2.5">
-        <span class="flex items-center gap-[3px]" aria-hidden="true">
-          <span class="h-6 w-2.5 rounded-[3px] bg-accent-red"></span>
-          <span class="h-6 w-2.5 rounded-[3px] bg-accent"></span>
-        </span>
-        <div>
-          <span class="block text-base font-bold tracking-tight text-ink">{SITE.name}</span>
-          <span class="block font-mono text-[9px] uppercase tracking-wider text-ink-dim/80">Productized Engineering</span>
-        </div>
-      </a>
-
-      <button
-        id="drawer-close-btn"
-        type="button"
-        class="flex h-8 w-8 items-center justify-center rounded-lg text-ink-dim hover:bg-paper-dim hover:text-ink"
-        aria-label="Close Drawer"
-      >
-        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- Status link -->
-    <div class="mt-4">
-      <a
-        href="/status"
-        class="flex items-center justify-between rounded-xl border border-emerald-500/30 bg-emerald-500/5 px-3 py-1.5 text-[11px] font-mono text-emerald-800 transition hover:bg-emerald-500/10"
-      >
-        <span class="flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>Status: Operational</span>
-        </span>
-        <span class="text-[9px] font-bold uppercase text-emerald-700">Live SLA</span>
-      </a>
-    </div>
-
-    <!-- Full Navigation Links Tree -->
-    <nav class="mt-6 space-y-4 overflow-y-auto max-h-[calc(100vh-320px)] pr-1">
-      <div>
-        <p class="mono-label px-2 pb-1 text-[10px] uppercase text-ink-dim/70 font-bold">Solutions</p>
-        <div class="space-y-0.5">
-          <a href="/express" class="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-ink hover:bg-paper-dim">
-            <span>WSS Express</span>
-            <span class="rounded bg-accent/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-accent">3–7d</span>
-          </a>
-          <a href="/marketplace" class="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-ink hover:bg-paper-dim">
-            <span>The Marketplace</span>
-            <span class="rounded bg-emerald-700/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-emerald-800">15 Systems</span>
-          </a>
-          <a href="/services/bespoke" class="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold text-ink hover:bg-paper-dim">
-            <span>Bespoke Enterprise</span>
-            <span class="rounded bg-amber-500/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-amber-800">Grant</span>
-          </a>
-          <a href="/services" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            All Services Catalog
-          </a>
-          <a href="/pricing" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            Pricing &amp; Packages
-          </a>
-        </div>
-      </div>
-
-      <div>
-        <p class="mono-label px-2 pb-1 text-[10px] uppercase text-ink-dim/70 font-bold">Studio &amp; Trust</p>
-        <div class="space-y-0.5">
-          <a href="/status" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            Live Build Status
-          </a>
-          <a href="/work" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            Projects &amp; Case Studies
-          </a>
-          <a href="/process" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            How We Build (Process)
-          </a>
-          <a href="/about" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            About &amp; Builders
-          </a>
-          <a href="/insights" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            Insights &amp; AI-SEO
-          </a>
-          <a href="/faq" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            Direct FAQ
-          </a>
-          <a href="/contact" class="block rounded-xl px-3 py-2 text-xs font-medium text-ink-dim hover:bg-paper-dim hover:text-ink">
-            Contact
-          </a>
-        </div>
-      </div>
-    </nav>
-  </div>
-
-  <!-- Bottom: Direct Action -->
-  <div class="border-t border-line pt-4">
-    <a
-      href={PRIMARY_CTA.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-semibold text-white shadow-md shadow-accent/20 transition hover:bg-accent-dim"
-    >
-      <span>{PRIMARY_CTA.label}</span>
-      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-      </svg>
-    </a>
-  </div>
-</div>
-
-<script>
-  function initDrawerHandlers() {
-    const openBtn = document.getElementById('drawer-open-btn');
-    const mobileToggle = document.getElementById('mobile-drawer-toggle');
-    const closeBtn = document.getElementById('drawer-close-btn');
-    const drawer = document.getElementById('full-nav-drawer');
-    const backdrop = document.getElementById('full-nav-backdrop');
-
-    if (!drawer || !backdrop) return;
-
-    function open() {
-      drawer?.classList.remove('-translate-x-full');
-      backdrop?.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function close() {
-      drawer?.classList.add('-translate-x-full');
-      backdrop?.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    openBtn?.addEventListener('click', open);
-    mobileToggle?.addEventListener('click', open);
-    closeBtn?.addEventListener('click', close);
-    backdrop.addEventListener('click', close);
-
-    const drawerLinks = drawer.querySelectorAll('a');
-    drawerLinks.forEach((l) => l.addEventListener('click', close));
-  }
-
-  initDrawerHandlers();
-  document.addEventListener('astro:page-load', initDrawerHandlers);
-</script>

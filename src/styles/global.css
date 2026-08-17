@@ -2,45 +2,36 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* ── Industrial concrete, red-first ─────────────────────────
-     Direction: raw-concrete architecture (Tadao Ando / Tamarind Square
-     Cyberjaya) matched to the founder's business card — grey concrete
-     surfaces, near-black steel/ink, red as the dominant signal color,
-     blue demoted to a thin structural stripe. Full rationale + palette
-     table in docs/DESIGN.md. */
-  --color-paper: #f2f0eb; /* page background — cast concrete, not white */
-  --color-paper-dim: #e6e3db; /* soft surface, one step into shadow */
-  --color-paper-deep: #d6d2c7; /* inset panels, deepest light surface */
-  --color-ink: #19191b; /* primary text — neutral near-black, like rebar/steel */
-  --color-ink-soft: #1b2437; /* dark panel surface (footer, contrast blocks) */
-  --color-ink-dim: #57585b; /* body copy — neutral grey, no navy tint */
-  --color-muted: #8d8d8a; /* placeholders, tertiary */
-  --color-line: #cac6bb; /* hairlines — visible, structural concrete joint */
+  /* ── Light cream & off-white theme with matte dark grey highlights ── */
+  --color-paper: #fcfbfa; /* page background — crisp light off-white */
+  --color-paper-dim: #f3f2ee; /* soft light cream surface */
+  --color-paper-deep: #e8e6df; /* inset panels, deepest light surface */
+  --color-ink: #19191b; /* primary text — matte dark grey / near black */
+  --color-ink-soft: #232427; /* dark highlight panel surface */
+  --color-ink-dim: #5c5d61; /* body copy — neutral grey */
+  --color-muted: #8e8e8b; /* placeholders, tertiary */
+  --color-line: #e2dfd7; /* hairlines — crisp, clean border joints */
 
-  /* Matte neutral dark: premium accent surfaces, distinct from navy-tinted ink */
-  --color-charcoal: #17181b;
-  --color-charcoal-soft: #232427;
+  /* Matte neutral dark: used sparingly as a highlight */
+  --color-charcoal: #19191b;
+  --color-charcoal-soft: #26272b;
 
-  /* Matte grey scale: the site's neutral, used for surfaces, secondary UI, and
-     as a grounded backdrop for the red accent below */
+  /* Matte grey scale */
   --color-matte: #6e6c67;
   --color-matte-dim: #4a4844;
-  --color-matte-soft: #d9d6d0;
+  --color-matte-soft: #e5e3dc;
 
-  /* Primary accent: signal red — the dominant color on the business card
-     (logo mark, name, graphic). Drives every button, link, and focus state. */
+  /* Primary accent: restrained signal red (used for pinpoint dots/badges) */
   --color-accent: #d92d20;
   --color-accent-dim: #b42318;
 
-  /* Categorical brand accents (service coding + deliberate highlight moments).
-     Blue is now a minor structural stripe only, per the card — never a
-     primary interactive color. */
+  /* Categorical brand accents */
   --color-accent-blue: #2d5be3;
   --color-accent-blue-dim: #2348c2;
   --color-accent-red: #d92d20;
   --color-accent-red-dim: #b42318;
-  --color-accent-yellow: #b45309; /* text-safe gold: labels, small type (AA on paper) */
-  --color-accent-yellow-vivid: #eab308; /* true saturated yellow: fills, badges, icon tiles */
+  --color-accent-yellow: #b45309;
+  --color-accent-yellow-vivid: #eab308;
   --color-accent-green: #15803d;
 
   /* Type */
@@ -49,38 +40,31 @@
   --font-mono:
     'Geist Mono Variable', ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', monospace;
   /* Bold geometric display face for headings; body copy stays on Geist */
-  --font-display: 'Outfit Variable', var(--font-sans);
+  --font-display: 'Outfit Variable', 'Space Grotesk Variable', var(--font-sans);
   /* Angular geometric face reserved for pull quotes and hero numerals */
   --font-feature: 'Space Grotesk Variable', var(--font-display);
 
   /* Tinted elevation */
-  --shadow-card: 0 1px 2px rgb(25 25 27 / 0.06), 0 8px 24px -16px rgb(25 25 27 / 0.16);
+  --shadow-card: 0 1px 2px rgb(25 25 27 / 0.04), 0 8px 24px -16px rgb(25 25 27 / 0.08);
   --shadow-card-hover:
-    0 2px 4px rgb(25 25 27 / 0.06), 0 24px 48px -20px rgb(217 45 32 / 0.22);
-  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.6) inset, 0 24px 64px -32px rgb(25 25 27 / 0.2);
-  --shadow-float: 0 12px 32px -12px rgb(25 25 27 / 0.24);
+    0 2px 4px rgb(25 25 27 / 0.04), 0 20px 40px -18px rgb(25 25 27 / 0.12);
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 20px 50px -25px rgb(25 25 27 / 0.1);
+  --shadow-float: 0 12px 32px -12px rgb(25 25 27 / 0.12);
 
   /* Easing */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* ── Radius scale, sharpened for "Industrial Concrete" ──────
-     Overrides Tailwind's default --radius-* scale, so every existing
-     rounded-xl/2xl/3xl/etc. utility sitewide gets slab-edged rather than
-     soft-rounded, with zero per-file changes. Precision-formwork chamfer,
-     not a knife edge — small, not zero. rounded-full (pill buttons/badges)
-     is untouched on purpose: it's a fixed 9999px value outside this scale,
-     kept as the one deliberately soft/human shape against otherwise sharp
-     panels and cards. */
-  --radius-xs: 0.0625rem;
-  --radius-sm: 0.125rem;
-  --radius-md: 0.1875rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.375rem;
-  --radius-2xl: 0.5rem;
-  --radius-3xl: 0.625rem;
-  --radius-4xl: 0.75rem;
+  /* Radius scale */
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
 }
 
 @layer base {
@@ -95,18 +79,17 @@
     font-family: var(--font-sans);
     font-feature-settings: 'ss01' on, 'cv01' on;
     position: relative;
+    background-color: var(--color-paper);
   }
 
-  /* Sitewide film-grain wash — the cast-concrete/photographic texture from
-     the business card and mood board, applied once so every surface (paper,
-     charcoal, red) reads as textured material rather than flat digital color. */
+  /* Sitewide film-grain wash */
   body::after {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 999;
     pointer-events: none;
-    opacity: 0.035;
+    opacity: 0.025;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -123,12 +106,12 @@
   }
 
   ::selection {
-    background-color: var(--color-accent);
+    background-color: var(--color-ink);
     color: #ffffff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-ink);
     outline-offset: 2px;
   }
 
@@ -147,21 +130,42 @@
 @layer components {
   /* ── Typography scale ───────────────────────────────────── */
   .h-display {
-    font-size: clamp(2.5rem, 1.4rem + 4.6vw, 4.35rem);
+    font-size: clamp(2.6rem, 1.4rem + 4.8vw, 4.75rem);
     line-height: 1.02;
-    letter-spacing: -0.042em;
-    font-weight: 650;
+    letter-spacing: -0.045em;
+    font-weight: 800;
     color: var(--color-ink);
   }
 
-  /* Wider display range for moments that want extra scale contrast */
   .h-display-xl {
     font-family: var(--font-display);
-    font-size: clamp(2.75rem, 1.2rem + 6.4vw, 5.75rem);
-    line-height: 0.98;
-    letter-spacing: -0.045em;
-    font-weight: 660;
+    font-size: clamp(2.85rem, 1.2rem + 6.6vw, 6rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    font-weight: 800;
     color: var(--color-ink);
+  }
+
+  /* Distinctive matte dark grey badge highlight for words in headers */
+  .badge-highlight {
+    display: inline-block;
+    background-color: var(--color-ink);
+    color: #ffffff;
+    padding: 0.12em 0.5em;
+    border-radius: 0.75rem;
+    font-weight: 800;
+    box-shadow: 0 4px 12px -2px rgba(25, 25, 27, 0.2);
+    white-space: nowrap;
+  }
+
+  .badge-highlight-dark {
+    display: inline-block;
+    background-color: var(--color-paper-dim);
+    color: var(--color-ink);
+    padding: 0.12em 0.5em;
+    border-radius: 0.75rem;
+    font-weight: 800;
+    border: 1px solid var(--color-line);
   }
 
   /* Angular feature type for pull quotes and callouts */
@@ -183,10 +187,10 @@
   }
 
   .h-section {
-    font-size: clamp(1.85rem, 1.2rem + 2.2vw, 2.75rem);
-    line-height: 1.06;
-    letter-spacing: -0.032em;
-    font-weight: 640;
+    font-size: clamp(2rem, 1.3rem + 2.5vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 800;
     color: var(--color-ink);
   }
 
@@ -194,7 +198,7 @@
     font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
     line-height: 1.2;
     letter-spacing: -0.02em;
-    font-weight: 620;
+    font-weight: 650;
     color: var(--color-ink);
   }
 
@@ -208,7 +212,7 @@
   .mono-label {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
@@ -217,7 +221,7 @@
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.04em;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   /* ── Section separation ─────────────────────────────────── */

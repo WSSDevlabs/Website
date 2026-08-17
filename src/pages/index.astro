@@ -2,19 +2,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
-import Marquee from '../components/ui/Marquee.astro';
-import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
-import WhateverYouNeed from '../components/sections/WhateverYouNeed.astro';
-import GrantSolutions from '../components/sections/GrantSolutions.astro';
-import AboutSection from '../components/sections/AboutSection.astro';
 import HomepageServices from '../components/sections/HomepageServices.astro';
-import Differentiator from '../components/sections/Differentiator.astro';
-import ProcessOverview from '../components/sections/ProcessOverview.astro';
-import FeaturedWork from '../components/sections/FeaturedWork.astro';
+import TeamGrid from '../components/sections/TeamGrid.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
-import SMEProjectCalculator from '../components/sections/SMEProjectCalculator.astro';
-import FAQ from '../components/sections/FAQ.astro';
-import { HOME_FAQ } from '../data/faq';
+import ElevateCTA from '../components/sections/ElevateCTA.astro';
+import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
+import FeaturedWork from '../components/sections/FeaturedWork.astro';
+import GrantSolutions from '../components/sections/GrantSolutions.astro';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.draft);
 const featuredProjects = allProjects.filter((p) => p.data.featured).slice(0, 4);
@@ -35,25 +29,13 @@ const schema = {
   path="/"
   schema={schema}
 >
-  <Hero
-    eyebrow="Direct with Builders · Zero SaaS Dependency"
-    title="Whatever you need, we can build it."
-    accentWord="build"
-    accentTone="blue"
-    subtitle="From RM 180 fixed-price websites and Buy-Once production systems to RM 15,000 bespoke enterprise platforms. Direct with senior engineers."
-    primaryCta={{ label: 'Explore Express & Marketplace', href: '/express' }}
-    secondaryCta={{ label: 'Bespoke Enterprise', href: '/services/bespoke' }}
-  />
-  <Marquee />
-  <MarketplaceAndExpressBanner />
-  <WhateverYouNeed />
-  <AboutSection />
+  <Hero />
   <HomepageServices />
-  <Differentiator />
-  <ProcessOverview />
-  <FeaturedWork projects={featuredProjects} />
+  <TeamGrid />
   <Testimonials />
+  <ElevateCTA />
+  <MarketplaceAndExpressBanner />
+  <FeaturedWork projects={featuredProjects} />
   <GrantSolutions />
-  <SMEProjectCalculator />
-  <FAQ items={HOME_FAQ} />
 </BaseLayout>
+

@@ -3,26 +3,31 @@ import Container from '../ui/Container.astro';
 import { SERVICES } from '../../data/services';
 
 const inputClass =
-  'w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-muted shadow-card transition-all focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25';
+  'w-full rounded-2xl border border-line bg-paper-dim/60 px-4 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10';
 ---
 
 <section class="py-12 md:py-16">
   <Container>
-    <div class="panel overflow-hidden">
+    <div class="panel overflow-hidden rounded-[2.5rem] border border-line bg-white shadow-card">
       <div class="grid lg:grid-cols-2">
         <!-- Left: form -->
         <div class="p-8 md:p-12">
-          <p class="mono-label text-accent">Contact us</p>
-          <h2 class="h-section mt-4" data-split>Get your free quote today</h2>
+          <p class="mono-label text-accent font-bold tracking-widest uppercase">FREE QUOTATION</p>
+          <h2 class="h-section mt-3 font-black tracking-tight text-ink">Get your free quote today</h2>
+          <p class="mt-2 text-sm text-ink-dim">
+            Tell us about your project and choose your preferred time for a 1-on-1 online scoping session.
+          </p>
 
           <form id="quote-form" class="mt-8 space-y-5" novalidate>
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <!-- Name & Email -->
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label for="qf-name" class="mb-2 block text-sm font-semibold text-ink">
+                <label for="qf-name" class="mb-1.5 block text-xs font-bold text-ink">
                   Your Name <span class="text-accent-red">*</span>
                 </label>
                 <input
                   id="qf-name"
+                  name="name"
                   type="text"
                   placeholder="Full name"
                   required
@@ -30,11 +35,12 @@ const inputClass =
                 />
               </div>
               <div>
-                <label for="qf-email" class="mb-2 block text-sm font-semibold text-ink">
+                <label for="qf-email" class="mb-1.5 block text-xs font-bold text-ink">
                   Email <span class="text-accent-red">*</span>
                 </label>
                 <input
                   id="qf-email"
+                  name="email"
                   type="email"
                   placeholder="you@company.com"
                   required
@@ -43,70 +49,126 @@ const inputClass =
               </div>
             </div>
 
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <!-- Phone & Service -->
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label for="qf-phone" class="mb-2 block text-sm font-semibold text-ink">Phone</label>
+                <label for="qf-phone" class="mb-1.5 block text-xs font-bold text-ink">Phone / WhatsApp</label>
                 <input
                   id="qf-phone"
+                  name="phone"
                   type="tel"
                   placeholder="+60 11-000 0000"
                   class={inputClass}
                 />
               </div>
               <div>
-                <label for="qf-service" class="mb-2 block text-sm font-semibold text-ink">
+                <label for="qf-service" class="mb-1.5 block text-xs font-bold text-ink">
                   Service Interested In
                 </label>
-                <select id="qf-service" class:list={[inputClass, 'appearance-none']}>
+                <select id="qf-service" name="service" class:list={[inputClass, 'appearance-none cursor-pointer']}>
                   <option value="" disabled selected>Select service</option>
-                  {SERVICES.map((s) => <option value={s.slug}>{s.title}</option>)}
-                  <option value="others">Others</option>
+                  {SERVICES.map((s) => <option value={s.title}>{s.title}</option>)}
+                  <option value="15 Buy-Once PHP Systems (Marketplace)">15 Buy-Once PHP Systems (Marketplace)</option>
+                  <option value="WSS Express Web (Fixed Price)">WSS Express Web (Fixed Price)</option>
+                  <option value="Bespoke Software / AI System">Bespoke Software / AI System</option>
+                  <option value="Others">Others</option>
                 </select>
               </div>
             </div>
 
+            <!-- Preferred Date & Time for Online Consultation -->
+            <div class="rounded-2xl border border-line bg-paper-dim/40 p-4">
+              <div class="mb-3 flex items-center justify-between">
+                <label class="text-xs font-bold text-ink flex items-center gap-1.5">
+                  <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Preferred Online Consultation Date &amp; Time</span>
+                </label>
+                <span class="text-[10px] font-semibold text-ink-dim uppercase">Google Meet / Zoom</span>
+              </div>
+
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div>
+                  <label for="qf-date" class="mb-1 block text-[11px] font-semibold text-ink-dim">
+                    Preferred Date
+                  </label>
+                  <input
+                    id="qf-date"
+                    name="preferred_date"
+                    type="date"
+                    class:list={[inputClass, '!py-2.5 bg-white']}
+                  />
+                </div>
+
+                <div>
+                  <label for="qf-time" class="mb-1 block text-[11px] font-semibold text-ink-dim">
+                    Preferred Time Slot
+                  </label>
+                  <select
+                    id="qf-time"
+                    name="preferred_time"
+                    class:list={[inputClass, '!py-2.5 bg-white appearance-none cursor-pointer']}
+                  >
+                    <option value="" selected>Select time slot</option>
+                    <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM – 12:00 PM)</option>
+                    <option value="Early Afternoon (02:00 PM - 04:00 PM)">Early Afternoon (02:00 PM – 04:00 PM)</option>
+                    <option value="Late Afternoon (04:00 PM - 06:00 PM)">Late Afternoon (04:00 PM – 06:00 PM)</option>
+                    <option value="Evening (08:00 PM - 10:00 PM)">Evening (08:00 PM – 10:00 PM)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Description / What are you building -->
             <div>
-              <label for="qf-message" class="mb-2 block text-sm font-semibold text-ink">
-                Your Message
+              <label for="qf-message" class="mb-1.5 block text-xs font-bold text-ink">
+                What are you building?
               </label>
               <textarea
                 id="qf-message"
-                rows="5"
-                placeholder="Tell us what you're building"
+                name="message"
+                rows="3"
+                placeholder="Tell us briefly about your system requirements or features..."
                 class:list={[inputClass, 'resize-none']}></textarea>
             </div>
 
+            <!-- Submit Button -->
             <button
               type="submit"
-              class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(217_45_32/0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-dim"
+              id="qf-submit-btn"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-accent/30 transition-all duration-300 hover:bg-accent-dim hover:scale-105 active:scale-95"
             >
-              Send Message
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <span id="qf-submit-label">Get My Free Quote</span>
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
               </svg>
             </button>
 
             <p
               id="qf-success"
-              class="hidden rounded-xl border border-accent-green/25 bg-accent-green/8 px-4 py-3 text-sm font-medium text-accent-green"
+              class="hidden rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm font-semibold text-emerald-800"
             >
-              Thank you. We will get back to you within 1 business day.
+              Thank you! Your quote request &amp; preferred consultation schedule have been sent. Our senior architect will confirm within 1 business hour.
             </p>
           </form>
         </div>
 
         <!-- Right: full-bleed image -->
-        <div class="relative hidden overflow-hidden lg:block">
+        <div class="relative hidden overflow-hidden lg:block bg-paper-dim">
           <img
             src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&h=1000&q=80"
-            alt="WSS DevLabs team ready to help"
-            class="absolute inset-0 h-full w-full scale-110 object-cover"
+            alt="WSS DevLabs senior engineer ready for online consultation"
+            class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
             loading="lazy"
             width="800"
             height="1000"
-            data-parallax="7"
           />
-          <div class="absolute inset-0 bg-gradient-to-r from-paper-dim/40 to-transparent" aria-hidden="true"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-transparent" aria-hidden="true"></div>
+          <div class="absolute bottom-8 left-8 right-8 rounded-2xl bg-white/95 border border-line p-5 shadow-lg backdrop-blur-md">
+            <p class="font-display text-sm font-bold text-ink">Direct Senior Architect Scoping</p>
+            <p class="mt-1 text-xs text-ink-dim leading-relaxed">
+              No sales middlemen. You will be attended 1-on-1 by a senior software engineer who writes and reviews production code.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -120,18 +182,32 @@ const inputClass =
     if (!form || form.dataset.bound) return;
     form.dataset.bound = '1';
 
+    // Set min date to today
+    const dateInput = document.getElementById('qf-date') as HTMLInputElement | null;
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+    }
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const name = (document.getElementById('qf-name') as HTMLInputElement)?.value.trim();
       const email = (document.getElementById('qf-email') as HTMLInputElement)?.value.trim();
       if (!name || !email) return;
 
-      const service = (document.getElementById('qf-service') as HTMLSelectElement)?.value;
-      const message = (document.getElementById('qf-message') as HTMLTextAreaElement)?.value.trim();
-      const body = encodeURIComponent(`Name: ${name}\nService: ${service}\n\n${message}`);
-      window.location.href = `mailto:hello@wssdevlabs.com?subject=Quote Request&body=${body}`;
+      const phone = (document.getElementById('qf-phone') as HTMLInputElement)?.value.trim() || 'N/A';
+      const service = (document.getElementById('qf-service') as HTMLSelectElement)?.value || 'General Inquiry';
+      const date = (document.getElementById('qf-date') as HTMLInputElement)?.value || 'Not specified';
+      const time = (document.getElementById('qf-time') as HTMLSelectElement)?.value || 'Not specified';
+      const message = (document.getElementById('qf-message') as HTMLTextAreaElement)?.value.trim() || 'No message';
 
-      success?.classList.remove('hidden');
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nPreferred Online Consultation Date: ${date}\nPreferred Time Slot: ${time}\n\nProject Details:\n${message}`
+      );
+
+      window.location.href = `mailto:hello@wssdevlabs.com?subject=${encodeURIComponent(`Free Quote & Online Meeting Request - ${name}`)}&body=${body}`;
+
+      if (success) success.classList.remove('hidden');
       form.reset();
     });
   }

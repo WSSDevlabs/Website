@@ -1,46 +1,34 @@
 ---
 import Container from '../ui/Container.astro';
-import Button from '../ui/Button.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import type { Tone } from '../../lib/tone';
 
 type Props = {
   eyebrow?: string;
   eyebrowTone?: Tone;
-  title: string;
-  /** A word or phrase within `title` to render in the accent color */
-  accentWord?: string;
-  accentTone?: 'blue' | 'red' | 'yellow' | 'green';
-  subtitle: string;
-  primaryCta: { label: string; href: string };
+  title?: string;
+  subtitle?: string;
+  primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
-  /** Use "page" for inner page hero (compact, patterned band) */
   variant?: 'home' | 'page';
 };
 
 const {
-  eyebrow,
-  eyebrowTone = 'blue',
-  title,
-  accentWord,
-  accentTone = 'blue',
-  subtitle,
-  primaryCta,
-  secondaryCta,
+  eyebrow = 'Direct with Builders · Zero SaaS Dependency',
+  eyebrowTone = 'red',
+  title = 'Empowering Businesses Through Custom Tech Solutions',
+  subtitle = 'From RM 180 fixed-price web packages and 15 Buy-Once production systems to bespoke enterprise software with senior architects.',
+  primaryCta = { label: 'Explore Marketplace', href: '/marketplace' },
+  secondaryCta = { label: 'WhatsApp an Engineer', href: 'https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I%20would%20like%20to%20discuss%20a%20project' },
   variant = 'home'
 } = Astro.props;
 
-const accentClass = {
-  blue: 'text-accent',
-  red: 'text-accent-red',
-  yellow: 'text-accent-yellow',
-  green: 'text-accent-green'
-}[accentTone];
-
-const titleHtml =
-  accentWord && title.includes(accentWord)
-    ? title.replace(accentWord, `<span class="${accentClass}">${accentWord}</span>`)
-    : title;
+const stats = [
+  { value: '2000+', label: 'Hours Shipped' },
+  { value: '10+', label: 'Years Engineering Experience' },
+  { value: '15+', label: 'Buy-Once PHP Systems' },
+  { value: 'RM 5M+', label: 'Client Value Generated' }
+];
 ---
 
 {
@@ -55,10 +43,6 @@ const titleHtml =
         class="absolute -bottom-24 left-[-8%] h-64 w-[28rem] rounded-full bg-matte/10 blur-3xl"
         aria-hidden="true"
       />
-      <div
-        class="absolute right-[8%] top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-line to-transparent sm:block"
-        aria-hidden="true"
-      />
       <Container class="relative py-12 md:py-16">
         {eyebrow && (
           <span data-hero-item data-hero-delay="0" style="display:block">
@@ -68,151 +52,300 @@ const titleHtml =
         <h1
           class="h-section mt-5 max-w-3xl !text-[clamp(2.25rem,1.4rem+3vw,3.4rem)]"
           data-split
-          set:html={titleHtml}
-        />
+        >
+          {title}
+        </h1>
         <p data-hero-item data-hero-delay="0.12" class="body-lead mt-5">{subtitle}</p>
         <div data-hero-item data-hero-delay="0.22" class="mt-8 flex flex-wrap gap-4">
-          <Button href={primaryCta.href} variant="primary">{primaryCta.label}</Button>
+          <a href={primaryCta.href} class="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-black hover:scale-105">
+            {primaryCta.label}
+          </a>
           {secondaryCta && (
-            <Button href={secondaryCta.href} variant="secondary">
+            <a href={secondaryCta.href} class="inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-sm font-semibold text-ink transition-all hover:bg-paper-dim hover:scale-105">
               {secondaryCta.label}
-            </Button>
+            </a>
           )}
         </div>
       </Container>
       <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
     </section>
   ) : (
-    <section class="relative overflow-hidden" data-noreveal>
-      <div class="grid-pattern mask-fade-edges absolute inset-0" aria-hidden="true" />
+    <section class="relative overflow-hidden pt-8 pb-14 md:pt-14 md:pb-20" data-noreveal>
+      <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-25" aria-hidden="true" />
       <div
-        class="absolute -top-40 right-[-12%] h-[28rem] w-[42rem] rounded-full bg-accent/10 blur-3xl"
+        class="absolute -top-40 right-[-10%] h-[32rem] w-[46rem] rounded-full bg-paper-dim blur-3xl"
         aria-hidden="true"
       />
       <div
-        class="absolute -bottom-32 left-[-10%] h-96 w-[34rem] rounded-full bg-matte/8 blur-3xl"
+        class="absolute top-1/2 left-[-15%] h-96 w-[36rem] rounded-full bg-paper-dim blur-3xl"
         aria-hidden="true"
       />
-      <!-- Structural accent: a single sharp diagonal cut, like a concrete beam edge crossing the frame -->
-      <div
-        class="pointer-events-none absolute -right-24 top-0 hidden h-[140%] w-[2px] rotate-[14deg] bg-gradient-to-b from-transparent via-accent/25 to-transparent lg:block"
-        aria-hidden="true"
-      />
-      <Container class="relative grid gap-14 py-14 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-20">
-        <div>
-          {eyebrow && (
-            <span data-hero-item data-hero-delay="0" style="display:block">
-              <Eyebrow label={eyebrow} tone={eyebrowTone} />
-            </span>
-          )}
-          <h1 class="h-display mt-5" data-split set:html={titleHtml} />
-          <p data-hero-item data-hero-delay="0.25" class="body-lead mt-6 max-w-xl">{subtitle}</p>
-          <div data-hero-item data-hero-delay="0.38" class="mt-9 flex flex-wrap items-center gap-4">
-            <Button href={primaryCta.href} variant="primary" size="lg" data-magnetic>
-              {primaryCta.label}
-              <svg class="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+
+      <Container class="relative">
+        {/* Top decorative star and heading banner */}
+        <div class="mx-auto max-w-4xl text-center">
+          {/* 8-Point Star Icon Motif */}
+          <div class="inline-flex items-center justify-center mb-4">
+            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-paper-dim text-ink shadow-sm ring-1 ring-line/80">
+              <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                <path d="M12 0l2.6 6.8L21.4 4.6l-2.2 7.4 7.4 2.2-6.8 2.6 4.6 6.8-7.4-2.2-2.2 7.4-2.6-6.8-6.8 4.6 2.2-7.4-7.4-2.2 6.8-2.6-4.6-6.8 7.4 2.2z" />
               </svg>
-            </Button>
-            {secondaryCta && (
-              <Button href={secondaryCta.href} variant="secondary" size="lg">
-                {secondaryCta.label}
-              </Button>
-            )}
+            </span>
           </div>
+
+          {/* Main Heavy Geometric Title */}
+          <h1 class="h-display font-black tracking-tight text-ink">
+            Empowering Businesses Through <span class="badge-highlight">Custom Tech Solutions</span>
+          </h1>
+
+          <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ink-dim sm:text-lg">
+            {subtitle}
+          </p>
         </div>
 
-        <!-- Free quote mini-form, replacing the hero photo -->
-        <div data-hero-item data-hero-delay="0.2" class="hidden md:block">
-          <div class="rounded-3xl border border-line bg-paper shadow-float">
-            <div class="p-7">
-              <p class="mono-label text-accent">Free Quotation</p>
-              <h2 class="mt-2 text-xl font-bold text-ink">Get your free quote today</h2>
+        {/* Center Hero Visual Composition with Arched Backing & Floating Cards */}
+        <div class="relative mx-auto mt-12 max-w-3xl">
+          {/* Arched Frame Container */}
+          <div class="relative mx-auto aspect-[4/3] sm:aspect-[16/11] w-full max-w-2xl overflow-hidden rounded-t-[10rem] sm:rounded-t-[16rem] rounded-b-3xl border border-line bg-gradient-to-b from-paper-dim via-paper to-white shadow-[0_20px_60px_-15px_rgba(25,25,27,0.12)]">
+            {/* Subtle backdrop glow */}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
 
-              <form id="hero-quote-form" class="mt-5 space-y-4" novalidate>
-                <input type="hidden" name="access_key" value={import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY} />
-                <input type="hidden" name="subject" value="Free Quote Request (Homepage)" />
-                <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+            {/* Hero Cutout Photo / High-quality tech visual */}
+            <img
+              src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&h=1000&q=85"
+              alt="WSS DevLabs Senior Engineering Lead"
+              class="h-full w-full object-cover object-top scale-105 transition-transform duration-1000 hover:scale-110"
+              loading="eager"
+            />
 
-                <div>
-                  <label for="hq-name" class="mb-1.5 block text-xs font-semibold text-ink">Your Name</label>
-                  <input id="hq-name" name="name" type="text" required placeholder="Full name"
-                    class="w-full rounded-xl border border-line bg-paper-dim px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25" />
-                </div>
-                <div>
-                  <label for="hq-email" class="mb-1.5 block text-xs font-semibold text-ink">Email</label>
-                  <input id="hq-email" name="email" type="email" required placeholder="you@company.com"
-                    class="w-full rounded-xl border border-line bg-paper-dim px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25" />
-                </div>
-                <div>
-                  <label for="hq-message" class="mb-1.5 block text-xs font-semibold text-ink">What are you building?</label>
-                  <textarea id="hq-message" name="message" rows="2" placeholder="Tell us briefly"
-                    class="w-full resize-none rounded-xl border border-line bg-paper-dim px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"></textarea>
-                </div>
+            {/* Top Left Mini Floating Badge */}
+            <div class="absolute top-10 left-6 sm:top-14 sm:left-10 z-20 hidden sm:flex items-center gap-2 rounded-full border border-black/10 bg-white/95 px-4 py-2 text-xs font-bold text-ink shadow-float backdrop-blur-md">
+              <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>100% Malaysian Built</span>
+            </div>
 
-                <button id="hero-quote-submit" type="submit"
-                  class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(217_45_32/0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-dim">
-                  <span id="hero-quote-submit-label">Get My Free Quote</span>
-                </button>
+            {/* Top Right Rating Badge */}
+            <div class="absolute top-10 right-6 sm:top-14 sm:right-10 z-20 flex flex-col items-end rounded-2xl border border-black/10 bg-white/95 p-3 sm:px-4 sm:py-3 shadow-float backdrop-blur-md">
+              <div class="flex items-center gap-1 text-amber-500">
+                <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              </div>
+              <span class="mt-1 font-display text-sm font-extrabold text-ink">10+ Years</span>
+              <span class="text-[10px] font-medium text-ink-dim">Senior Architects</span>
+            </div>
 
-                <p id="hero-quote-status" role="status" aria-live="polite" class="text-xs"></p>
-              </form>
+            {/* Floating Pill CTA Dock at Bottom of Photo */}
+            <div class="absolute bottom-6 inset-x-0 z-20 flex justify-center px-4">
+              <div class="flex items-center gap-2 rounded-full border border-black/10 bg-white/95 p-1.5 shadow-2xl backdrop-blur-xl">
+                <a
+                  href={primaryCta.href}
+                  class="rounded-full bg-ink px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md transition-all hover:bg-black hover:scale-105"
+                >
+                  {primaryCta.label}
+                </a>
+                <a
+                  href={secondaryCta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="rounded-full border border-line bg-paper-dim px-5 py-2.5 text-xs sm:text-sm font-semibold text-ink transition-all hover:bg-paper-deep hover:scale-105"
+                >
+                  {secondaryCta.label}
+                </a>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Floating Stats Bar Pill Container */}
+        <div class="mt-12 sm:mt-16 mx-auto max-w-4xl">
+          <div class="rounded-3xl sm:rounded-full border border-line bg-white text-ink p-6 sm:px-10 sm:py-7 shadow-card">
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:divide-x sm:divide-line text-center">
+              {stats.map((s, idx) => (
+                <div class:list={['flex flex-col items-center justify-center', idx > 0 && 'sm:pl-6']}>
+                  <span class="font-feature text-2xl sm:text-3xl font-black text-ink tracking-tight">{s.value}</span>
+                  <span class="mt-1 text-[11px] sm:text-xs text-ink-dim font-medium">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Form Card Matching Reference Image */}
+        <div class="mt-14 sm:mt-20 mx-auto max-w-4xl" id="hero-contact-section">
+          <div class="rounded-[2.5rem] border border-line bg-[#faf9f5] p-8 sm:p-12 md:p-14 shadow-card">
+            <!-- Top Pill Badge -->
+            <div class="inline-flex items-center gap-2 rounded-full border border-line/80 bg-white px-4 py-1.5 text-xs font-bold text-ink shadow-sm">
+              <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+              <span>Get In Touch</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h2 class="mt-5 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
+              Get In Touch
+            </h2>
+
+            <!-- Narrative Subtitle -->
+            <p class="mt-3 max-w-3xl text-sm sm:text-base leading-relaxed text-ink-dim font-normal">
+              We would love to hear about your project and help you grow your business online. Fill out the contact form and our team will get back to you soon with the best possible solution for your needs.
+            </p>
+
+            <!-- Form Container -->
+            <form id="hero-contact-form" class="mt-8 space-y-4" novalidate>
+              <!-- Row 1: Name & Email Address -->
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <input
+                    id="hero-name"
+                    name="name"
+                    type="text"
+                    placeholder="Name"
+                    required
+                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
+                  />
+                </div>
+                <div>
+                  <input
+                    id="hero-email"
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    required
+                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
+                  />
+                </div>
+              </div>
+
+              <!-- Row 2: Phone Number & Service Dropdown -->
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <input
+                    id="hero-phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone Number"
+                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
+                  />
+                </div>
+                <div>
+                  <select
+                    id="hero-service"
+                    name="service"
+                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink-dim transition-all focus:border-ink focus:bg-white focus:text-ink focus:outline-none focus:ring-2 focus:ring-ink/10 appearance-none cursor-pointer"
+                  >
+                    <option value="" selected>Service You're Interested In</option>
+                    <option value="Web & Mobile App Development">Web &amp; Mobile App Development</option>
+                    <option value="15 Buy-Once PHP Systems (Marketplace)">15 Buy-Once PHP Systems (Marketplace)</option>
+                    <option value="WSS Express Fixed-Price Packages">WSS Express Fixed-Price Packages</option>
+                    <option value="AI Systems & Bespoke Architecture">AI Systems &amp; Bespoke Architecture</option>
+                    <option value="General Consultation">General Consultation</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Row 3: Preferred Date & Time Slot for Online Attendance -->
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <input
+                    id="hero-date"
+                    name="preferred_date"
+                    type="date"
+                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
+                  />
+                </div>
+                <div>
+                  <select
+                    id="hero-time"
+                    name="preferred_time"
+                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink-dim transition-all focus:border-ink focus:bg-white focus:text-ink focus:outline-none focus:ring-2 focus:ring-ink/10 appearance-none cursor-pointer"
+                  >
+                    <option value="" selected>Preferred Online Time Slot</option>
+                    <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM – 12:00 PM)</option>
+                    <option value="Early Afternoon (02:00 PM - 04:00 PM)">Early Afternoon (02:00 PM – 04:00 PM)</option>
+                    <option value="Late Afternoon (04:00 PM - 06:00 PM)">Late Afternoon (04:00 PM – 06:00 PM)</option>
+                    <option value="Evening (08:00 PM - 10:00 PM)">Evening (08:00 PM – 10:00 PM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Row 4: Message Textarea -->
+              <div>
+                <textarea
+                  id="hero-message"
+                  name="message"
+                  rows="4"
+                  placeholder="Message"
+                  class="w-full resize-none rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
+                ></textarea>
+              </div>
+
+              <!-- Status Notification -->
+              <div id="hero-form-status" class="hidden rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-4 py-3 text-sm font-semibold text-emerald-800"></div>
+
+              <!-- Row 5: Pill Send Message Button with circular icon container -->
+              <div class="pt-2">
+                <button
+                  type="submit"
+                  id="hero-form-submit"
+                  class="inline-flex items-center gap-4 rounded-full bg-accent py-2 pl-7 pr-2.5 text-sm font-bold text-white shadow-lg shadow-accent/25 transition-all duration-300 hover:bg-accent-dim hover:scale-105 active:scale-95"
+                >
+                  <span id="hero-submit-label">Send Message</span>
+                  <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-accent transition-transform group-hover:translate-x-0.5">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </Container>
-      <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
     </section>
   )
 }
 
 <script>
-  function initHeroQuoteForm() {
-    const form = document.getElementById('hero-quote-form') as HTMLFormElement | null;
-    const submitButton = document.getElementById('hero-quote-submit') as HTMLButtonElement | null;
-    const submitLabel = document.getElementById('hero-quote-submit-label');
-    const status = document.getElementById('hero-quote-status');
+  function initHeroContactForm() {
+    const form = document.getElementById('hero-contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('hero-form-status');
+    const dateInput = document.getElementById('hero-date') as HTMLInputElement | null;
     if (!form || form.dataset.bound) return;
     form.dataset.bound = '1';
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      if (!submitButton || !submitLabel || !status) return;
+    if (dateInput) {
+      dateInput.min = new Date().toISOString().split('T')[0];
+    }
 
-      const botcheck = form.querySelector<HTMLInputElement>('input[name="botcheck"]');
-      if (botcheck?.checked) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = (document.getElementById('hero-name') as HTMLInputElement)?.value.trim();
+      const email = (document.getElementById('hero-email') as HTMLInputElement)?.value.trim();
+      if (!name || !email) return;
 
-      submitButton.disabled = true;
-      submitLabel.textContent = 'Sending…';
-      status.textContent = '';
-      status.className = 'text-xs';
+      const phone = (document.getElementById('hero-phone') as HTMLInputElement)?.value.trim() || 'N/A';
+      const service = (document.getElementById('hero-service') as HTMLSelectElement)?.value || 'General Inquiry';
+      const date = (document.getElementById('hero-date') as HTMLInputElement)?.value || 'Not specified';
+      const time = (document.getElementById('hero-time') as HTMLSelectElement)?.value || 'Not specified';
+      const message = (document.getElementById('hero-message') as HTMLTextAreaElement)?.value.trim() || 'No message provided';
 
-      try {
-        const formData = new FormData(form);
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: formData
-        });
-        const result = await response.json();
+      const subject = encodeURIComponent(`New Consultation & Quote Request from ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService Interested: ${service}\nPreferred Online Consultation Date: ${date}\nPreferred Time Slot: ${time}\n\nMessage:\n${message}`
+      );
 
-        if (result.success) {
-          status.textContent = "Thanks! We'll get back to you within one business day.";
-          status.classList.add('text-accent-green');
-          form.reset();
-        } else {
-          throw new Error(result.message ?? 'Submission failed');
-        }
-      } catch {
-        status.textContent = 'Something went wrong. Please try again or email us directly.';
-        status.classList.add('text-accent-red');
-      } finally {
-        submitButton.disabled = false;
-        submitLabel.textContent = 'Get My Free Quote';
+      window.location.href = `mailto:hello@wssdevlabs.com?subject=${subject}&body=${body}`;
+
+      if (status) {
+        status.textContent = 'Thank you! Your message and preferred consultation slot have been prepared. We will confirm shortly.';
+        status.classList.remove('hidden');
       }
+      form.reset();
     });
   }
 
-  initHeroQuoteForm();
-  document.addEventListener('astro:page-load', initHeroQuoteForm);
+  initHeroContactForm();
+  document.addEventListener('astro:page-load', initHeroContactForm);
 </script>

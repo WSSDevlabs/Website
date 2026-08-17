@@ -1,120 +1,126 @@
 ---
 import Container from '../ui/Container.astro';
-import { serviceHref } from '../../data/serviceCategories';
 
 const services = [
   {
-    slug: 'ai-development',
-    title: 'AI Development',
-    description:
-      'LLM-powered features, RAG pipelines, and workflow automation that help your product work smarter and your team move faster.',
-    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&h=760&q=80',
-    tone: 'red'
+    num: '01',
+    title: 'Web & Mobile App Development',
+    description: 'Custom-built, typed, sub-second web & mobile applications with zero template lock-in.',
+    href: '/services/web-development'
   },
   {
-    slug: 'web-development',
-    title: 'Web Development',
-    description:
-      'Custom-built, fast, typed websites. Engineered for speed and search visibility from the first commit.',
-    img: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&h=440&q=80',
-    tone: 'blue'
+    num: '02',
+    title: 'The Marketplace (15 Buy-Once PHP Systems)',
+    description: 'Self-hosted booking engines, CRMs, clinic queues, and POS you own outright forever.',
+    href: '/marketplace'
   },
   {
-    slug: 'digital-marketing',
-    title: 'Digital Marketing',
-    description:
-      'SEO, paid ads, social media strategy, and content marketing that bring the right people to your business.',
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&h=440&q=80',
-    tone: 'green'
+    num: '03',
+    title: 'WSS Express Fixed-Price Packages',
+    description: 'Rapid 3–7 day turnarounds with transparent pricing from RM 180 to RM 4,500.',
+    href: '/express'
+  },
+  {
+    num: '04',
+    title: 'AI Systems & Bespoke Architecture',
+    description: 'LLM agents, RAG document pipelines, custom ERPs, and automated workflow integrations.',
+    href: '/services/bespoke'
   }
 ];
-
-const [featured, ...rest] = services;
 ---
 
-<section class="py-14 md:py-20">
+<section class="py-16 md:py-24 border-t border-line/60 bg-paper-dim/30 overflow-hidden">
   <Container>
-    <div class="panel overflow-hidden px-6 py-10 md:px-14 md:py-12">
-      <!-- Section header -->
-      <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <h2 class="h-section max-w-md" data-split>Boost your brand with our expertise</h2>
-        <a
-          href="/services"
-          class="link-underline shrink-0 pb-1 text-sm font-semibold text-ink"
-        >
-          View all services
-          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
-      </div>
+    <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <!-- Left Column: Heading + Numbered Pill Services List -->
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="text-ink text-2xl font-black">✦</span>
+          <span class="mono-label text-ink-dim font-bold">What We Offer</span>
+        </div>
 
-      <!-- Asymmetric bento: featured large left, two stacked right -->
-      <div class="mt-10 grid gap-5 lg:grid-cols-5" data-stagger>
-        <!-- Featured card -->
-        <a
-          href={serviceHref(featured.slug)}
-          data-stagger-child
-          class="card card-lift spotlight-card group relative flex min-h-[26rem] flex-col justify-end overflow-hidden !rounded-3xl !border-0 lg:col-span-3"
-        >
-          <img
-            src={featured.img}
-            alt=""
-            class="absolute inset-0 h-full w-full scale-105 object-cover transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-110"
-            loading="lazy"
-            width="1000"
-            height="760"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-charcoal/92 via-charcoal/35 to-transparent" aria-hidden="true"></div>
-          <div class="relative p-8">
-            <p class="mono-label text-white/70">Featured service</p>
-            <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white md:text-3xl">
-              {featured.title}
-            </h3>
-            <p class="mt-2 max-w-md text-sm leading-relaxed text-white/75">{featured.description}</p>
-            <p class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white">
-              Learn more
-              <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
-            </p>
-          </div>
-        </a>
+        <h2 class="h-section mt-4 font-black tracking-tight text-ink">
+          Our <span class="badge-highlight">Services</span>
+        </h2>
 
-        <!-- Two stacked cards -->
-        <div class="grid gap-5 lg:col-span-2">
+        <p class="mt-4 text-base leading-relaxed text-ink-dim max-w-lg">
+          We bridge the gap between ideas and impact by crafting systems that are strategic, scalable, typed, and engineered for long-term business performance.
+        </p>
+
+        <!-- Numbered pill rows -->
+        <div class="mt-8 space-y-3.5">
           {
-            rest.map((svc) => (
+            services.map((svc) => (
               <a
-                href={serviceHref(svc.slug)}
-                data-stagger-child
-                class="card card-lift spotlight-card group flex flex-col overflow-hidden !rounded-3xl p-0"
+                href={svc.href}
+                class="group flex items-center justify-between rounded-full border border-line bg-white px-6 py-4 shadow-sm transition-all duration-300 hover:border-ink hover:bg-paper-dim hover:scale-[1.02] hover:shadow-md"
               >
-                <div class="h-36 overflow-hidden">
-                  <img
-                    src={svc.img}
-                    alt=""
-                    class="h-full w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-105"
-                    loading="lazy"
-                    width="700"
-                    height="440"
-                  />
+                <div class="flex items-center gap-4">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper-dim font-mono text-xs font-bold text-ink group-hover:bg-ink group-hover:text-white transition-colors">
+                    {svc.num}
+                  </span>
+                  <div>
+                    <h3 class="text-sm sm:text-base font-bold text-ink group-hover:text-ink transition-colors">
+                      {svc.title}
+                    </h3>
+                  </div>
                 </div>
-                <div class="flex flex-1 flex-col p-6">
-                  <h3 class="text-lg font-semibold tracking-tight text-ink transition-colors group-hover:text-accent">
-                    {svc.title}
-                  </h3>
-                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-ink-dim">{svc.description}</p>
-                  <p class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
-                    Learn more
-                    <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                  </p>
+
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper-dim text-ink-dim transition-all group-hover:bg-ink group-hover:text-white group-hover:translate-x-1">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
                 </div>
               </a>
             ))
           }
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Collage Card with circular/pill actions and star -->
+      <div class="relative">
+        <!-- Decorative 8-point star -->
+        <div class="absolute -top-6 -right-4 z-20 hidden sm:block">
+          <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-ink text-white shadow-xl rotate-12">
+            <svg class="h-8 w-8 fill-current" viewBox="0 0 24 24">
+              <path d="M12 0l2.6 6.8L21.4 4.6l-2.2 7.4 7.4 2.2-6.8 2.6 4.6 6.8-7.4-2.2-2.2 7.4-2.6-6.8-6.8 4.6 2.2-7.4-7.4-2.2 6.8-2.6-4.6-6.8 7.4 2.2z" />
+            </svg>
+          </span>
+        </div>
+
+        <!-- Main Photo Frame -->
+        <div class="relative overflow-hidden rounded-[2.5rem] border border-line bg-white shadow-2xl">
+          <img
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&h=700&q=85"
+            alt="WSS DevLabs Engineering Collaboration"
+            class="h-full w-full object-cover aspect-[4/3] sm:aspect-[1/1] scale-105 transition-transform duration-700 hover:scale-110"
+            loading="lazy"
+          />
+
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+          <!-- Bottom Action Buttons inside Photo -->
+          <div class="absolute bottom-6 inset-x-6 flex flex-wrap items-center justify-between gap-3 z-10">
+            <a
+              href="/about"
+              class="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/95 px-5 py-2.5 text-xs sm:text-sm font-bold text-ink shadow-lg backdrop-blur-md transition hover:bg-white hover:scale-105"
+            >
+              <span>Meet Our Experts</span>
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+
+            <a
+              href="/work"
+              class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-lg transition hover:bg-black hover:scale-105"
+            >
+              <span>See Our Work</span>
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
