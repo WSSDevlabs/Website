@@ -15,7 +15,6 @@ export const NAV_GROUPS: NavGroup[] = [
     links: [
       { label: 'WSS Express', href: '/express', badge: '3-7 Days' },
       { label: 'Marketplace', href: '/marketplace', badge: 'Buy-Once' },
-      { label: 'Bespoke Enterprise', href: '/services/bespoke', badge: 'Grant-Matched' },
       { label: 'All Services', href: '/services' },
       { label: 'Pricing', href: '/pricing' }
     ]
@@ -43,7 +42,6 @@ export const NAV_LINKS: NavLink[] = [
 export const FOOTER_SOLUTIONS_LINKS: NavLink[] = [
   { label: 'WSS Express (Fixed-Price)', href: '/express' },
   { label: 'WSS Marketplace (Buy-Once)', href: '/marketplace' },
-  { label: 'Bespoke Enterprise Engineering', href: '/services/bespoke' },
   { label: 'All Services Catalog', href: '/services' },
   { label: 'Pricing & Packages', href: '/pricing' }
 ];

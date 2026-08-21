@@ -64,17 +64,15 @@ const partnerProjects = allProjects.filter((p) => p.data.featured).slice(0, 4);
               data-t-track
             >
               {
-                allTestimonials.map((t, i) => (
+                allTestimonials.map((t) => (
                   <div class="tilt-card card w-[300px] shrink-0 snap-start overflow-hidden !rounded-3xl p-0 sm:w-[340px]" data-reveal="tilt3d">
-                    <div class="relative h-56 overflow-hidden">
-                      <img
-                        src={`https://picsum.photos/seed/wss-review-${i}/500/400`}
-                        alt={t.author}
-                        class="h-full w-full object-cover"
-                        loading="lazy"
-                        width="500"
-                        height="400"
-                      />
+                    <div class="relative h-56 overflow-hidden bg-charcoal">
+                      <div class="grid-pattern absolute inset-0 opacity-15" aria-hidden="true"></div>
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-2xl font-bold text-white ring-1 ring-white/20">
+                          {t.author.charAt(0)}
+                        </span>
+                      </div>
                       <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" aria-hidden="true"></div>
                       <div class="absolute left-4 top-4 flex gap-0.5">
                         {Array.from({ length: t.rating ?? 5 }).map(() => (

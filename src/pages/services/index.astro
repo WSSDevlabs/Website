@@ -4,7 +4,7 @@ import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
 import ServicesGrid from '../../components/sections/ServicesGrid.astro';
 import Differentiator from '../../components/sections/Differentiator.astro';
-import QuoteForm from '../../components/sections/QuoteForm.astro';
+import CTABand from '../../components/sections/CTABand.astro';
 import { PRICING_TIERS } from '../../data/pricing';
 
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
@@ -98,5 +98,8 @@ const schema = {
   </Section>
 
   <Differentiator />
-  <QuoteForm />
+  <CTABand
+    title="Ready to start your project?"
+    subtitle="Tell us what you're building, and we'll respond within one business day with a fixed-price proposal."
+  />
 </BaseLayout>

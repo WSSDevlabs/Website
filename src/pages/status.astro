@@ -39,7 +39,7 @@ import { LIVE_SYSTEM_METRICS, STANDARD_BUILD_PIPELINE } from '../data/status';
       </div>
 
       <!-- Quick Metrics Bar -->
-      <div class="mt-12 grid grid-cols-2 gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:grid-cols-4">
+      <div id="metrics" class="mt-12 grid grid-cols-2 gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:grid-cols-4">
         <div class="text-center">
           <p class="text-xs font-mono uppercase tracking-wider text-white/50">System Health</p>
           <p class="mt-1 font-feature text-2xl font-bold text-emerald-400">
@@ -69,7 +69,7 @@ import { LIVE_SYSTEM_METRICS, STANDARD_BUILD_PIPELINE } from '../data/status';
   </section>
 
   <!-- Named Builders Real-Time Availability -->
-  <Section rule>
+  <Section id="builders" rule>
     <Container>
       <div class="mx-auto max-w-2xl text-center">
         <Eyebrow label="The Direct Builder Model" tone="red" />
@@ -124,7 +124,7 @@ import { LIVE_SYSTEM_METRICS, STANDARD_BUILD_PIPELINE } from '../data/status';
   </Section>
 
   <!-- 4-Stage Standard Build Pipeline -->
-  <Section rule class="bg-paper-dim/30">
+  <Section id="pipeline" rule class="bg-paper-dim/30">
     <Container>
       <div class="mx-auto max-w-2xl text-center">
         <Eyebrow label="Go-Live Calm" tone="blue" />
@@ -158,7 +158,7 @@ import { LIVE_SYSTEM_METRICS, STANDARD_BUILD_PIPELINE } from '../data/status';
   </Section>
 
   <!-- Recent Shipments & Deployments -->
-  <Section rule>
+  <Section id="deployments" rule>
     <Container>
       <div class="mx-auto max-w-3xl">
         <div class="text-center">

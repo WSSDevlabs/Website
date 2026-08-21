@@ -1,78 +1,56 @@
 ---
 import Container from '../ui/Container.astro';
+import { TESTIMONIALS, type Testimonial } from '../../data/testimonials';
 
-const testimonials = [
-  {
-    quote: 'Working with WSS DevLabs for our booking and queue engine was a game-changer. They understood our clinic workflow immediately and shipped a rock-solid, zero-SaaS-tax system ahead of schedule.',
-    author: 'Daniel Moore',
-    role: 'Founder & Managing Director',
-    company: 'CarePoint Health Systems',
-    photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80'
-  },
-  {
-    quote: 'WSS DevLabs built our B2B marketplace portal and automated invoicing pipeline. We eliminated thousands of ringgit in recurring SaaS fees and own 100% of our production source code forever.',
-    author: 'Aisha Bello',
-    role: 'Head of Digital Operations',
-    company: 'Nexus Wholesale Hub',
-    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&h=120&q=80'
-  }
-];
+type Props = {
+  testimonials?: Testimonial[];
+};
+
+const { testimonials = TESTIMONIALS } = Astro.props;
 ---
 
-<section class="py-16 md:py-24 bg-paper text-ink border-t border-line/60 overflow-hidden">
-  <Container>
-    <div class="mx-auto max-w-2xl text-center">
-      <div class="inline-flex items-center gap-2 mb-3">
-        <span class="text-ink text-xl">✦</span>
-        <span class="mono-label text-ink-dim font-bold">Client Success Stories</span>
-      </div>
-      <h2 class="h-section font-black tracking-tight text-ink">
-        What Clients Say <span class="badge-highlight">About Us</span>
-      </h2>
-    </div>
+{
+  testimonials.length > 0 && (
+    <section class="py-16 md:py-24 bg-paper text-ink border-t border-line/60 overflow-hidden">
+      <Container>
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="h-section font-black tracking-tight text-ink">
+            What Clients Say <span class="badge-highlight">About Us</span>
+          </h2>
+        </div>
 
-    <!-- 2-Card Horizontal Display with clean white cards -->
-    <div class="mt-12 grid gap-6 sm:grid-cols-2 max-w-5xl mx-auto">
-      {
-        testimonials.map((t) => (
-          <div class="flex flex-col justify-between rounded-3xl border border-line bg-white p-8 shadow-card transition-all duration-300 hover:border-ink/40 hover:shadow-card-hover">
-            <div class="flex items-center gap-4">
-              <img
-                src={t.photo}
-                alt={t.author}
-                class="h-13 w-13 rounded-full object-cover ring-2 ring-line"
-                loading="lazy"
-                width="52"
-                height="52"
-              />
-              <div>
-                <h3 class="font-bold text-ink text-base">{t.author}</h3>
-                <p class="text-xs text-ink-dim">{t.role} · <span class="text-ink font-semibold">{t.company}</span></p>
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 max-w-5xl mx-auto">
+          {
+            testimonials.map((t) => (
+              <div class="flex flex-col justify-between rounded-3xl border border-line bg-white p-8 shadow-card transition-all duration-300 hover:border-ink/40 hover:shadow-card-hover">
+                <div>
+                  <h3 class="font-bold text-ink text-base">{t.author}</h3>
+                  <p class="text-xs text-ink-dim">
+                    {t.role}
+                    {t.company && (
+                      <>
+                        {' '}· <span class="text-ink font-semibold">{t.company}</span>
+                      </>
+                    )}
+                  </p>
+                </div>
+
+                <p class="mt-6 text-sm sm:text-base leading-relaxed text-ink/90 font-normal italic">
+                  "{t.quote}"
+                </p>
+
+                {t.rating && (
+                  <div class="mt-6 flex items-center gap-1 text-amber-500">
+                    {Array.from({ length: t.rating }).map(() => (
+                      <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
-
-            <p class="mt-6 text-sm sm:text-base leading-relaxed text-ink/90 font-normal italic">
-              "{t.quote}"
-            </p>
-
-            <div class="mt-6 flex items-center gap-1 text-amber-500">
-              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            </div>
-          </div>
-        ))
-      }
-    </div>
-
-    <!-- Center Carousel Nav Pill Indicator -->
-    <div class="mt-8 flex justify-center items-center gap-2">
-      <span class="h-2.5 w-8 rounded-full bg-ink"></span>
-      <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
-      <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
-    </div>
-  </Container>
-</section>
-
+            ))
+          }
+        </div>
+      </Container>
+    </section>
+  )
+}

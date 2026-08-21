@@ -9,7 +9,7 @@ export type TeamMember = {
   credentials?: string;
   social?: {
     linkedin?: string;
-    github?: string;
+    tiktok?: string;
     instagram?: string;
     twitter?: string;
   };

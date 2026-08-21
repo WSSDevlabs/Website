@@ -6,7 +6,6 @@ import Eyebrow from '../../components/ui/Eyebrow.astro';
 import GrantSolutions from '../../components/sections/GrantSolutions.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import CTABand from '../../components/sections/CTABand.astro';
-import QuoteForm from '../../components/sections/QuoteForm.astro';
 import { SERVICE_CATEGORIES, getServicesForCategory } from '../../data/serviceCategories';
 import { TESTIMONIALS } from '../../data/testimonials';
 import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
@@ -384,7 +383,4 @@ const toneAccent: Record<string, string> = {
     title={`Ready to start your ${category.title} project?`}
     subtitle="Tell us what you're building, and we'll respond within one business day with a fixed-price proposal."
   />
-
-  <!-- ── Quote Form ────────────────────────────────────────── -->
-  <QuoteForm />
 </ServiceLayout>

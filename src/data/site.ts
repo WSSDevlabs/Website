@@ -3,7 +3,7 @@ import raw from './site.json';
 type SocialLinks = {
   linkedin: string;
   instagram: string;
-  github: string;
+  tiktok: string;
   facebook: string;
   twitter?: string;
 };

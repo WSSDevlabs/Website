@@ -115,6 +115,7 @@ const faqSchema = {
         {
           EXPRESS_PACKAGES.map((pkg) => (
             <div
+              id={pkg.id}
               class:list={[
                 'relative flex flex-col justify-between rounded-2xl border p-7 transition-all duration-300',
                 pkg.highlight
@@ -259,21 +260,21 @@ const faqSchema = {
           <div>
             <Eyebrow label="Direct Builder Access" tone="red" />
             <h2 class="mt-2 text-2xl font-bold text-ink md:text-3xl">
-              You Talk Directly to Razin & Natasya. No Middlemen.
+              You Talk Directly to Razali. No Middlemen.
             </h2>
             <p class="mt-3 text-sm leading-relaxed text-ink-dim">
               Traditional agencies put junior account managers between you and the person writing the code, causing delays and miscommunication.
-              At WSS Dev Labs, <strong>Razin Hakim</strong> leads the backend and performance architecture, while <strong>Natasya Umairah</strong> crafts the UI and micro-moments.
+              At WSS Dev Labs, <strong>Razali</strong> handles the build end to end — architecture, UI, and delivery — so nothing gets lost in translation.
             </p>
 
             <div class="mt-6 flex flex-wrap gap-4">
               <a
-                href="https://wa.me/601127205895?text=Hi%20Razin%20%26%20Natasya%2C%20I'd%20like%20to%20discuss%20an%20Express%20build."
+                href="https://wa.me/601127205895?text=Hi%20Razali%2C%20I'd%20like%20to%20discuss%20an%20Express%20build."
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-accent-dim"
               >
-                WhatsApp the Builders Directly
+                WhatsApp the Builder Directly
               </a>
               <a
                 href="/status"
@@ -284,25 +285,14 @@ const faqSchema = {
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            <div class="rounded-2xl border border-line bg-paper-dim p-4 text-center">
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&h=300&q=80"
-                alt="Razin Hakim"
-                class="mx-auto h-16 w-16 rounded-full object-cover shadow-sm"
-              />
-              <h3 class="mt-3 text-sm font-bold text-ink">Razin Hakim</h3>
-              <p class="text-[11px] text-accent">Full-Stack & Backend</p>
+          <div class="rounded-2xl border border-line bg-paper-dim p-4 text-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-paper text-ink-dim/40">
+              <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.964 0a9 9 0 1 0-11.964 0m11.964 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
             </div>
-            <div class="rounded-2xl border border-line bg-paper-dim p-4 text-center">
-              <img
-                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&h=300&q=80"
-                alt="Natasya Umairah"
-                class="mx-auto h-16 w-16 rounded-full object-cover shadow-sm"
-              />
-              <h3 class="mt-3 text-sm font-bold text-ink">Natasya Umairah</h3>
-              <p class="text-[11px] text-accent">Front-End & UI/UX</p>
-            </div>
+            <h3 class="mt-3 text-sm font-bold text-ink">Razali</h3>
+            <p class="text-[11px] text-accent">Founder, WSS DevLabs</p>
           </div>
         </div>
       </div>

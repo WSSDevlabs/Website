@@ -1,30 +1,17 @@
 {
   "members": [
     {
-      "slug": "razin-hakim",
-      "name": "Razin Hakim",
-      "role": "Full-Stack & Backend Architecture Lead",
-      "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&h=600&q=80",
-      "bio": "Leads backend-heavy architecture, high-throughput APIs, database schemas, and cryptographic licensing. Ensures every system performs under heavy traffic with sane, zero-bloat engineering.",
-      "credentials": "Lead Software Architect",
+      "slug": "razali",
+      "name": "Razali",
+      "role": "Founder",
+      "photo": "",
+      "bio": "Founder of WSS DevLabs, building custom websites, systems, and software directly for clients with no account managers in between.",
+      "credentials": "",
       "social": {
         "linkedin": "https://linkedin.com/company/wssdevlabs",
-        "github": "https://github.com/wssdevlabs"
+        "tiktok": "https://tiktok.com/@wssdevlabs"
       },
-      "skills": ["PHP 8.2+", "MySQL", "Go", "Python", "API Architecture", "Cloudflare", "Ed25519 Cryptography"]
-    },
-    {
-      "slug": "natasya-umairah",
-      "name": "Natasya Umairah",
-      "role": "Front-End & UI/UX Specialist Lead",
-      "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&h=600&q=80",
-      "bio": "Leads front-end craft, micro-moments, responsive typography, and polished conversion UI. Obsessed with sub-second page loads, accessible design, and brand trust that turns visitors into paying clients.",
-      "credentials": "Lead UI/UX & Front-End Engineer",
-      "social": {
-        "linkedin": "https://linkedin.com/company/wssdevlabs",
-        "github": "https://github.com/wssdevlabs"
-      },
-      "skills": ["GSAP Motion", "Tailwind CSS", "Astro", "UI/UX Systems", "Answer Engine SEO", "Conversion Architecture"]
+      "skills": []
     }
   ]
 }

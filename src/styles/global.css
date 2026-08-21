@@ -146,16 +146,31 @@
     color: var(--color-ink);
   }
 
-  /* Distinctive matte dark grey badge highlight for words in headers */
+  /* Red accent badge highlight for words in headers, with a subtle heartbeat pulse */
   .badge-highlight {
     display: inline-block;
-    background-color: var(--color-ink);
+    background-color: var(--color-accent);
     color: #ffffff;
     padding: 0.12em 0.5em;
     border-radius: 0.75rem;
     font-weight: 800;
-    box-shadow: 0 4px 12px -2px rgba(25, 25, 27, 0.2);
+    box-shadow: 0 4px 16px -2px rgba(217, 45, 32, 0.45);
     white-space: nowrap;
+    animation: badge-heartbeat 2.4s ease-in-out infinite;
+  }
+
+  @keyframes badge-heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.06); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.04); }
+    56% { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge-highlight {
+      animation: none;
+    }
   }
 
   .badge-highlight-dark {

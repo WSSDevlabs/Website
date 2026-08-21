@@ -40,6 +40,14 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description:
       'LLM-powered features, RAG pipelines, and workflow automation, integrated where it meaningfully improves your product or team, not as a thin wrapper.',
     services: ['ai-development']
+  },
+  {
+    slug: 'iot-solutions-infrastructure',
+    title: 'IoT Solutions & Infrastructure',
+    tagline: 'Connect',
+    description:
+      'Connected devices, sensor networks, and the infrastructure to collect, monitor, and act on real-world data alongside your software.',
+    services: []
   }
 ];
 

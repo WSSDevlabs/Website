@@ -84,15 +84,6 @@ const stats = [
       <Container class="relative">
         {/* Top decorative star and heading banner */}
         <div class="mx-auto max-w-4xl text-center">
-          {/* 8-Point Star Icon Motif */}
-          <div class="inline-flex items-center justify-center mb-4">
-            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-paper-dim text-ink shadow-sm ring-1 ring-line/80">
-              <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0l2.6 6.8L21.4 4.6l-2.2 7.4 7.4 2.2-6.8 2.6 4.6 6.8-7.4-2.2-2.2 7.4-2.6-6.8-6.8 4.6 2.2-7.4-7.4-2.2 6.8-2.6-4.6-6.8 7.4 2.2z" />
-              </svg>
-            </span>
-          </div>
-
           {/* Main Heavy Geometric Title */}
           <h1 class="h-display font-black tracking-tight text-ink">
             Empowering Businesses Through <span class="badge-highlight">Custom Tech Solutions</span>
@@ -107,16 +98,19 @@ const stats = [
         <div class="relative mx-auto mt-12 max-w-3xl">
           {/* Arched Frame Container */}
           <div class="relative mx-auto aspect-[4/3] sm:aspect-[16/11] w-full max-w-2xl overflow-hidden rounded-t-[10rem] sm:rounded-t-[16rem] rounded-b-3xl border border-line bg-gradient-to-b from-paper-dim via-paper to-white shadow-[0_20px_60px_-15px_rgba(25,25,27,0.12)]">
-            {/* Subtle backdrop glow */}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10" />
-
-            {/* Hero Cutout Photo / High-quality tech visual */}
-            <img
-              src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&h=1000&q=85"
-              alt="WSS DevLabs Senior Engineering Lead"
-              class="h-full w-full object-cover object-top scale-105 transition-transform duration-1000 hover:scale-110"
-              loading="eager"
-            />
+            {/* Abstract identity composition (no stock photo) */}
+            <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-40" aria-hidden="true"></div>
+            <div class="absolute -top-16 right-0 h-72 w-72 rounded-full bg-accent/12 blur-3xl" aria-hidden="true"></div>
+            <div class="absolute -bottom-16 left-0 h-72 w-72 rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
+            <div class="relative flex h-full flex-col items-center justify-center gap-4 px-8 text-center">
+              <span class="flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-ink shadow-float ring-1 ring-line/80">
+                <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                </svg>
+              </span>
+              <p class="font-display text-lg font-bold text-ink">Built Direct, Not Outsourced</p>
+              <p class="max-w-xs text-sm text-ink-dim">Every project engineered end-to-end by the same builder you talk to.</p>
+            </div>
 
             {/* Top Left Mini Floating Badge */}
             <div class="absolute top-10 left-6 sm:top-14 sm:left-10 z-20 hidden sm:flex items-center gap-2 rounded-full border border-black/10 bg-white/95 px-4 py-2 text-xs font-bold text-ink shadow-float backdrop-blur-md">
@@ -134,7 +128,7 @@ const stats = [
                 <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
               </div>
               <span class="mt-1 font-display text-sm font-extrabold text-ink">10+ Years</span>
-              <span class="text-[10px] font-medium text-ink-dim">Senior Architects</span>
+              <span class="text-[10px] font-medium text-ink-dim">Engineering Experience</span>
             </div>
 
             {/* Floating Pill CTA Dock at Bottom of Photo */}
@@ -173,179 +167,7 @@ const stats = [
           </div>
         </div>
 
-        {/* Contact Form Card Matching Reference Image */}
-        <div class="mt-14 sm:mt-20 mx-auto max-w-4xl" id="hero-contact-section">
-          <div class="rounded-[2.5rem] border border-line bg-[#faf9f5] p-8 sm:p-12 md:p-14 shadow-card">
-            <!-- Top Pill Badge -->
-            <div class="inline-flex items-center gap-2 rounded-full border border-line/80 bg-white px-4 py-1.5 text-xs font-bold text-ink shadow-sm">
-              <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
-              <span>Get In Touch</span>
-            </div>
-
-            <!-- Main Heading -->
-            <h2 class="mt-5 font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
-              Get In Touch
-            </h2>
-
-            <!-- Narrative Subtitle -->
-            <p class="mt-3 max-w-3xl text-sm sm:text-base leading-relaxed text-ink-dim font-normal">
-              We would love to hear about your project and help you grow your business online. Fill out the contact form and our team will get back to you soon with the best possible solution for your needs.
-            </p>
-
-            <!-- Form Container -->
-            <form id="hero-contact-form" class="mt-8 space-y-4" novalidate>
-              <!-- Row 1: Name & Email Address -->
-              <div class="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <input
-                    id="hero-name"
-                    name="name"
-                    type="text"
-                    placeholder="Name"
-                    required
-                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
-                  />
-                </div>
-                <div>
-                  <input
-                    id="hero-email"
-                    name="email"
-                    type="email"
-                    placeholder="Email Address"
-                    required
-                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
-                  />
-                </div>
-              </div>
-
-              <!-- Row 2: Phone Number & Service Dropdown -->
-              <div class="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <input
-                    id="hero-phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone Number"
-                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
-                  />
-                </div>
-                <div>
-                  <select
-                    id="hero-service"
-                    name="service"
-                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink-dim transition-all focus:border-ink focus:bg-white focus:text-ink focus:outline-none focus:ring-2 focus:ring-ink/10 appearance-none cursor-pointer"
-                  >
-                    <option value="" selected>Service You're Interested In</option>
-                    <option value="Web & Mobile App Development">Web &amp; Mobile App Development</option>
-                    <option value="15 Buy-Once PHP Systems (Marketplace)">15 Buy-Once PHP Systems (Marketplace)</option>
-                    <option value="WSS Express Fixed-Price Packages">WSS Express Fixed-Price Packages</option>
-                    <option value="AI Systems & Bespoke Architecture">AI Systems &amp; Bespoke Architecture</option>
-                    <option value="General Consultation">General Consultation</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Row 3: Preferred Date & Time Slot for Online Attendance -->
-              <div class="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <input
-                    id="hero-date"
-                    name="preferred_date"
-                    type="date"
-                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
-                  />
-                </div>
-                <div>
-                  <select
-                    id="hero-time"
-                    name="preferred_time"
-                    class="w-full rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink-dim transition-all focus:border-ink focus:bg-white focus:text-ink focus:outline-none focus:ring-2 focus:ring-ink/10 appearance-none cursor-pointer"
-                  >
-                    <option value="" selected>Preferred Online Time Slot</option>
-                    <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM – 12:00 PM)</option>
-                    <option value="Early Afternoon (02:00 PM - 04:00 PM)">Early Afternoon (02:00 PM – 04:00 PM)</option>
-                    <option value="Late Afternoon (04:00 PM - 06:00 PM)">Late Afternoon (04:00 PM – 06:00 PM)</option>
-                    <option value="Evening (08:00 PM - 10:00 PM)">Evening (08:00 PM – 10:00 PM)</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Row 4: Message Textarea -->
-              <div>
-                <textarea
-                  id="hero-message"
-                  name="message"
-                  rows="4"
-                  placeholder="Message"
-                  class="w-full resize-none rounded-2xl border border-line/80 bg-paper-dim/60 px-5 py-3.5 text-sm text-ink placeholder:text-ink-dim/60 transition-all focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
-                ></textarea>
-              </div>
-
-              <!-- Status Notification -->
-              <div id="hero-form-status" class="hidden rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-4 py-3 text-sm font-semibold text-emerald-800"></div>
-
-              <!-- Row 5: Pill Send Message Button with circular icon container -->
-              <div class="pt-2">
-                <button
-                  type="submit"
-                  id="hero-form-submit"
-                  class="inline-flex items-center gap-4 rounded-full bg-accent py-2 pl-7 pr-2.5 text-sm font-bold text-white shadow-lg shadow-accent/25 transition-all duration-300 hover:bg-accent-dim hover:scale-105 active:scale-95"
-                >
-                  <span id="hero-submit-label">Send Message</span>
-                  <span class="flex h-9 w-9 items-center justify-center rounded-full bg-white text-accent transition-transform group-hover:translate-x-0.5">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                  </span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
       </Container>
     </section>
   )
 }
-
-<script>
-  function initHeroContactForm() {
-    const form = document.getElementById('hero-contact-form') as HTMLFormElement | null;
-    const status = document.getElementById('hero-form-status');
-    const dateInput = document.getElementById('hero-date') as HTMLInputElement | null;
-    if (!form || form.dataset.bound) return;
-    form.dataset.bound = '1';
-
-    if (dateInput) {
-      dateInput.min = new Date().toISOString().split('T')[0];
-    }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = (document.getElementById('hero-name') as HTMLInputElement)?.value.trim();
-      const email = (document.getElementById('hero-email') as HTMLInputElement)?.value.trim();
-      if (!name || !email) return;
-
-      const phone = (document.getElementById('hero-phone') as HTMLInputElement)?.value.trim() || 'N/A';
-      const service = (document.getElementById('hero-service') as HTMLSelectElement)?.value || 'General Inquiry';
-      const date = (document.getElementById('hero-date') as HTMLInputElement)?.value || 'Not specified';
-      const time = (document.getElementById('hero-time') as HTMLSelectElement)?.value || 'Not specified';
-      const message = (document.getElementById('hero-message') as HTMLTextAreaElement)?.value.trim() || 'No message provided';
-
-      const subject = encodeURIComponent(`New Consultation & Quote Request from ${name}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService Interested: ${service}\nPreferred Online Consultation Date: ${date}\nPreferred Time Slot: ${time}\n\nMessage:\n${message}`
-      );
-
-      window.location.href = `mailto:hello@wssdevlabs.com?subject=${subject}&body=${body}`;
-
-      if (status) {
-        status.textContent = 'Thank you! Your message and preferred consultation slot have been prepared. We will confirm shortly.';
-        status.classList.remove('hidden');
-      }
-      form.reset();
-    });
-  }
-
-  initHeroContactForm();
-  document.addEventListener('astro:page-load', initHeroContactForm);
-</script>

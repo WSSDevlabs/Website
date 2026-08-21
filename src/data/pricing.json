@@ -69,29 +69,6 @@
       "ctaHref": "/contact"
     },
     {
-      "name": "Scale",
-      "price": "From RM 28,000",
-      "segment": "scale",
-      "audience": "Corporate teams with multiple staff needing new systems, deeper analytics, and automation",
-      "services": ["custom-systems", "web-development", "ai-development", "digital-marketing", "business-growth", "maintenance-support"],
-      "highlight": false,
-      "description": "For a larger organisation with multiple departments that needs real systems built or rebuilt, sales and marketing backed by data, and processes automated instead of run by hand.",
-      "features": [
-        "Custom CMS, admin dashboard, or ERP modules (inventory, orders, reporting)",
-        "Corporate website or portal redesign",
-        "Workflow automation and AI-assisted features",
-        "Role-based access control across teams and departments",
-        "Integration with existing tools: accounting, CRM, payment gateways",
-        "Growth strategy and analytics-led marketing plan",
-        "Data migration from legacy systems",
-        "SLA-backed maintenance and priority support",
-        "Dedicated project management"
-      ],
-      "note": "Excludes 8% SST. Scoped and quoted individually after a discovery call.",
-      "cta": "Let's Talk",
-      "ctaHref": "/contact"
-    },
-    {
       "name": "Custom",
       "price": "Custom Quote",
       "segment": "custom",

@@ -75,7 +75,7 @@ export const EXPRESS_PACKAGES: ExpressPackage[] = [
       'SEO-ready semantic information architecture',
       '24-hour response time during onboarding and build',
       'Performance-led UI with smooth micro-interactions',
-      'Direct builder access — talk directly to Razin & Natasya',
+      'Direct builder access — talk directly to Razali, no account managers',
       'Web3Forms lead inquiry pipeline + WhatsApp routing',
       'Free 1st-year hosting & SSL on Cloudflare Pages'
     ],

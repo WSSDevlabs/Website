@@ -9,7 +9,7 @@ export const STANDARD_BUILD_PIPELINE: ProjectMilestone[] = [
   {
     stage: '01',
     label: 'Architecture & Technical Scope Lock',
-    description: 'Direct 30-minute kickoff with lead engineers Razin Hakim & Natasya Umairah. Requirements, data models, and API integrations are finalized.',
+    description: 'Direct 30-minute kickoff with the founder. Requirements, data models, and API integrations are finalized.',
     expectedDuration: 'Day 1'
   },
   {
@@ -44,18 +44,10 @@ export const LIVE_SYSTEM_METRICS = {
   },
   directBuilders: [
     {
-      name: 'Razin Hakim',
-      role: 'Full-Stack & Backend Architecture Lead',
+      name: 'Razali',
+      role: 'Founder & Lead Engineer',
       status: 'Available for Sprint Kickoffs',
-      specialty: 'High-Throughput APIs, PHP 8.2+, MySQL, Cloudflare Edge',
-      whatsapp: '+601127205895',
-      email: 'hello@wssdevlabs.com'
-    },
-    {
-      name: 'Natasya Umairah',
-      role: 'Front-End & UI/UX Specialist Lead',
-      status: 'Active on Staging Reviews',
-      specialty: 'GSAP Micro-Moments, Conversion Layouts, Tailwind CSS, Answer Engine SEO',
+      specialty: 'Full-stack development, PHP 8.2+/MySQL, UI/UX, and Cloudflare edge deployment',
       whatsapp: '+601127205895',
       email: 'hello@wssdevlabs.com'
     }

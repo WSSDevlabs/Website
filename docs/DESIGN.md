@@ -2,18 +2,18 @@
 
 > **Governing Direction:** "Industrial Concrete & Anti-SaaS Engineering."  
 > **Core Pillars:** Clarity, Speed, and Directness.  
-> **Lead Specialists:** **Natasya Umairah** (Front-End, UI/UX & Micro-Moments) & **Razin Hakim** (Full-Stack & Backend Architecture).
+> **Led By:** **Razali**, Founder of WSS DevLabs.
 
 ---
 
 ## 1. Core Design Philosophy & Visual Language
 
-WSS Dev Labs’ design identity is built on three core pillars: **Clarity, Speed, and Directness**. Spearheaded by our UI/UX specialist, **Natasya Umairah**, every visual and interactive decision is designed to turn first-time visitor interactions into lasting brand trust.
+WSS Dev Labs’ design identity is built on three core pillars: **Clarity, Speed, and Directness**. Every visual and interactive decision is designed to turn first-time visitor interactions into lasting brand trust.
 
 ### A. High-Converting, Minimalist UI/UX
 - **The "Anti-SaaS" Visual Tone:** We deliberately reject generic, illustration-heavy corporate SaaS templates and cartoonish 3D icons. Instead, we deploy clean, structural, and developer-centric layouts that communicate raw engineering competence, precision, and sub-second load times.
 - **Premium Simplicity:** Engineered to *"make small brands look big"*. We utilize generous whitespace, high-contrast typography, sharp chamfered geometry, and zero filler "fluff".
-- **Trust-Building Micro-Moments:** Natasya's front-end craft leverages subtle hover elevations, smooth page view transitions, and tactile button states to create polished micro-moments that validate user actions and signal authority.
+- **Trust-Building Micro-Moments:** The front-end leverages subtle hover elevations, smooth page view transitions, and tactile button states to create polished micro-moments that validate user actions and signal authority.
 
 ### B. Typography & Visual Hierarchy
 - **Sizing & Weighting:** Headers are oversized, bold, and scannable (`Outfit Variable` / `Geist Variable`), designed so human visitors and automated Answer Engines parse key value propositions within 2 seconds.

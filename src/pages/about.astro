@@ -31,16 +31,9 @@ const whyFeatures = [
   <!-- "About Us" intro block: banner, story, vision/mission + portrait -->
   <section class="relative overflow-hidden">
     <!-- Title banner with breadcrumb -->
-    <div class="relative flex h-56 items-center justify-center overflow-hidden md:h-64">
-      <img
-        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&h=500&q=80"
-        alt=""
-        class="absolute inset-0 h-full w-full object-cover"
-        loading="eager"
-        width="1600"
-        height="500"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-charcoal/35" aria-hidden="true"></div>
+    <div class="relative flex h-56 items-center justify-center overflow-hidden bg-charcoal md:h-64">
+      <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-20" aria-hidden="true"></div>
+      <div class="absolute -top-24 right-1/4 h-72 w-72 rounded-full bg-accent/15 blur-3xl" aria-hidden="true"></div>
       <Container class="relative text-center">
         <h1 class="h-display-xl text-white">About Us</h1>
         <nav aria-label="Breadcrumb" class="mt-3 flex items-center justify-center gap-2 text-sm text-white/55">
@@ -82,29 +75,19 @@ const whyFeatures = [
     <!-- About Us content block -->
     <Container class="relative py-16 md:py-20">
       <div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-        <!-- Left: 2 stacked images -->
-        <div class="relative">
-          <div class="overflow-hidden rounded-3xl border border-line shadow-card">
-            <img
-              src="https://picsum.photos/seed/coding-collaboration/700/420"
-              alt="WSS DevLabs team working"
-              class="h-56 w-full scale-110 object-cover sm:h-72"
-              loading="lazy"
-              width="700"
-              height="420"
-              data-parallax="7"
-            />
-          </div>
-          <div class="ml-10 mt-5 overflow-hidden rounded-3xl border-4 border-paper shadow-float">
-            <img
-              src="https://picsum.photos/seed/developer-whiteboard/700/360"
-              alt="Team planning session"
-              class="h-44 w-full scale-110 object-cover sm:h-56"
-              loading="lazy"
-              width="700"
-              height="360"
-              data-parallax="11"
-            />
+        <!-- Left: abstract identity panel (no stock photos) -->
+        <div class="relative overflow-hidden rounded-3xl border border-line bg-paper-dim shadow-card sm:h-[26rem]">
+          <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-50" aria-hidden="true"></div>
+          <div class="absolute -top-12 -right-12 h-56 w-56 rounded-full bg-accent/10 blur-3xl" aria-hidden="true"></div>
+          <div class="absolute -bottom-12 -left-12 h-56 w-56 rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
+          <div class="relative flex h-full flex-col items-center justify-center gap-4 p-10 text-center">
+            <span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-ink shadow-sm ring-1 ring-line/80">
+              <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.964 0a9 9 0 1 0-11.964 0m11.964 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+            </span>
+            <p class="font-semibold text-ink">One founder, every build</p>
+            <p class="max-w-xs text-sm text-ink-dim">No account managers, no outsourcing. Razali builds it, ships it, and supports it.</p>
           </div>
         </div>
 
@@ -180,14 +163,10 @@ const whyFeatures = [
     <div class="hairline absolute inset-x-0 top-0" aria-hidden="true"></div>
     <Container>
       <div class="grid gap-12 md:grid-cols-2 md:items-center md:gap-16">
-        <!-- Left: stacked images + ownership chip -->
-        <div class="relative">
-          <div class="overflow-hidden rounded-3xl border border-line shadow-card">
-            <img src="https://picsum.photos/seed/tech-team-planning/700/420" alt="WSS DevLabs team" class="h-56 w-full scale-110 object-cover" loading="lazy" width="700" height="420" data-parallax="7" />
-          </div>
-          <div class="mt-5 overflow-hidden rounded-3xl border-4 border-paper shadow-float">
-            <img src="https://picsum.photos/seed/developer-pair-programming/700/340" alt="Development session" class="h-44 w-full scale-110 object-cover" loading="lazy" width="700" height="340" data-parallax="10" />
-          </div>
+        <!-- Left: abstract panel + ownership chip (no stock photos) -->
+        <div class="relative overflow-hidden rounded-3xl border border-line bg-paper shadow-card h-72 sm:h-80">
+          <div class="dot-pattern mask-fade-edges absolute inset-0 opacity-60" aria-hidden="true"></div>
+          <div class="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/8 blur-3xl" aria-hidden="true"></div>
           <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-2xl border border-line bg-paper px-5 py-3.5 text-center shadow-float">
             <p class="stat-num text-xl leading-none text-ink">100%</p>
             <p class="mono-label mt-1.5 !text-[0.6rem] text-ink-dim">Code ownership</p>

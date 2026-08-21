@@ -13,3 +13,6 @@
 /services/grant-government-project-support /services/digital-consulting-solutions#grant-government-project-support 301
 /services/business-startup-package    /services/digital-consulting-solutions#business-startup-package      301
 /services/maintenance-support         /services/digital-consulting-solutions#maintenance-support           301
+
+# Bespoke Enterprise page removed, folded into the general services catalog (2026-08-22)
+/services/bespoke                     /services                                                            301
