@@ -2,12 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
 
-const processSteps = [
-  { title: 'Discover & Strategize', description: 'We dig into your business, audience, and goals, then build a clear plan before any work begins.' },
-  { title: 'Execute & Optimize', description: 'We build, launch, and iterate, with weekly performance reviews and fast adjustments.' },
-  { title: 'Analyze & Grow', description: 'Every project ends with data, documentation, and a roadmap for what comes next.' },
-];
-
 const capabilities = [
   { label: 'Websites, Apps & Systems', detail: 'Typed, custom-coded builds across web, mobile, and internal tools.' },
   { label: 'Marketing, Branding & Media', detail: 'SEO, paid ads, social media, photography, and brand systems.' },
@@ -29,21 +23,7 @@ const whyFeatures = [
 >
 
   <!-- "About Us" intro block: banner, story, vision/mission + portrait -->
-  <section class="relative overflow-hidden">
-    <!-- Title banner with breadcrumb -->
-    <div class="relative flex h-56 items-center justify-center overflow-hidden bg-charcoal md:h-64">
-      <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-20" aria-hidden="true"></div>
-      <div class="absolute -top-24 right-1/4 h-72 w-72 rounded-full bg-accent/15 blur-3xl" aria-hidden="true"></div>
-      <Container class="relative text-center">
-        <h1 class="h-display-xl text-white">About Us</h1>
-        <nav aria-label="Breadcrumb" class="mt-3 flex items-center justify-center gap-2 text-sm text-white/55">
-          <a href="/" class="hover:text-white">Home</a>
-          <span aria-hidden="true">/</span>
-          <span class="text-white">About Us</span>
-        </nav>
-      </Container>
-    </div>
-
+  <section class="relative overflow-hidden pt-24 md:pt-32">
     <!-- Vision / Mission with center founder frame -->
     <Container class="relative pb-16 pt-16 md:pb-20 md:pt-20">
       <div class="grid gap-6 lg:grid-cols-3 lg:items-center">
@@ -93,14 +73,7 @@ const whyFeatures = [
 
         <!-- Right: story + capability rows -->
         <div>
-          <p class="mono-label flex items-center gap-2.5 text-accent-yellow">
-            <span class="flex items-center gap-[3px]" aria-hidden="true">
-              <span class="h-3 w-[7px] rounded-[2px] bg-current"></span>
-              <span class="h-3 w-[7px] rounded-[2px] bg-current opacity-40"></span>
-            </span>
-            About Us
-          </p>
-          <h2 class="h-section mt-5" data-split>One team, whatever the digital need</h2>
+          <h1 class="h-section" data-split>One team, whatever the digital need</h1>
           <p class="mt-5 leading-relaxed text-ink-dim">
             WSS DevLabs started as a small software team, then kept growing because clients kept
             asking for more: not just a website, but the marketing to bring it traffic; not just an
@@ -121,35 +94,6 @@ const whyFeatures = [
                   <p class="font-semibold text-ink">{cap.label}</p>
                   <p class="mt-0.5 text-sm text-ink-dim">{cap.detail}</p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- Work process: numbered timeline -->
-  <section class="py-12 md:py-16">
-    <Container>
-      <div class="panel px-6 py-10 md:px-14 md:py-12">
-        <div class="max-w-2xl">
-          <h2 class="h-section" data-split>Step-by-step to your growth</h2>
-          <p class="mt-4 leading-relaxed text-ink-dim">
-            Every project follows a clear three-phase framework so you always know where things
-            stand, what is being built, and what comes next.
-          </p>
-        </div>
-        <div class="relative mt-12">
-          <div class="hairline absolute left-0 right-0 top-5 hidden sm:block" aria-hidden="true"></div>
-          <div class="grid gap-10 sm:grid-cols-3 sm:gap-8" data-stagger>
-            {processSteps.map((step, i) => (
-              <div data-stagger-child class="relative">
-                <span class="stat-num relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 class="mt-5 text-lg font-semibold tracking-tight text-ink">{step.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-ink-dim">{step.description}</p>
               </div>
             ))}
           </div>

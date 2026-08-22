@@ -47,7 +47,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     tagline: 'Connect',
     description:
       'Connected devices, sensor networks, and the infrastructure to collect, monitor, and act on real-world data alongside your software.',
-    services: []
+    services: ['iot-development']
   }
 ];
 

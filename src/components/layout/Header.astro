@@ -305,7 +305,7 @@ const navGroups: NavGroup[] = [
 <header
   id="desktop-topbar"
   aria-label="Primary Navigation"
-  class="fixed left-1/2 top-4 z-50 hidden md:flex h-20 w-[88%] max-w-4xl -translate-x-1/2 items-center justify-between px-6 lg:px-8"
+  class="fixed left-1/2 top-4 z-50 hidden md:flex h-20 w-[88%] max-w-4xl -translate-x-1/2 items-center justify-between rounded-[2.5rem] border border-white/40 bg-white/15 px-6 lg:px-8 shadow-[0_20px_50px_-15px_rgba(25,25,27,0.22)] backdrop-blur-2xl"
 >
   <!-- Left: Company Logo Button with Master White/Grey Popover -->
   <div class="relative group flex items-center">
@@ -451,7 +451,7 @@ const navGroups: NavGroup[] = [
 
           <!-- Rich Interactive Hover Popover (White/Grey Theme, Left Links + Right Cards) -->
           <div
-            class="pointer-events-none absolute right-0 top-full mt-3 z-50 hidden md:flex items-start opacity-0 -translate-y-2 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0"
+            class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-3 z-50 hidden md:flex items-start opacity-0 -translate-y-2 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0"
           >
             <div class="pt-2">
               <div class="w-[40rem] lg:w-[44rem] rounded-[2.2rem] border border-black/10 bg-white p-6 text-left shadow-[0_25px_70px_-15px_rgba(0,0,0,0.18)] text-ink">
@@ -520,12 +520,9 @@ const navGroups: NavGroup[] = [
     href={PRIMARY_CTA.href}
     target="_blank"
     rel="noopener noreferrer"
-    class="flex items-center gap-2 rounded-full bg-emerald-600 py-2.5 pl-4 pr-5 text-sm font-bold text-white shadow-sm transition hover:bg-emerald-700 hover:scale-105"
+    class="flex items-center gap-2 rounded-full bg-accent-blue py-2.5 pl-4 pr-5 text-sm font-bold text-white shadow-sm transition hover:opacity-90 hover:scale-105"
     aria-label="Consult with us on WhatsApp"
   >
-    <svg class="h-4.5 w-4.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.072-2.072-.5-1.761-.733-2.887-2.526-2.975-2.644-.088-.117-.708-.942-.708-1.798s.446-1.277.607-1.452c.16-.175.349-.219.465-.219.117 0 .233 0 .335.006.107.005.25.04.388.373.145.349.495 1.209.539 1.297.044.088.073.19.015.305-.058.117-.087.19-.175.292-.087.102-.184.228-.263.307-.087.087-.179.182-.077.357.102.175.454.748.974 1.211.669.595 1.233.78 1.408.868.175.087.277.073.379-.044.102-.117.437-.51.554-.685.117-.175.233-.146.393-.087.16.058 1.018.48 1.193.568.175.087.291.131.335.204.044.073.044.423-.1 1.028z"/>
-    </svg>
     <span>Consult with Us</span>
   </a>
 </header>

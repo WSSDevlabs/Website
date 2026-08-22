@@ -12,57 +12,59 @@ import { LIVE_SYSTEM_METRICS, STANDARD_BUILD_PIPELINE } from '../data/status';
   path="/status"
 >
   <!-- Hero Section -->
-  <section class="relative overflow-hidden bg-ink py-20 text-white md:py-28">
-    <div class="grain-overlay" aria-hidden="true"></div>
+  <section class="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-25" aria-hidden="true"></div>
     <div
-      class="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-emerald-500/15 blur-3xl"
+      class="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-paper-dim blur-3xl"
       aria-hidden="true"
     ></div>
 
     <Container class="relative">
       <div class="mx-auto max-w-3xl text-center">
-        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-mono uppercase tracking-wider text-emerald-300">
-          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-1 text-xs font-mono uppercase tracking-wider text-ink-dim shadow-sm">
+          <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
           All Systems Operational · Direct Engineering Access
         </div>
 
-        <h1 class="mt-6 font-display text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
-          Live Build &amp; Studio Status
+        <h1 class="mt-6 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl">
+          Live Build &amp; <span class="badge-highlight">Studio Status</span>
         </h1>
-        <p class="mt-4 font-display text-lg text-emerald-400 sm:text-xl">
+        <p class="mt-4 font-display text-lg text-accent sm:text-xl">
           Delivering "Go-Live Calm" Through Uncompromising Transparency.
         </p>
-        <p class="mt-4 text-base leading-relaxed text-white/70">
+        <p class="mt-4 text-base leading-relaxed text-ink-dim">
           We believe clients should never wonder what's happening with their software.
           Track our live sprint capacity, SLA response times, and recent production shipments in real time.
         </p>
       </div>
 
       <!-- Quick Metrics Bar -->
-      <div id="metrics" class="mt-12 grid grid-cols-2 gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:grid-cols-4">
-        <div class="text-center">
-          <p class="text-xs font-mono uppercase tracking-wider text-white/50">System Health</p>
-          <p class="mt-1 font-feature text-2xl font-bold text-emerald-400">
-            {LIVE_SYSTEM_METRICS.overallHealth}
-          </p>
-        </div>
-        <div class="text-center">
-          <p class="text-xs font-mono uppercase tracking-wider text-white/50">Average SLA</p>
-          <p class="mt-1 font-feature text-2xl font-bold text-white">
-            {LIVE_SYSTEM_METRICS.averageResponseTimeSLA}
-          </p>
-        </div>
-        <div class="text-center">
-          <p class="text-xs font-mono uppercase tracking-wider text-white/50">Mobile Lighthouse</p>
-          <p class="mt-1 font-feature text-2xl font-bold text-accent-yellow-vivid">
-            {LIVE_SYSTEM_METRICS.averageLighthouseScore}
-          </p>
-        </div>
-        <div class="text-center">
-          <p class="text-xs font-mono uppercase tracking-wider text-white/50">Sprint Slots Free</p>
-          <p class="mt-1 font-feature text-2xl font-bold text-accent">
-            {LIVE_SYSTEM_METRICS.activeSprintSlots.availableForBooking} of {LIVE_SYSTEM_METRICS.activeSprintSlots.total}
-          </p>
+      <div id="metrics" class="mt-12 rounded-3xl sm:rounded-full border border-line bg-white p-6 sm:px-10 sm:py-7 shadow-card">
+        <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:divide-x sm:divide-line text-center">
+          <div class="flex flex-col items-center justify-center">
+            <p class="text-xs font-mono uppercase tracking-wider text-ink-dim">System Health</p>
+            <p class="mt-1 font-feature text-2xl font-black text-emerald-600">
+              {LIVE_SYSTEM_METRICS.overallHealth}
+            </p>
+          </div>
+          <div class="flex flex-col items-center justify-center sm:pl-6">
+            <p class="text-xs font-mono uppercase tracking-wider text-ink-dim">Average SLA</p>
+            <p class="mt-1 font-feature text-2xl font-black text-ink">
+              {LIVE_SYSTEM_METRICS.averageResponseTimeSLA}
+            </p>
+          </div>
+          <div class="flex flex-col items-center justify-center sm:pl-6">
+            <p class="text-xs font-mono uppercase tracking-wider text-ink-dim">Mobile Lighthouse</p>
+            <p class="mt-1 font-feature text-2xl font-black text-accent-yellow-vivid">
+              {LIVE_SYSTEM_METRICS.averageLighthouseScore}
+            </p>
+          </div>
+          <div class="flex flex-col items-center justify-center sm:pl-6">
+            <p class="text-xs font-mono uppercase tracking-wider text-ink-dim">Sprint Slots Free</p>
+            <p class="mt-1 font-feature text-2xl font-black text-accent">
+              {LIVE_SYSTEM_METRICS.activeSprintSlots.availableForBooking} of {LIVE_SYSTEM_METRICS.activeSprintSlots.total}
+            </p>
+          </div>
         </div>
       </div>
     </Container>

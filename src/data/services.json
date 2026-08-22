@@ -421,6 +421,31 @@
           "answer": "Most startup packages take 4 to 8 weeks depending on scope, from first discovery call to a live, branded business."
         }
       ]
+    },
+    {
+      "slug": "iot-development",
+      "title": "IoT Solutions & Infrastructure",
+      "group": "Build",
+      "shortDescription": "Connected devices and sensor networks, wired into a dashboard so you can monitor and act on real-world data.",
+      "valueProp": "Hardware and software scoped together from the start, so sensor data actually reaches a dashboard or workflow you can use, not just a device that blinks.",
+      "problem": "IoT projects often stall at the gap between the hardware and the software, where sensor data is collected but never turned into something a business can actually act on.",
+      "deliverables": [
+        "Sensor and device selection & wiring plan",
+        "Device-to-cloud data pipeline",
+        "Real-time monitoring dashboard",
+        "Alerting and automation rules",
+        "Ongoing device fleet support"
+      ],
+      "approach": [
+        "Requirements & device audit",
+        "Architecture design (edge vs cloud processing)",
+        "Hardware setup and firmware/integration build",
+        "Dashboard and alerting build",
+        "Field testing and handover"
+      ],
+      "tools": ["MQTT", "Raspberry Pi / ESP32", "Cloud IoT pipelines", "Grafana / custom dashboards"],
+      "pricingFrom": "RM 8,000",
+      "faq": []
     }
   ]
 }
