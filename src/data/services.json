@@ -105,7 +105,7 @@
         },
         {
           "question": "Can you match the tech stack my university requires?",
-          "answer": "Yes. We build in whatever stack your brief or supervisor specifies, from PHP and Java to React and Python."
+          "answer": "Yes. We build in whatever stack your brief or supervisor specifies."
         }
       ]
     },

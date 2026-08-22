@@ -41,7 +41,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
         'Automated booking confirmation emails with calendar (.ics) attachments and deposit invoices.',
         'Direct WhatsApp and push notification triggers for hall managers upon reservation.'
       ],
-      technicalArchitecture: 'PHP 8.2+, MySQL transaction locks, Webhook dispatchers, responsive mobile-first booking UI.',
+      technicalArchitecture: 'MySQL transaction locks, Webhook dispatchers, responsive mobile-first booking UI.',
       securityAndLicensing: 'Full source code. Zero recurring fees or booking cut percentages.'
     },
     features: [
@@ -52,10 +52,10 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
       'Automated WhatsApp & Email customer notification',
       'Customer intake form for catering, AV, and decoration add-ons'
     ],
-    techStack: ['PHP 8.2+', 'MySQL', 'Tailwind CSS', 'Vanilla JS', 'FPX Gateway'],
+    techStack: ['MySQL', 'Tailwind CSS', 'Vanilla JS', 'FPX Gateway'],
     pricingModel: 'Buy-Once, Own-Forever',
     includedDeliverables: [
-      'Full venue booking PHP codebase',
+      'Full venue booking source code',
       'Admin portal with master calendar view',
       'Automated email templates',
       'Database schema & installation manual'
@@ -86,7 +86,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
         'Encrypted digital patient intake forms adhering to Malaysian PDPA privacy principles.',
         'Doctor consultation schedule switcher with emergency leave blackout overrides.'
       ],
-      technicalArchitecture: 'PHP 8.2+, MySQL InnoDB schema, WebSocket/AJAX polling for TV queue display, PDPA-compliant encryption.',
+      technicalArchitecture: 'MySQL InnoDB schema, WebSocket/AJAX polling for TV queue display, PDPA-compliant encryption.',
       securityAndLicensing: 'Buy once, complete data privacy. Patient health information is never hosted on third-party SaaS clouds.'
     },
     features: [
@@ -97,7 +97,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
       'Automated SMS/WhatsApp appointment reminders',
       'Doctor consultation log and appointment history'
     ],
-    techStack: ['PHP 8.2+', 'MySQL', 'Tailwind CSS', 'AJAX', 'WebSockets / Polling'],
+    techStack: ['MySQL', 'Tailwind CSS', 'AJAX', 'WebSockets / Polling'],
     pricingModel: 'Buy-Once, Own-Forever',
     includedDeliverables: [
       'Patient booking portal',
@@ -131,7 +131,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
         'Per-tier capacity control with real-time countdown (Early Bird, General, VIP).',
         'Instant PDF e-ticket generation dispatched via email upon successful FPX checkout.'
       ],
-      technicalArchitecture: 'PHP 8.2+, SVG/PNG QR generation library, HTML5 Camera API scanner, MySQL concurrency locks.',
+      technicalArchitecture: 'SVG/PNG QR generation library, HTML5 Camera API scanner, MySQL concurrency locks.',
       securityAndLicensing: 'Full source code ownership. Keep 100% of your ticket sales with no percentage cuts.'
     },
     features: [
@@ -142,7 +142,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
       'Real-time attendee check-in percentage dashboard',
       'Exportable attendee lists for post-event email marketing'
     ],
-    techStack: ['PHP 8.2+', 'MySQL', 'Tailwind CSS', 'HTML5 Barcode Detection API', 'ToyyibPay/Stripe'],
+    techStack: ['MySQL', 'Tailwind CSS', 'HTML5 Barcode Detection API', 'ToyyibPay/Stripe'],
     pricingModel: 'Buy-Once, Own-Forever',
     includedDeliverables: [
       'Customer ticket sales storefront',
@@ -176,7 +176,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
         'Automated quote request capture widget embeddable on any landing page.',
         'WhatsApp direct messaging templates for rapid quotation follow-ups.'
       ],
-      technicalArchitecture: 'PHP 8.2+, Sortable.js Kanban engine, MySQL relational schema, responsive tablet/mobile site-survey UI.',
+      technicalArchitecture: 'Sortable.js Kanban engine, MySQL relational schema, responsive tablet/mobile site-survey UI.',
       securityAndLicensing: 'Full source code ownership. Unlimited contractor seats and leads.'
     },
     features: [
@@ -187,7 +187,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
       'Expense & contractor payout tracking per project',
       'Embeddable quotation request widget'
     ],
-    techStack: ['PHP 8.2+', 'MySQL', 'Tailwind CSS', 'Sortable.js', 'Alpine.js'],
+    techStack: ['MySQL', 'Tailwind CSS', 'Sortable.js', 'Alpine.js'],
     pricingModel: 'Buy-Once, Own-Forever',
     includedDeliverables: [
       'Complete CRM web application',
@@ -221,7 +221,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
         'Multi-level category filters with state, district, and keyword search indexes.',
         'Direct business lead generation form on each listing with email dispatch.'
       ],
-      technicalArchitecture: 'PHP 8.2+, MySQL Full-Text Search indexing, Tailwind CSS responsive cards, payment gateway monetization.',
+      technicalArchitecture: 'MySQL Full-Text Search indexing, Tailwind CSS responsive cards, payment gateway monetization.',
       securityAndLicensing: 'Perpetual license. Full source code ownership.'
     },
     features: [
@@ -232,7 +232,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
       'User review and rating moderation system',
       'Admin analytics on listing views and contact clicks'
     ],
-    techStack: ['PHP 8.2+', 'MySQL', 'Tailwind CSS', 'Leaflet / OpenStreetMap', 'FPX Gateway'],
+    techStack: ['MySQL', 'Tailwind CSS', 'Leaflet / OpenStreetMap', 'FPX Gateway'],
     pricingModel: 'Buy-Once, Own-Forever',
     includedDeliverables: [
       'Full directory public portal',
@@ -266,7 +266,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
         'Configurable multi-tier request approval engine for annual leave, expense claims, and equipment requests.',
         'Detailed audit logging for all status changes and financial approvals.'
       ],
-      technicalArchitecture: 'PHP 8.2+, MySQL relational schema with foreign key integrity, Tailwind CSS enterprise dashboard, audit trail engine.',
+      technicalArchitecture: 'MySQL relational schema with foreign key integrity, Tailwind CSS enterprise dashboard, audit trail engine.',
       securityAndLicensing: 'Full source code ownership. Deploy on your local company server, intranet, or private cloud.'
     },
     features: [
@@ -277,7 +277,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
       'Internal team Kanban board for cross-department tasks',
       'Complete audit trail and PDF summary exports for accountants'
     ],
-    techStack: ['PHP 8.2+', 'MySQL', 'Tailwind CSS', 'Sortable.js', 'Alpine.js'],
+    techStack: ['MySQL', 'Tailwind CSS', 'Sortable.js', 'Alpine.js'],
     pricingModel: 'Buy-Once, Own-Forever',
     includedDeliverables: [
       'Complete internal staff operations portal',
@@ -288,7 +288,7 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
     faq: [
       {
         q: 'Can we install this on an internal office server or intranet?',
-        a: 'Yes, WSS StaffPortal is 100% self-hosted PHP and runs seamlessly on local office servers, private VPNs, or standard cloud hosting.'
+        a: 'Yes, WSS StaffPortal is 100% self-hosted and runs seamlessly on local office servers, private VPNs, or standard cloud hosting.'
       }
     ]
   }

@@ -155,8 +155,13 @@
     border-radius: 0.75rem;
     font-weight: 800;
     box-shadow: 0 4px 16px -2px rgba(217, 45, 32, 0.45);
-    white-space: nowrap;
     animation: badge-heartbeat 2.4s ease-in-out infinite;
+  }
+
+  @media (min-width: 640px) {
+    .badge-highlight {
+      white-space: nowrap;
+    }
   }
 
   @keyframes badge-heartbeat {

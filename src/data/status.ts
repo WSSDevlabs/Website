@@ -47,7 +47,7 @@ export const LIVE_SYSTEM_METRICS = {
       name: 'Razali',
       role: 'Founder & Lead Engineer',
       status: 'Available for Sprint Kickoffs',
-      specialty: 'Full-stack development, PHP 8.2+/MySQL, UI/UX, and Cloudflare edge deployment',
+      specialty: 'Full-stack development, UI/UX, and Cloudflare edge deployment',
       whatsapp: '+601127205895',
       email: 'hello@wssdevlabs.com'
     }

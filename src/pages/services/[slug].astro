@@ -2,13 +2,12 @@
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
-import Eyebrow from '../../components/ui/Eyebrow.astro';
 import GrantSolutions from '../../components/sections/GrantSolutions.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import CTABand from '../../components/sections/CTABand.astro';
 import { SERVICE_CATEGORIES, getServicesForCategory } from '../../data/serviceCategories';
 import { TESTIMONIALS } from '../../data/testimonials';
-import { GROUP_TONE, TONE_TEXT_CLASS } from '../../lib/tone';
+import { GROUP_TONE, TONE_TEXT_CLASS, TONE_BORDER_CLASS, TONE_BG_SOFT_CLASS } from '../../lib/tone';
 
 export function getStaticPaths() {
   return SERVICE_CATEGORIES.map((category) => ({
@@ -20,77 +19,68 @@ export function getStaticPaths() {
 const { category } = Astro.props;
 const services = getServicesForCategory(category);
 const otherCategories = SERVICE_CATEGORIES.filter((c) => c.slug !== category.slug);
+const isSpotlight = services.length === 1;
 
-const serviceImages: Record<string, [string, string, string]> = {
+const serviceImages: Record<string, [string, string]> = {
   'web-development': [
     'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'mobile-app-development': [
     'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'custom-systems': [
     'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'ai-development': [
     'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1526378800951-0eb6b1e7e9e2?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'ui-ux-design': [
     'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'maintenance-support': [
     'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'digital-marketing': [
     'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'business-growth': [
     'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'branding-services': [
     'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'product-photoshoot-marketing': [
     'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'media-creation': [
     'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'student-project-support': [
     'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'grant-government-project-support': [
     'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=700&h=380&q=80',
   ],
   'business-startup-package': [
     'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&h=460&q=80',
-    'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=700&h=380&q=80',
+  ],
+  'iot-development': [
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
   ],
 };
 
@@ -99,7 +89,7 @@ const toneAccent: Record<string, string> = {
   blue: 'bg-accent-blue',
   yellow: 'bg-accent-yellow',
   green: 'bg-accent-green',
-  neutral: 'bg-ink-dim',
+  neutral: 'bg-ink-dim'
 };
 ---
 
@@ -111,9 +101,9 @@ const toneAccent: Record<string, string> = {
 >
   <!-- ── Hero ───────────────────────────────────────────────── -->
   <section class="relative overflow-hidden">
-    <Container class="relative pt-28 pb-10 md:pt-36 md:pb-14">
-      <Eyebrow label={category.tagline} />
-      <h1 class="h-display mt-5 max-w-3xl" data-split>{category.title}</h1>
+    <Container class="relative pt-10 pb-10 md:pt-36 md:pb-14">
+      <p class="mono-label text-accent">{category.tagline}</p>
+      <h1 class="h-display mt-4 max-w-3xl" data-split>{category.title}</h1>
       <p class="body-lead mt-5 max-w-2xl">{category.description}</p>
       <div class="mt-8 flex flex-wrap items-center gap-4">
         <a
@@ -134,59 +124,47 @@ const toneAccent: Record<string, string> = {
         </a>
       </div>
 
-      <!-- Jump links to each service in this category -->
-      <div class="mt-8 flex flex-wrap gap-2.5">
-        {
-          services.map((service) => {
-            const tone = GROUP_TONE[service.group];
-            return (
-              <a
-                href={`#${service.slug}`}
-                class:list={['rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium transition-colors hover:border-ink/25', TONE_TEXT_CLASS[tone]]}
-              >
-                {service.title}
-              </a>
-            );
-          })
-        }
-      </div>
+      {
+        !isSpotlight && (
+          <div class="mt-8 flex flex-wrap gap-2.5">
+            {services.map((service) => {
+              const tone = GROUP_TONE[service.group];
+              return (
+                <a
+                  href={`#${service.slug}`}
+                  class:list={['rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium transition-colors hover:border-ink/25', TONE_TEXT_CLASS[tone]]}
+                >
+                  {service.title}
+                </a>
+              );
+            })}
+          </div>
+        )
+      }
     </Container>
     <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
   </section>
 
-  <!-- ── Per-service modules ─────────────────────────────────── -->
   {
-    services.map((service, index) => {
-      const tone = GROUP_TONE[service.group];
-      const [heroImg, imgA, imgB] = serviceImages[service.slug] ?? serviceImages['web-development'];
+    isSpotlight ? (
+      /* Single-service spotlight layout */
+      services.map((service) => {
+        const tone = GROUP_TONE[service.group];
+        const [heroImg, secondImg] = serviceImages[service.slug] ?? serviceImages['web-development'];
+        return (
+          <Fragment>
+            <Section rule>
+              <Container>
+                <div id={service.slug} class="scroll-mt-28 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                  <div>
+                    <p class:list={['mono-label', TONE_TEXT_CLASS[tone]]}>{service.group}</p>
+                    <h2 class="h-section mt-3" data-split>{service.title}</h2>
+                    <p class="mt-4 leading-relaxed text-ink-dim">{service.valueProp}</p>
+                    <div class="hairline my-6" aria-hidden="true" />
+                    <p class="leading-relaxed text-ink-dim">{service.problem}</p>
 
-      return (
-        <Fragment>
-          <Section rule={index > 0} class={index % 2 === 1 ? 'bg-paper-dim' : undefined}>
-            <Container>
-              <div id={service.slug} class="scroll-mt-28">
-                <Eyebrow label={service.group} tone={tone} />
-                <h2 class="h-section mt-4 max-w-2xl" data-split>{service.title}</h2>
-                <p class="mt-4 max-w-2xl leading-relaxed text-ink-dim">{service.shortDescription}</p>
-
-                <!-- Hero image + pricing chip -->
-                <div class="relative mt-8 overflow-hidden rounded-3xl border border-line shadow-card">
-                  <img
-                    src={heroImg}
-                    alt={service.title}
-                    class="h-64 w-full scale-110 object-cover sm:h-80"
-                    loading="lazy"
-                    width="1400"
-                    height="800"
-                    data-parallax="8"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" aria-hidden="true" />
-                </div>
-
-                {
-                  service.pricingFrom && (
-                    <div class="relative z-10 -mt-8 flex justify-start pl-2">
-                      <div class="flex items-center gap-4 rounded-2xl border border-line bg-paper px-6 py-4 shadow-float">
+                    {service.pricingFrom && (
+                      <div class="mt-8 flex items-center gap-4 rounded-2xl border border-line bg-paper p-5 shadow-card w-fit">
                         <span class:list={['flex h-10 w-10 items-center justify-center rounded-xl', toneAccent[tone]]}>
                           <svg class="h-4.5 w-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -197,163 +175,221 @@ const toneAccent: Record<string, string> = {
                           <p class="stat-num text-xl leading-none text-ink">{service.pricingFrom}</p>
                         </div>
                       </div>
-                    </div>
-                  )
-                }
-
-                <!-- About / value prop -->
-                <div class="card mt-10 p-8 md:p-10">
-                  <div class="flex items-start gap-4">
-                    <span class:list={[
-                      'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg font-black text-white',
-                      toneAccent[tone],
-                    ]}>
-                      {service.valueProp.charAt(0)}
-                    </span>
-                    <div class="flex-1">
-                      <h3 class="text-lg font-bold tracking-tight text-ink">About {service.title}</h3>
-                      <p class="mt-3 leading-relaxed text-ink-dim">{service.valueProp}</p>
-                    </div>
+                    )}
                   </div>
-                  <div class="hairline my-7" aria-hidden="true" />
-                  <p class="leading-relaxed text-ink-dim">{service.problem}</p>
-                </div>
 
-                <!-- Deliverables -->
-                <div class="mt-10">
-                  <p class="mono-label text-ink-dim">What's Included</p>
-                  <ul class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
-                    {
-                      service.deliverables.map((item) => (
-                        <li data-stagger-child class="card card-lift spotlight-card flex items-start gap-3 p-5">
-                          <span class:list={[
-                            'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg',
-                            toneAccent[tone],
-                          ]}>
-                            <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <div class="relative overflow-hidden rounded-3xl border border-line shadow-card">
+                    <img
+                      src={heroImg}
+                      alt={service.title}
+                      class="h-72 w-full scale-110 object-cover lg:h-96"
+                      loading="lazy"
+                      width="1400"
+                      height="800"
+                      data-parallax="8"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" aria-hidden="true" />
+                  </div>
+                </div>
+              </Container>
+            </Section>
+
+            <Section rule class="bg-paper-dim">
+              <Container>
+                <div class="grid gap-10 lg:grid-cols-2">
+                  <div>
+                    <p class="mono-label text-ink-dim">What's Included</p>
+                    <ul class="mt-5 space-y-3">
+                      {service.deliverables.map((item) => (
+                        <li class="flex items-start gap-3 text-sm leading-relaxed text-ink-dim">
+                          <span class:list={['mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg', toneAccent[tone]]}>
+                            <svg class="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                               <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                             </svg>
                           </span>
-                          <span class="pt-1 text-sm leading-relaxed text-ink-dim">{item}</span>
+                          {item}
                         </li>
-                      ))
-                    }
-                  </ul>
+                      ))}
+                    </ul>
 
-                  <div class="mt-6 grid gap-6 sm:grid-cols-2">
-                    <div class="overflow-hidden rounded-3xl border border-line shadow-card">
-                      <img src={imgA} alt="" class="h-44 w-full scale-110 object-cover sm:h-52" loading="lazy" width="700" height="460" data-parallax="7" />
+                    <div class="mt-8 flex flex-wrap gap-2.5">
+                      {service.tools.map((tool) => (
+                        <span class="rounded-full border border-line bg-paper px-4 py-2 text-xs font-medium text-ink shadow-card">
+                          {tool}
+                        </span>
+                      ))}
                     </div>
-                    <div class="mt-6 overflow-hidden rounded-3xl border border-line shadow-card sm:mt-0">
-                      <img src={imgB} alt="" class="h-44 w-full scale-110 object-cover sm:h-52" loading="lazy" width="700" height="380" data-parallax="11" />
+                  </div>
+
+                  <div>
+                    <p class="mono-label text-ink-dim">Our Approach</p>
+                    <div class="relative mt-5 space-y-6 border-l-2 border-line pl-6">
+                      {service.approach.map((step, i) => {
+                        const [head, ...rest] = step.split(':');
+                        const title = rest.length ? head.trim() : step;
+                        const desc = rest.length ? rest.join(':').trim() : '';
+                        return (
+                          <div class="relative">
+                            <span class:list={['absolute -left-[1.95rem] flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold text-white', toneAccent[tone]]}>
+                              {i + 1}
+                            </span>
+                            <h4 class="font-semibold tracking-tight text-ink">{title}</h4>
+                            {desc && <p class="mt-1 text-sm leading-relaxed text-ink-dim">{desc}</p>}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <div class="mt-8 overflow-hidden rounded-3xl border border-line shadow-card">
+                      <img src={secondImg} alt="" class="h-40 w-full scale-110 object-cover" loading="lazy" width="700" height="460" data-parallax="7" />
                     </div>
                   </div>
                 </div>
 
-                <!-- Approach -->
-                <div class="panel mt-10 px-6 py-10 md:px-10 md:py-10">
-                  <h3 class="text-lg font-bold tracking-tight text-ink">Our approach to {service.title}</h3>
-                  <div class="relative mt-8">
-                    <div class="hairline absolute left-0 right-0 top-5 hidden sm:block" aria-hidden="true" />
-                    <div class="grid gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3" data-stagger>
-                      {
-                        service.approach.map((step, i) => {
-                          const [head, ...rest] = step.split(':');
-                          const title = rest.length ? head.trim() : step;
-                          const desc = rest.length ? rest.join(':').trim() : '';
-                          return (
-                            <div data-stagger-child class="relative">
-                              <span class="stat-num relative z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-paper text-sm text-accent shadow-card">
-                                {String(i + 1).padStart(2, '0')}
-                              </span>
-                              <h4 class="mt-4 font-semibold tracking-tight text-ink">{title}</h4>
-                              {desc && <p class="mt-2 text-sm leading-relaxed text-ink-dim">{desc}</p>}
-                            </div>
-                          );
-                        })
-                      }
+                {service.pricingFrom && (
+                  <div class:list={['mt-10 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center', toneAccent[tone]]}>
+                    <div>
+                      <p class="mono-label text-white/70">Pricing From</p>
+                      <p class="stat-num mt-2 text-3xl text-white">{service.pricingFrom}</p>
+                    </div>
+                    <a
+                      href="/contact"
+                      class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-float transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5"
+                    >
+                      Get a Quote
+                      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
+
+                {service.faq.length > 0 && (
+                  <div class="mt-10">
+                    <p class="mono-label text-ink-dim">FAQ</p>
+                    <div class="mt-5 space-y-3">
+                      {service.faq.map((f) => (
+                        <details class="card group p-5 open:pb-5">
+                          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink">
+                            {f.question}
+                            <svg class="h-4 w-4 shrink-0 text-ink-dim transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                          </summary>
+                          <p class="mt-3 text-sm leading-relaxed text-ink-dim">{f.answer}</p>
+                        </details>
+                      ))}
                     </div>
                   </div>
-                </div>
+                )}
+              </Container>
+            </Section>
 
-                <!-- Tools + pricing CTA -->
-                <div class="mt-10 flex flex-wrap gap-2.5">
-                  {
-                    service.tools.map((tool) => (
-                      <span class="rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium text-ink shadow-card">
-                        {tool}
+            {service.slug === 'grant-government-project-support' && <GrantSolutions />}
+          </Fragment>
+        );
+      })
+    ) : (
+      /* Multi-service grid layout */
+      <Section rule class="bg-paper-dim">
+        <Container>
+          <div class="grid gap-6 lg:grid-cols-2" data-stagger>
+            {services.map((service) => {
+              const tone = GROUP_TONE[service.group];
+              const [heroImg] = serviceImages[service.slug] ?? serviceImages['web-development'];
+              return (
+                <div id={service.slug} data-stagger-child class:list={['scroll-mt-28 flex flex-col overflow-hidden rounded-3xl border bg-paper shadow-card', TONE_BORDER_CLASS[tone]]}>
+                  <div class="relative h-40 overflow-hidden">
+                    <img src={heroImg} alt={service.title} class="h-full w-full object-cover" loading="lazy" width="1400" height="800" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" aria-hidden="true" />
+                    {service.pricingFrom && (
+                      <span class="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-ink shadow-sm backdrop-blur-sm">
+                        From {service.pricingFrom}
                       </span>
-                    ))
-                  }
-                </div>
+                    )}
+                  </div>
 
-                {
-                  service.pricingFrom && (
-                    <div class:list={[
-                      'mt-8 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center',
-                      toneAccent[tone],
-                    ]}>
-                      <div>
-                        <p class="mono-label text-white/70">Pricing From</p>
-                        <p class="stat-num mt-2 text-3xl text-white">{service.pricingFrom}</p>
-                      </div>
-                      <a
-                        href="/contact"
-                        class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-float transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5"
-                      >
-                        Get a Quote
-                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                      </a>
+                  <div class="flex flex-1 flex-col p-7">
+                    <p class:list={['mono-label', TONE_TEXT_CLASS[tone]]}>{service.group}</p>
+                    <h2 class="mt-2 text-xl font-bold tracking-tight text-ink">{service.title}</h2>
+                    <p class="mt-3 text-sm leading-relaxed text-ink-dim">{service.valueProp}</p>
+
+                    <ul class="mt-5 space-y-2">
+                      {service.deliverables.slice(0, 4).map((item) => (
+                        <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                          <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div class="mt-5 flex flex-wrap gap-1.5">
+                      {service.tools.slice(0, 4).map((tool) => (
+                        <span class:list={['rounded-full px-3 py-1 text-[11px] font-medium', TONE_BG_SOFT_CLASS[tone], TONE_TEXT_CLASS[tone]]}>
+                          {tool}
+                        </span>
+                      ))}
                     </div>
-                  )
-                }
 
-                {
-                  service.faq.length > 0 && (
-                    <div class="mt-10">
-                      <p class="mono-label text-ink-dim">{service.title} FAQ</p>
-                      <div class="mt-5 space-y-3">
+                    {service.faq.length > 0 && (
+                      <div class="mt-5 space-y-2">
                         {service.faq.map((f) => (
-                          <details class="card group p-5 open:pb-5">
-                            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink">
+                          <details class="group rounded-xl border border-line bg-paper-dim/60 p-3.5">
+                            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-ink">
                               {f.question}
-                              <svg class="h-4 w-4 shrink-0 text-ink-dim transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <svg class="h-3.5 w-3.5 shrink-0 text-ink-dim transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                               </svg>
                             </summary>
-                            <p class="mt-3 text-sm leading-relaxed text-ink-dim">{f.answer}</p>
+                            <p class="mt-2 text-xs leading-relaxed text-ink-dim">{f.answer}</p>
                           </details>
                         ))}
                       </div>
-                    </div>
-                  )
-                }
-              </div>
-            </Container>
-          </Section>
+                    )}
 
-          {service.slug === 'grant-government-project-support' && <GrantSolutions />}
-        </Fragment>
-      );
-    })
+                    <a
+                      href="/contact"
+                      class:list={['mt-6 inline-flex items-center justify-center gap-1.5 rounded-full py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5', toneAccent[tone]]}
+                    >
+                      Get a Quote
+                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    </a>
+
+                    {service.slug === 'grant-government-project-support' && (
+                      <p class="mt-3 text-center text-[11px] text-ink-dim">
+                        See grant-matching detail below ↓
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+    )
   }
+
+  {services.some((s) => s.slug === 'grant-government-project-support') && !isSpotlight && <GrantSolutions />}
 
   <!-- ── Testimonials ───────────────────────────────────────── -->
   <Testimonials testimonials={TESTIMONIALS} />
 
   <!-- ── Explore other categories ────────────────────────────── -->
-  <Section rule class="bg-paper-dim">
+  <Section rule class:list={[isSpotlight ? undefined : 'bg-paper']}>
     <Container>
       <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <Eyebrow label="Keep Exploring" />
-          <h2 class="h-section mt-4" data-split>Other services you may need</h2>
+          <p class="mono-label text-accent">Keep Exploring</p>
+          <h2 class="h-section mt-3" data-split>Other services you may need</h2>
         </div>
         <a
           href="/services"
-          class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-dim"
+          class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent-blue transition-colors hover:opacity-80"
         >
           View all services
           <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -362,7 +398,7 @@ const toneAccent: Record<string, string> = {
         </a>
       </div>
 
-      <div class="mt-10 grid gap-5 sm:grid-cols-3" data-stagger>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
         {
           otherCategories.map((other) => (
             <a href={`/services/${other.slug}`} data-stagger-child class="card card-lift spotlight-card group block p-6">

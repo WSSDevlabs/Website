@@ -11,7 +11,7 @@ export type ServiceCategory = {
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     slug: 'web-software-app-development',
-    title: 'Web & Software, App Development',
+    title: 'Web, System & Mobile App Development',
     tagline: 'Build',
     description:
       'Custom-coded websites, mobile apps, and internal systems, built from scratch around your goals instead of bent to fit a template.',
