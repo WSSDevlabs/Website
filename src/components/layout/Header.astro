@@ -6,223 +6,20 @@ const currentPath = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 
-type NavVisualCard = {
-  title: string;
-  desc: string;
-  href: string;
-  image: string;
-};
-
-type NavSubLink = {
-  label: string;
-  href: string;
-  desc: string;
-  badge?: string;
-};
-
 type NavGroup = {
   label: string;
-  subtitle: string;
-  categoryTitle: string;
   href: string;
-  badge: string | null;
   active: boolean;
   icon: string;
-  links: NavSubLink[];
-  cards: NavVisualCard[];
-};
-
-const masterDirectory = {
-  categoryTitle: 'DIRECTORIES',
-  links: [
-    { label: 'All Services Catalog', href: '/services', desc: 'Web, AI, Mobile & Enterprise' },
-    { label: 'WSS Express Web', href: '/express', desc: 'Fixed-price, transparent quotes', badge: '3–7d' },
-    { label: 'The Marketplace', href: '/marketplace', desc: '6 Buy-once systems', badge: '6 Systems' },
-    { label: 'Projects & Work', href: '/work', desc: 'Delivered client results' },
-    { label: 'About Senior Builders', href: '/about', desc: 'Direct with the founder' },
-    { label: 'Live Build Status', href: '/status', desc: '99.9% operational SLA', badge: 'Live' },
-    { label: 'Direct FAQ', href: '/faq', desc: 'Pricing & engineering answers' }
-  ],
-  cards: [
-    {
-      title: 'Productized Software',
-      desc: 'Fixed-price engineering shipped in 3–7 days with zero recurring lock-in.',
-      href: '/services',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=380&q=80'
-    }
-  ]
 };
 
 const navGroups: NavGroup[] = [
-  {
-    label: 'Home',
-    subtitle: 'Overview & Fast Entry',
-    categoryTitle: 'EXPLORE',
-    href: '/',
-    badge: null,
-    active: currentPath === '/',
-    icon: 'home',
-    links: [
-      { label: 'Overview & Studio', href: '/', desc: 'Fast entry to all core offerings' },
-      { label: 'Browse All Services', href: '/services', desc: 'Web, AI, Mobile & Enterprise' },
-      { label: 'Pricing Calculator', href: '/pricing', desc: 'Transparent investment ranges' },
-      { label: 'Engineering Process', href: '/process', desc: 'Our engineering roadmap' },
-      { label: 'Direct Scoping', href: 'https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I%20would%20like%20to%20discuss%20a%20project', desc: 'Instant WhatsApp with builders' }
-    ],
-    cards: [
-      {
-        title: 'Bespoke Digital Platforms',
-        desc: 'High-contrast design systems built for Malaysian SMEs and fast-growing brands.',
-        href: '/express',
-        image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&h=380&q=80'
-      }
-    ]
-  },
-  {
-    label: 'Services & Details',
-    subtitle: 'Web, AI, Mobile & Enterprise',
-    categoryTitle: 'CAPABILITIES',
-    href: '/services',
-    badge: 'Catalog',
-    active: isActive('/services') || isActive('/pricing'),
-    icon: 'services',
-    links: [
-      { label: 'WSS Express Web', href: '/express', badge: '3–7d', desc: 'Fixed-price, transparent quotes' },
-      { label: 'The Marketplace', href: '/marketplace', badge: '6 Systems', desc: '6 Buy-once systems' },
-      { label: 'AI Agents & LLM', href: '/services/artificial-intelligence-automation#ai-development', desc: 'Smart workflow automation' },
-      { label: 'Mobile & Web Apps', href: '/services/web-software-app-development#web-development', desc: 'Full custom digital portals' },
-      { label: 'IoT Solutions & Infrastructure', href: '/services/iot-solutions-infrastructure', desc: 'Connected devices & sensor networks' },
-      { label: 'Pricing & Packages', href: '/pricing', desc: 'Transparent investment ranges' }
-    ],
-    cards: [
-      {
-        title: 'WSS Express Web',
-        desc: 'Turnkey landing pages and company platforms delivered in 3 to 7 business days.',
-        href: '/express',
-        image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&h=380&q=80'
-      }
-    ]
-  },
-  {
-    label: 'About & Studio',
-    subtitle: 'Direct with the Founder',
-    categoryTitle: 'STUDIO & TRUST',
-    href: '/about',
-    badge: 'Direct',
-    active: isActive('/about') || isActive('/work') || isActive('/process'),
-    icon: 'user',
-    links: [
-      { label: 'About Senior Builders', href: '/about', desc: 'Direct with lead engineers' },
-      { label: 'Projects & Case Studies', href: '/work', desc: 'Production results & metrics' },
-      { label: 'How We Build (Process)', href: '/process', desc: 'Our engineering workflow' },
-      { label: 'Live Build Status', href: '/status', desc: 'Operational metrics & SLA', badge: 'Live' },
-      { label: 'Direct FAQ', href: '/faq', desc: 'Answers to common questions' },
-      { label: 'Contact Us', href: '/contact', desc: 'Get in touch directly' }
-    ],
-    cards: [
-      {
-        title: 'Verified Production Results',
-        desc: 'Over RM 5M+ gross value transacted across 15+ custom software platforms.',
-        href: '/work',
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=380&q=80'
-      }
-    ]
-  },
-  {
-    label: 'Solutions & Express',
-    subtitle: 'Fixed-Price, Transparent Quotes',
-    categoryTitle: 'PACKAGES',
-    href: '/express',
-    badge: '3–7d',
-    active: isActive('/express'),
-    icon: 'code',
-    links: [
-      { label: 'WSS Express Overview', href: '/express', badge: '3–7d', desc: 'Fast turnaround web design' },
-      { label: 'Landing Tier', href: '/express#express-landing', desc: 'One-page landing essentials' },
-      { label: 'Starter Tier', href: '/express#express-starter', desc: 'Up to 3-page growth site' },
-      { label: 'Business Tier', href: '/express#express-business', desc: 'Full commerce-ready platform' },
-      { label: 'Compare All 3 Packages →', href: '/express#packages', desc: 'Side-by-side feature breakdown' }
-    ],
-    cards: [
-      {
-        title: 'Rapid Web Launch',
-        desc: 'Production-ready website deployed with DNS, SSL, and mobile optimization in 3–7 days.',
-        href: '/express',
-        image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&h=380&q=80'
-      }
-    ]
-  },
-  {
-    label: 'The Marketplace',
-    subtitle: '6 Buy-Once Systems',
-    categoryTitle: 'SYSTEMS',
-    href: '/marketplace',
-    badge: '6 Systems',
-    active: isActive('/marketplace'),
-    icon: 'store',
-    links: [
-      { label: 'WSS EventSpace', href: '/marketplace/wss-eventspace', desc: 'Hall & venue booking engine' },
-      { label: 'WSS MedCare Clinic', href: '/marketplace/wss-medcare', desc: 'Appointments & live patient queue' },
-      { label: 'WSS TicketFlow', href: '/marketplace/wss-ticketflow', desc: 'QR ticketing & gate scanner' },
-      { label: 'WSS StaffPortal', href: '/marketplace/wss-staffportal', desc: 'Internal RBAC operations hub' },
-      { label: 'Browse All 6 Systems →', href: '/marketplace', badge: 'Source Included', desc: 'Full unencrypted source code' }
-    ],
-    cards: [
-      {
-        title: 'WSS EventSpace',
-        desc: 'Real-time hall availability calendar, deposit payments, and automated booking confirmations.',
-        href: '/marketplace/wss-eventspace',
-        image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&h=380&q=80'
-      }
-    ]
-  },
-  {
-    label: 'Live Build Status',
-    subtitle: 'Operational & Direct SLA',
-    categoryTitle: 'RELIABILITY',
-    href: '/status',
-    badge: 'Live',
-    active: isActive('/status'),
-    icon: 'status',
-    links: [
-      { label: 'Live Status Overview', href: '/status', badge: '99.9%', desc: 'Real-time system health & SLA' },
-      { label: 'Direct Builder Availability', href: '/status#builders', desc: 'Who you talk to, and when' },
-      { label: 'Build Pipeline', href: '/status#pipeline', desc: 'Our 4-stage sprint process' },
-      { label: 'Recent Deployments', href: '/status#deployments', desc: 'Latest production shipments' }
-    ],
-    cards: [
-      {
-        title: '99.9% Production SLA',
-        desc: 'All systems running with sub-second response times across Cloudflare edge nodes.',
-        href: '/status',
-        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&h=380&q=80'
-      }
-    ]
-  },
-  {
-    label: 'Insights & FAQ',
-    subtitle: 'AI-First SEO & Answers',
-    categoryTitle: 'KNOWLEDGE',
-    href: '/insights',
-    badge: null,
-    active: isActive('/insights') || isActive('/faq'),
-    icon: 'document',
-    links: [
-      { label: 'Insights & AI-SEO', href: '/insights', desc: 'Technical & growth guides' },
-      { label: 'E-Invoicing 2026 Guide', href: '/insights/do-you-need-einvoicing-yet', desc: 'LHDN compliance guide' },
-      { label: 'Page Speed & SEO', href: '/insights/why-page-speed-still-matters-for-seo', desc: 'Sub-second Lighthouse scores' },
-      { label: 'MSME MADANI Grant', href: '/insights/msme-digital-grant-madani-explained', desc: 'Gov grant requirements' },
-      { label: 'Direct Pricing FAQ', href: '/faq', desc: 'Transparent SME pricing Q&A' }
-    ],
-    cards: [
-      {
-        title: 'Engineering Blueprints',
-        desc: 'In-depth technical guides and business growth strategies for Malaysian founders.',
-        href: '/insights',
-        image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&h=380&q=80'
-      }
-    ]
-  }
+  { label: 'Home', href: '/', active: currentPath === '/', icon: 'home' },
+  { label: 'Services & Details', href: '/services', active: isActive('/services') || isActive('/pricing'), icon: 'services' },
+  { label: 'About & Studio', href: '/about', active: isActive('/about') || isActive('/work') || isActive('/process'), icon: 'user' },
+  { label: 'Solutions & Express', href: '/express', active: isActive('/express'), icon: 'code' },
+  { label: 'The Marketplace', href: '/marketplace', active: isActive('/marketplace'), icon: 'store' },
+  { label: 'Insights & FAQ', href: '/insights', active: isActive('/insights') || isActive('/faq'), icon: 'document' }
 ];
 ---
 
@@ -253,19 +50,19 @@ const navGroups: NavGroup[] = [
   </div>
 </header>
 
-<!-- Desktop / Tablet Top Bar Navigation with White/Grey Split Popups -->
+<!-- Desktop / Tablet Top Bar Navigation -->
 <header
   id="desktop-topbar"
   aria-label="Primary Navigation"
   class="fixed left-1/2 top-4 z-50 hidden md:flex h-20 w-[88%] max-w-4xl -translate-x-1/2 items-center justify-between rounded-[2.5rem] border border-white/40 bg-white/15 px-6 lg:px-8 shadow-[0_20px_50px_-15px_rgba(25,25,27,0.22)] backdrop-blur-2xl"
 >
-  <!-- Left: Company Logo Button with Master White/Grey Popover -->
-  <div class="relative group flex items-center">
+  <!-- Left: Company Logo -->
+  <div class="flex items-center">
     <a
       href="/"
       id="topbar-logo-btn"
       class="flex items-center gap-2.5 rounded-2xl px-2 py-1.5 transition-all duration-200 hover:bg-paper-dim active:scale-95"
-      aria-label={`${SITE.name} Master Menu`}
+      aria-label={SITE.name}
     >
       <img
         src="/images/brand/logo.png"
@@ -275,75 +72,13 @@ const navGroups: NavGroup[] = [
         height="48"
       />
     </a>
-
-    <!-- Master White/Grey Mega Popover (Left Links + Right Image Cards) -->
-    <div
-      class="pointer-events-none absolute left-0 top-full mt-3 z-50 hidden md:flex items-start opacity-0 -translate-y-2 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0"
-    >
-      <div class="pt-2">
-        <div class="w-[42rem] lg:w-[46rem] rounded-[2.2rem] border border-black/10 bg-white p-6 text-left shadow-[0_25px_70px_-15px_rgba(0,0,0,0.18)] text-ink">
-          <div class="flex items-stretch gap-6">
-            <!-- Left Column: Menu Links -->
-            <div class="w-60 shrink-0 pr-5 border-r border-gray-100">
-              <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-dim/60 mb-2.5">
-                {masterDirectory.categoryTitle}
-              </p>
-              <div class="space-y-1">
-                {masterDirectory.links.map((sub, idx) => (
-                  <a
-                    href={sub.href}
-                    class:list={[
-                      'block rounded-xl px-3 py-2 text-xs transition-colors',
-                      idx === 0
-                        ? 'bg-[#f0efe9] font-bold text-ink'
-                        : 'font-medium text-ink-dim hover:text-ink hover:bg-[#f4f3f0] hover:font-semibold'
-                    ]}
-                  >
-                    <div class="flex items-center justify-between gap-2 whitespace-nowrap">
-                      <span class="truncate">{sub.label}</span>
-                      {sub.badge && (
-                        <span class="shrink-0 rounded bg-accent/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-accent">
-                          {sub.badge}
-                        </span>
-                      )}
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <!-- Right Area: Visual Image Card -->
-            <div class="flex-1">
-              {masterDirectory.cards.map((card) => (
-                <a href={card.href} class="group/card block text-left">
-                  <div class="overflow-hidden rounded-2xl aspect-[16/9] bg-[#f4f3f0] border border-black/5 mb-3">
-                    <img
-                      src={card.image}
-                      alt={card.title}
-                      class="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h4 class="text-xs font-bold text-ink group-hover/card:text-accent transition-colors">
-                    {card.title}
-                  </h4>
-                  <p class="text-[11px] text-ink-dim/80 mt-1 leading-snug">
-                    {card.desc}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- Center/Right: Primary Icon Navigation Row with White/Grey Popups -->
+  <!-- Center/Right: Primary Icon Navigation Row -->
   <nav class="flex items-center gap-1.5" aria-label="Quick Links">
     {
       navGroups.map((item) => (
-        <div class="relative group flex items-center justify-center">
+        <div class="flex items-center justify-center">
           <a
             href={item.href}
             class:list={[
@@ -385,83 +120,12 @@ const navGroups: NavGroup[] = [
               </svg>
             )}
 
-            {item.icon === 'status' && (
-              <div class="relative flex items-center justify-center">
-                <svg class="h-5.5 w-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                </svg>
-                <span class="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              </div>
-            )}
-
             {item.icon === 'document' && (
               <svg class="h-5.5 w-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
               </svg>
             )}
           </a>
-
-          <!-- Rich Interactive Hover Popover (White/Grey Theme, Left Links + Right Cards) -->
-          <div
-            class="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-3 z-50 hidden md:flex items-start opacity-0 -translate-y-2 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0"
-          >
-            <div class="pt-2">
-              <div class="w-[40rem] lg:w-[44rem] rounded-[2.2rem] border border-black/10 bg-white p-6 text-left shadow-[0_25px_70px_-15px_rgba(0,0,0,0.18)] text-ink">
-                <div class="flex items-stretch gap-6">
-                  <!-- Left Column: Menu Links -->
-                  <div class="w-60 shrink-0 pr-5 border-r border-gray-100">
-                    <p class="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-dim/60 mb-2.5">
-                      {item.categoryTitle}
-                    </p>
-                    <div class="space-y-1">
-                      {item.links.map((sub, idx) => (
-                        <a
-                          href={sub.href}
-                          class:list={[
-                            'block rounded-xl px-3 py-2 text-xs transition-colors',
-                            idx === 0
-                              ? 'bg-[#f0efe9] font-bold text-ink'
-                              : 'font-medium text-ink-dim hover:text-ink hover:bg-[#f4f3f0] hover:font-semibold'
-                          ]}
-                        >
-                          <div class="flex items-center justify-between gap-2 whitespace-nowrap">
-                            <span class="truncate">{sub.label}</span>
-                            {sub.badge && (
-                              <span class="shrink-0 rounded bg-accent/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-accent">
-                                {sub.badge}
-                              </span>
-                            )}
-                          </div>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-
-                  <!-- Right Area: Visual Image Card -->
-                  <div class="flex-1">
-                    {item.cards.map((card) => (
-                      <a href={card.href} class="group/card block text-left">
-                        <div class="overflow-hidden rounded-2xl aspect-[16/9] bg-[#f4f3f0] border border-black/5 mb-3">
-                          <img
-                            src={card.image}
-                            alt={card.title}
-                            class="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
-                            loading="lazy"
-                          />
-                        </div>
-                        <h4 class="text-xs font-bold text-ink group-hover/card:text-accent transition-colors">
-                          {card.title}
-                        </h4>
-                        <p class="text-[11px] text-ink-dim/80 mt-1 leading-snug">
-                          {card.desc}
-                        </p>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       ))
     }

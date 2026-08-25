@@ -38,6 +38,26 @@ const serviceImages: Record<string, [string, string]> = {
     'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
   ],
+  'custom-ml-model': [
+    'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'ai-chatbot': [
+    'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'ai-analytics': [
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'workflow-automation': [
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'computer-vision': [
+    'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
   'ui-ux-design': [
     'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=700&h=460&q=80',
@@ -191,25 +211,28 @@ const websiteDesignPricingTables: PricingTable[] = [
     <Container class="relative pt-10 pb-10 md:pt-36 md:pb-14">
       <h1 class="h-display mt-4 max-w-3xl" data-split>{category.title}</h1>
       <p class="body-lead mt-5 max-w-2xl">{category.description}</p>
-      <div class="mt-8 flex flex-wrap items-center gap-4">
-        <a
-          href="/contact"
-          data-magnetic
-          class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(217_45_32/0.5)] transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5 hover:bg-accent-dim"
-        >
-          Start a Project
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
-        <a
-          href="/services"
-          class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-6 py-3.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
-        >
-          All Services
-        </a>
-      </div>
-
+      {
+        category.slug !== 'web-software-app-development' && (
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href="/contact"
+              data-magnetic
+              class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(217_45_32/0.5)] transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5 hover:bg-accent-dim"
+            >
+              Start a Project
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <a
+              href="/services"
+              class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-6 py-3.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
+            >
+              All Services
+            </a>
+          </div>
+        )
+      }
     </Container>
     <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
   </section>
@@ -265,56 +288,6 @@ const websiteDesignPricingTables: PricingTable[] = [
 
             <Section rule class="bg-paper-dim">
               <Container>
-                <div class="grid gap-10 lg:grid-cols-2">
-                  <div>
-                    <p class="mono-label text-ink-dim">What's Included</p>
-                    <ul class="mt-5 space-y-3">
-                      {service.deliverables.map((item) => (
-                        <li class="flex items-start gap-3 text-sm leading-relaxed text-ink-dim">
-                          <span class:list={['mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg', toneAccent[tone]]}>
-                            <svg class="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                          </span>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div class="mt-8 flex flex-wrap gap-2.5">
-                      {service.tools.map((tool) => (
-                        <span class="rounded-full border border-line bg-paper px-4 py-2 text-xs font-medium text-ink shadow-card">
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p class="mono-label text-ink-dim">Our Approach</p>
-                    <div class="relative mt-5 space-y-6 border-l-2 border-line pl-6">
-                      {service.approach.map((step, i) => {
-                        const [head, ...rest] = step.split(':');
-                        const title = rest.length ? head.trim() : step;
-                        const desc = rest.length ? rest.join(':').trim() : '';
-                        return (
-                          <div class="relative">
-                            <span class:list={['absolute -left-[1.95rem] flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold text-white', toneAccent[tone]]}>
-                              {i + 1}
-                            </span>
-                            <h4 class="font-semibold tracking-tight text-ink">{title}</h4>
-                            {desc && <p class="mt-1 text-sm leading-relaxed text-ink-dim">{desc}</p>}
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <div class="mt-8 overflow-hidden rounded-3xl border border-line shadow-card">
-                      <img src={secondImg} alt="" class="h-40 w-full scale-110 object-cover" loading="lazy" width="700" height="460" data-parallax="7" />
-                    </div>
-                  </div>
-                </div>
-
                 {service.pricingFrom && (
                   <div class:list={['mt-10 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center', toneAccent[tone]]}>
                     <div>
@@ -379,34 +352,8 @@ const websiteDesignPricingTables: PricingTable[] = [
                   </div>
 
                   <div class="flex flex-1 flex-col p-7">
-                    <p class:list={['mono-label', TONE_TEXT_CLASS[tone]]}>{service.group}</p>
                     <h2 class="mt-2 text-xl font-bold tracking-tight text-ink">{service.title}</h2>
                     <p class="mt-3 text-sm leading-relaxed text-ink-dim">{service.valueProp}</p>
-
-                    <ul class="mt-5 space-y-2">
-                      {service.deliverables.slice(0, 4).map((item) => (
-                        <li class="flex items-start gap-2.5 text-sm text-ink-dim">
-                          <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                          </svg>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-
-                    {service.tools.length === 1 && service.tools[0].length > 24 ? (
-                      <p class:list={['mt-5 rounded-xl px-4 py-3 text-xs leading-relaxed', TONE_BG_SOFT_CLASS[tone], TONE_TEXT_CLASS[tone]]}>
-                        {service.tools[0]}
-                      </p>
-                    ) : (
-                      <div class="mt-5 flex flex-wrap gap-1.5">
-                        {service.tools.slice(0, 4).map((tool) => (
-                          <span class:list={['rounded-full px-3 py-1 text-[11px] font-medium', TONE_BG_SOFT_CLASS[tone], TONE_TEXT_CLASS[tone]]}>
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    )}
 
                     {service.faq.length > 0 && (
                       <div class="mt-5 space-y-2">
@@ -424,18 +371,6 @@ const websiteDesignPricingTables: PricingTable[] = [
                       </div>
                     )}
 
-                    {category.slug !== 'web-software-app-development' && (
-                      <a
-                        href="/contact"
-                        class:list={['mt-6 inline-flex items-center justify-center gap-1.5 rounded-full py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5', toneAccent[tone]]}
-                      >
-                        Get a Quote
-                        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                      </a>
-                    )}
-
                     {service.slug === 'grant-government-project-support' && (
                       <p class="mt-3 text-center text-[11px] text-ink-dim">
                         See grant-matching detail below ↓
@@ -445,6 +380,248 @@ const websiteDesignPricingTables: PricingTable[] = [
                 </div>
               );
             })}
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+
+  {
+    category.slug === 'web-software-app-development' && (() => {
+      const webSvc = services.find((s) => s.slug === 'web-development');
+      const mobileSvc = services.find((s) => s.slug === 'mobile-app-development');
+      const spotlightPairs = [
+        { svc: webSvc, icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5', tone: 'blue' },
+        { svc: mobileSvc, icon: 'M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3', tone: 'red' }
+      ] as const;
+
+      return (
+        <Section rule class="bg-paper-dim">
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <h2 class="h-section">Everything Included in Web &amp; Mobile App Development</h2>
+              <p class="mt-4 text-ink-dim">
+                Every build, whether it's a marketing site or a full mobile app, is scoped around your goals and shipped in a typed, maintainable stack.
+              </p>
+            </div>
+
+            <div class="grid gap-8 lg:grid-cols-2">
+              {spotlightPairs.map(({ svc, icon, tone }) => svc && (
+                <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
+                  <span class:list={['flex h-12 w-12 items-center justify-center rounded-2xl text-white', toneAccent[tone]]}>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+                    </svg>
+                  </span>
+                  <h3 class="mt-5 text-xl font-bold tracking-tight text-ink">{svc.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-ink-dim">{svc.valueProp}</p>
+
+                  <p class="mono-label mt-6 text-ink-dim">What's Included</p>
+                  <ul class="mt-3 space-y-2.5">
+                    {svc.deliverables.map((item) => (
+                      <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p class="mono-label mt-6 text-ink-dim">Our Approach</p>
+                  <ol class="mt-3 space-y-2">
+                    {svc.approach.map((step, i) => (
+                      <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                        <span class:list={['mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white', toneAccent[tone]]}>
+                          {i + 1}
+                        </span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+
+                  <div class="mt-6 flex flex-wrap gap-1.5">
+                    {svc.tools.map((tool) => (
+                      <span class="rounded-full border border-line bg-paper-dim px-3 py-1 text-[11px] font-medium text-ink-dim">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-10 flex flex-col items-center gap-4 rounded-3xl bg-charcoal p-8 text-center sm:flex-row sm:justify-between sm:text-left">
+              <div>
+                <p class="mono-label text-white/60">Pricing</p>
+                <p class="mt-1 text-2xl font-black text-white">Starting from RM 2,000</p>
+                <p class="mt-1 text-sm text-white/60">Final price depends on your project requirements.</p>
+              </div>
+              <a
+                href="/contact"
+                class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-float transition-all duration-300 hover:-translate-y-0.5"
+              >
+                Get a Custom Quote
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </Container>
+        </Section>
+      );
+    })()
+  }
+
+  {
+    category.slug === 'iot-solutions-infrastructure' && (
+      <Fragment>
+        <Section rule class="bg-paper-dim">
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <p class="mono-label text-accent">IoT & Smart Infrastructure</p>
+              <h2 class="h-section mt-3">Key Structural Components of IoT Infrastructure</h2>
+              <p class="mt-4 text-ink-dim">
+                Four essential layers of IoT hardware sensing infrastructure, from physical sensors to the power systems that keep them running.
+              </p>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  title: 'Physical Sensors',
+                  desc: 'Devices that detect real-world physical changes and convert them into electrical signals.',
+                  items: ['Temperature sensors', 'Humidity sensors', 'Pressure sensors', 'Motion sensors', 'Light sensors']
+                },
+                {
+                  title: 'Microcontrollers',
+                  desc: 'The local brain of the hardware — manages sensor operations, runs preliminary analysis, and connects hardware to the network.',
+                  items: ['Arduino', 'Raspberry Pi', 'ESP8266']
+                },
+                {
+                  title: 'Communication Modules',
+                  desc: 'Handle transmission between sensors and higher-level networks for real-time monitoring and remote sensing.',
+                  items: ['Wi-Fi', 'Bluetooth', 'Zigbee', 'LoRa']
+                },
+                {
+                  title: 'Power Management',
+                  desc: 'Critical for remote or hard-to-reach deployments — battery management, energy harvesting, and low-power design.',
+                  items: ['Battery management systems', 'Energy harvesting', 'Low-power architecture']
+                }
+              ].map((block) => (
+                <div class="flex flex-col rounded-3xl border border-line bg-white p-6 shadow-card">
+                  <h3 class="text-base font-bold text-ink">{block.title}</h3>
+                  <p class="mt-2 text-xs leading-relaxed text-ink-dim">{block.desc}</p>
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    {block.items.map((item) => (
+                      <span class="rounded-full border border-line bg-paper-dim px-2.5 py-1 text-[10px] font-medium text-ink-dim">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        <Section rule>
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <h2 class="h-section">Core Operational Roles of Hardware Sensing</h2>
+              <p class="mt-4 text-ink-dim">What hardware sensing infrastructure actually does within an IoT and AI ecosystem.</p>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { title: 'Data Acquisition', desc: 'Gathering accurate, high-resolution physical data directly from the field.' },
+                { title: 'Environmental Monitoring', desc: 'Non-stop tracking and reporting of surrounding environmental conditions.' },
+                { title: 'Health & Safety', desc: 'Securing machinery operations and detecting dangerous or hazardous conditions.' },
+                { title: 'Automation', desc: 'Triggering automated actions and industrial controls when sensor thresholds are met.' }
+              ].map((role) => (
+                <div class="rounded-2xl border border-line bg-paper-dim/60 p-5">
+                  <h3 class="text-sm font-bold text-ink">{role.title}</h3>
+                  <p class="mt-2 text-xs leading-relaxed text-ink-dim">{role.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        <Section rule class="bg-paper-dim">
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <h2 class="h-section">Practical Industry Applications</h2>
+              <p class="mt-4 text-ink-dim">Where this IoT and hardware infrastructure gets deployed across different industries.</p>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { title: 'Smart Agriculture & Livestock', desc: 'Soil monitoring sensors for nutrients and moisture, greenhouse climate control, cattle AI, smart poultry, smart aquaculture, and general livestock management.' },
+                { title: 'Industrial Automation (IIoT) & Oil & Gas', desc: 'Vibration and temperature sensors on heavy machinery for predictive maintenance, plus pressure and flow sensors to control industrial processes.' },
+                { title: 'Smart Cities & Buildings', desc: 'Smart building and office infrastructure, asset tracking, and city-wide smart initiatives.' },
+                { title: 'Smart Homes', desc: 'Home security (motion detectors, cameras, door/window alarms) and climate controls (thermostats, humidity monitoring).' },
+                { title: 'Healthcare', desc: 'Wearable sensors tracking vital health indicators and diagnostic medical devices.' }
+              ].map((app) => (
+                <div class="rounded-2xl border border-line bg-white p-6 shadow-card">
+                  <h3 class="text-base font-bold text-ink">{app.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-ink-dim">{app.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      </Fragment>
+    )
+  }
+
+  {
+    category.slug === 'digital-design-media-marketing' && (
+      <Section rule class="bg-paper-dim">
+        <Container>
+          <div class="mx-auto max-w-2xl text-center mb-12">
+            <h2 class="h-section">Core Services Delivered in the Copywriting Blueprint</h2>
+          </div>
+
+          <div class="grid gap-8 lg:grid-cols-2">
+            <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
+              <p class="mono-label text-accent">1. Google Ads Campaign Management</p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
+                Acquiring high-intent local prospects through real-time bid adjustments, keyword monitoring, and structured ad intelligence.
+              </p>
+
+              <p class="mono-label mt-6 text-ink-dim">Ad Channel Coverage</p>
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {['Standard Search Ads', 'Display Network Retargeting', 'Google Shopping Ads', 'YouTube Video Ads'].map((ch) => (
+                  <span class="rounded-full border border-line bg-paper-dim px-3 py-1 text-[11px] font-medium text-ink-dim">{ch}</span>
+                ))}
+              </div>
+
+              <p class="mono-label mt-6 text-ink-dim">Campaign Packages</p>
+              <p class="mt-2 text-sm leading-relaxed text-ink-dim">
+                Structured tiers from <strong class="text-ink">RM 500/month</strong> to <strong class="text-ink">RM 2,000/month</strong> (subject to 8% SST), with setup fees from <strong class="text-ink">RM 500 – RM 1,500</strong>, minimum contract durations, and campaign limits depending on tier.
+              </p>
+            </div>
+
+            <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
+              <p class="mono-label text-accent">2. Search Engine Optimisation (SEO)</p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
+                Positions your builds for long-term organic authority, helping clients convert search traffic without ongoing ad spend.
+              </p>
+
+              <p class="mono-label mt-6 text-ink-dim">Ongoing Monthly Packages</p>
+              <ul class="mt-3 space-y-2 text-sm text-ink-dim">
+                <li>· <strong class="text-ink">Starter</strong> — RM 1,200/month</li>
+                <li>· <strong class="text-ink">Basic</strong> — RM 1,500/month</li>
+                <li>· <strong class="text-ink">Premium</strong> — RM 1,900/month</li>
+              </ul>
+              <p class="mt-2 text-xs text-ink-dim">Guaranteed top-30 rankings for up to 20 keywords across 20 pages.</p>
+
+              <p class="mono-label mt-6 text-ink-dim">SEO Essential Setup (One-Time)</p>
+              <ul class="mt-3 space-y-2 text-sm text-ink-dim">
+                <li>· <strong class="text-ink">Basic</strong> — RM 4,000</li>
+                <li>· <strong class="text-ink">Advanced</strong> — RM 5,500</li>
+              </ul>
+              <p class="mt-2 text-xs text-ink-dim">Tag optimizations, performance checks, indexing setup, and 2 months of initial backlink/ranking support.</p>
+            </div>
           </div>
         </Container>
       </Section>
@@ -572,41 +749,6 @@ const websiteDesignPricingTables: PricingTable[] = [
 
   <!-- ── Testimonials ───────────────────────────────────────── -->
   <Testimonials testimonials={TESTIMONIALS} />
-
-  <!-- ── Explore other categories ────────────────────────────── -->
-  <Section rule class:list={[isSpotlight ? undefined : 'bg-paper']}>
-    <Container>
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p class="mono-label text-accent">Keep Exploring</p>
-          <h2 class="h-section mt-3" data-split>Other services you may need</h2>
-        </div>
-        <a
-          href="/services"
-          class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent-blue transition-colors hover:opacity-80"
-        >
-          View all services
-          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
-      </div>
-
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
-        {
-          otherCategories.map((other) => (
-            <a href={`/services/${other.slug}`} data-stagger-child class="card card-lift spotlight-card group block p-6">
-              <p class="mono-label text-accent">{other.tagline}</p>
-              <h3 class="mt-4 font-semibold tracking-tight text-ink transition-colors group-hover:text-accent">
-                {other.title}
-              </h3>
-              <p class="mt-2 text-sm leading-relaxed text-ink-dim">{other.description}</p>
-            </a>
-          ))
-        }
-      </div>
-    </Container>
-  </Section>
 
   <!-- ── CTA band ────────────────────────────────────────────── -->
   <CTABand

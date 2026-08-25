@@ -7,7 +7,6 @@ import Testimonials from '../components/sections/Testimonials.astro';
 import ElevateCTA from '../components/sections/ElevateCTA.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
-import GrantSolutions from '../components/sections/GrantSolutions.astro';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.draft);
 const featuredProjects = allProjects.filter((p) => p.data.featured).slice(0, 4);
@@ -34,6 +33,5 @@ const schema = {
   <ElevateCTA />
   <MarketplaceAndExpressBanner />
   <FeaturedWork projects={featuredProjects} />
-  <GrantSolutions />
 </BaseLayout>
 

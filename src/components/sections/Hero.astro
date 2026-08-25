@@ -94,18 +94,11 @@ const stats = [
         <div class="relative mx-auto mt-12 max-w-3xl">
           {/* Arched Frame Container */}
           <div class="relative mx-auto aspect-[4/3] sm:aspect-[16/11] w-full max-w-2xl overflow-hidden rounded-t-[10rem] sm:rounded-t-[16rem] rounded-b-3xl border border-line bg-gradient-to-b from-paper-dim via-paper to-white shadow-[0_20px_60px_-15px_rgba(25,25,27,0.12)]">
-            {/* Abstract identity composition (no stock photo) */}
-            <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-40" aria-hidden="true"></div>
-            <div class="absolute -top-16 right-0 h-72 w-72 rounded-full bg-accent/12 blur-3xl" aria-hidden="true"></div>
-            <div class="absolute -bottom-16 left-0 h-72 w-72 rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
-            <div class="relative flex h-full flex-col items-center justify-center gap-4 px-8 text-center">
-              <span class="flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-ink shadow-float ring-1 ring-line/80">
-                <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-                </svg>
-              </span>
-              <p class="font-display text-lg font-bold text-ink">Built Direct, Not Outsourced</p>
-              <p class="max-w-xs text-sm text-ink-dim">Every project engineered end-to-end by the same builder you talk to.</p>
+            {/* Image placeholder */}
+            <div class="flex h-full items-center justify-center bg-paper-dim">
+              <svg class="h-16 w-16 text-ink-dim/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3 16.5V4.5a1.5 1.5 0 0 1 1.5-1.5h15a1.5 1.5 0 0 1 1.5 1.5v15a1.5 1.5 0 0 1-1.5 1.5h-15a1.5 1.5 0 0 1-1.5-1.5Zm10.5-11.25h.008v.008h-.008V5.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+              </svg>
             </div>
 
             {/* Top Left Mini Floating Badge */}
@@ -127,25 +120,6 @@ const stats = [
               <span class="text-[10px] font-medium text-ink-dim">Engineering Experience</span>
             </div>
 
-            {/* Floating Pill CTA Dock at Bottom of Photo */}
-            <div class="absolute bottom-6 inset-x-0 z-20 flex justify-center px-4">
-              <div class="flex items-center gap-2 rounded-full border border-black/10 bg-white/95 p-1.5 shadow-2xl backdrop-blur-xl">
-                <a
-                  href={primaryCta.href}
-                  class="rounded-full bg-ink px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-md transition-all hover:bg-black hover:scale-105"
-                >
-                  {primaryCta.label}
-                </a>
-                <a
-                  href={secondaryCta.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="rounded-full border border-line bg-paper-dim px-5 py-2.5 text-xs sm:text-sm font-semibold text-ink transition-all hover:bg-paper-deep hover:scale-105"
-                >
-                  {secondaryCta.label}
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 

@@ -16,3 +16,6 @@
 
 # Bespoke Enterprise page removed, folded into the general services catalog (2026-08-22)
 /services/bespoke                     /services                                                            301
+
+# Status page merged into Express (2026-08-22)
+/status                               /express#builders                                                    301

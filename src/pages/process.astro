@@ -53,6 +53,72 @@ const STEPS = [
   }
 ];
 
+const SOLUTION_PHASES = [
+  {
+    title: 'Requirement Analysis',
+    items: [
+      'Client Consultation: We begin by engaging with clients to understand their specific needs, challenges, and goals.',
+      'Feasibility Study: Our team conducts a feasibility study to assess the technical and economic viability of the proposed solution.',
+      'Requirements Gathering: We gather detailed requirements, including functional and non-functional specifications, to ensure a clear understanding of the project scope.'
+    ]
+  },
+  {
+    title: 'Solution Design',
+    items: [
+      'Architecture Design: We design a scalable and robust architecture that integrates IoT devices, data processing systems, and AI algorithms.',
+      'Component Selection: Our team selects the appropriate hardware (sensors, devices) and software (platforms, frameworks) components to meet the project requirements.',
+      'Data Flow Design: We define the data flow, from data collection at the edge to processing, storage, and analysis, ensuring data integrity and security.'
+    ]
+  },
+  {
+    title: 'Prototyping and Proof of Concept (PoC)',
+    items: [
+      'Rapid Prototyping: We develop a prototype to demonstrate the core functionalities of the solution.',
+      'PoC Development: A proof of concept is created to validate the technical approach, test the feasibility, and gather feedback for improvements.',
+      'Client Review: We present the prototype and PoC to the client for review and approval, making necessary adjustments based on their feedback.'
+    ]
+  },
+  {
+    title: 'Development and Integration',
+    items: [
+      'IoT Device Integration: We integrate IoT sensors and devices into the existing infrastructure, ensuring seamless communication and data exchange.',
+      'Software Development: Our software development team creates custom applications and interfaces for data collection, processing, and analysis.',
+      'AI Model Development: We develop and train AI models to analyze the collected data, generate insights, and automate decision-making processes.'
+    ]
+  },
+  {
+    title: 'Testing and Validation',
+    items: [
+      'Unit and Integration Testing: Each component is thoroughly tested to ensure it functions correctly and integrates smoothly with other components.',
+      'Performance Testing: We test the solution for performance, scalability, and reliability under various conditions and loads.',
+      'Security Testing: Our team conducts rigorous security testing to identify and mitigate potential vulnerabilities.'
+    ]
+  },
+  {
+    title: 'Deployment and Implementation',
+    items: [
+      'Deployment Planning: We create a detailed deployment plan, outlining the steps and timeline for rolling out the solution.',
+      'Implementation: Our team deploys the solution in the production environment, ensuring minimal disruption to existing operations.',
+      "User Training: We provide training to the client's staff, ensuring they are proficient in using and managing the new system."
+    ]
+  },
+  {
+    title: 'Maintenance and Support',
+    items: [
+      'Ongoing Maintenance: We offer continuous maintenance services to ensure the solution remains up-to-date and performs optimally.',
+      'Technical Support: Our support team is available to assist with any issues or questions that arise, providing prompt and effective resolutions.',
+      "Continuous Improvement: We regularly review the solution's performance and incorporate client feedback to make continuous improvements and updates."
+    ]
+  }
+];
+
+const KEY_FEATURES = [
+  { title: 'Scalability', desc: 'Our solutions are designed to scale with the growth of your business, accommodating increasing data volumes and expanding device networks.' },
+  { title: 'Security', desc: 'We prioritize security at every stage, implementing robust measures to protect data and ensure compliance with industry standards.' },
+  { title: 'Real-time Analytics', desc: 'Our solutions provide real-time data analytics, enabling prompt decision-making and quick responses to changing conditions.' },
+  { title: 'Customizability', desc: 'Each solution is tailored to the specific needs of the client, ensuring maximum relevance and effectiveness.' },
+  { title: 'Integration Capabilities', desc: 'We ensure seamless integration with existing systems and technologies, enhancing overall operational efficiency.' }
+];
 ---
 
 <BaseLayout
@@ -122,6 +188,57 @@ const STEPS = [
             ))
           }
         </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Solution Development Process (IoT/AI project deep-dive) -->
+  <section class="py-16 md:py-24 bg-paper">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-section" data-split>The Solution Development Process</h2>
+      </div>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          SOLUTION_PHASES.map((phase, i) => (
+            <div class="rounded-3xl border border-line bg-white p-6 shadow-card">
+              <span class="font-feature text-2xl font-black text-accent">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-2 text-base font-bold text-ink">{phase.title}</h3>
+              <ul class="mt-4 space-y-2.5">
+                {phase.items.map((item) => {
+                  const [head, ...rest] = item.split(': ');
+                  const desc = rest.join(': ');
+                  return (
+                    <li class="text-xs leading-relaxed text-ink-dim">
+                      <strong class="text-ink">{head}:</strong> {desc}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- Key Features of Our Solutions -->
+  <section class="py-16 md:py-24 bg-paper-dim border-t border-line/60">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-section" data-split>Key Features of Our Solutions</h2>
+      </div>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {
+          KEY_FEATURES.map((f) => (
+            <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
+              <h3 class="text-sm font-bold text-ink">{f.title}</h3>
+              <p class="mt-2 text-xs leading-relaxed text-ink-dim">{f.desc}</p>
+            </div>
+          ))
+        }
       </div>
     </Container>
   </section>

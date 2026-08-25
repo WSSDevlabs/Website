@@ -39,7 +39,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     tagline: 'Intelligence',
     description:
       'LLM-powered features, RAG pipelines, and workflow automation, integrated where it meaningfully improves your product or team, not as a thin wrapper.',
-    services: ['ai-development']
+    services: ['ai-development', 'custom-ml-model', 'ai-chatbot', 'ai-analytics', 'workflow-automation', 'computer-vision']
   },
   {
     slug: 'iot-solutions-infrastructure',

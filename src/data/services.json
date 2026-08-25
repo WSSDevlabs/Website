@@ -505,6 +505,146 @@
         "Grafana / custom dashboards"
       ],
       "faq": []
+    },
+    {
+      "slug": "custom-ml-model",
+      "title": "Custom Machine Learning Model",
+      "group": "Intelligence",
+      "shortDescription": "A model trained on your own data for the specific prediction or classification problem generic AI tools can't solve out of the box.",
+      "valueProp": "Off-the-shelf AI APIs cover general tasks well, but a model trained on your own data handles the specific edge cases that matter to your business.",
+      "problem": "Generic AI tools plateau once your use case gets specific: predicting your churn, classifying your documents, scoring your leads.",
+      "deliverables": [
+        "Data audit and feature engineering",
+        "Model training and evaluation",
+        "Deployment as an API your app can call",
+        "Monitoring for model drift over time"
+      ],
+      "approach": [
+        "Define the prediction target and success metric",
+        "Prepare and validate training data",
+        "Train, evaluate, and tune the model",
+        "Deploy behind an API",
+        "Monitor and retrain as new data comes in"
+      ],
+      "tools": [
+        "Python",
+        "PyTorch",
+        "scikit-learn",
+        "Cloudflare Workers AI"
+      ],
+      "faq": []
+    },
+    {
+      "slug": "ai-chatbot",
+      "title": "AI Chatbot",
+      "group": "Intelligence",
+      "shortDescription": "A chatbot that actually knows your business, answering from your real docs, pricing, and policies instead of generic responses.",
+      "valueProp": "Grounded in your own content via retrieval, so answers come from what's actually true about your business, not a generic model guessing.",
+      "problem": "Generic chatbot widgets give generic answers. Customers ask specific questions about your pricing, policies, or product, and get vague replies.",
+      "deliverables": [
+        "Chatbot grounded in your docs, FAQs, and policies (RAG)",
+        "Website widget or WhatsApp integration",
+        "Escalation to a human when the bot can't help",
+        "Conversation logs and analytics"
+      ],
+      "approach": [
+        "Collect and structure the source content the bot should answer from",
+        "Build the retrieval pipeline and prompt design",
+        "Integrate into your site or WhatsApp",
+        "Test against real customer questions",
+        "Launch with human escalation and logging"
+      ],
+      "tools": [
+        "LLM APIs",
+        "RAG pipelines",
+        "WhatsApp Business API",
+        "Astro"
+      ],
+      "faq": []
+    },
+    {
+      "slug": "ai-analytics",
+      "title": "AI Analytics",
+      "group": "Intelligence",
+      "shortDescription": "Dashboards and reports that surface what's actually happening in your business, not just raw numbers you still have to interpret.",
+      "valueProp": "Turns raw operational or sales data into plain-language insights and forecasts, so you spend less time interpreting spreadsheets.",
+      "problem": "Data is scattered across tools and spreadsheets, and by the time someone compiles it into a report, the insight is already stale.",
+      "deliverables": [
+        "Data pipeline connecting your existing tools",
+        "Dashboard with the metrics that matter to your business",
+        "AI-generated plain-language summaries and trend flags",
+        "Scheduled reports to email or WhatsApp"
+      ],
+      "approach": [
+        "Identify the decisions the dashboard needs to support",
+        "Connect and clean data from existing sources",
+        "Build the dashboard and summary layer",
+        "Validate numbers against your existing reports",
+        "Launch with scheduled delivery"
+      ],
+      "tools": [
+        "Python",
+        "SQL",
+        "LLM APIs",
+        "Cloudflare Workers"
+      ],
+      "faq": []
+    },
+    {
+      "slug": "workflow-automation",
+      "title": "Automation, Workforce & Task",
+      "group": "Intelligence",
+      "shortDescription": "Automating the repetitive admin work (data entry, follow-ups, approvals) that's currently eating your team's time.",
+      "valueProp": "We map the actual repetitive steps your team does by hand first, then automate only what's worth automating, not automation for its own sake.",
+      "problem": "Repetitive manual tasks (data entry, follow-up messages, approval routing) quietly eat hours every week and don't scale as the business grows.",
+      "deliverables": [
+        "Workflow audit of current manual processes",
+        "Automated pipelines connecting your existing tools",
+        "Approval and notification routing",
+        "Handover documentation your team can maintain"
+      ],
+      "approach": [
+        "Map current manual workflows and pain points",
+        "Prioritize which steps are worth automating",
+        "Build the automation and integrations",
+        "Test alongside the team doing the work today",
+        "Launch with documentation and handover"
+      ],
+      "tools": [
+        "Automation frameworks",
+        "REST/GraphQL APIs",
+        "Cloudflare Workers",
+        "WhatsApp API"
+      ],
+      "faq": []
+    },
+    {
+      "slug": "computer-vision",
+      "title": "Computer Vision",
+      "group": "Intelligence",
+      "shortDescription": "Systems that read images and video feeds directly, for quality checks, counting, tracking, or detection that manual review can't keep up with.",
+      "valueProp": "Cameras and image data become a live data source your systems can act on, instead of footage someone has to watch manually.",
+      "problem": "Manual visual inspection (quality checks, counting stock, watching security footage) doesn't scale and is easy to get wrong when someone's tired or distracted.",
+      "deliverables": [
+        "Object detection, counting, or classification pipeline",
+        "Integration with existing cameras or image sources",
+        "Real-time alerts when something is detected",
+        "Dashboard for reviewing flagged events"
+      ],
+      "approach": [
+        "Define exactly what needs to be detected or measured",
+        "Collect and label sample images/video",
+        "Train and evaluate the vision model",
+        "Integrate with your camera feed or image pipeline",
+        "Deploy with alerting and a review dashboard"
+      ],
+      "tools": [
+        "Python",
+        "OpenCV",
+        "PyTorch",
+        "Edge inference"
+      ],
+      "faq": []
     }
   ]
 }

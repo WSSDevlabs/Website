@@ -22,7 +22,6 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     label: 'Company',
     links: [
-      { label: 'Live Status', href: '/status', badge: 'Live SLA' },
       { label: 'About & Builders', href: '/about' },
       { label: 'Projects', href: '/work' },
       { label: 'Process', href: '/process' },
@@ -34,7 +33,6 @@ export const NAV_GROUPS: NavGroup[] = [
 export const NAV_LINKS: NavLink[] = [
   { label: 'Express', href: '/express' },
   { label: 'Marketplace', href: '/marketplace' },
-  { label: 'Status', href: '/status' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' }
 ];
@@ -47,12 +45,12 @@ export const FOOTER_SOLUTIONS_LINKS: NavLink[] = [
 ];
 
 export const FOOTER_COMPANY_LINKS: NavLink[] = [
-  { label: 'Live Project Status', href: '/status' },
   { label: 'About Us & Builders', href: '/about' },
   { label: 'Case Studies & Work', href: '/work' },
   { label: 'Build Process', href: '/process' },
   { label: 'Insights & AI-SEO', href: '/insights' },
-  { label: 'Direct FAQ', href: '/faq' }
+  { label: 'Direct FAQ', href: '/faq' },
+  { label: 'Contact Us', href: '/contact' }
 ];
 
 export const FOOTER_WORK_LINKS = FOOTER_SOLUTIONS_LINKS;
