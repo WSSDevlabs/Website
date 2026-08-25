@@ -4,7 +4,6 @@ import SEO from '../components/seo/SEO.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
-import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
 import CookieConsent from '../components/layout/CookieConsent.astro';
 import SiteIntro from '../components/layout/SiteIntro.astro';
 import ServicesPopup from '../components/layout/ServicesPopup.astro';
@@ -58,7 +57,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     }
   </head>
   <body class="bg-paper text-ink">
-    <SiteIntro />
+    <SiteIntro path={path} />
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
@@ -73,8 +72,11 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
       </main>
       <Footer />
     </div>
-    <WhatsAppButton />
     <CookieConsent />
+
+    <!-- Botpress webchat -->
+    <script is:inline src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
+    <script is:inline src="https://files.bpcontent.cloud/2026/08/25/17/20260825170240-MPLEXMR6.js" defer></script>
   </body>
 </html>
 
