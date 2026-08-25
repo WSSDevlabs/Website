@@ -31,23 +31,17 @@ const show = path === '/';
 </noscript>
 
 <script>
-  declare global {
-    interface Window {
-      __wssIntroShown?: boolean;
-    }
-  }
-
   function initSiteIntro() {
     const intro = document.getElementById('site-intro');
     if (!intro) return;
 
-    // In-memory flag: resets on a true page reload, but survives client-side
-    // view-transition navigation so clicking back to "/" doesn't replay it.
-    if (window.__wssIntroShown) {
+    // Shows once per browser session: not on refresh, and not when
+    // navigating back to "/" after visiting other pages.
+    if (sessionStorage.getItem('wss-intro-shown')) {
       intro.remove();
       return;
     }
-    window.__wssIntroShown = true;
+    sessionStorage.setItem('wss-intro-shown', '1');
 
     const introLogo = document.getElementById('site-intro-logo') as HTMLImageElement | null;
     const navLogo = document.querySelector<HTMLImageElement>(
@@ -93,7 +87,7 @@ const show = path === '/';
           clearTimeout(failsafe);
           intro.remove();
         }, 1500);
-      }, 2500);
+      }, 1500);
     });
   }
 

@@ -50,7 +50,13 @@ function initMotion() {
 
 /* ── Smooth inertia scroll ──────────────────────────────────── */
 function initLenis() {
-  lenis = new Lenis({ autoRaf: false, duration: 1.05 });
+  lenis = new Lenis({
+    autoRaf: false,
+    duration: 1.05,
+    // Let the Botpress chat widget (and anything flagged data-lenis-prevent)
+    // handle its own scroll instead of scrolling the page underneath it.
+    prevent: (node) => Boolean(node.closest?.('.bpChatContainer, [data-lenis-prevent]'))
+  });
   lenis.on('scroll', ScrollTrigger.update);
   lenisRaf = (time: number) => lenis?.raf(time * 1000);
   gsap.ticker.add(lenisRaf);
