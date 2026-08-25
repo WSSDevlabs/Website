@@ -406,6 +406,14 @@
     background-size: 56px 56px;
   }
 
+  /* Blue-tinted variant of the grid, used on the homepage hero */
+  .grid-pattern-blue {
+    background-image:
+      linear-gradient(to right, rgb(45 91 227 / 0.14) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(45 91 227 / 0.14) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
   /* Fade a pattern out toward its edges */
   .mask-fade-edges {
     -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 40%, transparent 100%);

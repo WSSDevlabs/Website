@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import SEO from '../components/seo/SEO.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Header from '../components/layout/Header.astro';
+import TopBar from '../components/layout/TopBar.astro';
 import Footer from '../components/layout/Footer.astro';
 import CookieConsent from '../components/layout/CookieConsent.astro';
 import SiteIntro from '../components/layout/SiteIntro.astro';
@@ -58,6 +59,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
   </head>
   <body class="bg-paper text-ink">
     <SiteIntro path={path} />
+    <TopBar />
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
@@ -73,18 +75,16 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
       <Footer />
     </div>
     <CookieConsent />
-
-    <!-- Botpress webchat -->
-    <script is:inline src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
-    <script is:inline src="https://files.bpcontent.cloud/2026/08/25/17/20260825170240-MPLEXMR6.js" defer></script>
   </body>
 </html>
 
 <script>
   import { setupMotion } from '../scripts/siteMotion';
   import { setupEmailReveal } from '../scripts/emailReveal';
+  import { setupBotpress } from '../scripts/botpressLoader';
 
   // Handles initial load + every View Transition, with teardown between pages
   setupMotion();
   setupEmailReveal();
+  setupBotpress();
 </script>

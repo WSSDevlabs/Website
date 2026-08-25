@@ -33,15 +33,17 @@ const show = path === '/';
 <script>
   function initSiteIntro() {
     const intro = document.getElementById('site-intro');
-    if (!intro) return;
 
-    // Shows once per browser session: not on refresh, and not when
-    // navigating back to "/" after visiting other pages.
+    // Consumed on the very first page load of the session, regardless of
+    // which page that is — so if the first page isn't "/", the flag is
+    // already spent and clicking "Home" later never replays the intro.
     if (sessionStorage.getItem('wss-intro-shown')) {
-      intro.remove();
+      intro?.remove();
       return;
     }
     sessionStorage.setItem('wss-intro-shown', '1');
+
+    if (!intro) return;
 
     const introLogo = document.getElementById('site-intro-logo') as HTMLImageElement | null;
     const navLogo = document.querySelector<HTMLImageElement>(
