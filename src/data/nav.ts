@@ -15,17 +15,14 @@ export const NAV_GROUPS: NavGroup[] = [
     links: [
       { label: 'WSS Express', href: '/express', badge: '3-7 Days' },
       { label: 'Marketplace', href: '/marketplace', badge: 'Buy-Once' },
-      { label: 'All Services', href: '/services' },
-      { label: 'Pricing', href: '/pricing' }
+      { label: 'All Services', href: '/services' }
     ]
   },
   {
     label: 'Company',
     links: [
       { label: 'About & Builders', href: '/about' },
-      { label: 'Projects', href: '/work' },
-      { label: 'Process', href: '/process' },
-      { label: 'FAQ', href: '/faq' }
+      { label: 'FAQ', href: '/express#faq' }
     ]
   }
 ];
@@ -40,16 +37,13 @@ export const NAV_LINKS: NavLink[] = [
 export const FOOTER_SOLUTIONS_LINKS: NavLink[] = [
   { label: 'WSS Express (Fixed-Price)', href: '/express' },
   { label: 'WSS Marketplace (Buy-Once)', href: '/marketplace' },
-  { label: 'All Services Catalog', href: '/services' },
-  { label: 'Pricing & Packages', href: '/pricing' }
+  { label: 'All Services Catalog', href: '/services' }
 ];
 
 export const FOOTER_COMPANY_LINKS: NavLink[] = [
   { label: 'About Us & Builders', href: '/about' },
-  { label: 'Case Studies & Work', href: '/work' },
-  { label: 'Build Process', href: '/process' },
   { label: 'Insights & AI-SEO', href: '/insights' },
-  { label: 'Direct FAQ', href: '/faq' },
+  { label: 'Direct FAQ', href: '/express#faq' },
   { label: 'Contact Us', href: '/contact' }
 ];
 

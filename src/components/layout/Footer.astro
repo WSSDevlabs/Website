@@ -64,19 +64,25 @@ const year = new Date().getFullYear();
       <!-- Col 3: Let's Connect -->
       <div>
         <h4 class="font-display text-sm font-bold uppercase tracking-wider text-white">Let's Connect</h4>
-        <p class="mt-5 text-xs sm:text-sm text-white/60">Direct scoping with Senior Engineers:</p>
+        <p class="mt-5 text-xs sm:text-sm text-white/60">Direct deal with our sales:</p>
         <a
           href="https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I'd%20like%20to%20discuss%20a%20project."
           target="_blank"
           rel="noopener noreferrer"
           class="mt-3 inline-flex items-center gap-2 rounded-full bg-accent-blue px-5 py-2.5 text-xs font-bold text-white shadow-md transition hover:opacity-90 hover:scale-105"
         >
-          <span>WhatsApp an Engineer</span>
+          <span>WhatsApp Our Sales</span>
           <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
           </svg>
         </a>
-        <p class="mt-3 text-xs text-white/60">{SITE.email}</p>
+        <a
+          href="#"
+          data-email-user={SITE.email.split('@')[0]}
+          data-email-domain={SITE.email.split('@')[1]}
+          data-email-text="1"
+          class="mt-3 block text-xs text-white/60 transition-colors hover:text-white hover:underline"
+        />
       </div>
 
       <!-- Col 4: Location & Socials -->

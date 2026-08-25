@@ -50,7 +50,15 @@ const lastUpdated = new Date('2026-01-01');
       </p>
 
       <h2>5. Contact</h2>
-      <p>Questions about this policy can be sent to {SITE.email || 'our contact email'}.</p>
+      <p>
+        Questions about this policy can be sent to {
+          SITE.email ? (
+            <span data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]}>our contact email</span>
+          ) : (
+            'our contact email'
+          )
+        }.
+      </p>
     </Container>
   </Section>
 </BaseLayout>

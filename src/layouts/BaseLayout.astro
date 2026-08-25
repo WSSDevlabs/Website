@@ -6,6 +6,8 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
 import CookieConsent from '../components/layout/CookieConsent.astro';
+import SiteIntro from '../components/layout/SiteIntro.astro';
+import ServicesPopup from '../components/layout/ServicesPopup.astro';
 import '@fontsource-variable/geist/index.css';
 import '@fontsource-variable/geist-mono/index.css';
 import '@fontsource-variable/outfit/index.css';
@@ -56,6 +58,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     }
   </head>
   <body class="bg-paper text-ink">
+    <SiteIntro />
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
@@ -63,6 +66,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
       Skip to content
     </a>
     <Header />
+    <ServicesPopup path={path} />
     <div class="flex flex-col min-h-screen">
       <main id="main" class="flex-1 pt-14 md:pt-0">
         <slot />
@@ -76,7 +80,9 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 
 <script>
   import { setupMotion } from '../scripts/siteMotion';
+  import { setupEmailReveal } from '../scripts/emailReveal';
 
   // Handles initial load + every View Transition, with teardown between pages
   setupMotion();
+  setupEmailReveal();
 </script>

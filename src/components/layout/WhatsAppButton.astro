@@ -7,16 +7,59 @@ const href = SITE.whatsapp ? `https://wa.me/${SITE.whatsapp}?text=${message}` : 
 
 {
   href && (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Consult with us"
-      class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/20 transition-transform duration-200 ease-out hover:scale-105 max-md:bottom-20"
-    >
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
-      </svg>
-    </a>
+    <div class="fixed bottom-6 right-6 z-40 max-md:bottom-20">
+      <div
+        id="wa-bubble"
+        class="pointer-events-none absolute bottom-1/2 right-full mr-3 translate-y-1/2 translate-x-1 whitespace-nowrap rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white opacity-0 shadow-lg transition-all duration-300 [transition-timing-function:var(--ease-out-expo)]"
+      >
+        Ask me anything
+        <span class="absolute right-[-5px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rotate-45 bg-ink" aria-hidden="true"></span>
+      </div>
+
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Consult with us"
+        class="relative flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/20 transition-transform duration-200 ease-out hover:scale-105"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+        </svg>
+      </a>
+    </div>
   )
 }
+
+<script>
+  let waBubbleInterval: ReturnType<typeof setInterval> | null = null;
+  let waBubbleHideTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  function stopWaBubbleLoop() {
+    if (waBubbleInterval) clearInterval(waBubbleInterval);
+    if (waBubbleHideTimeout) clearTimeout(waBubbleHideTimeout);
+    waBubbleInterval = null;
+    waBubbleHideTimeout = null;
+  }
+
+  function initWaBubbleLoop() {
+    const bubble = document.getElementById('wa-bubble');
+    if (!bubble) return;
+    stopWaBubbleLoop();
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    waBubbleInterval = setInterval(() => {
+      bubble.classList.remove('opacity-0', 'translate-x-1');
+      bubble.classList.add('opacity-100', 'translate-x-0');
+
+      waBubbleHideTimeout = setTimeout(() => {
+        bubble.classList.remove('opacity-100', 'translate-x-0');
+        bubble.classList.add('opacity-0', 'translate-x-1');
+      }, 4000);
+    }, 7000);
+  }
+
+  document.addEventListener('astro:page-load', initWaBubbleLoop);
+  document.addEventListener('astro:before-swap', stopWaBubbleLoop);
+</script>

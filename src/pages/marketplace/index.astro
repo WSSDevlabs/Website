@@ -4,16 +4,6 @@ import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
 import { MARKETPLACE_SYSTEMS } from '../../data/marketplace';
 
-const categories = [
-  'All Systems',
-  'Developer Tools',
-  'Venues & Hospitality',
-  'Health & Services',
-  'Commerce & Rental',
-  'Real Estate & CRM',
-  'Corporate Operations'
-];
-
 const totalSystems = MARKETPLACE_SYSTEMS.length;
 ---
 
@@ -39,34 +29,6 @@ const totalSystems = MARKETPLACE_SYSTEMS.length;
         <h1 class="mt-6 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl">
           The WSS <span class="badge-highlight">Marketplace</span>
         </h1>
-        <p class="mt-4 font-display text-lg text-accent sm:text-xl">
-          Production-Ready Software Systems You Own For Life.
-        </p>
-        <p class="mt-4 text-base leading-relaxed text-ink-dim">
-          Tired of paying RM 200–RM 800 every month in software subscriptions?
-          WSS Dev Labs delivers typed, clean business systems with full unencrypted source code, Ed25519 offline licensing, and integrated Malaysian payment gateways.
-        </p>
-
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-ink-dim">
-          <span class="inline-flex items-center gap-1.5">
-            <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-            </svg>
-            Full Source Code Included
-          </span>
-          <span class="inline-flex items-center gap-1.5">
-            <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-            </svg>
-            Host on Any cPanel or VPS
-          </span>
-          <span class="inline-flex items-center gap-1.5">
-            <svg class="h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-            </svg>
-            ToyyibPay / SenangPay / Stripe Ready
-          </span>
-        </div>
       </div>
     </Container>
   </section>
@@ -74,33 +36,10 @@ const totalSystems = MARKETPLACE_SYSTEMS.length;
   <!-- Interactive Catalog Section -->
   <Section rule class="bg-paper-dim/30">
     <Container>
-      <!-- Filter Bar & Search -->
-      <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <h2 class="text-2xl font-bold text-ink md:text-3xl">
-            Explore All {totalSystems} Production Systems
-          </h2>
-          <p class="mt-1 text-xs text-ink-dim">Filter by industry or operational requirement</p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2" id="category-filter-buttons">
-          {
-            categories.map((cat, idx) => (
-              <button
-                type="button"
-                data-category={cat}
-                class:list={[
-                  'category-pill rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors duration-200',
-                  idx === 0
-                    ? 'active-pill bg-accent text-white shadow-sm'
-                    : 'bg-paper text-ink-dim border border-line hover:bg-paper-dim hover:text-ink'
-                ]}
-              >
-                {cat}
-              </button>
-            ))
-          }
-        </div>
+      <div>
+        <h2 class="text-2xl font-bold text-ink md:text-3xl">
+          Explore All {totalSystems} Production Systems
+        </h2>
       </div>
 
       <!-- Systems Grid -->
@@ -179,10 +118,7 @@ const totalSystems = MARKETPLACE_SYSTEMS.length;
       <div class="rounded-3xl border border-line bg-ink p-8 text-white md:p-12">
         <div class="grid items-center gap-8 lg:grid-cols-2">
           <div>
-            <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-xs text-accent-yellow-vivid">
-              Zero SaaS Dependency
-            </div>
-            <h2 class="mt-4 font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
+            <h2 class="font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
               Why Malaysian SMEs Are Escaping Subscription Lock-In.
             </h2>
             <p class="mt-4 text-sm leading-relaxed text-white/70">
@@ -239,38 +175,3 @@ const totalSystems = MARKETPLACE_SYSTEMS.length;
     </Container>
   </Section>
 </BaseLayout>
-
-<script>
-  function initMarketplaceFilters() {
-    const buttons = document.querySelectorAll<HTMLButtonElement>('.category-pill');
-    const cards = document.querySelectorAll<HTMLElement>('.system-card');
-
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const cat = btn.dataset.category || 'All Systems';
-
-        // Update active styles
-        buttons.forEach((b) => {
-          b.classList.remove('active-pill', 'bg-accent', 'text-white');
-          b.classList.add('bg-paper', 'text-ink-dim', 'border', 'border-line');
-        });
-
-        btn.classList.add('active-pill', 'bg-accent', 'text-white');
-        btn.classList.remove('bg-paper', 'text-ink-dim', 'border', 'border-line');
-
-        // Filter cards
-        cards.forEach((card) => {
-          const cardCat = card.dataset.systemCategory;
-          if (cat === 'All Systems' || cardCat === cat) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  }
-
-  initMarketplaceFilters();
-  document.addEventListener('astro:page-load', initMarketplaceFilters);
-</script>

@@ -19,3 +19,16 @@
 
 # Status page merged into Express (2026-08-22)
 /status                               /express#builders                                                    301
+
+# Pricing page removed (2026-08-26)
+/pricing                              /express                                                             301
+
+# Work/case-study section removed (2026-08-26)
+/work                                 /testimonials                                                        301
+/work/*                               /testimonials                                                        301
+
+# Process page merged into About (2026-08-26)
+/process                              /about#process                                                       301
+
+# FAQ page merged into Express (2026-08-26)
+/faq                                  /express#faq                                                         301

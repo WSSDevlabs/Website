@@ -1,0 +1,82 @@
+---
+import { SITE } from '../../data/site';
+---
+
+<div id="site-intro" class="fixed inset-0 z-[100] flex items-center justify-center bg-white">
+  <img
+    id="site-intro-logo"
+    src="/images/brand/logo.png"
+    alt={SITE.name}
+    class="h-16 w-auto object-contain will-change-transform sm:h-20"
+  />
+</div>
+
+<noscript>
+  <style>
+    #site-intro {
+      display: none;
+    }
+  </style>
+</noscript>
+
+<script>
+  function initSiteIntro() {
+    const intro = document.getElementById('site-intro');
+    if (!intro) return;
+
+    if (sessionStorage.getItem('wss-intro-shown')) {
+      intro.remove();
+      return;
+    }
+    sessionStorage.setItem('wss-intro-shown', '1');
+
+    const introLogo = document.getElementById('site-intro-logo') as HTMLImageElement | null;
+    const navLogo = document.querySelector<HTMLImageElement>(
+      '#topbar-logo-btn img, header.md\\:hidden img'
+    );
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!introLogo || !navLogo || reducedMotion) {
+      intro.remove();
+      return;
+    }
+
+    // Failsafe: never let the overlay get stuck on screen.
+    const failsafe = setTimeout(() => intro.remove(), 3000);
+
+    const targets = Array.from(
+      document.querySelectorAll<HTMLImageElement>('#topbar-logo-btn img, header.md\\:hidden img')
+    ).filter((img) => img.getClientRects().length > 0);
+    const target = targets[0] ?? navLogo;
+
+    requestAnimationFrame(() => {
+      const targetRect = target.getBoundingClientRect();
+      const startRect = introLogo.getBoundingClientRect();
+
+      if (targetRect.width === 0 || startRect.width === 0) {
+        clearTimeout(failsafe);
+        intro.remove();
+        return;
+      }
+
+      const scale = targetRect.width / startRect.width;
+      const translateX = targetRect.left + targetRect.width / 2 - (startRect.left + startRect.width / 2);
+      const translateY = targetRect.top + targetRect.height / 2 - (startRect.top + startRect.height / 2);
+
+      window.setTimeout(() => {
+        introLogo.style.transition = 'transform 650ms cubic-bezier(0.65, 0, 0.35, 1)';
+        introLogo.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+        intro.style.transition = 'opacity 450ms ease 250ms';
+        intro.style.opacity = '0';
+
+        window.setTimeout(() => {
+          clearTimeout(failsafe);
+          intro.remove();
+        }, 750);
+      }, 450);
+    });
+  }
+
+  initSiteIntro();
+</script>

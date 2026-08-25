@@ -15,11 +15,11 @@ type NavGroup = {
 
 const navGroups: NavGroup[] = [
   { label: 'Home', href: '/', active: currentPath === '/', icon: 'home' },
-  { label: 'Services & Details', href: '/services', active: isActive('/services') || isActive('/pricing'), icon: 'services' },
-  { label: 'About & Studio', href: '/about', active: isActive('/about') || isActive('/work') || isActive('/process'), icon: 'user' },
+  { label: 'Services & Details', href: '/services', active: isActive('/services'), icon: 'services' },
+  { label: 'About & Studio', href: '/about', active: isActive('/about'), icon: 'user' },
   { label: 'Solutions & Express', href: '/express', active: isActive('/express'), icon: 'code' },
   { label: 'The Marketplace', href: '/marketplace', active: isActive('/marketplace'), icon: 'store' },
-  { label: 'Insights & FAQ', href: '/insights', active: isActive('/insights') || isActive('/faq'), icon: 'document' }
+  { label: 'Insights & FAQ', href: '/insights', active: isActive('/insights'), icon: 'document' }
 ];
 ---
 
@@ -131,13 +131,11 @@ const navGroups: NavGroup[] = [
     }
   </nav>
 
-  <!-- Right: WhatsApp CTA -->
+  <!-- Right: Contact CTA -->
   <a
-    href={PRIMARY_CTA.href}
-    target="_blank"
-    rel="noopener noreferrer"
+    href="/contact"
     class="flex items-center gap-2 rounded-full bg-accent-blue py-2.5 pl-4 pr-5 text-sm font-bold text-white shadow-sm transition hover:opacity-90 hover:scale-105"
-    aria-label="Consult with us on WhatsApp"
+    aria-label="Consult with us"
   >
     <span>Consult with Us</span>
   </a>

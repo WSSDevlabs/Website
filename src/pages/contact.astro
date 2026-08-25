@@ -18,12 +18,8 @@ import { SITE } from '../data/site';
         <div>
           <p class="mono-label text-ink-dim">Get in touch</p>
           <h1 class="h-display mt-3 !text-[clamp(2rem,1.3rem+2.6vw,3.2rem)]" data-split>
-            We are always ready to help you and answer your questions
+            We are always ready to help you and <span class="badge-highlight">answer your questions</span>
           </h1>
-          <p class="mt-4 max-w-md leading-relaxed text-ink-dim">
-            Reach out however works best for you, and someone from our team will get back to you
-            within one business day.
-          </p>
 
           <div class="mt-10 grid gap-8 sm:grid-cols-2">
             <div>
@@ -36,7 +32,7 @@ import { SITE } from '../data/site';
             </div>
             <div>
               <p class="mono-label text-ink-dim">Email</p>
-              <p class="mt-2 text-sm font-semibold text-ink">{SITE.email}</p>
+              <p class="mt-2 text-sm font-semibold text-ink" data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]} />
             </div>
             <div>
               <p class="mono-label text-ink-dim">Social Network</p>
@@ -200,7 +196,7 @@ import { SITE } from '../data/site';
       const body = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\nPreferred Online Consultation Date: ${date}\nPreferred Time Slot: ${time}\n\nMessage:\n${message}`
       );
-      window.location.href = `mailto:hello@wssdevlabs.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:info@wssdevlabs.com?subject=${subject}&body=${body}`;
       success.classList.remove('hidden');
       form.reset();
     });

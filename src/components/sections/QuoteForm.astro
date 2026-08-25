@@ -198,7 +198,7 @@ const inputClass =
         `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nPreferred Online Consultation Date: ${date}\nPreferred Time Slot: ${time}\n\nProject Details:\n${message}`
       );
 
-      window.location.href = `mailto:hello@wssdevlabs.com?subject=${encodeURIComponent(`Free Quote & Online Meeting Request - ${name}`)}&body=${body}`;
+      window.location.href = `mailto:info@wssdevlabs.com?subject=${encodeURIComponent(`Free Quote & Online Meeting Request - ${name}`)}&body=${body}`;
 
       if (success) success.classList.remove('hidden');
       form.reset();

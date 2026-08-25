@@ -4,28 +4,63 @@ import Container from '../components/ui/Container.astro';
 import Section from '../components/ui/Section.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import SMEProjectCalculator from '../components/sections/SMEProjectCalculator.astro';
-import { EXPRESS_PACKAGES, EXPRESS_FAQ } from '../data/express';
-import { LIVE_SYSTEM_METRICS, STANDARD_BUILD_PIPELINE } from '../data/status';
+import { EXPRESS_PACKAGES } from '../data/express';
+import { LIVE_SYSTEM_METRICS } from '../data/status';
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: EXPRESS_FAQ.map((item) => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.a
-    }
-  }))
-};
+const faqCategories = [
+  { id: 'general', label: 'General Information' },
+  { id: 'services', label: 'Services' },
+  { id: 'marketplace', label: 'Marketplace & Express' },
+  { id: 'ai-iot', label: 'AI & IoT' },
+  { id: 'process', label: 'Process' },
+  { id: 'pricing', label: 'Pricing & Plans' },
+  { id: 'technical', label: 'Technical' },
+];
+
+const allFaqs = [
+  { cat: 'general', q: 'What does WSS DevLabs do?', a: 'We build custom websites, mobile apps, custom business systems (CMS/ERP), IoT and AI-powered software for startups and growing companies, all engineered from scratch and not assembled from templates.' },
+  { cat: 'general', q: 'Where are you based?', a: 'We are based in Kuala Lumpur, Malaysia, and work remotely with clients across Southeast Asia and beyond.' },
+  { cat: 'general', q: 'How do I start a project with you?', a: "Fill in our contact form or WhatsApp us directly. We'll reply within one business day to schedule a discovery call where we scope your project and provide a fixed-price proposal." },
+  { cat: 'general', q: 'Who will I actually be working with?', a: "You work directly with Razali, the founder. There are no account managers or middlemen between you and the person building your project." },
+  { cat: 'general', q: 'Where can I follow WSS DevLabs?', a: "We're on LinkedIn and TikTok. Links are in the footer of every page." },
+
+  { cat: 'services', q: 'What are your 5 core service pillars?', a: 'Web, System & Mobile App Development; Digital Consulting & Solutions; Digital Design & Media Marketing; Artificial Intelligence & Automation; and IoT Solutions & Infrastructure.' },
+  { cat: 'services', q: 'Do you build mobile apps?', a: "Yes. We build cross-platform apps (React Native / Flutter) and native iOS/Android when performance demands it. We'll advise which approach fits your scope and budget." },
+  { cat: 'services', q: 'Do you offer AI development?', a: "Yes, including LLM-powered features, RAG pipelines, custom machine learning models, AI chatbots, AI analytics, workflow automation, and computer vision. We're precise about scope: we'll tell you clearly what's AI integration vs. custom ML." },
+  { cat: 'services', q: 'Can you take over an existing project?', a: "Yes. We begin with a code audit to assess the state of the codebase before committing to a scope. If it's salvageable, we'll work with it; if a rebuild is more cost-effective, we'll say so, including full UI/UX and system redesigns." },
+  { cat: 'services', q: 'Do you do digital marketing and SEO?', a: 'Yes. Google Ads campaign management (RM 500–RM 2,000/month) and SEO retainers (RM 1,200–RM 1,900/month), plus one-time SEO essential setups. See the Digital Design & Media Marketing page for the full breakdown.' },
+  { cat: 'services', q: 'Do you help with government grants?', a: 'Yes. Our Digital Consulting & Solutions category covers grant eligibility review and application support, including the MSME Digital Grant MADANI (50% matching, up to RM5,000).' },
+
+  { cat: 'marketplace', q: 'What is the WSS Marketplace?', a: 'A set of buy-once, own-forever PHP-free business systems (booking engines, clinic queues, CRMs, POS) with full source code included, no monthly SaaS fees.' },
+  { cat: 'marketplace', q: 'Do I get the source code with a Marketplace system?', a: 'Yes. Every Marketplace purchase includes full unencrypted source code, so you can self-host and modify it without restrictions.' },
+  { cat: 'marketplace', q: 'What is WSS Express?', a: 'Fixed-price website packages (Landing, Starter, Business) shipped in 3–7 days, with transparent scope and no hidden discovery fees.' },
+  { cat: 'marketplace', q: 'What SME and Corporate website design packages do you offer?', a: 'SME packages range from 1 page to 10+ pages (RM 1,799–RM 3,499, subject to 8% SST), and Corporate packages range from Corporate to Champion tier (RM 4,299–RM 7,399, subject to 8% SST). See the Web, System & Mobile App Development page for the full comparison tables.' },
+
+  { cat: 'ai-iot', q: 'What AI services do you offer?', a: 'AI development, custom machine learning models, AI chatbots grounded in your own content, AI analytics dashboards, workflow/task automation, and computer vision.' },
+  { cat: 'ai-iot', q: 'What does your IoT & Smart Infrastructure service include?', a: 'IoT sensors, edge computing, remote monitoring, and infrastructure-focused technical blueprints, covering physical sensors, microcontrollers (Arduino, Raspberry Pi, ESP8266), communication modules (Wi-Fi, Bluetooth, Zigbee, LoRa), and power management.' },
+  { cat: 'ai-iot', q: 'What industries do your IoT solutions serve?', a: 'Smart agriculture & livestock, industrial automation (IIoT) & oil and gas, smart cities & buildings, smart homes, and healthcare wearables/diagnostics.' },
+  { cat: 'ai-iot', q: 'Can you build a computer vision system for us?', a: 'Yes. Object detection, counting, or classification pipelines integrated with your existing cameras, with real-time alerts and a review dashboard.' },
+
+  { cat: 'process', q: 'What is your solution development process?', a: 'Requirement analysis, solution design, prototyping/PoC, development & integration, testing & validation, deployment & implementation, then ongoing maintenance and support. See the full breakdown on our About page.' },
+  { cat: 'process', q: 'How long does a typical project take?', a: 'Websites: 4-8 weeks (or 3-7 days for WSS Express). Mobile apps: 8-16 weeks. Custom systems and IoT/AI projects vary by complexity and are scoped during our discovery call.' },
+  { cat: 'process', q: 'What do I own at the end?', a: "Full source code, documentation, and all credentials. No vendor lock-in, no platform dependency. It's yours." },
+  { cat: 'process', q: 'Will I talk to the actual engineer?', a: "Yes. We don't have account managers between you and the work. You'll interact directly with the founder building your project." },
+  { cat: 'process', q: 'What key features do your solutions guarantee?', a: 'Scalability, security at every stage, real-time analytics where relevant, full customizability to your needs, and integration with your existing systems.' },
+
+  { cat: 'pricing', q: 'How are projects priced?', a: "Fixed-price proposals after a scoping call for custom work. WSS Express and Marketplace systems have transparent listed pricing. We don't do open-ended hourly billing for project work." },
+  { cat: 'pricing', q: 'Can I pay in milestones?', a: 'Yes. Standard terms are 50% on kickoff and 50% on delivery. Larger projects use milestone schedules outlined in the proposal.' },
+  { cat: 'pricing', q: 'Do you offer maintenance retainers?', a: 'Yes. Monthly Maintenance & Support retainers cover uptime monitoring, security patches, dependency updates, and a monthly content/feature update quota.' },
+
+  { cat: 'technical', q: 'What tech stack do you use?', a: 'It depends on the project. For marketing sites: Astro + TypeScript + Tailwind. For apps: React Native or Flutter. For systems: TypeScript / Node.js / PostgreSQL. For AI: LLM APIs, RAG, Python. For IoT: Arduino, Raspberry Pi, ESP8266, Wi-Fi/Bluetooth/Zigbee/LoRa.' },
+  { cat: 'technical', q: 'Will I be able to update the site myself?', a: "Yes. If content management is a requirement, we'll include a CMS (headless or custom) so non-technical users can update content without touching code." },
+  { cat: 'technical', q: 'Do you host the site?', a: "We deploy to Cloudflare Pages by default, since it's fast, global, and free on their starter tier. We can deploy to Vercel, AWS, or other platforms if you have an existing preference." },
+];
 ---
 
 <BaseLayout
   title="WSS Express: Fixed-Price Web Design Packages & Live Build Status"
   description="Eliminating Malaysian SME quote friction with transparent, fixed-price websites. 3–7 day delivery, zero SaaS lock-in, direct builder access, and live sprint/deployment status."
   path="/express"
-  schema={faqSchema}
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden pt-10 pb-20 md:pt-40 md:pb-28">
@@ -45,11 +80,6 @@ const faqSchema = {
           Fast, High-Speed Websites <br class="hidden sm:inline" />
           <span class="badge-highlight">Without the Agency Fluff.</span>
         </h1>
-        <p class="mt-6 text-base leading-relaxed text-ink-dim sm:text-lg">
-          Malaysian SMEs waste weeks waiting for "custom quotes" only to be locked into recurring SaaS fees.
-          <strong>WSS Express</strong> delivers transparent, high-performance web systems shipped in days, directly engineered by senior builders.
-        </p>
-
         <!-- Trust Signals Bar -->
         <div class="mt-12 rounded-3xl sm:rounded-full border border-line bg-white p-6 sm:px-10 sm:py-7 shadow-card">
           <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:divide-x sm:divide-line text-center">
@@ -83,9 +113,6 @@ const faqSchema = {
         <h2 class="mt-2 text-3xl font-bold tracking-tight text-ink md:text-4xl">
           Pick Your Tier. Ship Next Week.
         </h2>
-        <p class="mt-3 text-sm leading-relaxed text-ink-dim">
-          No hidden discovery fees. No endless sales calls. Every package is typed, clean, and delivered directly to production.
-        </p>
       </div>
 
       <div class="mt-12 grid gap-8 lg:grid-cols-3 lg:items-stretch">
@@ -225,95 +252,6 @@ const faqSchema = {
     </Container>
   </Section>
 
-  <!-- Direct Builder Availability -->
-  <Section id="builders" rule>
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <Eyebrow label="The Direct Builder Model" tone="red" />
-        <h2 class="mt-2 text-3xl font-bold text-ink md:text-4xl">
-          You Talk Directly to the Engineer. No Middlemen.
-        </h2>
-        <p class="mt-3 text-sm text-ink-dim">
-          No account managers or support tickets. When you message WSS Dev Labs, you talk directly with the person building your product.
-        </p>
-      </div>
-
-      <div class="mt-10 mx-auto max-w-md">
-        {
-          LIVE_SYSTEM_METRICS.directBuilders.map((builder) => (
-            <div class="rounded-2xl border border-line bg-paper p-6 shadow-sm">
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <h3 class="text-xl font-bold text-ink">{builder.name}</h3>
-                  <p class="text-xs font-semibold text-accent">{builder.role}</p>
-                </div>
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700">
-                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                  {builder.status}
-                </span>
-              </div>
-
-              <p class="mt-4 text-xs leading-relaxed text-ink-dim">
-                <strong>Core Focus:</strong> {builder.specialty}
-              </p>
-
-              <div class="mt-6 flex items-center gap-3 pt-4 border-t border-line/60">
-                <a
-                  href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi ${builder.name}! I'd like to discuss an Express build.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex-1 rounded-xl bg-accent px-4 py-2 text-center text-xs font-semibold text-white shadow-sm transition hover:bg-accent-dim"
-                >
-                  WhatsApp Directly
-                </a>
-                <a
-                  href={`mailto:${builder.email}`}
-                  class="rounded-xl border border-line bg-paper-dim px-4 py-2 text-center text-xs font-semibold text-ink hover:bg-paper-deep"
-                >
-                  Email
-                </a>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </Container>
-  </Section>
-
-  <!-- 4-Stage Standard Build Pipeline -->
-  <Section id="pipeline" rule class="bg-paper-dim/30">
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <Eyebrow label="Go-Live Calm" tone="blue" />
-        <h2 class="mt-2 text-3xl font-bold text-ink md:text-4xl">
-          Our Standard 4-Stage Sprint Pipeline
-        </h2>
-        <p class="mt-3 text-sm text-ink-dim">
-          How every WSS Express build transitions safely from kick-off to production.
-        </p>
-      </div>
-
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          STANDARD_BUILD_PIPELINE.map((stage) => (
-            <div class="flex flex-col justify-between rounded-2xl border border-line bg-paper p-6 shadow-sm">
-              <div>
-                <span class="font-feature text-2xl font-extrabold text-accent">{stage.stage}</span>
-                <h3 class="mt-2 text-base font-bold text-ink">{stage.label}</h3>
-                <p class="mt-3 text-xs leading-relaxed text-ink-dim">{stage.description}</p>
-              </div>
-              <div class="mt-6 border-t border-line/60 pt-3">
-                <p class="text-[11px] font-mono text-ink-dim">
-                  Duration: <strong class="text-ink">{stage.expectedDuration}</strong>
-                </p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </Container>
-  </Section>
-
   <!-- Recent Shipments & Deployments -->
   <Section id="deployments" rule>
     <Container>
@@ -353,43 +291,187 @@ const faqSchema = {
   <!-- Interactive SME Grant & Project Calculator -->
   <SMEProjectCalculator />
 
-  <!-- Conversion FAQ -->
-  <Section rule class="bg-paper-dim/40">
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <Eyebrow label="Direct & Scannable Answers" tone="blue" />
-        <h2 class="mt-2 text-3xl font-bold tracking-tight text-ink">
-          Frequently Asked Questions
+  <!-- FAQ -->
+  <section id="faq" class="relative overflow-hidden pt-16 pb-16 md:pt-24 md:pb-20 border-t border-line">
+    <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-25" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-paper-dim blur-3xl"
+      aria-hidden="true"
+    ></div>
+    <Container class="relative">
+      <div class="mx-auto max-w-xl text-center">
+        <h2 class="h-display-xl mt-3 !text-[clamp(2rem,1.4rem+2.4vw,3.2rem)] text-ink" data-split>
+          Frequently Asked <span class="badge-highlight">Questions</span>
         </h2>
-      </div>
-
-      <div class="mx-auto mt-10 max-w-3xl space-y-4">
-        {
-          EXPRESS_FAQ.map((faq) => (
-            <details class="group rounded-2xl border border-line bg-paper p-5 transition hover:border-line-hover open:border-accent open:bg-paper">
-              <summary class="flex cursor-pointer items-center justify-between text-base font-semibold text-ink">
-                <span>{faq.q}</span>
-                <span class="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-paper-dim text-ink transition-transform duration-200 group-open:rotate-180">
-                  ↓
-                </span>
-              </summary>
-              <p class="mt-3 text-sm leading-relaxed text-ink-dim">{faq.a}</p>
-            </details>
-          ))
-        }
-      </div>
-
-      <div class="mt-12 text-center">
-        <p class="text-sm text-ink-dim">
-          Have a custom question or ready to begin?
-          <a
-            href="https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I%20have%20a%20question%20about%20WSS%20Express."
-            class="font-semibold text-accent-blue hover:underline"
-          >
-            Chat with us on WhatsApp
-          </a>
+        <p class="mt-4 leading-relaxed text-ink-dim">
+          Need help with something? Here are the questions we get asked most.
         </p>
+
+        <div class="mt-6 flex items-center gap-2 rounded-full border border-line bg-white p-1.5 shadow-sm">
+          <svg class="ml-2.5 h-4 w-4 shrink-0 text-ink-dim/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+          <input
+            id="faq-search"
+            type="text"
+            placeholder="Search questions..."
+            class="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm text-ink placeholder:text-ink-dim/50 focus:outline-none"
+          />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Combined FAQ card: tabs + single panel with transition -->
+  <Section rule>
+    <Container>
+      <div class="flex flex-col gap-12 lg:flex-row lg:gap-16">
+        <!-- Left: category tabs + contact CTA (shown once) -->
+        <div class="lg:w-72 lg:shrink-0">
+          <nav aria-label="FAQ categories" class="space-y-1">
+            {faqCategories.map((cat, i) => (
+              <button
+                type="button"
+                data-faq-tab={cat.id}
+                aria-pressed={i === 0 ? 'true' : 'false'}
+                class:list={[
+                  'faq-tab block w-full rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors',
+                  i === 0 ? 'bg-accent/10 text-accent' : 'text-ink-dim hover:bg-paper-dim hover:text-ink'
+                ]}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </nav>
+
+          <p class="mt-8 text-sm text-ink-dim">Can't find what you're looking for?</p>
+          <a
+            href="/contact"
+            class="mt-5 inline-flex items-center gap-2 rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
+          >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+            </svg>
+            Ask us directly
+          </a>
+
+          <div class="card mt-6 flex items-center gap-4 !rounded-2xl border-accent/20 bg-accent/4 p-5">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10">
+              <svg class="h-4.5 w-4.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-ink">We respond within</p>
+              <p class="text-sm text-ink-dim">1 business day</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: single combined card, one panel visible at a time -->
+        <div class="card flex-1 p-2 sm:p-4">
+          <div id="faq-panels">
+            {faqCategories.map((cat, ci) => {
+              const items = allFaqs.filter((f) => f.cat === cat.id);
+              return (
+                <div data-faq-panel={cat.id} class:list={['faq-panel px-4 py-2 transition-opacity duration-300', ci !== 0 && 'hidden']}>
+                  <h3 class="px-0 py-3 text-sm font-bold uppercase tracking-wide text-ink-dim">{cat.label}</h3>
+                  {items.map((item, i) => (
+                    <details data-faq-item name={`faq-${cat.id}`} class:list={['group py-5', i > 0 && 'border-t border-line']}>
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-base font-semibold tracking-tight text-ink transition-colors hover:text-accent">
+                        <span data-faq-question>{item.q}</span>
+                        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-ink-dim transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] group-open:rotate-45 group-open:border-accent group-open:bg-accent group-open:text-white">
+                          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                          </svg>
+                        </span>
+                      </summary>
+                      <p class="mt-4 max-w-2xl pr-10 text-sm leading-relaxed text-ink-dim">{item.a}</p>
+                    </details>
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </Container>
   </Section>
 </BaseLayout>
+
+<script>
+  function initFaqTabs() {
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.faq-tab'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-faq-panel]'));
+    if (tabs.length === 0 || tabs[0].dataset.bound) return;
+    tabs.forEach((t) => (t.dataset.bound = '1'));
+
+    const showPanel = (id: string) => {
+      panels.forEach((panel) => {
+        const match = panel.dataset.faqPanel === id;
+        panel.classList.toggle('hidden', !match);
+        if (match) {
+          panel.classList.remove('opacity-0');
+          panel.animate([{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }], {
+            duration: 220,
+            easing: 'ease-out'
+          });
+        }
+      });
+      tabs.forEach((t) => {
+        const active = t.dataset.faqTab === id;
+        t.setAttribute('aria-pressed', String(active));
+        t.classList.toggle('bg-accent/10', active);
+        t.classList.toggle('text-accent', active);
+        t.classList.toggle('text-ink-dim', !active);
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset.faqTab;
+        if (id) showPanel(id);
+      });
+    });
+  }
+
+  initFaqTabs();
+  document.addEventListener('astro:page-load', initFaqTabs);
+
+  function initFaqSearch() {
+    const input = document.getElementById('faq-search') as HTMLInputElement | null;
+    if (!input || input.dataset.bound) return;
+    input.dataset.bound = '1';
+
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('[data-faq-panel]'));
+
+    input.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      const searching = query.length > 0;
+
+      panels.forEach((panel) => {
+        const items = Array.from(panel.querySelectorAll<HTMLDetailsElement>('[data-faq-item]'));
+        let visibleCount = 0;
+
+        items.forEach((item) => {
+          const question = item.querySelector('[data-faq-question]')?.textContent?.toLowerCase() ?? '';
+          const match = !searching || question.includes(query);
+          item.classList.toggle('hidden', !match);
+          if (match) visibleCount += 1;
+        });
+
+        if (searching) {
+          panel.classList.toggle('hidden', visibleCount === 0);
+        }
+      });
+
+      if (!searching) {
+        const activeTab = document.querySelector<HTMLButtonElement>('.faq-tab[aria-pressed="true"]');
+        panels.forEach((panel) => panel.classList.toggle('hidden', panel.dataset.faqPanel !== activeTab?.dataset.faqTab));
+      }
+    });
+  }
+
+  initFaqSearch();
+  document.addEventListener('astro:page-load', initFaqSearch);
+</script>

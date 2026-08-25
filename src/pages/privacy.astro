@@ -58,11 +58,25 @@ const lastUpdated = new Date('2026-01-01');
       <h2>6. Your rights</h2>
       <p>
         Under the PDPA, you may request access to, correction of, or deletion of your personal data
-        by contacting us at {SITE.email || 'our contact email'}.
+        by contacting us at {
+          SITE.email ? (
+            <span data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]}>our contact email</span>
+          ) : (
+            'our contact email'
+          )
+        }.
       </p>
 
       <h2>7. Contact</h2>
-      <p>Questions about this policy can be sent to {SITE.email || 'our contact email'}.</p>
+      <p>
+        Questions about this policy can be sent to {
+          SITE.email ? (
+            <span data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]}>our contact email</span>
+          ) : (
+            'our contact email'
+          )
+        }.
+      </p>
     </Container>
   </Section>
 </BaseLayout>

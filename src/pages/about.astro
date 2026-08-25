@@ -14,6 +14,124 @@ const whyFeatures = [
   { icon: 'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z', label: 'Direct with the Builder', desc: 'You talk directly to the person doing the work, for faster answers and clearer communication.' },
   { icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z', label: 'Delivered Properly', desc: 'Fast sites, working systems, and campaigns that convert, built to the same high standard every time.' },
 ];
+
+const STEPS = [
+  {
+    n: 1,
+    title: 'Discovery call',
+    description:
+      'A call to walk through your goals, current setup, and budget, before anything is scoped or quoted.'
+  },
+  {
+    n: 2,
+    title: 'Proposal & quote',
+    description:
+      'A written proposal with scope, deliverables, timeline, and a fixed price, sent for you to review with no obligation.'
+  },
+  {
+    n: 3,
+    title: 'Contract & deposit',
+    description:
+      'A signed agreement and deposit lock in your start date and the scope agreed in the proposal.'
+  },
+  {
+    n: 4,
+    title: 'Kickoff & requirements',
+    description:
+      'A detailed requirements session, plus your brand assets, content, and account access handed over so we can start.'
+  },
+  {
+    n: 5,
+    title: 'Design sign-off',
+    description:
+      'Wireframes first, then high-fidelity UI, reviewed and approved by you before a single line of code is written.'
+  },
+  {
+    n: 6,
+    title: 'Development sprints',
+    description:
+      'Staged sprints with a staging link you can follow, so you see real progress and can redirect early.'
+  },
+  {
+    n: 7,
+    title: 'QA & client review',
+    description:
+      'Internal testing across devices, then your own review round with revisions before anything is called finished.'
+  },
+  {
+    n: 8,
+    title: 'Sign-off, launch & handover',
+    description:
+      'Formal approval, deployment to production, and full source code, credentials, and documentation handed over.'
+  }
+];
+
+const SOLUTION_PHASES = [
+  {
+    title: 'Requirement Analysis',
+    items: [
+      'Client Consultation: We begin by engaging with clients to understand their specific needs, challenges, and goals.',
+      'Feasibility Study: Our team conducts a feasibility study to assess the technical and economic viability of the proposed solution.',
+      'Requirements Gathering: We gather detailed requirements, including functional and non-functional specifications, to ensure a clear understanding of the project scope.'
+    ]
+  },
+  {
+    title: 'Solution Design',
+    items: [
+      'Architecture Design: We design a scalable and robust architecture that integrates IoT devices, data processing systems, and AI algorithms.',
+      'Component Selection: Our team selects the appropriate hardware (sensors, devices) and software (platforms, frameworks) components to meet the project requirements.',
+      'Data Flow Design: We define the data flow, from data collection at the edge to processing, storage, and analysis, ensuring data integrity and security.'
+    ]
+  },
+  {
+    title: 'Prototyping and Proof of Concept (PoC)',
+    items: [
+      'Rapid Prototyping: We develop a prototype to demonstrate the core functionalities of the solution.',
+      'PoC Development: A proof of concept is created to validate the technical approach, test the feasibility, and gather feedback for improvements.',
+      'Client Review: We present the prototype and PoC to the client for review and approval, making necessary adjustments based on their feedback.'
+    ]
+  },
+  {
+    title: 'Development and Integration',
+    items: [
+      'IoT Device Integration: We integrate IoT sensors and devices into the existing infrastructure, ensuring seamless communication and data exchange.',
+      'Software Development: Our software development team creates custom applications and interfaces for data collection, processing, and analysis.',
+      'AI Model Development: We develop and train AI models to analyze the collected data, generate insights, and automate decision-making processes.'
+    ]
+  },
+  {
+    title: 'Testing and Validation',
+    items: [
+      'Unit and Integration Testing: Each component is thoroughly tested to ensure it functions correctly and integrates smoothly with other components.',
+      'Performance Testing: We test the solution for performance, scalability, and reliability under various conditions and loads.',
+      'Security Testing: Our team conducts rigorous security testing to identify and mitigate potential vulnerabilities.'
+    ]
+  },
+  {
+    title: 'Deployment and Implementation',
+    items: [
+      'Deployment Planning: We create a detailed deployment plan, outlining the steps and timeline for rolling out the solution.',
+      'Implementation: Our team deploys the solution in the production environment, ensuring minimal disruption to existing operations.',
+      "User Training: We provide training to the client's staff, ensuring they are proficient in using and managing the new system."
+    ]
+  },
+  {
+    title: 'Maintenance and Support',
+    items: [
+      'Ongoing Maintenance: We offer continuous maintenance services to ensure the solution remains up-to-date and performs optimally.',
+      'Technical Support: Our support team is available to assist with any issues or questions that arise, providing prompt and effective resolutions.',
+      "Continuous Improvement: We regularly review the solution's performance and incorporate client feedback to make continuous improvements and updates."
+    ]
+  }
+];
+
+const KEY_FEATURES = [
+  { title: 'Scalability', desc: 'Our solutions are designed to scale with the growth of your business, accommodating increasing data volumes and expanding device networks.' },
+  { title: 'Security', desc: 'We prioritize security at every stage, implementing robust measures to protect data and ensure compliance with industry standards.' },
+  { title: 'Real-time Analytics', desc: 'Our solutions provide real-time data analytics, enabling prompt decision-making and quick responses to changing conditions.' },
+  { title: 'Customizability', desc: 'Each solution is tailored to the specific needs of the client, ensuring maximum relevance and effectiveness.' },
+  { title: 'Integration Capabilities', desc: 'We ensure seamless integration with existing systems and technologies, enhancing overall operational efficiency.' }
+];
 ---
 
 <BaseLayout
@@ -73,7 +191,7 @@ const whyFeatures = [
 
         <!-- Right: story + capability rows -->
         <div>
-          <h1 class="h-section" data-split>One team, whatever the digital need</h1>
+          <h1 class="h-display !text-[clamp(2rem,1.4rem+2.4vw,3.2rem)]" data-split>One team, whatever <span class="badge-highlight">the digital need</span></h1>
           <p class="mt-5 leading-relaxed text-ink-dim">
             WSS DevLabs started as a small software team, then kept growing because clients kept
             asking for more: not just a website, but the marketing to bring it traffic; not just an
@@ -136,5 +254,143 @@ const whyFeatures = [
     </Container>
   </section>
 
+  <!-- Eight-step scroll timeline: matte-dark, alternating, line fills as you scroll -->
+  <section id="process" class="relative overflow-hidden bg-charcoal py-16 md:py-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:radial-gradient(circle,white_1px,transparent_1px)] [background-size:26px_26px]"
+      aria-hidden="true"
+    />
+    <Container class="relative">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-display-xl !text-[clamp(2.1rem,1.5rem+2vw,3.1rem)] text-white" data-split>
+          How we get you to launch
+        </h2>
+        <p class="mt-4 leading-relaxed text-white/60">
+          From the first call to sign-off, here is exactly what happens and when.
+        </p>
+      </div>
 
+      <div class="relative mt-16" data-timeline-track>
+        <!-- Base rule + scroll-scrubbed fill, desktop -->
+        <div class="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 md:block" aria-hidden="true">
+          <div class="absolute inset-0 bg-white/10" />
+          <div class="absolute inset-0 bg-accent" style="transform-origin: top; transform: scaleY(0);" data-timeline-fill />
+        </div>
+        <!-- Mobile rule -->
+        <div class="absolute left-4 top-0 h-full w-px bg-white/10 md:hidden" aria-hidden="true" />
+
+        <div class="space-y-10 md:space-y-4">
+          {
+            STEPS.map((s, i) => (
+              <div class="relative grid items-start gap-6 pl-12 md:grid-cols-[1fr_2.5rem_1fr] md:gap-x-8 md:pl-0">
+                <span
+                  class="stat-num absolute left-4 top-0 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-xs text-white ring-4 ring-charcoal md:relative md:left-auto md:top-auto md:col-start-2 md:mx-auto md:-translate-x-0"
+                >
+                  {s.n}
+                </span>
+
+                {i % 2 === 0 ? (
+                  <>
+                    <div
+                      class="rounded-3xl border border-white/10 bg-charcoal-soft p-6 md:col-start-1 md:row-start-1"
+                      data-reveal="tilt3d"
+                    >
+                      <h3 class="text-lg font-semibold tracking-tight text-white">{s.title}</h3>
+                      <p class="mt-2 text-sm leading-relaxed text-white/60">{s.description}</p>
+                    </div>
+                    <div class="hidden md:col-start-3 md:row-start-1 md:block" aria-hidden="true" />
+                  </>
+                ) : (
+                  <>
+                    <div class="hidden md:col-start-1 md:row-start-1 md:block" aria-hidden="true" />
+                    <div
+                      class="rounded-3xl border border-white/10 bg-charcoal-soft p-6 md:col-start-3 md:row-start-1"
+                      data-reveal="tilt3d"
+                    >
+                      <h3 class="text-lg font-semibold tracking-tight text-white">{s.title}</h3>
+                      <p class="mt-2 text-sm leading-relaxed text-white/60">{s.description}</p>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Solution Development Process (IoT/AI project deep-dive) -->
+  <section class="py-16 md:py-24 bg-paper">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-section" data-split>The Solution Development Process</h2>
+      </div>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          SOLUTION_PHASES.map((phase, i) => (
+            <div class="rounded-3xl border border-line bg-white p-6 shadow-card">
+              <span class="font-feature text-2xl font-black text-accent">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-2 text-base font-bold text-ink">{phase.title}</h3>
+              <ul class="mt-4 space-y-2.5">
+                {phase.items.map((item) => {
+                  const [head, ...rest] = item.split(': ');
+                  const desc = rest.join(': ');
+                  return (
+                    <li class="text-xs leading-relaxed text-ink-dim">
+                      <strong class="text-ink">{head}:</strong> {desc}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- Key Features of Our Solutions -->
+  <section class="py-16 md:py-24 bg-paper-dim border-t border-line/60">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-section" data-split>Key Features of Our Solutions</h2>
+      </div>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {
+          KEY_FEATURES.map((f) => (
+            <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
+              <h3 class="text-sm font-bold text-ink">{f.title}</h3>
+              <p class="mt-2 text-xs leading-relaxed text-ink-dim">{f.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
 </BaseLayout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initTimelineFill() {
+    const track = document.querySelector<HTMLElement>('[data-timeline-track]');
+    const fill = document.querySelector<HTMLElement>('[data-timeline-fill]');
+    if (!track || !fill) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.to(fill, {
+      scaleY: 1,
+      ease: 'none',
+      scrollTrigger: { trigger: track, start: 'top 65%', end: 'bottom 65%', scrub: true }
+    });
+  }
+
+  initTimelineFill();
+  document.addEventListener('astro:page-load', initTimelineFill);
+</script>
