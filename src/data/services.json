@@ -1,4 +1,4 @@
-﻿{
+{
   "services": [
     {
       "slug": "web-development",
@@ -21,8 +21,13 @@
         "Performance and accessibility QA",
         "Launch and handover"
       ],
-      "tools": ["Astro", "TypeScript", "Tailwind CSS", "React", "Cloudflare Pages"],
-      "pricingFrom": "RM 3,000",
+      "tools": [
+        "Astro",
+        "TypeScript",
+        "Tailwind CSS",
+        "React",
+        "Cloudflare Pages"
+      ],
       "faq": []
     },
     {
@@ -46,8 +51,12 @@
         "Device and OS-version QA",
         "Store submission and launch"
       ],
-      "tools": ["React Native", "Flutter", "Swift", "Kotlin"],
-      "pricingFrom": "RM 28,000",
+      "tools": [
+        "React Native",
+        "Flutter",
+        "Swift",
+        "Kotlin"
+      ],
       "faq": []
     },
     {
@@ -71,41 +80,50 @@
         "User acceptance testing",
         "Migration, launch, and training"
       ],
-      "tools": ["TypeScript", "Node.js", "PostgreSQL", "REST/GraphQL APIs"],
-      "pricingFrom": "RM 15,000",
+      "tools": [
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "REST/GraphQL APIs"
+      ],
       "faq": []
     },
     {
-      "slug": "student-project-support",
-      "title": "Student & Final Year Project Support",
+      "slug": "ui-ux-system-redesign",
+      "title": "UI/UX & System Redesign",
       "group": "Build",
-      "shortDescription": "Hands-on help turning your final year project brief into a working, well-documented build you can confidently present.",
-      "valueProp": "A working, well-documented project you actually understand, built alongside you so you can explain and defend every part of it.",
-      "problem": "Many students get stuck between an ambitious project brief and the time or coding skill to deliver it before a fixed graduation deadline.",
+      "shortDescription": "A hard look at your existing site, app, or internal system, followed by a redesign that fixes what's actually costing you users or time.",
+      "valueProp": "Most redesigns fail because they change the look without fixing the workflow. We audit what's actually broken first, then redesign around real usage, not guesswork.",
+      "problem": "An aging site or internal tool that's slow, confusing, or was never designed for how the business actually works today, and needs more than a fresh coat of paint.",
       "deliverables": [
-        "Working website, app, or system matching your project brief",
-        "Clean, documented, and explainable codebase",
-        "Guidance sessions so you understand every part of your own project",
-        "Report-ready documentation (architecture, screenshots, write-up)",
-        "Revision support before submission and viva"
+        "UX audit of the current site, app, or system",
+        "Redesigned interface and information architecture",
+        "Migration plan that protects existing data and SEO",
+        "Updated component system for consistent future changes",
+        "Before/after performance and usability comparison"
       ],
       "approach": [
-        "Brief review: understand your requirements and rubric",
-        "Planning: scope that realistically fits your timeline",
-        "Build: development in checkpoints you can follow",
-        "Walkthrough: a session so you can present and defend the work",
-        "Handover: full documentation before your deadline"
+        "Audit: map what's broken, slow, or confusing in the current build",
+        "Redesign: new UI/UX and structure based on real usage, not guesswork",
+        "Rebuild: implement in a typed, component-based stack",
+        "Migrate: move content and data across without breaking what works",
+        "Launch: staged rollout with before/after comparison"
       ],
-      "tools": ["Stack matched to your brief (web, mobile, or systems)"],
-      "pricingFrom": "RM 800",
+      "tools": [
+        "Astro",
+        "TypeScript",
+        "Tailwind CSS",
+        "React",
+        "Figma"
+      ],
       "faq": [
         {
-          "question": "Will I understand the project well enough to present it?",
-          "answer": "Yes. We walk through the codebase and architecture with you before submission so you can explain and defend every decision."
+          "question": "Do we lose our existing content or SEO rankings?",
+          "answer": "No. Migration is planned around preserving URLs, redirects, and existing content, so search rankings carry over rather than reset."
         },
         {
-          "question": "Can you match the tech stack my university requires?",
-          "answer": "Yes. We build in whatever stack your brief or supervisor specifies."
+          "question": "What if we just want a visual refresh, not a full rebuild?",
+          "answer": "That's fine. The audit tells us how deep the problem actually goes; some projects only need new UI on the existing structure."
         }
       ]
     },
@@ -130,8 +148,12 @@
         "Staged rollout with monitoring",
         "Tuning and iteration post-launch"
       ],
-      "tools": ["LLM APIs", "RAG pipelines", "Automation frameworks", "Python (ML, where offered)"],
-      "pricingFrom": "RM 6,000",
+      "tools": [
+        "LLM APIs",
+        "RAG pipelines",
+        "Automation frameworks",
+        "Python (ML, where offered)"
+      ],
       "faq": []
     },
     {
@@ -155,8 +177,11 @@
         "Usability validation",
         "Developer handoff"
       ],
-      "tools": ["Figma", "Design tokens", "Accessibility audits (WCAG AA)"],
-      "pricingFrom": "RM 3,500",
+      "tools": [
+        "Figma",
+        "Design tokens",
+        "Accessibility audits (WCAG AA)"
+      ],
       "faq": []
     },
     {
@@ -180,8 +205,11 @@
         "Ongoing maintenance cycle",
         "Quarterly review and roadmap"
       ],
-      "tools": ["Uptime monitoring", "Dependency audits", "Performance monitoring (Lighthouse CI)"],
-      "pricingFrom": "RM 300 / month",
+      "tools": [
+        "Uptime monitoring",
+        "Dependency audits",
+        "Performance monitoring (Lighthouse CI)"
+      ],
       "faq": []
     },
     {
@@ -205,8 +233,13 @@
         "Optimise weekly based on data",
         "Monthly review and roadmap"
       ],
-      "tools": ["Google Analytics 4", "Google Ads", "Meta Ads", "SEMrush", "Hootsuite"],
-      "pricingFrom": "RM 1,500 / month",
+      "tools": [
+        "Google Analytics 4",
+        "Google Ads",
+        "Meta Ads",
+        "SEMrush",
+        "Hootsuite"
+      ],
       "faq": [
         {
           "question": "How long before I see results?",
@@ -239,8 +272,12 @@
         "Plan: 90-day execution roadmap with milestones",
         "Review: measure, iterate, and re-plan quarterly"
       ],
-      "tools": ["Business framework (Lean Canvas, Jobs-to-be-Done)", "Competitive analysis", "Analytics stack", "OKR tracking"],
-      "pricingFrom": "RM 2,500 / engagement",
+      "tools": [
+        "Business framework (Lean Canvas, Jobs-to-be-Done)",
+        "Competitive analysis",
+        "Analytics stack",
+        "OKR tracking"
+      ],
       "faq": [
         {
           "question": "Is this consulting or execution?",
@@ -273,8 +310,13 @@
         "Photography: styling, shoot, and post-processing",
         "Handover: all source files and brand guide"
       ],
-      "tools": ["Adobe Illustrator", "Adobe Photoshop", "Figma", "Lightroom", "Canva (for client editing)"],
-      "pricingFrom": "RM 3,800",
+      "tools": [
+        "Adobe Illustrator",
+        "Adobe Photoshop",
+        "Figma",
+        "Lightroom",
+        "Canva (for client editing)"
+      ],
       "faq": [
         {
           "question": "Do I get source files?",
@@ -307,8 +349,13 @@
         "Post-production: retouch, colour, and platform exports",
         "Marketing: launch ads and content using the new assets"
       ],
-      "tools": ["Adobe Photoshop", "Adobe Lightroom", "Capture One", "Meta Ads", "Canva (client templates)"],
-      "pricingFrom": "RM 1,800 / package",
+      "tools": [
+        "Adobe Photoshop",
+        "Adobe Lightroom",
+        "Capture One",
+        "Meta Ads",
+        "Canva (client templates)"
+      ],
       "faq": [
         {
           "question": "Do I need to send my products to you?",
@@ -341,8 +388,13 @@
         "Post-production: edit, colour, audio, graphics",
         "Delivery: optimised exports per platform"
       ],
-      "tools": ["Adobe Premiere Pro", "DaVinci Resolve", "After Effects", "Adobe Lightroom", "CapCut (social-native)"],
-      "pricingFrom": "RM 1,200 / video",
+      "tools": [
+        "Adobe Premiere Pro",
+        "DaVinci Resolve",
+        "After Effects",
+        "Adobe Lightroom",
+        "CapCut (social-native)"
+      ],
       "faq": [
         {
           "question": "Do you shoot on-site or remotely?",
@@ -375,8 +427,10 @@
         "Report: documentation and evidence for compliance",
         "Support: assistance through the reporting window"
       ],
-      "tools": ["Grant compliance frameworks", "Government digitalisation scheme guidelines"],
-      "pricingFrom": "RM 2,000",
+      "tools": [
+        "Grant compliance frameworks",
+        "Government digitalisation scheme guidelines"
+      ],
       "faq": [
         {
           "question": "Which grants do you work with?",
@@ -409,8 +463,9 @@
         "Launch: social presence and first marketing push",
         "Handover: a business that is live, branded, and ready for customers"
       ],
-      "tools": ["Branding, web, systems, and marketing stack, combined"],
-      "pricingFrom": "RM 5,000 / package",
+      "tools": [
+        "Branding, web, systems, and marketing stack, combined"
+      ],
       "faq": [
         {
           "question": "What if I only need some of this, not everything?",
@@ -443,8 +498,12 @@
         "Dashboard and alerting build",
         "Field testing and handover"
       ],
-      "tools": ["MQTT", "Raspberry Pi / ESP32", "Cloud IoT pipelines", "Grafana / custom dashboards"],
-      "pricingFrom": "RM 8,000",
+      "tools": [
+        "MQTT",
+        "Raspberry Pi / ESP32",
+        "Cloud IoT pipelines",
+        "Grafana / custom dashboards"
+      ],
       "faq": []
     }
   ]

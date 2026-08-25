@@ -66,9 +66,9 @@ const serviceImages: Record<string, [string, string]> = {
     'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?auto=format&fit=crop&w=700&h=460&q=80',
   ],
-  'student-project-support': [
-    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&h=800&q=80',
-    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&h=460&q=80',
+  'ui-ux-system-redesign': [
+    'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=700&h=460&q=80',
   ],
   'grant-government-project-support': [
     'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1400&h=800&q=80',
@@ -91,6 +91,93 @@ const toneAccent: Record<string, string> = {
   green: 'bg-accent-green',
   neutral: 'bg-ink-dim'
 };
+
+type PriceCell = boolean | string;
+type PricingTable = {
+  title: string;
+  tiers: { name: string; price: string }[];
+  rows: { label: string; values: PriceCell[] }[];
+  renewal?: string[];
+  hasCta: boolean;
+  popularIndex?: number;
+};
+
+const websiteDesignPricingTables: PricingTable[] = [
+  {
+    title: 'SME Website Design Packages',
+    tiers: [
+      { name: '1 Page', price: 'RM 1,799' },
+      { name: '5 Pages', price: 'RM 2,599' },
+      { name: '5+ Pages', price: 'RM 2,799' },
+      { name: '10 Pages', price: 'RM 3,299' },
+      { name: '10+ Pages', price: 'RM 3,499' }
+    ],
+    rows: [
+      { label: 'Domain', values: [true, true, true, true, true] },
+      { label: 'Web Pages Design', values: ['1 page', '5 pages', '5 pages', '10 pages', '10 pages'] },
+      { label: 'Web Storage', values: ['10 GB', '10 GB', '10 GB', '10 GB', '10 GB'] },
+      { label: 'Email Users', values: ['20 users', '20 users', '20 users', '20 users', '20 users'] },
+      { label: 'Mobile Responsive', values: [true, true, true, true, true] },
+      { label: 'Products Listing', values: [false, false, true, false, true] },
+      { label: 'Products Upload', values: [false, false, '20 products', false, '20 products'] },
+      { label: 'Animated Banner', values: ['1', '2', '2', '3', '3'] },
+      { label: 'Content Management System', values: [true, true, true, true, true] },
+      { label: 'Ownership & Access', values: [true, true, true, true, true] },
+      { label: 'SSL Certificate', values: [true, true, true, true, true] },
+      { label: 'Stock Photos', values: [true, true, true, true, true] },
+      { label: 'Technical Support', values: [true, true, true, true, true] },
+      { label: 'SEO Friendly', values: [true, true, true, true, true] }
+    ],
+    renewal: ['RM 549.00', 'RM 549.00', 'RM 549.00', 'RM 549.00', 'RM 549.00'],
+    hasCta: false
+  },
+  {
+    title: 'Corporate Website Design Packages',
+    tiers: [
+      { name: 'Corporate', price: 'RM 4,299' },
+      { name: 'Advance', price: 'RM 5,299' },
+      { name: 'Premium', price: 'RM 6,399' },
+      { name: 'Champion', price: 'RM 7,399' }
+    ],
+    rows: [
+      { label: 'Domain', values: [true, true, true, true] },
+      { label: 'Web Pages Design', values: ['15 pages', '20 pages', '25 pages', '30 pages'] },
+      { label: 'Web Storage', values: ['20 GB', '20 GB', '30 GB', '30 GB'] },
+      { label: 'Email Users', values: ['35 users', '35 users', 'Unlimited', 'Unlimited'] },
+      { label: 'Mobile Responsive', values: [true, true, true, true] },
+      { label: 'Customisable Design & Layout', values: [true, true, true, true] },
+      { label: 'Mega Menu', values: [true, true, true, true] },
+      { label: 'Products Upload', values: ['30', '30', '50', '50'] },
+      { label: 'Animated Banner', values: ['3', '5', '5', '5'] },
+      { label: 'Content Management System', values: [true, true, true, true] },
+      { label: 'Ownership & Access', values: [true, true, true, true] },
+      { label: 'SSL Certificate', values: [true, true, true, true] },
+      { label: 'Stock Photos', values: [true, true, true, true] },
+      { label: 'Technical Support', values: [true, true, true, true] },
+      { label: 'SEO Friendly', values: [true, true, true, true] }
+    ],
+    renewal: ['RM 659.00', 'RM 659.00', 'RM 769.00', 'RM 769.00'],
+    hasCta: true
+  },
+  {
+    title: 'UI & UX Design',
+    tiers: [
+      { name: 'Seed', price: 'RM 1,500' },
+      { name: 'Grow', price: 'RM 4,500' },
+      { name: 'Bloom', price: 'RM 8,500' },
+      { name: 'Ultimate', price: 'RM 13,000' }
+    ],
+    rows: [
+      { label: 'Number of Screens', values: ['5', '15', '30', '50'] },
+      { label: 'User Journey Mapping', values: [true, true, true, true] },
+      { label: 'Revisions', values: ['3', '3', '5', '5'] },
+      { label: 'Responsive Design', values: [false, false, false, false] },
+      { label: 'Technology', values: ['Figma', 'Figma', 'Figma', 'Figma'] }
+    ],
+    hasCta: true,
+    popularIndex: 1
+  }
+];
 ---
 
 <ServiceLayout
@@ -102,7 +189,6 @@ const toneAccent: Record<string, string> = {
   <!-- ── Hero ───────────────────────────────────────────────── -->
   <section class="relative overflow-hidden">
     <Container class="relative pt-10 pb-10 md:pt-36 md:pb-14">
-      <p class="mono-label text-accent">{category.tagline}</p>
       <h1 class="h-display mt-4 max-w-3xl" data-split>{category.title}</h1>
       <p class="body-lead mt-5 max-w-2xl">{category.description}</p>
       <div class="mt-8 flex flex-wrap items-center gap-4">
@@ -124,23 +210,6 @@ const toneAccent: Record<string, string> = {
         </a>
       </div>
 
-      {
-        !isSpotlight && (
-          <div class="mt-8 flex flex-wrap gap-2.5">
-            {services.map((service) => {
-              const tone = GROUP_TONE[service.group];
-              return (
-                <a
-                  href={`#${service.slug}`}
-                  class:list={['rounded-full border border-line bg-paper px-4 py-2 text-sm font-medium transition-colors hover:border-ink/25', TONE_TEXT_CLASS[tone]]}
-                >
-                  {service.title}
-                </a>
-              );
-            })}
-          </div>
-        )
-      }
     </Container>
     <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
   </section>
@@ -293,7 +362,7 @@ const toneAccent: Record<string, string> = {
       /* Multi-service grid layout */
       <Section rule class="bg-paper-dim">
         <Container>
-          <div class="grid gap-6 lg:grid-cols-2" data-stagger>
+          <div class:list={['grid gap-6 items-start', services.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-2']} data-stagger>
             {services.map((service) => {
               const tone = GROUP_TONE[service.group];
               const [heroImg] = serviceImages[service.slug] ?? serviceImages['web-development'];
@@ -325,13 +394,19 @@ const toneAccent: Record<string, string> = {
                       ))}
                     </ul>
 
-                    <div class="mt-5 flex flex-wrap gap-1.5">
-                      {service.tools.slice(0, 4).map((tool) => (
-                        <span class:list={['rounded-full px-3 py-1 text-[11px] font-medium', TONE_BG_SOFT_CLASS[tone], TONE_TEXT_CLASS[tone]]}>
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
+                    {service.tools.length === 1 && service.tools[0].length > 24 ? (
+                      <p class:list={['mt-5 rounded-xl px-4 py-3 text-xs leading-relaxed', TONE_BG_SOFT_CLASS[tone], TONE_TEXT_CLASS[tone]]}>
+                        {service.tools[0]}
+                      </p>
+                    ) : (
+                      <div class="mt-5 flex flex-wrap gap-1.5">
+                        {service.tools.slice(0, 4).map((tool) => (
+                          <span class:list={['rounded-full px-3 py-1 text-[11px] font-medium', TONE_BG_SOFT_CLASS[tone], TONE_TEXT_CLASS[tone]]}>
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    )}
 
                     {service.faq.length > 0 && (
                       <div class="mt-5 space-y-2">
@@ -349,15 +424,17 @@ const toneAccent: Record<string, string> = {
                       </div>
                     )}
 
-                    <a
-                      href="/contact"
-                      class:list={['mt-6 inline-flex items-center justify-center gap-1.5 rounded-full py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5', toneAccent[tone]]}
-                    >
-                      Get a Quote
-                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                      </svg>
-                    </a>
+                    {category.slug !== 'web-software-app-development' && (
+                      <a
+                        href="/contact"
+                        class:list={['mt-6 inline-flex items-center justify-center gap-1.5 rounded-full py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5', toneAccent[tone]]}
+                      >
+                        Get a Quote
+                        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                      </a>
+                    )}
 
                     {service.slug === 'grant-government-project-support' && (
                       <p class="mt-3 text-center text-[11px] text-ink-dim">
@@ -371,6 +448,123 @@ const toneAccent: Record<string, string> = {
           </div>
         </Container>
       </Section>
+    )
+  }
+
+  {
+    category.slug === 'web-software-app-development' && (
+      <Fragment>
+        {websiteDesignPricingTables.map((table) => (
+          <Section rule>
+            <Container>
+              <div class="mx-auto max-w-2xl text-center mb-10">
+                <h2 class="h-section">{table.title}</h2>
+              </div>
+
+              <div class="overflow-x-auto rounded-3xl border border-line shadow-card">
+                <table class="w-full min-w-[820px] border-collapse bg-white text-sm">
+                  <thead>
+                    <tr>
+                      <th class="w-56 bg-charcoal p-5 text-left align-bottom text-sm font-bold text-white">
+                        {table.title}
+                      </th>
+                      {table.tiers.map((tier, i) => {
+                        const isPopular = (table.popularIndex ?? table.tiers.length - 1) === i;
+                        return (
+                          <th
+                            class:list={[
+                              'relative border-l border-line p-5 text-center align-bottom font-bold',
+                              isPopular ? 'bg-accent/10 text-accent' : 'bg-paper-dim text-ink'
+                            ]}
+                          >
+                            {isPopular && (
+                              <span class="absolute right-2 top-2 rounded-full bg-accent px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                                Popular
+                              </span>
+                            )}
+                            {tier.name}
+                          </th>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      <td class="bg-charcoal" />
+                      {table.tiers.map((tier, i) => {
+                        const isPopular = (table.popularIndex ?? table.tiers.length - 1) === i;
+                        return (
+                          <td
+                            class:list={[
+                              'border-l border-line p-4 text-center',
+                              isPopular ? 'bg-accent text-white' : 'bg-paper-dim/60 text-ink'
+                            ]}
+                          >
+                            <p class="text-xl font-black">{tier.price}</p>
+                            <p class:list={['mt-0.5 text-[11px]', isPopular ? 'text-white/70' : 'text-ink-dim']}>
+                              Subject to 8% SST
+                            </p>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table.rows.map((row, ri) => (
+                      <tr class:list={[ri % 2 === 1 && 'bg-paper-dim/40']}>
+                        <td class="bg-charcoal p-4 text-sm font-semibold text-white">{row.label}</td>
+                        {row.values.map((val) => (
+                          <td class="border-l border-line p-4 text-center text-sm text-ink-dim">
+                            {val === true && (
+                              <svg class="mx-auto h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                              </svg>
+                            )}
+                            {val === false && (
+                              <svg class="mx-auto h-4 w-4 text-ink-dim/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                              </svg>
+                            )}
+                            {typeof val === 'string' && val}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+
+                    {table.renewal && (
+                      <tr class="border-t-2 border-line bg-paper-dim/60">
+                        <td class="bg-charcoal p-4 text-sm font-semibold text-white">Subsequent Yearly Renewal</td>
+                        {table.renewal.map((price) => (
+                          <td class="border-l border-line p-4 text-center">
+                            <p class="text-sm font-bold text-ink">{price}</p>
+                            <p class="text-[10px] text-ink-dim">Subject to 8% SST</p>
+                          </td>
+                        ))}
+                      </tr>
+                    )}
+
+                    {table.hasCta && (
+                      <tr class="bg-paper">
+                        <td class="bg-charcoal p-4" />
+                        {table.tiers.map((tier) => (
+                          <td class="border-l border-line p-4 text-center">
+                            <a
+                              href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs, I'd like to sign up for the ${tier.name} website design package.`)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-accent-dim"
+                            >
+                              Sign Up
+                            </a>
+                          </td>
+                        ))}
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </Container>
+          </Section>
+        ))}
+      </Fragment>
     )
   }
 

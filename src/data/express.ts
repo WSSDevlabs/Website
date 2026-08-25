@@ -54,8 +54,8 @@ export const EXPRESS_PACKAGES: ExpressPackage[] = [
       support: 'Standard Email & WhatsApp Setup Support',
       answerEngineReady: true
     },
-    ctaText: 'Get Express Landing (RM 180/yr)',
-    whatsappMessage: "Hi WSS DevLabs! I'd like to launch a WSS Express Landing Page for RM 180/year. Let's get started."
+    ctaText: 'Get Express Landing',
+    whatsappMessage: "Hi WSS DevLabs! I'd like to launch a WSS Express Landing Page. Let's get started."
   },
   {
     id: 'express-starter',
@@ -87,8 +87,8 @@ export const EXPRESS_PACKAGES: ExpressPackage[] = [
       support: 'Priority WhatsApp direct with builder',
       answerEngineReady: true
     },
-    ctaText: 'Launch Starter Package (RM 1,500)',
-    whatsappMessage: "Hi WSS DevLabs! I'm interested in the WSS Express Starter package (RM 1,500). I'd like to discuss my project."
+    ctaText: 'Launch Starter Package',
+    whatsappMessage: "Hi WSS DevLabs! I'm interested in the WSS Express Starter package. I'd like to discuss my project."
   },
   {
     id: 'express-business',
@@ -120,8 +120,8 @@ export const EXPRESS_PACKAGES: ExpressPackage[] = [
       support: 'Dedicated Senior Engineer Support Channel',
       answerEngineReady: true
     },
-    ctaText: 'Claim Business Package (RM 4,500)',
-    whatsappMessage: "Hi WSS DevLabs! I'd like to get started with the WSS Express Business package (RM 4,500). Please share the kickoff steps."
+    ctaText: 'Claim Business Package',
+    whatsappMessage: "Hi WSS DevLabs! I'd like to get started with the WSS Express Business package. Please share the kickoff steps."
   }
 ];
 

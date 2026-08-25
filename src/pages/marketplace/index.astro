@@ -112,15 +112,12 @@ const totalSystems = MARKETPLACE_SYSTEMS.length;
               class="system-card group flex flex-col justify-between rounded-2xl border border-line bg-paper p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg"
             >
               <div>
-                <!-- Category & Price Badge -->
+                <!-- Category & Buy-Once Badge -->
                 <div class="flex items-center justify-between gap-2">
                   <span class="rounded-full border border-line bg-paper-dim px-2.5 py-0.5 text-[11px] font-medium text-ink-dim">
                     {system.category}
                   </span>
-                  <div class="text-right">
-                    <span class="font-feature text-2xl font-extrabold text-accent">{system.price}</span>
-                    <span class="block text-[10px] uppercase tracking-wider text-ink-dim">Buy Once</span>
-                  </div>
+                  <span class="rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent">Buy Once</span>
                 </div>
 
                 <!-- Title & Tagline -->
@@ -161,12 +158,12 @@ const totalSystems = MARKETPLACE_SYSTEMS.length;
                   Technical Specs
                 </a>
                 <a
-                  href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs! I'd like to acquire the ${system.name} system (${system.price}). Please share the source code delivery steps.`)}`}
+                  href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs! I'd like to acquire the ${system.name} system. Please share the source code delivery steps.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex-1 rounded-xl bg-accent px-3.5 py-2 text-center text-xs font-semibold text-white shadow-sm transition hover:bg-accent-dim"
                 >
-                  Buy Once ({system.price})
+                  Buy Once
                 </a>
               </div>
             </div>

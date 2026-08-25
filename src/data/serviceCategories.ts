@@ -15,7 +15,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     tagline: 'Build',
     description:
       'Custom-coded websites, mobile apps, and internal systems, built from scratch around your goals instead of bent to fit a template.',
-    services: ['web-development', 'mobile-app-development', 'custom-systems', 'student-project-support']
+    services: ['web-development', 'mobile-app-development', 'custom-systems', 'ui-ux-system-redesign']
   },
   {
     slug: 'digital-design-media-marketing',

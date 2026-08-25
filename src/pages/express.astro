@@ -22,7 +22,7 @@ const faqSchema = {
 
 <BaseLayout
   title="WSS Express: Fixed-Price Web Design Packages (3–7 Day Ship)"
-  description="Eliminating Malaysian SME quote friction with transparent, fixed-price websites starting from RM 180/year. 3–7 day delivery, zero SaaS lock-in, mobile-first, and Answer Engine optimized."
+  description="Eliminating Malaysian SME quote friction with transparent, fixed-price websites. 3–7 day delivery, zero SaaS lock-in, mobile-first, and Answer Engine optimized."
   path="/express"
   schema={faqSchema}
 >
@@ -111,10 +111,6 @@ const faqSchema = {
                 <p class="mt-3 text-xs leading-relaxed text-ink-dim">{pkg.overview}</p>
 
                 <div class="my-6 border-y border-line/60 py-4">
-                  <div class="flex items-baseline gap-1">
-                    <span class="font-feature text-4xl font-extrabold text-ink">{pkg.price}</span>
-                    {pkg.period && <span class="text-xs text-ink-dim">{pkg.period}</span>}
-                  </div>
                   <div class="mt-2 flex items-center gap-2 text-xs text-ink-dim">
                     <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
                     <span>Turnaround: <strong>{pkg.turnaround}</strong></span>
