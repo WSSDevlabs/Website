@@ -1,23 +1,27 @@
 # TASKS
 
 ## DOING
-- Page-by-page live edit pass with the founder (2026-08-22, ongoing, second session) — founder sends screenshots/instructions one at a time; see PROGRESS.md for the full batch done so far. Nav bar has settled on a glass floating pill (rewound once, then re-iterated to this state — treat as current unless founder says otherwise). Founder is converting dark (`bg-ink`) hero sections to the homepage's light theme one page at a time.
+- (none active — the 2026-08-25/26 session's work landed and was pushed; see PROGRESS.md. Founder was mid-way through confirming the Botpress live-site hotfix worked when this checkpoint ran.)
 
 ## TODO
-- [uiux] Scroll-reveal / card-reveal / "3D transition" motion pass — founder wants the site to "feel alive... like have a soul." Not started; existing `data-stagger`/`data-split`/GSAP infra can likely be extended rather than rebuilt.
-- [uiux] Typography hierarchy strengthening pass — founder's own resolution when asked to clarify a vaguer "multiple fonts/colors" request: stronger size/weight contrast within the existing design system, not literally more fonts or random colors. Not started.
-- [uiux] Two more dark `bg-ink` hero sections still need the light-theme conversion already done for `/express`, `/marketplace`, `/status`: `/marketplace/[slug]` (individual product pages) and `/work/index.astro`. Same recipe: grid-pattern + blobs bg, light pill badge, `.badge-highlight` on the key heading phrase, light stat bar.
-- [cfo/founder] Confirm the remaining 4-package names (Launch/Expand/Grow/Custom) and prices (RM1,200 / RM4,500 / RM12,000 / Custom) — still placeholders. The 5th "Scale" tier (From RM28,000) was removed entirely 2026-08-22 per founder request, not renamed.
-- [uiux/dev] "IoT Solutions & Infrastructure" now has one real service (`iot-development`, RM 8,000, added 2026-08-22 as the grid's 15th card per founder's explicit instruction) — no longer content-gate-empty. Add more depth (case studies, more granular offerings) only if founder wants to expand it further.
-- [media] Founder will source the real "laptop, komputer, mobile app real design" image from their media designer — largely moot now: most homepage/about photo placeholders were replaced with abstract pattern panels 2026-08-22 rather than photos, per founder's "decrease the photos... too much photo for now" direction. Revisit only if founder wants photography back somewhere specific.
-- [admin] Fill in real WSS Devlabs details (SSM no., bank account, address) into the new templates before first real client use — legalName/ssmNumber/sstNumber in `src/data/site.json` are still blank (WhatsApp/social/email are already real)
-- [pm] Track lead volume once the campaign runs, to validate the new package structure
-- [content] `src/content/projects/` is still empty — real case studies would replace the "coming soon" empty state on /work with actual proof
-- [content] `src/data/testimonials.ts` is still empty by design (content gate) — add real reviews as they come in. Note: 2026-08-22 found and fixed a bug where `Testimonials.astro` was ignoring this and showing 2 hardcoded fake reviews anyway on every service page — that's fixed, the gate is now real.
-- [dev] Consider adding a "testimonials" collection to `public/wss-console/config.yml` — it's the only content type not currently editable via the CMS
-- [cmo] No dedicated landing page for the SME campaign — ad copy in `docs/marketing/SME-LAUNCH-CAMPAIGN.md` currently points at the full `/pricing` page instead of a focused page per segment.
-- [cmo] Confirm `PUBLIC_CF_ANALYTICS_TOKEN` is actually set in production — blank in `.env.example`, no local `.env`, so analytics status on the live site is unverified.
-- [cmo] Capture real customer language (verbatim quotes) from the first SME-tier and growth-tier clients and fold into `.agents/product-marketing.md` v2 — currently empty, flagged as an open section in the doc.
+- [dev/founder] **Confirm the Botpress live-navigation hotfix (`0355af4`) actually resolved the blank-page-on-Home-click bug on the live site** — pushed but not yet confirmed by the founder. If it recurs, get the actual browser console error text (screenshots keep failing to send — ask for typed text).
+- [coo] Flip Cloudflare's "Email Address Obfuscation" setting off (Speed → Optimization) for wssdevlabs.com — the code-side workaround (`emailReveal.ts`) covers JS-enabled visitors, but the dashboard toggle is the real fix and hasn't been requested from the founder yet.
+- [cfo] **`memory/FINANCE.md` needs a full rewrite** — it still documents the 5-tier Launch/Expand/Grow/Scale/Custom `/pricing` structure, but that entire page was deleted 2026-08-25 (see DECISIONS.md). Current live pricing: WSS Express's 3 packages (Landing RM180/yr, Starter RM1,500, Business RM4,500 — `src/data/express.ts`), the SME/Corporate comparison tables on `/services/web-software-app-development`, and the Google Ads/SEO pricing table on `/services/digital-design-media-marketing`.
+- [uiux] Scroll-reveal / card-reveal / "3D transition" motion pass — founder wants the site to "feel alive... like have a soul." Still not started as a dedicated pass, though the 2026-08-25 session did add several new micro-interactions piecemeal (auto-flip cards, popup stagger, marquee, hero glow) that partially serve this goal.
+- [uiux] Typography hierarchy strengthening pass — still not started as a dedicated pass, though a partial version shipped 2026-08-25 (bold + `.badge-highlight` treatment applied to `/about`, `/contact`, `/testimonials`, `/services` headings).
+- [content/media] Real partner/client logos needed for the new homepage "Our Strategic Partners & Clients" marquee (`PartnersMarquee.astro`, 2026-08-25) — currently placeholder cards.
+- [content] Real case-study content needed for `/services`' new "Our Latest Projects" section (`LatestProjects.astro`, 2026-08-25) — currently 3 honest "Case Study Coming Soon" placeholders, not fabricated results.
+- [dev] `src/data/pricing.json`/`.ts`, `PricingCard.astro`, and `FAQ.astro` (the component) are now fully orphaned dead code since the `/pricing`/`/faq` deletions — safe to delete outright if/when doing a cleanup pass, not urgent.
+- [i18n] TopBar's "BM" language button is a non-functional placeholder (founder explicit: no translation needed yet) — real Bahasa Melayu i18n is a future task if the founder wants it, not scoped yet.
+- [admin] Fill in real WSS Devlabs details (SSM no., bank account, address) into the client-document templates before first real client use — legalName/ssmNumber/sstNumber in `src/data/site.json` are still blank (WhatsApp/social/phone/email are already real; email corrected 2026-08-25 from `hello@` to `info@wssdevlabs.com`).
+- [pm] Track lead volume once any campaign runs, to validate current pricing/package structure.
+- [content] `src/content/projects/` is empty and now fully unused (its only consumer, `/work`, was deleted 2026-08-25) — either populate it and rebuild a case-studies surface, or consider removing the collection.
+- [content] `src/data/testimonials.ts` is still empty by design (content gate) — add real reviews as they come in.
+- [dev] Consider adding a "testimonials" collection to `public/wss-console/config.yml` — still the only content type not editable via the CMS.
+- [cmo] `docs/marketing/SME-LAUNCH-CAMPAIGN.md` still points at `/pricing`, which no longer exists — needs its links updated to `/express` (or wherever the founder wants campaign traffic to land) before that campaign runs.
+- [cmo] Confirm `PUBLIC_CF_ANALYTICS_TOKEN` is actually set in production — still unverified.
+- [cmo] Capture real customer language once available and fold into `.agents/product-marketing.md` v2.
+- [process] Founder feedback to self: several weeks of substantial dev/design work (2026-08-25/26) ran as plain chat instead of through `/dev`/`/uiux`/`/wssdevlabs`, and memory wasn't checkpointed during it. Per BizBrain's own auto-routing table, route plain-language build/design requests through the matching role skill going forward, and checkpoint memory at natural session boundaries, not just when the founder explicitly asks to "check progress."
 
 ## BLOCKED
 - (none)
