@@ -1,7 +1,7 @@
 # TASKS
 
 ## DOING
-- (none active — the 2026-08-25/26 session's work landed and was pushed; see PROGRESS.md. Founder was mid-way through confirming the Botpress live-site hotfix worked when this checkpoint ran.)
+- (none active — see PROGRESS.md 2026-09-19 entry: fixed the real nav bug (site-intro stuck overlay, not Botpress), removed the services popup, added 4 explanatory content sections to service category pages, pushed through `c495bb8`.)
 
 ## TODO
 - [dev/founder] **Confirm the Botpress live-navigation hotfix (`0355af4`) actually resolved the blank-page-on-Home-click bug on the live site** — pushed but not yet confirmed by the founder. If it recurs, get the actual browser console error text (screenshots keep failing to send — ask for typed text).
