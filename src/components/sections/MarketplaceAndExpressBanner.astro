@@ -6,8 +6,7 @@ const packages = [
     title: 'WSS Express Web',
     price: 'Fixed-Price',
     description:
-      'Standardized, ultra-fast websites engineered for Answer Engine discovery and zero monthly SaaS taxes.',
-    tags: ['3–7 Day Launch', 'Fixed Pricing'],
+      'Fixed-price, production-ready websites shipped in days, engineered for speed, search visibility, and zero recurring SaaS fees.',
     buttonText: 'Get Started',
     href: '/express',
     image:
@@ -18,8 +17,7 @@ const packages = [
     title: 'The Marketplace',
     price: '41 Systems',
     description:
-      'Self-hosted booking engines, clinic queues, CRMs, and POS portals. Pay once, own 100% source code forever.',
-    tags: ['Buy-Once Own-Forever', '100% Source Code'],
+      'Production-ready business systems you buy once and own outright, no subscriptions, no lock-in, full source code included.',
     buttonText: 'Explore Systems',
     href: '/marketplace',
     image:
@@ -30,8 +28,7 @@ const packages = [
     title: 'Enterprise Bespoke',
     price: 'Custom Scope',
     description:
-      'Tailored high-performance systems, custom AI agent workflows, ERPs, and dedicated senior engineering squads.',
-    tags: ['100% Custom Build', 'Senior Lead SLA'],
+      'Fully custom software built around your exact requirements, backed by a dedicated senior engineering team from architecture to launch.',
     buttonText: 'Book Consultation',
     href: '/contact',
     image:
@@ -90,17 +87,8 @@ const packages = [
                 {pkg.description}
               </p>
 
-              <!-- Pill Tags -->
-              <div class="mt-4 flex flex-wrap gap-2">
-                {pkg.tags.map((tag) => (
-                  <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/90 backdrop-blur-sm">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
               <!-- Action Button -->
-              <div class="mt-6">
+              <div class="mt-5">
                 <a
                   href={pkg.href}
                   class="flex w-full items-center justify-center rounded-full bg-white py-3.5 text-center text-xs sm:text-sm font-bold text-ink shadow-md transition-all duration-300 hover:bg-[#f2f0ea] hover:scale-[1.02] active:scale-95"

@@ -2,9 +2,64 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
-import { MARKETPLACE_SYSTEMS } from '../../data/marketplace';
+import { MARKETPLACE_SYSTEMS, type MarketplaceSystem } from '../../data/marketplace';
 
 const totalSystems = MARKETPLACE_SYSTEMS.length;
+
+const CATEGORY_META: Record<string, { icon: string; description: string }> = {
+  'Facility & Operations Management': {
+    icon: 'M2.25 21h19.5M4.5 3h6v18h-6zM10.5 8.25h6V21h-6zM16.5 12h4.5v9h-4.5z',
+    description: 'Booking, meal redemption, hostel, parcel, and facility-management systems for busy sites.'
+  },
+  'Corporate Operations': {
+    icon: 'M2.25 21h19.5M4.5 21V9.75l7.5-6 7.5 6V21M9.75 21v-6h4.5v6',
+    description: 'Attendance, HR, asset, and internal-operations tools for growing teams.'
+  },
+  'Security & Access Control': {
+    icon: 'M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+    description: 'ID issuance, visitor management, patrol, and incident-response systems.'
+  },
+  'Venues & Hospitality': {
+    icon: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5',
+    description: 'Booking engines, ticketing, and event tools for venues and organizers.'
+  },
+  'IoT & Monitoring': {
+    icon: 'M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z',
+    description: 'Real-time machine, energy, and equipment monitoring systems.'
+  },
+  'Developer Tools': {
+    icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5',
+    description: 'Portals, infrastructure, and immersive experience platforms.'
+  },
+  'Commerce & Rental': {
+    icon: 'M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.9-4.652 2.257-7.126a1.125 1.125 0 0 0-1.13-1.243H4.117L3.85 4.402A1.125 1.125 0 0 0 2.762 3.6H2.25m6 15.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm11.25 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z',
+    description: 'Point-of-sale and business directory systems for retail and services.'
+  },
+  'Real Estate & CRM': {
+    icon: 'M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819',
+    description: 'Lead and pipeline tracking built for contractors and service providers.'
+  },
+  'Health & Services': {
+    icon: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z',
+    description: 'Appointment booking and patient queue management for clinics.'
+  }
+};
+
+type GroupedCategory = { name: string; icon: string; description: string; systems: MarketplaceSystem[] };
+
+const categories: GroupedCategory[] = Object.entries(
+  MARKETPLACE_SYSTEMS.reduce<Record<string, MarketplaceSystem[]>>((acc, system) => {
+    (acc[system.category] ??= []).push(system);
+    return acc;
+  }, {})
+)
+  .map(([name, systems]) => ({
+    name,
+    icon: CATEGORY_META[name]?.icon ?? 'M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+    description: CATEGORY_META[name]?.description ?? 'Production-ready systems in this category.',
+    systems
+  }))
+  .sort((a, b) => b.systems.length - a.systems.length);
 ---
 
 <BaseLayout
@@ -36,74 +91,59 @@ const totalSystems = MARKETPLACE_SYSTEMS.length;
   <!-- Interactive Catalog Section -->
   <Section rule class="bg-paper-dim/30">
     <Container>
-      <div>
+      <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-2xl font-bold text-ink md:text-3xl">
-          Explore All {totalSystems} Production Systems
+          Browse {totalSystems} Systems Across {categories.length} Categories
         </h2>
+        <p class="mt-2 text-sm text-ink-dim">Hover a category to see what's inside, or tap on mobile.</p>
       </div>
 
-      <!-- Systems Grid -->
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="marketplace-grid">
+      <!-- Category Browser: hover/tap a category to reveal its systems -->
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
-          MARKETPLACE_SYSTEMS.map((system) => (
+          categories.map((cat) => (
             <div
-              data-system-category={system.category}
-              class="system-card group flex flex-col justify-between rounded-2xl border border-line bg-paper p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg"
+              tabindex="0"
+              class="category-card group relative flex flex-col rounded-2xl border border-line bg-paper p-6 shadow-sm transition-all duration-300 hover:border-accent hover:shadow-lg focus:border-accent focus:shadow-lg focus:outline-none"
             >
-              <div>
-                <!-- Category & Buy-Once Badge -->
-                <div class="flex items-center justify-between gap-2">
-                  <span class="rounded-full border border-line bg-paper-dim px-2.5 py-0.5 text-[11px] font-medium text-ink-dim">
-                    {system.category}
-                  </span>
-                  <span class="rounded-full bg-accent/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent">Buy Once</span>
-                </div>
-
-                <!-- Title & Tagline -->
-                <h3 class="mt-4 text-xl font-bold text-ink group-hover:text-accent transition-colors">
-                  <a href={`/marketplace/${system.slug}`}>
-                    {system.name}
-                  </a>
-                </h3>
-                <p class="mt-1 text-xs font-semibold text-accent-yellow">{system.tagline}</p>
-                <p class="mt-3 text-xs leading-relaxed text-ink-dim">{system.summary}</p>
-
-                <!-- Under the hood highlight -->
-                <div class="mt-4 rounded-xl border border-line/80 bg-paper-dim/60 p-3 text-[11px]">
-                  <p class="font-mono font-bold uppercase tracking-wider text-ink text-[10px]">
-                    Under the Hood:
-                  </p>
-                  <p class="mt-1 text-ink-dim">
-                    {system.underTheHood.highlights[0]}
-                  </p>
-                </div>
-
-                <!-- Tech Stack tags -->
-                <div class="mt-4 flex flex-wrap gap-1.5">
-                  {system.techStack.map((tech) => (
-                    <span class="rounded-md bg-paper-deep/60 px-2 py-0.5 text-[10px] font-mono text-ink-dim">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <div class="flex items-start justify-between gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/8 text-accent">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={cat.icon} />
+                  </svg>
+                </span>
+                <span class="rounded-full bg-paper-dim px-2.5 py-1 text-[11px] font-bold text-ink-dim">
+                  {cat.systems.length} System{cat.systems.length === 1 ? '' : 's'}
+                </span>
               </div>
 
-              <!-- Action Buttons -->
-              <div class="mt-6 flex items-center gap-2 border-t border-line/60 pt-4">
-                <a
-                  href={`/marketplace/${system.slug}`}
-                  class="flex-1 rounded-xl border border-line bg-paper-dim px-3.5 py-2 text-center text-xs font-semibold text-ink transition hover:bg-paper-deep"
-                >
-                  Technical Specs
-                </a>
-                <a
-                  href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs! I'd like to acquire the ${system.name} system. Please share the source code delivery steps.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex-1 rounded-xl bg-accent px-3.5 py-2 text-center text-xs font-semibold text-white shadow-sm transition hover:bg-accent-dim"
-                >
-                  Buy Once
-                </a>
+              <h3 class="mt-4 text-base font-bold text-ink">{cat.name}</h3>
+              <p class="mt-1.5 text-xs leading-relaxed text-ink-dim">{cat.description}</p>
+
+              <p class="category-hint mt-4 flex items-center gap-1.5 text-[11px] font-semibold text-accent transition-opacity duration-200 group-hover:opacity-0 group-focus:opacity-0">
+                Hover to see systems
+                <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </p>
+
+              {/* Reveal panel: collapsed by default, expands on hover/focus */}
+              <div class="category-reveal grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 [transition-timing-function:var(--ease-out-expo)] group-hover:grid-rows-[1fr] group-focus:grid-rows-[1fr]">
+                <div class="overflow-hidden">
+                  <div class="mt-4 max-h-56 space-y-1 overflow-y-auto border-t border-line pt-3">
+                    {cat.systems.map((system) => (
+                      <a
+                        href={`/marketplace/${system.slug}`}
+                        class="flex items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-xs font-medium text-ink-dim transition-colors hover:bg-paper-dim hover:text-ink"
+                      >
+                        <span class="truncate">{system.name}</span>
+                        <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           ))

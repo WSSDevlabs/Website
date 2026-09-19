@@ -1,82 +1,203 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Container from '../components/ui/Container.astro';
-import Section from '../components/ui/Section.astro';
+import LegalLayout from '../components/legal/LegalLayout.astro';
+import LegalSection from '../components/legal/LegalSection.astro';
 import { SITE } from '../data/site';
 
 const lastUpdated = new Date('2026-01-01');
+
+const email = SITE.email
+  ? { user: SITE.email.split('@')[0], domain: SITE.email.split('@')[1] }
+  : null;
+
+const toc = [
+  { id: 'introduction', label: '1. Introduction' },
+  { id: 'scope', label: '2. Scope' },
+  { id: 'data-we-collect', label: '3. Data we collect' },
+  { id: 'consent', label: '4. Consent' },
+  { id: 'how-we-use', label: '5. How we use your data' },
+  { id: 'confidentiality-nda', label: '6. Confidentiality & NDA' },
+  { id: 'data-sharing', label: '7. Data sharing' },
+  { id: 'security', label: '8. Data security' },
+  { id: 'retention', label: '9. Data retention' },
+  { id: 'your-rights', label: '10. Your rights' },
+  { id: 'children', label: '11. Children’s privacy' },
+  { id: 'transfers', label: '12. International transfers' },
+  { id: 'changes', label: '13. Changes to this policy' },
+  { id: 'contact', label: '14. Contact us' }
+];
 ---
 
-<BaseLayout
+<LegalLayout
   title="Privacy Policy"
-  description="How WSS DevLabs collects, uses, and protects your personal data, in accordance with the Malaysian Personal Data Protection Act 2010 (PDPA)."
+  description="How WSS DevLabs collects, uses, and protects your personal data, including consent and confidentiality practices, in accordance with the Malaysian Personal Data Protection Act 2010 (PDPA)."
   path="/privacy"
+  icon="M12 3l7 3.5v5c0 4.5-3 8.5-7 9.5-4-1-7-5-7-9.5v-5L12 3z M9.5 12l1.8 1.8L14.5 10"
+  accent="blue"
+  lastUpdated={lastUpdated}
+  intro="We know your project details, client lists, and business data are sensitive. This policy explains, in plain language, exactly what we collect, why, who ever sees it, and how the PDPA, confidentiality, and consent protect you throughout."
+  toc={toc}
 >
-  <Section>
-    <Container class="prose prose-neutral max-w-3xl">
-      <h1>Privacy Policy</h1>
-      <p>
-        Last updated: {
-          lastUpdated.toLocaleDateString('en-MY', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })
-        }
-      </p>
+  <LegalSection id="introduction" number="1" title="Introduction">
+    <p>
+      {SITE.name} ("we", "us", "our") respects your privacy and is committed to protecting your
+      personal data in accordance with the Personal Data Protection Act 2010 (PDPA) of Malaysia.
+      This policy applies to visitors of our website, prospective clients who contact us, and
+      clients we deliver projects for.
+    </p>
+    <p>
+      By using this website or engaging our services, you acknowledge that you have read and
+      understood how your data is handled as described below. If you do not agree with any part of
+      this policy, please do not submit personal data to us and contact us with your concerns.
+    </p>
+  </LegalSection>
 
-      <h2>1. Introduction</h2>
-      <p>
-        {SITE.name} ("we", "us", "our") respects your privacy and is committed to protecting your personal
-        data in accordance with the Personal Data Protection Act 2010 (PDPA) of Malaysia.
-      </p>
+  <LegalSection id="scope" number="2" title="Scope">
+    <p>This policy covers:</p>
+    <ul>
+      <li>Data collected through our website, including contact and quotation forms.</li>
+      <li>Data shared with us during project discovery calls, briefs, and correspondence.</li>
+      <li>Data processed while we build, test, host, or maintain systems on your behalf.</li>
+      <li>Data collected via cookies, analytics, and our website chat widget.</li>
+    </ul>
+    <p>
+      It does not cover the internal privacy practices of third-party platforms you may be
+      redirected to (for example, WhatsApp or LinkedIn), which have their own privacy policies.
+    </p>
+  </LegalSection>
 
-      <h2>2. Data we collect</h2>
-      <p>
-        When you submit our contact form, we collect your name, email, phone number, company name,
-        project details, and any other information you choose to provide.
-      </p>
+  <LegalSection id="data-we-collect" number="3" title="Data we collect">
+    <p>Depending on how you interact with us, we may collect:</p>
+    <ul>
+      <li><strong>Contact details:</strong> name, email address, phone/WhatsApp number, company name, and job title.</li>
+      <li><strong>Project data:</strong> business requirements, workflows, existing systems, sample documents, credentials for staging environments, and any files you upload or share to help us scope or build your solution.</li>
+      <li><strong>Commercial data:</strong> quotation details, invoices, and payment confirmation records (we do not store full card numbers; payments are processed by our banking or payment partners).</li>
+      <li><strong>Communications:</strong> emails, WhatsApp messages, call notes, and chat widget conversations related to your enquiry or project.</li>
+      <li><strong>Technical data:</strong> aggregate, non-identifying analytics such as pages visited and general device type, collected only after you accept our cookie notice.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>3. How we use your data</h2>
-      <p>
-        We use the data you provide to respond to enquiries, scope projects, and communicate about
-        your project.
-      </p>
+  <LegalSection id="consent" number="4" title="Consent">
+    <p>
+      We only collect and process personal data with your knowledge and, where required by law,
+      your explicit consent. Consent is obtained at the point data is given to us &mdash; for
+      example, by submitting our contact form, replying to our WhatsApp number, or signing a
+      project proposal that references this policy.
+    </p>
+    <ul>
+      <li>You may withdraw consent at any time by contacting us; we will stop using your data for the relevant purpose going forward, subject to any legal or contractual retention requirements.</li>
+      <li>Where a project agreement requires certain data to deliver the engagement (for example, staging credentials needed to build your system), withdrawing consent for that data may mean we are unable to continue the affected work.</li>
+      <li>Cookie-based analytics is opt-in: nothing beyond essential site function loads until you click "Allow cookies" on the consent banner. See our <a href="/cookies">Cookie Policy</a> for details.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>4. Data sharing</h2>
-      <p>
-        We do not sell your personal data. Form submissions are processed by Web3Forms, a
-        third-party form processing service, solely to deliver your enquiry to us.
-      </p>
+  <LegalSection id="how-we-use" number="5" title="How we use your data">
+    <p>We use the data you provide to:</p>
+    <ul>
+      <li>Respond to enquiries and prepare quotations or proposals.</li>
+      <li>Scope, design, build, test, deploy, and maintain the systems or websites you engage us for.</li>
+      <li>Communicate project updates, invoices, and support requests.</li>
+      <li>Provide after-sales support, bug fixes, and maintenance/subscription services you have signed up for.</li>
+      <li>Improve our services and website based on aggregate, anonymised usage patterns.</li>
+      <li>Comply with legal, accounting, and tax obligations.</li>
+    </ul>
+    <p>We do not use your data for automated decision-making or profiling that produces legal effects, and we do not send marketing messages unless you have separately opted in.</p>
+  </LegalSection>
 
-      <h2>5. Data retention</h2>
-      <p>
-        We retain enquiry data only as long as necessary to respond to your request or fulfil a
-        project engagement.
-      </p>
+  <LegalSection id="confidentiality-nda" number="6" title="Confidentiality & NDA">
+    <p>
+      Business information you share with us during a project &mdash; including internal processes,
+      pricing, customer lists, source code, and unreleased product plans &mdash; is treated as
+      confidential. Where a project involves sensitive information, we are glad to sign a mutual
+      Non-Disclosure Agreement (NDA) before any details are exchanged, and our standard project
+      agreements already include confidentiality clauses covering both parties.
+    </p>
+    <ul>
+      <li>Only team members and vetted sub-contractors directly working on your project are given access to your data, strictly on a need-to-know basis.</li>
+      <li>Any sub-contractor engaged on your project is bound by the same confidentiality obligations we hold ourselves to.</li>
+      <li>Confidential information is never used for any purpose outside the engagement it was shared for, and is not disclosed to other clients or third parties.</li>
+      <li>Confidentiality obligations survive the end of a project engagement.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>6. Your rights</h2>
-      <p>
-        Under the PDPA, you may request access to, correction of, or deletion of your personal data
-        by contacting us at {
-          SITE.email ? (
-            <span data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]}>our contact email</span>
-          ) : (
-            'our contact email'
-          )
-        }.
-      </p>
+  <LegalSection id="data-sharing" number="7" title="Data sharing">
+    <p>We do not sell your personal data. We only share data with:</p>
+    <ul>
+      <li><strong>Service providers</strong> that help us operate &mdash; our form processor (Web3Forms), our hosting/CDN provider (Cloudflare), and our chat widget provider (Botpress) &mdash; each solely to deliver the function you are using.</li>
+      <li><strong>Sub-contractors</strong> who assist on a specific project, bound by confidentiality as described above.</li>
+      <li><strong>Authorities</strong>, only where required by Malaysian law or a valid legal order.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>7. Contact</h2>
-      <p>
-        Questions about this policy can be sent to {
-          SITE.email ? (
-            <span data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]}>our contact email</span>
-          ) : (
-            'our contact email'
-          )
-        }.
-      </p>
-    </Container>
-  </Section>
-</BaseLayout>
+  <LegalSection id="security" number="8" title="Data security">
+    <p>
+      We apply reasonable technical and organisational measures to protect your data, including
+      access controls limited to the individuals working on your project, encrypted connections
+      (HTTPS/TLS) across our website and client-facing tools, and secure credential handling for
+      staging and production environments. No method of transmission or storage is 100% secure, but
+      we continuously review our practices to reduce risk.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="retention" number="9" title="Data retention">
+    <p>We keep personal data only as long as necessary for the purpose it was collected:</p>
+    <ul>
+      <li><strong>Enquiries that don't convert:</strong> retained for up to 12 months, then deleted unless you ask us to keep in touch.</li>
+      <li><strong>Active and completed projects:</strong> retained for the duration of the engagement plus the applicable warranty/support period, and thereafter as required for accounting and legal purposes (typically up to 7 years under Malaysian tax law).</li>
+      <li><strong>Staging/production credentials:</strong> revoked or deleted once no longer needed for maintenance you've engaged us for.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="your-rights" number="10" title="Your rights">
+    <p>Under the PDPA, you have the right to:</p>
+    <ul>
+      <li>Request access to the personal data we hold about you.</li>
+      <li>Request correction of inaccurate or incomplete data.</li>
+      <li>Withdraw consent to processing, subject to the limitations described in Section 4.</li>
+      <li>Request that we limit or stop processing your data for a specific purpose.</li>
+      <li>Lodge a complaint with us, or with the relevant Malaysian authority, if you believe your data has been mishandled.</li>
+    </ul>
+    <p>
+      To exercise any of these rights, contact us using the details in Section 14. We will respond
+      within 21 days as required by the PDPA.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="children" number="11" title="Children's privacy">
+    <p>
+      Our services are intended for businesses and individuals aged 18 and above. We do not
+      knowingly collect personal data from children. If you believe a child has provided us with
+      personal data, please contact us so we can delete it.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="transfers" number="12" title="International transfers">
+    <p>
+      Some of our service providers (such as our hosting/CDN and chat widget partners) operate
+      infrastructure outside Malaysia. Where this occurs, we rely on providers that maintain
+      appropriate security standards, and data is only transferred as necessary to deliver the
+      relevant function.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="changes" number="13" title="Changes to this policy">
+    <p>
+      We may update this policy from time to time to reflect changes in our practices or the law.
+      The "Last updated" date at the top of this page will always reflect the latest version.
+      Material changes affecting active clients will be communicated directly.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="contact" number="14" title="Contact us">
+    <p>
+      Questions about this policy, or requests relating to your personal data, can be sent to{' '}
+      {
+        email ? (
+          <span data-email-user={email.user} data-email-domain={email.domain}>our contact email</span>
+        ) : (
+          'our contact email'
+        )
+      }
+      {SITE.phone && <> or by phone at {SITE.phone}</>}. We're based in {SITE.address}.
+    </p>
+  </LegalSection>
+</LegalLayout>

@@ -1,71 +1,195 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Container from '../components/ui/Container.astro';
-import Section from '../components/ui/Section.astro';
+import LegalLayout from '../components/legal/LegalLayout.astro';
+import LegalSection from '../components/legal/LegalSection.astro';
 import { SITE } from '../data/site';
 
 const lastUpdated = new Date('2026-01-01');
+
+const email = SITE.email
+  ? { user: SITE.email.split('@')[0], domain: SITE.email.split('@')[1] }
+  : null;
+
+const toc = [
+  { id: 'acceptance', label: '1. Acceptance of terms' },
+  { id: 'our-services', label: '2. Our services' },
+  { id: 'engagement', label: '3. Project engagement' },
+  { id: 'payment', label: '4. Payment terms' },
+  { id: 'maintenance-support', label: '5. Maintenance & support' },
+  { id: 'subscriptions', label: '6. Subscriptions & renewals' },
+  { id: 'after-sales', label: '7. After-sales & warranty' },
+  { id: 'ip-ownership', label: '8. IP & source code ownership' },
+  { id: 'confidentiality', label: '9. Confidentiality' },
+  { id: 'client-responsibilities', label: '10. Client responsibilities' },
+  { id: 'website-content', label: '11. Website content' },
+  { id: 'liability', label: '12. Limitation of liability' },
+  { id: 'termination', label: '13. Termination' },
+  { id: 'governing-law', label: '14. Governing law' },
+  { id: 'changes', label: '15. Changes to these terms' },
+  { id: 'contact', label: '16. Contact' }
+];
 ---
 
-<BaseLayout
+<LegalLayout
   title="Terms of Service"
-  description="The terms governing use of the WSS DevLabs website and engagement with our services."
+  description="The terms governing use of the WSS DevLabs website, our productized and bespoke services, maintenance, subscriptions, and after-sales support."
   path="/terms"
+  icon="M9 2h6l1 4h4v2h-2l-1.6 12.2A2 2 0 0114.4 22H9.6a2 2 0 01-2-1.8L6 8H4V6h4l1-4z M9.5 12v5 M14.5 12v5"
+  accent="red"
+  lastUpdated={lastUpdated}
+  intro="These terms set out how we work together &mdash; from your first quotation through to ongoing maintenance and support &mdash; so there are no surprises about scope, payment, ownership, or what happens after launch."
+  toc={toc}
 >
-  <Section>
-    <Container class="prose prose-neutral max-w-3xl">
-      <h1>Terms of Service</h1>
-      <p>
-        Last updated: {
-          lastUpdated.toLocaleDateString('en-MY', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })
-        }
-      </p>
+  <LegalSection id="acceptance" number="1" title="Acceptance of terms">
+    <p>
+      By accessing this website, requesting a quotation, or engaging {SITE.name} for any project,
+      you agree to be bound by these Terms of Service. If you are accepting on behalf of a company,
+      you confirm you have the authority to do so.
+    </p>
+  </LegalSection>
 
-      <h2>1. Acceptance of terms</h2>
-      <p>By using this website, you agree to these Terms of Service.</p>
+  <LegalSection id="our-services" number="2" title="Our services">
+    <p>We offer four categories of service, each with its own delivery model:</p>
+    <ul>
+      <li><strong>WSS Express Web:</strong> fixed-price, production-ready websites delivered on a short, published timeline.</li>
+      <li><strong>The Marketplace:</strong> pre-built, buy-once business systems sold with full source code and no recurring licence fees.</li>
+      <li><strong>Enterprise Bespoke:</strong> fully custom software scoped, architected, and built around your specific requirements.</li>
+      <li><strong>Ongoing services:</strong> maintenance, hosting management, and technical support, offered either as one-off engagements or as a subscription retainer (see Sections 5 and 6).</li>
+    </ul>
+  </LegalSection>
 
-      <h2>2. Services</h2>
-      <p>
-        Project engagements (web development, mobile app development, custom systems, AI
-        development, UI/UX design, maintenance) are governed by a separate written agreement or
-        proposal signed by both parties, which takes precedence over these general terms.
-      </p>
+  <LegalSection id="engagement" number="3" title="Project engagement">
+    <p>
+      Every paid engagement is governed by a written quotation, proposal, or Statement of Work
+      (SOW) signed or confirmed by both parties. Where the terms of a signed project agreement
+      conflict with this general page, the signed agreement takes precedence.
+    </p>
+    <ul>
+      <li>Quotations are valid for 14 days from issue unless otherwise stated.</li>
+      <li>Scope changes requested after a quotation is accepted (new pages, features, or integrations) are treated as change requests and quoted separately before work begins.</li>
+      <li>Timelines assume timely feedback and asset delivery from you; delays on your side may shift the delivery date accordingly.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>3. Website content</h2>
-      <p>
-        Content on this site, including case studies and capability descriptions, reflects work we
-        can credibly deliver and is provided for informational purposes only.
-      </p>
+  <LegalSection id="payment" number="4" title="Payment terms">
+    <ul>
+      <li><strong>Deposit:</strong> Express Web and Bespoke projects typically require a deposit before work begins, with the balance due on agreed milestones or delivery, as set out in your quotation.</li>
+      <li><strong>Marketplace systems:</strong> paid in full at the time of purchase, before source code and deployment access are handed over.</li>
+      <li><strong>Late payment:</strong> we may pause active work, delay delivery, or suspend hosting/support until overdue invoices are settled. Repeated late payment may result in termination under Section 13.</li>
+      <li>All prices are in Malaysian Ringgit (RM) unless stated otherwise, and are exclusive of any applicable taxes unless explicitly quoted as inclusive.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>4. Intellectual property</h2>
-      <p>
-        Unless otherwise agreed in a project contract, site content and branding remain the property
-        of
-        {' '}{SITE.name}.
-      </p>
+  <LegalSection id="maintenance-support" number="5" title="Maintenance & support">
+    <p>
+      Maintenance keeps your website or system secure, up to date, and running smoothly after
+      launch. Depending on your agreement, maintenance may be purchased as a one-off block of hours
+      or as a recurring subscription (Section 6).
+    </p>
+    <ul>
+      <li><strong>What's included:</strong> security patches, dependency updates, uptime monitoring, minor content updates, and bug fixes for defects in functionality we originally delivered.</li>
+      <li><strong>What's excluded:</strong> new features, redesigns, third-party service outages outside our control, and issues caused by changes made outside our team.</li>
+      <li><strong>Response times:</strong> support requests are acknowledged within 1-2 business days for standard issues, and as a priority for critical outages, as detailed in your specific support agreement.</li>
+      <li>New feature requests raised during a maintenance period are quoted separately as a change request rather than treated as a bug fix.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>5. Limitation of liability</h2>
-      <p>
-        {SITE.name} is not liable for any indirect or consequential loss arising from use of this website.
-      </p>
+  <LegalSection id="subscriptions" number="6" title="Subscriptions & renewals">
+    <p>Where you subscribe to a recurring maintenance, hosting, or support retainer:</p>
+    <ul>
+      <li><strong>Billing cycle:</strong> subscriptions are billed monthly or annually as agreed in your plan, starting from the activation date.</li>
+      <li><strong>Auto-renewal:</strong> subscriptions renew automatically at the end of each billing cycle unless cancelled in advance.</li>
+      <li><strong>Cancellation:</strong> you may cancel a subscription by giving at least 30 days' written notice before the next renewal date; fees already paid for the current cycle are non-refundable.</li>
+      <li><strong>Non-payment:</strong> if a renewal payment fails or is not settled within 14 days, we may suspend the associated hosting, monitoring, or support services until payment is made.</li>
+      <li><strong>Price changes:</strong> we will give at least 30 days' notice before any subscription price change takes effect on your next renewal.</li>
+    </ul>
+  </LegalSection>
 
-      <h2>6. Governing law</h2>
-      <p>These terms are governed by the laws of Malaysia.</p>
+  <LegalSection id="after-sales" number="7" title="After-sales support & warranty">
+    <ul>
+      <li><strong>Warranty period:</strong> unless otherwise stated in your project agreement, we provide a 30-day bug-fix warranty after launch/handover, covering defects in functionality we built, at no additional charge.</li>
+      <li><strong>Not covered by warranty:</strong> new features, changes to requirements after launch, issues from third-party plugins/services, or damage caused by changes made by you or another party.</li>
+      <li><strong>Source code & handover:</strong> for Marketplace and Bespoke projects, source code and deployment documentation are handed over as agreed, so you are never locked into us for hosting or future changes.</li>
+      <li><strong>Beyond warranty:</strong> ongoing support after the warranty period is available on a pay-as-you-go basis or via a maintenance subscription (Section 6).</li>
+    </ul>
+  </LegalSection>
 
-      <h2>7. Contact</h2>
-      <p>
-        Questions about these terms can be sent to {
-          SITE.email ? (
-            <span data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]}>our contact email</span>
-          ) : (
-            'our contact email'
-          )
-        }.
-      </p>
-    </Container>
-  </Section>
-</BaseLayout>
+  <LegalSection id="ip-ownership" number="8" title="IP & source code ownership">
+    <ul>
+      <li><strong>Marketplace systems:</strong> full ownership of the source code for the specific system purchased transfers to you upon full payment, for your own use. You may not resell the underlying system as your own product to third parties.</li>
+      <li><strong>Bespoke & Express Web projects:</strong> upon full and final payment, ownership of the custom code, designs, and content created specifically for your project transfers to you, as detailed in your project agreement.</li>
+      <li><strong>Our retained rights:</strong> we retain ownership of our internal frameworks, reusable components, and tooling used to build your project, and may reuse general, non-confidential technical approaches in future work for other clients.</li>
+      <li>Third-party licences (fonts, stock imagery, plugins) remain subject to their own licence terms.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="confidentiality" number="9" title="Confidentiality">
+    <p>
+      Both parties agree to keep confidential any non-public business, technical, or financial
+      information shared during the engagement. We are glad to sign a mutual NDA before detailed
+      discussions begin, and our confidentiality obligations continue after a project ends. See our{' '}
+      <a href="/privacy">Privacy Policy</a> for how we handle personal and business data specifically.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="client-responsibilities" number="10" title="Client responsibilities">
+    <p>To deliver on time and to spec, we ask that you:</p>
+    <ul>
+      <li>Provide timely feedback, approvals, and content/assets needed for the project.</li>
+      <li>Designate a single point of contact authorised to approve scope and sign off milestones.</li>
+      <li>Ensure any third-party accounts, domains, or credentials you provide are accurate and that you have the right to share them with us.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="website-content" number="11" title="Website content">
+    <p>
+      Content on this website, including case studies, capability descriptions, and marketplace
+      listings, reflects work we can credibly deliver and is provided for informational purposes.
+      Specific pricing and deliverables for your project are always confirmed in a written
+      quotation before work begins.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="liability" number="12" title="Limitation of liability">
+    <p>
+      To the fullest extent permitted by Malaysian law, {SITE.name} is not liable for any indirect,
+      incidental, or consequential loss (including loss of profits or data) arising from use of
+      this website or our services, except where such loss arises from our gross negligence or
+      wilful misconduct. Our total liability for any project is capped at the total fees paid by
+      you for that specific engagement.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="termination" number="13" title="Termination">
+    <ul>
+      <li>Either party may terminate a project agreement for material breach not remedied within 14 days of written notice.</li>
+      <li>We may suspend or terminate services for non-payment, as described in Sections 4 and 6.</li>
+      <li>On termination, you remain liable for fees for work completed up to the termination date, and we will deliver any completed, paid-for work product.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="governing-law" number="14" title="Governing law">
+    <p>These terms are governed by the laws of Malaysia, and any dispute will first be addressed through good-faith discussion between the parties before formal proceedings.</p>
+  </LegalSection>
+
+  <LegalSection id="changes" number="15" title="Changes to these terms">
+    <p>
+      We may update these terms from time to time; the "Last updated" date above reflects the
+      latest version. Terms already agreed in a signed project agreement are not affected
+      retroactively by later changes to this page.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="contact" number="16" title="Contact">
+    <p>
+      Questions about these terms can be sent to{' '}
+      {
+        email ? (
+          <span data-email-user={email.user} data-email-domain={email.domain}>our contact email</span>
+        ) : (
+          'our contact email'
+        )
+      }
+      {SITE.phone && <> or by phone at {SITE.phone}</>}.
+    </p>
+  </LegalSection>
+</LegalLayout>
