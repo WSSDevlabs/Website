@@ -1281,6 +1281,591 @@ export const MARKETPLACE_SYSTEMS: MarketplaceSystem[] = [
         a: 'No — guests scan the QR code and upload directly from their phone browser, nothing to install.'
       }
     ]
+  },
+  {
+    id: 'wss-webportals',
+    slug: 'wss-webportals',
+    name: 'WSS Web Portals',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Developer Tools',
+    tagline: 'CMS-Backed Portals Built for Daily Logins, Not One-Time Visitors',
+    target: 'Corporations, Membership Organizations & Institutions',
+    summary:
+      'A CMS-backed web portal built for the people who log in every day, whether that\'s staff, members, or customers, not a one-time marketing visitor.',
+    underTheHood: {
+      title: 'Role-Based Portal & Content Management Engine',
+      highlights: [
+        'Flexible CMS foundation shaped around how the portal is actually used daily.',
+        'Role-based login and content areas for different user types.',
+        'Admin panel for managing users and content without a developer.',
+        'Mobile-responsive, accessible UI across every portal area.'
+      ],
+      technicalArchitecture: 'Headless CMS integration, role-based access control, mobile-first responsive UI.',
+      securityAndLicensing: 'Full source code ownership. Deploys on your own server or private cloud.'
+    },
+    features: [
+      'Role-based login and permissions',
+      'Admin-manageable content areas',
+      'Member/staff/customer-specific views',
+      'Mobile-responsive, accessible UI',
+      'Search and content organization',
+      'Integration with existing business systems'
+    ],
+    techStack: ['MySQL', 'Tailwind CSS', 'Headless CMS'],
+    pricingModel: 'Custom Quote, scoped to portal complexity and user volume',
+    includedDeliverables: [
+      'Custom-built web portal',
+      'Admin content management panel',
+      'Role and permissions configuration',
+      'Installation and handover documentation'
+    ],
+    faq: [
+      {
+        q: 'Can different user types see different content in the same portal?',
+        a: 'Yes, roles and permissions control exactly what each user type can see and do.'
+      }
+    ]
+  },
+  {
+    id: 'wss-servercloud',
+    slug: 'wss-servercloud',
+    name: 'WSS Server / Cloud Solutions',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Developer Tools',
+    tagline: 'Dedicated Server & Cloud Infrastructure, Sized to Fit',
+    target: 'Growing SMEs, Corporates & System Operators',
+    summary:
+      'Dedicated server and cloud-based infrastructure sized and secured for what your systems actually need, delivering reliable, secure, and scalable performance.',
+    underTheHood: {
+      title: 'Right-Sized Infrastructure & Monitoring Engine',
+      highlights: [
+        'Infrastructure sized to real traffic and workload, not guesswork.',
+        'Security hardening and access control from day one.',
+        'Backup and disaster-recovery configuration.',
+        'Ongoing uptime and performance monitoring with alerts.'
+      ],
+      technicalArchitecture: 'Cloud/dedicated server provisioning, CDN configuration, automated backup pipelines.',
+      securityAndLicensing: 'Full infrastructure ownership. No lock-in to a single provider.'
+    },
+    features: [
+      'Dedicated server or cloud environment setup',
+      'Security hardening and access control',
+      'Backup and disaster-recovery configuration',
+      'Uptime and performance monitoring',
+      'CDN and caching configuration',
+      'Scaling plan as traffic grows'
+    ],
+    techStack: ['Cloudflare', 'Linux Server Administration', 'Docker'],
+    pricingModel: 'Custom Quote, scoped to infrastructure tier',
+    includedDeliverables: [
+      'Provisioned and secured server/cloud environment',
+      'Monitoring and alerting setup',
+      'Backup and disaster-recovery plan',
+      'Documentation and access handover'
+    ],
+    faq: [
+      {
+        q: 'Can you migrate us from our current host?',
+        a: 'Yes, migration planning and execution is part of the scoping process so there\'s minimal downtime during the switch.'
+      }
+    ]
+  },
+  {
+    id: 'wss-training',
+    slug: 'wss-training',
+    name: 'WSS Training and Teambuilding',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Corporate Operations',
+    tagline: 'Technical Skills Training & Team-Culture Programs That Stick',
+    target: 'SMEs, Corporate Teams & Growing Organizations',
+    summary:
+      'Comprehensive training programs designed to enhance technical skills, strengthen collaboration, and foster a positive team culture that drives long-term improvement.',
+    underTheHood: {
+      title: 'Skill-Gap Assessment & Custom Curriculum Engine',
+      highlights: [
+        'Assessment of real skill gaps and team dynamics before designing a program.',
+        'Curriculum built around your actual tools and workflows, not generic material.',
+        'Hands-on workshops rather than passive lecture-style sessions.',
+        'Follow-up check-in to measure real adoption after training.'
+      ],
+      technicalArchitecture: 'Custom curriculum design, hands-on workshop delivery, post-training assessment.',
+      securityAndLicensing: 'Delivered on-site or remote, scoped per engagement.'
+    },
+    features: [
+      'Technical skills training, scoped to your team',
+      'Collaboration and team-culture workshops',
+      'Practical exercises tied to real workflows',
+      'Follow-up adoption check-in',
+      'Custom curriculum design',
+      'On-site or remote delivery'
+    ],
+    techStack: ['Custom Curriculum Design', 'Hands-On Workshops', 'Team Assessments'],
+    pricingModel: 'Custom Quote, scoped to team size and program length',
+    includedDeliverables: [
+      'Skill-gap assessment',
+      'Custom training curriculum',
+      'Workshop delivery',
+      'Post-training adoption report'
+    ],
+    faq: [
+      {
+        q: 'Can this be combined with a system we just built with you?',
+        a: 'Yes, this pairs well with a new custom system or portal rollout, so your team is trained on it directly.'
+      }
+    ]
+  },
+  {
+    id: 'wss-helpdesk',
+    slug: 'wss-helpdesk',
+    name: 'WSS Helpdesk / Ticketing System',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Corporate Operations',
+    tagline: 'A User-Friendly Helpdesk System to Streamline Support and Issue Tracking',
+    target: 'SMEs, Corporates & Customer Support Teams',
+    summary:
+      'A user-friendly helpdesk system that turns scattered support requests into a single, trackable queue, with status tracking and reporting.',
+    underTheHood: {
+      title: 'Ticket Queue & SLA Tracking Engine',
+      highlights: [
+        'Every support request lands in one trackable queue.',
+        'Customer-facing submission portal for new tickets.',
+        'Configurable SLA and escalation rules.',
+        'Reporting on response times and ticket volume.'
+      ],
+      technicalArchitecture: 'MySQL relational schema, email/WhatsApp integration, SLA escalation engine.',
+      securityAndLicensing: 'Full source code ownership. Deploys on your own infrastructure.'
+    },
+    features: [
+      'Ticketing with status tracking and assignment',
+      'Customer-facing submission portal',
+      'SLA and escalation rules',
+      'Response time and volume reporting',
+      'Email/WhatsApp integration',
+      'Internal notes and ticket history'
+    ],
+    techStack: ['MySQL', 'Tailwind CSS', 'Email/WhatsApp Integration'],
+    pricingModel: 'Custom Quote, scoped to team size and ticket volume',
+    includedDeliverables: [
+      'Helpdesk ticketing system',
+      'Customer submission portal',
+      'SLA configuration',
+      'Reporting dashboard'
+    ],
+    faq: [
+      {
+        q: 'Can tickets be submitted by email as well as the portal?',
+        a: 'Yes, email-to-ticket conversion can be configured so nothing has to change for customers who prefer email.'
+      }
+    ]
+  },
+  {
+    id: 'wss-vms',
+    slug: 'wss-vms',
+    name: 'WSS Vehicle Management System',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Facility & Operations Management',
+    tagline: 'Monitor, Schedule, and Report Vehicle Maintenance',
+    target: 'Transport Operators, Factories & Fleet-Owning Businesses',
+    summary:
+      'Monitors, schedules, and reports vehicle maintenance to reduce downtime and operational costs, replacing reactive repairs with a scheduled maintenance program.',
+    underTheHood: {
+      title: 'Scheduled Maintenance & Fleet Reporting Engine',
+      highlights: [
+        'Vehicle registry with full maintenance history per unit.',
+        'Scheduled maintenance reminders configured per vehicle type.',
+        'Cost and downtime reporting across the whole fleet.',
+        'Driver and vehicle assignment tracking.'
+      ],
+      technicalArchitecture: 'MySQL relational schema, maintenance scheduling engine, fleet reporting dashboard.',
+      securityAndLicensing: 'Full source code ownership. Fleet data stays on your own infrastructure.'
+    },
+    features: [
+      'Vehicle registry and maintenance history',
+      'Scheduled maintenance reminders',
+      'Cost and downtime reporting',
+      'Driver/vehicle assignment tracking',
+      'Fleet-wide maintenance dashboard',
+      'Service due alerts'
+    ],
+    techStack: ['MySQL', 'Tailwind CSS', 'GPS/Telemetry Integration'],
+    pricingModel: 'Custom Quote, scoped to fleet size',
+    includedDeliverables: [
+      'Vehicle management system',
+      'Maintenance scheduling module',
+      'Fleet cost/downtime reports',
+      'Setup and configuration guide'
+    ],
+    faq: [
+      {
+        q: 'Does this replace manual service logbooks?',
+        a: 'Yes, every service record moves into one digital fleet-wide history, replacing paper or per-vehicle logbooks.'
+      }
+    ]
+  },
+  {
+    id: 'wss-epelanggan',
+    slug: 'wss-epelanggan',
+    name: 'WSS E-Pelanggan',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Facility & Operations Management',
+    tagline: 'A Virtual Counter for Live Chat, Officer Directory & Video Meetings',
+    target: 'Government Agencies, Corporates & Public Service Counters',
+    summary:
+      'A virtual counter for live chat, officer directory, complaint submission, and integrated video meetings, replacing a physical service counter with a digital one.',
+    underTheHood: {
+      title: 'Virtual Counter & Officer Routing Engine',
+      highlights: [
+        'Live chat routed directly to the right officer or department.',
+        'Officer directory so customers can reach the right person without a physical visit.',
+        'Complaint submission and tracking workflow.',
+        'Integrated video meeting scheduling for cases that need a face-to-face discussion.'
+      ],
+      technicalArchitecture: 'MySQL relational schema, WebRTC video integration, live chat routing engine.',
+      securityAndLicensing: 'Full source code ownership. Deploys on your own infrastructure.'
+    },
+    features: [
+      'Virtual counter with live chat',
+      'Officer directory with direct routing',
+      'Complaint submission and tracking',
+      'Integrated video meeting scheduling',
+      'Case history per customer',
+      'Officer workload dashboard'
+    ],
+    techStack: ['MySQL', 'Tailwind CSS', 'WebRTC/Video API'],
+    pricingModel: 'Custom Quote, scoped to officer/department count',
+    includedDeliverables: [
+      'Virtual counter platform',
+      'Officer directory and routing setup',
+      'Complaint tracking workflow',
+      'Video meeting integration'
+    ],
+    faq: [
+      {
+        q: 'Can customers escalate a chat to a video call?',
+        a: 'Yes, a chat can be escalated directly into a scheduled or instant video meeting with the assigned officer.'
+      }
+    ]
+  },
+  {
+    id: 'wss-vrar',
+    slug: 'wss-vrar',
+    name: 'WSS VR / AR Solutions',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Developer Tools',
+    tagline: 'Immersive Experiences to Explore, Visualize, and Interact',
+    target: 'Real Estate, Retail, Training Providers & Event Organizers',
+    summary:
+      'Immersive digital experiences enabling users to explore, visualize, and interact with content in innovative ways, from product visualization to training simulations.',
+    underTheHood: {
+      title: 'Immersive 3D Experience Engine',
+      highlights: [
+        'VR or AR experiences scoped to a specific use case, not a generic demo.',
+        '3D asset creation or integration with existing models.',
+        'Deployment across web, mobile, or dedicated headsets.',
+        'Analytics on engagement and completion for training use cases.'
+      ],
+      technicalArchitecture: 'Unity/WebXR-based experience engine, 3D asset pipeline, cross-platform deployment.',
+      securityAndLicensing: 'Full source code ownership. Deploys to your chosen platform(s).'
+    },
+    features: [
+      'VR/AR experience scoped to your use case',
+      '3D asset creation or integration',
+      'Web, mobile, or headset deployment',
+      'Engagement and completion analytics',
+      'Product visualization or virtual tour modes',
+      'Training simulation support'
+    ],
+    techStack: ['Unity', 'WebXR', '3D Asset Pipelines'],
+    pricingModel: 'Custom Quote, scoped to experience complexity',
+    includedDeliverables: [
+      'VR/AR experience build',
+      '3D asset production or integration',
+      'Cross-platform deployment',
+      'Engagement analytics dashboard'
+    ],
+    faq: [
+      {
+        q: 'Do users need special headsets to experience this?',
+        a: 'Not necessarily — many experiences run in a standard mobile browser; dedicated headsets are only needed for full VR use cases.'
+      }
+    ]
+  },
+  {
+    id: 'wss-digitalform',
+    slug: 'wss-digitalform',
+    name: 'WSS Digital Form Platform',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Corporate Operations',
+    tagline: 'Smart Forms, Automated Workflows & Integrated Payments in One Ecosystem',
+    target: 'Corporates, Government Agencies & Service Businesses',
+    summary:
+      'Combines smart forms, automated workflows, integrated payments, and AI technology in one ecosystem, so a submission triggers real action automatically.',
+    underTheHood: {
+      title: 'Smart Form & Automated Workflow Engine',
+      highlights: [
+        'Conditional logic forms that adapt based on how they\'re filled in.',
+        'Automated workflow routing the moment a form is submitted.',
+        'Integrated payment collection where a form requires it.',
+        'AI-assisted data extraction or validation on submissions.'
+      ],
+      technicalArchitecture: 'MySQL relational schema, payment gateway integration, LLM-assisted validation.',
+      securityAndLicensing: 'Full source code ownership. Deploys on your own infrastructure.'
+    },
+    features: [
+      'Smart form builder with conditional logic',
+      'Automated workflow routing on submission',
+      'Integrated payment collection',
+      'AI-assisted data extraction/validation',
+      'Submission tracking dashboard',
+      'Export and reporting'
+    ],
+    techStack: ['MySQL', 'Tailwind CSS', 'Payment Gateway Integration', 'LLM APIs'],
+    pricingModel: 'Custom Quote, scoped to form/workflow complexity',
+    includedDeliverables: [
+      'Digital form platform',
+      'Workflow automation engine',
+      'Payment integration',
+      'Submission reporting dashboard'
+    ],
+    faq: [
+      {
+        q: 'Can a form trigger different workflows depending on the answers given?',
+        a: 'Yes, conditional logic routes each submission down the right workflow path automatically.'
+      }
+    ]
+  },
+  {
+    id: 'wss-aimeetingnotes',
+    slug: 'wss-aimeetingnotes',
+    name: 'WSS AI Meeting Notes',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Corporate Operations',
+    tagline: 'Transforms Conversations Into Structured, Searchable Notes',
+    target: 'Corporates, Consultancies & Remote-First Teams',
+    summary:
+      'Transforms conversations into structured, searchable meeting notes and action items automatically, instead of relying on whoever remembered to take notes.',
+    underTheHood: {
+      title: 'AI Transcription & Action-Item Extraction Engine',
+      highlights: [
+        'AI transcription of meeting audio across common platforms.',
+        'Structured summary with key decisions and action items.',
+        'Searchable meeting archive across your whole organization.',
+        'Integration with calendar or task management tools.'
+      ],
+      technicalArchitecture: 'Speech-to-text pipeline, LLM-based summarization, calendar/task integration.',
+      securityAndLicensing: 'Full source code ownership. Meeting data stays on your own infrastructure.'
+    },
+    features: [
+      'AI transcription of meeting audio',
+      'Structured summary with action items',
+      'Searchable meeting archive',
+      'Calendar/task tool integration',
+      'Speaker identification',
+      'Exportable meeting reports'
+    ],
+    techStack: ['Speech-to-Text APIs', 'LLM APIs', 'Calendar Integration'],
+    pricingModel: 'Custom Quote, scoped to meeting volume',
+    includedDeliverables: [
+      'AI meeting notes system',
+      'Transcription and summarization pipeline',
+      'Calendar/task integration',
+      'Searchable archive'
+    ],
+    faq: [
+      {
+        q: 'Does this work with our existing video call platform?',
+        a: 'We confirm compatibility with your video platform during scoping and integrate accordingly.'
+      }
+    ]
+  },
+  {
+    id: 'wss-aivoice',
+    slug: 'wss-aivoice',
+    name: 'WSS AI Voice Solution',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Corporate Operations',
+    tagline: 'Customizable Voice and Dialect Settings for Natural AI Interactions',
+    target: 'Call Centers, Kiosks & Customer-Facing Businesses',
+    summary:
+      'Customizable voice and dialect settings for natural-sounding AI voice interactions, tuned to how your actual customers speak.',
+    underTheHood: {
+      title: 'Custom Voice Profile & Dialect Tuning Engine',
+      highlights: [
+        'Custom voice profile configuration matched to your brand and audience.',
+        'Multi-dialect and multi-language support where needed.',
+        'Integration into phone lines, kiosks, or apps.',
+        'Ongoing tuning based on real user interactions.'
+      ],
+      technicalArchitecture: 'Text-to-speech and voice-tuning pipeline, multi-language support.',
+      securityAndLicensing: 'Full source code ownership. Deploys to your chosen channel.'
+    },
+    features: [
+      'Custom voice profile configuration',
+      'Multi-dialect/language support',
+      'Phone, kiosk, or app integration',
+      'Voice interaction testing and tuning',
+      'Natural-sounding local accents',
+      'Ongoing quality monitoring'
+    ],
+    techStack: ['Text-to-Speech APIs', 'Voice Cloning/Tuning', 'LLM APIs'],
+    pricingModel: 'Custom Quote, scoped to channel and language coverage',
+    includedDeliverables: [
+      'Custom voice profile setup',
+      'Channel integration (phone/kiosk/app)',
+      'Multi-language configuration',
+      'Tuning and quality review'
+    ],
+    faq: [
+      {
+        q: 'Can the voice speak in local Malaysian dialects?',
+        a: 'Yes, dialect and accent settings are configured to match your actual customer base.'
+      }
+    ]
+  },
+  {
+    id: 'wss-aiphone',
+    slug: 'wss-aiphone',
+    name: 'WSS AI Phone System',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Corporate Operations',
+    tagline: 'Answers Calls, Understands Callers in Multiple Languages, 24/7',
+    target: 'Call Centers, Clinics & Customer Service Teams',
+    summary:
+      'An AI-powered system that answers calls, understands and responds to callers in multiple languages 24/7, and provides insights on every call.',
+    underTheHood: {
+      title: '24/7 Multi-Language Call Handling Engine',
+      highlights: [
+        'AI phone answering system covering calls around the clock.',
+        'Multi-language call understanding and response.',
+        'Routing and escalation to a human when needed.',
+        'Call insights and transcript reporting.'
+      ],
+      technicalArchitecture: 'Telephony API integration, speech-to-text/text-to-speech pipeline, LLM-based response generation.',
+      securityAndLicensing: 'Full source code ownership. Call data stays on your own infrastructure.'
+    },
+    features: [
+      '24/7 AI phone answering',
+      'Multi-language call handling',
+      'Human escalation routing',
+      'Call insights and transcripts',
+      'Call volume reporting',
+      'Integration with existing phone lines'
+    ],
+    techStack: ['Telephony APIs', 'Speech-to-Text/Text-to-Speech', 'LLM APIs'],
+    pricingModel: 'Custom Quote, scoped to call volume',
+    includedDeliverables: [
+      'AI phone answering system',
+      'Multi-language configuration',
+      'Human escalation setup',
+      'Call reporting dashboard'
+    ],
+    faq: [
+      {
+        q: 'What happens if the AI can\'t handle a caller\'s request?',
+        a: 'The call is escalated to a human agent, with the AI\'s summary of the conversation so far handed off with it.'
+      }
+    ]
+  },
+  {
+    id: 'wss-digitalcontentai',
+    slug: 'wss-digitalcontentai',
+    name: 'WSS Digital Content AI',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Corporate Operations',
+    tagline: 'Create, Manage, and Publish Digital Content at Scale',
+    target: 'Marketing Teams, Agencies & Content-Heavy Businesses',
+    summary:
+      'Empowers teams to create, manage, and publish digital content at scale (images, videos, text) powered by AI, matching content output to your publishing schedule.',
+    underTheHood: {
+      title: 'AI-Assisted Content Generation & Publishing Engine',
+      highlights: [
+        'AI-assisted generation across images, video, and text.',
+        'Content management and review pipeline before publishing.',
+        'Brand-consistency guardrails on every generated asset.',
+        'Multi-channel publishing support.'
+      ],
+      technicalArchitecture: 'Generative AI API integration, content management pipeline, multi-channel publishing.',
+      securityAndLicensing: 'Full source code ownership. Deploys on your own infrastructure.'
+    },
+    features: [
+      'AI-assisted content generation',
+      'Content management and review pipeline',
+      'Brand-consistency guardrails',
+      'Multi-channel publishing support',
+      'Content calendar and scheduling',
+      'Asset library management'
+    ],
+    techStack: ['Generative AI APIs', 'Content Management Pipeline', 'Media Processing'],
+    pricingModel: 'Custom Quote, scoped to content volume and channels',
+    includedDeliverables: [
+      'Content generation workflow',
+      'Review and approval pipeline',
+      'Multi-channel publishing setup',
+      'Brand guardrail configuration'
+    ],
+    faq: [
+      {
+        q: 'Does generated content stay on-brand automatically?',
+        a: 'Brand guardrails are configured up front (tone, colors, style) so generated content stays consistent before it ever reaches review.'
+      }
+    ]
+  },
+  {
+    id: 'wss-aikiosk',
+    slug: 'wss-aikiosk',
+    name: 'WSS AI Digital Kiosk',
+    price: 'Custom Quote',
+    priceRaw: 0,
+    category: 'Facility & Operations Management',
+    tagline: 'Engages Visitors With Interactive, Expressive Voice Experiences',
+    target: 'Malls, Lobbies, Museums & Public Service Counters',
+    summary:
+      'Engages visitors, provides information, and delivers interactive and expressive voice experiences, replacing static touchscreen menus with real conversation.',
+    underTheHood: {
+      title: 'Conversational Kiosk & Knowledge Base Engine',
+      highlights: [
+        'Interactive voice and touch interface for natural visitor engagement.',
+        'AI response generation grounded in a defined knowledge base.',
+        'Expressive voice responses instead of flat text-to-speech.',
+        'Usage analytics on visitor interactions.'
+      ],
+      technicalArchitecture: 'LLM-based response engine, text-to-speech/speech-to-text, kiosk hardware integration.',
+      securityAndLicensing: 'Full source code ownership. Deploys on your chosen kiosk hardware.'
+    },
+    features: [
+      'Interactive voice/touch kiosk interface',
+      'AI response generation from a knowledge base',
+      'Expressive voice responses',
+      'Usage analytics dashboard',
+      'Multi-language support',
+      'Remote content/knowledge base updates'
+    ],
+    techStack: ['LLM APIs', 'Text-to-Speech/Speech-to-Text', 'Kiosk Hardware Integration'],
+    pricingModel: 'Custom Quote, scoped to kiosk count and hardware',
+    includedDeliverables: [
+      'AI digital kiosk software',
+      'Knowledge base setup',
+      'Kiosk hardware integration',
+      'Usage analytics dashboard'
+    ],
+    faq: [
+      {
+        q: 'Can we update what the kiosk knows without touching the hardware?',
+        a: 'Yes, the knowledge base is managed remotely, so updates go live without visiting each kiosk.'
+      }
+    ]
   }
 ];
 

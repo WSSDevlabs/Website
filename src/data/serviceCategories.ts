@@ -15,7 +15,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     tagline: 'Build',
     description:
       'Custom-coded websites, mobile apps, and internal systems, built from scratch around your goals instead of bent to fit a template.',
-    services: ['web-development', 'mobile-app-development', 'custom-systems', 'ui-ux-system-redesign', 'web-portals', 'server-cloud-solutions']
+    services: ['web-development', 'mobile-app-development', 'custom-systems', 'ui-ux-system-redesign']
   },
   {
     slug: 'digital-design-media-marketing',
@@ -31,7 +31,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     tagline: 'Grow & Care',
     description:
       'Growth strategy, grant-funded project support, full business launch bundles, and the ongoing care that keeps everything running after launch.',
-    services: ['business-growth', 'grant-government-project-support', 'business-startup-package', 'maintenance-support', 'training-teambuilding']
+    services: ['business-growth', 'grant-government-project-support', 'business-startup-package', 'maintenance-support']
   },
   {
     slug: 'artificial-intelligence-automation',
@@ -39,7 +39,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     tagline: 'Intelligence',
     description:
       'LLM-powered features, RAG pipelines, and workflow automation, integrated where it meaningfully improves your product or team, not as a thin wrapper.',
-    services: ['ai-development', 'custom-ml-model', 'ai-chatbot', 'ai-analytics', 'workflow-automation', 'computer-vision', 'helpdesk-ticketing', 'vehicle-management-system', 'e-pelanggan', 'vr-ar-solutions', 'digital-form-platform', 'ai-meeting-notes', 'ai-voice-solution', 'ai-phone-system', 'digital-content-ai', 'ai-digital-kiosk']
+    services: ['ai-development', 'custom-ml-model', 'ai-chatbot', 'ai-analytics', 'workflow-automation', 'computer-vision']
   },
   {
     slug: 'iot-solutions-infrastructure',
