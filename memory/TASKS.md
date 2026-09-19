@@ -1,9 +1,12 @@
 # TASKS
 
 ## DOING
-- (none active — see PROGRESS.md 2026-09-19 entry: fixed the real nav bug (site-intro stuck overlay, not Botpress), removed the services popup, added 4 explanatory content sections to service category pages, pushed through `c495bb8`.)
+- (none active — see PROGRESS.md 2026-09-19 entries: fixed the real nav bug (site-intro stuck overlay, not Botpress), removed the services popup, added 4 explanatory content sections, and integrated the founder's full product catalog PDF (22 new Marketplace systems + 13 new services + a TeD grant card). Pushed through `ce170c0`.)
 
 ## TODO
+- [cfo] **All 22 new Marketplace systems (Smart ID, EPURS, VIMS, TAMS, etc. + Event Gallery) are priced "Custom Quote"** — the founder's source catalog PDF gave no pricing, so no numbers were invented. Get real prices (or a real quoting process) from the founder before these are sold as fixed-price like the original 6.
+- [dev] The 13 new services added from the catalog (Web Portals, Server/Cloud Solutions, Training and Teambuilding, and 10 AI Ecosystem items) have reasonable but generic `tools`/`deliverables`/`approach` content, since the source PDF only gave 1-2 sentences per item — founder should review and add real technical specifics via the CMS where it matters.
+- [uiux] Marketplace's category filter pills were removed earlier this session (before the catalog jumped from 6 to 28 systems) — worth reconsidering now that the grid is much longer; a filter/search would help usability at this scale.
 - [dev/founder] **Confirm the Botpress live-navigation hotfix (`0355af4`) actually resolved the blank-page-on-Home-click bug on the live site** — pushed but not yet confirmed by the founder. If it recurs, get the actual browser console error text (screenshots keep failing to send — ask for typed text).
 - [coo] Flip Cloudflare's "Email Address Obfuscation" setting off (Speed → Optimization) for wssdevlabs.com — the code-side workaround (`emailReveal.ts`) covers JS-enabled visitors, but the dashboard toggle is the real fix and hasn't been requested from the founder yet.
 - [cfo] **`memory/FINANCE.md` needs a full rewrite** — it still documents the 5-tier Launch/Expand/Grow/Scale/Custom `/pricing` structure, but that entire page was deleted 2026-08-25 (see DECISIONS.md). Current live pricing: WSS Express's 3 packages (Landing RM180/yr, Starter RM1,500, Business RM4,500 — `src/data/express.ts`), the SME/Corporate comparison tables on `/services/web-software-app-development`, and the Google Ads/SEO pricing table on `/services/digital-design-media-marketing`.
