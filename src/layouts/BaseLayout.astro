@@ -7,7 +7,6 @@ import TopBar from '../components/layout/TopBar.astro';
 import Footer from '../components/layout/Footer.astro';
 import CookieConsent from '../components/layout/CookieConsent.astro';
 import SiteIntro from '../components/layout/SiteIntro.astro';
-import ServicesPopup from '../components/layout/ServicesPopup.astro';
 import '@fontsource-variable/geist/index.css';
 import '@fontsource-variable/geist-mono/index.css';
 import '@fontsource-variable/outfit/index.css';
@@ -67,7 +66,6 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
       Skip to content
     </a>
     <Header />
-    <ServicesPopup />
     <div class="flex flex-col min-h-screen">
       <main id="main" class="flex-1 pt-14 md:pt-0">
         <slot />
