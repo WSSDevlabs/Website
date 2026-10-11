@@ -1,0 +1,185 @@
+---
+import { RENT_VS_OWN, formatRM } from '../../data/catalog';
+
+/**
+ * Honest 3-year cost comparison (audit 7.2 lead magnet, 12.4 C1).
+ * Fair to both sides: the "own" total can include hosting and a Care Plan,
+ * because subscriptions include those. Defaults render server-side, so the
+ * numbers are visible before (or without) JavaScript.
+ */
+type Props = {
+  id: string;
+  monthlyLabel: string;
+  monthlyHint?: string;
+  defaultMonthly: number;
+  ownLabel: string;
+  ownOneTime: number;
+  /** Include a hosting estimate on the own side (systems you host yourself). */
+  hosting?: boolean;
+  careMonthly?: number;
+  careLabel?: string;
+  /** Care is required (ecosystems): always counted, no toggle. */
+  careRequired?: boolean;
+};
+
+const {
+  id,
+  monthlyLabel,
+  monthlyHint,
+  defaultMonthly,
+  ownLabel,
+  ownOneTime,
+  hosting = false,
+  careMonthly = 0,
+  careLabel = 'Care Plan',
+  careRequired = false
+} = Astro.props;
+
+const years = 3;
+const hostingMonthly = hosting ? RENT_VS_OWN.hostingEstimateMonthly : 0;
+const rent = defaultMonthly * 12 * years;
+const own = ownOneTime + hostingMonthly * 12 * years + (careRequired ? careMonthly * 12 * years : 0);
+const max = Math.max(rent, own, 1);
+---
+
+<div class="card p-5 sm:p-7" data-calculator id={id}>
+  <div class="grid gap-5 sm:grid-cols-2" role="group" aria-label="Your numbers">
+    <div class="sm:col-span-2">
+      <label for={`${id}-monthly`} class="field-label">{monthlyLabel}</label>
+      <input
+        id={`${id}-monthly`}
+        name="monthly"
+        type="number"
+        inputmode="numeric"
+        min="0"
+        step="1"
+        value={defaultMonthly}
+        class="field-input"
+        data-input="monthly"
+        aria-describedby={monthlyHint ? `${id}-monthly-help` : undefined}
+      />
+      {monthlyHint && <p id={`${id}-monthly-help`} class="field-help">{monthlyHint}</p>}
+    </div>
+
+    <div>
+      <label for={`${id}-years`} class="field-label">Years to compare</label>
+      <select id={`${id}-years`} name="years" class="field-input" data-input="years">
+        <option value="1">1 year</option>
+        <option value="3" selected>3 years</option>
+        <option value="5">5 years</option>
+      </select>
+    </div>
+
+    {
+      hosting && (
+        <div>
+          <label for={`${id}-hosting`} class="field-label">
+            Your hosting, per month (RM)
+          </label>
+          <input
+            id={`${id}-hosting`}
+            name="hosting"
+            type="number"
+            inputmode="numeric"
+            min="0"
+            step="1"
+            value={RENT_VS_OWN.hostingEstimateMonthly}
+            class="field-input"
+            data-input="hosting"
+            aria-describedby={`${id}-hosting-help`}
+          />
+          <p id={`${id}-hosting-help`} class="field-help">
+            An estimate. Change it to what your host charges.
+          </p>
+        </div>
+      )
+    }
+
+    {
+      careMonthly > 0 && !careRequired && (
+        <label class="flex min-h-11 items-center gap-3 sm:col-span-2">
+          <input type="checkbox" class="h-5 w-5 shrink-0 accent-[var(--color-accent)]" data-input="care" />
+          <span class="text-ink">
+            Add {careLabel} ({formatRM(careMonthly)}/month) for backups, updates and support
+          </span>
+        </label>
+      )
+    }
+  </div>
+
+  <div class="mt-7 space-y-5" aria-live="polite">
+    <div>
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <p class="font-semibold text-ink">Renting (subscriptions)</p>
+        <p class="price text-xl" data-output="rent">{formatRM(rent)}</p>
+      </div>
+      <div class="mt-2 h-3 rounded-full bg-ink" style={`width: ${Math.max(4, (rent / max) * 100)}%`} data-bar="rent"></div>
+    </div>
+    <div>
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <p class="font-semibold text-ink">
+          Owning ({ownLabel}{hosting ? ' + hosting' : ''}{careRequired ? ` + ${careLabel}` : ''})
+        </p>
+        <p class="price text-xl" data-output="own">{formatRM(own)}</p>
+      </div>
+      <div class="mt-2 h-3 rounded-full bg-accent" style={`width: ${Math.max(4, (own / max) * 100)}%`} data-bar="own"></div>
+    </div>
+    <p class="text-ink-dim" data-output="summary">
+      {
+        rent > own
+          ? `Over ${years} years, owning costs ${formatRM(rent - own)} less, and you keep the system.`
+          : `Over ${years} years, renting costs ${formatRM(own - rent)} less here. Owning still means you keep the system and your data.`
+      }
+    </p>
+  </div>
+
+  <div
+    hidden
+    data-config={JSON.stringify({ ownOneTime, careMonthly, careRequired, hosting })}
+  ></div>
+</div>
+
+<script>
+  const format = (amount: number) => `RM${Math.round(amount).toLocaleString('en-MY')}`;
+
+  document.querySelectorAll<HTMLElement>('[data-calculator]').forEach((calc) => {
+    const configEl = calc.querySelector<HTMLElement>('[data-config]');
+    if (!configEl?.dataset.config) return;
+    const config = JSON.parse(configEl.dataset.config) as {
+      ownOneTime: number;
+      careMonthly: number;
+      careRequired: boolean;
+      hosting: boolean;
+    };
+
+    const read = (name: string) => {
+      const el = calc.querySelector<HTMLInputElement | HTMLSelectElement>(`[data-input="${name}"]`);
+      if (!el) return 0;
+      if (el instanceof HTMLInputElement && el.type === 'checkbox') return el.checked ? 1 : 0;
+      const value = Number(el.value);
+      return Number.isFinite(value) && value > 0 ? value : 0;
+    };
+
+    const update = () => {
+      const years = read('years') || 3;
+      const months = years * 12;
+      const rent = read('monthly') * months;
+      const careOn = config.careRequired || read('care') === 1;
+      const own = config.ownOneTime + (config.hosting ? read('hosting') * months : 0) + (careOn ? config.careMonthly * months : 0);
+      const max = Math.max(rent, own, 1);
+
+      calc.querySelector('[data-output="rent"]')!.textContent = format(rent);
+      calc.querySelector('[data-output="own"]')!.textContent = format(own);
+      calc.querySelector<HTMLElement>('[data-bar="rent"]')!.style.width = `${Math.max(4, (rent / max) * 100)}%`;
+      calc.querySelector<HTMLElement>('[data-bar="own"]')!.style.width = `${Math.max(4, (own / max) * 100)}%`;
+      const label = years === 1 ? '1 year' : `${years} years`;
+      calc.querySelector('[data-output="summary"]')!.textContent =
+        rent > own
+          ? `Over ${label}, owning costs ${format(rent - own)} less, and you keep the system.`
+          : `Over ${label}, renting costs ${format(own - rent)} less here. Owning still means you keep the system and your data.`;
+    };
+
+    calc.addEventListener('input', update);
+    calc.addEventListener('change', update);
+  });
+</script>

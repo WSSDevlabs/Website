@@ -1,0 +1,34 @@
+---
+import Container from '../ui/Container.astro';
+import { PRIMARY_CTA } from '../../data/nav';
+import { REPLY_PROMISE } from '../../data/catalog';
+
+type Props = {
+  title?: string;
+  body?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  track?: string;
+};
+
+const {
+  title = 'Tell us what you need.',
+  body = REPLY_PROMISE,
+  ctaLabel = PRIMARY_CTA.label,
+  ctaHref = PRIMARY_CTA.href,
+  track = 'quote_click'
+} = Astro.props;
+---
+
+<section class="py-16 md:py-24">
+  <Container>
+    <div class="rounded-2xl bg-ink px-6 py-12 text-center sm:px-12 md:py-16">
+      <h2 class="h-section text-white">{title}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg text-white/85">{body}</p>
+      <div class="mt-8 flex justify-center">
+        <a href={ctaHref} class="btn btn-primary btn-lg" data-track={track}>{ctaLabel}</a>
+      </div>
+      <slot />
+    </div>
+  </Container>
+</section>

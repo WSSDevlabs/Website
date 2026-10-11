@@ -1,18 +1,26 @@
 # PROJECT
 
-**What this is:** WSS DevLabs' own marketing/agency website — a premium web & software studio site. Internal project (WSS DevLabs is the owner, not a client).
+**What this is:** WSS DevLabs' own website. Internal project (WSS DevLabs is the owner, not a client).
 
-**Current goal:** Redesign in progress. Target: within 3 days of 2026-08-09 → **2026-08-12**.
+**Current state (2026-10-12):** Fully rebuilt from the founder's audit of 11 Oct 2026 ("follow it 100%, full authority"). Work is on branch `audit-rebuild`, committed, **not pushed** (push only when the founder says "push"; deploying = merging to main).
 
-**Business pivot (2026-08-09):** Company-wide focus shifted to volume acquisition in the Malaysian SME / traditional business market (hawkers, traders, kedai runcit), alongside the existing premium studio offering. Website now carries a two-tier pricing ladder: SME tier (Starter RM500, Business RM1,500) plus the existing growth tier (Launch RM3,000, Build RM15,000, Enterprise custom). See pricing detail in FINANCE.md and rationale in DECISIONS.md.
+**Positioning:** "Software you own. Not rent." Fixed-price websites and ready-made business systems for Malaysian SMEs (5 to 100 staff). See `.agents/product-marketing.md` (v2).
 
-**Stack:** Astro 7 · TypeScript · Tailwind CSS v4 · React 19 (R3F hero island only) · GSAP/ScrollTrigger · Lenis · Astro View Transitions · Content Collections (MDX) · Web3Forms (contact) · Cloudflare Pages · Partytown · Cloudflare Web Analytics.
+**Structure (7 pages):** Home, /websites/, /systems/ (+ 15 system pages + 2 ecosystem pages), /custom/, /about/, /contact/, /insights/. Legal in the footer: /privacy/ (EN + BM), /terms/, /licence/, /refunds/, /care-plan-terms/, /cookies/. Old URLs redirect via `public/_redirects`.
 
-**Structure:** see [README.md](../README.md) and [WSSDevlabs Website Architecture.md](../WSSDevlabs%20Website%20Architecture.md) for the full build spec and flat sitemap.
+**Stack:** Astro 7 (static) · TypeScript · Tailwind CSS v4 · MDX · Web3Forms · Decap CMS at /wss-console/ · Cloudflare Pages · Cloudflare Web Analytics (cookieless) · Zaraz hooks for conversion events. No React, GSAP, Lenis, Three.js or Partytown any more.
+
+**Key files:**
+- Prices: `src/data/catalog.ts` (the only place)
+- Systems and their statuses: `src/data/systems.ts`
+- Ecosystems: `src/data/ecosystems.ts`
+- Company facts and Founding Client counter: `src/data/site.json`
+- Security headers: `public/_headers`
 
 **Constraints:**
-- Content gate: several sections (TrustBar, ImpactStats, Testimonials, Team, Partners, case studies, insights posts, legal/business info in `src/data/site.ts`, self-hosted fonts, default OG image) intentionally stay empty until real content exists — no placeholder/fake trust content ships.
-- Design direction: light theme, red/blue/yellow/green accents (per prior design memory).
-- Apply the taste-skill (design-taste-frontend) to all frontend work.
+- No fake proof: no placeholders, mock demos, invented stats, logos or reviews. Proof sections render only from real data with permission on file.
+- One light theme, brand red as the only action colour, green only for WhatsApp. Design rules: `docs/DESIGN.md`.
+- Strict CSP: no inline scripts (vite `assetsInlineLimit: 0`).
+- No em dashes in visible copy.
 
-**Links:** README.md, WSSDevlabs Website Architecture.md, SERVICE_PRICING_RESEARCH.md (all in project root).
+**Docs:** `docs/audit/` (implementation checklist, founder actions), `docs/legal/` (contract drafts for lawyer review), `docs/business/`, `docs/ops/`.

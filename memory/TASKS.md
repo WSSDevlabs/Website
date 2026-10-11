@@ -1,35 +1,31 @@
 # TASKS
 
 ## DOING
-- (none active — see PROGRESS.md 2026-09-19 entries: fixed the real nav bug (site-intro stuck overlay, not Botpress), removed the services popup, added 4 explanatory content sections, and integrated the founder's full product catalog PDF (22 new Marketplace systems + 13 new services + a TeD grant card). Pushed through `ce170c0`.)
+- (none) The audit rebuild is complete and committed on branch `audit-rebuild`, **not pushed**. Waiting for the founder to say "push" (merge to main = deploy). Before pushing: run docs/ops/deploy-checklist.md.run docs/ops/deploy-checklist.md.
 
-## TODO
-- [cfo] **All 22 new Marketplace systems (Smart ID, EPURS, VIMS, TAMS, etc. + Event Gallery) are priced "Custom Quote"** — the founder's source catalog PDF gave no pricing, so no numbers were invented. Get real prices (or a real quoting process) from the founder before these are sold as fixed-price like the original 6.
-- [dev] The 13 new services added from the catalog (Web Portals, Server/Cloud Solutions, Training and Teambuilding, and 10 AI Ecosystem items) have reasonable but generic `tools`/`deliverables`/`approach` content, since the source PDF only gave 1-2 sentences per item — founder should review and add real technical specifics via the CMS where it matters.
-- [uiux] Marketplace's category filter pills were removed earlier this session (before the catalog jumped from 6 to 28 systems) — worth reconsidering now that the grid is much longer; a filter/search would help usability at this scale.
-- [dev/founder] **Confirm the Botpress live-navigation hotfix (`0355af4`) actually resolved the blank-page-on-Home-click bug on the live site** — pushed but not yet confirmed by the founder. If it recurs, get the actual browser console error text (screenshots keep failing to send — ask for typed text).
-- [coo] Flip Cloudflare's "Email Address Obfuscation" setting off (Speed → Optimization) for wssdevlabs.com — the code-side workaround (`emailReveal.ts`) covers JS-enabled visitors, but the dashboard toggle is the real fix and hasn't been requested from the founder yet.
-- [cfo] **`memory/FINANCE.md` needs a full rewrite** — it still documents the 5-tier Launch/Expand/Grow/Scale/Custom `/pricing` structure, but that entire page was deleted 2026-08-25 (see DECISIONS.md). Current live pricing: WSS Express's 3 packages (Landing RM180/yr, Starter RM1,500, Business RM4,500 — `src/data/express.ts`), the SME/Corporate comparison tables on `/services/web-software-app-development`, and the Google Ads/SEO pricing table on `/services/digital-design-media-marketing`.
-- [uiux] Scroll-reveal / card-reveal / "3D transition" motion pass — founder wants the site to "feel alive... like have a soul." Still not started as a dedicated pass, though the 2026-08-25 session did add several new micro-interactions piecemeal (auto-flip cards, popup stagger, marquee, hero glow) that partially serve this goal.
-- [uiux] Typography hierarchy strengthening pass — still not started as a dedicated pass, though a partial version shipped 2026-08-25 (bold + `.badge-highlight` treatment applied to `/about`, `/contact`, `/testimonials`, `/services` headings).
-- [content/media] Real partner/client logos needed for the new homepage "Our Strategic Partners & Clients" marquee (`PartnersMarquee.astro`, 2026-08-25) — currently placeholder cards.
-- [content] Real case-study content needed for `/services`' new "Our Latest Projects" section (`LatestProjects.astro`, 2026-08-25) — currently 3 honest "Case Study Coming Soon" placeholders, not fabricated results.
-- [dev] `src/data/pricing.json`/`.ts`, `PricingCard.astro`, and `FAQ.astro` (the component) are now fully orphaned dead code since the `/pricing`/`/faq` deletions — safe to delete outright if/when doing a cleanup pass, not urgent.
-- [i18n] TopBar's "BM" language button is a non-functional placeholder (founder explicit: no translation needed yet) — real Bahasa Melayu i18n is a future task if the founder wants it, not scoped yet.
-- [admin] Fill in real WSS Devlabs details (SSM no., bank account, address) into the client-document templates before first real client use — legalName/ssmNumber/sstNumber in `src/data/site.json` are still blank (WhatsApp/social/phone/email are already real; email corrected 2026-08-25 from `hello@` to `info@wssdevlabs.com`).
-- [pm] Track lead volume once any campaign runs, to validate current pricing/package structure.
-- [content] `src/content/projects/` is empty and now fully unused (its only consumer, `/work`, was deleted 2026-08-25) — either populate it and rebuild a case-studies surface, or consider removing the collection.
-- [content] `src/data/testimonials.ts` is still empty by design (content gate) — add real reviews as they come in.
-- [dev] Consider adding a "testimonials" collection to `public/wss-console/config.yml` — still the only content type not editable via the CMS.
-- [cmo] `docs/marketing/SME-LAUNCH-CAMPAIGN.md` still points at `/pricing`, which no longer exists — needs its links updated to `/express` (or wherever the founder wants campaign traffic to land) before that campaign runs.
-- [cmo] Confirm `PUBLIC_CF_ANALYTICS_TOKEN` is actually set in production — still unverified.
-- [cmo] Capture real customer language once available and fold into `.agents/product-marketing.md` v2.
-- [process] Founder feedback to self: several weeks of substantial dev/design work (2026-08-25/26) ran as plain chat instead of through `/dev`/`/uiux`/`/wssdevlabs`, and memory wasn't checkpointed during it. Per BizBrain's own auto-routing table, route plain-language build/design requests through the matching role skill going forward, and checkpoint memory at natural session boundaries, not just when the founder explicitly asks to "check progress."
+## TODO (founder; full ordered list in docs/audit/founder-actions.md)
+- [founder] Fill legalName, ssmNumber, registeredAddress in the CMS (legal requirement, audit L1); set the exact base location.
+- [founder] Cloudflare: Email Address Obfuscation OFF, Rocket Loader OFF, pick one Web Analytics method, check PUBLIC_WEB3FORMS_ACCESS_KEY, switch on Zaraz and record the 7 events.
+- [founder] Confirm product facts the site states (docs/business/claims-evidence.md, "Founder to confirm"): all 15 public systems deliverable and demoable; PHP 8.2+/MySQL; offline licence check; kiosk languages; FPX deposits; English-only interfaces.
+- [founder] Check the Privacy Notice's email provider (says Google); prune social accounts not actively used; read the drafted founder/About copy for truth.
+- [founder] Founder photo, full name, LinkedIn, experience, notable builds (CMS > Founder & Team).
+- [founder] After deploy: PageSpeed on the live site, put the score in the CMS (pageSpeedMobile); submit the sitemap in Search Console.
+- [founder] Replace the RM50/month hosting placeholder (catalog.ts hostingEstimateMonthly).
+- [founder] Lawyer review of /terms/ /licence/ /refunds/ /privacy/ and docs/legal/; accountant on structure, SST, e-invoicing; freelancer agreements; insurance quotes.
+- [founder] Google Business Profile + 10 honest reviews; Founding Client Programme (update foundingSlotsLeft per signing).
+- [founder] Validate the estimate prices with 3 competitor quotes; price review on 2027-04-11.
+- [founder] Real screenshots (sample data) and 60-second recordings per public system; first case studies; real ToyyibPay/Stripe checkout (months 2 to 3).
+- [founder] Smart Premises readiness: integration layer, real demo, hardware partner, pilot site (docs/business/ecosystem-readiness.md).
+- [dev] Once the founder confirms per-product facts: fill version/lastUpdated, media, videoUrl, language in src/data/systems.ts.
+- [dev] Build the "Which system do I need?" quiz once the first 3 sales show which questions matter.
+- [dev] BM pages for Home, /websites/, /systems/ with hreflang (phase 3, real translation).
+- [dev] SBOM + NOTICE files for the 15 public systems (docs/ops/compliance-controls.md).
 
 ## BLOCKED
-- (none)
+- (none) Missing business facts don't block the build: the site shows honest fallbacks until they're filled.
 
 ## DONE
+- [2026-10-11/12] **Implemented the full website audit** (Parts 1 to 14) on branch `audit-rebuild`: 22 pages to 7; single price catalogue (src/data/catalog.ts); 15 public systems + 2 ecosystem pages (pilot status); removed fake demos, placeholder partners and logos, grants, SST labels, Botpress, cookie banner, intro animation, motion libraries; new legal pages (bilingual privacy, terms, licence, refunds, care plan terms, cookies); security headers + full redirect map; trailing slashes; structured data; conversion events; 2 pillar articles; docs packs (audit, legal drafts, business, ops). Verified: astro check 0 errors, lint clean, 0 broken links, 0 inline scripts, 0 horizontal scroll at 375px, 14/14 browser tests, Lighthouse mobile 99-100 in all categories (local). Item-by-item record: docs/audit/implementation-checklist.md.
 - [2026-08-22, session 2] Nav settled on a floating glass pill (rounded, `bg-white/15` + blur, no reserved page padding); light-themed the `/express`, `/marketplace`, `/status` dark hero sections to match the homepage; homepage's 5-pill service list now matches the 5 real category names/links exactly; added a real 15th "IoT Solutions & Infrastructure" service card+content (founder overrode the earlier "keep it 14" instruction, confirmed explicitly when asked); footer recolored to matte charcoal with the real logo; About page decluttered (banner, eyebrow, process section all removed); fixed a pricing-grid alignment bug. Pushed to `origin/main` (`6632372`).
 - [2026-08-22] Resolved the long-open fabricated-team question — founder confirmed their real name is Razali and asked to remove all "Razin"/"Natasya" content. Removed site-wide (Header, express, status, work, marketplace, SME calculator, docs/DESIGN.md, team.json/ts), deleted the fake 6-person `TeamGrid.astro` homepage section, and fixed `Testimonials.astro` which was silently ignoring its props and showing 2 fake testimonials with stock photos on every service page regardless.
 - [2026-08-22] Replaced stock photos implying real people/team/office across ~12 files (Hero, HomepageServices, About, ElevateCTA, Differentiator, QuoteForm, contact, coming-soon, testimonials, Header mega-menu) with abstract pattern/blob panels, per founder's "too much photo for now" direction.

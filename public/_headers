@@ -1,0 +1,22 @@
+# Security headers for every page (audit T2, T3, 14.8).
+# CSP notes: scripts are all same-origin files (vite assetsInlineLimit: 0), plus the
+# Cloudflare Web Analytics beacon. If you switch on Cloudflare Zaraz, Rocket Loader or
+# any other feature that injects inline scripts, update script-src here or it will be blocked.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com; font-src 'self'; connect-src 'self' https://api.web3forms.com https://cloudflareinsights.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  ! Access-Control-Allow-Origin
+
+# Fingerprinted build assets never change: cache them for a year.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The Decap CMS console loads its editor from unpkg and talks to GitHub,
+# so it can't run under the strict site policy above.
+/wss-console/*
+  ! Content-Security-Policy
+  X-Robots-Tag: noindex, nofollow

@@ -1,111 +1,75 @@
-# WSS DevLabs — Master Design & Visual Architecture Specification
+# WSS DevLabs: Design System
 
-> **Governing Direction:** "Industrial Concrete & Anti-SaaS Engineering."  
-> **Core Pillars:** Clarity, Speed, and Directness.  
-> **Led By:** **Razali**, Founder of WSS DevLabs.
+**Updated:** 11 October 2026, after the full website audit. This replaces the earlier "Industrial Concrete" spec.
+**Direction:** calm, honest and fast. The site is for Malaysian SME owners, mostly on phones. The design's job is to make the offer, the price and the next step obvious within 5 seconds.
 
----
+## 1. Rules that come before taste
 
-## 1. Core Design Philosophy & Visual Language
+These come from the audit and override any visual preference:
 
-WSS Dev Labs’ design identity is built on three core pillars: **Clarity, Speed, and Directness**. Every visual and interactive decision is designed to turn first-time visitor interactions into lasting brand trust.
+1. **No fake proof.** No placeholder images, no mock browser frames, no "live demo" that isn't live, no logos without written permission, no invented stats or reviews. If a section has no real content yet, it doesn't render (case studies, reviews, screenshots all switch on from data).
+2. **Price on the same screen as the offer.** Every card shows its price on line 2. Prices come only from `src/data/catalog.ts`.
+3. **Two calls to action.** Primary: **Get a fixed quote**. Secondary: **See details** / **See systems**. Ecosystems use **Book a site visit**; systems use **Buy now**. No other labels.
+4. **One floating element.** The WhatsApp button (desktop) or the sticky bottom bar (phones). No chat widget, no cookie banner, no intro animation.
+5. **Plain words.** Would a 50-year-old kedai owner understand it? No "productized", "bespoke", "Ed25519", "TTFB". Benefits before features.
+6. **No em dashes or en dashes** in visible copy. Ranges are written "2 to 3 weeks".
 
-### A. High-Converting, Minimalist UI/UX
-- **The "Anti-SaaS" Visual Tone:** We deliberately reject generic, illustration-heavy corporate SaaS templates and cartoonish 3D icons. Instead, we deploy clean, structural, and developer-centric layouts that communicate raw engineering competence, precision, and sub-second load times.
-- **Premium Simplicity:** Engineered to *"make small brands look big"*. We utilize generous whitespace, high-contrast typography, sharp chamfered geometry, and zero filler "fluff".
-- **Trust-Building Micro-Moments:** The front-end leverages subtle hover elevations, smooth page view transitions, and tactile button states to create polished micro-moments that validate user actions and signal authority.
+## 2. Tokens (`src/styles/global.css`)
 
-### B. Typography & Visual Hierarchy
-- **Sizing & Weighting:** Headers are oversized, bold, and scannable (`Outfit Variable` / `Geist Variable`), designed so human visitors and automated Answer Engines parse key value propositions within 2 seconds.
-- **Functional Layout Sections:** Information is broken into numbered structural grids (`01`, `02`, `03` using `Space Grotesk Variable`) and split-screen layouts pairing punchy text with live interactive previews.
+| Role | Token | Value | Use |
+|---|---|---|---|
+| Page background | `--color-paper` | `#fcfbfa` | Every page (one light theme) |
+| Soft surface | `--color-paper-dim` | `#f3f2ee` | Alternating sections, footer |
+| Text | `--color-ink` | `#19191b` | Headings, important text |
+| Body text | `--color-ink-dim` | `#55565a` | Paragraphs (6.9:1 contrast) |
+| Small print | `--color-muted` | `#6b6a66` | Captions only (5.1:1) |
+| Lines | `--color-line` / `--color-line-strong` | `#e2dfd7` / `#cfcbc1` | Borders, dividers |
+| Action | `--color-accent` | `#d92d20` | **The only button colour.** White text passes 4.8:1 |
+| Action hover | `--color-accent-dim` | `#b42318` | Hover, red text on light backgrounds |
+| WhatsApp | `--color-whatsapp` | `#15803d` | WhatsApp buttons only |
 
-### C. Motion & Interactive Previews
-- **GSAP-Powered Motion:** Hardware-accelerated GSAP animations are purpose-driven (scroll-triggered reveals, subtle fades, timeline orchestration). Motion never compromises our strict sub-second performance budget.
-- **Interactive Desktop & Mobile Previews:** Instead of static screenshots, our marketplace and showcase pages embed live, interactive preview wrappers with instant **Desktop (100%)** vs. **Mobile (375px)** viewport toggles, allowing clients to test touch responsiveness directly.
+There is no blue, yellow or decorative green. The logo's blue stripe stays in the logo only.
 
----
+## 3. Type
 
-## 2. Palette & Material Tokens
+- **Outfit Variable** for headings (`.h-display`, `.h-section`, `.h-sub`), preloaded because the headline is usually the largest thing on screen.
+- **Geist Variable** for body text, minimum 16px.
+- **Geist Mono** only for the rare `.eyebrow` label (max one per three sections).
+- The red `.highlight` box appears **once**: the home page hero.
 
-| Role | Token | Hex / Value | Architectural Purpose |
-|:---|:---|:---|:---|
-| **Page Background** | `--color-paper` | `#f2f0eb` | Cast concrete off-white base surface (Tamarind Square aesthetic) |
-| **Soft Surface** | `--color-paper-dim` | `#e6e3db` | Inset panels, cards, and secondary sections |
-| **Deep Surface** | `--color-paper-deep` | `#d6d2c7` | Structural panel dividers and active pill states |
-| **Primary Text** | `--color-ink` | `#19191b` | Neutral steel near-black (high contrast, AA accessible) |
-| **Body Copy** | `--color-ink-dim` | `#57585b` | Neutral grey with zero navy tint for effortless reading |
-| **Primary Accent** | `--color-accent` | `#d92d20` | **Signal Red** — drives primary CTAs, active badges, and focus rings |
-| **Accent Dim** | `--color-accent-dim` | `#b42318` | Hover state for primary buttons |
-| **Structural Blue** | `--color-accent-blue` | `#2d5be3` | Minor structural stripe and service taxonomy coding |
-| **Signal Gold/Yellow** | `--color-accent-yellow` | `#b45309` / `#eab308` | Highlight badges, Answer Engine tags, and grant notices |
-| **Verified Green** | `--color-accent-green` | `#15803d` / `#10b981` | Live status indicators, uptime badges, and instant checkmarks |
-| **Hairline Joints** | `--color-line` | `#cac6bb` | Precision-formwork concrete joints |
+## 4. Shape and spacing
 
-### Texture Wash
-- **Global Film Grain:** `body::after` fixed fractal-noise SVG overlay (`opacity: 0.035`, `mix-blend-mode: overlay`) imparting physical, tactile material depth to every surface.
+- Buttons and chips: full pill, at least 44px tall (`.btn`).
+- Cards and panels: 16px radius (`rounded-2xl`).
+- Form inputs: 12px radius, 48px tall, label above, help text below.
+- Sections: `py-16 md:py-24`. Content width `max-w-6xl`; reading pages `max-w-3xl`.
 
----
+## 5. Motion
 
-## 3. Technical Stack & Front-End Engineering
+CSS only: hover colour changes, a 1px press on buttons, chevrons that rotate on open. No scroll animations, no smooth-scroll library, no parallax. Content is visible without JavaScript. Everything respects `prefers-reduced-motion`.
 
-All technology choices are strictly performance-led:
+## 6. Patterns
 
-### A. Core Technologies & Frameworks
-- **Astro + TypeScript:** Static-first architecture, zero JS overhead by default, typed from line one.
-- **Tailwind CSS (v4):** Atomic utility token engine delivering an ultra-lightweight CSS footprint.
-- **PHP 8.2+ & Vanilla JS:** The foundation for our **WSS Marketplace** products. Clean, dependency-free PHP with Ed25519 offline cryptographic licensing, local MySQL storage, and zero telemetry.
-- **GSAP & Lenis:** Smooth scrolling and physics-based micro-interactions respecting `prefers-reduced-motion`.
+| Need | Pattern | Component |
+|---|---|---|
+| Packages | Price card: badge, name, price, who it's for, 5 benefits, timeline, one button, full spec collapsed | `PriceCard.astro` |
+| Systems | Card: name, one-line benefit, price, "See details" | `SystemCard.astro` |
+| Long detail | Collapsed by default (`details`/`summary`) | `Disclosure.astro`, `FaqList.astro` |
+| Own vs rent | Honest calculator, both sides shown | `RentVsOwnCalculator.astro` |
+| Proof | Case studies and reviews, only with permission on file | `CaseStudies.astro`, `Reviews.astro` |
+| Closing | One dark panel with one button | `FinalCTA.astro` |
+| Icons | Heroicons outline (MIT), one stroke width | `Icon.astro` |
 
-### B. Mobile-First Responsiveness & Accessibility
-- Touch-friendly 48px+ button tap targets.
-- Strict performance budget: Mobile Lighthouse Score ≥ 90, LCP ≤ 2.5s.
-- Semantic HTML5, ARIA labels, and keyboard-navigable interactive widgets.
+## 7. Images
 
----
+Real screenshots (with sample data) and a real founder photo are the only images that belong on offer pages. Until they exist, layouts are typographic. Article covers may use licensed stock photos and are marked decorative (`alt=""`). The share image is `public/images/og/default.png`; favicons were cut from the logo's circle mark.
 
-## 4. Optimization & Content Strategy Matrix
+## 8. Checks before shipping a page
 
-```
-┌──────────────────────────────────────────────────────────┐
-│             WSS DEV LABS OPTIMIZATION PILLARS            │
-├────────────────────────────┬─────────────────────────────┤
-│      HUMAN AUDIENCE        │        AI & BOT CRAWLERS    │
-├────────────────────────────┼─────────────────────────────┤
-│ • Direct, "No-Fluff" Copy  │ • Clear Heading Structures  │
-│ • Clear Milestone Sprints  │ • Structured FAQ Schemas    │
-│ • Fixed-Price Package Tiers│ • Local Relevance Metadata  │
-│ • Direct Engineer WhatsApp │ • SoftwareApplication Schema│
-└────────────────────────────┴─────────────────────────────┘
-```
-
-### A. AI-First SEO Strategy (Answer Engines)
-- **Engineered for LLMs:** Systematic heading hierarchies (`h1` ➔ `h2` ➔ `h3`) and clean semantic markup.
-- **Direct Q&A Formats:** Scannable FAQ accordions mirrored into JSON-LD `FAQPage` schema so ChatGPT, Perplexity, and Gemini cite WSS Dev Labs directly for Malaysian digital queries.
-
-### B. Local SEO & Trust Signals
-- **Malaysia-Anchored Copy:** Direct mentions of Malaysian states (Kuala Lumpur, Selangor, Johor, Penang, Sabah, Sarawak) with SSM registration identifiers in the footer.
-- **Malaysian Payment Gateways:** Native support for ToyyibPay, SenangPay, gKash, Stripe, and DuitNow QR.
-
-### C. The "No Subscriptions. No SaaS. Just Yours." Philosophy
-- Marketing copy for the **WSS Marketplace** explicitly highlights: **"No monthly fees. Buy once, own forever."**
-- Complete source code ownership, zero vendor lock-in, and self-hosted privacy under Malaysian PDPA.
-
----
-
-## 5. Recurring High-Converting UI Patterns
-
-### A. High-Impact Hero Sections
-- **Punchy Value Proposition:** Short, bold headlines with dynamic gradient text.
-- **Dual CTAs:** Always pair a primary action ("WhatsApp an Engineer" / "Get Express") with a secondary exploratory link ("Browse 15 Systems" / "View Grant Subsidies").
-
-### B. Logo Arrays (The Trust Grid)
-- Horizontal grayscale grid of recognizable Malaysian commercial landmarks and enterprises (Parkson, AEON, Sunway, KLCC, Plaza Sentral, Nexus Bangsar) placed directly below the hero to anchor immediate credibility.
-
-### C. Step-by-Step Step Modules
-- 4-phase numbered sprint pipelines (`01 Architecture Lock` ➔ `02 Staging Prototype` ➔ `03 Security & Payments` ➔ `04 Go-Live Handover`).
-
-### D. Embedded Utility Calculators
-- Interactive client-side calculators (e.g., **SME Project & Grant Savings Calculator**) that dynamically compute package costs, 50% PMKS Madani grant deductions, and generate prefilled WhatsApp booking prompts.
-
-### E. Interactive Desktop / Mobile Device Viewport Switcher
-- Live toggle switches allowing potential buyers to test systems across 100% desktop and 375px mobile phone dimensions with simulated browser chromes.
+- [ ] One `h1`, headings in order
+- [ ] Price visible next to the offer
+- [ ] Only the two allowed CTA labels
+- [ ] No horizontal scroll at 375px; all buttons at least 44px tall
+- [ ] No placeholder or stock image presented as our work
+- [ ] No em or en dashes in visible text
+- [ ] Lighthouse mobile 90+ in every category

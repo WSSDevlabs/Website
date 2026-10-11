@@ -1,0 +1,555 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import Disclosure from '../../components/ui/Disclosure.astro';
+import FaqList from '../../components/ui/FaqList.astro';
+import Icon from '../../components/ui/Icon.astro';
+import WhatsAppIcon from '../../components/ui/WhatsAppIcon.astro';
+import SystemCard from '../../components/sections/SystemCard.astro';
+import RentVsOwnCalculator from '../../components/sections/RentVsOwnCalculator.astro';
+import FinalCTA from '../../components/sections/FinalCTA.astro';
+import { LICENCE_TERMS, SYSTEM_EXTRAS, formatRM } from '../../data/catalog';
+import { PUBLISHED_ECOSYSTEMS, type Ecosystem, type MatrixValue } from '../../data/ecosystems';
+import {
+  BUYER_GROUPS,
+  COMMON_SYSTEM_FAQ,
+  DEFAULT_LANGUAGE_ANSWER,
+  PUBLIC_SYSTEMS,
+  systemPrice,
+  type SystemProduct
+} from '../../data/systems';
+import { whatsappHref } from '../../data/site';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return [
+    ...PUBLIC_SYSTEMS.map((system) => ({ params: { slug: system.slug }, props: { kind: 'product' as const, system } })),
+    ...PUBLISHED_ECOSYSTEMS.map((ecosystem) => ({ params: { slug: ecosystem.slug }, props: { kind: 'ecosystem' as const, ecosystem } }))
+  ];
+}
+
+type Props =
+  | { kind: 'product'; system: SystemProduct; ecosystem?: never }
+  | { kind: 'ecosystem'; ecosystem: Ecosystem; system?: never };
+
+const props = Astro.props;
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString();
+const matrixText = (value: MatrixValue) => (value === true ? 'Yes' : value === false ? 'No' : value);
+
+/* ── Product data ── */
+const system = props.kind === 'product' ? props.system : null;
+const price = system ? systemPrice(system) : null;
+const group = system?.groups?.[0];
+const productPath = system ? `/systems/${system.slug}/` : '';
+const related = system
+  ? PUBLIC_SYSTEMS.filter((s) => s.slug !== system.slug && s.groups?.some((g) => system.groups?.includes(g))).slice(0, 3)
+  : [];
+const productFaq = system
+  ? [
+      { q: 'Does it take online payments?', a: system.payments ?? "No. This system doesn't take payments." },
+      { q: 'Does it support Bahasa Malaysia?', a: system.language ?? DEFAULT_LANGUAGE_ANSWER },
+      ...(system.extraFaq ?? []),
+      ...COMMON_SYSTEM_FAQ
+    ]
+  : [];
+const extras = [
+  SYSTEM_EXTRAS.installation,
+  SYSTEM_EXTRAS.branding,
+  SYSTEM_EXTRAS.training,
+  SYSTEM_EXTRAS.dataImport,
+  SYSTEM_EXTRAS.updateInstall
+];
+
+/* ── Ecosystem data ── */
+const eco = props.kind === 'ecosystem' ? props.ecosystem : null;
+const ecoPath = eco ? `/systems/${eco.slug}/` : '';
+const siteVisitHref = eco ? `/contact/?need=system&item=${eco.slug}&topic=site-visit` : '';
+
+/* ── SEO ── */
+const title = system ? `${system.name}: Buy Once, No Monthly Fee` : `${eco?.name}: Connected Systems You Own`;
+const description = system
+  ? `${system.benefit} ${price !== null ? `${formatRM(price)} one-time, ` : ''}full source code, 12 months of updates.`
+  : `${eco?.pitch} From ${formatRM(eco?.packages[0].price ?? 0)} plus hardware.`;
+
+const schema: Record<string, unknown>[] = [];
+if (system && price !== null) {
+  schema.push({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: system.name,
+    description: system.benefit,
+    brand: { '@type': 'Brand', name: 'WSS DevLabs' },
+    category: 'Business software',
+    offers: {
+      '@type': 'Offer',
+      price,
+      priceCurrency: 'MYR',
+      availability: 'https://schema.org/InStock',
+      url: new URL(productPath, siteUrl).toString(),
+      seller: { '@type': 'Organization', name: 'WSS DevLabs' }
+    }
+  });
+  schema.push(faqSchema(productFaq));
+  schema.push(
+    breadcrumbSchema(siteUrl, [
+      { name: 'Systems', path: '/systems/' },
+      { name: system.name, path: productPath }
+    ])
+  );
+}
+if (eco) {
+  schema.push(faqSchema(eco.faq));
+  schema.push(
+    breadcrumbSchema(siteUrl, [
+      { name: 'Systems', path: '/systems/' },
+      { name: eco.name, path: ecoPath }
+    ])
+  );
+}
+---
+
+<BaseLayout title={title} description={description} path={system ? productPath : ecoPath} schema={schema}>
+  {
+    system && (
+      <>
+        {/* 1. Name, benefit, price, buy (audit P1, P2) */}
+        <section class="border-b border-line">
+          <Container class="py-10 md:py-14">
+            <Breadcrumbs
+              items={[
+                { name: 'Systems', href: '/systems/' },
+                ...(group ? [{ name: BUYER_GROUPS[group], href: '/systems/#catalogue' }] : []),
+                { name: system.name }
+              ]}
+            />
+            <div class="mt-6 grid gap-10 lg:grid-cols-[1fr_380px]">
+              <div>
+                <h1 class="h-display">{system.name}</h1>
+                <p class="lead mt-5">{system.benefit}</p>
+                <p class="mt-4 text-ink-dim">
+                  <span class="font-semibold text-ink">For:</span> {system.forWho}
+                </p>
+              </div>
+              <aside class="card self-start p-6" aria-label="Price and purchase">
+                {price !== null && (
+                  <p class="price text-4xl">
+                    {formatRM(price)}
+                    <span class="ml-1 text-base font-medium text-ink-dim">one-time</span>
+                  </p>
+                )}
+                <p class="mt-1 text-ink-dim">No monthly fee. No SST added.</p>
+                <ul class="mt-5 space-y-3 text-sm">
+                  <li class="flex gap-3">
+                    <Icon name="check" class="h-5 w-5 shrink-0 text-accent" />
+                    <span class="text-ink">Perpetual licence with full source code</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <Icon name="check" class="h-5 w-5 shrink-0 text-accent" />
+                    <span class="text-ink">{LICENCE_TERMS.supportDays} days of WhatsApp support from the builder</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <Icon name="check" class="h-5 w-5 shrink-0 text-accent" />
+                    <span class="text-ink">{LICENCE_TERMS.updateMonths} months of updates</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <Icon name="check" class="h-5 w-5 shrink-0 text-accent" />
+                    <span class="text-ink">Download link and licence by email once payment clears</span>
+                  </li>
+                </ul>
+                <a href={`/contact/?order=${system.slug}`} class="btn btn-primary btn-lg mt-6 w-full" data-track="buy_click">
+                  Buy now
+                </a>
+                <a
+                  href={whatsappHref(`Hi WSS DevLabs, I have a question about ${system.name}.`)}
+                  class="btn btn-whatsapp mt-3 w-full"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="whatsapp_click"
+                >
+                  <WhatsAppIcon class="h-5 w-5" />
+                  Ask a question
+                </a>
+                <p class="mt-4 text-sm text-ink-dim">
+                  {LICENCE_TERMS.refundDays}-day refund if it can't be installed by following the guide and we can't fix it.{' '}
+                  <a href="/refunds/" class="link">Refund Policy</a>
+                </p>
+              </aside>
+            </div>
+          </Container>
+        </section>
+
+        {/* 2. See it working: real screenshots or a real walkthrough, never a mockup (audit P3, V1) */}
+        <section class="py-14 md:py-16">
+          <Container>
+            {system.media && system.media.length > 0 ? (
+              <>
+                <h2 class="h-section">Screenshots</h2>
+                <ul class="mt-8 grid gap-6 md:grid-cols-2">
+                  {system.media.map((shot) => (
+                    <li>
+                      <img src={shot.src} alt={shot.alt} loading="lazy" class="w-full rounded-2xl border border-line" />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <div class="rounded-2xl bg-paper-dim p-6 sm:p-10">
+                <h2 class="h-section">See it working before you buy.</h2>
+                <p class="lead mt-4">
+                  Book a 15-minute screen-share. We'll walk you through the real {system.name} with sample data and answer your
+                  questions.
+                </p>
+                <a
+                  href={`/contact/?need=system&item=${system.slug}&topic=demo`}
+                  class="btn btn-secondary mt-6"
+                  data-track="demo_click"
+                >
+                  Book a screen-share
+                </a>
+              </div>
+            )}
+            {system.videoUrl && (
+              <video class="mt-8 w-full rounded-2xl border border-line" src={system.videoUrl} controls preload="metadata" playsinline />
+            )}
+          </Container>
+        </section>
+
+        {/* 3. Features in benefit language + "Is this right for you?" (audit 3.18, 12.7) */}
+        <section class="bg-paper-dim py-14 md:py-16">
+          <Container class="grid gap-10 md:grid-cols-2">
+            <div>
+              <h2 class="h-section">What it does for you</h2>
+              <ul class="mt-8 space-y-4">
+                {(system.features ?? []).map((feature) => (
+                  <li class="flex gap-3">
+                    <Icon name="check-circle" class="mt-0.5 h-6 w-6 shrink-0 text-accent" />
+                    <span class="text-lg text-ink">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="card self-start p-6 sm:p-8">
+              <h2 class="h-sub">Is this right for you?</h2>
+              <ul class="mt-5 space-y-3">
+                {(system.rightForYou ?? []).map((question) => (
+                  <li class="text-ink">{question}</li>
+                ))}
+              </ul>
+              <p class="mt-5 text-ink-dim">If you answered yes to any of these, it probably is. Not sure? Ask us; we'll tell you honestly.</p>
+            </div>
+          </Container>
+        </section>
+
+        {/* 4. What's included, extras and what you need (audit P8, 12.4 C) */}
+        <section class="py-14 md:py-16">
+          <Container class="grid gap-12 lg:grid-cols-2">
+            <div>
+              <h2 class="h-section">What you get</h2>
+              <ul class="mt-6 list-disc space-y-2 pl-5 text-ink">
+                <li>Full source code and the database setup file</li>
+                <li>A step-by-step install guide and admin setup instructions</li>
+                <li>{LICENCE_TERMS.supportDays} days of WhatsApp support and bug fixes from the builder</li>
+                <li>{LICENCE_TERMS.updateMonths} months of updates: security patches and improvements, with release notes</li>
+                <li>
+                  A perpetual licence for {LICENCE_TERMS.installations}. <a href="/licence/" class="link">Licence terms</a>
+                </li>
+              </ul>
+
+              <h3 class="h-sub mt-10">What you need to run it</h3>
+              <p class="mt-3 text-ink-dim">
+                A web hosting account that runs PHP 8.2 or newer with a MySQL database, such as cPanel shared hosting or a small
+                VPS. You pay your host directly, usually a modest monthly fee. Hosting is like renting the shop space; the system is yours.
+              </p>
+              {system.hardware && (
+                <p class="mt-3 text-ink-dim">
+                  <span class="font-semibold text-ink">Hardware:</span> {system.hardware}
+                </p>
+              )}
+
+              <h3 class="h-sub mt-10">Not included</h3>
+              <p class="mt-3 text-ink-dim">
+                Hosting, installation, customisation, hardware and data import, unless you add them below.
+              </p>
+            </div>
+            <div>
+              <h2 class="h-section">Optional extras</h2>
+              <ul class="mt-6 divide-y divide-line rounded-2xl border border-line bg-white">
+                {extras.map((extra) => (
+                  <li class="p-5">
+                    <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                      <h3 class="font-semibold text-ink">{extra.name}</h3>
+                      <p class="price text-lg">
+                        {'from' in extra && extra.from ? 'From ' : ''}
+                        {formatRM(extra.price)}
+                      </p>
+                    </div>
+                    <p class="mt-1 text-sm text-ink-dim">{extra.detail}</p>
+                  </li>
+                ))}
+              </ul>
+              <p class="mt-4 text-ink-dim">
+                After the first {LICENCE_TERMS.supportDays} days, a <a href="/websites/#care-plans" class="link">Care Plan</a> keeps
+                your system backed up, updated and supported.
+              </p>
+            </div>
+          </Container>
+        </section>
+
+        {/* 5. Tech specs, collapsed for IT people (audit P7) */}
+        <section class="pb-4">
+          <Container>
+            <Disclosure summary="Technical details (for your IT person)" class="rounded-2xl border border-line bg-white px-5" summaryClass="py-3 font-semibold text-ink">
+              <dl class="grid gap-4 text-sm sm:grid-cols-2">
+                <div>
+                  <dt class="font-semibold text-ink">Built with</dt>
+                  <dd class="mt-1 text-ink-dim">{['PHP 8.2+', ...(system.stack ?? [])].join(', ')}</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-ink">Runs on</dt>
+                  <dd class="mt-1 text-ink-dim">
+                    PHP 8.2 or newer with a MySQL database, on cPanel shared hosting or a VPS. The full requirements are in the install
+                    guide; ask us before you buy.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-ink">Version</dt>
+                  <dd class="mt-1 text-ink-dim">
+                    {system.version ?? 'Ask us for the current version and changelog.'}
+                    {system.lastUpdated && <span class="block">Last updated {system.lastUpdated}</span>}
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-ink">Licence check</dt>
+                  <dd class="mt-1 text-ink-dim">
+                    Verified offline. The system never phones home, and there is no remote kill switch. Your protection and ours is
+                    the licence agreement.
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-ink">Your data</dt>
+                  <dd class="mt-1 text-ink-dim">Stored on your server, in the location you choose.</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-ink">Licence</dt>
+                  <dd class="mt-1 text-ink-dim">Perpetual, for {LICENCE_TERMS.installations}. No resale.</dd>
+                </div>
+              </dl>
+            </Disclosure>
+          </Container>
+        </section>
+
+        {/* 6. FAQ: the 10 questions buyers ask (audit P6) */}
+        <section class="py-14 md:py-16">
+          <Container narrow>
+            <h2 class="h-section">Questions</h2>
+            <FaqList items={productFaq} class="mt-8" />
+          </Container>
+        </section>
+
+        {/* 7. Related systems, max 3 */}
+        {related.length > 0 && (
+          <section class="bg-paper-dim py-14 md:py-16">
+            <Container>
+              <h2 class="h-section">Related systems</h2>
+              <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {related.map((item) => (
+                  <SystemCard system={item} />
+                ))}
+              </ul>
+            </Container>
+          </section>
+        )}
+
+        <FinalCTA
+          title="Ready to own it?"
+          body={`${price !== null ? `${formatRM(price)} once. ` : ''}No monthly fee, full source code, and a builder who answers your WhatsApp.`}
+          ctaLabel="Buy now"
+          ctaHref={`/contact/?order=${system.slug}`}
+          track="buy_click"
+        />
+      </>
+    )
+  }
+
+  {
+    eco && (
+      <>
+        {/* 1. Hero */}
+        <section class="border-b border-line">
+          <Container class="py-10 md:py-14">
+            <Breadcrumbs items={[{ name: 'Systems', href: '/systems/' }, { name: 'Complete solutions', href: '/systems/#complete-solutions' }, { name: eco.name }]} />
+            <p class="mt-6 inline-block rounded-full bg-accent-soft px-3 py-1 text-sm font-semibold text-accent-dim">{eco.status}</p>
+            <h1 class="h-display mt-4 max-w-4xl">{eco.name}</h1>
+            <p class="lead mt-5">{eco.pitch}</p>
+            <p class="mt-3 max-w-2xl text-ink-dim">
+              <span class="font-semibold text-ink">For:</span> {eco.forWho}
+            </p>
+            <p class="price mt-6 text-3xl">
+              From {formatRM(eco.packages[0].price)}
+              <span class="ml-1 text-base font-medium text-ink-dim">one-time, plus hardware</span>
+            </p>
+            <a href={siteVisitHref} class="btn btn-primary btn-lg mt-6" data-track="site_visit_click">
+              Book a site visit
+            </a>
+          </Container>
+        </section>
+
+        {/* 2. Problems, in the buyer's words */}
+        <section class="py-14 md:py-16">
+          <Container>
+            <h2 class="h-section">Sound familiar?</h2>
+            <ul class="mt-8 grid gap-6 md:grid-cols-2">
+              {eco.problems.map((problem) => (
+                <li class="border-l-2 border-accent pl-5">
+                  <p class="font-display text-xl font-semibold text-ink">{problem.quote}</p>
+                  <p class="mt-1 text-ink-dim">{problem.detail}</p>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+
+        {/* 3. How it works: the connected flow */}
+        <section class="bg-paper-dim py-14 md:py-16">
+          <Container>
+            <h2 class="h-section">How it works</h2>
+            <ol class="mt-8 space-y-3">
+              {eco.flow.map((row) => (
+                <li class="card grid gap-2 p-5 md:grid-cols-[1fr_auto_1.4fr_auto_1fr] md:items-center md:gap-4">
+                  <span class="font-semibold text-ink">{row.trigger}</span>
+                  <Icon name="arrow-right" class="hidden h-5 w-5 text-muted md:block" />
+                  <span class="text-ink">{row.module}</span>
+                  <Icon name="arrow-right" class="hidden h-5 w-5 text-muted md:block" />
+                  <span class="text-ink-dim">{row.result}</span>
+                </li>
+              ))}
+            </ol>
+            <div class="mt-4 rounded-2xl bg-ink p-6 text-white">
+              <p class="font-display text-xl font-bold">Everything lands in one place</p>
+              <p class="mt-1 text-white/85">{eco.hub}</p>
+            </div>
+          </Container>
+        </section>
+
+        {/* 4. Packages (two columns) */}
+        <section class="py-14 md:py-16" id="packages">
+          <Container>
+            <h2 class="h-section">Packages</h2>
+            <div class="mt-8 grid gap-6 md:grid-cols-2">
+              {eco.packages.map((pkg) => (
+                <div class="card p-6 sm:p-8">
+                  <h3 class="h-sub">{pkg.name}</h3>
+                  <p class="mt-1 text-ink-dim">{pkg.scope}</p>
+                  <p class="price mt-4 text-4xl">{formatRM(pkg.price)}</p>
+                  <p class="text-sm text-ink-dim">Software, one-time. Hardware quoted separately.</p>
+                  <p class="mt-3 font-semibold text-ink">{pkg.care}</p>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-8 overflow-hidden rounded-2xl border border-line">
+              <table class="w-full border-collapse text-left text-sm sm:text-base">
+                <caption class="sr-only">What each {eco.name} package includes</caption>
+                <thead class="bg-paper-dim">
+                  <tr>
+                    <th scope="col" class="p-4 font-semibold text-ink">Included</th>
+                    <th scope="col" class="w-28 p-4 font-semibold text-ink">{eco.packages[0].name}</th>
+                    <th scope="col" class="w-28 p-4 font-semibold text-ink">{eco.packages[1].name}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {eco.matrix.map((row) => (
+                    <tr class="border-t border-line">
+                      <th scope="row" class="p-4 font-medium text-ink">{row.feature}</th>
+                      <td class:list={['p-4', row.essential === false ? 'text-muted' : 'font-medium text-ink']}>{matrixText(row.essential)}</td>
+                      <td class:list={['p-4', row.complete === false ? 'text-muted' : 'font-medium text-ink']}>{matrixText(row.complete)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-10 grid gap-8 md:grid-cols-2">
+              <div>
+                <h3 class="h-sub">Hardware</h3>
+                <p class="mt-2 text-ink-dim">{eco.hardware}</p>
+                <h3 class="h-sub mt-6">Not included</h3>
+                <ul class="mt-2 list-disc space-y-1 pl-5 text-ink-dim">
+                  {eco.notIncluded.map((item) => <li>{item}</li>)}
+                </ul>
+                <h3 class="h-sub mt-6">Timeline</h3>
+                <p class="mt-2 text-ink-dim">{eco.timeline}</p>
+              </div>
+              <div>
+                <h3 class="h-sub">What you provide</h3>
+                <ul class="mt-2 list-disc space-y-1 pl-5 text-ink-dim">
+                  {eco.clientProvides.map((item) => <li>{item}</li>)}
+                </ul>
+                <h3 class="h-sub mt-6">Acceptance and warranty</h3>
+                <p class="mt-2 text-ink-dim">{eco.acceptance}</p>
+                <p class="mt-2 text-ink-dim">{eco.warranty}</p>
+                <h3 class="h-sub mt-6">What we measure with you</h3>
+                <ul class="mt-2 list-disc space-y-1 pl-5 text-ink-dim">
+                  {eco.outcomes.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* 5. Honest 3-year comparison */}
+        <section class="bg-paper-dim py-14 md:py-16">
+          <Container class="grid gap-10 lg:grid-cols-2">
+            <div>
+              <h2 class="h-section">{eco.education.title}</h2>
+              <p class="lead mt-4">{eco.education.body}</p>
+            </div>
+            <RentVsOwnCalculator
+              id={`${eco.slug}-calc`}
+              monthlyLabel={eco.calculator.label}
+              monthlyHint={eco.calculator.hint}
+              defaultMonthly={eco.calculator.defaultMonthly}
+              ownLabel={`${eco.name} ${eco.packages[0].name}`}
+              ownOneTime={eco.calculator.ownOneTime}
+              careMonthly={eco.calculator.careMonthly}
+              careLabel={eco.calculator.careLabel}
+              careRequired={eco.calculator.careRequired}
+            />
+          </Container>
+        </section>
+
+        {/* 6. Data protection, built in */}
+        <section class="py-14 md:py-16">
+          <Container>
+            <h2 class="h-section">Personal data, handled properly</h2>
+            <ul class="mt-8 grid gap-4 md:grid-cols-2">
+              {eco.compliance.map((item) => (
+                <li class="flex gap-3">
+                  <Icon name="shield-check" class="mt-0.5 h-6 w-6 shrink-0 text-accent" />
+                  <span class="text-ink">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+
+        {/* 7. FAQ */}
+        <section class="bg-paper-dim py-14 md:py-16">
+          <Container narrow>
+            <h2 class="h-section">Questions</h2>
+            <FaqList items={eco.faq} class="mt-8" />
+          </Container>
+        </section>
+
+        <FinalCTA
+          title={`See ${eco.name} at your site.`}
+          body="We visit, look at how things work today, and tell you honestly which package fits. Then you get a fixed quote."
+          ctaLabel="Book a site visit"
+          ctaHref={siteVisitHref}
+          track="site_visit_click"
+        />
+      </>
+    )
+  }
+</BaseLayout>

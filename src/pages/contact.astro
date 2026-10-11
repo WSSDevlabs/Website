@@ -1,252 +1,372 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
-import { SITE } from '../data/site';
+import Icon from '../components/ui/Icon.astro';
+import WhatsAppIcon from '../components/ui/WhatsAppIcon.astro';
+import { REPLY_PROMISE, SYSTEM_EXTRAS, WEBSITE_PACKAGES, GO_DIGITAL_BUNDLE, LICENCE_TERMS, formatRM } from '../data/catalog';
+import { PUBLISHED_ECOSYSTEMS } from '../data/ecosystems';
+import { DEFAULT_WHATSAPP_MESSAGE, SITE, phoneHref, whatsappHref } from '../data/site';
+import { PUBLIC_SYSTEMS, systemPrice } from '../data/systems';
+import { organizationSchema } from '../lib/schema';
+
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString();
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+
+/* Everything the page needs to pre-fill the form from a link like /contact/?need=website&package=business */
+const lookup = {
+  packages: Object.fromEntries([
+    ...WEBSITE_PACKAGES.map((p) => [p.id, `${p.name} (${formatRM(p.price)})`]),
+    ['go-digital-bundle', `Go Digital Bundle (${formatRM(GO_DIGITAL_BUNDLE.price)})`]
+  ]),
+  items: Object.fromEntries([
+    ...PUBLIC_SYSTEMS.map((s) => [s.slug, s.name]),
+    ...PUBLISHED_ECOSYSTEMS.map((e) => [e.slug, e.name])
+  ]),
+  orders: Object.fromEntries(PUBLIC_SYSTEMS.map((s) => [s.slug, { name: s.name, price: systemPrice(s) ?? 0 }]))
+};
+
+const orderExtras = [
+  { id: 'installation', label: `${SYSTEM_EXTRAS.installation.name} (${formatRM(SYSTEM_EXTRAS.installation.price)})`, price: SYSTEM_EXTRAS.installation.price },
+  { id: 'training', label: `${SYSTEM_EXTRAS.training.name} (${formatRM(SYSTEM_EXTRAS.training.price)})`, price: SYSTEM_EXTRAS.training.price },
+  { id: 'branding', label: `${SYSTEM_EXTRAS.branding.name} (from ${formatRM(SYSTEM_EXTRAS.branding.price)}, quoted first)`, price: 0 },
+  { id: 'data-import', label: `${SYSTEM_EXTRAS.dataImport.name} (from ${formatRM(SYSTEM_EXTRAS.dataImport.price)}, quoted first)`, price: 0 }
+];
 ---
 
 <BaseLayout
-  title="Contact Us: WSS DevLabs"
-  description="Get in touch with WSS DevLabs. Start a project, ask a question, or request a free quote."
-  path="/contact"
+  title="Contact WSS DevLabs"
+  description={`Tell us what you need. ${REPLY_PROMISE} WhatsApp, email or a short form.`}
+  path="/contact/"
+  schema={organizationSchema(siteUrl)}
 >
+  <section class="py-12 md:py-16">
+    <Container class="grid gap-12 lg:grid-cols-[1fr_360px]">
+      <div>
+        <h1 class="h-display" data-heading>Tell us what you need.</h1>
+        <p class="lead mt-4" data-lead>{REPLY_PROMISE}</p>
 
-  <!-- Contact intro + form -->
-  <section class="border-b border-line">
-    <Container class="pt-10 pb-12 md:pt-36 md:pb-16">
-      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <!-- Left: heading + info -->
-        <div>
-          <p class="mono-label text-ink-dim">Get in touch</p>
-          <h1 class="h-display mt-3 !text-[clamp(2rem,1.3rem+2.6vw,3.2rem)]" data-split>
-            We are always ready to help you and <span class="badge-highlight">answer your questions</span>
-          </h1>
-
-          <div class="mt-10 grid gap-8 sm:grid-cols-2">
-            <div>
-              <p class="mono-label text-ink-dim">Reach us</p>
-              <p class="mt-2 text-sm font-semibold text-ink">{SITE.phone}</p>
-            </div>
-            <div>
-              <p class="mono-label text-ink-dim">Our Location</p>
-              <p class="mt-2 text-sm font-semibold text-ink">{SITE.address}</p>
-            </div>
-            <div>
-              <p class="mono-label text-ink-dim">Email</p>
-              <p class="mt-2 text-sm font-semibold text-ink" data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]} />
-            </div>
-            <div>
-              <p class="mono-label text-ink-dim">Social Network</p>
-              <div class="mt-2 flex items-center gap-2">
-                {SITE.social.linkedin && (
-                  <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:bg-accent hover:text-white">
-                    <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
-                  </a>
-                )}
-                {SITE.social.instagram && (
-                  <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:bg-accent hover:text-white">
-                    <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" /></svg>
-                  </a>
-                )}
-                {SITE.social.facebook && (
-                  <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:bg-accent hover:text-white">
-                    <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
-                  </a>
-                )}
-              </div>
-            </div>
+        <!-- Order summary: shown when arriving from a system's "Buy now" (audit 14.2 C) -->
+        <div class="card mt-10 hidden p-6" data-order-panel data-lookup={JSON.stringify(lookup)}>
+          <h2 class="h-sub">Your order</h2>
+          <div class="mt-4 flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-4">
+            <p class="font-semibold text-ink"><span data-order-name></span> licence</p>
+            <p class="price text-xl" data-order-price></p>
           </div>
+          <ul class="mt-4 space-y-1 text-sm text-ink-dim">
+            <li>Perpetual licence with full source code, for {LICENCE_TERMS.installations}</li>
+            <li>{LICENCE_TERMS.supportDays} days of WhatsApp support and bug fixes, {LICENCE_TERMS.updateMonths} months of updates</li>
+            <li>Delivered by download link, with your licence and install guide, once payment clears</li>
+          </ul>
+          <fieldset class="mt-5">
+            <legend class="font-semibold text-ink">Optional extras</legend>
+            {
+              orderExtras.map((extra) => (
+                <label class="mt-2 flex min-h-11 items-center gap-3">
+                  <input type="checkbox" class="h-5 w-5 shrink-0 accent-[var(--color-accent)]" data-extra={extra.id} data-extra-price={extra.price} data-extra-label={extra.label} />
+                  <span class="text-ink">{extra.label}</span>
+                </label>
+              ))
+            }
+          </fieldset>
+          <div class="mt-5 flex items-baseline justify-between border-t border-line pt-4">
+            <p class="font-semibold text-ink">Total for fixed-price items</p>
+            <p class="price text-2xl" data-order-total></p>
+          </div>
+          <p class="mt-1 text-sm text-ink-dim">Final price, no SST added. Hosting and hardware are paid separately.</p>
         </div>
 
-        <!-- Right: dark quick-contact form -->
-        <!-- Right: Light quick-contact form with Date/Time picker -->
-        <div class="rounded-3xl border border-line bg-white p-8 md:p-10 shadow-card">
-          <p class="mono-label text-accent font-bold tracking-widest uppercase">FREE QUOTATION</p>
-          <h2 class="text-xl font-bold text-ink mt-1">Get In Touch</h2>
-          <p class="mt-1.5 text-sm text-ink-dim">Tell us what you're building and pick a preferred date &amp; time for an online consultation.</p>
+        <form
+          class="mt-10 space-y-6"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          data-contact-form
+          novalidate
+        >
+          <input type="hidden" name="access_key" value={accessKey} />
+          <input type="hidden" name="subject" value="New enquiry from wssdevlabs.com" data-field="subject" />
+          <input type="hidden" name="from_name" value="wssdevlabs.com" />
+          <input type="hidden" name="context" value="" data-field="context" />
+          <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-          <form id="contact-form" class="mt-6 space-y-4" onsubmit="return false;">
-            <div class="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label for="c-name" class="mb-1.5 block text-xs font-semibold text-ink">Your Name <span class="text-accent-red">*</span></label>
-                <input id="c-name" type="text" placeholder="Full name" required class="w-full rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
-              </div>
-              <div>
-                <label for="c-email" class="mb-1.5 block text-xs font-semibold text-ink">Email <span class="text-accent-red">*</span></label>
-                <input id="c-email" type="email" placeholder="you@company.com" required class="w-full rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
-              </div>
-            </div>
+          <div>
+            <label for="name" class="field-label">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required class="field-input" />
+          </div>
 
-            <div>
-              <label for="c-subject" class="mb-1.5 block text-xs font-semibold text-ink">Service / Topic</label>
-              <input id="c-subject" type="text" placeholder="e.g. Buy-Once Marketplace System, Web App, Express Package" class="w-full rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
-            </div>
+          <div>
+            <label for="contact" class="field-label" data-contact-label>WhatsApp number or email</label>
+            <input
+              id="contact"
+              name="contact"
+              type="text"
+              autocomplete="email"
+              required
+              class="field-input"
+              aria-describedby="contact-help"
+            />
+            <p id="contact-help" class="field-help" data-contact-help>Whichever you prefer us to reply on.</p>
+          </div>
 
-            <!-- Preferred Date & Time for Online Meeting -->
-            <div class="rounded-2xl border border-line bg-paper-dim/40 p-4">
-              <div class="mb-3 flex items-center justify-between">
-                <label class="text-xs font-bold text-ink flex items-center gap-1.5">
-                  <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span>Preferred Online Consultation Date &amp; Time</span>
-                </label>
-                <span class="text-[10px] font-semibold text-ink-dim uppercase">Google Meet</span>
-              </div>
+          <div>
+            <label for="need" class="field-label">What do you need?</label>
+            <select id="need" name="need" required class="field-input">
+              <option value="" disabled selected>Choose one</option>
+              <option value="Website">A website</option>
+              <option value="System">A system to run my business</option>
+              <option value="Custom">Something built just for us</option>
+              <option value="Other">Something else</option>
+            </select>
+          </div>
 
-              <div class="grid gap-3 sm:grid-cols-2">
-                <div>
-                  <label for="c-date" class="mb-1 block text-[11px] font-medium text-ink-dim">Preferred Date</label>
-                  <input id="c-date" type="date" class="w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-xs text-ink focus:border-ink focus:outline-none" />
-                </div>
-                <div>
-                  <label for="c-time" class="mb-1 block text-[11px] font-medium text-ink-dim">Preferred Time Slot</label>
-                  <select id="c-time" class="w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-xs text-ink focus:border-ink focus:outline-none appearance-none cursor-pointer">
-                    <option value="">Select time slot</option>
-                    <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM – 12:00 PM)</option>
-                    <option value="Early Afternoon (02:00 PM - 04:00 PM)">Early Afternoon (02:00 PM – 04:00 PM)</option>
-                    <option value="Late Afternoon (04:00 PM - 06:00 PM)">Late Afternoon (04:00 PM – 06:00 PM)</option>
-                    <option value="Evening (08:00 PM - 10:00 PM)">Evening (08:00 PM – 10:00 PM)</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+          <div>
+            <label for="message" class="field-label">Short message <span class="font-normal text-ink-dim">(optional)</span></label>
+            <textarea id="message" name="message" rows="4" class="field-input"></textarea>
+          </div>
 
-            <div>
-              <label for="c-message" class="mb-1.5 block text-xs font-semibold text-ink">What are you building?</label>
-              <textarea id="c-message" rows="3" placeholder="Tell us briefly about your requirements..." class="w-full resize-none rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
-            </div>
+          <label class="hidden min-h-11 items-start gap-3" data-terms-row>
+            <input type="checkbox" name="accepted_terms" value="Yes" class="mt-1 h-5 w-5 shrink-0 accent-[var(--color-accent)]" data-terms />
+            <span class="text-ink">
+              I agree to the <a href="/licence/" class="link" target="_blank">Licence Agreement</a> and the{' '}
+              <a href="/refunds/" class="link" target="_blank">Refund Policy</a>.
+            </span>
+          </label>
 
-            <div id="c-success" class="hidden rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-4 py-3 text-sm font-semibold text-emerald-800">
-              Message sent! Our senior architect will confirm your consultation within one business hour.
-            </div>
+          <label class="flex min-h-11 items-start gap-3">
+            <input type="checkbox" name="marketing_opt_in" value="Yes" class="mt-1 h-5 w-5 shrink-0 accent-[var(--color-accent)]" />
+            <span class="text-ink-dim">Send me occasional tips and offers. You can stop them at any time. (Optional)</span>
+          </label>
 
-            <button type="submit" id="c-submit" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-bold text-white shadow-md shadow-accent/25 transition-all hover:bg-accent-dim hover:scale-[1.01] active:scale-95">
-              Get My Free Quote
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+          <p class="text-sm text-ink-dim">
+            We use these details only to reply to you and prepare your quote. By sending this form you agree to that. See our{' '}
+            <a href="/privacy/" class="link">Privacy Notice</a> (English and Bahasa Malaysia).
+          </p>
+
+          <div>
+            <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto" data-submit>
+              <span data-submit-label>Get a fixed quote</span>
             </button>
-          </form>
+            <p class="mt-3 text-sm" role="status" aria-live="polite" data-status></p>
+          </div>
+        </form>
+
+        <!-- Confirmation: what happens next (audit 3.18, 10.1 visibility of system status) -->
+        <div class="card mt-10 hidden p-6 sm:p-8" data-thanks tabindex="-1">
+          <h2 class="h-section" data-thanks-title>Thanks. We've got it.</h2>
+          <ol class="mt-6 space-y-4" data-steps-enquiry>
+            <li class="flex gap-4"><span class="price text-ink-dim">01</span><span class="text-ink">We reply within one business day.</span></li>
+            <li class="flex gap-4"><span class="price text-ink-dim">02</span><span class="text-ink">A 15-minute call to understand what you need.</span></li>
+            <li class="flex gap-4"><span class="price text-ink-dim">03</span><span class="text-ink">You get a fixed quote within three business days.</span></li>
+          </ol>
+          <ol class="mt-6 hidden space-y-4" data-steps-order>
+            <li class="flex gap-4"><span class="price text-ink-dim">01</span><span class="text-ink">We email your invoice with payment details within one business day.</span></li>
+            <li class="flex gap-4"><span class="price text-ink-dim">02</span><span class="text-ink">You pay by bank transfer or FPX.</span></li>
+            <li class="flex gap-4"><span class="price text-ink-dim">03</span><span class="text-ink">Your download link, licence and install guide arrive by email once payment clears. If you added installation, we finish it within 3 working days.</span></li>
+          </ol>
+          <p class="mt-6 text-ink-dim">
+            In a hurry? <a href={whatsappHref(DEFAULT_WHATSAPP_MESSAGE)} class="link" target="_blank" rel="noopener noreferrer">WhatsApp us</a>.
+          </p>
         </div>
       </div>
-    </Container>
-  </section>
 
-  <!-- Map + location -->
-  <div class="border-b border-line">
-    <Container class="py-6">
-      <div class="grid gap-5 lg:grid-cols-[1fr_320px]">
-        <div class="perspective-wrap relative overflow-hidden rounded-[0.75rem] border border-line" data-reveal="tilt3d">
-          <div
-            id="contact-map"
-            role="img"
-            aria-label="Map showing WSS DevLabs location in Kuala Lumpur"
-            class="h-[320px] w-full bg-paper-dim md:h-[440px]"
-          />
-        </div>
-
-        <!-- Dedicated location card, always visible (not floated over the map) -->
-        <div class="tilt-card card flex flex-col gap-4 p-6">
-          <div class="relative flex h-32 w-full items-center justify-center overflow-hidden rounded-xl border border-line bg-paper-dim">
-            <div class="dot-pattern mask-fade-edges absolute inset-0 opacity-60" aria-hidden="true"></div>
-            <svg class="relative h-9 w-9 text-ink-dim/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
-          </div>
-          <div>
-            <p class="mono-label text-ink-dim">Our Location</p>
-            <p class="mt-2 font-semibold text-ink">{SITE.name}</p>
-            <p class="mt-1 text-sm leading-relaxed text-ink-dim">{SITE.address}</p>
-            <p class="mono-label mt-3 !text-[0.62rem] text-accent">{SITE.hours}</p>
-          </div>
+      <!-- Side panel -->
+      <aside class="space-y-6 lg:pt-4" aria-label="Other ways to reach us">
+        <div class="card p-6">
+          <h2 class="h-sub">Talk to the builder</h2>
           <a
-            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(SITE.address)}`}
+            href={whatsappHref(DEFAULT_WHATSAPP_MESSAGE)}
+            class="btn btn-whatsapp mt-4 w-full"
             target="_blank"
             rel="noopener noreferrer"
-            class="link-underline mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-accent"
+            data-track="whatsapp_click"
           >
-            Get directions
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-            </svg>
+            <WhatsAppIcon class="h-5 w-5" />
+            WhatsApp us
           </a>
+          <ul class="mt-5 space-y-1">
+            <li>
+              <a href={`mailto:${SITE.email}`} class="flex min-h-11 items-center gap-3 text-ink hover:text-accent-dim">
+                <Icon name="mail" class="h-5 w-5 text-ink-dim" />
+                {SITE.email}
+              </a>
+            </li>
+            <li>
+              <a href={phoneHref} class="flex min-h-11 items-center gap-3 text-ink hover:text-accent-dim">
+                <Icon name="phone" class="h-5 w-5 text-ink-dim" />
+                {SITE.phone}
+              </a>
+            </li>
+            <li class="flex min-h-11 items-center gap-3 text-ink">
+              <Icon name="map-pin" class="h-5 w-5 shrink-0 text-ink-dim" />
+              <span>{SITE.registeredAddress || SITE.baseLocation}. {SITE.meetings}.</span>
+            </li>
+            <li class="flex min-h-11 items-center gap-3 text-ink">
+              <Icon name="clock" class="h-5 w-5 text-ink-dim" />
+              {SITE.hours}
+            </li>
+          </ul>
         </div>
-      </div>
+        <div class="rounded-2xl bg-paper-dim p-6">
+          <h2 class="h-sub">What happens next</h2>
+          <ol class="mt-4 space-y-3 text-ink-dim">
+            <li>1. We reply within one business day.</li>
+            <li>2. A 15-minute call to understand what you need.</li>
+            <li>3. A fixed quote within three business days.</li>
+          </ol>
+        </div>
+      </aside>
     </Container>
-  </div>
-
+  </section>
 </BaseLayout>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const success = document.getElementById('c-success');
-  if (form && success) {
-    const dateInput = document.getElementById('c-date') as HTMLInputElement | null;
-    if (dateInput) {
-      dateInput.min = new Date().toISOString().split('T')[0];
+  import { track } from '../scripts/track';
+
+  type Lookup = {
+    packages: Record<string, string>;
+    items: Record<string, string>;
+    orders: Record<string, { name: string; price: number }>;
+  };
+
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const orderPanel = document.querySelector<HTMLElement>('[data-order-panel]');
+  const params = new URLSearchParams(window.location.search);
+  const lookup: Lookup = JSON.parse(orderPanel?.dataset.lookup ?? '{"packages":{},"items":{},"orders":{}}');
+  const format = (amount: number) => `RM${amount.toLocaleString('en-MY')}`;
+
+  const needSelect = form?.querySelector<HTMLSelectElement>('#need');
+  const message = form?.querySelector<HTMLTextAreaElement>('#message');
+  const contact = form?.querySelector<HTMLInputElement>('#contact');
+  const subject = form?.querySelector<HTMLInputElement>('[data-field="subject"]');
+  const context = form?.querySelector<HTMLInputElement>('[data-field="context"]');
+  const termsRow = form?.querySelector<HTMLElement>('[data-terms-row]');
+  const terms = form?.querySelector<HTMLInputElement>('[data-terms]');
+
+  const order = params.get('order');
+  const orderItem = order ? lookup.orders[order] : undefined;
+
+  /* Pre-fill from the link the visitor clicked */
+  const need = params.get('need');
+  const needMap: Record<string, string> = { website: 'Website', system: 'System', custom: 'Custom' };
+  if (needSelect && need && needMap[need]) needSelect.value = needMap[need];
+
+  const packageId = params.get('package');
+  const item = params.get('item');
+  const topic = params.get('topic');
+  if (message && !orderItem) {
+    if (packageId && lookup.packages[packageId]) {
+      message.value = `I'm interested in the ${lookup.packages[packageId]}.`;
+    } else if (item && lookup.items[item]) {
+      const name = lookup.items[item];
+      message.value =
+        topic === 'demo'
+          ? `I'd like a 15-minute screen-share of ${name}.`
+          : topic === 'site-visit'
+            ? `I'd like to book a site visit for ${name}.`
+            : `I'm interested in ${name}.`;
+    }
+  }
+  if (context) context.value = [need, packageId, item, topic].filter(Boolean).join(' / ');
+
+  /* Order mode */
+  const updateTotal = () => {
+    if (!orderPanel || !orderItem) return;
+    let total = orderItem.price;
+    orderPanel.querySelectorAll<HTMLInputElement>('[data-extra]').forEach((box) => {
+      if (box.checked) total += Number(box.dataset.extraPrice ?? 0);
+    });
+    orderPanel.querySelector('[data-order-total]')!.textContent = format(total);
+    return total;
+  };
+
+  if (orderPanel && orderItem && form) {
+    orderPanel.classList.remove('hidden');
+    orderPanel.querySelector('[data-order-name]')!.textContent = orderItem.name;
+    orderPanel.querySelector('[data-order-price]')!.textContent = format(orderItem.price);
+    orderPanel.addEventListener('change', updateTotal);
+    updateTotal();
+
+    document.querySelector('[data-heading]')!.textContent = 'Request your order.';
+    document.querySelector('[data-lead]')!.textContent = 'We email your invoice within one business day. Your download link follows as soon as payment clears.';
+    if (needSelect) needSelect.value = 'System';
+    if (subject) subject.value = `Order request: ${orderItem.name}`;
+    if (contact) {
+      contact.type = 'email';
+      document.querySelector('[data-contact-label]')!.textContent = 'Email for your invoice and licence';
+      document.querySelector('[data-contact-help]')!.textContent = 'We send the invoice, then your download link and licence, to this address.';
+    }
+    termsRow?.classList.replace('hidden', 'flex');
+    if (terms) terms.required = true;
+    form.querySelector('[data-submit-label]')!.textContent = 'Request invoice';
+  }
+
+  /* Submit with inline validation and a clear result */
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+  const submit = form?.querySelector<HTMLButtonElement>('[data-submit]');
+
+  const fail = (text: string, field?: HTMLElement | null) => {
+    if (status) {
+      status.textContent = text;
+      status.className = 'mt-3 text-sm font-semibold text-accent-dim';
+    }
+    field?.focus();
+  };
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form || !submit || !contact) return;
+    if ((form.querySelector('[name="botcheck"]') as HTMLInputElement).checked) return;
+
+    const name = form.querySelector<HTMLInputElement>('#name');
+    const value = contact.value.trim();
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const isPhone = /^\+?[\d\s-]{8,16}$/.test(value);
+
+    if (!name?.value.trim()) return fail('Please add your name.', name);
+    if (orderItem && !isEmail) return fail('Please add a valid email address for your invoice and licence.', contact);
+    if (!orderItem && !isEmail && !isPhone) return fail('Please add a WhatsApp number or an email address so we can reply.', contact);
+    if (!needSelect?.value) return fail('Please choose what you need.', needSelect);
+    if (orderItem && !terms?.checked) return fail('Please confirm you agree to the Licence Agreement and Refund Policy.', terms);
+
+    const data = new FormData(form);
+    if (isEmail) data.set('email', value);
+    else data.set('whatsapp', value);
+
+    if (orderItem && orderPanel) {
+      const extras = Array.from(orderPanel.querySelectorAll<HTMLInputElement>('[data-extra]:checked')).map((box) => box.dataset.extraLabel);
+      data.set('order', `${orderItem.name} licence (${format(orderItem.price)})`);
+      data.set('order_extras', extras.length ? extras.join('; ') : 'None');
+      data.set('order_total_fixed_items', format(updateTotal() ?? orderItem.price));
     }
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = (document.getElementById('c-name') as HTMLInputElement).value;
-      const email = (document.getElementById('c-email') as HTMLInputElement).value;
-      const subjectInput = (document.getElementById('c-subject') as HTMLInputElement).value;
-      const date = (document.getElementById('c-date') as HTMLInputElement)?.value || 'Not specified';
-      const time = (document.getElementById('c-time') as HTMLSelectElement)?.value || 'Not specified';
-      const message = (document.getElementById('c-message') as HTMLTextAreaElement).value;
+    submit.disabled = true;
+    if (status) {
+      status.textContent = 'Sending...';
+      status.className = 'mt-3 text-sm text-ink-dim';
+    }
 
-      const subject = encodeURIComponent(subjectInput || `Quote & Consultation Request from ${name}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nPreferred Online Consultation Date: ${date}\nPreferred Time Slot: ${time}\n\nMessage:\n${message}`
-      );
-      window.location.href = `mailto:info@wssdevlabs.com?subject=${subject}&body=${body}`;
-      success.classList.remove('hidden');
-      form.reset();
-    });
-  }
-</script>
+    try {
+      const response = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: data });
+      const result = (await response.json()) as { success?: boolean; message?: string };
+      if (!result.success) throw new Error(result.message ?? 'Submission failed');
 
-<script>
-  import 'leaflet/dist/leaflet.css';
-  import L from 'leaflet';
-
-  const OFFICE: [number, number] = [3.149, 101.695];
-  let map: L.Map | null = null;
-
-  function initContactMap() {
-    const el = document.getElementById('contact-map');
-    if (!el || map) return;
-
-    map = L.map(el, {
-      center: OFFICE,
-      zoom: 13,
-      scrollWheelZoom: false,
-      zoomControl: false
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 19
-    }).addTo(map);
-
-    L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-    const pin = L.divIcon({
-      className: '',
-      html:
-        '<span style="display:block;height:14px;width:14px;border-radius:9999px;background:var(--color-accent);border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,.35)"></span>',
-      iconSize: [14, 14],
-      iconAnchor: [7, 7]
-    });
-
-    L.marker(OFFICE, { icon: pin }).addTo(map);
-  }
-
-  function teardownContactMap() {
-    map?.remove();
-    map = null;
-  }
-
-  initContactMap();
-  document.addEventListener('astro:page-load', initContactMap);
-  document.addEventListener('astro:before-swap', teardownContactMap);
+      track(orderItem ? 'order_request' : 'form_submit', { need: needSelect?.value ?? '' });
+      form.classList.add('hidden');
+      orderPanel?.classList.add('hidden');
+      const thanks = document.querySelector<HTMLElement>('[data-thanks]');
+      if (thanks) {
+        thanks.classList.remove('hidden');
+        if (orderItem) {
+          thanks.querySelector('[data-thanks-title]')!.textContent = 'Thanks. Your order request is in.';
+          thanks.querySelector('[data-steps-enquiry]')?.classList.add('hidden');
+          thanks.querySelector('[data-steps-order]')?.classList.remove('hidden');
+        }
+        thanks.focus();
+      }
+    } catch (error) {
+      console.error('Contact form submission failed', error);
+      fail("Sorry, that didn't send. Please try again, or WhatsApp or email us directly.");
+    } finally {
+      submit.disabled = false;
+    }
+  });
 </script>

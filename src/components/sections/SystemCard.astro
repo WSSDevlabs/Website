@@ -1,0 +1,27 @@
+---
+import Icon from '../ui/Icon.astro';
+import { formatRM } from '../../data/catalog';
+import { systemPrice, type SystemProduct } from '../../data/systems';
+
+/** Catalogue card: name, one-line benefit, price, one button (audit 3.18). */
+type Props = { system: SystemProduct };
+const { system } = Astro.props;
+const price = systemPrice(system);
+---
+
+<li class="card flex flex-col p-6" data-groups={(system.groups ?? []).join(' ')}>
+  <h3 class="h-sub">{system.name}</h3>
+  <p class="mt-2 flex-1 text-ink-dim">{system.benefit}</p>
+  {
+    price !== null && (
+      <p class="price mt-5 text-2xl">
+        {formatRM(price)}
+        <span class="ml-1 text-sm font-medium text-ink-dim">one-time</span>
+      </p>
+    )
+  }
+  <a href={`/systems/${system.slug}/`} class="link mt-4 inline-flex min-h-11 items-center gap-2 self-start">
+    See details <Icon name="arrow-right" class="h-4 w-4" />
+    <span class="sr-only">for {system.name}</span>
+  </a>
+</li>

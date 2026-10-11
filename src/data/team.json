@@ -3,15 +3,16 @@
     {
       "slug": "razali",
       "name": "Razali",
+      "fullName": "",
       "role": "Founder",
       "photo": "",
-      "bio": "Founder of WSS DevLabs, building custom websites, systems, and software directly for clients with no account managers in between.",
-      "credentials": "",
+      "bio": "I started WSS DevLabs to help Malaysian SMEs own their software instead of renting it. I scope, build and support every project myself, so you always talk to the person doing the work.",
+      "yearsExperience": "",
+      "notable": [],
       "social": {
-        "linkedin": "https://linkedin.com/company/wssdevlabs",
+        "linkedin": "",
         "tiktok": "https://tiktok.com/@wssdevlabs"
-      },
-      "skills": []
+      }
     }
   ]
 }

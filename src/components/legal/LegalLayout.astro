@@ -3,78 +3,139 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../ui/Container.astro';
 
 type TocItem = { id: string; label: string };
-type Accent = 'blue' | 'red' | 'yellow' | 'green';
 
 type Props = {
   title: string;
   description: string;
   path: string;
-  icon: string;
-  accent?: Accent;
   lastUpdated: Date;
   intro: string;
   toc: TocItem[];
 };
 
-const { title, description, path, icon, accent = 'blue', lastUpdated, intro, toc } = Astro.props;
-
-const accentMap: Record<Accent, { bg: string; text: string; ring: string }> = {
-  blue: { bg: 'bg-accent-blue/15', text: 'text-accent-blue', ring: 'ring-accent-blue/25' },
-  red: { bg: 'bg-accent-red/15', text: 'text-accent-red', ring: 'ring-accent-red/25' },
-  yellow: { bg: 'bg-accent-yellow-vivid/15', text: 'text-accent-yellow', ring: 'ring-accent-yellow-vivid/25' },
-  green: { bg: 'bg-accent-green/15', text: 'text-accent-green', ring: 'ring-accent-green/25' }
-};
-const a = accentMap[accent];
-
-const formattedDate = lastUpdated.toLocaleDateString('en-MY', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-});
+const { title, description, path, lastUpdated, intro, toc } = Astro.props;
+const formattedDate = lastUpdated.toLocaleDateString('en-MY', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout title={title} description={description} path={path}>
-  <section class="relative overflow-hidden bg-charcoal pt-28 pb-16 text-white md:pt-36 md:pb-20">
-    <div class="grain-overlay opacity-20" aria-hidden="true"></div>
-    <Container class="relative">
-      <div class:list={['inline-flex h-14 w-14 items-center justify-center rounded-2xl ring-1', a.bg, a.ring]}>
-        <svg class:list={['h-7 w-7', a.text]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path stroke-linecap="round" stroke-linejoin="round" d={icon}></path>
-        </svg>
-      </div>
-      <h1 class="mt-6 font-display text-4xl font-black tracking-tight text-white sm:text-5xl">{title}</h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/65">{intro}</p>
-      <p class="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-white/60">
-        Last updated: {formattedDate}
-      </p>
+  <section class="border-b border-line">
+    <Container class="py-12 md:py-16">
+      <h1 class="h-display max-w-3xl">{title}</h1>
+      <p class="lead mt-5">{intro}</p>
+      <p class="mt-5 text-sm text-ink-dim">Last updated: {formattedDate}</p>
     </Container>
   </section>
 
-  <section class="bg-paper">
-    <Container>
-      <div class="grid gap-12 py-14 md:py-20 lg:grid-cols-[260px_1fr]">
-        <aside class="hidden lg:block">
-          <div class="sticky top-28">
-            <p class="text-xs font-bold uppercase tracking-widest text-ink-dim">On this page</p>
-            <nav class="mt-4 space-y-1 border-l border-line">
-              {
-                toc.map((item) => (
-                  <a
-                    href={`#${item.id}`}
-                    class="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-sm text-ink-dim transition-colors hover:border-accent hover:text-ink"
-                  >
+  <Container>
+    <div class="grid gap-12 py-12 md:py-16 lg:grid-cols-[240px_1fr]">
+      <aside class="hidden lg:block">
+        <nav class="sticky top-24" aria-label="On this page">
+          <p class="text-sm font-semibold text-ink">On this page</p>
+          <ul class="mt-3 border-l border-line">
+            {
+              toc.map((item) => (
+                <li>
+                  <a href={`#${item.id}`} class="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-sm text-ink-dim hover:border-accent hover:text-ink">
                     {item.label}
                   </a>
-                ))
-              }
-            </nav>
-          </div>
-        </aside>
-
-        <div class="min-w-0 space-y-5">
-          <slot />
-        </div>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+      <div class="legal-body min-w-0 max-w-3xl">
+        <slot />
       </div>
-    </Container>
-  </section>
+    </div>
+  </Container>
 </BaseLayout>
+
+<style>
+  .legal-body :global(h2) {
+    margin-top: 2.75rem;
+    scroll-margin-top: 6rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+  }
+
+  .legal-body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .legal-body :global(h3) {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 650;
+    color: var(--color-ink);
+  }
+
+  .legal-body :global(p),
+  .legal-body :global(li) {
+    color: var(--color-ink-dim);
+    line-height: 1.7;
+  }
+
+  .legal-body :global(p) {
+    margin-top: 0.85rem;
+  }
+
+  .legal-body :global(ul),
+  .legal-body :global(ol) {
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+  }
+
+  .legal-body :global(ul) {
+    list-style: disc;
+  }
+
+  .legal-body :global(ol) {
+    list-style: decimal;
+  }
+
+  .legal-body :global(li + li) {
+    margin-top: 0.4rem;
+  }
+
+  .legal-body :global(strong) {
+    color: var(--color-ink);
+  }
+
+  .legal-body :global(a) {
+    color: var(--color-ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--color-line-strong);
+    text-underline-offset: 3px;
+  }
+
+  .legal-body :global(a:hover) {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .legal-body :global(table) {
+    margin-top: 1rem;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .legal-body :global(th),
+  .legal-body :global(td) {
+    border-top: 1px solid var(--color-line);
+    padding: 0.6rem 0.75rem 0.6rem 0;
+    text-align: left;
+    vertical-align: top;
+    color: var(--color-ink-dim);
+  }
+
+  .legal-body :global(th) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+</style>

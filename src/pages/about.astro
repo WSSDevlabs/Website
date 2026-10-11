@@ -1,389 +1,163 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
+import FounderCard from '../components/sections/FounderCard.astro';
+import Reviews from '../components/sections/Reviews.astro';
+import FinalCTA from '../components/sections/FinalCTA.astro';
+import { SITE, phoneHref } from '../data/site';
+import { FOUNDER, founderDisplayName } from '../data/team';
+import { organizationSchema } from '../lib/schema';
 
-const capabilities = [
-  { label: 'Websites, Apps & Systems', detail: 'Typed, custom-coded builds across web, mobile, and internal tools.' },
-  { label: 'Marketing, Branding & Media', detail: 'SEO, paid ads, social media, photography, and brand systems.' },
-  { label: 'Grants & Startup Launches', detail: 'Whatever the brief, from grant-funded builds to a first business launch.' },
-];
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString();
 
-const whyFeatures = [
-  { icon: 'M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z', label: 'One Team, Every Need', desc: 'One team handles your website, app, marketing, and branding together, so everything stays consistent and connected.' },
-  { icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5', label: 'Built Around Your Brief', desc: 'Every project, from a business system to a student capstone, is shaped around exactly what you need.' },
-  { icon: 'M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z', label: 'Direct with the Builder', desc: 'You talk directly to the person doing the work, for faster answers and clearer communication.' },
-  { icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z', label: 'Delivered Properly', desc: 'Fast sites, working systems, and campaigns that convert, built to the same high standard every time.' },
-];
-
-const STEPS = [
+const principles = [
   {
-    n: 1,
-    title: 'Discovery call',
-    description:
-      'A call to walk through your goals, current setup, and budget, before anything is scoped or quoted.'
+    title: 'You own everything.',
+    body: 'Code, domain, data and credentials, all handed over to you. Your domain is registered in your name from day one.'
   },
   {
-    n: 2,
-    title: 'Proposal & quote',
-    description:
-      'A written proposal with scope, deliverables, timeline, and a fixed price, sent for you to review with no obligation.'
+    title: 'The price is the price.',
+    body: 'Fixed quotes and published packages. No hourly billing, and any change gets a fixed price before work starts.'
   },
   {
-    n: 3,
-    title: 'Contract & deposit',
-    description:
-      'A signed agreement and deposit lock in your start date and the scope agreed in the proposal.'
-  },
-  {
-    n: 4,
-    title: 'Kickoff & requirements',
-    description:
-      'A detailed requirements session, plus your brand assets, content, and account access handed over so we can start.'
-  },
-  {
-    n: 5,
-    title: 'Design sign-off',
-    description:
-      'Wireframes first, then high-fidelity UI, reviewed and approved by you before a single line of code is written.'
-  },
-  {
-    n: 6,
-    title: 'Development sprints',
-    description:
-      'Staged sprints with a staging link you can follow, so you see real progress and can redirect early.'
-  },
-  {
-    n: 7,
-    title: 'QA & client review',
-    description:
-      'Internal testing across devices, then your own review round with revisions before anything is called finished.'
-  },
-  {
-    n: 8,
-    title: 'Sign-off, launch & handover',
-    description:
-      'Formal approval, deployment to production, and full source code, credentials, and documentation handed over.'
+    title: 'You talk to the builder.',
+    body: 'No account managers and no hand-offs. The person you message is the person doing the work.'
   }
 ];
 
-const SOLUTION_PHASES = [
-  {
-    title: 'Requirement Analysis',
-    items: [
-      'Client Consultation: We begin by engaging with clients to understand their specific needs, challenges, and goals.',
-      'Feasibility Study: Our team conducts a feasibility study to assess the technical and economic viability of the proposed solution.',
-      'Requirements Gathering: We gather detailed requirements, including functional and non-functional specifications, to ensure a clear understanding of the project scope.'
-    ]
-  },
-  {
-    title: 'Solution Design',
-    items: [
-      'Architecture Design: We design a scalable and robust architecture that integrates IoT devices, data processing systems, and AI algorithms.',
-      'Component Selection: Our team selects the appropriate hardware (sensors, devices) and software (platforms, frameworks) components to meet the project requirements.',
-      'Data Flow Design: We define the data flow, from data collection at the edge to processing, storage, and analysis, ensuring data integrity and security.'
-    ]
-  },
-  {
-    title: 'Prototyping and Proof of Concept (PoC)',
-    items: [
-      'Rapid Prototyping: We develop a prototype to demonstrate the core functionalities of the solution.',
-      'PoC Development: A proof of concept is created to validate the technical approach, test the feasibility, and gather feedback for improvements.',
-      'Client Review: We present the prototype and PoC to the client for review and approval, making necessary adjustments based on their feedback.'
-    ]
-  },
-  {
-    title: 'Development and Integration',
-    items: [
-      'IoT Device Integration: We integrate IoT sensors and devices into the existing infrastructure, ensuring seamless communication and data exchange.',
-      'Software Development: Our software development team creates custom applications and interfaces for data collection, processing, and analysis.',
-      'AI Model Development: We develop and train AI models to analyze the collected data, generate insights, and automate decision-making processes.'
-    ]
-  },
-  {
-    title: 'Testing and Validation',
-    items: [
-      'Unit and Integration Testing: Each component is thoroughly tested to ensure it functions correctly and integrates smoothly with other components.',
-      'Performance Testing: We test the solution for performance, scalability, and reliability under various conditions and loads.',
-      'Security Testing: Our team conducts rigorous security testing to identify and mitigate potential vulnerabilities.'
-    ]
-  },
-  {
-    title: 'Deployment & Ongoing Support',
-    items: [
-      'Deployment Planning: We create a detailed deployment plan, outlining the steps and timeline for rolling out the solution.',
-      "Implementation & Training: We deploy with minimal disruption to existing operations and train your staff to manage the new system confidently.",
-      'Ongoing Maintenance: We keep the solution up-to-date, secure, and performing optimally after launch.',
-      "Technical Support: Our team resolves issues quickly and rolls out continuous improvements based on your feedback."
-    ]
-  }
-];
-
-const KEY_FEATURES = [
-  { title: 'Scalability', desc: 'Our solutions are designed to scale with the growth of your business, accommodating increasing data volumes and expanding device networks.' },
-  { title: 'Security', desc: 'We prioritize security at every stage, implementing robust measures to protect data and ensure compliance with industry standards.' },
-  { title: 'Real-time Analytics', desc: 'Our solutions provide real-time data analytics, enabling prompt decision-making and quick responses to changing conditions.' },
-  { title: 'Customizability', desc: 'Each solution is tailored to the specific needs of the client, ensuring maximum relevance and effectiveness.' },
-  { title: 'Integration Capabilities', desc: 'We ensure seamless integration with existing systems and technologies, enhancing overall operational efficiency.' }
+const facts: [string, string | undefined][] = [
+  ['Registered name', SITE.legalName || undefined],
+  ['Registration no.', SITE.ssmNumber || undefined],
+  ['Founded', SITE.foundedYear || undefined],
+  ['Address', SITE.registeredAddress || undefined],
+  ['Based in', SITE.baseLocation],
+  ['Meetings', SITE.meetings],
+  ['Hours', SITE.hours]
 ];
 ---
 
 <BaseLayout
-  title="About Us: WSS DevLabs"
-  description="WSS DevLabs is a Kuala Lumpur digital solutions team building websites, apps, systems, marketing, branding, and more for businesses, founders, and students."
-  path="/about"
+  title="About WSS DevLabs"
+  description="Founder-led and based in the Klang Valley. WSS DevLabs helps Malaysian SMEs own their software instead of renting it: fixed prices, full source code, no lock-in."
+  path="/about/"
+  schema={organizationSchema(siteUrl)}
 >
-
-  <!-- "About Us" intro block: banner, story, vision/mission + portrait -->
-  <section class="relative overflow-hidden pt-10 md:pt-32">
-    <!-- Vision / Mission with center founder frame -->
-    <Container class="relative pb-16 pt-16 md:pb-20 md:pt-20">
-      <div class="grid gap-6 lg:grid-cols-3 lg:items-center">
-        <div class="card p-8">
-          <h3 class="h-sub text-ink">Our Vision</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the first call Southeast Asian founders, businesses, and students make for anything digital they need built, marketed, or launched.</p>
-        </div>
-
-        <!-- Center founder frame: circular, placeholder until a real photo is added -->
-        <div class="mx-auto flex flex-col items-center">
-          <div class="relative aspect-square w-full max-w-[220px] overflow-hidden rounded-full border-4 border-paper bg-paper-dim shadow-float">
-            <div class="flex h-full w-full items-center justify-center">
-              <svg class="h-20 w-20 text-ink-dim/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.964 0a9 9 0 1 0-11.964 0m11.964 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              </svg>
-            </div>
-          </div>
-          <p class="mt-4 font-semibold text-ink">Razali</p>
-          <p class="text-sm text-ink-dim">Founder of WSS DevLabs</p>
-        </div>
-
-        <div class="card p-8">
-          <h3 class="h-sub text-ink">Our Mission</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To handle any digital need, big or small, with the same care and follow-through, so you never have to piece it together across five different vendors.</p>
-        </div>
-      </div>
-    </Container>
-
-    <!-- About Us content block -->
-    <Container class="relative py-16 md:py-20">
-      <div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-        <!-- Left: abstract identity panel (no stock photos) -->
-        <div class="relative overflow-hidden rounded-3xl border border-line bg-paper-dim shadow-card sm:h-[26rem]">
-          <div class="grid-pattern mask-fade-edges absolute inset-0 opacity-50" aria-hidden="true"></div>
-          <div class="absolute -top-12 -right-12 h-56 w-56 rounded-full bg-accent/10 blur-3xl" aria-hidden="true"></div>
-          <div class="absolute -bottom-12 -left-12 h-56 w-56 rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
-          <div class="relative flex h-full flex-col items-center justify-center gap-4 p-10 text-center">
-            <span class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-ink shadow-sm ring-1 ring-line/80">
-              <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.964 0a9 9 0 1 0-11.964 0m11.964 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              </svg>
-            </span>
-            <p class="font-semibold text-ink">One founder, every build</p>
-            <p class="max-w-xs text-sm text-ink-dim">No account managers, no outsourcing. Razali builds it, ships it, and supports it.</p>
-          </div>
-        </div>
-
-        <!-- Right: story + capability rows -->
-        <div>
-          <h1 class="h-display !text-[clamp(2rem,1.4rem+2.4vw,3.2rem)]" data-split>One team, whatever <span class="badge-highlight">the digital need</span></h1>
-          <p class="mt-5 leading-relaxed text-ink-dim">
-            WSS DevLabs started as a small software team, then kept growing because clients kept
-            asking for more: not just a website, but the marketing to bring it traffic; not just an
-            app, but the brand behind it. So we built the team to match. Today we take on whatever a
-            business, a founder, or even a student needs built, marketed, or launched, all under one
-            roof, with no lock-in and no hidden dependencies.
-          </p>
-
-          <div class="mt-8">
-            {capabilities.map((cap, i) => (
-              <div class:list={['flex items-start gap-4 py-4', i > 0 && 'border-t border-line']}>
-                <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent/8">
-                  <svg class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                </span>
-                <div>
-                  <p class="font-semibold text-ink">{cap.label}</p>
-                  <p class="mt-0.5 text-sm text-ink-dim">{cap.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+  <!-- 1. Founder: photo, name, three sentences (audit A3, A4) -->
+  <section class="border-b border-line">
+    <Container class="grid items-center gap-10 py-14 md:grid-cols-[auto_1fr] md:py-20">
+      <FounderCard size="lg" />
+      <div class="max-w-2xl">
+        <h1 class="h-display">Hi, I'm {founderDisplayName}.</h1>
+        <p class="lead mt-5">
+          I run WSS DevLabs. It's founder-led: I scope, build and support every project myself. When a job needs a specialist,
+          such as a licensed electrician for hardware, I tell you upfront who they are and what they do.
+        </p>
+        {
+          FOUNDER.yearsExperience && (
+            <p class="mt-4 text-ink-dim">{FOUNDER.yearsExperience} years of building software.</p>
+          )
+        }
+        {
+          FOUNDER.notable && FOUNDER.notable.length > 0 && (
+            <ul class="mt-4 list-disc space-y-1 pl-5 text-ink-dim">
+              {FOUNDER.notable.map((item) => <li>{item}</li>)}
+            </ul>
+          )
+        }
+        {
+          FOUNDER.social?.linkedin && (
+            <a href={FOUNDER.social.linkedin} class="link mt-5 inline-flex min-h-11 items-center" target="_blank" rel="noopener noreferrer">
+              Connect on LinkedIn
+            </a>
+          )
+        }
       </div>
     </Container>
   </section>
 
-  <!-- Why choose us -->
-  <section class="relative bg-paper-dim py-12 md:py-16">
-    <div class="hairline absolute inset-x-0 top-0" aria-hidden="true"></div>
+  <!-- 2. Mission, vision and three principles (audit 1.4) -->
+  <section class="py-16 md:py-20">
     <Container>
-      <div class="grid gap-12 md:grid-cols-2 md:items-center md:gap-16">
-        <!-- Left: abstract panel + ownership chip (no stock photos) -->
-        <div class="relative overflow-hidden rounded-3xl border border-line bg-paper shadow-card h-72 sm:h-80">
-          <div class="dot-pattern mask-fade-edges absolute inset-0 opacity-60" aria-hidden="true"></div>
-          <div class="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/8 blur-3xl" aria-hidden="true"></div>
-          <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-2xl border border-line bg-paper px-5 py-3.5 text-center shadow-float">
-            <p class="stat-num text-xl leading-none text-ink">100%</p>
-            <p class="mono-label mt-1.5 !text-[0.6rem] text-ink-dim">Code ownership</p>
-          </div>
-        </div>
-
-        <!-- Right: heading + 2x2 features -->
+      <div class="grid gap-10 md:grid-cols-2">
         <div>
-          <h2 class="h-section" data-split>Why our clients believe we're different</h2>
-          <div class="mt-9 grid gap-x-8 gap-y-7 sm:grid-cols-2" data-stagger>
-            {whyFeatures.map((f) => (
-              <div data-stagger-child>
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/8">
-                  <svg class="h-[18px] w-[18px] text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d={f.icon} /></svg>
-                </span>
-                <p class="mt-3.5 font-semibold tracking-tight text-ink">{f.label}</p>
-                <p class="mt-1.5 text-sm leading-relaxed text-ink-dim">{f.desc}</p>
-              </div>
-            ))}
-          </div>
+          <h2 class="h-sub text-ink-dim">Mission</h2>
+          <p class="mt-3 font-display text-2xl font-semibold leading-snug text-ink sm:text-3xl">
+            Help Malaysian SMEs own their software instead of renting it: fixed price, full source code, no lock-in.
+          </p>
+        </div>
+        <div>
+          <h2 class="h-sub text-ink-dim">Vision</h2>
+          <p class="mt-3 font-display text-2xl font-semibold leading-snug text-ink sm:text-3xl">
+            A Malaysia where a 10-person business runs on software it owns and controls, not a stack of subscriptions it can't escape.
+          </p>
         </div>
       </div>
+      <h2 class="h-section mt-16">Three principles</h2>
+      <ol class="mt-8 grid gap-8 md:grid-cols-3">
+        {
+          principles.map((principle) => (
+            <li class="border-t-2 border-ink pt-5">
+              <h3 class="h-sub">{principle.title}</h3>
+              <p class="mt-2 text-ink-dim">{principle.body}</p>
+            </li>
+          ))
+        }
+      </ol>
     </Container>
   </section>
 
-  <!-- Eight-step scroll timeline: matte-dark, alternating, line fills as you scroll -->
-  <section id="process" class="relative overflow-hidden bg-charcoal py-16 md:py-24">
-    <div
-      class="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:radial-gradient(circle,white_1px,transparent_1px)] [background-size:26px_26px]"
-      aria-hidden="true"
-    />
-    <Container class="relative">
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="h-display-xl !text-[clamp(2.1rem,1.5rem+2vw,3.1rem)] text-white" data-split>
-          How we get you to launch
-        </h2>
-        <p class="mt-4 leading-relaxed text-white/60">
-          From the first call to sign-off, here is exactly what happens and when.
+  <!-- 3. The story (audit A5: the "own, don't rent" origin) -->
+  <section class="bg-paper-dim py-16 md:py-20">
+    <Container narrow>
+      <h2 class="h-section">Why WSS DevLabs exists</h2>
+      <div class="mt-6 space-y-4 text-lg text-ink-dim">
+        <p>
+          Small businesses in Malaysia pay monthly for almost everything: the POS, the attendance app, the booking tool, the website
+          builder. Each bill looks small. Together they never stop, and the business never owns any of it. Stop paying, and the
+          software and often the data go with it.
+        </p>
+        <p>
+          WSS DevLabs exists to offer the other way: pay a fixed price once, get the full source code, and keep the system running
+          on hosting you control. When you want help, a Care Plan covers real ongoing work. You're never charged rent just to keep
+          using what you bought.
+        </p>
+        <p>
+          We focus on Malaysian SMEs with 5 to 100 staff, and we keep our offer small on purpose: websites, ready-made systems and
+          custom builds. If we can't show it, we don't sell it.
         </p>
       </div>
+    </Container>
+  </section>
 
-      <div class="relative mt-16" data-timeline-track>
-        <!-- Base rule + scroll-scrubbed fill, desktop -->
-        <div class="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 md:block" aria-hidden="true">
-          <div class="absolute inset-0 bg-white/10" />
-          <div class="absolute inset-0 bg-accent" style="transform-origin: top; transform: scaleY(0);" data-timeline-fill />
-        </div>
-        <!-- Mobile rule -->
-        <div class="absolute left-4 top-0 h-full w-px bg-white/10 md:hidden" aria-hidden="true" />
+  <!-- 4. Reviews: real ones only, shown once published with permission -->
+  <Reviews id="reviews" title="What clients say" />
 
-        <div class="space-y-10 md:space-y-4">
-          {
-            STEPS.map((s, i) => (
-              <div class="relative grid items-start gap-6 pl-12 md:grid-cols-[1fr_2.5rem_1fr] md:gap-x-8 md:pl-0">
-                <span
-                  class="stat-num absolute left-4 top-0 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-accent text-xs text-white ring-4 ring-charcoal md:relative md:left-auto md:top-auto md:col-start-2 md:mx-auto md:-translate-x-0"
-                >
-                  {s.n}
-                </span>
-
-                {i % 2 === 0 ? (
-                  <>
-                    <div
-                      class="rounded-3xl border border-white/10 bg-charcoal-soft p-6 md:col-start-1 md:row-start-1"
-                      data-reveal="tilt3d"
-                    >
-                      <h3 class="text-lg font-semibold tracking-tight text-white">{s.title}</h3>
-                      <p class="mt-2 text-sm leading-relaxed text-white/60">{s.description}</p>
-                    </div>
-                    <div class="hidden md:col-start-3 md:row-start-1 md:block" aria-hidden="true" />
-                  </>
-                ) : (
-                  <>
-                    <div class="hidden md:col-start-1 md:row-start-1 md:block" aria-hidden="true" />
-                    <div
-                      class="rounded-3xl border border-white/10 bg-charcoal-soft p-6 md:col-start-3 md:row-start-1"
-                      data-reveal="tilt3d"
-                    >
-                      <h3 class="text-lg font-semibold tracking-tight text-white">{s.title}</h3>
-                      <p class="mt-2 text-sm leading-relaxed text-white/60">{s.description}</p>
-                    </div>
-                  </>
-                )}
+  <!-- 5. Company facts (audit A9, L1) -->
+  <section class="py-16 md:py-20" id="company">
+    <Container>
+      <h2 class="h-section">Company details</h2>
+      <dl class="mt-8 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          facts
+            .filter(([, value]) => Boolean(value))
+            .map(([label, value]) => (
+              <div class="border-t border-line pt-4">
+                <dt class="text-sm font-semibold text-ink-dim">{label}</dt>
+                <dd class="mt-1 text-lg text-ink">{value}</dd>
               </div>
             ))
-          }
+        }
+        <div class="border-t border-line pt-4">
+          <dt class="text-sm font-semibold text-ink-dim">Email</dt>
+          <dd class="mt-1 text-lg"><a href={`mailto:${SITE.email}`} class="link">{SITE.email}</a></dd>
         </div>
-      </div>
+        <div class="border-t border-line pt-4">
+          <dt class="text-sm font-semibold text-ink-dim">Phone and WhatsApp</dt>
+          <dd class="mt-1 text-lg"><a href={phoneHref} class="link">{SITE.phone}</a></dd>
+        </div>
+      </dl>
     </Container>
   </section>
 
-  <!-- Solution Development Process (IoT/AI project deep-dive) -->
-  <section class="py-16 md:py-24 bg-paper">
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="h-section" data-split>The Solution Development Process</h2>
-      </div>
-
-      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          SOLUTION_PHASES.map((phase, i) => (
-            <div class="rounded-3xl border border-line bg-white p-6 shadow-card">
-              <span class="font-feature text-2xl font-black text-accent">{String(i + 1).padStart(2, '0')}</span>
-              <h3 class="mt-2 text-base font-bold text-ink">{phase.title}</h3>
-              <ul class="mt-4 space-y-2.5">
-                {phase.items.map((item) => {
-                  const [head, ...rest] = item.split(': ');
-                  const desc = rest.join(': ');
-                  return (
-                    <li class="text-xs leading-relaxed text-ink-dim">
-                      <strong class="text-ink">{head}:</strong> {desc}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
-    </Container>
-  </section>
-
-  <!-- Key Features of Our Solutions -->
-  <section class="py-16 md:py-24 bg-paper-dim border-t border-line/60">
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="h-section" data-split>Key Features of Our Solutions</h2>
-      </div>
-
-      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {
-          KEY_FEATURES.map((f) => (
-            <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
-              <h3 class="text-sm font-bold text-ink">{f.title}</h3>
-              <p class="mt-2 text-xs leading-relaxed text-ink-dim">{f.desc}</p>
-            </div>
-          ))
-        }
-      </div>
-    </Container>
-  </section>
+  <FinalCTA title="Tell us what you need." />
 </BaseLayout>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  function initTimelineFill() {
-    const track = document.querySelector<HTMLElement>('[data-timeline-track]');
-    const fill = document.querySelector<HTMLElement>('[data-timeline-fill]');
-    if (!track || !fill) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    gsap.to(fill, {
-      scaleY: 1,
-      ease: 'none',
-      scrollTrigger: { trigger: track, start: 'top 65%', end: 'bottom 65%', scrub: true }
-    });
-  }
-
-  initTimelineFill();
-  document.addEventListener('astro:page-load', initTimelineFill);
-</script>

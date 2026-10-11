@@ -1,111 +1,81 @@
 ---
 import LegalLayout from '../components/legal/LegalLayout.astro';
-import LegalSection from '../components/legal/LegalSection.astro';
-import { SITE } from '../data/site';
+import LegalIdentity from '../components/legal/LegalIdentity.astro';
 
-const lastUpdated = new Date('2026-01-01');
-
-const email = SITE.email
-  ? { user: SITE.email.split('@')[0], domain: SITE.email.split('@')[1] }
-  : null;
+const lastUpdated = new Date('2026-10-11');
 
 const toc = [
-  { id: 'what-are-cookies', label: '1. What are cookies' },
-  { id: 'what-we-use', label: '2. What we use' },
-  { id: 'consent-banner', label: '3. Our consent banner' },
-  { id: 'local-storage', label: '4. Local storage' },
-  { id: 'third-party', label: '5. Third-party services' },
-  { id: 'your-choices', label: '6. Your choices' },
-  { id: 'changes', label: '7. Changes to this policy' },
-  { id: 'contact', label: '8. Contact' }
+  { id: 'short-version', label: 'The short version' },
+  { id: 'what-runs', label: 'What runs on this site' },
+  { id: 'no-banner', label: 'Why there is no cookie banner' },
+  { id: 'control', label: 'Your choices' },
+  { id: 'changes', label: 'Changes' }
 ];
 ---
 
 <LegalLayout
   title="Cookie Policy"
-  description="How WSS DevLabs uses cookies, local storage, and similar technologies on this website, and how our cookie consent banner works."
-  path="/cookies"
-  icon="M21 12a9 9 0 11-9-9 3 3 0 003 3 3 3 0 003 3 3 3 0 003 3z M8.5 10.5h.01 M11 15h.01 M15 14h.01"
-  accent="yellow"
+  description="WSS DevLabs doesn't use tracking or advertising cookies. Our analytics are cookieless. Here is exactly what runs on this website."
+  path="/cookies/"
   lastUpdated={lastUpdated}
-  intro="We keep this simple: no tracking cookies, no cross-site profiling, and nothing beyond essential site function runs until you actively click Allow on our consent banner."
+  intro="We don't use tracking or advertising cookies. This page lists exactly what runs on this website, and it matches what the site actually does."
   toc={toc}
 >
-  <LegalSection id="what-are-cookies" number="1" title="What are cookies">
-    <p>
-      Cookies are small text files a website can store on your device to remember information
-      between visits. "Similar technologies" includes local storage, which works like a cookie but
-      is only readable by our own site, not shared across other websites.
-    </p>
-  </LegalSection>
+  <h2 id="short-version">The short version</h2>
+  <ul>
+    <li>We don't set any cookies of our own.</li>
+    <li>Our visitor statistics are cookieless and anonymous.</li>
+    <li>Nothing on this site follows you to other websites.</li>
+  </ul>
+  <LegalIdentity />
 
-  <LegalSection id="what-we-use" number="2" title="What we use">
-    <p>
-      This site uses Cloudflare Web Analytics, a privacy-friendly analytics service that does not
-      use tracking cookies, does not fingerprint your device, and does not collect personally
-      identifiable information. It only tells us aggregate information such as which pages are
-      popular and roughly how visitors found us.
-    </p>
-    <p>
-      This script is not loaded by default. It only runs after you click "Allow cookies" on our
-      consent banner, described below.
-    </p>
-  </LegalSection>
+  <h2 id="what-runs">What runs on this site</h2>
+  <table>
+    <thead>
+      <tr><th>Service</th><th>What it does</th><th>Cookies</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cloudflare (hosting and security)</td>
+        <td>Delivers the site and blocks attacks and bots.</td>
+        <td>May set strictly necessary security cookies, such as <code>__cf_bm</code>, to tell people from bots. They don't identify you.</td>
+      </tr>
+      <tr>
+        <td>Cloudflare Web Analytics</td>
+        <td>Counts page views, device types and countries, as anonymous totals.</td>
+        <td>None. It's cookieless and doesn't track you across sites.</td>
+      </tr>
+      <tr>
+        <td>Button and form statistics</td>
+        <td>Counts clicks on our WhatsApp and quote buttons, and form submissions, so we know which pages help people reach us.</td>
+        <td>None.</td>
+      </tr>
+      <tr>
+        <td>Web3Forms</td>
+        <td>Delivers our contact form to our inbox. Runs only when you press send.</td>
+        <td>None.</td>
+      </tr>
+      <tr>
+        <td>WhatsApp</td>
+        <td>Opens a chat with us, only when you click a WhatsApp button.</td>
+        <td>None on this site. WhatsApp's own policy applies once you're there.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>The site doesn't store anything in your browser's local storage either.</p>
 
-  <LegalSection id="consent-banner" number="3" title="Our consent banner">
-    <p>
-      When you first visit our site, you'll see a banner asking you to Allow or Reject
-      non-essential cookies/analytics.
-    </p>
-    <ul>
-      <li><strong>Allow cookies:</strong> we load Cloudflare Web Analytics for that visit and remember your choice in local storage so you aren't asked again.</li>
-      <li><strong>Reject:</strong> analytics stays switched off, and we remember your choice so the banner doesn't reappear on every visit.</li>
-      <li>Nothing beyond what's required to render the page and remember your choice is loaded before you decide.</li>
-    </ul>
-  </LegalSection>
+  <h2 id="no-banner">Why there is no cookie banner</h2>
+  <p>
+    Cookie banners exist to ask permission for non-essential cookies. We don't use any, so there is nothing to ask permission for,
+    and you get a calmer page. If we ever add something that needs your consent, we'll ask first and update this page.
+  </p>
 
-  <LegalSection id="local-storage" number="4" title="Local storage">
-    <p>
-      We use your browser's local storage (not a cookie) to remember two things: whether you've
-      responded to the cookie banner, and whether you've seen our one-time welcome/intro animation.
-      Neither is shared with us or any third party &mdash; it stays entirely in your browser.
-    </p>
-  </LegalSection>
+  <h2 id="control">Your choices</h2>
+  <p>
+    You can block or delete cookies in your browser settings at any time. The site works normally without them. For how we handle
+    personal data, see our <a href="/privacy/">Privacy Notice</a>.
+  </p>
 
-  <LegalSection id="third-party" number="5" title="Third-party services">
-    <p>A small number of third-party tools support core site functionality:</p>
-    <ul>
-      <li><strong>Web3Forms:</strong> processes contact form submissions solely to deliver your enquiry to us. Refer to their own privacy policy for details on how they handle submitted data in transit.</li>
-      <li><strong>Botpress:</strong> powers the chat widget in the corner of the site. It may set its own technical cookies/local storage needed to maintain a chat session; refer to Botpress's privacy policy for details.</li>
-      <li><strong>Cloudflare:</strong> our hosting and content-delivery provider, which may process standard connection-level technical data (such as IP address) as part of serving the website securely, independent of the analytics choice above.</li>
-    </ul>
-  </LegalSection>
-
-  <LegalSection id="your-choices" number="6" title="Your choices">
-    <ul>
-      <li>You can change your mind at any time by clearing your browser's local storage for this site, which will bring the consent banner back on your next visit.</li>
-      <li>You can block or delete cookies and local storage entirely through your browser settings; core site functionality and content will still work, though the chat widget or consent memory may reset.</li>
-      <li>Rejecting analytics never affects your ability to browse, request a quote, or use any part of the site.</li>
-    </ul>
-  </LegalSection>
-
-  <LegalSection id="changes" number="7" title="Changes to this policy">
-    <p>
-      We may update this policy as our tools change. The "Last updated" date at the top of this
-      page always reflects the current version.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="contact" number="8" title="Contact">
-    <p>
-      Questions about this policy can be sent to{' '}
-      {
-        email ? (
-          <span data-email-user={email.user} data-email-domain={email.domain}>our contact email</span>
-        ) : (
-          'our contact email'
-        )
-      }.
-    </p>
-  </LegalSection>
+  <h2 id="changes">Changes</h2>
+  <p>We update this page whenever what runs on the site changes. The date at the top shows the latest version.</p>
 </LegalLayout>

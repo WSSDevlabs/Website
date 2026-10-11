@@ -1,33 +1,228 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/sections/Hero.astro';
-import HomepageServices from '../components/sections/HomepageServices.astro';
-import PartnersMarquee from '../components/sections/PartnersMarquee.astro';
-import Testimonials from '../components/sections/Testimonials.astro';
-import ElevateCTA from '../components/sections/ElevateCTA.astro';
-import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
+import Container from '../components/ui/Container.astro';
+import Icon from '../components/ui/Icon.astro';
+import FaqList from '../components/ui/FaqList.astro';
+import FounderCard from '../components/sections/FounderCard.astro';
+import CaseStudies from '../components/sections/CaseStudies.astro';
+import Reviews from '../components/sections/Reviews.astro';
+import FinalCTA from '../components/sections/FinalCTA.astro';
+import { CUSTOM, FOUNDING_CLIENT, RENT_VS_OWN, SYSTEM_EXTRAS, SYSTEM_TIERS, WEBSITE_PACKAGES, formatRM, subscriptionTotal } from '../data/catalog';
+import { HOME_FAQ } from '../data/faqs';
+import { HOW_IT_WORKS } from '../data/process';
+import { SITE } from '../data/site';
+import { founderDisplayName } from '../data/team';
+import { faqSchema, organizationSchema } from '../lib/schema';
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'WSS DevLabs',
-  url: Astro.site?.toString(),
-  description:
-    'SME productized tech & custom engineering partner: WSS Express websites, Buy-Once Marketplace systems, AI development, and Bespoke Enterprise solutions.'
-};
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString();
+
+const websiteFrom = Math.min(...WEBSITE_PACKAGES.map((p) => p.price));
+const systemFrom = Math.min(...Object.values(SYSTEM_TIERS).map((t) => t.price));
+const ownTotal = SYSTEM_TIERS.standard.price + SYSTEM_EXTRAS.installation.price;
+const ownShare = Math.round((ownTotal / subscriptionTotal) * 100);
+const slotsLeft = Math.max(0, Math.min(FOUNDING_CLIENT.totalSlots, SITE.foundingSlotsLeft));
+
+const choices = [
+  {
+    need: 'A website',
+    price: `From ${formatRM(websiteFrom)}`,
+    detail: 'Live in 5 working days',
+    cta: 'See websites',
+    href: '/websites/',
+    dark: false
+  },
+  {
+    need: 'A system to run my business',
+    price: `From ${formatRM(systemFrom)}, one-time`,
+    detail: 'Pay once, use forever',
+    cta: 'See systems',
+    href: '/systems/',
+    dark: true
+  },
+  {
+    need: 'Something built just for us',
+    price: `From ${formatRM(CUSTOM.build.from)}`,
+    detail: 'Fixed quote after a Discovery Sprint',
+    cta: 'Tell us more',
+    href: '/custom/',
+    dark: false
+  }
+];
 ---
 
 <BaseLayout
-  title="WSS DevLabs: Productized Services, Marketplace & Bespoke Engineering"
-  description="High-performance websites, Buy-Once production systems, AI automation, and custom enterprise engineering with 2026 Government Grant funding matching."
+  title="Websites & Business Systems for Malaysian SMEs at a Fixed Price"
+  description={`Fixed-price websites from ${formatRM(websiteFrom)} and buy-once business systems with full source code. No monthly SaaS fees.`}
   path="/"
-  schema={schema}
+  schema={[organizationSchema(siteUrl), faqSchema(HOME_FAQ)]}
 >
-  <Hero />
-  <HomepageServices />
-  <PartnersMarquee />
-  <Testimonials />
-  <ElevateCTA />
-  <MarketplaceAndExpressBanner />
-</BaseLayout>
+  <!-- 1. Hero: one message, one button (audit H3, H4, V8) -->
+  <section class="border-b border-line">
+    <Container class="py-16 text-center sm:py-20 md:py-24">
+      <h1 class="h-display mx-auto max-w-4xl">
+        <span class="block">Software you own.</span>{' '}
+        <span class="highlight mt-2">Not rent.</span>
+      </h1>
+      <p class="lead mx-auto mt-6">
+        Fixed-price websites and ready-made business systems for Malaysian SMEs. Full source code, no monthly SaaS fees.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
+        <a href="/contact/" class="btn btn-primary btn-lg" data-track="quote_click">Get a fixed quote</a>
+        <a href="/systems/" class="link inline-flex min-h-11 items-center">or see our systems</a>
+      </div>
+    </Container>
+  </section>
 
+  <!-- 2. Chooser: three choices in the customer's words (audit 2.5) -->
+  <section class="py-16 md:py-20">
+    <Container>
+      <h2 class="h-section">What do you need?</h2>
+      <ul class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          choices.map((choice) => (
+            <li>
+              <a
+                href={choice.href}
+                class:list={[
+                  'group flex h-full flex-col rounded-2xl border p-6 transition-colors sm:p-7',
+                  choice.dark ? 'border-ink bg-ink text-white' : 'border-line bg-white hover:border-ink'
+                ]}
+              >
+                <span class:list={['font-display text-2xl font-bold', choice.dark ? 'text-white' : 'text-ink']}>{choice.need}</span>
+                <span class:list={['price mt-6 text-xl', choice.dark && 'text-white']}>{choice.price}</span>
+                <span class:list={['mt-1', choice.dark ? 'text-white/85' : 'text-ink-dim']}>{choice.detail}</span>
+                <span class:list={['mt-8 inline-flex min-h-11 items-center gap-2 font-semibold', choice.dark ? 'text-white' : 'text-ink']}>
+                  {choice.cta}
+                  <Icon name="arrow-right" class="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </Container>
+  </section>
+
+  <!-- 3. Own vs rent: the strongest argument, with real numbers (audit 3.2, 12.4 C1) -->
+  <section class="bg-paper-dim py-16 md:py-24">
+    <Container class="grid items-center gap-10 md:grid-cols-2">
+      <div>
+        <h2 class="h-section">Owning beats renting.</h2>
+        <p class="lead mt-5">
+          A typical POS subscription costs {formatRM(RENT_VS_OWN.subscriptionMonthly)} a month. Over three years that's{' '}
+          {formatRM(subscriptionTotal)}, and if you stop paying, you lose access.
+        </p>
+        <p class="mt-4 text-ink-dim">
+          To be fair, subscriptions include hosting and updates. When you own, you pay for your own hosting and can add a Care
+          Plan if you want us to look after it. The calculator shows both sides, so you can decide with your own numbers.
+        </p>
+        <a href="/systems/#calculator" class="link mt-6 inline-flex min-h-11 items-center gap-2">
+          Work out your own numbers <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+      <figure class="card p-6 sm:p-8">
+        <figcaption class="text-sm font-semibold text-ink-dim">Point of sale, 3 years</figcaption>
+        <div class="mt-6">
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="font-semibold text-ink">Subscription POS</span>
+            <span class="price text-2xl">{formatRM(subscriptionTotal)}</span>
+          </div>
+          <div class="mt-2 h-4 w-full rounded-full bg-ink"></div>
+          <p class="mt-1 text-sm text-ink-dim">{formatRM(RENT_VS_OWN.subscriptionMonthly)} a month, for 36 months</p>
+        </div>
+        <div class="mt-6">
+          <div class="flex items-baseline justify-between gap-3">
+            <span class="font-semibold text-ink">WSS POS, owned</span>
+            <span class="price text-2xl">{formatRM(ownTotal)}</span>
+          </div>
+          <div class="mt-2 h-4 rounded-full bg-accent" style={`width: ${ownShare}%`}></div>
+          <p class="mt-1 text-sm text-ink-dim">
+            {formatRM(SYSTEM_TIERS.standard.price)} licence + {formatRM(SYSTEM_EXTRAS.installation.price)} installation, plus your hosting
+          </p>
+        </div>
+        <p class="mt-6 text-xs text-muted">
+          Subscription figure: a published Malaysian POS entry plan, checked {RENT_VS_OWN.checked}. Prices change, so check current rates.
+        </p>
+      </figure>
+    </Container>
+  </section>
+
+  <!-- 4. Proof: real case studies and reviews only. Hidden until they exist (audit H6, H9). -->
+  <CaseStudies />
+  <Reviews />
+
+  <!-- 5. How it works: one process, three steps -->
+  <section class="py-16 md:py-24">
+    <Container>
+      <h2 class="h-section">How it works</h2>
+      <ol class="mt-10 grid gap-8 md:grid-cols-3">
+        {
+          HOW_IT_WORKS.map((step, index) => (
+            <li class="border-t-2 border-ink pt-5">
+              <span class="price text-sm text-ink-dim" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 class="h-sub mt-2">{step.title}</h3>
+              <p class="mt-2 text-ink-dim">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </Container>
+  </section>
+
+  <!-- 6. Founder: SMEs buy from people (audit A4) -->
+  <section class="bg-paper-dim py-16 md:py-20">
+    <Container class="flex flex-col gap-8 sm:flex-row sm:items-center">
+      <FounderCard size="lg" />
+      <div class="max-w-2xl">
+        <h2 class="h-section">You talk to the builder.</h2>
+        <p class="lead mt-4">
+          I'm {founderDisplayName}. I started WSS DevLabs because too many small businesses pay rent on software they will never
+          own. I scope, build and support every project myself.
+        </p>
+        <a href="/about/" class="link mt-5 inline-flex min-h-11 items-center gap-2">
+          About me and how I work <Icon name="arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="py-16 md:py-24">
+    <Container narrow>
+      <h2 class="h-section">Questions</h2>
+      <FaqList items={HOME_FAQ} class="mt-8" />
+    </Container>
+  </section>
+
+  <!-- 8. Final CTA with the Founding Client Programme (audit 12.4 G) -->
+  <FinalCTA title="Tell us what you need.">
+    {
+      slotsLeft > 0 && (
+        <div id="founding-clients" class="mx-auto mt-10 max-w-2xl rounded-2xl border border-white/20 p-6 text-left">
+          <p class="font-display text-xl font-bold text-white">
+            Founding Client Programme: {slotsLeft} of {FOUNDING_CLIENT.totalSlots} places left
+          </p>
+          <p class="mt-2 text-white/85">
+            Our first {FOUNDING_CLIENT.totalSlots} clients get {FOUNDING_CLIENT.discountPercent}% off {FOUNDING_CLIENT.appliesTo}{' '}
+            (not {FOUNDING_CLIENT.excludes}). In return, you give us a case study with real results, an honest Google review,
+            permission to show your logo and screenshots, and a 15-minute feedback call.
+          </p>
+          <ul class="mt-4 grid gap-2 text-white sm:grid-cols-3">
+            {FOUNDING_CLIENT.effectivePrices.map((item) => (
+              <li>
+                <span class="block text-sm text-white/85">{item.name}</span>
+                <span class="price text-lg text-white">{formatRM(item.price)}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-4 text-sm text-white/85">
+            The offer ends when all {FOUNDING_CLIENT.totalSlots} places are taken. Full terms are on the{' '}
+            <a href="/terms/#founding-clients" class="font-semibold text-white underline underline-offset-4">Terms page</a>.
+          </p>
+        </div>
+      )
+    }
+  </FinalCTA>
+</BaseLayout>

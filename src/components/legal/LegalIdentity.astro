@@ -1,0 +1,22 @@
+---
+import { SITE, businessName } from '../../data/site';
+
+/** Who we are: shown in every policy (audit L1, 14.6). Fields appear as soon as they're filled in site.json. */
+type Props = { lang?: 'en' | 'ms' };
+const { lang = 'en' } = Astro.props;
+const t =
+  lang === 'ms'
+    ? { trading: 'Nama dagangan', reg: 'No. pendaftaran SSM', address: 'Alamat berdaftar', based: 'Lokasi', email: 'E-mel', phone: 'Telefon dan WhatsApp' }
+    : { trading: 'Trading name', reg: 'SSM registration no.', address: 'Registered address', based: 'Based in', email: 'Email', phone: 'Phone and WhatsApp' };
+---
+
+<div class="mt-4 rounded-2xl border border-line bg-white p-5">
+  <p class="!mt-0 font-semibold text-ink">{businessName}</p>
+  <ul class="!mt-2 !list-none !pl-0 text-sm">
+    {SITE.legalName && SITE.legalName !== SITE.name && <li>{t.trading}: {SITE.name}</li>}
+    {SITE.ssmNumber && <li>{t.reg}: {SITE.ssmNumber}</li>}
+    {SITE.registeredAddress ? <li>{t.address}: {SITE.registeredAddress}</li> : <li>{t.based}: {SITE.baseLocation}</li>}
+    <li>{t.email}: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+    <li>{t.phone}: {SITE.phone}</li>
+  </ul>
+</div>

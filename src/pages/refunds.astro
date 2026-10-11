@@ -1,0 +1,79 @@
+---
+import LegalLayout from '../components/legal/LegalLayout.astro';
+import LegalIdentity from '../components/legal/LegalIdentity.astro';
+import { LICENCE_TERMS } from '../data/catalog';
+import { SITE } from '../data/site';
+
+const lastUpdated = new Date('2026-10-11');
+
+const toc = [
+  { id: 'summary', label: 'Summary' },
+  { id: 'websites-custom', label: 'Websites and custom builds' },
+  { id: 'discovery', label: 'Discovery Sprint and Rescue Audit' },
+  { id: 'systems', label: 'Ready-made systems' },
+  { id: 'care', label: 'Care Plans' },
+  { id: 'third-party', label: 'Third-party costs and hardware' },
+  { id: 'how', label: 'How to ask for a refund' }
+];
+---
+
+<LegalLayout
+  title="Refund Policy"
+  description="When WSS DevLabs refunds deposits, licence fees and Care Plans, and how to ask for a refund."
+  path="/refunds/"
+  lastUpdated={lastUpdated}
+  intro="Clear rules on cancellations and refunds, so nobody is surprised. Your rights under Malaysian consumer law are not affected."
+  toc={toc}
+>
+  <h2 id="summary">Summary</h2>
+  <ul>
+    <li>Cancel a website or custom build before you approve the design: we refund your deposit, minus the work already done.</li>
+    <li>A ready-made system that can't be installed by following the guide, and that we can't fix: full refund within {LICENCE_TERMS.refundDays} days.</li>
+    <li>Monthly Care Plans: cancel any time, effective at the end of the paid month.</li>
+  </ul>
+  <LegalIdentity />
+
+  <h2 id="websites-custom">Websites and custom builds</h2>
+  <ul>
+    <li>
+      <strong>Before design approval:</strong> if you cancel, we refund your deposit minus the work already done, which we show you in
+      writing.
+    </li>
+    <li>
+      <strong>After design approval:</strong> payments for milestones already reached aren't refundable. We invoice work done up to
+      the cancellation, and hand over that work once it's paid for.
+    </li>
+    <li>If we can't deliver what we agreed and don't fix it within a reasonable time, you may cancel and receive a refund for the undelivered work.</li>
+  </ul>
+
+  <h2 id="discovery">Discovery Sprint and Rescue Audit</h2>
+  <p>
+    Refunded in full if you cancel before the first workshop or before we start the audit. After that they aren't refundable, but
+    you keep everything delivered, including the documents and report.
+  </p>
+
+  <h2 id="systems">Ready-made systems</h2>
+  <p>
+    If the system can't be installed by following the install guide and we can't fix the problem, we refund the licence fee in full,
+    as long as you tell us within {LICENCE_TERMS.refundDays} days of delivery. Because software can be copied once downloaded, there
+    is no refund if you simply change your mind after download. Watch it working on a screen-share before you buy if you're unsure.
+  </p>
+
+  <h2 id="care">Care Plans</h2>
+  <ul>
+    <li><strong>Monthly plans:</strong> cancel any time. The plan ends at the end of the month you've paid for.</li>
+    <li><strong>Yearly plans:</strong> if you cancel within 30 days of paying, we refund the unused months. After that, the plan runs until the end of the paid year.</li>
+  </ul>
+
+  <h2 id="third-party">Third-party costs and hardware</h2>
+  <p>
+    Domain registrations, payment gateway fees, WhatsApp (Meta) fees and other third-party costs paid on your behalf can't be refunded
+    by us once paid. Hardware follows the supplier's returns and warranty terms.
+  </p>
+
+  <h2 id="how">How to ask for a refund</h2>
+  <p>
+    Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or WhatsApp {SITE.phone} with your invoice number and the reason. We reply
+    within one business day. Approved refunds are paid to the account you paid from within 14 days.
+  </p>
+</LegalLayout>

@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+
+/** Collapsed-by-default details block (audit 10.1, progressive disclosure). Works without JavaScript. */
+type Props = {
+  summary: string;
+  class?: string;
+  summaryClass?: string;
+  open?: boolean;
+  id?: string;
+};
+
+const { summary, class: className = '', summaryClass = 'font-semibold text-ink', open = false, id } = Astro.props;
+---
+
+<details class:list={['disclosure', className]} open={open} id={id}>
+  <summary class={summaryClass}>
+    <span>{summary}</span>
+    <Icon name="chevron-down" class="chevron h-5 w-5 text-ink-dim" />
+  </summary>
+  <div class="pb-4 pt-1">
+    <slot />
+  </div>
+</details>
