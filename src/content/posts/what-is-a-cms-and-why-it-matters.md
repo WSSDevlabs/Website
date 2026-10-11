@@ -1,8 +1,7 @@
 ---
 title: "What Is a CMS, and Why Should a Small Business Care?"
 description: "A content management system sounds like a technical detail you can ignore. In practice, it's the difference between owning your website and being stuck renting it from your developer forever."
-author: "razali"
-cta: "websites"
+author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["Web Development"]
 draft: false

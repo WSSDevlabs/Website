@@ -1,14 +1,16 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import SEO from '../components/seo/SEO.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Header from '../components/layout/Header.astro';
+import TopBar from '../components/layout/TopBar.astro';
 import Footer from '../components/layout/Footer.astro';
-import WhatsAppFloat from '../components/layout/WhatsAppFloat.astro';
-import MobileActionBar from '../components/layout/MobileActionBar.astro';
+import CookieConsent from '../components/layout/CookieConsent.astro';
+import SiteIntro from '../components/layout/SiteIntro.astro';
 import '@fontsource-variable/geist/index.css';
 import '@fontsource-variable/geist-mono/index.css';
 import '@fontsource-variable/outfit/index.css';
-import outfitLatin from '@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2?url';
+import '@fontsource-variable/space-grotesk/index.css';
 import '../styles/global.css';
 
 type Props = {
@@ -18,61 +20,59 @@ type Props = {
   ogImage?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
-  schema?: Record<string, unknown> | Record<string, unknown>[];
+  schema?: Record<string, unknown>;
 };
 
 const { title, description, path, ogImage, type, noindex, schema } = Astro.props;
-
-/*
- * Cloudflare Web Analytics is cookieless, so it loads without a consent banner and
- * the Cookie Policy says so (audit V11 / 10.2). Use EITHER this token OR Cloudflare's
- * automatic setup in the dashboard, never both, or every visit is counted twice.
- */
 const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 ---
 
 <!doctype html>
-<html lang="en-MY">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/images/brand/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/images/brand/logo.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <!-- Headlines are the largest thing on most pages, so their font loads first. -->
-    <link rel="preload" href={outfitLatin} as="font" type="font/woff2" crossorigin />
-    <SEO title={title} description={description} path={path} ogImage={ogImage} type={type} noindex={noindex} />
+    <SEO
+      title={title}
+      description={description}
+      path={path}
+      ogImage={ogImage}
+      type={type}
+      noindex={noindex}
+    />
     {schema && <JsonLd schema={schema} />}
-    {
-      cfAnalyticsToken && (
-        <script
-          is:inline
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={JSON.stringify({ token: cfAnalyticsToken })}
-        />
-      )
-    }
+    <ClientRouter />
   </head>
-  <body class="bg-paper pb-24 text-ink antialiased md:pb-0">
+  <body class="bg-paper text-ink">
+    <SiteIntro path={path} />
+    <TopBar />
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-3 focus:text-white"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
     >
       Skip to content
     </a>
     <Header />
-    <main id="main">
-      <slot />
-    </main>
-    <Footer />
-    <WhatsAppFloat />
-    <MobileActionBar />
+    <div class="flex flex-col min-h-screen">
+      <main id="main" class="flex-1 pt-14 md:pt-0">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <CookieConsent cfAnalyticsToken={cfAnalyticsToken} />
   </body>
 </html>
 
 <script>
-  import { setupClickTracking } from '../scripts/track';
-  setupClickTracking();
+  import { setupMotion } from '../scripts/siteMotion';
+  import { setupEmailReveal } from '../scripts/emailReveal';
+  import { setupBotpress } from '../scripts/botpressLoader';
+
+  // Handles initial load + every View Transition, with teardown between pages
+  setupMotion();
+  setupEmailReveal();
+  setupBotpress();
 </script>

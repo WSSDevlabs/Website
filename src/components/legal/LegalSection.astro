@@ -1,0 +1,23 @@
+---
+type Props = {
+  id: string;
+  number: string;
+  title: string;
+};
+
+const { id, number, title } = Astro.props;
+---
+
+<div id={id} class="scroll-mt-28 rounded-3xl border border-line bg-white p-6 shadow-sm sm:p-8">
+  <div class="flex items-start gap-4">
+    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-charcoal text-sm font-bold text-white">
+      {number}
+    </span>
+    <div class="min-w-0 flex-1">
+      <h2 class="font-display text-xl font-bold tracking-tight text-ink">{title}</h2>
+      <div class="prose prose-neutral prose-sm sm:prose-base mt-3 max-w-none text-ink-dim [&_a]:text-accent-blue [&_a]:no-underline [&_a:hover]:underline [&_strong]:text-ink [&_li]:my-1">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

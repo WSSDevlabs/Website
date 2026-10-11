@@ -1,47 +1,40 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { SITE_NAME } from '../lib/seo';
-import { breadcrumbSchema } from '../lib/schema';
 
 type Props = {
   title: string;
   description: string;
   path: string;
-  authorName: string;
-  authorUrl: string;
+  author: string;
   publishDate: Date;
   updatedDate?: Date;
   coverImage: string;
 };
 
-const { title, description, path, authorName, authorUrl, publishDate, updatedDate, coverImage } = Astro.props;
-const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString();
+const { title, description, path, author, publishDate, updatedDate, coverImage } = Astro.props;
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 
-/* Article schema with a named Person author (audit N3, T10) */
-const schema = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
-    description,
-    image: new URL(coverImage, siteUrl).toString(),
-    author: { '@type': 'Person', name: authorName, url: new URL(authorUrl, siteUrl).toString() },
-    publisher: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      logo: { '@type': 'ImageObject', url: new URL('/images/brand/logo.png', siteUrl).toString() }
-    },
-    datePublished: publishDate.toISOString(),
-    dateModified: (updatedDate ?? publishDate).toISOString(),
-    mainEntityOfPage: new URL(path, siteUrl).toString()
-  },
-  breadcrumbSchema(siteUrl, [
-    { name: 'Insights', path: '/insights/' },
-    { name: title, path }
-  ])
-];
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  image: new URL(coverImage, siteUrl).toString(),
+  author: { '@type': 'Organization', name: author },
+  publisher: { '@type': 'Organization', name: SITE_NAME },
+  datePublished: publishDate.toISOString(),
+  dateModified: (updatedDate ?? publishDate).toISOString()
+};
 ---
 
-<BaseLayout title={title} description={description} path={path} type="article" ogImage={coverImage} schema={schema}>
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  type="article"
+  ogImage={coverImage}
+  schema={schema}
+>
   <slot />
 </BaseLayout>

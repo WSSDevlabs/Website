@@ -1,13 +1,11 @@
 ---
 title: "Do You Need E-Invoicing Yet? What Malaysian Small Businesses Should Know"
 description: "LHDN's e-Invoicing rollout has confused a lot of small business owners about whether it applies to them right now. The exemption threshold changed in 2026, and it matters."
-author: "razali"
-cta: "systems"
+author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["Business Growth"]
 draft: false
 publishDate: 2026-07-05
-updatedDate: 2026-10-11
 sourceUrl: "https://www.cleartax.com/my/en/different-phases-implementation-timelines-einvoicing-malaysia"
 sourceLabel: "ClearTax: e-Invoice Implementation Phases & Timelines in Malaysia"
 ---
@@ -29,9 +27,3 @@ It's not a permanent exemption if you're in that revenue band, it's a runway. Th
 ## The practical takeaway
 
 If you're under RM1 million in annual turnover, this isn't urgent for you right now, but revenue thresholds change and so do compliance deadlines, so it's worth a five-minute check every time your accountant reviews your annual numbers rather than assuming last year's exemption still applies. If you're above it, the smart move is treating "relaxation period" as a preparation window, not a delay.
-
-## Check the official source
-
-Thresholds and deadlines change, and this article is a summary, not tax advice. Before you decide anything, check the current rules on [LHDN's official e-Invoice page](https://www.hasil.gov.my/en/e-invoice/) and confirm your own position with your accountant.
-
-If you run a shop or outlet: our ready-made POS doesn't include MyInvois submission as standard. If you need it, we quote the integration as a fixed-price add-on, and we'll tell you honestly whether you need it yet.

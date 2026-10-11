@@ -1,0 +1,23 @@
+---
+type Props = {
+  href?: string;
+  /** Disable the hover lift + spotlight for purely static cards */
+  static?: boolean;
+  class?: string;
+};
+
+const { href, static: isStatic = false, class: className = '' } = Astro.props;
+const Tag = href ? 'a' : 'div';
+const linkProps = href ? { href } : {};
+---
+
+<Tag
+  {...linkProps}
+  class:list={[
+    'card group block p-6',
+    !isStatic && 'card-lift spotlight-card',
+    className
+  ]}
+>
+  <slot />
+</Tag>

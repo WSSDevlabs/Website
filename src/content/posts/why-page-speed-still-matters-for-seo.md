@@ -1,8 +1,7 @@
 ---
 title: "Why Page Speed Still Matters for Google Rankings"
 description: "Core Web Vitals aren't new, but Google tightened the thresholds again in 2026. Here's what that actually means if you're not an SEO specialist."
-author: "razali"
-cta: "websites"
+author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["SEO"]
 draft: false
@@ -17,9 +16,9 @@ Clients sometimes push back when I bring up page speed early in a project. It fe
 
 Google measures real user experience through three Core Web Vitals metrics:
 
-- **Largest Contentful Paint (LCP)**: how long the main content takes to load. Good is under 2.5 seconds.
-- **Interaction to Next Paint (INP)**: how quickly the page responds when someone taps or clicks. Good is under 200 milliseconds.
-- **Cumulative Layout Shift (CLS)**: how much the page visually jumps around while loading. Good is under 0.1.
+- **Largest Contentful Paint (LCP)** — how long the main content takes to load. Good is under 2.5 seconds.
+- **Interaction to Next Paint (INP)** — how quickly the page responds when someone taps or clicks. Good is under 200 milliseconds.
+- **Cumulative Layout Shift (CLS)** — how much the page visually jumps around while loading. Good is under 0.1.
 
 Google confirmed these as an official page experience ranking signal back in 2021, and they're still very much active in 2026. What changed recently is that the thresholds got stricter, and INP in particular became a more heavily weighted metric than it used to be.
 

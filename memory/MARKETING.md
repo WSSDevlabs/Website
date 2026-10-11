@@ -1,13 +1,17 @@
 # MARKETING
 
-Canonical positioning: `.agents/product-marketing.md` (**v2, 2026-10-12**, rewritten from the audit). Read it before any marketing task.
+Full positioning/messaging context lives at `.agents/product-marketing.md` (canonical
+location per the product-marketing skill) — read that first before any marketing
+task. This file is just the memory-system pointer plus fast-moving state.
 
-**Positioning:** "Software you own. Not rent." Malaysian SMEs, 5 to 100 staff. Three offers (Websites, Systems, Custom) plus Care Plans and two ecosystems in pilot.
+**Doc status:** v1, created 2026-08-09, auto-drafted from the codebase. Three open
+issues flagged in it: zero proof content (no real projects/testimonials/posts), a
+fictional 3-person team on the About page, and placeholder SWOT-matched pricing.
 
-**Plan:** `docs/business/marketing-plan.md` (channels in priority order, lead magnets, content calendar, month-6 checkpoint on 11 Apr 2027). Sales process: `docs/business/sales-playbook.md`.
+**Active campaign:** `docs/marketing/SME-LAUNCH-CAMPAIGN.md` — ad copy, WhatsApp
+broadcast, launch sequence for the Informative/Ecommerce package launch. Not yet run
+live (needs real WhatsApp/social handles confirmed — see PROGRESS.md).
 
-**Live:** rent vs own calculator (lead magnet) on /systems/ and ecosystem pages; first content-calendar article "Renting vs owning business software" (11 Oct 2026); conversion events wired for Zaraz (founder must switch Zaraz on).
-
-**Retired:** `docs/archive/SME-LAUNCH-CAMPAIGN.md` (grant-led, RM500 pricing, /pricing links). **No paid ads** until conversion tracking works and real proof is on the site (audit 7.1).
-
-**Next marketing actions (founder):** Google Business Profile + 10 honest reviews from past clients; Founding Client Programme (5 places); 2 articles a month; founder LinkedIn 3x/week; 30-second screen recordings of real systems.
+**Next marketing action:** either close the proof-content gap (get 1-2 real client
+results published) or run the launch campaign as-is and accept the credibility gap
+short-term — founder call, not yet made.
