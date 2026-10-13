@@ -1,0 +1,230 @@
+---
+import Container from '../ui/Container.astro';
+import { RENT_VS_OWN, formatRM } from '../../data/catalog';
+
+/**
+ * Honest rent-vs-own comparison. Fair to both sides: subscriptions include hosting and
+ * support, so the "own" total can include hosting and a Care Plan too. The default numbers
+ * are rendered on the server, so they show even before JavaScript runs.
+ */
+type Props = {
+  id: string;
+  title?: string;
+  intro?: string;
+  monthlyLabel: string;
+  monthlyHint?: string;
+  defaultMonthly: number;
+  ownLabel: string;
+  ownOneTime: number;
+  /** Include a hosting estimate on the "own" side (systems you host yourself). */
+  hosting?: boolean;
+  careMonthly?: number;
+  careLabel?: string;
+  /** Care is required (ecosystems): always counted, no toggle. */
+  careRequired?: boolean;
+};
+
+const {
+  id,
+  title = 'Rent or own? Work it out with your numbers.',
+  intro = 'Enter what you pay now. We count hosting and support on the owning side too, because a subscription includes them.',
+  monthlyLabel,
+  monthlyHint,
+  defaultMonthly,
+  ownLabel,
+  ownOneTime,
+  hosting = false,
+  careMonthly = 0,
+  careLabel = 'Care Plan',
+  careRequired = false
+} = Astro.props;
+
+const years = 3;
+const hostingMonthly = hosting ? RENT_VS_OWN.hostingEstimateMonthly : 0;
+const rent = defaultMonthly * 12 * years;
+const own = ownOneTime + hostingMonthly * 12 * years + (careRequired ? careMonthly * 12 * years : 0);
+const max = Math.max(rent, own, 1);
+const config = JSON.stringify({ ownOneTime, careMonthly, careRequired, hosting });
+---
+
+<section class="relative overflow-hidden bg-paper-dim/40 py-16 md:py-24 border-y border-line" id={id}>
+  <Container>
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="mt-2 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">{title}</h2>
+      <p class="mt-3 text-sm text-ink-dim">{intro}</p>
+    </div>
+
+    <slot />
+
+    <!-- Calculator Card -->
+    <div class="mx-auto mt-12 max-w-4xl rounded-3xl border border-line bg-paper p-6 shadow-xl md:p-10" data-rent-calculator data-config={config}>
+      <div class="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <!-- Left Options -->
+        <div class="space-y-6">
+          <div>
+            <label for={`${id}-monthly`} class="font-mono text-xs font-bold uppercase tracking-wider text-accent">
+              01. {monthlyLabel}
+            </label>
+            <input
+              id={`${id}-monthly`}
+              type="number"
+              inputmode="numeric"
+              min="0"
+              step="1"
+              value={defaultMonthly}
+              data-input="monthly"
+              class="mt-2 w-full rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm font-semibold text-ink transition focus:border-accent focus:outline-none"
+            />
+            {monthlyHint && <p class="mt-1.5 text-[11px] text-ink-dim">{monthlyHint}</p>}
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for={`${id}-years`} class="font-mono text-xs font-bold uppercase tracking-wider text-ink">02. Years to compare</label>
+              <select
+                id={`${id}-years`}
+                data-input="years"
+                class="mt-2 w-full rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm font-semibold text-ink transition focus:border-accent focus:outline-none"
+              >
+                <option value="1">1 year</option>
+                <option value="3" selected>3 years</option>
+                <option value="5">5 years</option>
+              </select>
+            </div>
+
+            {
+              hosting && (
+                <div>
+                  <label for={`${id}-hosting`} class="font-mono text-xs font-bold uppercase tracking-wider text-ink">
+                    03. Your hosting, RM/month
+                  </label>
+                  <input
+                    id={`${id}-hosting`}
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    step="1"
+                    value={RENT_VS_OWN.hostingEstimateMonthly}
+                    data-input="hosting"
+                    class="mt-2 w-full rounded-xl border border-line bg-paper-dim px-4 py-3 text-sm font-semibold text-ink transition focus:border-accent focus:outline-none"
+                  />
+                  <p class="mt-1.5 text-[11px] text-ink-dim">An estimate. Change it to what your host charges.</p>
+                </div>
+              )
+            }
+          </div>
+
+          {
+            careMonthly > 0 && !careRequired && (
+              <label class="flex cursor-pointer items-center justify-between rounded-xl border border-line bg-paper-dim/40 p-3 text-xs transition hover:bg-paper-dim">
+                <span class="flex items-center gap-2.5">
+                  <input type="checkbox" data-input="care" class="rounded border-line text-accent" />
+                  <span class="font-medium text-ink">Add {careLabel} for backups, updates and support</span>
+                </span>
+                <span class="font-bold text-ink">+{formatRM(careMonthly)}/month</span>
+              </label>
+            )
+          }
+          {
+            careRequired && (
+              <p class="rounded-xl border border-line bg-paper-dim/40 p-3 text-xs text-ink-dim">
+                Includes {careLabel} at {formatRM(careMonthly)}/month for every month compared.
+              </p>
+            )
+          }
+        </div>
+
+        <!-- Right Summary -->
+        <div class="flex flex-col justify-between rounded-2xl border border-line bg-ink p-6 text-white shadow-xl">
+          <div aria-live="polite">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3 font-mono text-xs text-white/50">
+              <span>TOTAL COST</span>
+              <span class="text-emerald-400">● Your numbers</span>
+            </div>
+
+            <div class="mt-5 space-y-5">
+              <div>
+                <div class="flex items-baseline justify-between gap-2 text-xs text-white/70">
+                  <span>Renting (subscriptions)</span>
+                  <span class="font-feature text-xl font-extrabold text-white" data-output="rent">{formatRM(rent)}</span>
+                </div>
+                <div class="mt-2 h-2.5 rounded-full bg-white/80" style={`width: ${Math.max(4, (rent / max) * 100)}%`} data-bar="rent"></div>
+              </div>
+              <div>
+                <div class="flex items-baseline justify-between gap-2 text-xs text-white/70">
+                  <span>Owning ({ownLabel}{hosting ? ' + hosting' : ''}{careRequired ? ` + ${careLabel}` : ''})</span>
+                  <span class="font-feature text-xl font-extrabold text-accent-yellow-vivid" data-output="own">{formatRM(own)}</span>
+                </div>
+                <div class="mt-2 h-2.5 rounded-full bg-accent" style={`width: ${Math.max(4, (own / max) * 100)}%`} data-bar="own"></div>
+              </div>
+            </div>
+
+            <p class="mt-6 rounded-xl border border-white/10 bg-white/5 p-3 text-xs leading-relaxed text-white/70" data-output="summary">
+              {
+                rent > own
+                  ? `Over ${years} years, owning costs ${formatRM(rent - own)} less, and you keep the system.`
+                  : `Over ${years} years, renting costs ${formatRM(own - rent)} less here. Owning still means you keep the system and your data.`
+              }
+            </p>
+          </div>
+
+          <p class="mt-6 border-t border-white/10 pt-4 text-[10px] leading-relaxed text-white/50">
+            Subscriptions include hosting, updates and support. Owning means you pay your host directly and can add a Care Plan.
+            The hosting figure is only an estimate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  const format = (amount: number) => `RM${Math.round(amount).toLocaleString('en-MY')}`;
+
+  function initRentCalculators() {
+    document.querySelectorAll<HTMLElement>('[data-rent-calculator]').forEach((calc) => {
+      if (calc.dataset.bound || !calc.dataset.config) return;
+      calc.dataset.bound = '1';
+      const config = JSON.parse(calc.dataset.config) as {
+        ownOneTime: number;
+        careMonthly: number;
+        careRequired: boolean;
+        hosting: boolean;
+      };
+
+      const read = (name: string) => {
+        const el = calc.querySelector<HTMLInputElement | HTMLSelectElement>(`[data-input="${name}"]`);
+        if (!el) return 0;
+        if (el instanceof HTMLInputElement && el.type === 'checkbox') return el.checked ? 1 : 0;
+        const value = Number(el.value);
+        return Number.isFinite(value) && value > 0 ? value : 0;
+      };
+
+      const update = () => {
+        const years = read('years') || 3;
+        const months = years * 12;
+        const rent = read('monthly') * months;
+        const careOn = config.careRequired || read('care') === 1;
+        const own =
+          config.ownOneTime + (config.hosting ? read('hosting') * months : 0) + (careOn ? config.careMonthly * months : 0);
+        const max = Math.max(rent, own, 1);
+        const label = years === 1 ? '1 year' : `${years} years`;
+
+        calc.querySelector('[data-output="rent"]')!.textContent = format(rent);
+        calc.querySelector('[data-output="own"]')!.textContent = format(own);
+        calc.querySelector<HTMLElement>('[data-bar="rent"]')!.style.width = `${Math.max(4, (rent / max) * 100)}%`;
+        calc.querySelector<HTMLElement>('[data-bar="own"]')!.style.width = `${Math.max(4, (own / max) * 100)}%`;
+        calc.querySelector('[data-output="summary"]')!.textContent =
+          rent > own
+            ? `Over ${label}, owning costs ${format(rent - own)} less, and you keep the system.`
+            : `Over ${label}, renting costs ${format(own - rent)} less here. Owning still means you keep the system and your data.`;
+      };
+
+      calc.addEventListener('input', update);
+      calc.addEventListener('change', update);
+    });
+  }
+
+  initRentCalculators();
+  document.addEventListener('astro:page-load', initRentCalculators);
+</script>

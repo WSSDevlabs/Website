@@ -1,0 +1,336 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import RentVsOwnCalculator from './RentVsOwnCalculator.astro';
+import FAQ from './FAQ.astro';
+import CTABand from './CTABand.astro';
+import { getEcosystem, type MatrixValue } from '../../data/ecosystems';
+import { formatRM } from '../../data/catalog';
+import { whatsappHref } from '../../data/site';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+type Props = { slug: string };
+
+const ecosystem = getEcosystem(Astro.props.slug);
+if (!ecosystem) throw new Error(`Unknown ecosystem: ${Astro.props.slug}`);
+
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString();
+const path = `/systems/${ecosystem.slug}/`;
+const [essential, complete] = ecosystem.packages;
+const visitMessage = `Hi WSS DevLabs, I'd like to book a site visit for ${ecosystem.name}.`;
+const questionMessage = `Hi WSS DevLabs, I have a question about ${ecosystem.name}.`;
+
+const forWhoSentence = /^[A-Z][a-z]/.test(ecosystem.forWho)
+  ? ecosystem.forWho.charAt(0).toLowerCase() + ecosystem.forWho.slice(1)
+  : ecosystem.forWho;
+
+const isYes = (value: MatrixValue) => value === true;
+const isNo = (value: MatrixValue) => value === false;
+
+const details = [
+  { title: 'Timeline', body: ecosystem.timeline },
+  { title: 'Acceptance', body: ecosystem.acceptance },
+  { title: 'Warranty and support', body: ecosystem.warranty },
+  { title: 'Hardware', body: ecosystem.hardware }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      name: ecosystem.name,
+      description: ecosystem.pitch,
+      provider: { '@id': `${siteUrl}#organization` },
+      areaServed: { '@type': 'Country', name: 'Malaysia' },
+      offers: ecosystem.packages.map((pkg) => ({
+        '@type': 'Offer',
+        name: `${ecosystem.name} ${pkg.name}`,
+        price: String(pkg.price),
+        priceCurrency: 'MYR',
+        description: pkg.scope
+      }))
+    },
+    ...(ecosystem.faq.length ? [faqSchema(ecosystem.faq)] : []),
+    breadcrumbSchema(siteUrl, [
+      { name: 'Home', path: '/' },
+      { name: 'Systems', path: '/systems/' },
+      { name: ecosystem.name, path }
+    ])
+  ]
+};
+---
+
+<BaseLayout
+  title={`${ecosystem.name}: One Connected System You Own`}
+  description={`${ecosystem.pitch} Software from ${formatRM(essential.price)}, hardware quoted separately. ${ecosystem.status}.`}
+  path={path}
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-ink pt-10 pb-20 text-white md:pt-40 md:pb-28">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-accent/20 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-accent-blue/20 blur-3xl" aria-hidden="true"></div>
+
+    <Container class="relative">
+      <div class="mx-auto max-w-4xl">
+        <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-xs font-mono text-white/60">
+          <a href="/systems/" class="transition hover:text-white">Systems</a>
+          <span aria-hidden="true">›</span>
+          <span>Complete solutions</span>
+          <span aria-hidden="true">›</span>
+          <span class="text-white/80" aria-current="page">{ecosystem.name}</span>
+        </nav>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <span class="rounded-full bg-emerald-500/20 border border-emerald-500/30 px-3 py-1 text-xs font-semibold text-emerald-300">
+            {ecosystem.status}
+          </span>
+        </div>
+
+        <div class="mt-6 grid items-start gap-8 lg:grid-cols-[1.5fr_1fr]">
+          <div>
+            <h1 class="font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+              {ecosystem.name}
+            </h1>
+            <p class="mt-3 text-lg font-medium text-accent-yellow sm:text-xl">{ecosystem.pitch}</p>
+            <p class="mt-5 text-sm leading-relaxed text-white/75 sm:text-base">Built for {forWhoSentence}</p>
+          </div>
+
+          <div class="rounded-2xl border border-accent/40 bg-white/5 p-6 backdrop-blur-xl shadow-2xl">
+            <p class="text-xs font-mono uppercase tracking-wider text-white/60">Software, one-time</p>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-xs text-white/60">from</span>
+              <span class="font-feature text-4xl font-black text-white">{formatRM(essential.price)}</span>
+            </div>
+            <p class="mt-2 text-xs text-white/60">Hardware is quoted separately, at cost plus handling.</p>
+
+            <div class="mt-6 space-y-3">
+              <a
+                href={whatsappHref(visitMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="site_visit_click"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/30 transition hover:bg-accent-dim"
+              >
+                <span>Book a site visit</span>
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+              <a
+                href={whatsappHref(questionMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-white/10"
+              >
+                Ask a question first
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Problems, in the buyer's words -->
+  <Section rule>
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-section">Sound familiar?</h2>
+      </div>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          ecosystem.problems.map((problem) => (
+            <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
+              <p class="text-sm font-bold text-ink">{problem.quote}</p>
+              <p class="mt-2 text-xs leading-relaxed text-ink-dim">{problem.detail}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </Section>
+
+  <!-- How it works -->
+  <Section rule class="bg-paper-dim/40">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-section">How it works</h2>
+        <p class="mt-4 text-sm leading-relaxed text-ink-dim">Each part does one job. Together they feed one dashboard.</p>
+      </div>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        {
+          ecosystem.flow.map((step) => (
+            <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-wide text-ink-dim/70">When</p>
+              <p class="mt-1 text-sm text-ink-dim">{step.trigger}</p>
+              <div class="my-3 h-px bg-line" />
+              <p class="text-xs font-semibold uppercase tracking-wide text-ink-dim/70">Handled by</p>
+              <p class="mt-1 text-sm text-ink-dim">{step.module}</p>
+              <div class="my-3 h-px bg-line" />
+              <p class="text-xs font-semibold uppercase tracking-wide text-accent">Result</p>
+              <p class="mt-1 text-sm font-medium text-ink">{step.result}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mx-auto mt-8 max-w-3xl rounded-3xl bg-charcoal p-6 text-center">
+        <p class="mono-label text-white/60">Everything lands in</p>
+        <p class="mt-2 text-sm font-semibold text-white">{ecosystem.hub}</p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Packages -->
+  <Section rule id="packages">
+    <Container>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="h-section">Two packages</h2>
+        <p class="mt-4 text-sm text-ink-dim">One-time software prices, with no SST added. Hardware is always quoted separately.</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+          [essential, complete].map((pkg, i) => (
+            <div class:list={['rounded-2xl border p-7', i === 0 ? 'border-line bg-paper-dim/40' : 'border-accent bg-paper shadow-2xl ring-2 ring-accent/20']}>
+              <h3 class="text-xl font-bold text-ink">{pkg.name}</h3>
+              <p class="mt-2 font-feature text-3xl font-black tracking-tight text-ink">{formatRM(pkg.price)}</p>
+              <p class="mt-2 text-xs font-medium text-accent">{pkg.scope}</p>
+              <p class="mt-4 rounded-xl border border-line/70 bg-paper-deep/40 p-3 text-[11px] text-ink-dim">{pkg.care}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-8 overflow-hidden rounded-3xl border border-line shadow-card">
+        <table class="w-full border-collapse bg-white text-sm">
+          <thead>
+            <tr>
+              <th class="bg-charcoal p-4 text-left text-sm font-bold text-white">What's included</th>
+              <th class="w-24 border-l border-line bg-paper-dim p-4 text-center font-bold text-ink sm:w-40">{essential.name}</th>
+              <th class="w-24 border-l border-line bg-accent/10 p-4 text-center font-bold text-accent sm:w-40">{complete.name}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              ecosystem.matrix.map((row, ri) => (
+                <tr class:list={[ri % 2 === 1 && 'bg-paper-dim/40']}>
+                  <th scope="row" class="bg-charcoal p-4 text-left text-xs font-semibold text-white sm:text-sm">{row.feature}</th>
+                  {[row.essential, row.complete].map((val) => (
+                    <td class="border-l border-line p-4 text-center text-xs text-ink-dim">
+                      {isYes(val) && (
+                        <>
+                          <svg class="mx-auto h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                          </svg>
+                          <span class="sr-only">Included</span>
+                        </>
+                      )}
+                      {isNo(val) && (
+                        <>
+                          <svg class="mx-auto h-4 w-4 text-ink-dim/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                          </svg>
+                          <span class="sr-only">Not included</span>
+                        </>
+                      )}
+                      {typeof val === 'string' && val}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {
+          details.map((item) => (
+            <div class="rounded-2xl border border-line bg-paper p-5">
+              <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-accent">{item.title}</h3>
+              <p class="mt-2 text-xs leading-relaxed text-ink-dim">{item.body}</p>
+            </div>
+          ))
+        }
+        <div class="rounded-2xl border border-line bg-paper p-5">
+          <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-accent">Not included</h3>
+          <ul class="mt-2 list-disc space-y-1 pl-4 text-xs leading-relaxed text-ink-dim">
+            {ecosystem.notIncluded.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-line bg-paper p-5">
+          <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-accent">What you provide</h3>
+          <ul class="mt-2 list-disc space-y-1 pl-4 text-xs leading-relaxed text-ink-dim">
+            {ecosystem.clientProvides.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- 3-year comparison -->
+  <RentVsOwnCalculator
+    id="calculator"
+    title={ecosystem.education.title}
+    intro={ecosystem.education.body}
+    monthlyLabel={ecosystem.calculator.label}
+    monthlyHint={ecosystem.calculator.hint}
+    defaultMonthly={ecosystem.calculator.defaultMonthly}
+    ownLabel={`${ecosystem.name} ${essential.name}`}
+    ownOneTime={ecosystem.calculator.ownOneTime}
+    careMonthly={ecosystem.calculator.careMonthly}
+    careLabel={ecosystem.calculator.careLabel}
+    careRequired={ecosystem.calculator.careRequired}
+  />
+
+  <!-- What we measure + compliance -->
+  <Section rule>
+    <Container>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-3xl border border-line bg-white p-7 shadow-card">
+          <h2 class="text-xl font-bold text-ink">What we measure with you</h2>
+          <p class="mt-2 text-sm text-ink-dim">The numbers that tell you it's working, and the ones that go into your case study.</p>
+          <ul class="mt-4 space-y-2.5">
+            {ecosystem.outcomes.map((item) => (
+              <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-3xl border border-line bg-white p-7 shadow-card">
+          <h2 class="text-xl font-bold text-ink">Data protection, built in</h2>
+          <p class="mt-2 text-sm text-ink-dim">How we handle the personal data this system holds.</p>
+          <ul class="mt-4 space-y-2.5">
+            {ecosystem.compliance.map((item) => (
+              <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  {ecosystem.faq.length > 0 && <FAQ title={`Questions about ${ecosystem.name}`} items={ecosystem.faq} />}
+
+  <CTABand
+    title={`See ${ecosystem.name} on your site`}
+    subtitle="We visit, walk the premises with you, and come back with a fixed quote for the software and the hardware."
+    ctaLabel="Book a site visit"
+    ctaHref={`/contact/?package=${ecosystem.slug}`}
+  />
+</BaseLayout>

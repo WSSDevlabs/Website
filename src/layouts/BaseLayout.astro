@@ -28,7 +28,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-MY">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -70,9 +70,11 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
   import { setupMotion } from '../scripts/siteMotion';
   import { setupEmailReveal } from '../scripts/emailReveal';
   import { setupBotpress } from '../scripts/botpressLoader';
+  import { setupClickTracking } from '../scripts/track';
 
   // Handles initial load + every View Transition, with teardown between pages
   setupMotion();
   setupEmailReveal();
   setupBotpress();
+  setupClickTracking();
 </script>

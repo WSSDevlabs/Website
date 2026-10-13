@@ -1,5 +1,7 @@
+> **Archived 14 October 2026.** This campaign uses the offers, prices and grant messaging from before the October 2026 audit. Don't run it. The current plan is [docs/business/marketing-plan.md](../business/marketing-plan.md), and prices live in `src/data/catalog.ts`.
+
 # SME Tier Launch Campaign — WSS Devlabs
-**Prepared by:** /cmo · **Date:** 2026-08-09 · **Status:** Ready to run, pending real business details (see Admin note at bottom)
+**Prepared by:** /cmo · **Date:** 2026-08-09 · **Status:** Archived (see note above)
 
 ## Positioning
 WSS Devlabs now serves two audiences from one team: growing companies who need

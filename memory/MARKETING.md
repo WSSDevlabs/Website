@@ -1,17 +1,15 @@
 # MARKETING
 
-Full positioning/messaging context lives at `.agents/product-marketing.md` (canonical
-location per the product-marketing skill) — read that first before any marketing
-task. This file is just the memory-system pointer plus fast-moving state.
+Full positioning lives at `.agents/product-marketing.md` (v2, from the October 2026 audit). Read it first before any marketing task. This file is the pointer plus fast-moving state.
 
-**Doc status:** v1, created 2026-08-09, auto-drafted from the codebase. Three open
-issues flagged in it: zero proof content (no real projects/testimonials/posts), a
-fictional 3-person team on the About page, and placeholder SWOT-matched pricing.
+**Positioning:** "Software you own. Not rent." Fixed-price websites and ready-made business systems for Malaysian SMEs. Founder-led.
 
-**Active campaign:** `docs/marketing/SME-LAUNCH-CAMPAIGN.md` — ad copy, WhatsApp
-broadcast, launch sequence for the Informative/Ecommerce package launch. Not yet run
-live (needs real WhatsApp/social handles confirmed — see PROGRESS.md).
+**Plan:** `docs/business/marketing-plan.md` (Google Business Profile, own-vs-rent content, founder LinkedIn, TikTok screen recordings of real systems, 2 articles a month, accountant partnerships; no paid ads until tracking and proof exist). Sales process: `docs/business/sales-playbook.md`.
 
-**Next marketing action:** either close the proof-content gap (get 1-2 real client
-results published) or run the launch campaign as-is and accept the credibility gap
-short-term — founder call, not yet made.
+**Proof status (2026-10-14):** no published reviews or case studies yet. The Founding Client Programme (5 places, counter on the home page from `foundingSlotsLeft` in the CMS) exists to fix this.
+
+**Chat assistant:** the Botpress bot's knowledge base must be replaced with `docs/business/chat-assistant-knowledge.md` (it still holds old prices and grant answers).
+
+**Archived:** `docs/archive/SME-LAUNCH-CAMPAIGN.md` (August campaign with old offers and grants; don't run it).
+
+**Next marketing action:** Google Business Profile + ask past clients for honest reviews; sign the first Founding Client.

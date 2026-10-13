@@ -1,13 +1,4 @@
-import type { ServiceGroup } from '../data/services';
-
 export type Tone = 'neutral' | 'red' | 'blue' | 'yellow' | 'green';
-
-export const GROUP_TONE: Record<ServiceGroup, Tone> = {
-  Build: 'blue',
-  Intelligence: 'red',
-  'Design & Care': 'yellow',
-  Grow: 'green'
-};
 
 export const CATEGORY_TONE: Record<string, Tone> = {
   Web: 'blue',

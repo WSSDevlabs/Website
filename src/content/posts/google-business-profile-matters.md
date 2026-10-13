@@ -1,7 +1,8 @@
 ---
 title: "Why Your Google Business Profile Matters More Than You Think"
 description: "It's free, it takes twenty minutes to set up properly, and most small businesses still leave it half-finished. Here's what the data says it's actually worth."
-author: "WSS DevLabs"
+author: "Razali"
+cta: "websites"
 coverImage: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["SEO"]
 draft: false

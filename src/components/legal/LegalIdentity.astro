@@ -1,0 +1,24 @@
+---
+import Email from '../ui/Email.astro';
+import { SITE, businessName } from '../../data/site';
+
+/** Who we are, shown in every policy. Registration details appear as soon as they're filled in site.json. */
+type Props = { lang?: 'en' | 'ms' };
+const { lang = 'en' } = Astro.props;
+
+const t =
+  lang === 'ms'
+    ? { trading: 'Nama dagangan', reg: 'No. pendaftaran SSM', address: 'Alamat berdaftar', based: 'Lokasi', email: 'E-mel', phone: 'Telefon dan WhatsApp' }
+    : { trading: 'Trading name', reg: 'SSM registration no.', address: 'Registered address', based: 'Based in', email: 'Email', phone: 'Phone and WhatsApp' };
+---
+
+<div class="not-prose mt-4 rounded-2xl border border-line bg-paper-dim/60 p-5">
+  <p class="font-semibold text-ink">{businessName}</p>
+  <ul class="mt-2 space-y-1 text-sm text-ink-dim">
+    {SITE.legalName && SITE.legalName !== SITE.name && <li>{t.trading}: {SITE.name}</li>}
+    {SITE.ssmNumber && <li>{t.reg}: {SITE.ssmNumber}</li>}
+    {SITE.registeredAddress ? <li>{t.address}: {SITE.registeredAddress}</li> : <li>{t.based}: {SITE.baseLocation}</li>}
+    <li>{t.email}: <Email class="text-accent-blue hover:underline" /></li>
+    <li>{t.phone}: {SITE.phone}</li>
+  </ul>
+</div>

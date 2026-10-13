@@ -1,8 +1,3 @@
 {
-  "partners": [
-    { "name": "Solaris Retail Group", "logo": "/uploads/partners/solaris-retail-group.svg" },
-    { "name": "Bumi Logistics", "logo": "/uploads/partners/bumi-logistics.svg" },
-    { "name": "Kenanga Fintech", "logo": "/uploads/partners/kenanga-fintech.svg" },
-    { "name": "Meridian Health Group", "logo": "/uploads/partners/meridian-health-group.svg" }
-  ]
+  "partners": []
 }

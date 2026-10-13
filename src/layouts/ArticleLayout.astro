@@ -21,8 +21,12 @@ const schema = {
   headline: title,
   description,
   image: new URL(coverImage, siteUrl).toString(),
-  author: { '@type': 'Organization', name: author },
-  publisher: { '@type': 'Organization', name: SITE_NAME },
+  author: { '@type': 'Person', name: author, url: new URL('/about/', siteUrl).toString() },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    logo: { '@type': 'ImageObject', url: new URL('/images/brand/logo.png', siteUrl).toString() }
+  },
   datePublished: publishDate.toISOString(),
   dateModified: (updatedDate ?? publishDate).toISOString()
 };

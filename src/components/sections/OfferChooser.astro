@@ -1,39 +1,43 @@
 ---
 import Container from '../ui/Container.astro';
+import { CUSTOM, SYSTEM_TIERS, WEBSITE_PACKAGES, formatRM } from '../../data/catalog';
+
+// The homepage chooser: three offers in the customer's own words, each with its starting price.
+const websiteFrom = Math.min(...WEBSITE_PACKAGES.map((p) => p.price));
 
 const packages = [
   {
-    title: 'WSS Express Web',
-    price: 'Fixed-Price',
+    title: 'A website',
+    price: `From ${formatRM(websiteFrom)}`,
     description:
-      'Fixed-price, production-ready websites shipped in days, engineered for speed, search visibility, and zero recurring SaaS fees.',
-    buttonText: 'Get Started',
-    href: '/express',
+      'Fixed-price websites, live in 5 days to 5 weeks depending on the package. Your domain is registered in your name, and you own the design, code and content.',
+    buttonText: 'See websites',
+    href: '/websites/',
     image:
       'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&h=1100&q=85',
-    alt: 'WSS Express Web Packages'
+    alt: 'A bright, modern office space'
   },
   {
-    title: 'The Marketplace',
-    price: '41 Systems',
+    title: 'A system to run my business',
+    price: `From ${formatRM(SYSTEM_TIERS.basic.price)}`,
     description:
-      'Production-ready business systems you buy once and own outright, no subscriptions, no lock-in, full source code included.',
-    buttonText: 'Explore Systems',
-    href: '/marketplace',
+      'Ready-made business systems you pay for once. Full source code, 12 months of updates, and no monthly fee, ever.',
+    buttonText: 'See systems',
+    href: '/systems/',
     image:
       'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&h=1100&q=85',
-    alt: 'WSS Marketplace Systems'
+    alt: 'A team working together at laptops'
   },
   {
-    title: 'Enterprise Bespoke',
-    price: 'Custom Scope',
+    title: 'Something built just for us',
+    price: `From ${formatRM(CUSTOM.build.from)}`,
     description:
-      'Fully custom software built around your exact requirements, backed by a dedicated senior engineering team from architecture to launch.',
-    buttonText: 'Book Consultation',
-    href: '/contact',
+      'Custom software built around how your business works. It starts with a paid Discovery Sprint that ends in a fixed price you can trust.',
+    buttonText: 'Tell us more',
+    href: '/custom/',
     image:
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=1100&q=85',
-    alt: 'WSS Enterprise Bespoke Software'
+    alt: 'A modern building at dusk'
   }
 ];
 ---
@@ -43,8 +47,11 @@ const packages = [
     <!-- Section Header -->
     <div class="mx-auto max-w-3xl text-center">
       <h2 class="h-section font-black tracking-tight text-ink">
-        Eliminate Quote Friction. <span class="badge-highlight">Ship in Days.</span>
+        What do you <span class="badge-highlight">need?</span>
       </h2>
+      <p class="mt-4 text-base leading-relaxed text-ink-dim">
+        Pick the one that sounds like you. Every price is published, and every option ends with you owning what you paid for.
+      </p>
     </div>
 
     <!-- 3 Side-by-Side Visual Cards (matching reference screenshot) -->
@@ -66,7 +73,7 @@ const packages = [
             <!-- Card Content -->
             <div class="relative z-10 p-6 sm:p-7 flex flex-col justify-end">
               <!-- Carousel Indicator Dots Motif -->
-              <div class="flex justify-center items-center gap-1.5 mb-4">
+              <div class="flex justify-center items-center gap-1.5 mb-4" aria-hidden="true">
                 <span class="h-1.5 w-5 rounded-full bg-white"></span>
                 <span class="h-1.5 w-1.5 rounded-full bg-white/40"></span>
                 <span class="h-1.5 w-1.5 rounded-full bg-white/40"></span>

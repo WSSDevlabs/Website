@@ -76,77 +76,23 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Author (your name, shown as the byline)", name: "author", widget: "string", default: "Razali" }
+      - label: "Call to action (which offer this article points to)"
+        name: "cta"
+        widget: "select"
+        options: ["websites", "systems", "custom"]
+        required: false
       - { label: "Cover Image", name: "coverImage", widget: "image" }
       - { label: "Tags", name: "tags", widget: "list", default: [] }
       - { label: "Draft (hide from site)", name: "draft", widget: "boolean", default: true }
       - { label: "Publish Date", name: "publishDate", widget: "datetime" }
       - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
+      - { label: "Source link (optional)", name: "sourceUrl", widget: "string", required: false }
+      - { label: "Source name (optional)", name: "sourceLabel", widget: "string", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # ---- Services list (src/data/services.json) ----
-  - name: "services"
-    label: "Services"
-    files:
-      - name: "services"
-        label: "All Services"
-        file: "src/data/services.json"
-        fields:
-          - label: "Services"
-            name: "services"
-            widget: "list"
-            summary: "{{title}}"
-            fields:
-              - { label: "Slug (used in the URL, no spaces)", name: "slug", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - label: "Group"
-                name: "group"
-                widget: "select"
-                options: ["Build", "Intelligence", "Design & Care", "Grow"]
-              - { label: "Short Description", name: "shortDescription", widget: "string" }
-              - { label: "Value Proposition", name: "valueProp", widget: "text" }
-              - { label: "Problem It Solves", name: "problem", widget: "text" }
-              - { label: "Deliverables", name: "deliverables", widget: "list" }
-              - { label: "Approach Steps", name: "approach", widget: "list" }
-              - { label: "Tools & Tech", name: "tools", widget: "list" }
-              - { label: "Pricing From", name: "pricingFrom", widget: "string", required: false }
-              - label: "Service-specific FAQ"
-                name: "faq"
-                widget: "list"
-                default: []
-                fields:
-                  - { label: "Question", name: "question", widget: "string" }
-                  - { label: "Answer", name: "answer", widget: "text" }
-
-  # ---- Pricing tiers (src/data/pricing.json) ----
-  - name: "pricing"
-    label: "Pricing Tiers"
-    files:
-      - name: "pricing"
-        label: "Pricing Tiers"
-        file: "src/data/pricing.json"
-        fields:
-          - label: "Tiers"
-            name: "tiers"
-            widget: "list"
-            summary: "{{name}}"
-            fields:
-              - { label: "Tier Name", name: "name", widget: "string" }
-              - { label: "Price", name: "price", widget: "string" }
-              - label: "Stage"
-                name: "segment"
-                widget: "select"
-                options: ["launch", "expand", "grow", "custom"]
-                required: false
-              - { label: "Who it's for", name: "audience", widget: "string", required: false }
-              - { label: "Bundled service slugs", name: "services", widget: "list", required: false }
-              - { label: "Highlight This Tier", name: "highlight", widget: "boolean", default: false }
-              - { label: "Badge (e.g. Most popular)", name: "badge", widget: "string", required: false }
-              - { label: "Description", name: "description", widget: "text" }
-              - { label: "Features", name: "features", widget: "list" }
-              - { label: "Note (small print)", name: "note", widget: "text", required: false }
-              - { label: "Button Label", name: "cta", widget: "string" }
-              - { label: "Button Link", name: "ctaHref", widget: "string" }
+  # Prices, packages, systems and FAQs live in code (src/data/catalog.ts, systems.ts,
+  # faqs.ts) so a price can never contradict itself. Ask your developer to change them.
 
   # ---- Team members (src/data/team.json) ----
   - name: "team"
@@ -179,36 +125,6 @@ collections:
                   - { label: "Instagram", name: "instagram", widget: "string", required: false }
                   - { label: "Twitter / X", name: "twitter", widget: "string", required: false }
 
-  # ---- FAQ content (src/data/faq.json) ----
-  - name: "faq"
-    label: "FAQ"
-    files:
-      - name: "faq"
-        label: "Homepage & Contact FAQ"
-        file: "src/data/faq.json"
-        fields:
-          - label: "Homepage FAQ"
-            name: "home"
-            widget: "list"
-            summary: "{{question}}"
-            fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
-          - label: "Contact Page FAQ"
-            name: "contact"
-            widget: "list"
-            summary: "{{question}}"
-            fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
-          - label: "Pricing Page FAQ"
-            name: "pricing"
-            widget: "list"
-            summary: "{{question}}"
-            fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
-
   # ---- Partner / client logos (src/data/partners.json) ----
   - name: "partners"
     label: "Partner & Client Logos"
@@ -217,9 +133,10 @@ collections:
         label: "Partner & Client Logos"
         file: "src/data/partners.json"
         fields:
-          - label: "Partners"
+          - label: "Partners (real clients only, with written permission to show their logo)"
             name: "partners"
             widget: "list"
+            default: []
             summary: "{{name}}"
             fields:
               - { label: "Name", name: "name", widget: "string" }
@@ -235,20 +152,27 @@ collections:
         fields:
           - { label: "Company Name", name: "name", widget: "string" }
           - { label: "Tagline", name: "tagline", widget: "string" }
-          - { label: "Legal Name", name: "legalName", widget: "string", required: false }
-          - { label: "SSM Number", name: "ssmNumber", widget: "string", required: false }
-          - { label: "SST Number", name: "sstNumber", widget: "string", required: false }
+          - { label: "Registered name (exactly as on your SSM certificate)", name: "legalName", widget: "string", required: false }
+          - { label: "SSM registration number", name: "ssmNumber", widget: "string", required: false }
+          - { label: "SST Number (only once registered)", name: "sstNumber", widget: "string", required: false }
+          - { label: "Registered address (a virtual office is fine if labelled honestly)", name: "registeredAddress", widget: "string", required: false }
+          - { label: "Based in (city, shown when no registered address is set)", name: "baseLocation", widget: "string" }
+          - { label: "Meetings line", name: "meetings", widget: "string" }
           - { label: "Email", name: "email", widget: "string" }
-          - { label: "WhatsApp Number (with country code, no symbols)", name: "whatsapp", widget: "string" }
+          - { label: "Privacy email", name: "privacyEmail", widget: "string" }
+          - { label: "Privacy contact (name and role)", name: "privacyContact", widget: "string" }
+          - { label: "WhatsApp Number (country code and digits only, e.g. 601127205895)", name: "whatsapp", widget: "string" }
           - { label: "Phone (display format)", name: "phone", widget: "string" }
-          - { label: "Address", name: "address", widget: "string" }
           - { label: "Business Hours", name: "hours", widget: "string" }
-          - label: "Social Links"
+          - { label: "Year founded", name: "foundedYear", widget: "string", required: false }
+          - { label: "Founding Client places left (update every time one is taken)", name: "foundingSlotsLeft", widget: "number", value_type: "int", min: 0, max: 5 }
+          - { label: "Your mobile PageSpeed score (e.g. 96, shown only when set)", name: "pageSpeedMobile", widget: "string", required: false }
+          - { label: "Google Business Profile link", name: "googleBusinessProfileUrl", widget: "string", required: false }
+          - label: "Social Links (leave blank to hide; only accounts you post on)"
             name: "social"
             widget: "object"
             fields:
-              - { label: "LinkedIn", name: "linkedin", widget: "string" }
-              - { label: "Instagram", name: "instagram", widget: "string" }
-              - { label: "TikTok", name: "tiktok", widget: "string" }
-              - { label: "Facebook", name: "facebook", widget: "string" }
-              - { label: "Twitter / X", name: "twitter", widget: "string" }
+              - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "TikTok", name: "tiktok", widget: "string", required: false }
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }

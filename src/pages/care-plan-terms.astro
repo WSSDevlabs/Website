@@ -1,0 +1,114 @@
+---
+import LegalLayout from '../components/legal/LegalLayout.astro';
+import LegalSection from '../components/legal/LegalSection.astro';
+import LegalIdentity from '../components/legal/LegalIdentity.astro';
+import { CARE_PLANS, CARE_PLAN_ROWS, CARE_PRO_EXTRA_SITE_MONTHLY, formatRM } from '../data/catalog';
+
+const lastUpdated = new Date('2026-10-14');
+
+const toc = [
+  { id: 'plans', label: '1. Plans and prices' },
+  { id: 'included', label: '2. What each plan includes' },
+  { id: 'meanings', label: '3. What the terms mean' },
+  { id: 'not-included', label: '4. Not included' },
+  { id: 'your-part', label: '5. Your part' },
+  { id: 'data', label: '6. Your data' },
+  { id: 'billing', label: '7. Billing, renewal and cancelling' },
+  { id: 'handover', label: '8. When a plan ends' }
+];
+---
+
+<LegalLayout
+  title="Care Plan Terms"
+  description="What WSS DevLabs Care Plans include: hosting, monitoring, backups, updates, small edits and response times, plus billing, renewal and cancellation."
+  path="/care-plan-terms/"
+  icon="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"
+  accent="red"
+  lastUpdated={lastUpdated}
+  intro="Our Care Plan service levels in plain language. Your Care Plan agreement may add details for your site or system, and our Terms of Service apply to every plan."
+  toc={toc}
+>
+  <LegalSection id="plans" number="1" title="Plans and prices">
+    <ul>
+      {CARE_PLANS.map((plan) => <li><strong>{plan.name}:</strong> {plan.price}{plan.annual ? `, or ${plan.annual}` : ''}. {plan.forWho}</li>)}
+      <li>Complete solutions with more than one site: {formatRM(CARE_PRO_EXTRA_SITE_MONTHLY)}/month per extra site on Care Pro.</li>
+    </ul>
+    <LegalIdentity />
+  </LegalSection>
+
+  <LegalSection id="included" number="2" title="What each plan includes">
+    <div class="overflow-x-auto">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            {CARE_PLANS.map((plan) => <th>{plan.name}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {
+            CARE_PLAN_ROWS.map(([label, ...values]) => (
+              <tr>
+                <th>{label}</th>
+                {values.map((value) => (
+                  <td>{value}</td>
+                ))}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </LegalSection>
+
+  <LegalSection id="meanings" number="3" title="What the terms mean">
+    <ul>
+      <li><strong>Working day:</strong> Monday to Friday, excluding Malaysian public holidays.</li>
+      <li><strong>Response time:</strong> how soon we start working on your request and tell you what happens next. It isn't a promise that every fix is finished in that time.</li>
+      <li><strong>Critical issue:</strong> your site or system is down, or there is a security incident.</li>
+      <li><strong>Small edits:</strong> content changes such as text, images, prices or a new blog post. New pages, features or redesigns are quoted separately.</li>
+      <li><strong>Unused edit time</strong> doesn't carry over to the next month.</li>
+      <li><strong>Backups:</strong> daily backups (weekly on Hosting Only) are kept for at least 14 days and can be restored on request.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="not-included" number="4" title="Not included">
+    <ul>
+      <li>New features, redesigns and new pages (we quote these at a fixed price first).</li>
+      <li>Problems caused by changes made by you or others, or by third-party services and plugins.</li>
+      <li>Outages of third-party providers outside our control.</li>
+      <li>Hardware faults, which are covered by the supplier's warranty.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="your-part" number="5" title="Your part">
+    <p>
+      Give us the access we need, tell us before making your own changes to the site or system, and keep your contact details up
+      to date so we can reach you in an emergency.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="data" number="6" title="Your data">
+    <p>
+      While we look after your site or system we may be able to see personal data in it. You are the data controller; we act as
+      your data processor, only on your instructions, under a Data Processing Agreement that we sign with you before the plan
+      starts.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="billing" number="7" title="Billing, renewal and cancelling">
+    <ul>
+      <li>Plans are billed monthly or yearly in advance, and renew automatically until you cancel.</li>
+      <li>We give at least 30 days' notice of any price change.</li>
+      <li>Monthly plans can be cancelled any time, effective at the end of the paid month. Yearly plans follow our <a href="/refunds/">Refund Policy</a>.</li>
+      <li>Complete solutions (such as Smart Premises) require Care Pro while the system is in use, because security systems can't be left unmaintained.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="handover" number="8" title="When a plan ends">
+    <p>
+      You keep everything. We hand over your latest backup, all credentials and anything we were holding for you, and help move
+      your hosting if you ask.
+    </p>
+  </LegalSection>
+</LegalLayout>

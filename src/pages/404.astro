@@ -4,9 +4,10 @@ import Container from '../components/ui/Container.astro';
 ---
 
 <BaseLayout
-  title="Page Not Found: WSS DevLabs"
+  title="Page Not Found"
   description="The page you are looking for cannot be found."
   path="/404"
+  noindex
 >
   <!-- 404 hero -->
   <section class="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-paper py-12 text-center">
@@ -22,7 +23,7 @@ import Container from '../components/ui/Container.astro';
       <p class="text-[8rem] font-black leading-none tracking-tighter text-ink md:text-[11rem]">404</p>
       <h1 class="mt-2 text-2xl font-bold text-ink md:text-3xl">Oops! Page not Found</h1>
       <p class="mx-auto mt-3 max-w-sm text-sm text-ink-dim">
-        The page you are looking for cannot be found. Take a break before trying again.
+        The page you are looking for has moved or no longer exists. These might be what you need:
       </p>
       <a
         href="/"
@@ -30,6 +31,12 @@ import Container from '../components/ui/Container.astro';
       >
         Go To Home Page
       </a>
+      <p class="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm font-semibold">
+        <a href="/websites/" class="text-ink-dim underline hover:text-accent">Websites</a>
+        <a href="/systems/" class="text-ink-dim underline hover:text-accent">Systems</a>
+        <a href="/custom/" class="text-ink-dim underline hover:text-accent">Custom</a>
+        <a href="/contact/" class="text-ink-dim underline hover:text-accent">Contact</a>
+      </p>
     </Container>
   </section>
 

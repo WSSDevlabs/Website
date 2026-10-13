@@ -1,54 +1,44 @@
 # FINANCE
 
-This file tracks WSS Devlabs' company-wide pricing (not billing specific to this
-website project, which is internal/n/a).
+Company-wide pricing for WSS DevLabs (this website project itself is internal, no billing).
 
-## ⚠️ 2026-08-25 rewrite note
+## Source of truth: `src/data/catalog.ts`
 
-The pricing structure previously documented here (a 5-tier Launch/Expand/Grow/Scale/Custom
-ladder on a standalone `/pricing` page) **no longer exists** — the founder had `/pricing`
-deleted entirely (redirects to `/express`; see `memory/DECISIONS.md`). `src/data/pricing.json`/
-`.ts`/`PricingCard.astro` are now orphaned dead code, not live pricing. Below reflects what's
-actually live as of this rewrite.
+Every price on the website is read from `src/data/catalog.ts`. Change it there and every card, calculator, FAQ, article table and schema updates. This file is a summary; if they disagree, the code wins.
 
-## Live pricing — WSS Express (`src/data/express.ts`, rendered on `/express`)
+**Basis (founder decisions, 11 Oct 2026, audit Part 12):** prices sit about 44% below the Malaysian market reference (reference x 0.75 x 0.75) to win the first clients. No SST is added (prices are final). No grant offering. 12 months of updates included with every system licence. Founding Client Programme: 5 places, 20% off. **Price review: 14 April 2027** or after the 5 Founding Client projects, moving toward each item's `reviewTarget` (the "market minus 25%" level).
 
-Three fixed packages, no page-count/segment ladder — this is now the site's only
-standalone "pricing page" in practice (it also absorbed the old `/faq` content as
-its last section).
+## Websites (one-time)
+| Package | Price | From year 2 |
+|---|---|---|
+| One-Page Website | RM569 | Hosting + domain RM219/year |
+| Business Website (most popular) | RM2,990 | RM219/year |
+| Store Website | RM5,590 | RM369/year |
 
-| Package | Price | Turnaround | Audience |
-|---|---|---|---|
-| WSS Express Landing | RM 180 / year | 3–5 days | Micro-SMEs, hawkers, solo traders — 1 page |
-| WSS Express Starter | RM 1,500 (one-time) | 3–7 days | Growing SMEs/clinics/consultancies — up to 3 pages, marked "Most Popular" |
-| WSS Express Business | RM 4,500 (one-time) | 7–14 days | Retail/wholesale/booking ops — full e-commerce, PMKS Madani grant-eligible |
+Add-ons: extra page RM219 · copywriting RM149/page · BM + EN +RM749 (Business) / +RM1,119 (Store) · payment gateway RM369 (Business; included in Store) · Local SEO Setup RM819 · AI WhatsApp Assistant RM629 setup + RM99/month (+ Meta fees at cost). Local SEO Monthly (RM969) stays unpublished until 2 clients have results.
 
-## Live pricing — service category comparison tables (`/services/[category]` pages)
+Payment: One-Page and Business 50/50; Store 40/30/30.
 
-These are the other two places real prices appear on the site, both added 2026-08-25:
+## Ready-made systems (one-time, perpetual licence + source code)
+Basic RM569 · Standard RM1,119 · Advanced RM2,249. Extras: installation RM369, branding from RM669, training RM219, data import from RM299, update install RM219 (free on a Care Plan). Paid in full before download. 30 days support, 12 months updates, 14-day refund if it can't be installed and we can't fix it.
 
-- **`/services/web-software-app-development`**: SME website packages RM 1,799–RM 3,499
-  (by page count, +8% SST) and Corporate packages RM 4,299–RM 7,399 (Corporate→Champion
-  tier, +8% SST) — comparison tables, not the old SWOT-sourced 9-tier ladder (that's the
-  now-orphaned structure this file used to document).
-- **`/services/digital-design-media-marketing`**: Google Ads campaign management
-  RM 500–RM 2,000/month; SEO retainer RM 1,200–RM 1,900/month; one-time SEO essentials
-  setup (flat fee, exact figure in the page copy).
+## Custom
+Discovery Sprint RM1,129 (credited within 60 days) · Custom Build from RM8,250 (typical RM14,000 to RM28,000; 30/40/30) · Mobile App from RM16,500 · Rescue Audit RM749 (credited toward the fix).
 
-## Grant angle (still applies to Express Business + SME web packages)
+## Care Plans (recurring)
+Hosting Only RM219/year (sites), RM369/year (stores) · Care Basic RM129/month or RM1,290/year · Care Pro RM339/month or RM3,390/year (+RM119/month per extra site for complete solutions). Pre-select a Care Plan in every quote.
 
-MSME Digital Grant MADANI: **50% matching, up to RM5,000, not full coverage** (client
-still pays the other half). Administered by MDEC, first-come-first-served against a
-fixed pool, one claim per business, requires ≥6 months SSM registration and ≥RM50,000
-annual turnover. Never market this as "free."
+## Bundles and complete solutions
+Go Digital Bundle RM6,790 (saves RM495). Smart Premises RM9,690 / RM18,690 + hardware, Care Pro required. Smart Outlet RM4,490 / RM11,900 + hardware. (Smart Clinic and Smart Warehouse priced in the data, unpublished.)
+
+## Margin floor
+RM70/hour of founder time. Track hours on the first 3 projects of each package (`docs/business/pricing-and-margins.md`). One-Page is excluded from the Founding Client discount because it would fall below the floor.
 
 ## Quotes / Invoices
-Use `.claude/skills/cfo/templates/quotation.md` and `invoice.md` per client.
+Use `.claude/skills/cfo/templates/quotation.md` and `invoice.md`, or `docs/legal/statement-of-work-template.md`. Prices must match `catalog.ts`.
 
 ## P&L
-Not yet tracked — set up once real client volume starts flowing.
+Not yet tracked; set up once client volume starts.
 
-## Business contact details still needed
-`legalName`/`ssmNumber`/`sstNumber` in `src/data/site.json` are still blank.
-Email corrected 2026-08-25: `hello@wssdevlabs.com` → `info@wssdevlabs.com`
-(WhatsApp/phone/social were already real).
+## Business details still needed
+`legalName`, `ssmNumber`, `registeredAddress` in `src/data/site.json` are still blank (they render automatically once set).

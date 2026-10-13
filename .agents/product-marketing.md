@@ -1,122 +1,77 @@
 # Product Marketing Context
 
-**Document version:** v1
-**Last updated:** 2026-08-09
+**Document version:** v2 (replaces v1 of 2026-08-09 entirely)
+**Last updated:** 2026-10-14 (live on the site, keeping the existing design)
+**Source:** the founder's full website audit of 11 Oct 2026 (Part 1 strategy, Part 10 microcopy, Part 12 pricing, Part 13 ecosystems). Prices: always read `src/data/catalog.ts`, never this file.
 
-## Product Overview
-**One-liner:** WSS DevLabs is a Kuala Lumpur digital solutions studio that builds websites, apps, custom systems, and runs marketing/branding for Malaysian businesses — from first-time SME websites to bespoke AI-powered platforms.
+## Positioning
+**Line:** Software you own. Not rent.
+**Sub-line:** Fixed-price websites and ready-made business systems for Malaysian SMEs. Full source code, no monthly SaaS fees.
 
-**What it does:** Operates on two tracks. (1) Fast, fixed-price Informative and Ecommerce website packages aimed at SMEs and traditional businesses getting online for the first time. (2) Custom-coded websites, mobile apps, internal systems, and AI features for growing companies that need bespoke software, sold as Launch/Build/Enterprise. Also offers marketing services (SEO, ads, branding, content, photography) as standalone or bundled work.
+**The one idea behind every offer:** you own it. No SaaS rent. Full source code (websites and custom builds: owned outright on full payment; ready-made systems: a perpetual licence with full source code, no resale).
 
-**Product category:** Web design & software development studio (Malaysia)
+## Who we serve
+**Malaysian SMEs with 5 to 100 staff.** Owner-operators who decide directly, mostly on a phone, often arriving from WhatsApp, TikTok or Google Maps.
 
-**Product type:** Service business — project-based fixed-price packages, custom quotes for bespoke work, and an optional monthly Care Plan retainer (RM99–199/mo: hosting, updates, capped edits).
+**Not now:** enterprise buyers (they need references, certifications, SLAs and a team), students, grant applicants. Revisit enterprise after 3 SME case studies and 1 corporate reference.
 
-**Business model:** Informative packages RM1,799–RM3,499; Ecommerce packages RM3,899–RM6,799 (both currently priced to match a named competitor, SWOT, as an explicit placeholder — founder intends to retune); custom growth-tier work from RM3,000 (Launch) to RM15,000+ (Build) to custom quote (Enterprise); Care Plan add-on RM99–199/month.
+## What we sell (three offers, one idea)
+| Offer | Page | From | Role |
+|---|---|---|---|
+| Websites | /websites/ | RM569 | Entry product: fixed price, fast |
+| Systems | /systems/ | RM569 one-time | The differentiator: buy once, own the code |
+| Custom | /custom/ | RM8,250 (after a RM1,129 Discovery Sprint) | Upsell for unique workflows |
 
-## Target Audience
-**Target companies:** Two segments, deliberately different buyers:
-- **SME / traditional business** — hawkers, kedai runcit, bengkel, small F&B, home-based businesses, service traders. No or minimal web presence (Facebook/Instagram only). Price-sensitive. Many may qualify for the MSME Digital Grant MADANI (50% match up to RM5,000, requires ≥6 months SSM registration and ≥RM50,000 turnover).
-- **Growing companies / startups** — need custom software, apps, AI features, or internal systems. Bigger budget, values bespoke engineering over templates.
+Plus the recurring layer: **Care Plans** (Hosting Only, Care Basic, Care Pro), pre-selected in every quote. Plus **ecosystems** (Smart Premises, Smart Outlet) sold to one clear buyer each, currently booking pilot sites.
 
-**Decision-makers:** SME segment — owner-operator, decides directly. Growth segment — founder, ops lead, or technical decision-maker.
+**Not sold:** IoT or ML services, computer vision, ESG, Industry 4.0, grants, photo or video production, Google Ads, VR/AR, branding as a service. "If you can't show a screenshot, a client name or a number for a service, it doesn't go on the website."
 
-**Primary use case:** SME segment — get a credible, functional web presence online fast and cheap, ideally grant-subsidized. Growth segment — get custom software built without hiring an internal engineering team.
+## Mission, vision, principles
+- **Mission:** Help Malaysian SMEs own their software instead of renting it: fixed price, full source code, no lock-in.
+- **Vision:** A Malaysia where a 10-person business runs on software it owns and controls, not a stack of subscriptions it can't escape.
+- **Principles:** You own everything. The price is the price. You talk to the builder.
 
-**Jobs to be done:**
-- "Get my business found online without an agency's usual RM3,000+ minimum"
-- "Get a custom system/app built without hiring full-time engineers"
-- "Work directly with the person building it, not an account manager"
+## The problem we solve
+Small businesses pay monthly for almost everything (POS, attendance, booking, website builder). Each bill looks small; together they never stop, and the business never owns any of it. Stop paying, and the software and often the data go with it.
 
-**Use cases:** first-time SME websites, ecommerce storefronts, mobile apps, custom CMS/ERP, AI feature integration, grant-funded builds, student capstone projects, marketing/branding engagements.
-
-## Personas
-Mostly single-decision-maker sales (owner-operator or founder) rather than multi-stakeholder B2B buying committees — formal persona table skipped for now. Revisit if/when Enterprise-tier deals involve procurement or multiple stakeholders.
-
-## Problems & Pain Points
-**Core problem:** SME segment either has no website or an outdated social-media-only presence, and assumes "a proper website" costs RM3,000+ (Malaysia market range: RM1,500–25,000+ per 2026-08-09 research), pricing them out. Growth segment needs custom software but full agencies quote high and move slowly, while freelancers each cover only one skill, forcing the client to coordinate multiple vendors.
-
-**Why alternatives fall short:**
-- DIY builders (Wix/Canva) look unprofessional, rank poorly, no ongoing support
-- Full-service agencies price out small businesses
-- Solo freelancers cover one skill each, forcing multi-vendor coordination
-- Competitor SWOT undercuts on structure/price parity but leads with "2,000+ Projects Completed" — a credibility claim WSS cannot currently match
-
-**What it costs them:** Lost customers who search before they visit; missed grant funding they didn't know how to access; slower time-to-market coordinating multiple freelancers for growth-tier builds.
-
-**Emotional tension:** SME segment feels priced out or embarrassed not to have a website. Growth segment is wary of scope creep, slow communication, and agency overhead.
-
-## Competitive Landscape
-**Direct:** SWOT (swot.com.my) — Malaysian web design company selling near-identical page-count-based Informative/Ecommerce packages (RM1,799–RM6,799). Leads with "2,000+ Projects Completed" and "100% Deliverable." WSS's packages currently mirror SWOT's structure and pricing exactly (as of 2026-08-09, by explicit founder request) but has zero published proof to counter SWOT's credibility claim.
-
-**Secondary:** Generic freelancers (Upwork/local), RM1,500–6,000 project-based — inconsistent quality, single-skill, no ongoing support.
-
-**Indirect:** DIY builders (Wix, Canva) — free/cheap, weak SEO and differentiation, no support.
+## Honest economics (say it this way)
+A RM158/month subscription POS costs RM5,688 over 3 years. A WSS POS is RM1,119 + RM369 installation + your hosting. **Fairness rule:** subscriptions include hosting, updates and support; with a Care Plan, owning one POS can cost more than renting over 3 years. Owning wins clearly without a support plan, with several outlets or users, over longer periods, and for data control. Always show both sides (the calculators do).
 
 ## Differentiation
-**Key differentiators:**
-- Single point of contact — client works directly with the builder, not routed through account managers
-- Full range under one roof — web, app, systems, AI, marketing, branding — no multi-vendor coordination
-- MSME Digital Grant MADANI positioning built into SME package messaging, which local competitors don't lead with
-- Structured internal delivery process (discovery → quote → requirements → plan → architecture → design → build → QA → ship → deliver → retro)
+- **Ownership:** full source code, domain in the client's name, no kill switch.
+- **Fixed, published prices:** every package lists what's included and what isn't.
+- **Founder-led:** you talk to the person who builds it. No account managers.
+- **Ready-made systems you can buy once:** few Malaysian competitors offer owned alternatives to SaaS.
 
-**How we do it differently:** One person handles (or directly orchestrates) the whole engagement instead of splitting it across a design team, a dev team, and an account manager.
+## Proof status (be honest about it)
+No published case studies or reviews yet. The **Founding Client Programme** (first 5 clients, 20% off, in exchange for a case study, an honest Google review and permission to show logo and screenshots) exists to fix this. Never invent proof, logos, stats or reviews. Never say "live demo" until a real one loads; offer a 15-minute screen-share instead.
 
-**Why that's better:** Faster answers, no information loss between layers, consistent ownership from quote to handover.
+## Objections and answers
+| Objection | Answer |
+|---|---|
+| "Why so cheap? What's the catch?" | Lean, founder-led studio; every package lists exactly what's included and what isn't; prices will rise after our first 5 clients. |
+| "What if you disappear?" | You get the source code, credentials and docs; the domain is in your name; anyone can take over. |
+| "Subscriptions include support." | True. Owning means you pay hosting and can add a Care Plan. Here are both totals. |
+| "Can I see it first?" | Book a 15-minute screen-share. |
+| "Do you guarantee Google page 1?" | No one honestly can. We set up Local SEO properly and tell you what to expect (3 to 6 months). |
 
-**Why customers choose us:** Direct access to the builder, transparent fixed-price packages, one relationship across every digital need.
+## Voice and microcopy (audit 10.5)
+Short sentences, "you" not "businesses", benefits before features, numbers instead of adjectives. Would a 50-year-old kedai owner understand it? No em dashes.
+| Instead of | Write |
+|---|---|
+| Empowering Businesses Through Custom Tech Solutions | Software you own. Not rent. |
+| Buy-Once production systems | Pay once, use forever |
+| Ed25519 offline signature verification | Works offline. No kill switch. |
+| Consult with Us / Start a Project / Book Consultation | Get a fixed quote |
+| A senior architect confirms within one business hour | We reply within one business day. Fixed quote within three. |
+| Direct deal with our sales | Talk to the builder |
 
-## Objections & Anti-Personas
-| Objection | Response |
-|-----------|----------|
-| "You're a one-person operation — can you actually deliver?" | Structured delivery process, direct communication as a feature not a limitation, fixed-price/milestone billing reduces client risk |
-| "Your Informative/Ecommerce prices currently match SWOT's — why not go with them?" | **Unresolved as of 2026-08-09** — WSS has no case studies or testimonials yet to differentiate on outcomes. This is the single biggest gap in the current positioning; see Proof Points. |
-| "Is the grant claim legit / will it actually save me money?" | Be precise always: 50% match up to RM5,000, not free — client still pays half, and eligibility has real thresholds (≥6mo registration, ≥RM50,000 turnover) |
+**Calls to action:** "Get a fixed quote" (primary), "See details" / "See systems" (secondary), "Buy now" (systems), "Book a site visit" (ecosystems).
 
-**Anti-persona:** Businesses wanting a large in-house-feeling team or multi-vendor redundancy; enterprise procurement processes requiring vendor diversification; clients unwilling to work with a single-founder-led studio.
+## Competitive landscape
+- **Subscription software** (POS, attendance, visitor and booking apps): the real alternative to our systems. Compare fairly; never name or disparage competitors on the site; keep sources in docs/business/claims-evidence.md.
+- **Agencies** quoting RM3,000 to 8,000 for a custom SME site (KL corporate RM8,000 to 18,000).
+- **Freelancers and DIY builders:** cheaper upfront, weaker ownership, support and SEO.
 
-## Switching Dynamics
-**Push:** Current no-website/social-media-only presence losing customers to competitors who rank on Google; existing agency relationship too slow or expensive.
-
-**Pull:** Aggressive package pricing, direct-to-builder access, grant-eligible pricing lowering effective cost.
-
-**Habit:** Comfort with "just posting on Facebook/Instagram"; fear of the technical complexity of "having a website."
-
-**Anxiety:** "What if the person building this disappears" (solo-founder continuity risk); "Do I actually own my site and content after" (mitigated by existing "full ownership & access" language in package copy).
-
-## Customer Language
-Not yet captured — no real customer interviews or testimonials exist yet (content gate: `src/data/testimonials.ts` is empty by design). **Action:** capture verbatim language from the first real SME-tier and growth-tier clients and fold it into v2 of this document.
-
-**Words to avoid:** "free" or "near-zero cost" when referring to the MADANI grant (it's a 50% match, not full coverage) — see `.claude/skills/admin/templates/grant-assistance-info-sheet.md`.
-
-## Brand Voice
-**Tone:** Direct, competent, no-fluff — consistent with existing homepage copy ("Whatever you need, we can build it").
-
-**Style:** Plain and benefit-first for SME-facing copy; more technical and specific on growth-tier service pages (names Astro, TypeScript, Lighthouse scores directly).
-
-**Personality:** Capable, direct, unpretentious, builder-not-salesperson.
-
-## Proof Points
-**Metrics:** None published yet. `/work` shows 0 real case studies, `/testimonials` shows 0 real reviews, `/insights` has 0 published posts despite the section being fully built. This is the largest open gap in the entire marketing foundation — flagged in the 2026-08-09 CMO audit.
-
-**Customers:** None named yet.
-
-**Testimonials:** None real yet (a prior version of the site had fabricated testimonials and case studies hardcoded as fallbacks — removed 2026-08-09 for being deceptive; do not reintroduce placeholder "proof" content of any kind).
-
-**Value themes:** "Direct access to the builder," "one team for every digital need," "grant-eligible pricing" — currently asserted, not yet backed by third-party proof.
-
-## Goals
-**Primary business goal:** Win volume from the Malaysian SME/traditional-business segment via the new Informative/Ecommerce packages, while preserving the higher-margin growth tier (Launch/Build/Enterprise) for bigger clients.
-
-**Key conversion action:** Contact form submission or WhatsApp message → quote call.
-
-**Current metrics:** None confirmed tracked yet — `PUBLIC_CF_ANALYTICS_TOKEN` is blank in `.env.example` and no local `.env` exists; production analytics status unverified as of 2026-08-09.
-
-## Open Issues (not in the standard template, kept because they materially affect any copy generated from this doc)
-1. **Zero proof content** — no real projects, testimonials, or blog posts. Every differentiation claim above is currently unbacked. Highest-priority fix before spending on ads.
-2. **About page team roster is fictional.** `src/pages/about.astro` lists three team members (Wan Syahiid, Farah Izzati, Rin Takahara) with stock photos, but WSS operates as a single founder per its own internal role documentation. Any copy generated from this context should say "founder-led" or "one team," not reference multiple named staff, until this is resolved with the founder. (The career page, which had the same issue plus fictional office perks, was removed 2026-08-09.)
-3. **Pricing is an explicit placeholder** — the 9 Informative/Ecommerce packages currently match competitor SWOT's prices exactly, at the founder's direction, pending a retune. Don't treat current price points as final positioning signals (e.g., "we're the premium option" or "we're the budget option") until pricing settles.
-
-## Changelog
-*Newest first. One line per revision: what changed and why.*
-- v1 (2026-08-09) — Initial context, auto-drafted from the codebase (README, `pricing.json`, `services.json`, `site.json`, `about.astro`, CLAUDE.md/skill role docs) and this session's history (SME pricing pivot, SWOT-matched package overhaul, career page removal, CMO content audit). Flagged three open issues: zero proof content, a fictional team roster on the About page, and placeholder pricing.
+## Channels (audit Part 7)
+Google Business Profile, own-vs-rent content, founder LinkedIn, 30-second TikTok/Reels screen recordings of real systems, 2 articles a month, partnerships with accountants and company secretaries. No paid ads until conversion tracking works and proof is on the site. Full plan: docs/business/marketing-plan.md.

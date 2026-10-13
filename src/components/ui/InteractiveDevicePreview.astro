@@ -1,23 +1,29 @@
 ---
+/**
+ * Desktop / mobile preview frame. It only ever shows real material: screenshots or a real
+ * demo passed in through the slot. It never shows a made-up address or live status.
+ */
 type Props = {
   title?: string;
-  urlPath?: string;
+  /** Text for the address bar. Use a real URL only when a real demo exists. */
+  addressLabel?: string;
+  /** Small chip on the right of the address bar. */
+  chip?: string;
   class?: string;
-  systemSlug?: string;
 };
 
 const {
-  title = 'Live System Interactive Preview',
-  urlPath = 'https://demo.wssdevlabs.com',
-  class: className = '',
-  systemSlug = 'system'
+  title = 'System preview',
+  addressLabel = 'Walkthrough on request',
+  chip = 'Sample data',
+  class: className = ''
 } = Astro.props;
 
 const previewId = `preview-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
 <div class:list={['rounded-3xl border border-line bg-ink p-4 text-white shadow-2xl sm:p-6', className]} id={previewId}>
-  <!-- Top Bar: Device Mode Switcher & URL simulated bar -->
+  <!-- Top Bar: Device Mode Switcher & title -->
   <div class="flex flex-col gap-4 border-b border-white/10 pb-4 sm:flex-row sm:items-center sm:justify-between">
     <!-- Left: Window Controls & Title -->
     <div class="flex items-center gap-3">
@@ -36,7 +42,7 @@ const previewId = `preview-${Math.random().toString(36).substring(2, 9)}`;
         data-device-target="desktop"
         class="device-btn active-device flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 font-semibold text-white transition-all duration-200"
       >
-        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0H3" />
         </svg>
         <span>Desktop</span>
@@ -47,7 +53,7 @@ const previewId = `preview-${Math.random().toString(36).substring(2, 9)}`;
         data-device-target="mobile"
         class="device-btn flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold text-white/60 transition-all duration-200 hover:text-white"
       >
-        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
         </svg>
         <span>Mobile (375px)</span>
@@ -55,13 +61,10 @@ const previewId = `preview-${Math.random().toString(36).substring(2, 9)}`;
     </div>
   </div>
 
-  <!-- Simulated Browser Address Bar -->
+  <!-- Address Bar -->
   <div class="mt-3 flex items-center justify-between rounded-xl bg-white/5 px-3 py-1.5 text-[11px] font-mono text-white/50">
-    <div class="flex items-center gap-2">
-      <span class="text-emerald-400">🔒 https://</span>
-      <span class="text-white/80">{urlPath.replace(/^https?:\/\//, '')}/{systemSlug}</span>
-    </div>
-    <span class="rounded bg-white/10 px-1.5 py-0.5 text-[9px] text-accent-yellow-vivid">Sub-50ms TTFB</span>
+    <span class="text-white/80">{addressLabel}</span>
+    <span class="rounded bg-white/10 px-1.5 py-0.5 text-[9px] text-accent-yellow-vivid">{chip}</span>
   </div>
 
   <!-- Viewport Stage -->
@@ -70,38 +73,8 @@ const previewId = `preview-${Math.random().toString(36).substring(2, 9)}`;
     <div class="viewport-container w-full transition-all duration-300 ease-out">
       <div class="preview-content rounded-xl border border-line bg-paper p-6 text-ink">
         <slot>
-          <!-- Default Mock UI if no slot provided -->
-          <div class="flex items-center justify-between border-b border-line pb-4">
-            <div class="flex items-center gap-2">
-              <span class="h-4 w-2 rounded-sm bg-accent"></span>
-              <span class="font-bold text-sm">{title}</span>
-            </div>
-            <span class="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700">
-              ● Live Engine Active
-            </span>
-          </div>
-
-          <div class="mt-4 grid gap-4 sm:grid-cols-3">
-            <div class="rounded-xl border border-line bg-paper-dim p-3">
-              <p class="text-[10px] font-mono text-ink-dim uppercase">Status</p>
-              <p class="mt-1 font-bold text-sm text-ink">Zero SaaS Lock-in</p>
-            </div>
-            <div class="rounded-xl border border-line bg-paper-dim p-3">
-              <p class="text-[10px] font-mono text-ink-dim uppercase">License</p>
-              <p class="mt-1 font-bold text-sm text-accent">Ed25519 Offline Verified</p>
-            </div>
-            <div class="rounded-xl border border-line bg-paper-dim p-3">
-              <p class="text-[10px] font-mono text-ink-dim uppercase">Response</p>
-              <p class="mt-1 font-bold text-sm text-emerald-700">Sub-Second Load</p>
-            </div>
-          </div>
-
-          <div class="mt-4 rounded-xl border border-line/60 bg-paper-deep/30 p-4">
-            <p class="text-xs font-semibold text-ink">Interactive Responsive Showcase</p>
-            <p class="mt-1 text-xs text-ink-dim">
-              Click the <strong>Desktop</strong> and <strong>Mobile</strong> toggle buttons above to test the responsive layout adaptations in real time.
-            </p>
-          </div>
+          <p class="text-sm font-semibold text-ink">{title}</p>
+          <p class="mt-2 text-xs text-ink-dim">Screenshots appear here once they're published.</p>
         </slot>
       </div>
     </div>
@@ -110,8 +83,8 @@ const previewId = `preview-${Math.random().toString(36).substring(2, 9)}`;
 
 <script>
   function initDevicePreviews() {
-    const wrappers = document.querySelectorAll('.device-btn');
-    wrappers.forEach((btn) => {
+    document.querySelectorAll<HTMLButtonElement>('.device-btn:not([data-bound])').forEach((btn) => {
+      btn.dataset.bound = '1';
       btn.addEventListener('click', (e) => {
         const targetBtn = e.currentTarget as HTMLButtonElement;
         const parentStage = targetBtn.closest('.rounded-3xl');

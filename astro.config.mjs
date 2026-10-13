@@ -13,7 +13,7 @@ export default defineConfig({
   prefetch: true,
   integrations: [
     react(),
-    sitemap(),
+    sitemap({ filter: (page) => !page.includes('/404') }),
     mdx(),
     partytown({
       config: { forward: ['dataLayer.push'] }

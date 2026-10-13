@@ -1,0 +1,25 @@
+---
+import { SITE } from '../../data/site';
+
+/**
+ * Plain-HTML email link that crawlers and no-JS visitors can read.
+ * The email_off comments tell Cloudflare's Email Address Obfuscation to leave it alone;
+ * the data attributes let emailReveal.ts repair it if that setting ever mangles it anyway.
+ */
+type Props = {
+  email?: string;
+  class?: string;
+};
+
+const { email = SITE.email, class: className } = Astro.props;
+const [user, domain] = email.split('@');
+const hasSlot = Astro.slots.has('default');
+---
+
+<Fragment set:html="<!--email_off-->" /><a
+  href={`mailto:${email}`}
+  class={className}
+  data-email-user={user}
+  data-email-domain={domain}
+  data-email-text={hasSlot ? undefined : '1'}
+>{hasSlot ? <slot /> : email}</a><Fragment set:html="<!--/email_off-->" />

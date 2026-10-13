@@ -1,33 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
-import HomepageServices from '../components/sections/HomepageServices.astro';
-import PartnersMarquee from '../components/sections/PartnersMarquee.astro';
+import OfferChooser from '../components/sections/OfferChooser.astro';
+import HomeOwnership from '../components/sections/HomeOwnership.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
+import FAQ from '../components/sections/FAQ.astro';
 import ElevateCTA from '../components/sections/ElevateCTA.astro';
-import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
+import { HOME_FAQ } from '../data/faqs';
+import { organizationSchema, faqSchema } from '../lib/schema';
+
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).toString();
 
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'WSS DevLabs',
-  url: Astro.site?.toString(),
-  description:
-    'SME productized tech & custom engineering partner: WSS Express websites, Buy-Once Marketplace systems, AI development, and Bespoke Enterprise solutions.'
+  '@graph': [organizationSchema(siteUrl), faqSchema(HOME_FAQ)]
 };
 ---
 
 <BaseLayout
-  title="WSS DevLabs: Productized Services, Marketplace & Bespoke Engineering"
-  description="High-performance websites, Buy-Once production systems, AI automation, and custom enterprise engineering with 2026 Government Grant funding matching."
+  title="Websites & Business Systems for Malaysian SMEs, Fixed Price"
+  description="Fixed-price websites from RM569 and buy-once business systems with full source code. No monthly SaaS fees. Founder-led, based in Kuala Lumpur."
   path="/"
   schema={schema}
 >
   <Hero />
-  <HomepageServices />
-  <PartnersMarquee />
+  <OfferChooser />
+  <HomeOwnership />
   <Testimonials />
+  <FAQ title="Questions people ask first" items={HOME_FAQ} />
   <ElevateCTA />
-  <MarketplaceAndExpressBanner />
 </BaseLayout>
-

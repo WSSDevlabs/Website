@@ -1,18 +1,18 @@
 # PROJECT
 
-**What this is:** WSS DevLabs' own marketing/agency website — a premium web & software studio site. Internal project (WSS DevLabs is the owner, not a client).
+**What this is:** WSS DevLabs' own marketing website. Internal project (WSS DevLabs is the owner, not a client).
 
-**Current goal:** Redesign in progress. Target: within 3 days of 2026-08-09 → **2026-08-12**.
+**Current state (2026-10-14):** the founder's October 2026 audit is implemented on top of the existing design. Positioning: **"Software you own. Not rent."** Fixed-price websites and ready-made business systems for Malaysian SMEs (5 to 100 staff), plus custom builds. Founder-led by Razali.
 
-**Business pivot (2026-08-09):** Company-wide focus shifted to volume acquisition in the Malaysian SME / traditional business market (hawkers, traders, kedai runcit), alongside the existing premium studio offering. Website now carries a two-tier pricing ladder: SME tier (Starter RM500, Business RM1,500) plus the existing growth tier (Launch RM3,000, Build RM15,000, Enterprise custom). See pricing detail in FINANCE.md and rationale in DECISIONS.md.
+**Pages:** Home · /websites/ · /systems/ (15 public systems + 2 complete solutions as pilots: Smart Premises, Smart Outlet) · /custom/ · /about/ · /contact/ · /insights/ · legal: /privacy/ (EN + BM), /terms/, /licence/, /refunds/, /care-plan-terms/, /cookies/. Old URLs (/express/, /marketplace/, /services/, /testimonials/, /coming-soon/) 301 via `public/_redirects`.
 
-**Stack:** Astro 7 · TypeScript · Tailwind CSS v4 · React 19 (R3F hero island only) · GSAP/ScrollTrigger · Lenis · Astro View Transitions · Content Collections (MDX) · Web3Forms (contact) · Cloudflare Pages · Partytown · Cloudflare Web Analytics.
+**Source of truth for prices:** `src/data/catalog.ts` (never retype prices). Systems: `src/data/systems.ts`. Complete solutions: `src/data/ecosystems.ts`. FAQs: `src/data/faqs.ts`. Company settings: `src/data/site.json` (CMS).
 
-**Structure:** see [README.md](../README.md) and [WSSDevlabs Website Architecture.md](../WSSDevlabs%20Website%20Architecture.md) for the full build spec and flat sitemap.
+**Stack:** Astro 7 · TypeScript · Tailwind CSS v4 · React 19 (R3F island, currently unused) · GSAP/ScrollTrigger · Lenis · Motion · Astro View Transitions · Content Collections (MD/MDX) · Web3Forms · Cloudflare Pages · Partytown · Cloudflare Web Analytics · Botpress chat · Decap CMS at /wss-console/.
 
 **Constraints:**
-- Content gate: several sections (TrustBar, ImpactStats, Testimonials, Team, Partners, case studies, insights posts, legal/business info in `src/data/site.ts`, self-hosted fonts, default OG image) intentionally stay empty until real content exists — no placeholder/fake trust content ships.
-- Design direction: light theme, red/blue/yellow/green accents (per prior design memory).
-- Apply the taste-skill (design-taste-frontend) to all frontend work.
+- **Design rule (founder, 2026-10-14):** change content, descriptions, pages and structure freely, but keep the UI, style, design, buttons, effects and transitions (floating icon nav, top bar, intro animation, cookie banner, Botpress bubble, red badge highlights, GSAP motion, hover-reveal category browser). New pages are built from existing section designs. Design reference: `docs/DESIGN.md`.
+- Content gate: no fake proof. Legal identity, reviews, partner logos, case studies, screenshots and the founder photo stay empty or hidden until real.
+- Push only when the founder says "push". No "Co-Authored-By: Claude" in commits.
 
-**Links:** README.md, WSSDevlabs Website Architecture.md, SERVICE_PRICING_RESEARCH.md (all in project root).
+**Links:** README.md · docs/DESIGN.md · docs/audit/ (checklist + founder actions) · docs/legal/ · docs/business/ · docs/ops/deploy-checklist.md · .agents/product-marketing.md

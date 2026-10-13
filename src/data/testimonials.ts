@@ -6,5 +6,6 @@ export type Testimonial = {
   rating?: number;
 };
 
-// Content gate: add real testimonials before this section ships
+// Content gate: only real reviews, quoted word for word, with the client's written permission.
+// The reviews section stays hidden on every page until this list has at least one entry.
 export const TESTIMONIALS: Testimonial[] = [];
