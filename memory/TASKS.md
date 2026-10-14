@@ -1,7 +1,7 @@
 # TASKS
 
 ## DOING
-- [founder review] 2026-10-14 solutions repositioning + motion layer + 10 new Insights posts is built and verified locally but **NOT committed or pushed**. Waiting for founder to review at localhost and say "push".
+- (none) 2026-10-14 solutions repositioning pushed as 7c1a73b. Next: post-deploy check on the live site, then real footage swaps.
 
 ## TODO
 - [founder/content] Replace stock clips with real WSS recordings (wild animal detection, plant disease, digital twins, waste-to-energy, CCTV analytics): set `youtubeId` in `src/data/demos.ts` or add files to `/public/videos/` and `footage: 'wss'` in `src/data/media.ts`.

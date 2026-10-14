@@ -108,6 +108,7 @@ const chips = [
     const reel = document.querySelector<HTMLElement>('[data-hero-reel]');
     if (!reel || reel.dataset.bound) return;
     reel.dataset.bound = '1';
+    const reelEl: HTMLElement = reel;
 
     const items: ReelItem[] = JSON.parse(reel.dataset.items ?? '[]');
     const layers = Array.from(reel.querySelectorAll<HTMLElement>('[data-reel-layer]'));
@@ -145,7 +146,7 @@ const chips = [
       segs[i]?.classList.add('is-active');
       if (nameEl) nameEl.textContent = items[i].sector;
       if (link) link.href = items[i].href;
-      reel.dataset.currentWord = items[i].word;
+      reelEl.dataset.currentWord = items[i].word;
       document.dispatchEvent(new CustomEvent('wss:reel-change', { detail: items[i] }));
       index = i;
       schedule();
