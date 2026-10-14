@@ -33,9 +33,9 @@ const more = rest.slice(4, 7);
 ---
 
 <BaseLayout
-  title="Insights: Guides for Malaysian SMEs"
+  title="Insights: WSS DevLabs"
   description="Practical, sourced notes on web development, SEO, and running a small business in Malaysia."
-  path="/insights/"
+  path="/insights"
 >
   {featured && (
     <section class="border-b border-line">
@@ -43,7 +43,7 @@ const more = rest.slice(4, 7);
         <div class="grid gap-6 lg:grid-cols-3">
           <!-- Featured -->
           <a
-            href={`/insights/${featured.id}/`}
+            href={`/insights/${featured.id}`}
             data-open-insight={featured.id}
             class="group relative block w-full overflow-hidden rounded-3xl text-left lg:col-span-2"
           >
@@ -75,7 +75,7 @@ const more = rest.slice(4, 7);
               <div class="mt-5 space-y-5">
                 {
                   latest.map((item) => (
-                    <a href={`/insights/${item.id}/`} data-open-insight={item.id} class="group flex w-full items-start gap-3 text-left">
+                    <a href={`/insights/${item.id}`} data-open-insight={item.id} class="group flex w-full items-start gap-3 text-left">
                       <div class="h-16 w-16 shrink-0 overflow-hidden rounded-xl">
                         <img src={item.image} alt={item.title} loading="lazy" width="100" height="100" class="h-full w-full object-cover" />
                       </div>
@@ -125,7 +125,7 @@ const more = rest.slice(4, 7);
             <div class="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" data-more-track>
               {
                 more.map((item) => (
-                  <a href={`/insights/${item.id}/`} data-open-insight={item.id} class="tilt-card card group w-[280px] shrink-0 snap-start overflow-hidden !rounded-3xl p-0 text-left sm:w-[320px]">
+                  <a href={`/insights/${item.id}`} data-open-insight={item.id} class="tilt-card card group w-[280px] shrink-0 snap-start overflow-hidden !rounded-3xl p-0 text-left sm:w-[320px]">
                     <div class="relative h-44 overflow-hidden">
                       <img src={item.image} alt={item.title} loading="lazy" width="640" height="400" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                       <span class="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-paper/95 px-2.5 py-1 text-[11px] font-semibold text-ink">
@@ -167,7 +167,7 @@ const more = rest.slice(4, 7);
       </button>
       <div class="overflow-y-auto p-6 md:p-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <div id="insight-modal-body"></div>
-        <div id="insight-modal-source-block" class="mt-8 border-t border-line pt-6">
+        <div class="mt-8 border-t border-line pt-6">
           <p class="text-xs text-ink-dim">Written after reading and studying the source below. Want the original?</p>
           <a id="insight-modal-source" href="#" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 rounded-full border border-line bg-paper-dim px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
             <span id="insight-modal-source-label">Visit the source</span>
@@ -198,9 +198,7 @@ const more = rest.slice(4, 7);
         e.preventDefault();
         body.innerHTML = '';
         body.appendChild(template.content.cloneNode(true));
-        const sourceUrl = template.dataset.sourceUrl;
-        document.getElementById('insight-modal-source-block')?.classList.toggle('hidden', !sourceUrl);
-        sourceLink.href = sourceUrl ?? '#';
+        sourceLink.href = template.dataset.sourceUrl ?? '#';
         sourceLabel.textContent = template.dataset.sourceLabel ?? 'Visit the source';
         modal.classList.remove('hidden');
         modal.classList.add('flex');

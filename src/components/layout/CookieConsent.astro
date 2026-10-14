@@ -8,16 +8,16 @@ const { cfAnalyticsToken } = Astro.props;
 
 <div
   id="cookie-consent"
-  class="fixed inset-x-4 bottom-24 z-50 hidden max-w-xl rounded-2xl border border-line bg-paper p-5 shadow-lg md:inset-x-auto md:bottom-4 md:left-6"
+  class="fixed inset-x-4 bottom-4 z-50 hidden max-w-xl rounded-2xl border border-line bg-paper p-5 shadow-lg md:inset-x-auto md:left-6"
   role="dialog"
   aria-live="polite"
   aria-label="Cookie consent"
   data-cf-token={cfAnalyticsToken || ''}
 >
   <p class="text-sm text-ink-dim">
-    We'd like to count visits with cookieless analytics that never identify you. It only runs if you
-    click Allow. Our chat assistant keeps a session ID in your browser so it can remember your
-    conversation. See our <a href="/cookies/" class="underline hover:text-accent">Cookie Policy</a>.
+    We use privacy-friendly analytics to understand site usage. No tracking cookies, no cross-site
+    profiling. Analytics only runs after you click Allow. See our
+    <a href="/cookies" class="underline hover:text-accent">Cookie Policy</a>.
   </p>
   <div class="mt-4 flex gap-3">
     <button

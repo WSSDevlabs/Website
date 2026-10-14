@@ -1,0 +1,105 @@
+---
+import Container from '../ui/Container.astro';
+
+const packages = [
+  {
+    title: 'WSS Express Web',
+    price: 'Fixed-Price',
+    description:
+      'Fixed-price, production-ready websites shipped in days, engineered for speed, search visibility, and zero recurring SaaS fees.',
+    buttonText: 'Get Started',
+    href: '/express',
+    image:
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&h=1100&q=85',
+    alt: 'WSS Express Web Packages'
+  },
+  {
+    title: 'The Marketplace',
+    price: '41 Systems',
+    description:
+      'Production-ready business systems you buy once and own outright, no subscriptions, no lock-in, full source code included.',
+    buttonText: 'Explore Systems',
+    href: '/marketplace',
+    image:
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&h=1100&q=85',
+    alt: 'WSS Marketplace Systems'
+  },
+  {
+    title: 'Enterprise Bespoke',
+    price: 'Custom Scope',
+    description:
+      'Fully custom software built around your exact requirements, backed by a dedicated senior engineering team from architecture to launch.',
+    buttonText: 'Book Consultation',
+    href: '/contact',
+    image:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&h=1100&q=85',
+    alt: 'WSS Enterprise Bespoke Software'
+  }
+];
+---
+
+<section class="relative overflow-hidden bg-paper py-16 md:py-24 border-t border-line/60">
+  <Container>
+    <!-- Section Header -->
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="h-section font-black tracking-tight text-ink">
+        Eliminate Quote Friction. <span class="badge-highlight">Ship in Days.</span>
+      </h2>
+    </div>
+
+    <!-- 3 Side-by-Side Visual Cards (matching reference screenshot) -->
+    <div class="mt-14 grid gap-7 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+      {
+        packages.map((pkg) => (
+          <div class="group relative flex flex-col justify-end overflow-hidden rounded-[2.2rem] border border-black/10 bg-charcoal aspect-[3/4.3] sm:aspect-[3/4.5] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.18)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl">
+            <!-- Full Bleed Background Image -->
+            <img
+              src={pkg.image}
+              alt={pkg.alt}
+              class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+
+            <!-- Dark Tint Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#111215]/95 via-[#111215]/65 to-transparent pointer-events-none" />
+
+            <!-- Card Content -->
+            <div class="relative z-10 p-6 sm:p-7 flex flex-col justify-end">
+              <!-- Carousel Indicator Dots Motif -->
+              <div class="flex justify-center items-center gap-1.5 mb-4">
+                <span class="h-1.5 w-5 rounded-full bg-white"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-white/40"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-white/40"></span>
+              </div>
+
+              <!-- Title & Price Badge -->
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-display text-xl sm:text-2xl font-bold tracking-tight text-white">
+                  {pkg.title}
+                </h3>
+                <span class="shrink-0 rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-bold text-white shadow-sm backdrop-blur-md">
+                  {pkg.price}
+                </span>
+              </div>
+
+              <!-- Description -->
+              <p class="mt-3 text-xs sm:text-sm leading-relaxed text-white/75 font-normal">
+                {pkg.description}
+              </p>
+
+              <!-- Action Button -->
+              <div class="mt-5">
+                <a
+                  href={pkg.href}
+                  class="flex w-full items-center justify-center rounded-full bg-white py-3.5 text-center text-xs sm:text-sm font-bold text-ink shadow-md transition-all duration-300 hover:bg-[#f2f0ea] hover:scale-[1.02] active:scale-95"
+                >
+                  {pkg.buttonText}
+                </a>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</section>

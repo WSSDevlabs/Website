@@ -1,0 +1,110 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+import { SERVICES } from '../../data/services';
+import { serviceHref } from '../../data/serviceCategories';
+
+const serviceImages: Record<string, string> = {
+  'web-development':              'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=600&h=400&q=80',
+  'mobile-app-development':       'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&h=400&q=80',
+  'custom-systems':               'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&h=400&q=80',
+  'ai-development':               'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=600&h=400&q=80',
+  'ui-ux-design':                 'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=600&h=400&q=80',
+  'maintenance-support':          'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&h=400&q=80',
+  'digital-marketing':            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&h=400&q=80',
+  'business-growth':              'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=600&h=400&q=80',
+  'branding-services':            'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&h=400&q=80',
+  'product-photoshoot-marketing': 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=600&h=400&q=80',
+  'media-creation':               'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=600&h=400&q=80',
+  'ui-ux-system-redesign':        'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=600&h=400&q=80',
+  'grant-government-project-support': 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&h=400&q=80',
+  'business-startup-package':     'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&h=400&q=80',
+};
+---
+
+<Section class="pt-10 md:pt-36">
+  <Container>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="h-display !text-[clamp(2rem,1.4rem+2.4vw,3.2rem)]" data-split>Boost your brand with <span class="badge-highlight">our expertise</span></h2>
+    </div>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5" data-stagger>
+      {
+        SERVICES.map((service) => {
+          const img = serviceImages[service.slug] ?? `https://picsum.photos/seed/${service.slug}/600/400`;
+
+          return (
+            <a href={serviceHref(service.slug)} data-stagger-child data-flip-card class="group block [perspective:1400px]">
+              <div class="flip-inner relative h-52 transition-transform duration-700 [transform-style:preserve-3d] [transition-timing-function:var(--ease-out-expo)] group-hover:[transform:rotateY(180deg)]">
+                {/* Front face: image + title */}
+                <div class="card absolute inset-0 flex flex-col overflow-hidden !rounded-3xl p-0 [backface-visibility:hidden]">
+                  <div class="h-24 overflow-hidden">
+                    <img
+                      src={img}
+                      alt=""
+                      class="h-full w-full scale-105 object-cover"
+                      loading="lazy"
+                      width="600"
+                      height="400"
+                    />
+                  </div>
+                  <div class="flex flex-1 flex-col justify-center p-4">
+                    <h3 class="text-sm font-semibold leading-snug tracking-tight text-ink">{service.title}</h3>
+                  </div>
+                </div>
+
+                {/* Back face: description */}
+                <div class="absolute inset-0 flex flex-col justify-center rounded-3xl border border-white/10 bg-charcoal p-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                  <h3 class="text-sm font-semibold leading-snug tracking-tight text-white">{service.title}</h3>
+                  <p class="mt-2 text-xs leading-relaxed text-white/65">{service.shortDescription}</p>
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </Container>
+</Section>
+
+<script>
+  let timer: ReturnType<typeof setInterval> | null = null;
+
+  function initAutoFlip() {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-flip-card]'));
+    if (!cards.length || timer) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const flipCount = Math.min(3, cards.length);
+    let current: HTMLElement[] = [];
+
+    const pickRandom = () => {
+      const pool = [...cards];
+      const picked: HTMLElement[] = [];
+      while (picked.length < flipCount && pool.length) {
+        const idx = Math.floor(Math.random() * pool.length);
+        picked.push(pool.splice(idx, 1)[0]);
+      }
+      return picked;
+    };
+
+    const tick = () => {
+      current.forEach((card) => card.querySelector('.flip-inner')?.classList.remove('is-flipped'));
+      const next = pickRandom();
+      next.forEach((card) => card.querySelector('.flip-inner')?.classList.add('is-flipped'));
+      current = next;
+    };
+
+    tick();
+    timer = setInterval(tick, 2500);
+  }
+
+  function teardownAutoFlip() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  initAutoFlip();
+  document.addEventListener('astro:page-load', initAutoFlip);
+  document.addEventListener('astro:before-swap', teardownAutoFlip);
+</script>

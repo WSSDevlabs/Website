@@ -1,0 +1,905 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import GrantSolutions from '../../components/sections/GrantSolutions.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import CTABand from '../../components/sections/CTABand.astro';
+import { SERVICE_CATEGORIES, getServicesForCategory } from '../../data/serviceCategories';
+import { TESTIMONIALS } from '../../data/testimonials';
+import { GROUP_TONE, TONE_TEXT_CLASS, TONE_BORDER_CLASS, TONE_BG_SOFT_CLASS } from '../../lib/tone';
+
+export function getStaticPaths() {
+  return SERVICE_CATEGORIES.map((category) => ({
+    params: { slug: category.slug },
+    props: { category }
+  }));
+}
+
+const { category } = Astro.props;
+const services = getServicesForCategory(category);
+const otherCategories = SERVICE_CATEGORIES.filter((c) => c.slug !== category.slug);
+const isSpotlight = services.length === 1;
+
+const serviceImages: Record<string, [string, string]> = {
+  'web-development': [
+    'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'mobile-app-development': [
+    'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1512428813834-c702c7702b78?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'custom-systems': [
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'ai-development': [
+    'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'custom-ml-model': [
+    'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'ai-chatbot': [
+    'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'ai-analytics': [
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'workflow-automation': [
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'computer-vision': [
+    'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'ui-ux-design': [
+    'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'maintenance-support': [
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'digital-marketing': [
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'business-growth': [
+    'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'branding-services': [
+    'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'product-photoshoot-marketing': [
+    'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'media-creation': [
+    'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'ui-ux-system-redesign': [
+    'https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'grant-government-project-support': [
+    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'business-startup-package': [
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+  'iot-development': [
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=800&q=80',
+    'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&h=460&q=80',
+  ],
+};
+
+const toneAccent: Record<string, string> = {
+  red: 'bg-accent-red',
+  blue: 'bg-accent-blue',
+  yellow: 'bg-accent-yellow',
+  green: 'bg-accent-green',
+  neutral: 'bg-ink-dim'
+};
+
+type PriceCell = boolean | string;
+type PricingTable = {
+  title: string;
+  tiers: { name: string; price: string }[];
+  rows: { label: string; values: PriceCell[] }[];
+  renewal?: string[];
+  hasCta: boolean;
+  popularIndex?: number;
+};
+
+const websiteDesignPricingTables: PricingTable[] = [
+  {
+    title: 'SME Website Design Packages',
+    tiers: [
+      { name: '1 Page', price: 'RM 1,799' },
+      { name: '5 Pages', price: 'RM 2,599' },
+      { name: '5+ Pages', price: 'RM 2,799' },
+      { name: '10 Pages', price: 'RM 3,299' },
+      { name: '10+ Pages', price: 'RM 3,499' }
+    ],
+    rows: [
+      { label: 'Domain', values: [true, true, true, true, true] },
+      { label: 'Web Pages Design', values: ['1 page', '5 pages', '5 pages', '10 pages', '10 pages'] },
+      { label: 'Web Storage', values: ['10 GB', '10 GB', '10 GB', '10 GB', '10 GB'] },
+      { label: 'Email Users', values: ['20 users', '20 users', '20 users', '20 users', '20 users'] },
+      { label: 'Mobile Responsive', values: [true, true, true, true, true] },
+      { label: 'Products Listing', values: [false, false, true, false, true] },
+      { label: 'Products Upload', values: [false, false, '20 products', false, '20 products'] },
+      { label: 'Animated Banner', values: ['1', '2', '2', '3', '3'] },
+      { label: 'Content Management System', values: [true, true, true, true, true] },
+      { label: 'Ownership & Access', values: [true, true, true, true, true] },
+      { label: 'SSL Certificate', values: [true, true, true, true, true] },
+      { label: 'Stock Photos', values: [true, true, true, true, true] },
+      { label: 'Technical Support', values: [true, true, true, true, true] },
+      { label: 'SEO Friendly', values: [true, true, true, true, true] }
+    ],
+    renewal: ['RM 549.00', 'RM 549.00', 'RM 549.00', 'RM 549.00', 'RM 549.00'],
+    hasCta: false
+  },
+  {
+    title: 'Corporate Website Design Packages',
+    tiers: [
+      { name: 'Corporate', price: 'RM 4,299' },
+      { name: 'Advance', price: 'RM 5,299' },
+      { name: 'Premium', price: 'RM 6,399' },
+      { name: 'Champion', price: 'RM 7,399' }
+    ],
+    rows: [
+      { label: 'Domain', values: [true, true, true, true] },
+      { label: 'Web Pages Design', values: ['15 pages', '20 pages', '25 pages', '30 pages'] },
+      { label: 'Web Storage', values: ['20 GB', '20 GB', '30 GB', '30 GB'] },
+      { label: 'Email Users', values: ['35 users', '35 users', 'Unlimited', 'Unlimited'] },
+      { label: 'Mobile Responsive', values: [true, true, true, true] },
+      { label: 'Customisable Design & Layout', values: [true, true, true, true] },
+      { label: 'Mega Menu', values: [true, true, true, true] },
+      { label: 'Products Upload', values: ['30', '30', '50', '50'] },
+      { label: 'Animated Banner', values: ['3', '5', '5', '5'] },
+      { label: 'Content Management System', values: [true, true, true, true] },
+      { label: 'Ownership & Access', values: [true, true, true, true] },
+      { label: 'SSL Certificate', values: [true, true, true, true] },
+      { label: 'Stock Photos', values: [true, true, true, true] },
+      { label: 'Technical Support', values: [true, true, true, true] },
+      { label: 'SEO Friendly', values: [true, true, true, true] }
+    ],
+    renewal: ['RM 659.00', 'RM 659.00', 'RM 769.00', 'RM 769.00'],
+    hasCta: true
+  },
+  {
+    title: 'UI & UX Design',
+    tiers: [
+      { name: 'Seed', price: 'RM 1,500' },
+      { name: 'Grow', price: 'RM 4,500' },
+      { name: 'Bloom', price: 'RM 8,500' },
+      { name: 'Ultimate', price: 'RM 13,000' }
+    ],
+    rows: [
+      { label: 'Number of Screens', values: ['5', '15', '30', '50'] },
+      { label: 'User Journey Mapping', values: [true, true, true, true] },
+      { label: 'Revisions', values: ['3', '3', '5', '5'] },
+      { label: 'Responsive Design', values: [false, false, false, false] },
+      { label: 'Technology', values: ['Figma', 'Figma', 'Figma', 'Figma'] }
+    ],
+    hasCta: true,
+    popularIndex: 1
+  }
+];
+---
+
+<ServiceLayout
+  title={`${category.title}: WSS DevLabs`}
+  description={category.description}
+  path={`/services/${category.slug}`}
+  serviceName={category.title}
+>
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section class="relative overflow-hidden">
+    <Container class="relative pt-10 pb-10 md:pt-36 md:pb-14">
+      <h1 class="h-display mt-4 max-w-3xl" data-split>{category.title}</h1>
+      <p class="body-lead mt-5 max-w-2xl">{category.description}</p>
+      {
+        category.slug !== 'web-software-app-development' && (
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href="/contact"
+              data-magnetic
+              class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgb(217_45_32/0.5)] transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5 hover:bg-accent-dim"
+            >
+              Start a Project
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <a
+              href="/services"
+              class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-6 py-3.5 text-sm font-semibold text-ink shadow-card transition-all hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-card-hover"
+            >
+              All Services
+            </a>
+          </div>
+        )
+      }
+    </Container>
+    <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
+  </section>
+
+  {
+    isSpotlight ? (
+      /* Single-service spotlight layout */
+      services.map((service) => {
+        const tone = GROUP_TONE[service.group];
+        const [heroImg, secondImg] = serviceImages[service.slug] ?? serviceImages['web-development'];
+        return (
+          <Fragment>
+            <Section rule>
+              <Container>
+                <div id={service.slug} class="scroll-mt-28 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                  <div>
+                    <p class:list={['mono-label', TONE_TEXT_CLASS[tone]]}>{service.group}</p>
+                    <h2 class="h-section mt-3" data-split>{service.title}</h2>
+                    <p class="mt-4 leading-relaxed text-ink-dim">{service.valueProp}</p>
+                    <div class="hairline my-6" aria-hidden="true" />
+                    <p class="leading-relaxed text-ink-dim">{service.problem}</p>
+
+                    {service.pricingFrom && (
+                      <div class="mt-8 flex items-center gap-4 rounded-2xl border border-line bg-paper p-5 shadow-card w-fit">
+                        <span class:list={['flex h-10 w-10 items-center justify-center rounded-xl', toneAccent[tone]]}>
+                          <svg class="h-4.5 w-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                          </svg>
+                        </span>
+                        <div>
+                          <p class="mono-label text-ink-dim">Pricing From</p>
+                          <p class="stat-num text-xl leading-none text-ink">{service.pricingFrom}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div class="relative overflow-hidden rounded-3xl border border-line shadow-card">
+                    <img
+                      src={heroImg}
+                      alt={service.title}
+                      class="h-72 w-full scale-110 object-cover lg:h-96"
+                      loading="lazy"
+                      width="1400"
+                      height="800"
+                      data-parallax="8"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" aria-hidden="true" />
+                  </div>
+                </div>
+              </Container>
+            </Section>
+
+            <Section rule class="bg-paper-dim">
+              <Container>
+                {service.pricingFrom && (
+                  <div class:list={['mt-10 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 sm:flex-row sm:items-center', toneAccent[tone]]}>
+                    <div>
+                      <p class="mono-label text-white/70">Pricing From</p>
+                      <p class="stat-num mt-2 text-3xl text-white">{service.pricingFrom}</p>
+                    </div>
+                    <a
+                      href="/contact"
+                      class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-float transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5"
+                    >
+                      Get a Quote
+                      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
+
+                {service.faq.length > 0 && (
+                  <div class="mt-10">
+                    <p class="mono-label text-ink-dim">FAQ</p>
+                    <div class="mt-5 space-y-3">
+                      {service.faq.map((f) => (
+                        <details class="card group p-5 open:pb-5">
+                          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink">
+                            {f.question}
+                            <svg class="h-4 w-4 shrink-0 text-ink-dim transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                          </summary>
+                          <p class="mt-3 text-sm leading-relaxed text-ink-dim">{f.answer}</p>
+                        </details>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </Container>
+            </Section>
+
+            {service.slug === 'grant-government-project-support' && <GrantSolutions />}
+          </Fragment>
+        );
+      })
+    ) : (
+      /* Multi-service grid layout */
+      <Section rule class="bg-paper-dim">
+        <Container>
+          <div class:list={['grid gap-6 items-start', services.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-2']} data-stagger>
+            {services.map((service) => {
+              const tone = GROUP_TONE[service.group];
+              const [heroImg] = serviceImages[service.slug] ?? serviceImages['web-development'];
+              return (
+                <div id={service.slug} data-stagger-child class:list={['scroll-mt-28 flex flex-col overflow-hidden rounded-3xl border bg-paper shadow-card', TONE_BORDER_CLASS[tone]]}>
+                  <div class="relative h-40 overflow-hidden">
+                    <img src={heroImg} alt={service.title} class="h-full w-full object-cover" loading="lazy" width="1400" height="800" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" aria-hidden="true" />
+                    {service.pricingFrom && (
+                      <span class="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-ink shadow-sm backdrop-blur-sm">
+                        From {service.pricingFrom}
+                      </span>
+                    )}
+                  </div>
+
+                  <div class="flex flex-1 flex-col p-7">
+                    <h2 class="mt-2 text-xl font-bold tracking-tight text-ink">{service.title}</h2>
+                    <p class="mt-3 text-sm leading-relaxed text-ink-dim">{service.valueProp}</p>
+
+                    {service.faq.length > 0 && (
+                      <div class="mt-5 space-y-2">
+                        {service.faq.map((f) => (
+                          <details class="group rounded-xl border border-line bg-paper-dim/60 p-3.5">
+                            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-ink">
+                              {f.question}
+                              <svg class="h-3.5 w-3.5 shrink-0 text-ink-dim transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                              </svg>
+                            </summary>
+                            <p class="mt-2 text-xs leading-relaxed text-ink-dim">{f.answer}</p>
+                          </details>
+                        ))}
+                      </div>
+                    )}
+
+                    {service.slug === 'grant-government-project-support' && (
+                      <p class="mt-3 text-center text-[11px] text-ink-dim">
+                        See grant-matching detail below ↓
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+
+  {
+    category.slug === 'web-software-app-development' && (() => {
+      const webSvc = services.find((s) => s.slug === 'web-development');
+      const mobileSvc = services.find((s) => s.slug === 'mobile-app-development');
+      const spotlightPairs = [
+        { svc: webSvc, icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5', tone: 'blue' },
+        { svc: mobileSvc, icon: 'M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3', tone: 'red' }
+      ] as const;
+
+      return (
+        <Section rule class="bg-paper-dim">
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <h2 class="h-section">Everything Included in Web &amp; Mobile App Development</h2>
+              <p class="mt-4 text-ink-dim">
+                Every build, whether it's a marketing site or a full mobile app, is scoped around your goals and shipped in a typed, maintainable stack.
+              </p>
+            </div>
+
+            <div class="grid gap-8 lg:grid-cols-2">
+              {spotlightPairs.map(({ svc, icon, tone }) => svc && (
+                <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
+                  <span class:list={['flex h-12 w-12 items-center justify-center rounded-2xl text-white', toneAccent[tone]]}>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+                    </svg>
+                  </span>
+                  <h3 class="mt-5 text-xl font-bold tracking-tight text-ink">{svc.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-ink-dim">{svc.valueProp}</p>
+
+                  <p class="mono-label mt-6 text-ink-dim">What's Included</p>
+                  <ul class="mt-3 space-y-2.5">
+                    {svc.deliverables.map((item) => (
+                      <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p class="mono-label mt-6 text-ink-dim">Our Approach</p>
+                  <ol class="mt-3 space-y-2">
+                    {svc.approach.map((step, i) => (
+                      <li class="flex items-start gap-2.5 text-sm text-ink-dim">
+                        <span class:list={['mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white', toneAccent[tone]]}>
+                          {i + 1}
+                        </span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+
+                  <div class="mt-6 flex flex-wrap gap-1.5">
+                    {svc.tools.map((tool) => (
+                      <span class="rounded-full border border-line bg-paper-dim px-3 py-1 text-[11px] font-medium text-ink-dim">
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-10 flex flex-col items-center gap-4 rounded-3xl bg-charcoal p-8 text-center sm:flex-row sm:justify-between sm:text-left">
+              <div>
+                <p class="mono-label text-white/60">Pricing</p>
+                <p class="mt-1 text-2xl font-black text-white">Starting from RM 2,000</p>
+                <p class="mt-1 text-sm text-white/60">Final price depends on your project requirements.</p>
+              </div>
+              <a
+                href="/contact"
+                class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-float transition-all duration-300 hover:-translate-y-0.5"
+              >
+                Get a Custom Quote
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </Container>
+        </Section>
+      );
+    })()
+  }
+
+  {
+    category.slug === 'iot-solutions-infrastructure' && (
+      <Fragment>
+        <Section rule class="bg-paper-dim">
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <p class="mono-label text-accent">IoT & Smart Infrastructure</p>
+              <h2 class="h-section mt-3">Key Structural Components of IoT Infrastructure</h2>
+              <p class="mt-4 text-ink-dim">
+                Four essential layers of IoT hardware sensing infrastructure, from physical sensors to the power systems that keep them running.
+              </p>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  title: 'Physical Sensors',
+                  desc: 'Devices that detect real-world physical changes and convert them into electrical signals.',
+                  items: ['Temperature sensors', 'Humidity sensors', 'Pressure sensors', 'Motion sensors', 'Light sensors']
+                },
+                {
+                  title: 'Microcontrollers',
+                  desc: 'The local brain of the hardware — manages sensor operations, runs preliminary analysis, and connects hardware to the network.',
+                  items: ['Arduino', 'Raspberry Pi', 'ESP8266']
+                },
+                {
+                  title: 'Communication Modules',
+                  desc: 'Handle transmission between sensors and higher-level networks for real-time monitoring and remote sensing.',
+                  items: ['Wi-Fi', 'Bluetooth', 'Zigbee', 'LoRa']
+                },
+                {
+                  title: 'Power Management',
+                  desc: 'Critical for remote or hard-to-reach deployments — battery management, energy harvesting, and low-power design.',
+                  items: ['Battery management systems', 'Energy harvesting', 'Low-power architecture']
+                }
+              ].map((block) => (
+                <div class="flex flex-col rounded-3xl border border-line bg-white p-6 shadow-card">
+                  <h3 class="text-base font-bold text-ink">{block.title}</h3>
+                  <p class="mt-2 text-xs leading-relaxed text-ink-dim">{block.desc}</p>
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    {block.items.map((item) => (
+                      <span class="rounded-full border border-line bg-paper-dim px-2.5 py-1 text-[10px] font-medium text-ink-dim">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        <Section rule>
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <h2 class="h-section">Core Operational Roles of Hardware Sensing</h2>
+              <p class="mt-4 text-ink-dim">What hardware sensing infrastructure actually does within an IoT and AI ecosystem.</p>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { title: 'Data Acquisition', desc: 'Gathering accurate, high-resolution physical data directly from the field.' },
+                { title: 'Environmental Monitoring', desc: 'Non-stop tracking and reporting of surrounding environmental conditions.' },
+                { title: 'Health & Safety', desc: 'Securing machinery operations and detecting dangerous or hazardous conditions.' },
+                { title: 'Automation', desc: 'Triggering automated actions and industrial controls when sensor thresholds are met.' }
+              ].map((role) => (
+                <div class="rounded-2xl border border-line bg-paper-dim/60 p-5">
+                  <h3 class="text-sm font-bold text-ink">{role.title}</h3>
+                  <p class="mt-2 text-xs leading-relaxed text-ink-dim">{role.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+
+        <Section rule class="bg-paper-dim">
+          <Container>
+            <div class="mx-auto max-w-2xl text-center mb-12">
+              <h2 class="h-section">Practical Industry Applications</h2>
+              <p class="mt-4 text-ink-dim">Where this IoT and hardware infrastructure gets deployed across different industries.</p>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { title: 'Smart Agriculture & Livestock', desc: 'Soil monitoring sensors for nutrients and moisture, greenhouse climate control, cattle AI, smart poultry, smart aquaculture, and general livestock management.' },
+                { title: 'Industrial Automation (IIoT) & Oil & Gas', desc: 'Vibration and temperature sensors on heavy machinery for predictive maintenance, plus pressure and flow sensors to control industrial processes.' },
+                { title: 'Smart Cities & Buildings', desc: 'Smart building and office infrastructure, asset tracking, and city-wide smart initiatives.' },
+                { title: 'Smart Homes', desc: 'Home security (motion detectors, cameras, door/window alarms) and climate controls (thermostats, humidity monitoring).' },
+                { title: 'Healthcare', desc: 'Wearable sensors tracking vital health indicators and diagnostic medical devices.' }
+              ].map((app) => (
+                <div class="rounded-2xl border border-line bg-white p-6 shadow-card">
+                  <h3 class="text-base font-bold text-ink">{app.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-ink-dim">{app.desc}</p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      </Fragment>
+    )
+  }
+
+  {
+    category.slug === 'digital-design-media-marketing' && (
+      <Section rule class="bg-paper-dim">
+        <Container>
+          <div class="mx-auto max-w-2xl text-center mb-12">
+            <h2 class="h-section">Core Services Delivered in the Copywriting Blueprint</h2>
+          </div>
+
+          <div class="grid gap-8 lg:grid-cols-2">
+            <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
+              <p class="mono-label text-accent">1. Google Ads Campaign Management</p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
+                Acquiring high-intent local prospects through real-time bid adjustments, keyword monitoring, and structured ad intelligence.
+              </p>
+
+              <p class="mono-label mt-6 text-ink-dim">Ad Channel Coverage</p>
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                {['Standard Search Ads', 'Display Network Retargeting', 'Google Shopping Ads', 'YouTube Video Ads'].map((ch) => (
+                  <span class="rounded-full border border-line bg-paper-dim px-3 py-1 text-[11px] font-medium text-ink-dim">{ch}</span>
+                ))}
+              </div>
+
+              <p class="mono-label mt-6 text-ink-dim">Campaign Packages</p>
+              <p class="mt-2 text-sm leading-relaxed text-ink-dim">
+                Structured tiers from <strong class="text-ink">RM 500/month</strong> to <strong class="text-ink">RM 2,000/month</strong> (subject to 8% SST), with setup fees from <strong class="text-ink">RM 500 – RM 1,500</strong>, minimum contract durations, and campaign limits depending on tier.
+              </p>
+            </div>
+
+            <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
+              <p class="mono-label text-accent">2. Search Engine Optimisation (SEO)</p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
+                Positions your builds for long-term organic authority, helping clients convert search traffic without ongoing ad spend.
+              </p>
+
+              <p class="mono-label mt-6 text-ink-dim">Ongoing Monthly Packages</p>
+              <ul class="mt-3 space-y-2 text-sm text-ink-dim">
+                <li>· <strong class="text-ink">Starter</strong> — RM 1,200/month</li>
+                <li>· <strong class="text-ink">Basic</strong> — RM 1,500/month</li>
+                <li>· <strong class="text-ink">Premium</strong> — RM 1,900/month</li>
+              </ul>
+              <p class="mt-2 text-xs text-ink-dim">Guaranteed top-30 rankings for up to 20 keywords across 20 pages.</p>
+
+              <p class="mono-label mt-6 text-ink-dim">SEO Essential Setup (One-Time)</p>
+              <ul class="mt-3 space-y-2 text-sm text-ink-dim">
+                <li>· <strong class="text-ink">Basic</strong> — RM 4,000</li>
+                <li>· <strong class="text-ink">Advanced</strong> — RM 5,500</li>
+              </ul>
+              <p class="mt-2 text-xs text-ink-dim">Tag optimizations, performance checks, indexing setup, and 2 months of initial backlink/ranking support.</p>
+            </div>
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+
+  {
+    category.slug === 'web-software-app-development' && (
+      <Fragment>
+        {websiteDesignPricingTables.map((table) => (
+          <Section rule>
+            <Container>
+              <div class="mx-auto max-w-2xl text-center mb-10">
+                <h2 class="h-section">{table.title}</h2>
+              </div>
+
+              <div class="overflow-x-auto rounded-3xl border border-line shadow-card">
+                <table class="w-full min-w-[820px] border-collapse bg-white text-sm">
+                  <thead>
+                    <tr>
+                      <th class="w-56 bg-charcoal p-5 text-left align-bottom text-sm font-bold text-white">
+                        {table.title}
+                      </th>
+                      {table.tiers.map((tier, i) => {
+                        const isPopular = (table.popularIndex ?? table.tiers.length - 1) === i;
+                        return (
+                          <th
+                            class:list={[
+                              'relative border-l border-line p-5 text-center align-bottom font-bold',
+                              isPopular ? 'bg-accent/10 text-accent' : 'bg-paper-dim text-ink'
+                            ]}
+                          >
+                            {isPopular && (
+                              <span class="absolute right-2 top-2 rounded-full bg-accent px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                                Popular
+                              </span>
+                            )}
+                            {tier.name}
+                          </th>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      <td class="bg-charcoal" />
+                      {table.tiers.map((tier, i) => {
+                        const isPopular = (table.popularIndex ?? table.tiers.length - 1) === i;
+                        return (
+                          <td
+                            class:list={[
+                              'border-l border-line p-4 text-center',
+                              isPopular ? 'bg-accent text-white' : 'bg-paper-dim/60 text-ink'
+                            ]}
+                          >
+                            <p class="text-xl font-black">{tier.price}</p>
+                            <p class:list={['mt-0.5 text-[11px]', isPopular ? 'text-white/70' : 'text-ink-dim']}>
+                              Subject to 8% SST
+                            </p>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table.rows.map((row, ri) => (
+                      <tr class:list={[ri % 2 === 1 && 'bg-paper-dim/40']}>
+                        <td class="bg-charcoal p-4 text-sm font-semibold text-white">{row.label}</td>
+                        {row.values.map((val) => (
+                          <td class="border-l border-line p-4 text-center text-sm text-ink-dim">
+                            {val === true && (
+                              <svg class="mx-auto h-4 w-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                              </svg>
+                            )}
+                            {val === false && (
+                              <svg class="mx-auto h-4 w-4 text-ink-dim/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                              </svg>
+                            )}
+                            {typeof val === 'string' && val}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+
+                    {table.renewal && (
+                      <tr class="border-t-2 border-line bg-paper-dim/60">
+                        <td class="bg-charcoal p-4 text-sm font-semibold text-white">Subsequent Yearly Renewal</td>
+                        {table.renewal.map((price) => (
+                          <td class="border-l border-line p-4 text-center">
+                            <p class="text-sm font-bold text-ink">{price}</p>
+                            <p class="text-[10px] text-ink-dim">Subject to 8% SST</p>
+                          </td>
+                        ))}
+                      </tr>
+                    )}
+
+                    {table.hasCta && (
+                      <tr class="bg-paper">
+                        <td class="bg-charcoal p-4" />
+                        {table.tiers.map((tier) => (
+                          <td class="border-l border-line p-4 text-center">
+                            <a
+                              href={`https://wa.me/601127205895?text=${encodeURIComponent(`Hi WSS DevLabs, I'd like to sign up for the ${tier.name} website design package.`)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-accent-dim"
+                            >
+                              Sign Up
+                            </a>
+                          </td>
+                        ))}
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </Container>
+          </Section>
+        ))}
+      </Fragment>
+    )
+  }
+
+  {
+    category.slug === 'artificial-intelligence-automation' && (
+      <Section rule class="bg-paper-dim/40">
+        <Container>
+          <div class="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <h2 class="h-section">How Your Business Data Becomes Predictions</h2>
+              <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+                Every sale, booking, and support ticket your business logs is a data point. On its own, a spreadsheet
+                of last year's numbers just tells you what happened. Feed the same numbers into a trained model, and
+                it starts telling you what's <em>likely to happen next</em> — that's the entire shift AI brings to a
+                normal business system.
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
+                The pipeline is simpler than it sounds: your system already collects the data (orders, foot traffic,
+                inventory levels, response times). We clean and structure it, train a model on the patterns, then wire
+                the model's output back into your dashboard as a plain number or alert — no data science degree
+                required on your end to use it.
+              </p>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2">
+              {[
+                { title: 'Demand forecasting', desc: 'Predict next week\'s stock needs from sales history, so you order less dead stock and run out less often.' },
+                { title: 'Churn prediction', desc: 'Flag customers likely to stop buying before they actually leave, based on drop-off patterns in their activity.' },
+                { title: 'Anomaly detection', desc: 'Catch unusual transactions, sensor readings, or traffic spikes automatically, instead of noticing them days later.' },
+                { title: 'Lead scoring', desc: 'Rank incoming inquiries by how likely they are to convert, so your team calls the right ones first.' }
+              ].map((item) => (
+                <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
+                  <h3 class="text-sm font-bold text-ink">{item.title}</h3>
+                  <p class="mt-2 text-xs leading-relaxed text-ink-dim">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+
+  {
+    category.slug === 'iot-solutions-infrastructure' && (
+      <Section rule class="bg-paper-dim/40">
+        <Container>
+          <div class="mx-auto max-w-2xl text-center">
+            <h2 class="h-section">What IoT Actually Removes From Your Day</h2>
+            <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+              IoT sounds abstract until you see what it replaces. It's not a new task to manage — it's the manual
+              checks, walk-arounds, and guesswork you already do, done automatically and reported to a screen instead.
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-4 sm:grid-cols-2">
+            {[
+              { before: 'Someone checks the cold-room temperature by hand, twice a day', after: 'A sensor reports temperature every minute and alerts you the moment it drifts out of range' },
+              { before: 'You find out a machine broke down when it stops working', after: 'Vibration and heat sensors flag early wear before the machine actually fails' },
+              { before: 'A staff member walks the site to read water or power meters', after: 'Meters report usage automatically, so billing and leak-detection happen in real time' },
+              { before: 'You guess how full a tank, bin, or warehouse rack is', after: 'Level sensors report exact capacity, so restocking or collection happens on real data' }
+            ].map((item) => (
+              <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-wide text-ink-dim/70">Before</p>
+                <p class="mt-1 text-sm text-ink-dim">{item.before}</p>
+                <div class="my-3 h-px bg-line" />
+                <p class="text-xs font-semibold uppercase tracking-wide text-accent">After</p>
+                <p class="mt-1 text-sm font-medium text-ink">{item.after}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+
+  {
+    category.slug === 'digital-design-media-marketing' && (
+      <Section rule class="bg-paper-dim/40">
+        <Container>
+          <div class="grid items-center gap-12 lg:grid-cols-2">
+            <div>
+              <h2 class="h-section">Why Branding Is a Business Decision, Not a Design One</h2>
+              <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+                A logo is not a brand. Branding is the reason a customer trusts your price, remembers your name after
+                one visit, and picks you over a cheaper competitor who looks less put-together. Skipping it doesn't
+                save money — it just moves the cost into every sale you have to work harder to close.
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
+                Consistent branding across your website, social pages, packaging, and ads compounds: every touchpoint
+                reinforces the last one instead of starting from zero, which is what actually drives repeat business
+                and referrals over time.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              {[
+                { title: 'Trust, before a word is spoken', desc: 'A consistent look tells a new customer you\'re established and reliable before they read a single review.' },
+                { title: 'Pricing power', desc: 'Businesses with a clear brand identity can charge more for the same product, because perceived value goes up.' },
+                { title: 'Lower marketing cost over time', desc: 'A recognizable brand needs fewer impressions to be remembered — every ad works a little harder.' }
+              ].map((item) => (
+                <div class="flex items-start gap-3 rounded-2xl border border-line bg-white p-4 shadow-sm">
+                  <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/10">
+                    <svg class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="text-sm font-bold text-ink">{item.title}</p>
+                    <p class="mt-1 text-xs leading-relaxed text-ink-dim">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+
+  {
+    category.slug === 'web-software-app-development' && (
+      <Section rule class="bg-paper-dim/40">
+        <Container>
+          <div class="mx-auto max-w-2xl text-center">
+            <h2 class="h-section">Why Systems Beat Spreadsheets</h2>
+            <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+              A spreadsheet works fine until two people need to edit it at once, a formula gets accidentally deleted,
+              or the person who built it leaves. A custom system is the same tracking logic, built so it can't break
+              that way — and it scales with your business instead of becoming the thing that slows it down.
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-4 sm:grid-cols-3">
+            {[
+              { title: 'No more version conflicts', desc: 'Everyone works off one live system instead of five copies of "Inventory_FINAL_v3.xlsx" emailed around.' },
+              { title: 'Fewer costly mistakes', desc: 'Built-in rules stop bad data at entry (a formula can\'t stop someone typing the wrong price; a system can).' },
+              { title: 'Scales without extra headcount', desc: 'A system handles 10x the orders the same way it handles 10 — a spreadsheet just gets slower and messier.' }
+            ].map((item) => (
+              <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
+                <h3 class="text-sm font-bold text-ink">{item.title}</h3>
+                <p class="mt-2 text-xs leading-relaxed text-ink-dim">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    )
+  }
+
+  {services.some((s) => s.slug === 'grant-government-project-support') && !isSpotlight && <GrantSolutions />}
+
+  <!-- ── Testimonials ───────────────────────────────────────── -->
+  <Testimonials testimonials={TESTIMONIALS} />
+
+  <!-- ── CTA band ────────────────────────────────────────────── -->
+  <CTABand
+    title={`Ready to start your ${category.title} project?`}
+    subtitle="Tell us what you're building, and we'll respond within one business day with a fixed-price proposal."
+  />
+</ServiceLayout>

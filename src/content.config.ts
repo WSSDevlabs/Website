@@ -43,15 +43,13 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string(),
     author: z.string(),
-    /** Which offer the article's call to action points at. */
-    cta: z.enum(['websites', 'systems', 'custom']).optional(),
     coverImage: z.string(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(true),
     publishDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
-    sourceUrl: z.string().optional(),
-    sourceLabel: z.string().optional()
+    sourceUrl: z.string(),
+    sourceLabel: z.string()
   })
 });
 

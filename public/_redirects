@@ -1,113 +1,34 @@
-# Redirect map for the October 2026 restructure (audit Part 2.3).
-# Every old URL points straight at its final page, so there are no redirect chains.
-# Both the slash and no-slash forms are listed. Order matters: first match wins.
+# Old individual service pages, consolidated into 4 category pages (2026-08-14)
+/services/web-development             /services/web-software-app-development#web-development             301
+/services/mobile-app-development      /services/web-software-app-development#mobile-app-development      301
+/services/custom-systems              /services/web-software-app-development#custom-systems               301
+/services/student-project-support     /services/web-software-app-development      301
+/services/ai-development              /services/artificial-intelligence-automation#ai-development          301
+/services/ui-ux-design                /services/digital-design-media-marketing#ui-ux-design                301
+/services/branding-services           /services/digital-design-media-marketing#branding-services           301
+/services/product-photoshoot-marketing /services/digital-design-media-marketing#product-photoshoot-marketing 301
+/services/media-creation              /services/digital-design-media-marketing#media-creation              301
+/services/digital-marketing           /services/digital-design-media-marketing#digital-marketing           301
+/services/business-growth             /services/digital-consulting-solutions#business-growth               301
+/services/grant-government-project-support /services/digital-consulting-solutions#grant-government-project-support 301
+/services/business-startup-package    /services/digital-consulting-solutions#business-startup-package      301
+/services/maintenance-support         /services/digital-consulting-solutions#maintenance-support           301
 
-# ── Offer pages ──────────────────────────────────────────────
-/express                                        /websites/            301
-/express/                                       /websites/            301
-/services                                       /                     301
-/services/                                      /                     301
-/services/web-software-app-development          /websites/            301
-/services/web-software-app-development/         /websites/            301
-/services/digital-design-media-marketing        /websites/            301
-/services/digital-design-media-marketing/       /websites/            301
-/services/digital-consulting-solutions          /                     301
-/services/digital-consulting-solutions/         /                     301
-/services/artificial-intelligence-automation    /custom/              301
-/services/artificial-intelligence-automation/   /custom/              301
-/services/iot-solutions-infrastructure          /custom/              301
-/services/iot-solutions-infrastructure/         /custom/              301
+# Bespoke Enterprise page removed, folded into the general services catalog (2026-08-22)
+/services/bespoke                     /services                                                            301
 
-# Older individual service pages (removed 2026-08-14), pointed at their final homes
-/services/web-development                       /websites/            301
-/services/web-development/                      /websites/            301
-/services/mobile-app-development                /custom/              301
-/services/mobile-app-development/               /custom/              301
-/services/custom-systems                        /custom/              301
-/services/custom-systems/                       /custom/              301
-/services/ai-development                        /custom/              301
-/services/ai-development/                       /custom/              301
-/services/ui-ux-design                          /websites/            301
-/services/ui-ux-design/                         /websites/            301
-/services/branding-services                     /websites/            301
-/services/branding-services/                    /websites/            301
-/services/product-photoshoot-marketing          /websites/            301
-/services/product-photoshoot-marketing/         /websites/            301
-/services/media-creation                        /websites/            301
-/services/media-creation/                       /websites/            301
-/services/digital-marketing                     /websites/            301
-/services/digital-marketing/                    /websites/            301
-/services/maintenance-support                   /websites/#care-plans 301
-/services/maintenance-support/                  /websites/#care-plans 301
-/services/business-startup-package              /websites/            301
-/services/business-startup-package/             /websites/            301
-/services/bespoke                               /custom/              301
-/services/bespoke/                              /custom/              301
-/services/*                                     /                     301
+# Status page merged into Express (2026-08-22)
+/status                               /express#builders                                                    301
 
-# ── Marketplace becomes Systems ──────────────────────────────
-/marketplace                                    /systems/             301
-/marketplace/                                   /systems/             301
+# Pricing page removed (2026-08-26)
+/pricing                              /express                                                             301
 
-# Public systems keep their own page
-/marketplace/wss-pos                            /systems/wss-pos/                 301
-/marketplace/wss-pos/                           /systems/wss-pos/                 301
-/marketplace/wss-helpdesk                       /systems/wss-helpdesk/            301
-/marketplace/wss-helpdesk/                      /systems/wss-helpdesk/            301
-/marketplace/wss-vims                           /systems/wss-vims/                301
-/marketplace/wss-vims/                          /systems/wss-vims/                301
-/marketplace/wss-vms                            /systems/wss-vms/                 301
-/marketplace/wss-vms/                           /systems/wss-vms/                 301
-/marketplace/wss-guardtour                      /systems/wss-guardtour/           301
-/marketplace/wss-guardtour/                     /systems/wss-guardtour/           301
-/marketplace/wss-tams                           /systems/wss-tams/                301
-/marketplace/wss-tams/                          /systems/wss-tams/                301
-/marketplace/wss-staffportal                    /systems/wss-staffportal/         301
-/marketplace/wss-staffportal/                   /systems/wss-staffportal/         301
-/marketplace/wss-assetmanagement                /systems/wss-assetmanagement/     301
-/marketplace/wss-assetmanagement/               /systems/wss-assetmanagement/     301
-/marketplace/wss-parcellocker                   /systems/wss-parcellocker/        301
-/marketplace/wss-parcellocker/                  /systems/wss-parcellocker/        301
-/marketplace/wss-eventspace                     /systems/wss-eventspace/          301
-/marketplace/wss-eventspace/                    /systems/wss-eventspace/          301
-/marketplace/wss-incidentsystem                 /systems/wss-incidentsystem/      301
-/marketplace/wss-incidentsystem/                /systems/wss-incidentsystem/      301
-/marketplace/wss-kiosk                          /systems/wss-kiosk/               301
-/marketplace/wss-kiosk/                         /systems/wss-kiosk/               301
-/marketplace/wss-digitalform                    /systems/wss-digitalform/         301
-/marketplace/wss-digitalform/                   /systems/wss-digitalform/         301
-/marketplace/wss-ebusinesscard                  /systems/wss-ebusinesscard/       301
-/marketplace/wss-ebusinesscard/                 /systems/wss-ebusinesscard/       301
-/marketplace/wss-directory                      /systems/wss-directory/           301
-/marketplace/wss-directory/                     /systems/wss-directory/           301
+# Work/case-study section removed (2026-08-26)
+/work                                 /testimonials                                                        301
+/work/*                               /testimonials                                                        301
 
-# Modules sold inside a published complete solution
-/marketplace/wss-smartid                        /systems/smart-premises/          301
-/marketplace/wss-smartid/                       /systems/smart-premises/          301
-/marketplace/wss-rfidtracking                   /systems/smart-premises/          301
-/marketplace/wss-rfidtracking/                  /systems/smart-premises/          301
-/marketplace/wss-fabs                           /systems/smart-premises/          301
-/marketplace/wss-fabs/                          /systems/smart-premises/          301
-/marketplace/wss-aikiosk                        /systems/smart-outlet/            301
-/marketplace/wss-aikiosk/                       /systems/smart-outlet/            301
+# Process page merged into About (2026-08-26)
+/process                              /about#process                                                       301
 
-# Everything else (other modules, on request, on hold) goes to the catalogue
-/marketplace/*                                  /systems/             301
-
-# ── Other removed or merged pages ────────────────────────────
-/testimonials                                   /about/#reviews       301
-/testimonials/                                  /about/#reviews       301
-/coming-soon                                    /                     301
-/coming-soon/                                   /                     301
-/insights/msme-digital-grant-madani-explained   /insights/            301
-/insights/msme-digital-grant-madani-explained/  /insights/            301
-/status                                         /websites/            301
-/status/                                        /websites/            301
-/pricing                                        /websites/            301
-/pricing/                                       /websites/            301
-/faq                                            /websites/#faq        301
-/faq/                                           /websites/#faq        301
-/process                                        /custom/#process      301
-/process/                                       /custom/#process      301
-/work                                           /about/               301
-/work/*                                         /about/               301
+# FAQ page merged into Express (2026-08-26)
+/faq                                  /express#faq                                                         301

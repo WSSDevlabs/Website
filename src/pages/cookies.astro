@@ -1,122 +1,111 @@
 ---
 import LegalLayout from '../components/legal/LegalLayout.astro';
 import LegalSection from '../components/legal/LegalSection.astro';
-import Email from '../components/ui/Email.astro';
+import { SITE } from '../data/site';
 
-const lastUpdated = new Date('2026-10-14');
+const lastUpdated = new Date('2026-01-01');
+
+const email = SITE.email
+  ? { user: SITE.email.split('@')[0], domain: SITE.email.split('@')[1] }
+  : null;
 
 const toc = [
-  { id: 'what-are-cookies', label: '1. Cookies and similar tools' },
-  { id: 'summary', label: '2. What this site uses' },
+  { id: 'what-are-cookies', label: '1. What are cookies' },
+  { id: 'what-we-use', label: '2. What we use' },
   { id: 'consent-banner', label: '3. Our consent banner' },
-  { id: 'analytics', label: '4. Visit statistics' },
-  { id: 'chat', label: '5. The chat assistant' },
-  { id: 'essential', label: '6. Essential storage' },
-  { id: 'third-party', label: '7. Other third-party content' },
-  { id: 'your-choices', label: '8. Your choices' },
-  { id: 'changes', label: '9. Changes' },
-  { id: 'contact', label: '10. Contact' }
-];
-
-const items = [
-  ['Your banner choice', 'Local storage, on this site', 'Remembers whether you clicked Allow or Reject, so we don\'t ask on every visit', 'Until you clear it'],
-  ['Intro animation', 'Session storage, on this site', 'Shows the logo intro only once per visit', 'Until you close the tab'],
-  ['Chat assistant (Botpress)', 'Local storage', 'Keeps your chat session so the conversation continues between pages', 'Until you clear it'],
-  ['Visit statistics (Cloudflare Web Analytics)', 'No cookies, nothing stored on your device', 'Counts page views anonymously', 'Only after you click Allow'],
-  ['Security (Cloudflare)', 'A cookie may be set if a visit looks automated', 'Protects the site from bots and attacks', 'Short-lived']
+  { id: 'local-storage', label: '4. Local storage' },
+  { id: 'third-party', label: '5. Third-party services' },
+  { id: 'your-choices', label: '6. Your choices' },
+  { id: 'changes', label: '7. Changes to this policy' },
+  { id: 'contact', label: '8. Contact' }
 ];
 ---
 
 <LegalLayout
   title="Cookie Policy"
-  description="Exactly what WSS DevLabs stores in your browser, what loads after you click Allow, and how to change your mind."
-  path="/cookies/"
+  description="How WSS DevLabs uses cookies, local storage, and similar technologies on this website, and how our cookie consent banner works."
+  path="/cookies"
   icon="M21 12a9 9 0 11-9-9 3 3 0 003 3 3 3 0 003 3 3 3 0 003 3z M8.5 10.5h.01 M11 15h.01 M15 14h.01"
   accent="yellow"
   lastUpdated={lastUpdated}
-  intro="A short, honest list: no advertising cookies, no cross-site tracking, and visit statistics only run if you click Allow."
+  intro="We keep this simple: no tracking cookies, no cross-site profiling, and nothing beyond essential site function runs until you actively click Allow on our consent banner."
   toc={toc}
 >
-  <LegalSection id="what-are-cookies" number="1" title="Cookies and similar tools">
+  <LegalSection id="what-are-cookies" number="1" title="What are cookies">
     <p>
-      Cookies are small files a website stores on your device. "Local storage" and "session storage" work in a similar way, but
-      can only be read by this website. This policy covers all of them.
+      Cookies are small text files a website can store on your device to remember information
+      between visits. "Similar technologies" includes local storage, which works like a cookie but
+      is only readable by our own site, not shared across other websites.
     </p>
   </LegalSection>
 
-  <LegalSection id="summary" number="2" title="What this site uses">
-    <div class="overflow-x-auto">
-      <table>
-        <thead>
-          <tr><th>What</th><th>Where it's kept</th><th>Why</th><th>How long</th></tr>
-        </thead>
-        <tbody>
-          {items.map(([what, where, why, howLong]) => <tr><td>{what}</td><td>{where}</td><td>{why}</td><td>{howLong}</td></tr>)}
-        </tbody>
-      </table>
-    </div>
-    <p>We don't use advertising cookies, and we don't track you across other websites.</p>
+  <LegalSection id="what-we-use" number="2" title="What we use">
+    <p>
+      This site uses Cloudflare Web Analytics, a privacy-friendly analytics service that does not
+      use tracking cookies, does not fingerprint your device, and does not collect personally
+      identifiable information. It only tells us aggregate information such as which pages are
+      popular and roughly how visitors found us.
+    </p>
+    <p>
+      This script is not loaded by default. It only runs after you click "Allow cookies" on our
+      consent banner, described below.
+    </p>
   </LegalSection>
 
   <LegalSection id="consent-banner" number="3" title="Our consent banner">
-    <p>On your first visit, a banner asks you to Allow or Reject visit statistics.</p>
+    <p>
+      When you first visit our site, you'll see a banner asking you to Allow or Reject
+      non-essential cookies/analytics.
+    </p>
     <ul>
-      <li><strong>Allow:</strong> we load Cloudflare Web Analytics and remember your choice.</li>
-      <li><strong>Reject:</strong> statistics stay off, and we remember that choice so the banner doesn't keep coming back.</li>
-      <li>Rejecting never affects your ability to browse, ask for a quote or use the chat assistant.</li>
+      <li><strong>Allow cookies:</strong> we load Cloudflare Web Analytics for that visit and remember your choice in local storage so you aren't asked again.</li>
+      <li><strong>Reject:</strong> analytics stays switched off, and we remember your choice so the banner doesn't reappear on every visit.</li>
+      <li>Nothing beyond what's required to render the page and remember your choice is loaded before you decide.</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="analytics" number="4" title="Visit statistics">
+  <LegalSection id="local-storage" number="4" title="Local storage">
     <p>
-      Cloudflare Web Analytics counts page views without cookies, without storing anything on your device and without
-      identifying you. It tells us which pages are useful, roughly how many people visit, and from which country and type of
-      device. It runs only after you click Allow.
+      We use your browser's local storage (not a cookie) to remember two things: whether you've
+      responded to the cookie banner, and whether you've seen our one-time welcome/intro animation.
+      Neither is shared with us or any third party &mdash; it stays entirely in your browser.
     </p>
   </LegalSection>
 
-  <LegalSection id="chat" number="5" title="The chat assistant">
-    <p>
-      The chat bubble in the corner is an automated assistant run by Botpress. It loads on every page so you can start a chat
-      any time, and keeps a session identifier in your browser's local storage so your conversation continues as you move between
-      pages. Your messages are processed by Botpress only when you use the chat. It is an automated assistant: it can be wrong,
-      and you can always ask for a person. Please don't share passwords or sensitive personal data in the chat.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="essential" number="6" title="Essential storage">
-    <p>
-      Remembering your banner choice and whether you've seen the intro animation is needed for the site to work the way you
-      expect, so it doesn't need consent. Cloudflare, our host, may also set a short-lived security cookie if a visit looks like
-      it comes from a bot.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="third-party" number="7" title="Other third-party content">
+  <LegalSection id="third-party" number="5" title="Third-party services">
+    <p>A small number of third-party tools support core site functionality:</p>
     <ul>
-      <li><strong>Images</strong> on some pages load from Unsplash's servers.</li>
-      <li><strong>The map</strong> on our contact page loads map tiles from OpenStreetMap.</li>
-      <li><strong>Our contact form</strong> sends your enquiry through Web3Forms when you submit it.</li>
-    </ul>
-    <p>
-      These services receive your IP address when they load, as any website you request content from does. None of them set
-      cookies through this site.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="your-choices" number="8" title="Your choices">
-    <ul>
-      <li>To change your banner choice, clear this site's local storage in your browser settings; the banner returns on your next visit.</li>
-      <li>You can block cookies and storage entirely in your browser. The site still works, though the chat may restart each time.</li>
-      <li>Rejecting statistics never affects anything else on the site.</li>
+      <li><strong>Web3Forms:</strong> processes contact form submissions solely to deliver your enquiry to us. Refer to their own privacy policy for details on how they handle submitted data in transit.</li>
+      <li><strong>Botpress:</strong> powers the chat widget in the corner of the site. It may set its own technical cookies/local storage needed to maintain a chat session; refer to Botpress's privacy policy for details.</li>
+      <li><strong>Cloudflare:</strong> our hosting and content-delivery provider, which may process standard connection-level technical data (such as IP address) as part of serving the website securely, independent of the analytics choice above.</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="changes" number="9" title="Changes">
-    <p>We update this policy when the tools on our site change. The date at the top shows the latest version.</p>
+  <LegalSection id="your-choices" number="6" title="Your choices">
+    <ul>
+      <li>You can change your mind at any time by clearing your browser's local storage for this site, which will bring the consent banner back on your next visit.</li>
+      <li>You can block or delete cookies and local storage entirely through your browser settings; core site functionality and content will still work, though the chat widget or consent memory may reset.</li>
+      <li>Rejecting analytics never affects your ability to browse, request a quote, or use any part of the site.</li>
+    </ul>
   </LegalSection>
 
-  <LegalSection id="contact" number="10" title="Contact">
-    <p>Questions about this policy can be sent to <Email />. Our <a href="/privacy/">Privacy Notice</a> has the full details.</p>
+  <LegalSection id="changes" number="7" title="Changes to this policy">
+    <p>
+      We may update this policy as our tools change. The "Last updated" date at the top of this
+      page always reflects the current version.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="contact" number="8" title="Contact">
+    <p>
+      Questions about this policy can be sent to{' '}
+      {
+        email ? (
+          <span data-email-user={email.user} data-email-domain={email.domain}>our contact email</span>
+        ) : (
+          'our contact email'
+        )
+      }.
+    </p>
   </LegalSection>
 </LegalLayout>

@@ -1,298 +1,195 @@
 ---
 import LegalLayout from '../components/legal/LegalLayout.astro';
 import LegalSection from '../components/legal/LegalSection.astro';
-import LegalIdentity from '../components/legal/LegalIdentity.astro';
-import Email from '../components/ui/Email.astro';
-import {
-  CARE_BASIC_MONTHLY,
-  CARE_PRO_MONTHLY,
-  CUSTOM,
-  FOUNDING_CLIENT,
-  HOSTING_SITE_YEARLY,
-  HOSTING_STORE_YEARLY,
-  LICENCE_TERMS,
-  formatRM
-} from '../data/catalog';
-import { SITE, businessName } from '../data/site';
+import { SITE } from '../data/site';
 
-const lastUpdated = new Date('2026-10-14');
+const lastUpdated = new Date('2026-01-01');
+
+const email = SITE.email
+  ? { user: SITE.email.split('@')[0], domain: SITE.email.split('@')[1] }
+  : null;
 
 const toc = [
-  { id: 'who-we-are', label: '1. Who we are' },
-  { id: 'these-terms', label: '2. These terms' },
-  { id: 'services', label: '3. Our services' },
-  { id: 'website', label: '4. Using this website' },
-  { id: 'quotes', label: '5. Quotes and orders' },
-  { id: 'payment', label: '6. Prices and payment' },
-  { id: 'scope', label: '7. Scope and changes' },
-  { id: 'your-part', label: '8. Your part' },
-  { id: 'acceptance', label: '9. Revisions and acceptance' },
-  { id: 'ownership', label: '10. Who owns what' },
-  { id: 'warranty', label: '11. Warranty and after-sales' },
-  { id: 'care-plans', label: '12. Maintenance and Care Plans' },
-  { id: 'third-parties', label: '13. Hosting and third parties' },
-  { id: 'ai', label: '14. AI features' },
-  { id: 'hardware', label: '15. Hardware' },
-  { id: 'data', label: '16. Personal data' },
-  { id: 'liability', label: '17. Limits of liability' },
-  { id: 'confidentiality', label: '18. Confidentiality and NDA' },
-  { id: 'ending', label: '19. Cancelling and ending' },
-  { id: 'founding-clients', label: '20. Founding Client Programme' },
-  { id: 'complaints', label: '21. Complaints and disputes' },
-  { id: 'changes', label: '22. Changes to these terms' }
+  { id: 'acceptance', label: '1. Acceptance of terms' },
+  { id: 'our-services', label: '2. Our services' },
+  { id: 'engagement', label: '3. Project engagement' },
+  { id: 'payment', label: '4. Payment terms' },
+  { id: 'maintenance-support', label: '5. Maintenance & support' },
+  { id: 'subscriptions', label: '6. Subscriptions & renewals' },
+  { id: 'after-sales', label: '7. After-sales & warranty' },
+  { id: 'ip-ownership', label: '8. IP & source code ownership' },
+  { id: 'confidentiality', label: '9. Confidentiality' },
+  { id: 'client-responsibilities', label: '10. Client responsibilities' },
+  { id: 'website-content', label: '11. Website content' },
+  { id: 'liability', label: '12. Limitation of liability' },
+  { id: 'termination', label: '13. Termination' },
+  { id: 'governing-law', label: '14. Governing law' },
+  { id: 'changes', label: '15. Changes to these terms' },
+  { id: 'contact', label: '16. Contact' }
 ];
 ---
 
 <LegalLayout
   title="Terms of Service"
-  description="The terms for using the WSS DevLabs website and for our websites, ready-made systems, custom builds, maintenance and Care Plans: payment, scope, ownership, warranty, after-sales, liability and disputes."
-  path="/terms/"
+  description="The terms governing use of the WSS DevLabs website, our productized and bespoke services, maintenance, subscriptions, and after-sales support."
+  path="/terms"
   icon="M9 2h6l1 4h4v2h-2l-1.6 12.2A2 2 0 0114.4 22H9.6a2 2 0 01-2-1.8L6 8H4V6h4l1-4z M9.5 12v5 M14.5 12v5"
   accent="red"
   lastUpdated={lastUpdated}
-  intro="Plain-language terms for using this website and working with us, from your first quote to maintenance and support after launch. Your quotation sets out the specific scope, price and timeline for your project."
+  intro="These terms set out how we work together &mdash; from your first quotation through to ongoing maintenance and support &mdash; so there are no surprises about scope, payment, ownership, or what happens after launch."
   toc={toc}
 >
-  <LegalSection id="who-we-are" number="1" title="Who we are">
-    <p>These terms are between you and {businessName} ("we", "us").</p>
-    <LegalIdentity />
-  </LegalSection>
-
-  <LegalSection id="these-terms" number="2" title="These terms">
+  <LegalSection id="acceptance" number="1" title="Acceptance of terms">
     <p>
-      These terms apply to everything we sell: websites, ready-made systems, custom builds, add-ons and Care Plans. Ready-made
-      systems are also covered by our <a href="/licence/">Licence Agreement</a>, Care Plans by the{' '}
-      <a href="/care-plan-terms/">Care Plan terms</a>, and refunds by our <a href="/refunds/">Refund Policy</a>. Larger projects
-      may also have a Master Services Agreement and schedules such as a Data Processing Agreement.
-    </p>
-    <p>
-      If documents conflict, this order applies: your quotation or Statement of Work, then any schedules, then a Master Services
-      Agreement, then these terms. Nothing in these terms takes away rights you have by law, for example as a consumer under the
-      Consumer Protection Act 1999.
+      By accessing this website, requesting a quotation, or engaging {SITE.name} for any project,
+      you agree to be bound by these Terms of Service. If you are accepting on behalf of a company,
+      you confirm you have the authority to do so.
     </p>
   </LegalSection>
 
-  <LegalSection id="services" number="3" title="Our services">
+  <LegalSection id="our-services" number="2" title="Our services">
+    <p>We offer four categories of service, each with its own delivery model:</p>
     <ul>
-      <li><strong>Websites:</strong> fixed-price One-Page, Business and Store websites, each with a published scope, timeline and price.</li>
-      <li><strong>Ready-made systems:</strong> business systems sold with a perpetual licence and the full source code, with no monthly fee.</li>
-      <li><strong>Custom builds:</strong> software built to your requirements, starting with a paid Discovery Sprint that ends in a fixed price.</li>
-      <li><strong>Care Plans:</strong> optional hosting, maintenance and support after launch (see section 12).</li>
-    </ul>
-    <p>Each package page lists exactly what's included and what isn't. Anything not listed is not included.</p>
-  </LegalSection>
-
-  <LegalSection id="website" number="4" title="Using this website">
-    <ul>
-      <li>Articles and guides on this site are general information, not professional advice for your situation.</li>
-      <li>Prices on this site are current prices. The price that binds us is the one in your quotation or order confirmation.</li>
-      <li>The text, design and code of this website belong to us. Please don't copy them without permission.</li>
-      <li>Links to other websites are for convenience. We're not responsible for their content.</li>
-      <li>The chat assistant on this site is automated. It can be wrong, and it doesn't make binding offers.</li>
+      <li><strong>WSS Express Web:</strong> fixed-price, production-ready websites delivered on a short, published timeline.</li>
+      <li><strong>The Marketplace:</strong> pre-built, buy-once business systems sold with full source code and no recurring licence fees.</li>
+      <li><strong>Enterprise Bespoke:</strong> fully custom software scoped, architected, and built around your specific requirements.</li>
+      <li><strong>Ongoing services:</strong> maintenance, hosting management, and technical support, offered either as one-off engagements or as a subscription retainer (see Sections 5 and 6).</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="quotes" number="5" title="Quotes and orders">
+  <LegalSection id="engagement" number="3" title="Project engagement">
+    <p>
+      Every paid engagement is governed by a written quotation, proposal, or Statement of Work
+      (SOW) signed or confirmed by both parties. Where the terms of a signed project agreement
+      conflict with this general page, the signed agreement takes precedence.
+    </p>
     <ul>
-      <li>Quotations are valid for 30 days.</li>
-      <li>
-        A project starts when you accept the quotation in writing (a signature, an e-signature, or a clear written "accepted",
-        including on WhatsApp) and pay the first payment.
-      </li>
-      <li>
-        Ready-made systems are ordered by WhatsApp, email or the contact form. We send an invoice; once payment clears, we send the
-        download link, licence and install guide.
-      </li>
-      <li>Your quotation lists everything included. Anything not listed is not included.</li>
+      <li>Quotations are valid for 14 days from issue unless otherwise stated.</li>
+      <li>Scope changes requested after a quotation is accepted (new pages, features, or integrations) are treated as change requests and quoted separately before work begins.</li>
+      <li>Timelines assume timely feedback and asset delivery from you; delays on your side may shift the delivery date accordingly.</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="payment" number="6" title="Prices and payment">
+  <LegalSection id="payment" number="4" title="Payment terms">
     <ul>
-      <li>Prices are in Ringgit Malaysia and are final. No SST is added.</li>
-      <li>
-        Payment schedules: One-Page and Business websites 50% to start and 50% before going live; Store websites 40% / 30% / 30%;
-        custom builds 30% to start, 40% at the staging demo and 30% at handover; ready-made systems in full before download; Care
-        Plans monthly or yearly in advance.
-      </li>
-      <li>Invoices are due within 7 days. Late payment interest may apply at the rate stated in your quotation.</li>
-      <li>If a payment is more than 14 days late, we may pause work and support after giving you written notice.</li>
-      <li>We hand over source code, credentials and ownership once everything due has been paid.</li>
+      <li><strong>Deposit:</strong> Express Web and Bespoke projects typically require a deposit before work begins, with the balance due on agreed milestones or delivery, as set out in your quotation.</li>
+      <li><strong>Marketplace systems:</strong> paid in full at the time of purchase, before source code and deployment access are handed over.</li>
+      <li><strong>Late payment:</strong> we may pause active work, delay delivery, or suspend hosting/support until overdue invoices are settled. Repeated late payment may result in termination under Section 13.</li>
+      <li>All prices are in Malaysian Ringgit (RM) unless stated otherwise, and are exclusive of any applicable taxes unless explicitly quoted as inclusive.</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="scope" number="7" title="Scope and changes">
+  <LegalSection id="maintenance-support" number="5" title="Maintenance & support">
     <p>
-      We deliver the items listed in your quotation or Statement of Work. Anything else is a change. Changes get a written change
-      request with a fixed price and the effect on the timeline, and work only starts once you approve it. We never bill for
-      changes after the fact.
+      Maintenance keeps your website or system secure, up to date, and running smoothly after
+      launch. Depending on your agreement, maintenance may be purchased as a one-off block of hours
+      or as a recurring subscription (Section 6).
     </p>
-  </LegalSection>
-
-  <LegalSection id="your-part" number="8" title="Your part">
     <ul>
-      <li>Provide the content, information and access listed in your quotation within the agreed time. Delays on your side move the timeline.</li>
-      <li>If we don't receive what we need for 30 days, we may pause the project, invoice the work completed, and reschedule when you're ready.</li>
-      <li>Name one person who can make decisions and reply within 2 working days.</li>
-      <li>Make sure you have the rights to the content you give us (text, photos, logos) and the consents needed for any personal data you collect.</li>
-    </ul>
-    <p>You agree to cover us for claims caused by content or data you provide, or by using what we deliver in breach of the law.</p>
-  </LegalSection>
-
-  <LegalSection id="acceptance" number="9" title="Revisions and acceptance">
-    <p>
-      Each package lists its revision rounds. When we deliver a draft, staging site or milestone, please test it and either
-      approve it or list the specific problems within 5 working days. If we hear nothing in that time, or you start using it
-      live, it counts as accepted. We fix listed problems that fall within the agreed scope.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="ownership" number="10" title="Who owns what">
-    <ul>
-      <li><strong>Websites and custom builds:</strong> once you've paid in full, you own the design, code and content we created specifically for you.</li>
-      <li>
-        <strong>Our building blocks:</strong> we keep our own templates, components, code libraries and know-how that existed
-        before your project or were made independently of it. You get a permanent, royalty-free licence to use them as part of
-        what we delivered to you.
-      </li>
-      <li><strong>Ready-made systems:</strong> you get a perpetual licence with the full source code, not ownership of the product. See the <a href="/licence/">Licence Agreement</a>.</li>
-      <li><strong>Third-party and open-source parts</strong> stay under their own licences, which we list in a notice file at handover.</li>
-      <li><strong>Your domain</strong> is registered in your name, and we hand over every login when the project ends.</li>
+      <li><strong>What's included:</strong> security patches, dependency updates, uptime monitoring, minor content updates, and bug fixes for defects in functionality we originally delivered.</li>
+      <li><strong>What's excluded:</strong> new features, redesigns, third-party service outages outside our control, and issues caused by changes made outside our team.</li>
+      <li><strong>Response times:</strong> support requests are acknowledged within 1-2 business days for standard issues, and as a priority for critical outages, as detailed in your specific support agreement.</li>
+      <li>New feature requests raised during a maintenance period are quoted separately as a change request rather than treated as a bug fix.</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="warranty" number="11" title="Warranty and after-sales">
-    <p>
-      After acceptance we fix, free of charge, anything we built that doesn't work as described in your quotation: One-Page
-      websites for 14 days, Business and Store websites for 30 days, ready-made systems for {LICENCE_TERMS.supportDays} days and
-      custom builds for {CUSTOM.build.warrantyDays} days.
-    </p>
+  <LegalSection id="subscriptions" number="6" title="Subscriptions & renewals">
+    <p>Where you subscribe to a recurring maintenance, hosting, or support retainer:</p>
     <ul>
-      <li>Ready-made systems also include {LICENCE_TERMS.supportDays} days of WhatsApp support from the builder and {LICENCE_TERMS.updateMonths} months of updates.</li>
-      <li>After the warranty, support is available through a Care Plan or paid per fix, quoted before we start.</li>
-      <li>
-        The warranty doesn't cover changes made by others, third-party services, hosting you manage, hardware, or misuse.
-        Software is never completely free of errors, and we don't promise it will be.
-      </li>
-      <li>
-        We target a 90+ mobile Lighthouse score at handover on the agreed content, and fix it free if we miss. We never guarantee
-        search rankings, because Google decides them.
-      </li>
+      <li><strong>Billing cycle:</strong> subscriptions are billed monthly or annually as agreed in your plan, starting from the activation date.</li>
+      <li><strong>Auto-renewal:</strong> subscriptions renew automatically at the end of each billing cycle unless cancelled in advance.</li>
+      <li><strong>Cancellation:</strong> you may cancel a subscription by giving at least 30 days' written notice before the next renewal date; fees already paid for the current cycle are non-refundable.</li>
+      <li><strong>Non-payment:</strong> if a renewal payment fails or is not settled within 14 days, we may suspend the associated hosting, monitoring, or support services until payment is made.</li>
+      <li><strong>Price changes:</strong> we will give at least 30 days' notice before any subscription price change takes effect on your next renewal.</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="care-plans" number="12" title="Maintenance and Care Plans">
-    <p>
-      Care Plans are optional. They keep your website or system hosted, backed up, updated and supported after launch: Hosting
-      Only from {formatRM(HOSTING_SITE_YEARLY)} a year ({formatRM(HOSTING_STORE_YEARLY)} for stores), Care Basic at
-      {' '}{formatRM(CARE_BASIC_MONTHLY)} a month and Care Pro at {formatRM(CARE_PRO_MONTHLY)} a month.
-    </p>
+  <LegalSection id="after-sales" number="7" title="After-sales support & warranty">
     <ul>
-      <li><strong>Billing:</strong> monthly or yearly in advance. Yearly plans are 10 months' price for 12 months.</li>
-      <li><strong>Renewal:</strong> plans renew automatically at the end of each period until you cancel.</li>
-      <li><strong>Cancelling:</strong> monthly plans can be cancelled any time, effective at the end of the paid month. Yearly plans follow our <a href="/refunds/">Refund Policy</a>.</li>
-      <li><strong>Price changes:</strong> we give at least 30 days' notice before a new price applies to your plan.</li>
-      <li><strong>Not included:</strong> new features, redesigns and new pages, which we quote at a fixed price first.</li>
-    </ul>
-    <p>
-      "No SaaS fees" means you never pay rent for software you own. A Care Plan is optional service work. Response times, backups
-      and exclusions are set out in the <a href="/care-plan-terms/">Care Plan terms</a>.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="third-parties" number="13" title="Hosting and third parties">
-    <p>
-      Some features rely on third-party services such as hosting, domain registries, payment gateways, WhatsApp and AI providers.
-      Their availability, prices and terms are outside our control. Their usage fees are paid by you, at cost, unless your
-      quotation says otherwise.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="ai" number="14" title="AI features">
-    <p>
-      AI-generated answers can be wrong. You approve the knowledge base an AI assistant uses. Users are always told they're talking
-      to an automated assistant and can reach a person. AI assistants must not be used to give medical, legal or financial advice.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="hardware" number="15" title="Hardware">
-    <p>
-      Hardware we supply comes with the manufacturer's warranty only. We're not responsible for losses caused by device failure,
-      power or network outages, or alerts that aren't acted on. You remain responsible for insuring your premises, stock and
-      equipment. Electrical and cabling work is carried out by licensed contractors.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="data" number="16" title="Personal data">
-    <p>
-      Our <a href="/privacy/">Privacy Notice</a> explains how we handle personal data. Where we process personal data on your
-      behalf, you are the data controller and we are the data processor, acting only on your instructions under a Data Processing
-      Agreement.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="liability" number="17" title="Limits of liability">
-    <p>
-      Our total liability for each project is limited to the fees you paid for that project. For Care Plans, it is limited to the
-      fees paid in the previous 12 months. For ready-made systems, it is limited to the licence fee you paid.
-    </p>
-    <p>
-      Neither of us is liable for indirect or consequential losses, such as lost profits, revenue, goodwill, or data beyond what
-      can be restored from our latest backup. Nothing in these terms limits liability for fraud, or anything else that cannot be
-      limited by law.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="confidentiality" number="18" title="Confidentiality and NDA">
-    <p>
-      We each keep the other's confidential information private, and use it only for the project, during the project and for 3
-      years afterwards. We're happy to sign a mutual NDA before you share anything sensitive. During a project and for 12 months
-      afterwards, neither of us will directly hire the other's staff or contractors who worked on it without consent.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="ending" number="19" title="Cancelling and ending">
-    <p>
-      Refunds and cancellations follow our <a href="/refunds/">Refund Policy</a>. Either of us may end an agreement if the other
-      seriously breaches it and doesn't fix the breach within 14 days of written notice. You pay for work done up to that point,
-      and we hand over the completed work you've paid for. Neither of us is liable for delays caused by events beyond reasonable
-      control, such as natural disasters, major provider outages or government action, as long as we tell each other promptly.
-    </p>
-  </LegalSection>
-
-  <LegalSection id="founding-clients" number="20" title="Founding Client Programme">
-    <ul>
-      <li>
-        Our first {FOUNDING_CLIENT.totalSlots} clients get {FOUNDING_CLIENT.discountPercent}% off {FOUNDING_CLIENT.appliesTo}. It
-        doesn't apply to {FOUNDING_CLIENT.excludes}.
-      </li>
-      <li>
-        In return, within 30 days of launch, you agree to give us: a case study interview with real results, permission to publish
-        your business name, logo and approved screenshots, an honest public review, and a 15-minute feedback call.
-      </li>
-      <li>You approve the case study text before we publish it. Screenshots use sample data or are blurred where needed.</li>
-      <li>We ask for an honest review. The discount never depends on the review being positive.</li>
-      <li>If the case study, permission and review aren't provided, the discount amount becomes payable.</li>
-      <li>The programme ends when all {FOUNDING_CLIENT.totalSlots} places are taken.</li>
+      <li><strong>Warranty period:</strong> unless otherwise stated in your project agreement, we provide a 30-day bug-fix warranty after launch/handover, covering defects in functionality we built, at no additional charge.</li>
+      <li><strong>Not covered by warranty:</strong> new features, changes to requirements after launch, issues from third-party plugins/services, or damage caused by changes made by you or another party.</li>
+      <li><strong>Source code & handover:</strong> for Marketplace and Bespoke projects, source code and deployment documentation are handed over as agreed, so you are never locked into us for hosting or future changes.</li>
+      <li><strong>Beyond warranty:</strong> ongoing support after the warranty period is available on a pay-as-you-go basis or via a maintenance subscription (Section 6).</li>
     </ul>
   </LegalSection>
 
-  <LegalSection id="complaints" number="21" title="Complaints and disputes">
+  <LegalSection id="ip-ownership" number="8" title="IP & source code ownership">
+    <ul>
+      <li><strong>Marketplace systems:</strong> full ownership of the source code for the specific system purchased transfers to you upon full payment, for your own use. You may not resell the underlying system as your own product to third parties.</li>
+      <li><strong>Bespoke & Express Web projects:</strong> upon full and final payment, ownership of the custom code, designs, and content created specifically for your project transfers to you, as detailed in your project agreement.</li>
+      <li><strong>Our retained rights:</strong> we retain ownership of our internal frameworks, reusable components, and tooling used to build your project, and may reuse general, non-confidential technical approaches in future work for other clients.</li>
+      <li>Third-party licences (fonts, stock imagery, plugins) remain subject to their own licence terms.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="confidentiality" number="9" title="Confidentiality">
     <p>
-      If something isn't right, tell us at <Email />. We acknowledge complaints within 2 working days and give a full response
-      within 10 working days.
-    </p>
-    <p>
-      These terms are governed by the laws of Malaysia. If a dispute can't be settled by talking, we will try mediation, for
-      example through the Asian International Arbitration Centre, before going to the courts of Kuala Lumpur. Consumers may also
-      bring claims to the Tribunal for Consumer Claims Malaysia.
+      Both parties agree to keep confidential any non-public business, technical, or financial
+      information shared during the engagement. We are glad to sign a mutual NDA before detailed
+      discussions begin, and our confidentiality obligations continue after a project ends. See our{' '}
+      <a href="/privacy">Privacy Policy</a> for how we handle personal and business data specifically.
     </p>
   </LegalSection>
 
-  <LegalSection id="changes" number="22" title="Changes to these terms">
+  <LegalSection id="client-responsibilities" number="10" title="Client responsibilities">
+    <p>To deliver on time and to spec, we ask that you:</p>
+    <ul>
+      <li>Provide timely feedback, approvals, and content/assets needed for the project.</li>
+      <li>Designate a single point of contact authorised to approve scope and sign off milestones.</li>
+      <li>Ensure any third-party accounts, domains, or credentials you provide are accurate and that you have the right to share them with us.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="website-content" number="11" title="Website content">
     <p>
-      We may update these terms. The version that applies to your project is the one in force when you accepted your quotation.
-      The date at the top shows the latest version. Questions? Email <Email /> or call {SITE.phone}.
+      Content on this website, including case studies, capability descriptions, and marketplace
+      listings, reflects work we can credibly deliver and is provided for informational purposes.
+      Specific pricing and deliverables for your project are always confirmed in a written
+      quotation before work begins.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="liability" number="12" title="Limitation of liability">
+    <p>
+      To the fullest extent permitted by Malaysian law, {SITE.name} is not liable for any indirect,
+      incidental, or consequential loss (including loss of profits or data) arising from use of
+      this website or our services, except where such loss arises from our gross negligence or
+      wilful misconduct. Our total liability for any project is capped at the total fees paid by
+      you for that specific engagement.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="termination" number="13" title="Termination">
+    <ul>
+      <li>Either party may terminate a project agreement for material breach not remedied within 14 days of written notice.</li>
+      <li>We may suspend or terminate services for non-payment, as described in Sections 4 and 6.</li>
+      <li>On termination, you remain liable for fees for work completed up to the termination date, and we will deliver any completed, paid-for work product.</li>
+    </ul>
+  </LegalSection>
+
+  <LegalSection id="governing-law" number="14" title="Governing law">
+    <p>These terms are governed by the laws of Malaysia, and any dispute will first be addressed through good-faith discussion between the parties before formal proceedings.</p>
+  </LegalSection>
+
+  <LegalSection id="changes" number="15" title="Changes to these terms">
+    <p>
+      We may update these terms from time to time; the "Last updated" date above reflects the
+      latest version. Terms already agreed in a signed project agreement are not affected
+      retroactively by later changes to this page.
+    </p>
+  </LegalSection>
+
+  <LegalSection id="contact" number="16" title="Contact">
+    <p>
+      Questions about these terms can be sent to{' '}
+      {
+        email ? (
+          <span data-email-user={email.user} data-email-domain={email.domain}>our contact email</span>
+        ) : (
+          'our contact email'
+        )
+      }
+      {SITE.phone && <> or by phone at {SITE.phone}</>}.
     </p>
   </LegalSection>
 </LegalLayout>

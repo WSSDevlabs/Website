@@ -3,13 +3,12 @@ type Props = {
   id: string;
   number: string;
   title: string;
-  lang?: string;
 };
 
-const { id, number, title, lang } = Astro.props;
+const { id, number, title } = Astro.props;
 ---
 
-<div id={id} lang={lang} class="scroll-mt-28 rounded-3xl border border-line bg-white p-6 shadow-sm sm:p-8">
+<div id={id} class="scroll-mt-28 rounded-3xl border border-line bg-white p-6 shadow-sm sm:p-8">
   <div class="flex items-start gap-4">
     <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-charcoal text-sm font-bold text-white">
       {number}

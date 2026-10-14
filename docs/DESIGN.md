@@ -21,7 +21,7 @@ WSS Dev Labs’ design identity is built on three core pillars: **Clarity, Speed
 
 ### C. Motion & Interactive Previews
 - **GSAP-Powered Motion:** Hardware-accelerated GSAP animations are purpose-driven (scroll-triggered reveals, subtle fades, timeline orchestration). Motion never compromises our strict sub-second performance budget.
-- **Interactive Desktop & Mobile Previews:** System pages wrap real screenshots or screen recordings (sample data only) in a device frame with instant **Desktop (100%)** vs. **Mobile (375px)** viewport toggles. The frame never shows a made-up address or a "live" status; until real material exists, it offers a 15-minute screen-share walkthrough instead.
+- **Interactive Desktop & Mobile Previews:** Instead of static screenshots, our marketplace and showcase pages embed live, interactive preview wrappers with instant **Desktop (100%)** vs. **Mobile (375px)** viewport toggles, allowing clients to test touch responsiveness directly.
 
 ---
 
@@ -29,25 +29,20 @@ WSS Dev Labs’ design identity is built on three core pillars: **Clarity, Speed
 
 | Role | Token | Hex / Value | Architectural Purpose |
 |:---|:---|:---|:---|
-> Exact values live in `src/styles/global.css` (`@theme`). This table mirrors them.
-
-| Role | Token | Hex / Value | Architectural Purpose |
-|:---|:---|:---|:---|
-| **Page Background** | `--color-paper` | `#fcfbfa` | Crisp light off-white base surface |
-| **Soft Surface** | `--color-paper-dim` | `#f3f2ee` | Inset panels, cards, and secondary sections |
-| **Deep Surface** | `--color-paper-deep` | `#e8e6df` | Structural panel dividers and active pill states |
+| **Page Background** | `--color-paper` | `#f2f0eb` | Cast concrete off-white base surface (Tamarind Square aesthetic) |
+| **Soft Surface** | `--color-paper-dim` | `#e6e3db` | Inset panels, cards, and secondary sections |
+| **Deep Surface** | `--color-paper-deep` | `#d6d2c7` | Structural panel dividers and active pill states |
 | **Primary Text** | `--color-ink` | `#19191b` | Neutral steel near-black (high contrast, AA accessible) |
-| **Body Copy** | `--color-ink-dim` | `#5c5d61` | Neutral grey with zero navy tint for effortless reading |
-| **Primary Accent** | `--color-accent` | `#d92d20` | **Signal Red** — drives primary CTAs, highlight badges, and focus rings |
+| **Body Copy** | `--color-ink-dim` | `#57585b` | Neutral grey with zero navy tint for effortless reading |
+| **Primary Accent** | `--color-accent` | `#d92d20` | **Signal Red** — drives primary CTAs, active badges, and focus rings |
 | **Accent Dim** | `--color-accent-dim` | `#b42318` | Hover state for primary buttons |
-| **Structural Blue** | `--color-accent-blue` | `#2d5be3` | The header "Get a quote" pill, footer WhatsApp pill, minor structural stripes |
-| **Signal Gold/Yellow** | `--color-accent-yellow` | `#b45309` / `#eab308` | Highlight badges and price callouts on dark panels |
-| **Verified Green** | `--color-accent-green` | `#15803d` / `#10b981` | Status indicators ("Now booking pilot sites") and checkmarks |
-| **Hairline Joints** | `--color-line` | `#e2dfd7` | Precision-formwork joints |
-| **Matte Dark** | `--color-charcoal` | `#19191b` | Footer, timeline, dark panels and the top utility bar |
+| **Structural Blue** | `--color-accent-blue` | `#2d5be3` | Minor structural stripe and service taxonomy coding |
+| **Signal Gold/Yellow** | `--color-accent-yellow` | `#b45309` / `#eab308` | Highlight badges, Answer Engine tags, and grant notices |
+| **Verified Green** | `--color-accent-green` | `#15803d` / `#10b981` | Live status indicators, uptime badges, and instant checkmarks |
+| **Hairline Joints** | `--color-line` | `#cac6bb` | Precision-formwork concrete joints |
 
 ### Texture Wash
-- **Global Film Grain:** `body::after` fixed fractal-noise SVG overlay (`opacity: 0.025`, `mix-blend-mode: overlay`) imparting physical, tactile material depth to every surface.
+- **Global Film Grain:** `body::after` fixed fractal-noise SVG overlay (`opacity: 0.035`, `mix-blend-mode: overlay`) imparting physical, tactile material depth to every surface.
 
 ---
 
@@ -58,7 +53,7 @@ All technology choices are strictly performance-led:
 ### A. Core Technologies & Frameworks
 - **Astro + TypeScript:** Static-first architecture, zero JS overhead by default, typed from line one.
 - **Tailwind CSS (v4):** Atomic utility token engine delivering an ultra-lightweight CSS footprint.
-- **PHP 8.2+ & Vanilla JS:** The foundation for our **ready-made systems**. Clean, dependency-free PHP with an offline licence check (no phoning home, no kill switch), local MySQL storage, and zero telemetry. Sales copy says "Works offline. No kill switch."; the cryptography detail stays in tech specs.
+- **PHP 8.2+ & Vanilla JS:** The foundation for our **WSS Marketplace** products. Clean, dependency-free PHP with Ed25519 offline cryptographic licensing, local MySQL storage, and zero telemetry.
 - **GSAP & Lenis:** Smooth scrolling and physics-based micro-interactions respecting `prefers-reduced-motion`.
 
 ### B. Mobile-First Responsiveness & Accessibility
@@ -79,7 +74,7 @@ All technology choices are strictly performance-led:
 │ • Direct, "No-Fluff" Copy  │ • Clear Heading Structures  │
 │ • Clear Milestone Sprints  │ • Structured FAQ Schemas    │
 │ • Fixed-Price Package Tiers│ • Local Relevance Metadata  │
-│ • Direct Builder WhatsApp  │ • SoftwareApplication Schema│
+│ • Direct Engineer WhatsApp │ • SoftwareApplication Schema│
 └────────────────────────────┴─────────────────────────────┘
 ```
 
@@ -88,31 +83,29 @@ All technology choices are strictly performance-led:
 - **Direct Q&A Formats:** Scannable FAQ accordions mirrored into JSON-LD `FAQPage` schema so ChatGPT, Perplexity, and Gemini cite WSS Dev Labs directly for Malaysian digital queries.
 
 ### B. Local SEO & Trust Signals
-- **Malaysia-Anchored Copy:** Direct mentions of Malaysian places (Kuala Lumpur, Klang Valley) with the SSM registration identifier in the footer once it's set.
-- **Malaysian Payment Gateways:** ToyyibPay, SenangPay and Stripe (FPX, cards and e-wallets) on Store websites; money goes straight to the client's own merchant account.
+- **Malaysia-Anchored Copy:** Direct mentions of Malaysian states (Kuala Lumpur, Selangor, Johor, Penang, Sabah, Sarawak) with SSM registration identifiers in the footer.
+- **Malaysian Payment Gateways:** Native support for ToyyibPay, SenangPay, gKash, Stripe, and DuitNow QR.
 
-### C. "Software you own. Not rent."
-- The positioning on every page: fixed prices, full source code, no monthly software rent.
-- Ready-made systems: **"Perpetual licence with full source code. No monthly fee."** (a licence, never "100% ownership"; it can't be resold).
-- Websites and custom builds: the client owns the design, code and content once paid in full, and the domain is registered in their name.
-- Every claim must be true today and provable (see `docs/business/claims-evidence.md`).
+### C. The "No Subscriptions. No SaaS. Just Yours." Philosophy
+- Marketing copy for the **WSS Marketplace** explicitly highlights: **"No monthly fees. Buy once, own forever."**
+- Complete source code ownership, zero vendor lock-in, and self-hosted privacy under Malaysian PDPA.
 
 ---
 
 ## 5. Recurring High-Converting UI Patterns
 
 ### A. High-Impact Hero Sections
-- **Punchy Value Proposition:** Short, bold headlines with a red highlight badge on the key phrase ("Software you own. **Not rent.**").
-- **Dual CTAs:** Always pair the primary action ("Get a fixed quote") with a secondary exploratory link ("See systems" / "See websites"). On phones, at least one of them is visible on the first screen.
+- **Punchy Value Proposition:** Short, bold headlines with dynamic gradient text.
+- **Dual CTAs:** Always pair a primary action ("WhatsApp an Engineer" / "Get Express") with a secondary exploratory link ("Browse 15 Systems" / "View Grant Subsidies").
 
 ### B. Logo Arrays (The Trust Grid)
-- Horizontal grayscale marquee of client or partner logos below the hero. **Only real clients or partners, each with written permission**, and only once there are at least 4. Until then the section stays off the page (never placeholder boxes).
+- Horizontal grayscale grid of recognizable Malaysian commercial landmarks and enterprises (Parkson, AEON, Sunway, KLCC, Plaza Sentral, Nexus Bangsar) placed directly below the hero to anchor immediate credibility.
 
 ### C. Step-by-Step Step Modules
-- Numbered step modules: the 3-step "How it works" on Home (`01 Tell us what you need` ➔ `02 Get a fixed quote` ➔ `03 We build and hand over everything`) and the 8-step custom build timeline on /custom/ with its scroll-filled line.
+- 4-phase numbered sprint pipelines (`01 Architecture Lock` ➔ `02 Staging Prototype` ➔ `03 Security & Payments` ➔ `04 Go-Live Handover`).
 
 ### D. Embedded Utility Calculators
-- Interactive client-side calculators in the shared calculator card (options left, dark live-total panel right): the **website quote builder** (package + add-ons ➔ total + prefilled WhatsApp quote) and the **rent vs own calculator** (3-year cost of subscriptions vs owning, counting hosting and support on both sides).
+- Interactive client-side calculators (e.g., **SME Project & Grant Savings Calculator**) that dynamically compute package costs, 50% PMKS Madani grant deductions, and generate prefilled WhatsApp booking prompts.
 
 ### E. Interactive Desktop / Mobile Device Viewport Switcher
-- Toggle switches show a system's real screenshots or recording at 100% desktop and 375px mobile widths inside a simulated browser chrome. No fake addresses, no "live" badges, no demo claims until a real demo loads.
+- Live toggle switches allowing potential buyers to test systems across 100% desktop and 375px mobile phone dimensions with simulated browser chromes.

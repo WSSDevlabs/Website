@@ -2,9 +2,6 @@
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import type { Tone } from '../../lib/tone';
-import { PRIMARY_CTA } from '../../data/nav';
-import { PUBLIC_SYSTEMS } from '../../data/systems';
-import { RENT_VS_OWN, SYSTEM_EXTRAS, SYSTEM_TIERS, formatRM, subscriptionTotal } from '../../data/catalog';
 
 type Props = {
   eyebrow?: string;
@@ -17,27 +14,20 @@ type Props = {
 };
 
 const {
-  eyebrow = 'Fixed price · Full source code · No monthly rent',
+  eyebrow = 'Direct with Builders · Zero SaaS Dependency',
   eyebrowTone = 'red',
-  title = 'Software you own. Not rent.',
-  subtitle = 'Fixed-price websites and ready-made business systems for Malaysian SMEs. Full source code, no monthly SaaS fees.',
-  primaryCta = { label: 'Get a fixed quote', href: PRIMARY_CTA.href },
-  secondaryCta = { label: 'See systems', href: '/systems/' },
+  title = 'Empowering Businesses Through Custom Tech Solutions',
+  subtitle = 'One engineering team behind everything from fixed-price websites to the custom systems running your business, built to last and fully owned by you.',
+  primaryCta = { label: 'Explore Marketplace', href: '/marketplace' },
+  secondaryCta = { label: 'Talk with us', href: 'https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I%20would%20like%20to%20discuss%20a%20project' },
   variant = 'home'
 } = Astro.props;
 
-const isExternal = (href: string) => /^https?:\/\//.test(href);
-
-// Founder-supplied project count; confirm it stays true. Everything else is a fact about the offer.
 const stats = [
-  { value: String(PUBLIC_SYSTEMS.length), label: 'Ready-made systems' },
-  { value: '10+', label: 'Custom projects delivered' },
-  { value: 'RM0', label: 'Monthly licence fees' }
+  { value: '2000+', label: 'Hours Shipped' },
+  { value: '40+', label: 'Buy-Once Systems' },
+  { value: '10+', label: 'Custom Project Completion' }
 ];
-
-const standardLicence = SYSTEM_TIERS.standard.price;
-const installation = SYSTEM_EXTRAS.installation.price;
-const years = RENT_VS_OWN.months / 12;
 ---
 
 {
@@ -96,7 +86,7 @@ const years = RENT_VS_OWN.months / 12;
           {/* Left: Copy & CTAs */}
           <div data-hero-item data-hero-delay="0" class="text-center lg:text-left">
             <h1 class="h-display font-black tracking-tight text-ink">
-              Software you own. <span class="badge-highlight">Not rent.</span>
+              Empowering Businesses Through <span class="badge-highlight">Custom Tech Solutions</span>
             </h1>
 
             <p class="mt-5 max-w-xl text-base leading-relaxed text-ink-dim sm:text-lg lg:mx-0 mx-auto">
@@ -105,55 +95,31 @@ const years = RENT_VS_OWN.months / 12;
           </div>
 
           {/* Right: Visual Composition + CTAs */}
-          <div data-hero-item data-hero-delay="0.15" class="relative mx-auto flex w-full max-w-md flex-col lg:max-w-none">
-            {/* Rent vs own, worked out on a point-of-sale system. On phones the buttons come first, so one is visible without scrolling. */}
-            <div class="relative order-2 mx-auto w-full overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-paper-dim via-paper to-white shadow-[0_20px_60px_-15px_rgba(25,25,27,0.12)] lg:order-1">
-              <div class="flex h-full flex-col justify-center gap-4 p-6 sm:p-8">
-                <p class="mono-label text-ink-dim">A point-of-sale system over {years} years</p>
-
-                <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
-                  <div class="flex items-baseline justify-between gap-3">
-                    <p class="text-sm font-semibold text-ink-dim">Renting (subscription)</p>
-                    <p class="font-feature text-2xl font-black text-ink">{formatRM(subscriptionTotal)}</p>
-                  </div>
-                  <p class="mt-1 text-xs text-ink-dim">
-                    {formatRM(RENT_VS_OWN.subscriptionMonthly)}/month for {RENT_VS_OWN.months} months, and it stops if you stop paying.
-                  </p>
-                </div>
-
-                <div class="rounded-2xl border border-accent/30 bg-white p-5 shadow-sm ring-1 ring-accent/10">
-                  <div class="flex items-baseline justify-between gap-3">
-                    <p class="text-sm font-semibold text-ink-dim">Owning (WSS POS)</p>
-                    <p class="font-feature text-2xl font-black text-accent">{formatRM(standardLicence + installation)}</p>
-                  </div>
-                  <p class="mt-1 text-xs text-ink-dim">
-                    {formatRM(standardLicence)} licence + {formatRM(installation)} installation, plus your own hosting. It keeps running.
-                  </p>
-                </div>
-
-                <p class="text-[11px] leading-relaxed text-ink-dim">
-                  Subscription figure from a published Malaysian POS entry plan, checked {RENT_VS_OWN.checked}. Subscriptions include
-                  hosting and support; owning means you choose your host and can add a Care Plan.{' '}
-                  <a href="/systems/#calculator" class="font-semibold text-ink underline hover:text-accent">Try it with your numbers</a>.
-                </p>
+          <div data-hero-item data-hero-delay="0.15" class="relative mx-auto w-full max-w-md lg:max-w-none">
+            {/* Image placeholder */}
+            <div class="relative mx-auto aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-paper-dim via-paper to-white shadow-[0_20px_60px_-15px_rgba(25,25,27,0.12)]">
+              <div class="flex h-full items-center justify-center bg-paper-dim">
+                <svg class="h-16 w-16 text-ink-dim/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3 16.5V4.5a1.5 1.5 0 0 1 1.5-1.5h15a1.5 1.5 0 0 1 1.5 1.5v15a1.5 1.5 0 0 1-1.5 1.5h-15a1.5 1.5 0 0 1-1.5-1.5Zm10.5-11.25h.008v.008h-.008V5.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                </svg>
               </div>
             </div>
 
-            <div class="order-1 mb-8 flex flex-wrap justify-center gap-4 lg:order-2 lg:mb-0 lg:mt-6">
+            <div class="mt-6 flex flex-wrap justify-center gap-4">
               <a
                 href={primaryCta.href}
-                data-track="quote_click"
                 class="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-black hover:scale-105"
               >
                 {primaryCta.label}
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                 </svg>
               </a>
               {secondaryCta && (
                 <a
                   href={secondaryCta.href}
-                  {...(isExternal(secondaryCta.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white px-6 py-3.5 text-sm font-semibold text-ink transition-all hover:bg-paper-dim hover:scale-105"
                 >
                   {secondaryCta.label}
@@ -169,9 +135,7 @@ const years = RENT_VS_OWN.months / 12;
             <div class="mx-auto max-w-xl text-center">
               <h2 class="text-sm font-bold uppercase tracking-wide text-accent">Who we are</h2>
               <p class="mt-2 text-sm leading-relaxed text-ink-dim">
-                WSS DevLabs is a founder-led Malaysian software studio. Razali builds fixed-price websites, ready-made business
-                systems and custom software for SMEs, then hands over the code so you own it.{' '}
-                <a href="/about/" class="font-semibold text-ink underline hover:text-accent">Meet the founder</a>.
+                WSS DevLabs is a Malaysian software studio building fixed-price websites, buy-once business systems, and custom enterprise software for growing companies.
               </p>
             </div>
 
