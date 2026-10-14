@@ -1,0 +1,71 @@
+---
+import Container from '../ui/Container.astro';
+import VideoMedia from '../media/VideoMedia.astro';
+import { CLIPS, type ClipKey } from '../../data/media';
+
+const pillars: { title: string; body: string; href: string; clip: ClipKey }[] = [
+  {
+    title: 'Food security',
+    body: 'Farms that lose less to weather, pests and disease, and keep the records to prove it.',
+    href: '/solutions/agriculture',
+    clip: 'ricePaddy'
+  },
+  {
+    title: 'Energy transition',
+    body: 'Plants and factories that measure energy, cut waste and turn residue into power.',
+    href: '/solutions/energy-sustainability',
+    clip: 'solarSunset'
+  },
+  {
+    title: 'Liveable cities',
+    body: 'Councils and townships that see floods, traffic and faults before residents complain.',
+    href: '/solutions/smart-city',
+    clip: 'cityTraffic'
+  },
+  {
+    title: 'Productive SMEs',
+    body: 'Small teams that key in data once and learn the tools to grow.',
+    href: '/solutions/sme-digital-shift',
+    clip: 'workshop'
+  }
+];
+---
+
+<section class="relative overflow-hidden border-t border-line/60 bg-paper py-20 md:py-28">
+  <div class="pointer-events-none absolute inset-0 opacity-[0.09] mix-blend-multiply grayscale invert" aria-hidden="true">
+    <VideoMedia clip={CLIPS.worldMap} class="h-full w-full !bg-transparent" />
+  </div>
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-paper via-paper/40 to-paper" aria-hidden="true"></div>
+
+  <Container class="relative">
+    <p class="mono-label text-accent" data-scramble>Our vision</p>
+    <p
+      data-color-reveal
+      class="mt-6 max-w-5xl font-display text-[clamp(1.8rem,1.1rem+2.6vw,3.4rem)] font-bold leading-[1.12] tracking-[-0.03em]"
+    >
+      Malaysian farms, plants, cities and shops that <span data-accent>measure what they do</span>, decide with data and run on <span data-accent>technology they own</span>.
+    </p>
+
+    <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        pillars.map((pillar) => (
+          <a href={pillar.href} class="card card-lift spotlight-card group flex flex-col overflow-hidden !rounded-3xl bg-white p-0" data-hover-host>
+            <div class="relative h-40 overflow-hidden" data-clip-reveal>
+              <VideoMedia clip={CLIPS[pillar.clip]} hover class="h-full w-full" />
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="text-lg font-bold tracking-tight text-ink">{pillar.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-dim">{pillar.body}</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors group-hover:text-accent">
+                See how
+                <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </Container>
+</section>

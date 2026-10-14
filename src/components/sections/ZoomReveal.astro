@@ -1,0 +1,71 @@
+---
+import VideoMedia from '../media/VideoMedia.astro';
+import { CLIPS } from '../../data/media';
+
+// Pinned on desktop: a small video card between two oversized lines grows to
+// fill the screen as you scroll (scripts/scrollScenes.ts → initZoomReveal).
+// Without JS, on phones and for reduced motion it renders as a full-bleed
+// video panel with the copy already visible.
+---
+
+<section data-zoom-reveal data-noreveal class="relative h-[100dvh] min-h-[560px] overflow-hidden bg-paper" aria-labelledby="zoom-reveal-title">
+  <div class="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
+    <span
+      data-zoom-left
+      class="absolute right-[62%] whitespace-nowrap font-display text-[clamp(2.4rem,6.4vw,7.2rem)] font-black uppercase leading-none tracking-[-0.04em] text-ink"
+    >
+      From the field
+    </span>
+    <span
+      data-zoom-right
+      class="absolute left-[62%] whitespace-nowrap font-display text-[clamp(2.4rem,6.4vw,7.2rem)] font-black uppercase leading-none tracking-[-0.04em] text-ink"
+    >
+      to <span class="text-accent">decisions</span>
+    </span>
+  </div>
+
+  <div data-zoom-card class="absolute inset-0 overflow-hidden bg-charcoal">
+    <div data-zoom-media class="absolute inset-0">
+      <VideoMedia clip={CLIPS.worldMap} class="h-full w-full" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/45 to-charcoal/80" aria-hidden="true"></div>
+    <div class="grid-pattern absolute inset-0 opacity-[0.07] invert" aria-hidden="true"></div>
+
+    <p
+      data-zoom-label
+      class="mono-label absolute inset-x-0 top-1/2 -translate-y-1/2 text-center !text-[0.62rem] text-white/80"
+      aria-hidden="true"
+    >
+      7 sectors · 1 team
+    </p>
+
+    <div data-zoom-copy class="absolute inset-0 flex items-center justify-center px-6">
+      <div class="mx-auto max-w-4xl text-center">
+        <h2 id="zoom-reveal-title" class="h-display !text-[clamp(2.2rem,1.2rem+4vw,4.6rem)] !text-white">
+          Sensors, cameras, AI and software. <span class="badge-highlight">One team.</span>
+        </h2>
+        <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+          We design the hardware layout, write the software, train the models and stay on to support it. You deal with one company from the first site visit to the dashboard your managers open every morning.
+        </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+          <a
+            href="/solutions"
+            data-magnetic
+            class="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-ink shadow-md transition-all hover:scale-105 hover:bg-paper"
+          >
+            Explore solutions
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+          <a
+            href="/labs"
+            class="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20"
+          >
+            Watch the demos
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

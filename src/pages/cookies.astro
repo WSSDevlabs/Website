@@ -3,7 +3,7 @@ import LegalLayout from '../components/legal/LegalLayout.astro';
 import LegalSection from '../components/legal/LegalSection.astro';
 import { SITE } from '../data/site';
 
-const lastUpdated = new Date('2026-01-01');
+const lastUpdated = new Date('2026-10-14');
 
 const email = SITE.email
   ? { user: SITE.email.split('@')[0], domain: SITE.email.split('@')[1] }
@@ -77,6 +77,8 @@ const toc = [
     <ul>
       <li><strong>Web3Forms:</strong> processes contact form submissions solely to deliver your enquiry to us. Refer to their own privacy policy for details on how they handle submitted data in transit.</li>
       <li><strong>Botpress:</strong> powers the chat widget in the corner of the site. It may set its own technical cookies/local storage needed to maintain a chat session; refer to Botpress's privacy policy for details.</li>
+      <li><strong>YouTube (youtube-nocookie.com):</strong> some articles and demos embed YouTube videos. Nothing loads from YouTube until you press play. Once you do, YouTube may set its own cookies under its privacy policy.</li>
+      <li><strong>Video and image hosts:</strong> background videos stream from Mixkit's content network and some photos load from Unsplash. These requests share standard technical data (such as your IP address) with those hosts and set no cookies from us.</li>
       <li><strong>Cloudflare:</strong> our hosting and content-delivery provider, which may process standard connection-level technical data (such as IP address) as part of serving the website securely, independent of the analytics choice above.</li>
     </ul>
   </LegalSection>

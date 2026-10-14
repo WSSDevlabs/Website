@@ -35,15 +35,22 @@ export const NAV_LINKS: NavLink[] = [
 ];
 
 export const FOOTER_SOLUTIONS_LINKS: NavLink[] = [
-  { label: 'WSS Express (Fixed-Price)', href: '/express' },
-  { label: 'WSS Marketplace (Buy-Once)', href: '/marketplace' },
-  { label: 'All Services Catalog', href: '/services' }
+  { label: 'Smart Agriculture', href: '/solutions/agriculture' },
+  { label: 'Biomass & Digital Twins', href: '/solutions/biomass' },
+  { label: 'Smart City', href: '/solutions/smart-city' },
+  { label: 'Energy & Sustainability', href: '/solutions/energy-sustainability' },
+  { label: 'Waste-to-Energy', href: '/solutions/waste-to-energy' },
+  { label: 'Websites, Apps & IoT', href: '/solutions/digital-foundations' },
+  { label: 'SME Digital Shift & Training', href: '/solutions/sme-digital-shift' },
+  { label: 'Labs & Demos', href: '/labs' }
 ];
 
 export const FOOTER_COMPANY_LINKS: NavLink[] = [
-  { label: 'About Us & Builders', href: '/about' },
-  { label: 'Insights & AI-SEO', href: '/insights' },
-  { label: 'Direct FAQ', href: '/express#faq' },
+  { label: 'About Us & Vision', href: '/about' },
+  { label: 'All Services', href: '/services' },
+  { label: 'WSS Express (Fixed-Price)', href: '/express' },
+  { label: 'WSS Marketplace (Buy-Once)', href: '/marketplace' },
+  { label: 'Insights & News', href: '/insights' },
   { label: 'Contact Us', href: '/contact' }
 ];
 

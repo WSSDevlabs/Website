@@ -70,9 +70,15 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
   import { setupMotion } from '../scripts/siteMotion';
   import { setupEmailReveal } from '../scripts/emailReveal';
   import { setupBotpress } from '../scripts/botpressLoader';
+  import { setupVideoMedia } from '../scripts/videoMedia';
+  import { setupScrollScenes } from '../scripts/scrollScenes';
+  import { setupScenes } from '../components/three/mountScene';
 
   // Handles initial load + every View Transition, with teardown between pages
   setupMotion();
+  setupScrollScenes();
+  setupVideoMedia();
+  setupScenes();
   setupEmailReveal();
   setupBotpress();
 </script>

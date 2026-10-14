@@ -109,3 +109,39 @@ All technology choices are strictly performance-led:
 
 ### E. Interactive Desktop / Mobile Device Viewport Switcher
 - Live toggle switches allowing potential buyers to test systems across 100% desktop and 375px mobile phone dimensions with simulated browser chromes.
+
+---
+
+## 6. Solutions Positioning & Motion Layer (October 2026)
+
+> **Positioning:** WSS DevLabs is a **technology solutions company**, not only a website/system shop. We apply software, apps, AI, IoT, analytics and marketing to real problems in **agriculture, biomass, smart cities, energy & sustainability, waste-to-energy, digital foundations (websites/apps/basic IoT) and SME digital shift + training**. The base design system above (palette, type, red `badge-highlight`, floating glass nav, pill buttons, charcoal panels) is unchanged. This section adds patterns on top of it.
+
+### A. Information architecture additions
+- `/solutions` (sector bento) and `/solutions/[slug]` (7 sector pages, data in `src/data/sectors.ts`).
+- `/labs` (demo stage, filterable use cases, "what we are building", pilot process; data in `src/data/demos.ts`).
+- Floating nav gains two icons: **globe** (Solutions) and **beaker** (Labs). Icons stay 48px at `lg`, 40px at `md`; the "Consult with Us" pill shows from `lg`.
+
+### B. Media rules
+- **One video library:** `src/data/media.ts`. Every clip has a first-frame poster in `/public/images/posters/` (shown instantly, and the only thing reduced-motion / Save-Data visitors see).
+- **`VideoMedia.astro`** handles three modes: background (plays only while on screen), hover (desktop hover preview on cards with `data-hover-host`), and player (click-to-load; YouTube uses `youtube-nocookie.com` and loads nothing until play).
+- Stock clips (Mixkit, free licence) show the *setting*, never our system output; pages label them "Illustrative footage". Replace with real recordings by setting `footage: 'wss'` or a `youtubeId`.
+
+### C. Scroll scenes (`src/scripts/scrollScenes.ts`, GSAP ScrollTrigger)
+| Pattern | Attribute | Where | Fallback (phones / reduced motion) |
+|---|---|---|---|
+| Hero word scramble synced to the sector reel | `data-scramble-word` | Home hero | Plain text |
+| Label decode on enter | `data-scramble` | Mono labels | Plain text |
+| Zoom reveal (card between two oversized lines grows to full screen) | `data-zoom-reveal` | Home | Full-bleed video panel with copy |
+| Pinned sector scroller (list → media → panel) | `data-sector-scroller` | Home | Tabs |
+| Horizontal pan gallery | `data-hpan` | Home demos | Native swipe with scroll-snap |
+| Self-drawing rules | `data-draw-line` | Stack + pilot steps | Static line |
+| Media unmask on enter | `data-clip-reveal` | Use-case bento, cards | Static |
+- Pinned scenes are created **in page order** (see `init()`), otherwise ScrollTrigger mis-measures later pins.
+- Existing motion (`siteMotion.ts`: Lenis, split headlines, colour reveal, tilt, spotlight, magnetic) is untouched; add `data-noreveal` to pinned sections so auto-reveal doesn't fight GSAP.
+
+### D. 3D
+- `NetworkScene.tsx` (React Three Fiber): a rotating sphere of sensor nodes (paper), active nodes (signal red) and links (structural blue). Mounted lazily by `mountScene.ts` via `<div data-scene="network">`, desktop only, never for reduced motion, unmounted on page swap. Used on the dark "Sense. Connect. Understand. Act." panel, the Solutions hero and the Labs hero.
+
+### E. Content rules for this layer
+- No invented clients, results or event attendance. Use cases are written as "what we build"; event posts are analysis with cited sources, not first-person attendance claims.
+- Every new Insights post carries `sourceUrl` / `sourceLabel` and links to the matching sector page.

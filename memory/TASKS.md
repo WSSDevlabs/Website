@@ -1,9 +1,13 @@
 # TASKS
 
 ## DOING
-- (none active — see PROGRESS.md 2026-09-19 entries: fixed the real nav bug (site-intro stuck overlay, not Botpress), removed the services popup, added 4 explanatory content sections, and integrated the founder's full product catalog PDF (22 new Marketplace systems + 13 new services + a TeD grant card). Pushed through `ce170c0`.)
+- [founder review] 2026-10-14 solutions repositioning + motion layer + 10 new Insights posts is built and verified locally but **NOT committed or pushed**. Waiting for founder to review at localhost and say "push".
 
 ## TODO
+- [founder/content] Replace stock clips with real WSS recordings (wild animal detection, plant disease, digital twins, waste-to-energy, CCTV analytics): set `youtubeId` in `src/data/demos.ts` or add files to `/public/videos/` and `footage: 'wss'` in `src/data/media.ts`.
+- [dev] Consider self-hosting the Mixkit clips (currently hotlinked from assets.mixkit.co) if their CDN ever blocks hotlinking; 720p ~5-15MB each, keep under Cloudflare's 25MB file limit.
+- [founder] Confirm the sector use cases/claims match what WSS can actually deliver (e.g. Modbus/OPC UA integration, LoRaWAN, thermal cameras, BM/EN classes).
+- [cmo] Keep Insights fresh: Budget 2027 follow-ups when MDEC AI fund terms are published; IGEM 2026 post-show results; KL20 finale (5 Nov 2026).
 - [cfo] **All 22 new Marketplace systems (Smart ID, EPURS, VIMS, TAMS, etc. + Event Gallery) are priced "Custom Quote"** — the founder's source catalog PDF gave no pricing, so no numbers were invented. Get real prices (or a real quoting process) from the founder before these are sold as fixed-price like the original 6.
 - [dev] The 13 new services added from the catalog (Web Portals, Server/Cloud Solutions, Training and Teambuilding, and 10 AI Ecosystem items) have reasonable but generic `tools`/`deliverables`/`approach` content, since the source PDF only gave 1-2 sentences per item — founder should review and add real technical specifics via the CMS where it matters.
 - [uiux] Marketplace's category filter pills were removed earlier this session (before the catalog jumped from 6 to 28 systems) — worth reconsidering now that the grid is much longer; a filter/search would help usability at this scale.

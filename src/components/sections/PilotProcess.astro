@@ -1,0 +1,57 @@
+---
+import Container from '../ui/Container.astro';
+
+const steps = [
+  {
+    title: 'Site visit',
+    body: 'We walk the site with your team, check power, network and camera angles, and agree on the one problem to solve first.'
+  },
+  {
+    title: 'Pilot',
+    body: 'We install a small setup on one site, block or line and run it for a few weeks, so you judge it on your own data.'
+  },
+  {
+    title: 'Rollout',
+    body: 'If the pilot earns its keep, we scale to more sites with a fixed scope, timeline and price.'
+  },
+  {
+    title: 'Support and training',
+    body: 'We train your team, hand over documentation and stay on for support, updates and model retraining.'
+  }
+];
+---
+
+<section class="relative border-t border-line/60 bg-paper py-16 md:py-24">
+  <Container>
+    <div class="max-w-2xl">
+      <h2 class="h-section font-black tracking-tight text-ink">
+        Start small. <span class="badge-highlight">Prove it</span> on your own site.
+      </h2>
+      <p class="mt-4 text-base leading-relaxed text-ink-dim">
+        Every solution starts as a pilot. You see real data from your own operation before you commit to a full rollout.
+      </p>
+    </div>
+
+    <div class="relative mt-14">
+      <div class="absolute left-0 right-0 top-[1.6rem] hidden h-px bg-line md:block" aria-hidden="true">
+        <div data-draw-line class="h-full w-full bg-ink"></div>
+      </div>
+      <div class="absolute bottom-0 left-[1.6rem] top-0 w-px bg-line md:hidden" aria-hidden="true">
+        <div data-draw-line="y" class="h-full w-full bg-ink"></div>
+      </div>
+      <ol class="grid gap-10 md:grid-cols-4 md:gap-8">
+        {
+          steps.map((step, i) => (
+            <li class="relative pl-16 md:pl-0">
+              <span class="absolute left-0 top-0 flex h-[3.2rem] w-[3.2rem] items-center justify-center rounded-full border border-line bg-white font-feature text-lg font-semibold text-ink shadow-card md:relative">
+                {i + 1}
+              </span>
+              <h3 class="text-lg font-bold tracking-tight text-ink md:mt-6">{step.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-dim">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Container>
+</section>

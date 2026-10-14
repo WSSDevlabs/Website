@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import VideoMedia from '../components/media/VideoMedia.astro';
+import DemoStage from '../components/sections/DemoStage.astro';
+import PilotProcess from '../components/sections/PilotProcess.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import { DEMOS } from '../data/demos';
+import { SECTORS } from '../data/sectors';
+import { CLIPS } from '../data/media';
+import { SITE } from '../data/site';
+
+const sectorFilters = SECTORS.filter((s) => DEMOS.some((d) => d.sector === s.slug));
+
+const BUILDING = [
+  {
+    title: 'Edge AI cameras',
+    body: 'Detection models that run on a small box at the site, so alerts still work when the internet drops.',
+    clip: 'cctv' as const
+  },
+  {
+    title: 'LoRaWAN sensor kits',
+    body: 'Solar-powered soil, weather and water-level nodes that reach a gateway kilometres away.',
+    clip: 'cropIrrigation' as const
+  },
+  {
+    title: 'Digital twin viewer',
+    body: 'A browser-based 3D view of a site with live readings, built to run on an ordinary office laptop.',
+    clip: 'renewables3d' as const
+  }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'WSS Labs: demos and pilots',
+  description: 'Demos of AI detection, IoT monitoring and digital twins for agriculture, energy, waste-to-energy, smart cities and SMEs.',
+  hasPart: DEMOS.map((demo) => ({ '@type': 'CreativeWork', name: demo.title, description: demo.summary }))
+};
+---
+
+<BaseLayout
+  title="WSS Labs: AI, IoT and Digital Twin Demos | WSS DevLabs"
+  description="Watch the use cases WSS DevLabs builds: wild animal detection, plant disease detection, digital twins, waste-to-energy monitoring, CCTV analytics and staff training."
+  path="/labs"
+  schema={schema}
+>
+  <!-- Dark lab hero inside the light page frame -->
+  <section class="pb-6 pt-6 md:pb-10 md:pt-32" data-noreveal>
+    <Container>
+      <div class="relative isolate overflow-hidden rounded-[2.5rem] bg-charcoal px-6 py-16 text-white shadow-2xl sm:px-12 md:py-24 lg:px-16">
+        <div class="absolute inset-0 -z-10 opacity-45">
+          <VideoMedia clip={CLIPS.network} eager class="h-full w-full !bg-transparent" />
+        </div>
+        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/30" aria-hidden="true"></div>
+        <div class="grid-pattern absolute inset-0 -z-10 opacity-[0.07] invert" aria-hidden="true"></div>
+        <div data-scene="network" data-scene-props='{"radius":2.4,"count":190}' class="pointer-events-none absolute -right-[10%] top-0 -z-10 hidden h-full w-[65%] md:block" aria-hidden="true"></div>
+
+        <div class="max-w-2xl">
+          <p data-hero-item data-hero-delay="0" class="mono-label text-white/60" data-scramble>WSS Labs</p>
+          <h1 data-hero-item data-hero-delay="0.08" class="h-display mt-5 !text-[clamp(2.4rem,1.3rem+4vw,4.6rem)] !text-white">
+            Demos, pilots and <span class="badge-highlight">prototypes</span>
+          </h1>
+          <p data-hero-item data-hero-delay="0.16" class="mt-6 text-base leading-relaxed text-white/70 sm:text-lg">
+            Labs is where we show the use cases we build for farms, plants, cities and offices, and where your pilot starts.
+          </p>
+          <div data-hero-item data-hero-delay="0.24" class="mt-8 flex flex-wrap gap-4">
+            <a href="#demos" class="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-ink shadow-md transition-all hover:scale-105">
+              Watch the demos
+            </a>
+            <a href="/contact?topic=Pilot" class="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:scale-105 hover:bg-white/20">
+              Start a pilot
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <div id="demos"></div>
+  <DemoStage />
+
+  <!-- All demos with sector filter -->
+  <section class="border-t border-line/60 bg-paper py-16 md:py-24" data-demo-filter>
+    <Container>
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <h2 class="h-section font-black tracking-tight text-ink">Every <span class="badge-highlight">use case</span></h2>
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filter by sector">
+          <button type="button" data-filter="all" aria-pressed="true" class="rounded-full border border-ink bg-ink px-4 py-2 text-xs font-bold text-white transition">All</button>
+          {
+            sectorFilters.map((sector) => (
+              <button type="button" data-filter={sector.slug} aria-pressed="false" class="rounded-full border border-line bg-white px-4 py-2 text-xs font-bold text-ink transition hover:border-ink">
+                {sector.name}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          DEMOS.map((demo) => (
+            <article data-demo-card data-sector={demo.sector} class="tilt-card group overflow-hidden rounded-[1.75rem] border border-line bg-white shadow-card" data-hover-host>
+              <div class="relative aspect-video overflow-hidden bg-charcoal">
+                <VideoMedia clip={CLIPS[demo.clip]} hover class="h-full w-full" />
+                <span class="absolute left-4 top-4 rounded-full border border-white/25 bg-white/15 px-3 py-1 text-[0.68rem] font-bold text-white backdrop-blur-md">
+                  {demo.sectorName}
+                </span>
+              </div>
+              <div class="p-6">
+                <h3 class="text-base font-bold tracking-tight text-ink">{demo.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-ink-dim">{demo.summary}</p>
+                <a href={`/solutions/${demo.sector}`} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition group-hover:text-accent">
+                  {demo.sectorName} solutions
+                  <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <p class="mt-8 text-xs text-ink-dim">Clips are illustrative footage of each setting. Recordings of our own systems replace them as each pilot goes live.</p>
+    </Container>
+  </section>
+
+  <!-- On the bench -->
+  <section class="border-t border-line/60 bg-paper py-16 md:py-24">
+    <Container>
+      <div class="max-w-2xl">
+        <h2 class="h-section font-black tracking-tight text-ink">What we are <span class="badge-highlight">building</span></h2>
+        <p class="mt-4 text-base leading-relaxed text-ink-dim">Reusable pieces we develop in-house, so each new project starts further ahead.</p>
+      </div>
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          BUILDING.map((item) => (
+            <div class="group" data-hover-host>
+              <div class="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-line bg-charcoal" data-clip-reveal>
+                <VideoMedia clip={CLIPS[item.clip]} hover class="h-full w-full" />
+              </div>
+              <h3 class="mt-5 text-lg font-bold tracking-tight text-ink">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-dim">{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <PilotProcess />
+
+  <!-- Follow the builds -->
+  <section class="border-t border-line/60 bg-paper py-14 md:py-16">
+    <Container>
+      <div class="flex flex-col items-start justify-between gap-6 rounded-3xl border border-line bg-paper-dim p-8 md:flex-row md:items-center">
+        <div>
+          <h2 class="h-sub text-ink">Follow the builds</h2>
+          <p class="mt-2 max-w-xl text-sm leading-relaxed text-ink-dim">Short clips of site installs, prototypes and demos as they happen.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          {
+            SITE.social.tiktok && (
+              <a href={SITE.social.tiktok} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold text-white transition hover:scale-105">
+                TikTok
+              </a>
+            )
+          }
+          {
+            SITE.social.linkedin && (
+              <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-line bg-white px-5 py-3 text-sm font-bold text-ink transition hover:scale-105">
+                LinkedIn
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <CTABand
+    title="Bring us a problem to prototype."
+    subtitle="Describe what goes wrong on site. We reply within one business day."
+    ctaLabel="Start a pilot"
+    ctaHref="/contact?topic=Pilot"
+  />
+</BaseLayout>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initFilter() {
+    document.querySelectorAll<HTMLElement>('[data-demo-filter]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+      const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-demo-card]'));
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      buttons.forEach((button) =>
+        button.addEventListener('click', () => {
+          const filter = button.dataset.filter;
+          buttons.forEach((b) => {
+            const on = b === button;
+            b.setAttribute('aria-pressed', String(on));
+            b.classList.toggle('bg-ink', on);
+            b.classList.toggle('text-white', on);
+            b.classList.toggle('border-ink', on);
+            b.classList.toggle('bg-white', !on);
+            b.classList.toggle('text-ink', !on);
+            b.classList.toggle('border-line', !on);
+          });
+          const shown: HTMLElement[] = [];
+          cards.forEach((card) => {
+            const match = filter === 'all' || card.dataset.sector === filter;
+            card.toggleAttribute('hidden', !match);
+            if (match) shown.push(card);
+          });
+          if (!reduce) gsap.fromTo(shown, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'power3.out' });
+        })
+      );
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFilter);
+</script>

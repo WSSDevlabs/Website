@@ -1,0 +1,141 @@
+---
+import Container from '../ui/Container.astro';
+import VideoMedia from '../media/VideoMedia.astro';
+import { DEMOS, type Demo } from '../../data/demos';
+import { CLIPS } from '../../data/media';
+
+// Big stage + list of demos. Clicking a demo swaps the stage (cross-fade).
+
+type Props = { demos?: Demo[] };
+const { demos = DEMOS } = Astro.props;
+---
+
+<section class="bg-paper py-16 md:py-24" data-demo-stage>
+  <Container>
+    <div class="grid gap-8 lg:grid-cols-[1.55fr_1fr] lg:gap-10">
+      <div>
+        <div class="relative aspect-video overflow-hidden rounded-[2rem] border border-line bg-charcoal shadow-[0_30px_70px_-30px_rgba(25,25,27,0.5)]">
+          {
+            demos.map((demo, i) => (
+              <div data-stage-layer class:list={['reel-layer absolute inset-0', i === 0 && 'is-active']}>
+                <VideoMedia clip={CLIPS[demo.clip]} manual eager={i === 0} class="h-full w-full" />
+                {demo.youtubeId && (
+                  <VideoMedia
+                    clip={CLIPS[demo.clip]}
+                    mode="player"
+                    youtubeId={demo.youtubeId}
+                    title={demo.title}
+                    class="!absolute inset-0 !bg-transparent"
+                  />
+                )}
+              </div>
+            ))
+          }
+          <div class="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/45 to-transparent" aria-hidden="true"></div>
+          <span class="absolute left-5 top-5 rounded-full border border-white/25 bg-white/15 px-3 py-1 text-[0.7rem] font-bold text-white backdrop-blur-md" data-stage-sector>
+            {demos[0].sectorName}
+          </span>
+        </div>
+        {
+          demos.map((demo, i) => (
+            <div data-stage-info hidden={i !== 0} class="mt-6">
+              <h2 class="h-sub text-ink">{demo.title}</h2>
+              <p class="mt-3 max-w-2xl leading-relaxed text-ink-dim">{demo.summary}</p>
+              <ul class="mt-5 flex flex-wrap gap-2">
+                {demo.points.map((point) => (
+                  <li class="rounded-full border border-line bg-white px-3.5 py-1.5 text-xs font-semibold text-ink">{point}</li>
+                ))}
+              </ul>
+              <p class="mt-4 text-xs text-ink-dim">
+                {demo.youtubeId ? 'Press play for the full recording.' : 'Illustrative footage. A recording of our system replaces it when this pilot goes live.'}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="flex flex-col gap-2.5" role="tablist" aria-label="Demos">
+        {
+          demos.map((demo, i) => (
+            <button
+              type="button"
+              role="tab"
+              data-stage-tab
+              aria-selected={i === 0 ? 'true' : 'false'}
+              class:list={[
+                'group flex items-center gap-4 rounded-2xl border p-2.5 pr-4 text-left transition-all',
+                i === 0 ? 'border-ink bg-white shadow-card' : 'border-line bg-paper hover:border-ink/40 hover:bg-white'
+              ]}
+            >
+              <span class="relative h-16 w-24 shrink-0 overflow-hidden rounded-xl bg-charcoal">
+                <img src={CLIPS[demo.clip].poster} alt="" loading="lazy" width="192" height="128" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              </span>
+              <span class="min-w-0">
+                <span class="block text-[0.7rem] font-semibold uppercase tracking-wide text-accent">{demo.sectorName}</span>
+                <span class="mt-0.5 block text-sm font-bold leading-snug text-ink">{demo.title}</span>
+              </span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  import { canAutoplay, pauseVideo, playVideo } from '../../scripts/videoMedia';
+
+  function initStage() {
+    document.querySelectorAll<HTMLElement>('[data-demo-stage]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const layers = Array.from(root.querySelectorAll<HTMLElement>('[data-stage-layer]'));
+      const infos = Array.from(root.querySelectorAll<HTMLElement>('[data-stage-info]'));
+      const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-stage-tab]'));
+      const sector = root.querySelector<HTMLElement>('[data-stage-sector]');
+      const names = tabs.map((t) => t.querySelector('span span')?.textContent ?? '');
+      const auto = canAutoplay();
+      let current = 0;
+      let visible = false;
+
+      const sync = () =>
+        layers.forEach((layer, k) => {
+          const video = layer.querySelector<HTMLVideoElement>('[data-video="background"] video');
+          if (!video) return;
+          if (k === current && visible && auto) playVideo(video);
+          else pauseVideo(video);
+        });
+
+      const show = (i: number) => {
+        current = i;
+        layers.forEach((layer, k) => layer.classList.toggle('is-active', k === i));
+        infos.forEach((info, k) => info.toggleAttribute('hidden', k !== i));
+        tabs.forEach((tab, k) => {
+          const on = k === i;
+          tab.setAttribute('aria-selected', String(on));
+          tab.classList.toggle('border-ink', on);
+          tab.classList.toggle('bg-white', on);
+          tab.classList.toggle('shadow-card', on);
+          tab.classList.toggle('border-line', !on);
+          tab.classList.toggle('bg-paper', !on);
+        });
+        if (sector) sector.textContent = names[i];
+        sync();
+      };
+
+      tabs.forEach((tab, k) => tab.addEventListener('click', () => show(k)));
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          visible = entry.isIntersecting;
+          sync();
+        },
+        { threshold: 0.25 }
+      );
+      observer.observe(root);
+      document.addEventListener('astro:before-swap', () => observer.disconnect(), { once: true });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initStage);
+</script>

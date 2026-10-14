@@ -1,0 +1,83 @@
+---
+import type { Clip } from '../../data/media';
+
+type Props = {
+  clip: Clip;
+  /**
+   * background: muted loop that plays while on screen (or on hover with `hover`).
+   * player: poster with a play button; plays the clip with controls, or YouTube if `youtubeId` is set.
+   */
+  mode?: 'background' | 'player';
+  /** Background mode only: play on hover (desktop) instead of when scrolled into view. */
+  hover?: boolean;
+  /** Background mode only: another script decides when to play (e.g. the hero reel). */
+  manual?: boolean;
+  youtubeId?: string;
+  title?: string;
+  eager?: boolean;
+  class?: string;
+};
+
+const {
+  clip,
+  mode = 'background',
+  hover = false,
+  manual = false,
+  youtubeId,
+  title = clip.label,
+  eager = false,
+  class: className = ''
+} = Astro.props;
+---
+
+<div
+  class:list={['wss-video relative overflow-hidden bg-charcoal', className]}
+  data-video={mode}
+  data-hover={hover ? '' : undefined}
+  data-manual={manual ? '' : undefined}
+  data-youtube={youtubeId}
+  data-src={mode === 'player' ? clip.src : undefined}
+  data-title={title}
+>
+  <img
+    src={clip.poster}
+    alt={mode === 'player' ? title : ''}
+    class="absolute inset-0 h-full w-full object-cover"
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : undefined}
+    decoding="async"
+    width="1280"
+    height="720"
+  />
+  {
+    mode === 'background' && (
+      <video
+        class="absolute inset-0 h-full w-full object-cover"
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-label={clip.label}
+        data-src={clip.src}
+        data-src-mobile={clip.srcMobile}
+      />
+    )
+  }
+  {
+    mode === 'player' && (
+      <button
+        type="button"
+        class="group absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-t from-black/40 via-transparent to-transparent"
+        aria-label={`Play video: ${title}`}
+        data-video-play
+      >
+        <span class="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-ink shadow-xl backdrop-blur-md transition-transform duration-300 group-hover:scale-110 sm:h-20 sm:w-20">
+          <svg class="ml-1 h-6 w-6 sm:h-7 sm:w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l11.02-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14Z" />
+          </svg>
+        </span>
+      </button>
+    )
+  }
+  <slot />
+</div>

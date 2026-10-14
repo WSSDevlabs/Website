@@ -503,3 +503,159 @@
     }
   }
 }
+
+/* ── Video media (VideoMedia.astro + scripts/videoMedia.ts) ─────────────── */
+@layer components {
+  /* The poster <img> sits underneath; the clip fades in once it is actually playing */
+  .wss-video video {
+    opacity: 0;
+    transition: opacity 0.8s var(--ease-out-quart);
+  }
+
+  .wss-video video.is-playing {
+    opacity: 1;
+  }
+
+  /* Hero reel: stacked clips cross-fade */
+  .reel-layer {
+    opacity: 0;
+    transition: opacity 1s var(--ease-out-quart);
+  }
+
+  .reel-layer.is-active {
+    opacity: 1;
+  }
+
+  /* Hero reel progress segment: fill grows over --reel-duration */
+  .reel-seg-fill {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .reel-seg.is-done .reel-seg-fill {
+    transform: scaleX(1);
+  }
+
+  .reel-seg.is-active .reel-seg-fill {
+    animation: reel-fill var(--reel-duration, 7s) linear forwards;
+  }
+
+  .reel-paused .reel-seg.is-active .reel-seg-fill {
+    animation-play-state: paused;
+  }
+
+  @keyframes reel-fill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reel-seg.is-active .reel-seg-fill {
+      animation: none;
+      transform: scaleX(1);
+    }
+  }
+
+  /* Live "REC" pulse on demo stages */
+  @keyframes rec-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  .rec-dot {
+    animation: rec-pulse 1.6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rec-dot {
+      animation: none;
+    }
+  }
+}
+
+/* ── Scroll scenes (scripts/scrollScenes.ts) ─────────────────────────────── */
+@layer components {
+  /* 3D canvases fade in once mounted */
+  [data-scene] {
+    opacity: 0;
+    transition: opacity 1.4s var(--ease-out-quart);
+  }
+
+  [data-scene].is-ready {
+    opacity: 1;
+  }
+
+  /* Zoom reveal: words and label only show once JS takes over */
+  [data-zoom-reveal] [data-zoom-left],
+  [data-zoom-reveal] [data-zoom-right],
+  [data-zoom-reveal] [data-zoom-label] {
+    visibility: hidden;
+  }
+
+  /* Sector scroller states */
+  [data-ss-media] {
+    opacity: 0;
+    transition: opacity 0.7s var(--ease-out-quart);
+  }
+
+  [data-ss-media].is-active {
+    opacity: 1;
+  }
+
+  [data-ss-item] .ss-dot {
+    transform: scale(0.4);
+    opacity: 0;
+    transition: transform 0.4s var(--ease-spring), opacity 0.3s ease;
+  }
+
+  [data-ss-item].is-active .ss-dot {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  [data-ss-item].is-active {
+    color: var(--color-ink);
+  }
+
+  [data-ss-progress] {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  /* Horizontal pan: native scroll-snap until GSAP pins it */
+  [data-hpan-viewport] {
+    scrollbar-width: none;
+  }
+
+  [data-hpan-viewport]::-webkit-scrollbar {
+    display: none;
+  }
+
+  [data-hpan-viewport].is-panning {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  [data-hpan-progress] {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+}
+
+/* Sector scroller chips on phones and tablets: filled when active */
+@media (max-width: 1023px) {
+  [data-ss-item].is-active {
+    background-color: var(--color-ink);
+    border-color: var(--color-ink);
+    color: #ffffff;
+  }
+}

@@ -1,33 +1,66 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
+import ZoomReveal from '../components/sections/ZoomReveal.astro';
+import SectorScroller from '../components/sections/SectorScroller.astro';
+import SolutionStack from '../components/sections/SolutionStack.astro';
+import DemoGallery from '../components/sections/DemoGallery.astro';
+import VisionBand from '../components/sections/VisionBand.astro';
 import HomepageServices from '../components/sections/HomepageServices.astro';
 import PartnersMarquee from '../components/sections/PartnersMarquee.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import ElevateCTA from '../components/sections/ElevateCTA.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
+import { SECTORS } from '../data/sectors';
 
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'ProfessionalService',
   name: 'WSS DevLabs',
   url: Astro.site?.toString(),
   description:
-    'SME productized tech & custom engineering partner: WSS Express websites, Buy-Once Marketplace systems, AI development, and Bespoke Enterprise solutions.'
+    'Malaysian technology solutions company applying software, apps, AI, IoT, analytics and digital marketing to agriculture, biomass, smart cities, energy, waste-to-energy and SME digitalisation.',
+  areaServed: 'MY',
+  knowsAbout: [
+    'Artificial intelligence',
+    'Computer vision',
+    'Internet of Things',
+    'Digital twins',
+    'Smart agriculture',
+    'Biomass',
+    'Waste-to-energy',
+    'Smart city',
+    'Energy monitoring',
+    'Web and mobile app development',
+    'Digital marketing',
+    'Digital skills training'
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Solutions by sector',
+    itemListElement: SECTORS.map((sector) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: `${sector.name} solutions`, description: sector.summary }
+    }))
+  }
 };
 ---
 
 <BaseLayout
-  title="WSS DevLabs: Productized Services, Marketplace & Bespoke Engineering"
-  description="High-performance websites, Buy-Once production systems, AI automation, and custom enterprise engineering with 2026 Government Grant funding matching."
+  title="WSS DevLabs: AI, IoT and Software Solutions for Malaysian Industry"
+  description="AI, IoT, software and analytics for agriculture, biomass, smart cities, energy, waste-to-energy and SMEs in Malaysia. Designed, built, supported and taught by one team."
   path="/"
   schema={schema}
 >
   <Hero />
+  <ZoomReveal />
+  <SectorScroller />
+  <SolutionStack />
+  <DemoGallery />
+  <VisionBand />
   <HomepageServices />
   <PartnersMarquee />
   <Testimonials />
   <ElevateCTA />
   <MarketplaceAndExpressBanner />
 </BaseLayout>
-

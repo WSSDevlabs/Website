@@ -1,0 +1,182 @@
+---
+import VideoMedia from '../media/VideoMedia.astro';
+import { CLIPS, HERO_REEL } from '../../data/media';
+
+const items = HERO_REEL.map(({ sector, word, href }) => ({ sector, word, href }));
+const first = HERO_REEL[0];
+
+const chips = [
+  {
+    label: 'AI detection',
+    icon: 'M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178ZM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+    pos: '-left-8 top-12',
+    delay: '0s'
+  },
+  {
+    label: 'IoT sensors',
+    icon: 'M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0Z',
+    pos: '-right-7 top-[42%]',
+    delay: '1.2s'
+  },
+  {
+    label: 'Digital twin',
+    icon: 'm21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9',
+    pos: 'left-12 -bottom-6',
+    delay: '2.4s'
+  }
+];
+---
+
+<div class="relative" data-hero-reel data-items={JSON.stringify(items)}>
+  <div
+    class="relative mx-auto aspect-[4/3] w-full overflow-hidden rounded-3xl border border-line bg-charcoal shadow-[0_20px_60px_-15px_rgba(25,25,27,0.25)] sm:aspect-[16/11]"
+  >
+    {
+      HERO_REEL.map((item, i) => (
+        <div class:list={['reel-layer absolute inset-0', i === 0 && 'is-active']} data-reel-layer>
+          <VideoMedia clip={CLIPS[item.clip]} manual eager={i === 0} class="h-full w-full" />
+        </div>
+      ))
+    }
+
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/45 to-transparent" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/75 via-black/25 to-transparent" aria-hidden="true"></div>
+
+    <!-- Progress segments: one per sector, clickable -->
+    <div class="absolute inset-x-5 top-5 z-10 flex gap-1.5 sm:inset-x-6">
+      {
+        HERO_REEL.map((item, i) => (
+          <button
+            type="button"
+            class:list={['reel-seg relative h-1 flex-1 overflow-hidden rounded-full bg-white/30', i === 0 && 'is-active']}
+            data-reel-seg
+            aria-label={`Show ${item.sector}`}
+          >
+            <span class="reel-seg-fill absolute inset-0 rounded-full bg-white" />
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 p-5 sm:p-6">
+      <div class="min-w-0 text-left">
+        <p class="mono-label !text-[0.62rem] text-white/65">Where we work</p>
+        <p class="mt-1 truncate font-display text-xl font-bold tracking-tight text-white sm:text-2xl" data-reel-name>
+          {first.sector}
+        </p>
+      </div>
+      <a
+        href={first.href}
+        data-reel-link
+        class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/25 bg-white/15 px-4 py-2 text-xs font-bold text-white backdrop-blur-md transition hover:bg-white/25"
+      >
+        Explore
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating capability chips (desktop) -->
+  {
+    chips.map((chip) => (
+      <div
+        class:list={['glass-float-card animate-float absolute z-20 hidden items-center gap-2 !rounded-full px-3.5 py-2 lg:flex', chip.pos]}
+        style={`animation-delay:${chip.delay}`}
+        aria-hidden="true"
+      >
+        <span class="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-white">
+          <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d={chip.icon} />
+          </svg>
+        </span>
+        <span class="text-xs font-bold text-ink">{chip.label}</span>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  import { canAutoplay, pauseVideo, playVideo } from '../../scripts/videoMedia';
+
+  const DURATION = 7000;
+
+  type ReelItem = { sector: string; word: string; href: string };
+
+  function initReel() {
+    const reel = document.querySelector<HTMLElement>('[data-hero-reel]');
+    if (!reel || reel.dataset.bound) return;
+    reel.dataset.bound = '1';
+
+    const items: ReelItem[] = JSON.parse(reel.dataset.items ?? '[]');
+    const layers = Array.from(reel.querySelectorAll<HTMLElement>('[data-reel-layer]'));
+    const segs = Array.from(reel.querySelectorAll<HTMLButtonElement>('[data-reel-seg]'));
+    const nameEl = reel.querySelector<HTMLElement>('[data-reel-name]');
+    const link = reel.querySelector<HTMLAnchorElement>('[data-reel-link]');
+    const auto = canAutoplay();
+    reel.style.setProperty('--reel-duration', `${DURATION}ms`);
+
+    let index = 0;
+    let timer = 0;
+    let visible = true;
+
+    const videoAt = (i: number) => layers[i]?.querySelector('video') ?? null;
+
+    function schedule() {
+      window.clearTimeout(timer);
+      if (!auto || !visible) return;
+      timer = window.setTimeout(() => show((index + 1) % layers.length), DURATION);
+    }
+
+    function show(i: number) {
+      layers.forEach((layer, k) => {
+        layer.classList.toggle('is-active', k === i);
+        const video = videoAt(k);
+        if (!video) return;
+        if (k === i && auto && visible) playVideo(video);
+        else pauseVideo(video);
+      });
+      segs.forEach((seg, k) => {
+        seg.classList.toggle('is-done', k < i);
+        seg.classList.remove('is-active');
+      });
+      void segs[i]?.offsetWidth; // restart the fill animation
+      segs[i]?.classList.add('is-active');
+      if (nameEl) nameEl.textContent = items[i].sector;
+      if (link) link.href = items[i].href;
+      reel.dataset.currentWord = items[i].word;
+      document.dispatchEvent(new CustomEvent('wss:reel-change', { detail: items[i] }));
+      index = i;
+      schedule();
+    }
+
+    segs.forEach((seg, k) => seg.addEventListener('click', () => show(k)));
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        reel.classList.toggle('reel-paused', !visible);
+        if (visible) show(index);
+        else {
+          window.clearTimeout(timer);
+          const video = videoAt(index);
+          if (video) pauseVideo(video);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(reel);
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        window.clearTimeout(timer);
+        observer.disconnect();
+      },
+      { once: true }
+    );
+  }
+
+  document.addEventListener('astro:page-load', initReel);
+</script>

@@ -1,6 +1,7 @@
 ---
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
+import HeroReel from './HeroReel.astro';
 import type { Tone } from '../../lib/tone';
 
 type Props = {
@@ -17,8 +18,8 @@ const {
   eyebrow = 'Direct with Builders · Zero SaaS Dependency',
   eyebrowTone = 'red',
   title = 'Empowering Businesses Through Custom Tech Solutions',
-  subtitle = 'One engineering team behind everything from fixed-price websites to the custom systems running your business, built to last and fully owned by you.',
-  primaryCta = { label: 'Explore Marketplace', href: '/marketplace' },
+  subtitle = 'AI, IoT, software and analytics for agriculture, biomass, energy, smart cities and SMEs. Designed, built and supported by one Malaysian team.',
+  primaryCta = { label: 'Explore solutions', href: '/solutions' },
   secondaryCta = { label: 'Talk with us', href: 'https://wa.me/601127205895?text=Hi%20WSS%20DevLabs%2C%20I%20would%20like%20to%20discuss%20a%20project' },
   variant = 'home'
 } = Astro.props;
@@ -69,7 +70,7 @@ const stats = [
       <div class="hairline absolute inset-x-0 bottom-0" aria-hidden="true" />
     </section>
   ) : (
-    <section class="relative overflow-hidden pt-8 pb-14 md:pt-32 md:pb-20" data-noreveal>
+    <section class="relative overflow-hidden pt-8 pb-14 md:pt-40 md:pb-20" data-noreveal>
       <div
         class="absolute -top-40 right-[-10%] h-[32rem] w-[46rem] rounded-full bg-accent-blue/10 blur-3xl"
         aria-hidden="true"
@@ -85,8 +86,10 @@ const stats = [
         <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           {/* Left: Copy & CTAs */}
           <div data-hero-item data-hero-delay="0" class="text-center lg:text-left">
-            <h1 class="h-display font-black tracking-tight text-ink">
-              Empowering Businesses Through <span class="badge-highlight">Custom Tech Solutions</span>
+            <h1 class="h-display font-black tracking-tight text-ink !text-[clamp(2.4rem,1.2rem+3.9vw,4.1rem)]">
+              Applied technology for{' '}
+              <span class="sr-only">real problems in agriculture, biomass, smart cities, clean energy, waste-to-energy and SMEs</span>
+              <span class="badge-highlight" data-scramble-word aria-hidden="true">real problems</span>
             </h1>
 
             <p class="mt-5 max-w-xl text-base leading-relaxed text-ink-dim sm:text-lg lg:mx-0 mx-auto">
@@ -96,14 +99,8 @@ const stats = [
 
           {/* Right: Visual Composition + CTAs */}
           <div data-hero-item data-hero-delay="0.15" class="relative mx-auto w-full max-w-md lg:max-w-none">
-            {/* Image placeholder */}
-            <div class="relative mx-auto aspect-[4/3] sm:aspect-[16/11] w-full overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-paper-dim via-paper to-white shadow-[0_20px_60px_-15px_rgba(25,25,27,0.12)]">
-              <div class="flex h-full items-center justify-center bg-paper-dim">
-                <svg class="h-16 w-16 text-ink-dim/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3 16.5V4.5a1.5 1.5 0 0 1 1.5-1.5h15a1.5 1.5 0 0 1 1.5 1.5v15a1.5 1.5 0 0 1-1.5 1.5h-15a1.5 1.5 0 0 1-1.5-1.5Zm10.5-11.25h.008v.008h-.008V5.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                </svg>
-              </div>
-            </div>
+            {/* Sector reel: one clip per sector, cross-fading */}
+            <HeroReel />
 
             <div class="mt-6 flex flex-wrap justify-center gap-4">
               <a
@@ -135,7 +132,7 @@ const stats = [
             <div class="mx-auto max-w-xl text-center">
               <h2 class="text-sm font-bold uppercase tracking-wide text-accent">Who we are</h2>
               <p class="mt-2 text-sm leading-relaxed text-ink-dim">
-                WSS DevLabs is a Malaysian software studio building fixed-price websites, buy-once business systems, and custom enterprise software for growing companies.
+                WSS DevLabs is a Malaysian technology solutions company. We combine software, apps, AI, IoT, analytics and marketing to solve real problems on farms, in plants, across cities and inside growing businesses.
               </p>
             </div>
 

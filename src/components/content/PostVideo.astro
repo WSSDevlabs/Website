@@ -1,0 +1,37 @@
+---
+import VideoMedia from '../media/VideoMedia.astro';
+import { CLIPS, type ClipKey } from '../../data/media';
+
+// Video block for MDX posts.
+//   <PostVideo youtubeId="abc123" title="..." caption="Video: The Star" />  → click-to-load YouTube
+//   <PostVideo clip="solarSunset" caption="..." />                          → looping stock clip
+
+type Props = {
+  youtubeId?: string;
+  clip?: ClipKey;
+  title?: string;
+  caption?: string;
+};
+
+const { youtubeId, clip, title = 'Video', caption } = Astro.props;
+
+const youtubeClip = youtubeId
+  ? {
+      src: '',
+      poster: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
+      label: title,
+      footage: 'stock' as const
+    }
+  : null;
+---
+
+<figure class="not-prose my-8">
+  {
+    youtubeClip ? (
+      <VideoMedia clip={youtubeClip} mode="player" youtubeId={youtubeId} title={title} class="aspect-video w-full rounded-2xl" />
+    ) : clip ? (
+      <VideoMedia clip={CLIPS[clip]} class="aspect-video w-full rounded-2xl" />
+    ) : null
+  }
+  {caption && <figcaption class="mt-2.5 text-xs text-ink-dim">{caption}</figcaption>}
+</figure>

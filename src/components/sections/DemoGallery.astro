@@ -1,0 +1,119 @@
+---
+import Container from '../ui/Container.astro';
+import VideoMedia from '../media/VideoMedia.astro';
+import { DEMOS, type Demo } from '../../data/demos';
+import { CLIPS } from '../../data/media';
+
+// Desktop: pinned, vertical scroll pans the cards sideways (scrollScenes → initHorizontalPan).
+// Phones and reduced motion: a native swipeable row with scroll-snap.
+
+type Props = {
+  demos?: Demo[];
+  title?: string;
+  highlight?: string;
+  intro?: string;
+  showLabsLink?: boolean;
+};
+
+const {
+  demos = DEMOS,
+  title = 'See it',
+  highlight = 'working',
+  intro = 'Use cases we build across our sectors. The clips show the setting; recordings of our own systems replace them as each pilot goes live.',
+  showLabsLink = true
+} = Astro.props;
+---
+
+<section data-hpan data-noreveal class="relative overflow-hidden border-t border-line/60 bg-paper py-16 md:py-0" aria-labelledby="demo-gallery-title">
+  <div class="md:flex md:h-[100dvh] md:min-h-[640px] md:flex-col md:justify-center">
+    <Container class="mb-8 md:mb-10">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <h2 id="demo-gallery-title" class="h-section font-black tracking-tight text-ink">
+            {title} <span class="badge-highlight">{highlight}</span>
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-ink-dim">{intro}</p>
+        </div>
+        {
+          showLabsLink && (
+            <a
+              href="/labs"
+              class="inline-flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-sm font-semibold text-ink transition-all hover:scale-105 hover:bg-paper-dim"
+            >
+              All demos in Labs
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          )
+        }
+      </div>
+    </Container>
+
+    <div data-hpan-viewport class="snap-x snap-mandatory overflow-x-auto">
+      <div data-hpan-track class="flex w-max gap-5 px-6 md:gap-7 md:px-10 xl:px-[max(2.5rem,calc((100vw-80rem)/2+2.5rem))]">
+        {
+          demos.map((demo) => (
+            <article class="group w-[82vw] shrink-0 snap-start sm:w-[440px] lg:w-[500px]" data-hover-host>
+              <div class="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-line bg-charcoal shadow-[0_24px_60px_-28px_rgba(25,25,27,0.45)]">
+                <VideoMedia
+                  clip={CLIPS[demo.clip]}
+                  class="h-full w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+                {demo.youtubeId && (
+                  <VideoMedia
+                    clip={CLIPS[demo.clip]}
+                    mode="player"
+                    youtubeId={demo.youtubeId}
+                    title={demo.title}
+                    class="!absolute inset-0 !bg-transparent"
+                  />
+                )}
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/55 to-transparent" aria-hidden="true" />
+                <span class="absolute bottom-4 left-4 rounded-full border border-white/25 bg-white/15 px-3 py-1 text-[0.7rem] font-bold text-white backdrop-blur-md">
+                  {demo.sectorName}
+                </span>
+              </div>
+              <div class="mt-5 pr-4">
+                <h3 class="text-lg font-bold tracking-tight text-ink sm:text-xl">{demo.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-ink-dim">{demo.summary}</p>
+              </div>
+            </article>
+          ))
+        }
+
+        <article class="flex w-[82vw] shrink-0 snap-start sm:w-[440px] lg:w-[420px]">
+          <div class="relative flex w-full flex-col justify-between overflow-hidden rounded-[2rem] bg-charcoal p-8 text-white">
+            <div class="grid-pattern pointer-events-none absolute inset-0 opacity-[0.07] invert" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
+            <div class="relative">
+              <h3 class="font-display text-2xl font-bold leading-tight tracking-tight sm:text-3xl">Have a problem like these?</h3>
+              <p class="mt-3 text-sm leading-relaxed text-white/65">
+                Tell us what goes wrong today. We visit the site, propose a pilot and show you the data before you commit to a rollout.
+              </p>
+            </div>
+            <a
+              href="/contact"
+              data-magnetic
+              class="relative mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-ink shadow-md transition-all hover:scale-105"
+            >
+              Consult with us
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <Container class="mt-10 hidden md:block">
+      <div class="flex items-center gap-4">
+        <div class="h-px flex-1 bg-line" aria-hidden="true">
+          <div data-hpan-progress class="h-full w-full bg-ink"></div>
+        </div>
+        <span class="mono-label !text-[0.6rem] text-ink-dim">{demos.length} use cases</span>
+      </div>
+    </Container>
+  </div>
+</section>
