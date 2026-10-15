@@ -2,7 +2,7 @@
 title: "Why Mobile-First Design Isn't Optional Anymore"
 description: "Google stopped indexing most sites by their desktop version years ago. If your website was designed desktop-first and adapted down, that's a real problem, not a style preference."
 author: "WSS DevLabs"
-coverImage: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1200&h=700&q=80"
+coverImage: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["Web Development"]
 draft: false
 publishDate: 2026-07-15

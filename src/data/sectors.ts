@@ -25,7 +25,10 @@ export type Sector = {
   intro: string;
   problem: string;
   image: string;
+  /** Page hero clip (sector page only). */
   clip: ClipKey;
+  /** Home page sector-scroller clip, so the home page never repeats the sector page visuals. */
+  teaserClip: ClipKey;
   stack: Record<StackLayer, string[]>;
   useCases: SectorUseCase[];
   outcomes: string[];
@@ -59,6 +62,7 @@ export const SECTORS: Sector[] = [
       'Most farm decisions still run on memory, WhatsApp photos and a walk around the field. By the time someone spots leaf blight or a broken fence, the damage is done.',
     image: u('1592982537447-7440770cbfc9'),
     clip: 'cropIrrigation',
+    teaserClip: 'agriField',
     stack: {
       sense: [
         'Weather station: rain, wind, temperature, humidity',
@@ -88,22 +92,22 @@ export const SECTORS: Sector[] = [
       {
         title: 'Wild animal alerts',
         body: 'Cameras at the forest edge detect elephants, wild boar and monkeys and alert your team before they reach the crop.',
-        clip: 'elephants'
+        clip: 'monkey'
       },
       {
         title: 'Plant disease detection',
         body: 'A worker photographs a leaf in the app. The model names the likely disease and the treatment your agronomist approved.',
-        clip: 'greenhouse'
+        image: u('1625246333195-78d9c38ad449')
       },
       {
         title: 'Weather-led irrigation',
         body: 'A weather station and soil probes decide when to irrigate, so you stop watering before rain and stop guessing in a dry spell.',
-        clip: 'cropIrrigation'
+        clip: 'tropicalRain'
       },
       {
         title: 'Plantation digital twin',
         body: 'A live map of every block with sensor readings, tasks and harvest history, so a manager in KL sees what the mandor sees.',
-        clip: 'ricePaddy'
+        clip: 'jungleRiver'
       },
       {
         title: 'Farm management system',
@@ -163,7 +167,8 @@ export const SECTORS: Sector[] = [
     problem:
       'Empty fruit bunches, fibre, shell and wood waste arrive wet, mixed and on irregular trucks. Operators guess moisture, chase delivery notes and find problems after boiler output drops.',
     image: u('1513828583688-c52646db42da'),
-    clip: 'processingPlant',
+    clip: 'industrialSite',
+    teaserClip: 'factoryTop',
     stack: {
       sense: [
         'Weighbridge and truck-in records',
@@ -193,12 +198,12 @@ export const SECTORS: Sector[] = [
       {
         title: 'Feedstock intake and grading',
         body: 'Every truck is weighed, photographed and graded, so you pay suppliers on measured quality.',
-        clip: 'processingPlant'
+        clip: 'grainStore'
       },
       {
         title: 'Plant digital twin',
         body: 'A live model of conveyors, dryers and boiler shows where material and energy are lost, and lets you test a change before you make it.',
-        clip: 'renewables3d'
+        clip: 'plantCorridor'
       },
       {
         title: 'Pile and dryer monitoring',
@@ -208,7 +213,7 @@ export const SECTORS: Sector[] = [
       {
         title: 'Predictive maintenance',
         body: 'Vibration and current sensors on shredders and fans flag wear early, so you replace parts on your schedule.',
-        image: u('1621905252507-b35492cc74b4')
+        clip: 'machinery'
       },
       {
         title: 'Supply forecasting',
@@ -218,7 +223,7 @@ export const SECTORS: Sector[] = [
       {
         title: 'Traceability for buyers',
         body: 'Batch records from mill to shipment for buyers who ask where the biomass came from.',
-        clip: 'datacenter'
+        clip: 'cloudData'
       }
     ],
     outcomes: [
@@ -267,8 +272,9 @@ export const SECTORS: Sector[] = [
       'Cities already own thousands of cameras and street assets. We connect them, add sensors where data is missing, and give your team one dashboard for traffic, floods, parking, lighting and complaints.',
     problem:
       'Flash floods, jammed junctions and dark streets show up first as angry posts on social media. Most councils and township managers find out after residents do.',
-    image: u('1596422846543-75c6fc197f07'),
-    clip: 'cityTraffic',
+    image: u('1508062878650-88b52897f298'),
+    clip: 'cityDusk',
+    teaserClip: 'cityAvenue',
     stack: {
       sense: [
         'Existing CCTV with AI analytics',
@@ -298,27 +304,27 @@ export const SECTORS: Sector[] = [
       {
         title: 'Traffic and crowd analytics',
         body: 'Existing CCTV counts vehicles and people at junctions, markets and events. Most sites need no new cameras.',
-        clip: 'cityTraffic'
+        clip: 'rainyTraffic'
       },
       {
         title: 'Flood early warning',
         body: 'Water-level sensors in drains and rivers alert your team and residents when levels pass a set mark.',
-        image: u('1547683905-f686c993aae5')
+        clip: 'streetRain'
       },
       {
         title: 'Command centre dashboards',
         body: 'One screen for cameras, sensors, complaints and work orders, built for the operators who watch it all day.',
-        clip: 'controlRoom'
+        clip: 'securityDesk'
       },
       {
         title: 'Township digital twin',
         body: 'A 3D model of the township with live sensor, asset and complaint data on one map.',
-        image: u('1508062878650-88b52897f298')
+        clip: 'cityBuild'
       },
       {
         title: 'Smart street lighting',
         body: 'Lights report their own faults and dim when streets are empty, cutting energy bills and night-time complaints.',
-        image: u('1473341304170-971dccb5ac1e')
+        clip: 'pedestrianLight'
       },
       {
         title: 'Resident reporting app',
@@ -373,7 +379,8 @@ export const SECTORS: Sector[] = [
     problem:
       'Most businesses see one number a month: the electricity bill. You can’t cut what you can’t see by machine, by hour and by site.',
     image: u('1497435334941-8c899ee9e8e9'),
-    clip: 'solarSunset',
+    clip: 'solarRows',
+    teaserClip: 'windFarm',
     stack: {
       sense: [
         'Smart meters and current clamps per machine or floor',
@@ -403,7 +410,7 @@ export const SECTORS: Sector[] = [
       {
         title: 'Solar performance analytics',
         body: 'Compare actual solar yield with what the weather says you should get, and catch dirty panels or failed strings early.',
-        clip: 'solarSunset'
+        clip: 'solarInstall'
       },
       {
         title: 'Energy monitoring by machine',
@@ -413,12 +420,12 @@ export const SECTORS: Sector[] = [
       {
         title: 'Site digital twin',
         body: 'A model of your building or solar site with live energy, temperature and occupancy data, so you test changes before you spend.',
-        clip: 'renewables3d'
+        clip: 'solarRoof'
       },
       {
         title: 'AI load forecasting',
         body: 'Forecast tomorrow’s demand to avoid peak charges and plan battery use.',
-        image: u('1551288049-bebda4e38f71')
+        clip: 'hudGraph'
       },
       {
         title: 'Carbon and ESG reporting',
@@ -428,7 +435,7 @@ export const SECTORS: Sector[] = [
       {
         title: 'Data centre and server rooms',
         body: 'Power, cooling and temperature monitoring for server rooms, where an hour of overheating costs more than the sensors.',
-        clip: 'datacenter'
+        clip: 'serverLights'
       }
     ],
     outcomes: [
@@ -478,7 +485,8 @@ export const SECTORS: Sector[] = [
     problem:
       'Digesters and boilers drift for hours before anyone notices. Feedstock records sit on paper, and investors wait weeks for numbers that should be on a screen.',
     image: u('1611284446314-60a58ac0deb9'),
-    clip: 'powerPlant',
+    clip: 'dumpSite',
+    teaserClip: 'landfillTruck',
     stack: {
       sense: [
         'Feedstock weighing and camera grading',
@@ -508,7 +516,7 @@ export const SECTORS: Sector[] = [
       {
         title: 'POME biogas monitoring',
         body: 'Live pH, temperature and gas readings from palm oil mill effluent digesters, with alerts before a digester sours.',
-        clip: 'powerPlant'
+        clip: 'substation'
       },
       {
         title: 'AI waste sorting',
@@ -518,7 +526,7 @@ export const SECTORS: Sector[] = [
       {
         title: 'Process digital twin',
         body: 'Model the full line from tipping floor to grid meter and see where energy is lost.',
-        clip: 'renewables3d'
+        image: u('1503387762-592deb58ef4e')
       },
       {
         title: 'Feedstock logistics',
@@ -528,12 +536,12 @@ export const SECTORS: Sector[] = [
       {
         title: 'Investor reporting',
         body: 'Daily output, uptime and export figures on a dashboard investors and lenders can log in to.',
-        image: u('1551288049-bebda4e38f71')
+        clip: 'dataHud'
       },
       {
         title: 'Carbon credit evidence',
         body: 'Measured methane capture and energy export data, stored for verification.',
-        image: u('1542601906990-b4d3fb778b09')
+        clip: 'powerLines'
       }
     ],
     outcomes: [
@@ -584,6 +592,7 @@ export const SECTORS: Sector[] = [
       'Many businesses pay for a website nobody updates, an app nobody opens and a system that doesn’t talk to the others.',
     image: u('1581094794329-c8112a89af12'),
     clip: 'code',
+    teaserClip: 'circuitMachine',
     stack: {
       sense: [
         'Contact forms, bookings and orders',
@@ -610,19 +619,19 @@ export const SECTORS: Sector[] = [
       {
         title: 'Websites in days',
         body: 'Fixed-price websites through WSS Express, with speed and search built in.',
-        image: u('1497366216548-37526070297c'),
+        image: u('1563013544-824ae1b704d3'),
         href: '/express'
       },
       {
         title: 'Ready-made business systems',
         body: 'POS, inventory, HR and more from the Marketplace. Buy once and own the code.',
-        image: u('1504384308090-c894fdcc538d'),
+        clip: 'officeDocs',
         href: '/marketplace'
       },
       {
         title: 'Custom apps and systems',
         body: 'Customer and staff apps for Android, iOS and the web, built when nothing off the shelf fits.',
-        clip: 'code'
+        clip: 'phoneTyping'
       },
       {
         title: 'Basic IoT',
@@ -632,12 +641,12 @@ export const SECTORS: Sector[] = [
       {
         title: 'Cloud and servers',
         body: 'Domains, email, hosting, backups and security, set up properly and documented.',
-        clip: 'datacenter'
+        clip: 'fiberOptics'
       },
       {
         title: 'Analytics dashboards',
         body: 'Sales, stock and visitor numbers on one screen instead of three exports.',
-        image: u('1551288049-bebda4e38f71')
+        clip: 'multiScreens'
       }
     ],
     outcomes: [
@@ -687,7 +696,8 @@ export const SECTORS: Sector[] = [
     problem:
       'Most SMEs already pay for three or four systems that don’t talk to each other. Staff re-type the same data, owners wait for reports, and someone checks the CCTV only after stock goes missing.',
     image: u('1557597774-9d273605dfa9'),
-    clip: 'cctv',
+    clip: 'opsCentre',
+    teaserClip: 'brainstorm',
     stack: {
       sense: [
         'CCTV with AI detection',
@@ -715,12 +725,12 @@ export const SECTORS: Sector[] = [
       {
         title: 'CCTV with AI',
         body: 'Cameras that alert you to after-hours movement, crowding or an open till, instead of hours of footage nobody watches.',
-        clip: 'cctv'
+        clip: 'cctvFeed'
       },
       {
         title: 'Training and classes',
         body: 'Hands-on classes for owners and staff: digital basics, AI tools at work, your new systems and digital marketing.',
-        clip: 'trainingRoom'
+        clip: 'boardroom'
       },
       {
         title: 'HR, ERP and stock, connected',
@@ -730,17 +740,17 @@ export const SECTORS: Sector[] = [
       {
         title: 'Smart office IoT',
         body: 'Door access, attendance, air-con schedules and energy monitoring in one app.',
-        image: u('1558002038-1055907df827')
+        clip: 'busyOffice'
       },
       {
         title: 'Owner dashboard',
         body: 'Sales, stock, cash and attendance for every branch on your phone.',
-        image: u('1551288049-bebda4e38f71')
+        clip: 'chartsDesk'
       },
       {
         title: 'Digital marketing',
         body: 'Google Business Profile, social media and ads, run with the customer data your systems already collect.',
-        clip: 'workshop'
+        clip: 'whatsapp'
       }
     ],
     outcomes: [

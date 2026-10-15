@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
+import VisionBand from '../components/sections/VisionBand.astro';
 
 const capabilities = [
   { label: 'AI, IoT & Digital Twins', detail: 'Computer vision, sensors, gateways and live models of farms, plants and buildings.' },
@@ -140,7 +141,7 @@ const KEY_FEATURES = [
       <div class="grid gap-6 lg:grid-cols-3 lg:items-center">
         <div class="card p-8">
           <h3 class="h-sub text-ink">Our Vision</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">Malaysian farms, plants, cities and businesses that measure what they do, decide with data and run on technology they own.</p>
+          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the team Malaysian operators call when a problem lives outside the office: in the field, on the plant floor or across a city.</p>
         </div>
 
         <!-- Center founder frame: circular, placeholder until a real photo is added -->
@@ -212,6 +213,8 @@ const KEY_FEATURES = [
       </div>
     </Container>
   </section>
+
+  <VisionBand />
 
   <!-- Why choose us -->
   <section class="relative bg-paper-dim py-12 md:py-16">

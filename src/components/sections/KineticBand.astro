@@ -1,0 +1,25 @@
+---
+// Home only: two oversized rows of sector names that slide in opposite
+// directions as you scroll (scrollScenes → initKinetic). Static for reduced motion.
+const ROW_A = ['Agriculture', 'Biomass', 'Smart City', 'Energy', 'Waste-to-Energy', 'SMEs'];
+const ROW_B = ['AI vision', 'IoT sensors', 'Digital twins', 'Dashboards', 'Apps', 'Training'];
+---
+
+<section data-kinetic data-noreveal class="relative overflow-hidden border-t border-line/60 bg-paper py-14 md:py-20" aria-label="Sectors and capabilities">
+  <div data-kinetic-row class="flex w-max items-center gap-8 whitespace-nowrap font-display text-[clamp(2.6rem,7vw,7rem)] font-black uppercase leading-none tracking-[-0.04em] text-ink">
+    {[...ROW_A, ...ROW_A].map((word, i) => (
+      <>
+        <span class:list={[i % 3 === 1 && 'text-accent']}>{word}</span>
+        <span class="h-[0.22em] w-[0.22em] shrink-0 rounded-full bg-ink/20" aria-hidden="true" />
+      </>
+    ))}
+  </div>
+  <div data-kinetic-row class="mt-4 flex w-max items-center gap-8 whitespace-nowrap font-display text-[clamp(2.6rem,7vw,7rem)] font-black uppercase leading-none tracking-[-0.04em] text-transparent [-webkit-text-stroke:1.5px_var(--color-ink)]">
+    {[...ROW_B, ...ROW_B].map((word) => (
+      <>
+        <span>{word}</span>
+        <span class="h-[0.22em] w-[0.22em] shrink-0 rounded-full bg-accent/60" aria-hidden="true" />
+      </>
+    ))}
+  </div>
+</section>

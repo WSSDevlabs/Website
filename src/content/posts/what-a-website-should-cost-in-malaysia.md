@@ -2,7 +2,7 @@
 title: "What Should a Website Actually Cost in Malaysia?"
 description: "I looked at real 2026 pricing data across freelancers, small studios, and full agencies in Malaysia to figure out what a fair price actually looks like."
 author: "WSS DevLabs"
-coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&h=700&q=80"
+coverImage: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["Web Development"]
 draft: false
 publishDate: 2026-07-25

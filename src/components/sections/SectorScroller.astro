@@ -55,7 +55,7 @@ import { CLIPS } from '../../data/media';
           {
             SECTORS.map((sector, i) => (
               <div data-ss-media class:list={['absolute inset-0', i === 0 && 'is-active']}>
-                <VideoMedia clip={CLIPS[sector.clip]} manual class="h-full w-full" />
+                <VideoMedia clip={CLIPS[sector.teaserClip]} manual class="h-full w-full" />
               </div>
             ))
           }

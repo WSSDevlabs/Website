@@ -202,3 +202,12 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - **Insights:** 10 new MDX posts with sources: Budget 2027 (SMEs, green energy, agriculture, liveable cities), 2027 FiT biomass/biogas quota, IGEM 2026, MAHA 2026, KL20 2026, Visit Malaysia 2026, Johor data centres. One embeds The Star's Budget 2027 YouTube video (click-to-load).
 - **Verified:** `astro build` clean; 0 broken internal links; 375px no horizontal overflow on home, solutions, sector, labs, insights, about; pinned scenes fixed to be created in page order (they overlapped before); 3D scene confirmed rendering on the production build.
 - **Next:** founder reviews locally → "push". Then real footage swaps (TASKS.md).
+
+## 2026-10-15 — De-duplicate content and visuals, stronger scroll experience (uncommitted)
+
+- **Each section now has one home:** method panel "Sense. Connect. Understand. Act." = home only (sector pages use a renamed sector-specific version); pilot process = /labs#pilot only; demos = /labs only (home gallery replaced by a new "Problems we get called for" pan); vision band moved from home to /about; /labs no longer shows the demos twice; sector pages dropped the repeated demo + pilot sections and the image strip of other sectors (now text pills).
+- **Visuals unique:** 51 new Mixkit clips + posters; every sector has its own hero clip, home teaser clip and 6 distinct use-case visuals; blog posts no longer reuse site clips; four blog covers and twelve service photos replaced; related posts now topic-matched. Remaining repeats are intentional overview→detail (services index→category) and blog listing thumbnails.
+- **New on /solutions:** interactive capability matrix (only place it appears).
+- **Motion:** red reading-progress bar, sticky stacking cards (sector outcomes, Labs "What we are building"), scroll-driven kinetic sector/capability band on home, page wipe transition (view transitions), all off for reduced motion.
+- **Verified:** `npm run build` (astro check 0 errors), 0 broken links, 375px no overflow on 6 pages, screenshots via playwright-core + Edge (gstack browse blocked by Windows Application Control again).
+- **Next:** founder reviews, says "push".

@@ -34,14 +34,20 @@ const sectors = only ? SECTORS.filter((s) => s.slug === only) : SECTORS;
       ></div>
 
       <div class="relative">
-        <p class="mono-label text-white/55" data-scramble>How a solution comes together</p>
-        <h2 class="h-section mt-4 max-w-2xl !text-white">
-          Sense. Connect. Understand. <span class="badge-highlight">Act.</span>
-        </h2>
+        <p class="mono-label text-white/55" data-scramble>{only ? 'Inside the system' : 'How a solution comes together'}</p>
+        {only ? (
+          <h2 class="h-section mt-4 max-w-2xl !text-white">
+            What we install, connect and <span class="badge-highlight">automate</span>
+          </h2>
+        ) : (
+          <h2 class="h-section mt-4 max-w-2xl !text-white">
+            Sense. Connect. Understand. <span class="badge-highlight">Act.</span>
+          </h2>
+        )}
         <p class="mt-5 max-w-xl leading-relaxed text-white/65">
           {
             only
-              ? 'What we put in each of the four layers for this sector.'
+              ? 'The parts of this system, from the first sensor to the report on your desk.'
               : 'Every project we build follows the same four layers. Pick a sector to see what sits in each one.'
           }
         </p>

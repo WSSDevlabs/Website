@@ -60,7 +60,7 @@ export const DEMOS: Demo[] = [
       'Block history for audits and buyers',
       'Managers see the field from the office'
     ],
-    clip: 'ricePaddy'
+    clip: 'agriMorning'
   },
   {
     id: 'energy-twin',
@@ -88,7 +88,7 @@ export const DEMOS: Demo[] = [
       'Daily export and uptime report',
       'Remote access for engineers'
     ],
-    clip: 'powerPlant'
+    clip: 'furnace'
   },
   {
     id: 'traffic-counting',
@@ -102,7 +102,7 @@ export const DEMOS: Demo[] = [
       'Peak-hour and queue reports',
       'No faces stored'
     ],
-    clip: 'cityTraffic'
+    clip: 'crowdJunction'
   },
   {
     id: 'cctv-analytics',

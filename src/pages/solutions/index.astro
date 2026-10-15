@@ -2,12 +2,21 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import VideoMedia from '../../components/media/VideoMedia.astro';
-import SolutionStack from '../../components/sections/SolutionStack.astro';
-import PilotProcess from '../../components/sections/PilotProcess.astro';
 import FAQ from '../../components/sections/FAQ.astro';
 import CTABand from '../../components/sections/CTABand.astro';
 import { SECTORS } from '../../data/sectors';
 import { CLIPS } from '../../data/media';
+
+const MATRIX: { label: string; sectors: string[] }[] = [
+  { label: 'AI computer vision', sectors: ['agriculture', 'biomass', 'smart-city', 'waste-to-energy', 'sme-digital-shift'] },
+  { label: 'IoT sensors and gateways', sectors: ['agriculture', 'biomass', 'smart-city', 'energy-sustainability', 'waste-to-energy', 'digital-foundations', 'sme-digital-shift'] },
+  { label: 'Digital twins', sectors: ['agriculture', 'biomass', 'smart-city', 'energy-sustainability', 'waste-to-energy'] },
+  { label: 'Analytics and dashboards', sectors: ['agriculture', 'biomass', 'smart-city', 'energy-sustainability', 'waste-to-energy', 'digital-foundations', 'sme-digital-shift'] },
+  { label: 'Apps and business systems', sectors: ['agriculture', 'smart-city', 'digital-foundations', 'sme-digital-shift'] },
+  { label: 'PLC, ERP and HR integration', sectors: ['biomass', 'energy-sustainability', 'waste-to-energy', 'sme-digital-shift'] },
+  { label: 'Digital marketing', sectors: ['digital-foundations', 'sme-digital-shift'] },
+  { label: 'Training for your team', sectors: ['agriculture', 'biomass', 'smart-city', 'energy-sustainability', 'waste-to-energy', 'digital-foundations', 'sme-digital-shift'] }
+];
 
 // Bento: two wide, three regular, two wide (6-column grid on desktop)
 const SPANS = ['lg:col-span-3', 'lg:col-span-3', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-3', 'lg:col-span-3'];
@@ -87,7 +96,7 @@ const schema = {
 
         <div data-hero-item data-hero-delay="0.15" class="relative">
           <div class="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-line bg-charcoal shadow-[0_30px_70px_-25px_rgba(25,25,27,0.45)]">
-            <VideoMedia clip={CLIPS.network} eager class="h-full w-full opacity-70" />
+            <VideoMedia clip={CLIPS.dotsSphere} eager class="h-full w-full opacity-70" />
             <div data-scene="network" data-scene-props='{"radius":2.1,"linkOpacity":0.35}' class="absolute inset-0" aria-hidden="true"></div>
             <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent" aria-hidden="true"></div>
             <div class="absolute inset-x-0 bottom-0 grid grid-cols-3 gap-px border-t border-white/10 bg-white/10 text-white backdrop-blur-md">
@@ -115,7 +124,7 @@ const schema = {
     <Container>
       <div class="max-w-2xl">
         <h2 class="h-section font-black tracking-tight text-ink">Choose your <span class="badge-highlight">sector</span></h2>
-        <p class="mt-4 text-base leading-relaxed text-ink-dim">Hover a card to see the setting. Each page explains the problem, the system and the use cases.</p>
+        <p class="mt-4 text-base leading-relaxed text-ink-dim">Each page explains the problem, the system behind it and six use cases with footage.</p>
       </div>
 
       <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
@@ -138,7 +147,6 @@ const schema = {
                 height="800"
                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <VideoMedia clip={CLIPS[sector.clip]} hover class="!absolute inset-0 !bg-transparent [&>img]:opacity-0" />
               <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#111215]/95 via-[#111215]/55 to-transparent" aria-hidden="true" />
               <div class="relative z-10 p-6 sm:p-7">
                 <h3 class="font-display text-2xl font-bold tracking-tight text-white">{sector.name}</h3>
@@ -162,8 +170,47 @@ const schema = {
     </Container>
   </section>
 
-  <SolutionStack />
-  <PilotProcess />
+
+  <!-- Capability matrix (unique to this page) -->
+  <section class="border-t border-line/60 bg-paper py-16 md:py-24" data-matrix>
+    <Container>
+      <div class="max-w-2xl">
+        <h2 class="h-section font-black tracking-tight text-ink">One toolkit, <span class="badge-highlight">seven sectors</span></h2>
+        <p class="mt-4 text-base leading-relaxed text-ink-dim">The same capabilities, combined differently for each industry. Point at a row or a sector to trace it.</p>
+      </div>
+      <div class="mt-10 overflow-x-auto rounded-[2rem] border border-line bg-white shadow-card [scrollbar-width:thin]">
+        <table class="w-full min-w-[760px] border-collapse text-left text-sm">
+          <thead>
+            <tr>
+              <th scope="col" class="sticky left-0 z-10 bg-white px-6 py-5 text-xs font-bold uppercase tracking-wide text-ink-dim">Capability</th>
+              {SECTORS.map((sector) => (
+                <th scope="col" data-col={sector.slug} class="px-3 py-5 text-center text-xs font-bold text-ink transition-colors">
+                  <a href={`/solutions/${sector.slug}`} class="hover:text-accent">{sector.name}</a>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {MATRIX.map((row) => (
+              <tr data-row class="border-t border-line transition-colors">
+                <th scope="row" class="sticky left-0 z-10 bg-inherit px-6 py-4 font-semibold text-ink">{row.label}</th>
+                {SECTORS.map((sector) => (
+                  <td data-col={sector.slug} class="px-3 py-4 text-center transition-colors">
+                    {row.sectors.includes(sector.slug) ? (
+                      <span class="matrix-dot inline-block h-3 w-3 rounded-full bg-ink" aria-label="Yes" />
+                    ) : (
+                      <span class="inline-block h-px w-3 bg-line" aria-label="No" />
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Container>
+  </section>
+
   <FAQ title="Questions about our solutions" items={faqs} />
   <CTABand
     title="Tell us what goes wrong on site."
@@ -171,3 +218,28 @@ const schema = {
     ctaLabel="Consult with us"
   />
 </BaseLayout>
+
+<script>
+  function initMatrix() {
+    document.querySelectorAll<HTMLElement>('[data-matrix]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const cells = Array.from(root.querySelectorAll<HTMLElement>('[data-col]'));
+      const clear = () => root.querySelectorAll('.is-hot').forEach((el) => el.classList.remove('is-hot'));
+      cells.forEach((cell) =>
+        cell.addEventListener('mouseenter', () => {
+          clear();
+          root.querySelectorAll(`[data-col="${cell.dataset.col}"]`).forEach((el) => el.classList.add('is-hot'));
+        })
+      );
+      root.querySelectorAll<HTMLElement>('[data-row]').forEach((row) =>
+        row.addEventListener('mouseenter', () => row.classList.add('is-hot'))
+      );
+      root.querySelectorAll<HTMLElement>('[data-row]').forEach((row) =>
+        row.addEventListener('mouseleave', () => row.classList.remove('is-hot'))
+      );
+      root.addEventListener('mouseleave', clear);
+    });
+  }
+  document.addEventListener('astro:page-load', initMatrix);
+</script>

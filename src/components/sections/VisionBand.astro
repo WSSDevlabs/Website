@@ -8,19 +8,19 @@ const pillars: { title: string; body: string; href: string; clip: ClipKey }[] = 
     title: 'Food security',
     body: 'Farms that lose less to weather, pests and disease, and keep the records to prove it.',
     href: '/solutions/agriculture',
-    clip: 'ricePaddy'
+    clip: 'harvest'
   },
   {
     title: 'Energy transition',
     body: 'Plants and factories that measure energy, cut waste and turn residue into power.',
     href: '/solutions/energy-sustainability',
-    clip: 'solarSunset'
+    clip: 'altEnergy'
   },
   {
     title: 'Liveable cities',
     body: 'Councils and townships that see floods, traffic and faults before residents complain.',
     href: '/solutions/smart-city',
-    clip: 'cityTraffic'
+    clip: 'nightCity'
   },
   {
     title: 'Productive SMEs',
@@ -32,9 +32,7 @@ const pillars: { title: string; body: string; href: string; clip: ClipKey }[] = 
 ---
 
 <section class="relative overflow-hidden border-t border-line/60 bg-paper py-20 md:py-28">
-  <div class="pointer-events-none absolute inset-0 opacity-[0.09] mix-blend-multiply grayscale invert" aria-hidden="true">
-    <VideoMedia clip={CLIPS.worldMap} class="h-full w-full !bg-transparent" />
-  </div>
+  <div class="dot-pattern mask-fade-edges pointer-events-none absolute inset-0 opacity-60" aria-hidden="true"></div>
   <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-paper via-paper/40 to-paper" aria-hidden="true"></div>
 
   <Container class="relative">

@@ -659,3 +659,35 @@
     color: #ffffff;
   }
 }
+
+/* Capability matrix highlight (/solutions) */
+[data-matrix] tr[data-row] { background: #fff; }
+[data-matrix] tr[data-row].is-hot,
+[data-matrix] [data-col].is-hot { background: var(--color-paper-dim); }
+[data-matrix] .matrix-dot { transition: transform 0.35s var(--ease-spring), background-color 0.3s; }
+[data-matrix] tr.is-hot .matrix-dot,
+[data-matrix] td.is-hot .matrix-dot { transform: scale(1.5); background-color: var(--color-accent); }
+
+/* Page-to-page transition: old page settles back, new page wipes up */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-out 380ms var(--ease-out-quart) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-in 650ms var(--ease-out-expo) both;
+  }
+  @keyframes vt-out {
+    to {
+      opacity: 0;
+      transform: scale(0.975);
+    }
+  }
+  @keyframes vt-in {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}

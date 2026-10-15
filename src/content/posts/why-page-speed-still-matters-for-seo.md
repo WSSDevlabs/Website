@@ -2,7 +2,7 @@
 title: "Why Page Speed Still Matters for Google Rankings"
 description: "Core Web Vitals aren't new, but Google tightened the thresholds again in 2026. Here's what that actually means if you're not an SEO specialist."
 author: "WSS DevLabs"
-coverImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=700&q=80"
+coverImage: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["SEO"]
 draft: false
 publishDate: 2026-07-20

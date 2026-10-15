@@ -8,7 +8,16 @@ export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: { post, related: posts.filter((p) => p.id !== post.id).slice(0, 3) },
+    props: {
+      post,
+      // Related = most shared tags first, then newest, so each article gets its own trio
+      related: posts
+        .filter((p) => p.id !== post.id)
+        .map((p) => ({ p, score: p.data.tags.filter((t) => post.data.tags.includes(t)).length }))
+        .sort((a, b) => b.score - a.score || b.p.data.publishDate.valueOf() - a.p.data.publishDate.valueOf())
+        .slice(0, 3)
+        .map(({ p }) => p)
+    },
   }));
 }
 

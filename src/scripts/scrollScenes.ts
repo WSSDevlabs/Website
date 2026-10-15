@@ -50,6 +50,9 @@ function init() {
   mm.add(MOTION, () => {
     initDrawLines();
     initClipReveal();
+    initStackCards();
+    initKinetic();
+    initScrollProgress();
   });
 
   ScrollTrigger.sort();
@@ -350,5 +353,53 @@ function initClipReveal() {
       0
     );
     if (inner.length) tl.fromTo(inner, { scale: 1.25 }, { scale: 1, ease: 'power2.out' }, 0);
+  });
+}
+
+/* ── Stacking cards: earlier cards sink back as the next one lands ── */
+function initStackCards() {
+  document.querySelectorAll<HTMLElement>('[data-stack-cards]').forEach((stack) => {
+    const cards = Array.from(stack.querySelectorAll<HTMLElement>('[data-stack-card]'));
+    cards.forEach((card, i) => {
+      const next = cards[i + 1];
+      if (!next) return;
+      gsap.to(card, {
+        scale: 0.94 - (cards.length - i) * 0.005,
+        filter: 'brightness(0.97)',
+        transformOrigin: 'center top',
+        ease: 'none',
+        scrollTrigger: { trigger: next, start: 'top 85%', end: 'top 35%', scrub: 0.5 }
+      });
+    });
+  });
+}
+
+/* ── Kinetic type rows that slide with scroll, alternating direction ── */
+function initKinetic() {
+  document.querySelectorAll<HTMLElement>('[data-kinetic]').forEach((band) => {
+    band.querySelectorAll<HTMLElement>('[data-kinetic-row]').forEach((row, i) => {
+      const dir = i % 2 === 0 ? 1 : -1;
+      gsap.fromTo(
+        row,
+        { xPercent: dir > 0 ? -18 : 0 },
+        {
+          xPercent: dir > 0 ? 0 : -18,
+          ease: 'none',
+          scrollTrigger: { trigger: band, start: 'top bottom', end: 'bottom top', scrub: 0.4 }
+        }
+      );
+    });
+  });
+}
+
+/* ── Reading progress bar along the top of the window ── */
+function initScrollProgress() {
+  const bar = document.querySelector<HTMLElement>('[data-scroll-progress]');
+  if (!bar) return;
+  gsap.set(bar, { scaleX: 0 });
+  ScrollTrigger.create({
+    start: 0,
+    end: 'max',
+    onUpdate: (self) => gsap.set(bar, { scaleX: self.progress })
   });
 }
