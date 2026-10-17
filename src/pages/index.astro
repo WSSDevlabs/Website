@@ -81,7 +81,7 @@ const STORY: Record<string, string> = {
   <TrustedPartners />
 
   <!-- Story band: three tall photos (reference layout), dark -->
-  <section class="rounded-[2.75rem] bg-charcoal py-20 text-white md:py-28" data-tight>
+  <section class="bg-charcoal py-20 text-white md:py-28" data-tight>
     <div class="mx-auto w-full max-w-[100rem] px-4 md:px-6">
       <div class="grid items-end gap-8 md:grid-cols-[1.2fr_0.8fr] md:gap-12">
         <div>
@@ -101,12 +101,12 @@ const STORY: Record<string, string> = {
         {
           [
             { img: '/images/home/how-1.webp', pos: 'left top', alt: 'A live dashboard reading sensor values', title: 'We listen on site', body: 'We walk the farm, the plant or the shop with you, and hear what really goes wrong. Sensors then read the numbers for you, all day, without anyone checking.' },
-            { img: '/images/home/how-2.webp', pos: 'center', alt: 'A workflow that connects apps and steps automatically', title: 'We connect the dots', body: 'Orders, alerts and messages flow through automations we set up, so the boring steps happen on their own and nothing gets missed.' },
-            { img: '/images/home/how-3.webp', pos: '30% top', alt: 'A business workspace with calendar, tasks and shortcuts in one place', title: 'We help you act', body: 'Your records come together in one system with AI watching it, so you see what needs attention before it becomes a problem.' }
+            { img: '/images/home/how-2.webp', pos: 'left top', alt: 'A workflow that connects apps and steps automatically', title: 'We connect the dots', body: 'Orders, alerts and messages flow through automations we set up, so the boring steps happen on their own and nothing gets missed.' },
+            { img: '/images/home/how-3.webp', pos: 'left top', alt: 'A business workspace with calendar, tasks and shortcuts in one place', title: 'We help you act', body: 'Your records come together in one system with AI watching it, so you see what needs attention before it becomes a problem.' }
           ].map((card) => (
             <article>
-              <div class="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-white">
-                <img src={card.img} alt={card.alt} loading="lazy" width="1400" height="1000" class="h-full w-full object-cover" style={`object-position:${card.pos}`} />
+              <div class="relative aspect-[16/9] overflow-hidden rounded-[1.75rem] bg-white">
+                <img src={card.img} alt={card.alt} loading="lazy" width="1500" height="900" class="h-full w-full object-cover" style={`object-position:${card.pos}`} />
               </div>
               <h3 class="mt-5 text-lg font-bold tracking-tight">{card.title}</h3>
               <p class="mt-1.5 max-w-md text-sm leading-relaxed text-white/60">{card.body}</p>
@@ -118,7 +118,16 @@ const STORY: Record<string, string> = {
   </section>
 
   <!-- What we build: two small cards left, one large right -->
-  <section class="rounded-t-[2.75rem] bg-paper-dim py-20 md:py-28">
+  <section class="relative isolate overflow-hidden bg-paper-dim py-20 md:py-28">
+    <!-- background photo (white backdrop blends into the grey section); mirrored so the figure sits on the right, away from the heading -->
+    <img
+      src="/images/home/secbg1.webp"
+      alt=""
+      width="1000"
+      height="925"
+      loading="lazy"
+      class="pointer-events-none absolute right-0 top-0 -z-10 h-[30rem] w-auto max-w-none -scale-x-100 object-cover object-top opacity-40 mix-blend-multiply md:h-[40rem] md:opacity-100"
+    />
     <Container>
       <SectionHead
         title="AI, IoT and systems, engineered as one stack. Field-tested ideas, built to last on your site."
@@ -208,6 +217,7 @@ const STORY: Record<string, string> = {
 
   <MarketplaceAndExpressBanner />
   <CTABand
+    image="/images/home/secbg3.webp"
     title="Let's turn your problem into a plan."
     subtitle="Tell us what is slowing you down, even if you are not sure what the answer is yet. We reply within one business day, and we take it from there."
     ctaLabel="Consult with us"

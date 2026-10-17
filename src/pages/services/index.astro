@@ -351,7 +351,7 @@ const schema = {
       const activate = (card: HTMLElement) => {
         cards.forEach((c) => (c.dataset.active = c === card ? 'true' : 'false'));
       };
-      // every 4 seconds the next card opens by itself; hovering or tapping a card opens that one and restarts the 4 seconds
+      // every 2.5 seconds the next card opens by itself; hovering or tapping a card opens that one and restarts the 2.5 seconds
       const restart = () => {
         window.clearInterval(timer);
         timer = window.setInterval(() => {
@@ -359,7 +359,7 @@ const schema = {
           if (document.hidden || !desktop()) return;
           const index = cards.findIndex((c) => c.dataset.active === 'true');
           activate(cards[(index + 1) % cards.length]);
-        }, 4000);
+        }, 2500);
       };
       cards.forEach((card) => {
         card.addEventListener('mouseenter', () => {

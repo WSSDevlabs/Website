@@ -7,20 +7,42 @@ type Props = {
   subtitle?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  /** Light variant: text on the left, this picture (white backdrop) on the right */
+  image?: string;
 };
 
-const { title, subtitle, ctaLabel = 'Start a Project', ctaHref = '/contact' } = Astro.props;
+const { title, subtitle, ctaLabel = 'Start a Project', ctaHref = '/contact', image } = Astro.props;
 ---
 
 <section class="py-10 md:py-14" data-tight>
   <Container>
-    <div class="relative overflow-hidden rounded-[2.25rem] bg-charcoal px-8 py-14 text-white md:rounded-[2.75rem] md:px-16 md:py-20">
-      <div class="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/25 blur-3xl" aria-hidden="true"></div>
-      <div class="relative mx-auto max-w-2xl text-center">
-        <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-white">{title}</h2>
-        {subtitle && <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/65">{subtitle}</p>}
-        <Pill href={ctaHref} label={ctaLabel} variant="light" class="mt-9" />
-      </div>
-    </div>
+    {
+      image ? (
+        <div class="relative isolate overflow-hidden rounded-[2.25rem] bg-white md:rounded-[2.75rem]">
+          <img
+            src={image}
+            alt=""
+            width="1000"
+            height="697"
+            loading="lazy"
+            class="pointer-events-none absolute bottom-0 right-0 -z-10 h-full w-auto max-w-none object-cover object-right-bottom opacity-30 md:opacity-100"
+          />
+          <div class="relative max-w-xl px-8 py-14 md:px-16 md:py-20">
+            <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-ink">{title}</h2>
+            {subtitle && <p class="mt-5 max-w-md text-base leading-relaxed text-ink-dim">{subtitle}</p>}
+            <Pill href={ctaHref} label={ctaLabel} class="mt-9" />
+          </div>
+        </div>
+      ) : (
+        <div class="relative overflow-hidden rounded-[2.25rem] bg-charcoal px-8 py-14 text-white md:rounded-[2.75rem] md:px-16 md:py-20">
+          <div class="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/25 blur-3xl" aria-hidden="true"></div>
+          <div class="relative mx-auto max-w-2xl text-center">
+            <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-white">{title}</h2>
+            {subtitle && <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/65">{subtitle}</p>}
+            <Pill href={ctaHref} label={ctaLabel} variant="light" class="mt-9" />
+          </div>
+        </div>
+      )
+    }
   </Container>
 </section>
