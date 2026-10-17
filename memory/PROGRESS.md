@@ -211,3 +211,16 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - **Motion:** red reading-progress bar, sticky stacking cards (sector outcomes, Labs "What we are building"), scroll-driven kinetic sector/capability band on home, page wipe transition (view transitions), all off for reduced motion.
 - **Verified:** `npm run build` (astro check 0 errors), 0 broken links, 375px no overflow on 6 pages, screenshots via playwright-core + Edge (gstack browse blocked by Windows Application Control again).
 - **Next:** founder reviews, says "push".
+
+## 2026-10-17 — Page consolidation, AI/IoT/Systems positioning, section bands, CMS removed (uncommitted)
+
+- **Pages 91 -> 23 built (22 + 404):** `/solutions` is now one page with a band per sector (7 sector pages gone, anchors `/solutions#<slug>`); `/systems` (new) merges `/labs` + Marketplace: demos, 8 featured sample systems with a dialog each, "Also built" name list, pilot process. 42 marketplace detail pages + `/marketplace` + `/labs` + `/testimonials` + `/coming-soon` deleted. `marketplace.ts` data kept for the future WSS store.
+- **Insights:** 17 posts -> 6 live (the other 11 set `draft: true`, files kept). Kept: Budget 2027 SME / green energy / agriculture, biomass FiT quota, MSME grant (MADANI), website cost.
+- **Kept on purpose (hold prices/procedure):** 5 service category pages + `/services`, `/express`, 3 legal pages, `/about`, `/contact`.
+- **Redirects:** `public/_redirects` has 301s for every removed URL.
+- **Positioning:** tagline `AI, IoT and intelligent systems for Malaysian industry`; home, footer, About, Hero copy lead with AI/IoT/systems; service categories reordered AI, IoT, Systems/Web, Design/Marketing, Consulting; home trimmed (KineticBand, ProblemPan, PartnersMarquee, Testimonials removed); nav rail 8 -> 4 icons (Express/Insights live in footer, Express active under Services).
+- **Bands:** `.band-light`, `.edge-panel`, alternating `main > section.bg-paper` tint, flat cards (global.css bottom). Buttons/motion untouched.
+- **CMS removed:** `public/wss-console`, `cms-oauth-worker/` deleted. Founder still has to delete the deployed Cloudflare Worker `wss-cms-auth` and the GitHub OAuth App by hand.
+- **Docs:** `docs/TECH-STACK.md` added.
+- **Verified:** `npm run build` (astro check 0 errors), 0 broken internal links. NOT verified: visual check of new bands/pages in a browser.
+- **Next:** founder reviews locally, says "push". Open: legal pages not merged, Marketplace wording left in terms/QuoteForm, services pages not merged further.

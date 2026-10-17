@@ -6,13 +6,13 @@ import Container from '../ui/Container.astro';
 // One real-world problem per sector, in the client's own words, linking to the fix.
 
 const PROBLEMS = [
-  { quote: 'Elephants reached the crop again last night.', sector: 'Agriculture', href: '/solutions/agriculture', tone: 'dark' },
-  { quote: 'Boiler output dropped and nobody can say why.', sector: 'Biomass', href: '/solutions/biomass', tone: 'light' },
-  { quote: 'Residents posted the flood before we saw it.', sector: 'Smart City', href: '/solutions/smart-city', tone: 'accent' },
-  { quote: 'One electricity bill a month, and no idea where it goes.', sector: 'Energy & Sustainability', href: '/solutions/energy-sustainability', tone: 'light' },
-  { quote: 'The digester soured over the weekend.', sector: 'Waste-to-Energy', href: '/solutions/waste-to-energy', tone: 'dark' },
-  { quote: 'Our website still says 2019.', sector: 'Websites, Apps & IoT', href: '/solutions/digital-foundations', tone: 'light' },
-  { quote: 'Three systems, and staff still re-type every order.', sector: 'SME Digital Shift', href: '/solutions/sme-digital-shift', tone: 'accent' }
+  { quote: 'Elephants reached the crop again last night.', sector: 'Agriculture', href: '/solutions#agriculture', tone: 'dark' },
+  { quote: 'Boiler output dropped and nobody can say why.', sector: 'Biomass', href: '/solutions#biomass', tone: 'light' },
+  { quote: 'Residents posted the flood before we saw it.', sector: 'Smart City', href: '/solutions#smart-city', tone: 'accent' },
+  { quote: 'One electricity bill a month, and no idea where it goes.', sector: 'Energy & Sustainability', href: '/solutions#energy-sustainability', tone: 'light' },
+  { quote: 'The digester soured over the weekend.', sector: 'Waste-to-Energy', href: '/solutions#waste-to-energy', tone: 'dark' },
+  { quote: 'Our website still says 2019.', sector: 'Websites, Apps & IoT', href: '/solutions#digital-foundations', tone: 'light' },
+  { quote: 'Three systems, and staff still re-type every order.', sector: 'SME Digital Shift', href: '/solutions#sme-digital-shift', tone: 'accent' }
 ] as const;
 
 const TONES = {
@@ -62,7 +62,7 @@ const TONES = {
         }
         <li class="shrink-0 snap-start">
           <a
-            href="/labs"
+            href="/systems"
             class="group flex h-[22rem] w-[80vw] flex-col justify-center rounded-[2.25rem] border border-dashed border-ink/25 p-8 text-ink transition-colors hover:border-ink hover:bg-white sm:w-[360px] md:h-[26rem] md:p-10"
           >
             <p class="font-display text-2xl font-bold tracking-tight">See the fixes running</p>

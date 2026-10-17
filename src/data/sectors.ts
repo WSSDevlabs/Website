@@ -2,7 +2,7 @@ import type { ClipKey } from './media';
 import type { FaqItem } from './faq';
 
 // The sectors WSS DevLabs builds for. Each one drives a card on the home page,
-// a row on /solutions and a full page at /solutions/<slug>.
+// and a section on /solutions (anchor /solutions#<slug>).
 
 export type SectorUseCase = {
   title: string;
@@ -130,7 +130,7 @@ export const SECTORS: Sector[] = [
     related: [
       { label: 'AI & Automation services', href: '/services/artificial-intelligence-automation' },
       { label: 'IoT Solutions & Infrastructure', href: '/services/iot-solutions-infrastructure' },
-      { label: 'Ready-made systems', href: '/marketplace' }
+      { label: 'Ready-made systems', href: '/systems' }
     ],
     whyNow: {
       text: 'Budget 2027 gives the Ministry of Agriculture and Food Security RM6.92 billion, with local food production and farmer resilience as the stated priorities.',
@@ -236,7 +236,7 @@ export const SECTORS: Sector[] = [
     related: [
       { label: 'AI & Automation services', href: '/services/artificial-intelligence-automation' },
       { label: 'IoT Solutions & Infrastructure', href: '/services/iot-solutions-infrastructure' },
-      { label: 'Waste-to-energy solutions', href: '/solutions/waste-to-energy' }
+      { label: 'Waste-to-energy solutions', href: '/solutions#waste-to-energy' }
     ],
     whyNow: {
       text: 'The 2027 feed-in tariff quota, announced in September 2026, sets aside 120MW for biomass and 30MW for biogas projects in Peninsular Malaysia and Labuan.',
@@ -342,11 +342,11 @@ export const SECTORS: Sector[] = [
     related: [
       { label: 'AI & Automation services', href: '/services/artificial-intelligence-automation' },
       { label: 'IoT Solutions & Infrastructure', href: '/services/iot-solutions-infrastructure' },
-      { label: 'Energy & sustainability', href: '/solutions/energy-sustainability' }
+      { label: 'Energy & sustainability', href: '/solutions#energy-sustainability' }
     ],
     whyNow: {
       text: 'Budget 2027 puts RM100 million into Klang Valley retention ponds and river maintenance, and close to RM320 million into slopes, drains and ditches nationwide.',
-      href: '/insights/budget-2027-liveable-cities-flood-tech',
+      href: '/insights',
       linkLabel: 'Read: Budget 2027 and liveable cities'
     },
     faqs: [
@@ -448,7 +448,7 @@ export const SECTORS: Sector[] = [
     related: [
       { label: 'AI & Automation services', href: '/services/artificial-intelligence-automation' },
       { label: 'IoT Solutions & Infrastructure', href: '/services/iot-solutions-infrastructure' },
-      { label: 'Waste-to-energy solutions', href: '/solutions/waste-to-energy' }
+      { label: 'Waste-to-energy solutions', href: '/solutions#waste-to-energy' }
     ],
     whyNow: {
       text: 'Budget 2027 extends investment tax allowances of up to 100% for green technology projects and for companies buying green assets for their own use, until 31 December 2030.',
@@ -552,7 +552,7 @@ export const SECTORS: Sector[] = [
     ],
     demos: ['waste-to-energy', 'energy-twin'],
     related: [
-      { label: 'Biomass solutions', href: '/solutions/biomass' },
+      { label: 'Biomass solutions', href: '/solutions#biomass' },
       { label: 'IoT Solutions & Infrastructure', href: '/services/iot-solutions-infrastructure' },
       { label: 'AI & Automation services', href: '/services/artificial-intelligence-automation' }
     ],
@@ -626,7 +626,7 @@ export const SECTORS: Sector[] = [
         title: 'Ready-made business systems',
         body: 'POS, inventory, HR and more from the Marketplace. Buy once and own the code.',
         clip: 'officeDocs',
-        href: '/marketplace'
+        href: '/systems'
       },
       {
         title: 'Custom apps and systems',
@@ -658,7 +658,7 @@ export const SECTORS: Sector[] = [
     demos: ['cctv-analytics'],
     related: [
       { label: 'WSS Express websites', href: '/express' },
-      { label: 'The Marketplace', href: '/marketplace' },
+      { label: 'The Marketplace', href: '/systems' },
       { label: 'Web, system & app development', href: '/services/web-software-app-development' }
     ],
     whyNow: {
@@ -763,7 +763,7 @@ export const SECTORS: Sector[] = [
     related: [
       { label: 'Digital consulting & solutions', href: '/services/digital-consulting-solutions' },
       { label: 'Digital design & media marketing', href: '/services/digital-design-media-marketing' },
-      { label: 'Ready-made systems', href: '/marketplace' }
+      { label: 'Ready-made systems', href: '/systems' }
     ],
     whyNow: {
       text: 'Budget 2027 includes an RM30 million MDEC fund to help 4,000 MSMEs adopt AI and automation. Application details are still to be announced.',

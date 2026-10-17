@@ -1,6 +1,6 @@
 import type { ClipKey } from './media';
 
-// Use cases shown in the demo reel (home page, /labs and sector pages).
+// Use cases shown in the demo reel (home page, /systems and sector pages).
 //
 // Each demo plays a clip from media.ts. Today those clips are stock footage of
 // the setting (labelled "illustrative footage" on the page). When a screen

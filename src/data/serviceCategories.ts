@@ -10,8 +10,24 @@ export type ServiceCategory = {
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
+    slug: 'artificial-intelligence-automation',
+    title: 'Artificial Intelligence & Automation',
+    tagline: 'Intelligence',
+    description:
+      'LLM-powered features, RAG pipelines, and workflow automation, integrated where it meaningfully improves your product or team, not as a thin wrapper.',
+    services: ['ai-development', 'custom-ml-model', 'ai-chatbot', 'ai-analytics', 'workflow-automation', 'computer-vision']
+  },
+  {
+    slug: 'iot-solutions-infrastructure',
+    title: 'IoT Solutions & Infrastructure',
+    tagline: 'Connect',
+    description:
+      'Connected devices, sensor networks, and the infrastructure to collect, monitor, and act on real-world data alongside your software.',
+    services: ['iot-development']
+  },
+  {
     slug: 'web-software-app-development',
-    title: 'Web, System & Mobile App Development',
+    title: 'Systems, Web & Mobile App Development',
     tagline: 'Build',
     description:
       'Custom-coded websites, mobile apps, and internal systems, built from scratch around your goals instead of bent to fit a template.',
@@ -32,22 +48,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     description:
       'Growth strategy, grant-funded project support, full business launch bundles, and the ongoing care that keeps everything running after launch.',
     services: ['business-growth', 'grant-government-project-support', 'business-startup-package', 'maintenance-support']
-  },
-  {
-    slug: 'artificial-intelligence-automation',
-    title: 'Artificial Intelligence & Automation',
-    tagline: 'Intelligence',
-    description:
-      'LLM-powered features, RAG pipelines, and workflow automation, integrated where it meaningfully improves your product or team, not as a thin wrapper.',
-    services: ['ai-development', 'custom-ml-model', 'ai-chatbot', 'ai-analytics', 'workflow-automation', 'computer-vision']
-  },
-  {
-    slug: 'iot-solutions-infrastructure',
-    title: 'IoT Solutions & Infrastructure',
-    tagline: 'Connect',
-    description:
-      'Connected devices, sensor networks, and the infrastructure to collect, monitor, and act on real-world data alongside your software.',
-    services: ['iot-development']
   }
 ];
 

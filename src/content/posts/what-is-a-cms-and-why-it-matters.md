@@ -4,7 +4,7 @@ description: "A content management system sounds like a technical detail you can
 author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["Web Development"]
-draft: false
+draft: true
 publishDate: 2026-06-28
 sourceUrl: "https://developer.mozilla.org/en-US/docs/Glossary/CMS"
 sourceLabel: "MDN Web Docs: Content Management System (CMS)"

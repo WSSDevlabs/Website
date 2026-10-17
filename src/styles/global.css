@@ -691,3 +691,36 @@
     }
   }
 }
+
+/* ── Section bands (2026-10-17) ───────────────────────────────
+   Full-width colour bands instead of floating cards on one page colour.
+   Sections that sit on the page colour alternate with a soft tint, and
+   cards lose their floating drop shadow (borders only). Hero and dark
+   sections are untouched because they do not use the bg-paper class. */
+.band-light {
+  background-color: var(--color-paper-dim);
+}
+
+/* Panel behind a card group that runs to both screen edges */
+.edge-panel {
+  background-color: var(--color-paper-deep);
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+}
+
+main > section.bg-paper:nth-of-type(even) {
+  background-color: var(--color-paper-dim);
+}
+
+main > section.bg-paper:nth-of-type(even) .card:not(.keep-shadow) {
+  background-color: var(--color-paper);
+}
+
+main .card:not(.keep-shadow),
+main section [class*='shadow-[0_']:not(.keep-shadow) {
+  box-shadow: none;
+}
+
+main .card-lift:hover {
+  box-shadow: none;
+}

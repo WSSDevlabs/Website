@@ -109,10 +109,10 @@ export type ClipKey = keyof typeof CLIPS;
  * `word` replaces the highlighted word in the hero headline while that clip plays.
  */
 export const HERO_REEL: { clip: ClipKey; sector: string; word: string; href: string }[] = [
-  { clip: 'ricePaddy', sector: 'Agriculture', word: 'agriculture', href: '/solutions/agriculture' },
-  { clip: 'processingPlant', sector: 'Biomass', word: 'biomass', href: '/solutions/biomass' },
-  { clip: 'cityTraffic', sector: 'Smart City', word: 'smart cities', href: '/solutions/smart-city' },
-  { clip: 'solarSunset', sector: 'Energy & Sustainability', word: 'clean energy', href: '/solutions/energy-sustainability' },
-  { clip: 'powerPlant', sector: 'Waste-to-Energy', word: 'waste-to-energy', href: '/solutions/waste-to-energy' },
-  { clip: 'cctv', sector: 'SME Digital Shift', word: 'SMEs', href: '/solutions/sme-digital-shift' }
+  { clip: 'ricePaddy', sector: 'Agriculture', word: 'agriculture', href: '/solutions#agriculture' },
+  { clip: 'processingPlant', sector: 'Biomass', word: 'biomass', href: '/solutions#biomass' },
+  { clip: 'cityTraffic', sector: 'Smart City', word: 'smart cities', href: '/solutions#smart-city' },
+  { clip: 'solarSunset', sector: 'Energy & Sustainability', word: 'clean energy', href: '/solutions#energy-sustainability' },
+  { clip: 'powerPlant', sector: 'Waste-to-Energy', word: 'waste-to-energy', href: '/solutions#waste-to-energy' },
+  { clip: 'cctv', sector: 'SME Digital Shift', word: 'SMEs', href: '/solutions#sme-digital-shift' }
 ];

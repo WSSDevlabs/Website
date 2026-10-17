@@ -4,7 +4,7 @@ description: "LHDN's e-Invoicing rollout has confused a lot of small business ow
 author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["Business Growth"]
-draft: false
+draft: true
 publishDate: 2026-07-05
 sourceUrl: "https://www.cleartax.com/my/en/different-phases-implementation-timelines-einvoicing-malaysia"
 sourceLabel: "ClearTax: e-Invoice Implementation Phases & Timelines in Malaysia"

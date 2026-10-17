@@ -4,7 +4,7 @@ description: "It's free, it takes twenty minutes to set up properly, and most sm
 author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["SEO"]
-draft: false
+draft: true
 publishDate: 2026-07-10
 sourceUrl: "https://localiq.com/blog/local-seo-statistics/"
 sourceLabel: "LocalIQ: Local SEO Statistics"

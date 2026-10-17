@@ -1,7 +1,8 @@
 # TASKS
 
 ## DOING
-- (none) 2026-10-14 solutions repositioning pushed as 7c1a73b. Next: post-deploy check on the live site, then real footage swaps.
+- 2026-10-17 consolidation (91 -> 23 pages) built, uncommitted; awaiting founder review + "push". Visual check of /solutions, /systems and the new band styling still to do.
+- (earlier)  2026-10-14 solutions repositioning pushed as 7c1a73b. Next: post-deploy check on the live site, then real footage swaps.
 
 ## TODO
 - [founder/content] Replace stock clips with real WSS recordings (wild animal detection, plant disease, digital twins, waste-to-energy, CCTV analytics): set `youtubeId` in `src/data/demos.ts` or add files to `/public/videos/` and `footage: 'wss'` in `src/data/media.ts`.

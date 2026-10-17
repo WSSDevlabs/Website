@@ -4,7 +4,7 @@ description: "Core Web Vitals aren't new, but Google tightened the thresholds ag
 author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["SEO"]
-draft: false
+draft: true
 publishDate: 2026-07-20
 sourceUrl: "https://developers.google.com/search/docs/appearance/core-web-vitals"
 sourceLabel: "Google Search Central: Core Web Vitals"

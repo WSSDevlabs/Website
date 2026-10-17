@@ -4,7 +4,7 @@ description: "Google stopped indexing most sites by their desktop version years 
 author: "WSS DevLabs"
 coverImage: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&h=700&q=80"
 tags: ["Web Development"]
-draft: false
+draft: true
 publishDate: 2026-07-15
 sourceUrl: "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
 sourceLabel: "Google Search Central: Mobile-First Indexing"

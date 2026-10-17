@@ -16,7 +16,6 @@ export type TeamMember = {
   skills?: string[];
 };
 
-// Editable via the CMS at /data/team.json (see /wss-console/config.yml)
 export const TEAM: TeamMember[] = (raw as { members: TeamMember[] }).members;
 
 export const getTeamMemberBySlug = (slug: string) => TEAM.find((m) => m.slug === slug);

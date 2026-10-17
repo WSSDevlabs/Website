@@ -16,7 +16,6 @@ export type Service = {
   faq: { question: string; answer: string }[];
 };
 
-// Editable via the CMS at /data/services.json (see /wss-console/config.yml)
 export const SERVICES: Service[] = (raw as { services: Service[] }).services;
 
 export const getServiceBySlug = (slug: string) => SERVICES.find((s) => s.slug === slug);

@@ -4,11 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import ZoomReveal from '../components/sections/ZoomReveal.astro';
 import SectorScroller from '../components/sections/SectorScroller.astro';
 import SolutionStack from '../components/sections/SolutionStack.astro';
-import KineticBand from '../components/sections/KineticBand.astro';
-import ProblemPan from '../components/sections/ProblemPan.astro';
 import HomepageServices from '../components/sections/HomepageServices.astro';
-import PartnersMarquee from '../components/sections/PartnersMarquee.astro';
-import Testimonials from '../components/sections/Testimonials.astro';
 import ElevateCTA from '../components/sections/ElevateCTA.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import { SECTORS } from '../data/sectors';
@@ -19,7 +15,7 @@ const schema = {
   name: 'WSS DevLabs',
   url: Astro.site?.toString(),
   description:
-    'Malaysian technology solutions company applying software, apps, AI, IoT, analytics and digital marketing to agriculture, biomass, smart cities, energy, waste-to-energy and SME digitalisation.',
+    'Malaysian AI, IoT and systems company building intelligent solutions for agriculture, biomass, smart cities, energy, waste-to-energy and SMEs. Websites, apps and digital marketing also available.',
   areaServed: 'MY',
   knowsAbout: [
     'Artificial intelligence',
@@ -47,8 +43,8 @@ const schema = {
 ---
 
 <BaseLayout
-  title="WSS DevLabs: AI, IoT and Software Solutions for Malaysian Industry"
-  description="AI, IoT, software and analytics for agriculture, biomass, smart cities, energy, waste-to-energy and SMEs in Malaysia. Designed, built, supported and taught by one team."
+  title="WSS DevLabs: AI, IoT and System Solutions for Malaysian Industry"
+  description="AI, IoT and intelligent systems for agriculture, biomass, smart cities, energy, waste-to-energy and SMEs in Malaysia. Designed, built, supported and taught by one team."
   path="/"
   schema={schema}
 >
@@ -56,11 +52,7 @@ const schema = {
   <ZoomReveal />
   <SectorScroller />
   <SolutionStack />
-  <KineticBand />
-  <ProblemPan />
   <HomepageServices />
-  <PartnersMarquee />
-  <Testimonials />
   <ElevateCTA />
   <MarketplaceAndExpressBanner />
 </BaseLayout>

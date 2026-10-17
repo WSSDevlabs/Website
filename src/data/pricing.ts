@@ -16,5 +16,4 @@ export type PricingTier = {
   ctaHref: string;
 };
 
-// Editable via the CMS at /data/pricing.json (see /wss-console/config.yml)
 export const PRICING_TIERS: PricingTier[] = (raw as { tiers: PricingTier[] }).tiers;
