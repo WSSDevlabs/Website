@@ -1,23 +1,159 @@
 ---
 import Container from '../ui/Container.astro';
 import Pill from '../ui/Pill.astro';
+
+// Three banners that slide from right to left every 3 seconds (the whole card, buttons included).
+const slides = [
+  {
+    title: 'Need a website or system?',
+    body: 'Every business starts the same way: a name, a few customers, and a place people can find you. We build that foundation, from a clean website to the system running quietly behind it, with clear prices and a launch measured in days. Start simple, and grow when you are ready.',
+    bg: 'bg-tint',
+    dark: false,
+    primary: { label: 'Website packages', href: '/express' },
+    secondary: { label: 'Visit our Marketplace', href: '/marketplace' }
+  },
+  {
+    title: 'Need marketing solutions?',
+    body: 'A good business can still go unnoticed. We help the right customers find you and feel comfortable choosing you, with design, photos, video, search and ad campaigns that fit your budget. You always know what we are doing and why.',
+    bg: 'bg-paper-dim',
+    dark: false,
+    primary: { label: 'See marketing services', href: '/services/digital-design-media-marketing' },
+    secondary: { label: 'Talk to us', href: '/contact?topic=Marketing' }
+  },
+  {
+    title: 'Need automation and workforce?',
+    body: 'If your team spends hours on work a computer could do, that time can go back to your customers. We automate the repetitive tasks, then train your people to use the new tools with confidence, so the change feels like help, not extra work.',
+    bg: 'bg-charcoal-soft',
+    dark: true,
+    primary: { label: 'See automation', href: '/services/artificial-intelligence-automation' },
+    secondary: { label: 'Training for your team', href: '/solutions#training' }
+  }
+];
 ---
 
-<section class="py-6 md:py-10" data-tight>
+<section class="py-6 md:py-10" data-tight data-banner-rotator>
   <Container>
-    <div class="grid gap-8 rounded-[2.25rem] bg-tint p-8 md:grid-cols-[1.3fr_1fr] md:items-center md:p-12">
-      <div>
-        <h2 class="font-display text-[clamp(1.6rem,1.15rem+1.8vw,2.4rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
-          Need a website or marketing too?
-        </h2>
-        <p class="mt-3 max-w-xl text-sm leading-relaxed text-ink-dim">
-          Every business starts the same way: a name, a few customers, and a website people can find. We build that foundation too, with clear prices and a launch measured in days, then help the right customers discover you through design and marketing. Start simple, and grow when you are ready.
-        </p>
-      </div>
-      <div class="flex flex-wrap gap-3 md:justify-end">
-        <Pill href="/express" label="Website packages" />
-        <Pill href="/marketplace" label="Visit our Marketplace" variant="light" />
-      </div>
+    <div class="relative grid overflow-hidden rounded-[2.25rem]" aria-live="off">
+      {
+        slides.map((slide, i) => (
+          <div
+            class:list={['banner-slide col-start-1 row-start-1 grid gap-8 p-8 md:grid-cols-[1.3fr_1fr] md:items-center md:p-12', slide.bg, slide.dark && 'text-white']}
+            data-banner-slide
+            data-state={i === 0 ? 'active' : 'next'}
+            aria-hidden={i === 0 ? 'false' : 'true'}
+          >
+            <div>
+              <h2 class:list={['font-display text-[clamp(1.6rem,1.15rem+1.8vw,2.4rem)] font-semibold leading-[1.15] tracking-[-0.025em]', slide.dark ? 'text-white' : 'text-ink']}>
+                {slide.title}
+              </h2>
+              <p class:list={['mt-3 max-w-xl text-sm leading-relaxed', slide.dark ? 'text-white/65' : 'text-ink-dim']}>{slide.body}</p>
+            </div>
+            <div class="flex flex-wrap gap-3 md:justify-end">
+              <Pill href={slide.primary.href} label={slide.primary.label} variant={slide.dark ? 'light' : 'dark'} />
+              <Pill href={slide.secondary.href} label={slide.secondary.label} variant={slide.dark ? 'ghost' : 'light'} />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-4 flex justify-center gap-2" role="tablist" aria-label="Choose a banner">
+      {
+        slides.map((slide, i) => (
+          <button
+            type="button"
+            role="tab"
+            data-banner-dot
+            data-index={i}
+            aria-label={slide.title}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            class="h-2 w-2 rounded-full bg-ink/20 transition-all duration-300 aria-selected:w-6 aria-selected:bg-ink"
+          ></button>
+        ))
+      }
     </div>
   </Container>
 </section>
+
+<style is:global>
+  .banner-slide {
+    transition:
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.7s;
+  }
+  .banner-slide[data-state='active'] {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  .banner-slide[data-state='prev'] {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .banner-slide[data-state='next'] {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .banner-slide {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>
+
+<script>
+  function initBannerRotator() {
+    document.querySelectorAll<HTMLElement>('[data-banner-rotator]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-banner-slide]'));
+      const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-banner-dot]'));
+      if (slides.length < 2) return;
+      let current = 0;
+      let paused = false;
+      let timer = 0;
+
+      const show = (next: number) => {
+        if (next === current) return;
+        const leaving = slides[current];
+        const entering = slides[next];
+        slides.forEach((slide) => {
+          if (slide !== leaving && slide !== entering) slide.dataset.state = 'next';
+        });
+        // incoming card waits on the right, then slides in while the old one slides out to the left
+        entering.dataset.state = 'next';
+        void entering.offsetWidth;
+        leaving.dataset.state = 'prev';
+        entering.dataset.state = 'active';
+        slides.forEach((slide, i) => slide.setAttribute('aria-hidden', i === next ? 'false' : 'true'));
+        dots.forEach((dot, i) => dot.setAttribute('aria-selected', i === next ? 'true' : 'false'));
+        current = next;
+      };
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const start = () => {
+        window.clearInterval(timer);
+        if (reduce) return;
+        timer = window.setInterval(() => {
+          if (!document.body.contains(root)) return window.clearInterval(timer);
+          if (!paused && !document.hidden) show((current + 1) % slides.length);
+        }, 3000);
+      };
+
+      root.addEventListener('mouseenter', () => (paused = true));
+      root.addEventListener('mouseleave', () => (paused = false));
+      root.addEventListener('focusin', () => (paused = true));
+      root.addEventListener('focusout', () => (paused = false));
+      dots.forEach((dot, i) =>
+        dot.addEventListener('click', () => {
+          show(i);
+          start();
+        })
+      );
+      start();
+    });
+  }
+  document.addEventListener('astro:page-load', initBannerRotator);
+</script>

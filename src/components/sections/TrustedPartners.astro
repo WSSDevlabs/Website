@@ -1,0 +1,35 @@
+---
+import Container from '../ui/Container.astro';
+import { TRUSTED_PARTNERS } from '../../data/trustedPartners';
+
+const slots = TRUSTED_PARTNERS.length > 0 ? TRUSTED_PARTNERS : Array.from({ length: 6 }, () => null);
+// repeat so the strip loops without a gap
+const track = [...slots, ...slots, ...slots];
+---
+
+<section class="py-16 md:py-20" data-tight>
+  <Container>
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-ink">Our trusted partner</h2>
+      <p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-dim">
+        The people and companies we build with and learn from. Good technology is never built alone.
+      </p>
+    </div>
+  </Container>
+
+  <div class="mask-fade-x marquee-pausable mt-10 overflow-hidden">
+    <div class="animate-marquee flex w-max items-center gap-5 pr-5" style="animation-duration: 40s;">
+      {
+        track.map((partner) => (
+          <div class="group flex h-24 w-52 shrink-0 items-center justify-center rounded-[1.5rem] bg-white px-7 ring-1 ring-black/5">
+            {partner ? (
+              <img src={partner.logo} alt={partner.name} loading="lazy" class="max-h-14 w-auto max-w-full object-contain opacity-70 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0" width="280" height="100" />
+            ) : (
+              <span class="h-2 w-16 rounded-full bg-ink/10" aria-hidden="true"></span>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

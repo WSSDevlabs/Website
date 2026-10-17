@@ -7,9 +7,10 @@ import Pill from '../components/ui/Pill.astro';
 import VideoMedia from '../components/media/VideoMedia.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import HomeSectors from '../components/sections/HomeSectors.astro';
+import TrustedPartners from '../components/sections/TrustedPartners.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import { CLIPS } from '../data/media';
-import { SECTORS, STACK_LAYERS } from '../data/sectors';
+import { SECTORS } from '../data/sectors';
 import { SERVICE_CATEGORIES } from '../data/serviceCategories';
 import { PILOT_STEPS } from '../data/pilot';
 
@@ -74,38 +75,48 @@ const STORY: Record<string, string> = {
         ctaLabel="Consult with us"
         ctaHref="/contact"
       />
+    </Container>
+  </section>
 
-      <div class="mt-14 grid gap-4 md:grid-cols-[1fr_1.5fr]">
-        <div class="flex flex-col justify-between rounded-[1.75rem] bg-paper-dim p-3">
-          <div class="relative min-h-[16rem] flex-1 overflow-hidden rounded-[1.25rem] bg-charcoal">
-            <VideoMedia clip={CLIPS.cropIrrigation} class="h-full w-full" />
-          </div>
-          <div class="p-5">
-            <p class="text-lg font-bold tracking-tight text-ink">Multiple sectors</p>
-            <p class="mt-1.5 text-sm leading-relaxed text-ink-dim">How technology can help these sectors, with a range of tech and solutions.</p>
-          </div>
+  <!-- Story band: three tall photos (reference layout), dark -->
+  <section class="rounded-b-[2.75rem] bg-charcoal py-20 text-white md:py-28" data-tight>
+    <Container>
+      <div class="grid items-end gap-8 md:grid-cols-[1.2fr_0.8fr] md:gap-12">
+        <div>
+          <p class="mono-label text-white/50">How we help</p>
+          <h2 class="mt-4 max-w-2xl font-display text-[clamp(2rem,1.2rem+3vw,3.8rem)] font-medium leading-[1.05] tracking-[-0.035em]">
+            Technology that makes hard days a little easier
+          </h2>
         </div>
-        <div class="flex flex-col justify-between rounded-[1.75rem] bg-tint p-3">
-          <div class="relative aspect-[16/8] overflow-hidden rounded-[1.25rem] bg-charcoal">
-            <VideoMedia clip={CLIPS.dataHud} class="h-full w-full" />
-          </div>
-          <ol class="relative grid gap-6 p-5 pt-8 sm:grid-cols-4 sm:gap-4">
-            <span class="absolute left-[calc(1.25rem+7px)] right-5 top-[calc(2rem+6px)] hidden h-[2px] bg-tint-ink/25 sm:block" aria-hidden="true"></span>
-            {
-              STACK_LAYERS.map((layer, i) => (
-                <li class="relative">
-                  <span class="relative z-10 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-tint-ink ring-4 ring-tint" aria-hidden="true"></span>
-                  <p class="mt-4 font-feature text-xs font-semibold text-tint-ink">0{i + 1}</p>
-                  <p class="mt-1 text-sm font-bold text-ink">{layer.label}</p>
-                  <p class="mt-1 text-xs leading-relaxed text-ink-dim">{layer.verb}</p>
-                </li>
-              ))
-            }
-          </ol>
+        <div class="md:ml-auto md:max-w-xs">
+          <p class="text-sm leading-relaxed text-white/65">
+            We start where the work happens, in the field, the plant or the shop. We listen, we connect what we find, and we turn it into simple tools your team can trust.
+          </p>
+          <Pill href="/resources#consult" label="See how we work" variant="light" class="mt-5" />
         </div>
+      </div>
+
+      <div class="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
+        {
+          [
+            { clip: CLIPS.cropIrrigation, title: 'We listen on site', body: 'We walk the farm, the plant or the shop with you, and hear what really goes wrong.', tone: 'grayscale' },
+            { clip: CLIPS.dataHud, title: 'We connect the dots', body: 'Sensors, cameras and records come together on one screen you can read at a glance.', tone: '' },
+            { clip: CLIPS.opsCentre, title: 'We help you act', body: 'Alerts and simple reports tell you what to do next, so problems are small when you meet them.', tone: '' }
+          ].map((card) => (
+            <article class="group">
+              <div class="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-charcoal-soft">
+                <VideoMedia clip={card.clip} class:list={['h-full w-full transition-[filter] duration-700 group-hover:!filter-none', card.tone === 'grayscale' && 'grayscale']} />
+              </div>
+              <h3 class="mt-5 text-lg font-bold tracking-tight">{card.title}</h3>
+              <p class="mt-1.5 max-w-xs text-sm leading-relaxed text-white/60">{card.body}</p>
+            </article>
+          ))
+        }
       </div>
     </Container>
   </section>
+
+  <TrustedPartners />
 
   <!-- What we build: two small cards left, one large right -->
   <section class="rounded-t-[2.75rem] bg-paper-dim py-20 md:py-28">

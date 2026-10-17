@@ -37,14 +37,7 @@ const start = Math.floor(SECTORS.length / 2);
             <h3 class="deck-title">{sector.name}</h3>
             <p class="deck-label">Description</p>
             <p class="deck-body">{sector.summary}</p>
-            <ul class="deck-chips">
-              {sector.useCases.slice(0, 3).map((useCase) => <li>{useCase.title}</li>)}
-            </ul>
-            <div class="deck-foot">
-              <span>
-                <span class="deck-label">Use cases</span>
-                <strong>{sector.useCases.length}</strong>
-              </span>
+            <div class="deck-foot deck-foot--end">
               <a href={`/solutions#${sector.slug}`} class="deck-go" aria-label={`Explore ${sector.name}`} tabindex={i === start ? 0 : -1}>
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -54,16 +47,6 @@ const start = Math.floor(SECTORS.length / 2);
           </article>
         ))
       }
-    </div>
-
-    <div class="mt-6 flex items-center justify-center gap-3">
-      <button type="button" data-deck-prev class="deck-arrow" aria-label="Previous sector">
-        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
-      </button>
-      <p class="min-w-[9rem] text-center text-sm font-semibold text-white/70" data-deck-count aria-live="polite">{start + 1} / {SECTORS.length}</p>
-      <button type="button" data-deck-next class="deck-arrow" aria-label="Next sector">
-        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-      </button>
     </div>
   </div>
 </section>
@@ -192,30 +175,14 @@ const start = Math.floor(SECTORS.length / 2);
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .deck-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin: 0.7rem 0.5rem 0;
-    padding: 0;
-    list-style: none;
-  }
-  .deck-chips li {
-    border-radius: 9999px;
-    background: rgb(18 18 20 / 0.07);
-    padding: 0.2rem 0.6rem;
-    font-size: 0.66rem;
-    font-weight: 600;
-  }
-  .deck-card[data-active='true'] .deck-chips li {
-    background: #e6edfb;
-    color: #1d3a8a;
-  }
   .deck-foot {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     margin: 0.9rem 0.5rem 0.4rem;
+  }
+  .deck-foot--end {
+    justify-content: flex-end;
   }
   .deck-foot .deck-label {
     display: block;
@@ -243,23 +210,6 @@ const start = Math.floor(SECTORS.length / 2);
     opacity: 0.55;
   }
 
-  .deck-arrow {
-    display: flex;
-    height: 2.75rem;
-    width: 2.75rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: rgb(255 255 255 / 0.1);
-    color: #fff;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .deck-arrow:hover {
-    background: #fff;
-    color: #121214;
-    transform: scale(1.06);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .deck-card,
     .deck-photo img {
@@ -275,7 +225,6 @@ const start = Math.floor(SECTORS.length / 2);
       root.dataset.bound = '1';
       const deck = root.querySelector<HTMLElement>('[data-deck]')!;
       const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-deck-card]'));
-      const count = root.querySelector<HTMLElement>('[data-deck-count]');
       let active = Math.floor(cards.length / 2);
 
       const render = () => {
@@ -286,7 +235,6 @@ const start = Math.floor(SECTORS.length / 2);
           card.dataset.active = i === active ? 'true' : 'false';
           card.querySelector<HTMLElement>('.deck-go')?.setAttribute('tabindex', i === active ? '0' : '-1');
         });
-        if (count) count.textContent = `${active + 1} / ${cards.length}`;
       };
       const go = (index: number) => {
         active = Math.max(0, Math.min(cards.length - 1, index));
@@ -301,8 +249,6 @@ const start = Math.floor(SECTORS.length / 2);
           }
         });
       });
-      root.querySelector('[data-deck-prev]')?.addEventListener('click', () => go(active - 1));
-      root.querySelector('[data-deck-next]')?.addEventListener('click', () => go(active + 1));
       deck.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') go(active - 1);
         if (event.key === 'ArrowRight') go(active + 1);

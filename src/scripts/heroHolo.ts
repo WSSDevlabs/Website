@@ -181,8 +181,6 @@ async function initHeroHolo() {
     target.y = 0;
   };
 
-  const wordmark = root.querySelector<HTMLElement>('[data-holo-wordmark]');
-
   const frame = () => {
     raf = requestAnimationFrame(frame);
     if (!visible || document.hidden) return;
@@ -197,7 +195,6 @@ async function initHeroHolo() {
     gl.uniform2f(uMouse, current.x, current.y);
     gl.uniform1f(uTime, t);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    if (wordmark) wordmark.style.transform = `translate3d(${(-current.x * 14).toFixed(2)}px, ${(-current.y * 6).toFixed(2)}px, 0)`;
   };
 
   const io = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting), { threshold: 0 });
@@ -217,7 +214,6 @@ async function initHeroHolo() {
     window.removeEventListener('resize', resize);
     root.removeEventListener('pointermove', onMove);
     root.removeEventListener('pointerleave', onLeave);
-    if (wordmark) wordmark.style.transform = '';
     gl.getExtension('WEBGL_lose_context')?.loseContext();
   };
 }

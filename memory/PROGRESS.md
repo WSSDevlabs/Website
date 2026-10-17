@@ -242,3 +242,10 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - Solutions: one-page layout, labels/stat panel/pills/outcome ticks removed. About: longer founding story, vision card text rewritten, "Why our clients" and checklist removed. Contact: heading only; Leaflet map no longer overlaps the fixed nav.
 - Darkest band colour (`bg-charcoal`) now used on home pilot, resources documentation, one solutions sector and about process.
 - Verified: build 0 errors, 24 pages, 0 broken links, no overflow at 375px.
+
+## 2026-10-17 (night) — Home hero redesign + 3D hologram + sector deck (uncommitted)
+
+- Hero: founder's `WebsiteImage/HeroBgPlain.jpg` (optimised to `public/images/hero/hero-bg.jpg`), headline left, short text + CTA right, giant "WSS DevLabs" wordmark. A WebGL depth layer (`src/scripts/heroHolo.ts`, depth map from `scripts/make-hero-depth.mjs`) makes the robot shift in pseudo-3D with the mouse, with red rim light, scan sweep and scanlines; touch screens get a slow sway; reduced-motion keeps the plain photo.
+- `src/scripts/redCursor.ts`: red dot + trailing ring on the home page (fine pointer only).
+- Home sectors section is now a coverflow deck (`HomeSectors.astro`): centre card in colour, others metallic grey, click/hover/arrows/swipe/keys to select.
+- Verified in Edge: build 0 errors, 24 pages, 0 broken links, no overflow at 375px.
