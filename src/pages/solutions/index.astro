@@ -86,12 +86,11 @@ const schema = {
       return (
       <section id={sector.slug} class:list={['scroll-mt-24 rounded-t-[2.75rem] py-16 md:py-24', i > 0 && '-mt-10 pt-24 md:-mt-12 md:pt-32', tone.bg, d && 'text-white']}>
         <Container>
-          <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
-            <div class="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-charcoal" data-clip-reveal>
+          <div class:list={['grid gap-10 lg:items-center lg:gap-16', i % 2 === 0 ? 'lg:grid-cols-[0.9fr_1.1fr]' : 'lg:grid-cols-[1.1fr_0.9fr]']}>
+            <div class:list={['relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-charcoal', i % 2 === 1 && 'lg:order-2']} data-clip-reveal>
               <VideoMedia clip={CLIPS[sector.clip]} class="h-full w-full" />
-              <p class="absolute bottom-3 left-4 z-10 text-[0.68rem] text-white/70">Illustrative footage</p>
             </div>
-            <div>
+            <div class:list={[i % 2 === 1 && 'lg:order-1']}>
               <h2 class:list={['font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em]', d ? 'text-white' : 'text-ink']}>
                 {sector.titleLead} <span class="badge-highlight">{sector.titleHighlight}</span>
               </h2>

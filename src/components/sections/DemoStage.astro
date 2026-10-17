@@ -46,9 +46,7 @@ const { demos = DEMOS } = Astro.props;
                   <li class="rounded-full border border-line bg-white px-3.5 py-1.5 text-xs font-semibold text-ink">{point}</li>
                 ))}
               </ul>
-              <p class="mt-4 text-xs text-ink-dim">
-                {demo.youtubeId ? 'Press play for the full recording.' : 'Illustrative footage. A recording of our system replaces it when this pilot goes live.'}
-              </p>
+              {demo.youtubeId && <p class="mt-4 text-xs text-ink-dim">Press play for the full recording.</p>}
             </div>
           ))
         }
