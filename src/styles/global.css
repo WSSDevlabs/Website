@@ -724,3 +724,8 @@ main section [class*='shadow-[0_']:not(.keep-shadow) {
 main .card-lift:hover {
   box-shadow: none;
 }
+
+/* Roomier vertical rhythm between sections (the first section is the hero and keeps its own offset) */
+main > section:not(:first-of-type) {
+  padding-block: clamp(5rem, 3.5rem + 4.5vw, 9rem);
+}
