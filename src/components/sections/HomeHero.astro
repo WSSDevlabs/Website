@@ -1,24 +1,43 @@
 ---
-import VideoMedia from '../media/VideoMedia.astro';
 import Pill from '../ui/Pill.astro';
-import { CLIPS } from '../../data/media';
 ---
 
-<section class="relative isolate flex min-h-[100dvh] flex-col justify-end bg-charcoal text-white" data-noreveal>
-  <div class="absolute inset-0 -z-10">
-    <VideoMedia clip={CLIPS.windFarm} eager class="h-full w-full" />
-  </div>
-  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/20 to-black/35" aria-hidden="true"></div>
+<section class="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden bg-charcoal text-white" data-noreveal>
+  <img
+    src="/images/hero/hero-bg.jpg"
+    alt=""
+    width="2200"
+    height="1228"
+    fetchpriority="high"
+    class="absolute inset-0 -z-20 h-full w-full object-cover object-[47%_center] md:object-center"
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/40 to-black/70" aria-hidden="true"></div>
 
-  <div class="relative mx-auto w-full max-w-7xl px-6 pb-12 pt-48 md:px-10 md:pb-16">
-    <div class="max-w-5xl" data-hero-item data-hero-delay="0.1">
-      <h1 class="font-display text-[clamp(2.2rem,1.1rem+4vw,4.4rem)] font-bold uppercase leading-[0.98] tracking-[-0.035em] text-white">
+  <div class="relative mx-auto w-full max-w-7xl px-6 md:px-10">
+    <div class="grid items-end gap-8 pb-6 md:grid-cols-[1.1fr_0.9fr] md:gap-12 md:pb-10">
+      <h1
+        data-hero-item
+        data-hero-delay="0.05"
+        class="max-w-xl font-display text-[clamp(1.9rem,1.1rem+2.9vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-white"
+      >
         Artificial Intelligence and technology solutions for real problems
       </h1>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <Pill href="/solutions" label="Explore solutions" variant="light" />
-        <Pill href="/contact" label="Talk with us" variant="ghost" />
+
+      <div data-hero-item data-hero-delay="0.15" class="md:ml-auto md:max-w-xs">
+        <p class="text-sm leading-relaxed text-white/75">
+          Tell us what is not working. We will listen first, then build the AI and technology that actually helps.
+        </p>
+        <Pill href="/contact" label="Consult with us" variant="light" class="mt-5" />
       </div>
     </div>
+
+    <p
+      class="pointer-events-none -mx-1 select-none whitespace-nowrap pb-2 font-display text-[clamp(3.2rem,15.6vw,17rem)] font-bold leading-[0.82] tracking-[-0.05em] text-white md:pb-4"
+      aria-hidden="true"
+      data-hero-item
+      data-hero-delay="0.25"
+    >
+      WSS DevLabs
+    </p>
   </div>
 </section>
