@@ -1,0 +1,249 @@
+---
+// Three original, animated illustrations drawn in code (no stock footage):
+//  1. automatic sensor reading, 2. a workflow-automation canvas, 3. an ERP dashboard with an AI insight.
+// All numbers are illustrative.
+type Props = { kind: 'sensors' | 'workflow' | 'erp' };
+const { kind } = Astro.props;
+---
+
+{
+  kind === 'sensors' && (
+    <div class="viz viz-sensors" data-viz-sensors>
+      <div class="viz-head">
+        <span class="viz-dot"></span> Live readings
+        <span class="viz-pill">Auto</span>
+      </div>
+      <ul class="viz-list">
+        {[
+          { name: 'Soil moisture', unit: '%', base: 38, spread: 6, id: 'a' },
+          { name: 'Tank temperature', unit: '°C', base: 61, spread: 4, id: 'b' },
+          { name: 'Power draw', unit: 'kW', base: 24.5, spread: 3, id: 'c' },
+          { name: 'Water level', unit: 'm', base: 2.4, spread: 0.4, id: 'd' }
+        ].map((row) => (
+          <li class="viz-row" data-sensor data-base={row.base} data-spread={row.spread}>
+            <span class="viz-name">{row.name}</span>
+            <svg class="viz-spark" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true">
+              <polyline points="0,14 8,12 16,15 24,10 32,13 40,9 48,12 56,8 64,11 72,7 80,10" />
+            </svg>
+            <span class="viz-val"><b data-val>{row.base}</b><i>{row.unit}</i></span>
+          </li>
+        ))}
+      </ul>
+      <div class="viz-alert">
+        <span class="viz-alert-dot"></span> Moisture dropping. Irrigation scheduled for 6:00.
+      </div>
+    </div>
+  )
+}
+
+{
+  kind === 'workflow' && (
+    <div class="viz viz-flow">
+      <div class="viz-head">
+        <span class="viz-dot"></span> Workflow
+        <span class="viz-pill">Running</span>
+      </div>
+      <svg class="viz-canvas" viewBox="0 0 300 330" aria-hidden="true">
+        <defs>
+          <linearGradient id="flowline" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff5a4a" />
+            <stop offset="1" stop-color="#7c6cff" />
+          </linearGradient>
+        </defs>
+        <g class="flow-lines" fill="none" stroke="url(#flowline)" stroke-width="2" stroke-linecap="round">
+          <path d="M60 60 C 60 110, 150 90, 150 140" />
+          <path d="M240 60 C 240 110, 150 90, 150 140" />
+          <path d="M150 190 C 150 230, 80 220, 80 262" />
+          <path d="M150 190 C 150 230, 220 220, 220 262" />
+        </g>
+        <g class="flow-pulses" fill="#fff">
+          <circle r="4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M60 60 C 60 110, 150 90, 150 140" /></circle>
+          <circle r="4"><animateMotion dur="2.4s" begin="0.6s" repeatCount="indefinite" path="M240 60 C 240 110, 150 90, 150 140" /></circle>
+          <circle r="4"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M150 190 C 150 230, 80 220, 80 262" /></circle>
+          <circle r="4"><animateMotion dur="2.4s" begin="1.8s" repeatCount="indefinite" path="M150 190 C 150 230, 220 220, 220 262" /></circle>
+        </g>
+        {[
+          { x: 15, y: 30, w: 90, label: 'New order', tone: 'a' },
+          { x: 195, y: 30, w: 90, label: 'Sensor alert', tone: 'a' },
+          { x: 95, y: 140, w: 110, label: 'AI checks', tone: 'b' },
+          { x: 30, y: 262, w: 100, label: 'Update ERP', tone: 'c' },
+          { x: 170, y: 262, w: 100, label: 'Message team', tone: 'c' }
+        ].map((n) => (
+          <g class={`flow-node flow-${n.tone}`}>
+            <rect x={n.x} y={n.y} width={n.w} height="50" rx="14" />
+            <circle cx={n.x + 16} cy={n.y + 25} r="5" />
+            <text x={n.x + 28} y={n.y + 29}>{n.label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  )
+}
+
+{
+  kind === 'erp' && (
+    <div class="viz viz-erp">
+      <div class="viz-head">
+        <span class="viz-dot"></span> Business overview
+        <span class="viz-pill">AI</span>
+      </div>
+      <div class="erp-tiles">
+        <div><small>Orders today</small><b>128</b><em class="up">+12%</em></div>
+        <div><small>Stock alerts</small><b>3</b><em class="down">low</em></div>
+      </div>
+      <svg class="erp-chart" viewBox="0 0 240 90" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="erparea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7c6cff" stop-opacity="0.55" />
+            <stop offset="1" stop-color="#7c6cff" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <path d="M0 70 L24 62 L48 66 L72 48 L96 54 L120 36 L144 42 L168 24 L192 30 L216 14 L240 18 L240 90 L0 90 Z" fill="url(#erparea)" />
+        <polyline class="erp-line" points="0,70 24,62 48,66 72,48 96,54 120,36 144,42 168,24 192,30 216,14 240,18" fill="none" stroke="#a79bff" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
+      </svg>
+      <table class="erp-table">
+        <tbody>
+          <tr><td>INV-2041</td><td>Paid</td><td>RM 4,200</td></tr>
+          <tr><td>INV-2042</td><td>Due</td><td>RM 1,850</td></tr>
+          <tr><td>PO-0187</td><td>Sent</td><td>RM 9,300</td></tr>
+        </tbody>
+      </table>
+      <div class="viz-alert viz-alert--ai">
+        <span class="viz-alert-dot"></span> AI insight: reorder resin by Friday to avoid a stock-out.
+      </div>
+    </div>
+  )
+}
+
+<style is:global>
+  .viz {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.4rem;
+    color: #fff;
+    background:
+      radial-gradient(70% 50% at 20% 0%, rgb(255 90 74 / 0.22), transparent 70%),
+      radial-gradient(70% 55% at 90% 100%, rgb(124 108 255 / 0.28), transparent 70%),
+      #17181c;
+    font-size: 0.8rem;
+  }
+  .viz-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .viz-dot {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+    background: #3ddc97;
+    box-shadow: 0 0 0 0 rgb(61 220 151 / 0.6);
+    animation: viz-ping 2s infinite;
+  }
+  .viz-pill {
+    margin-left: auto;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.12);
+    padding: 0.15rem 0.6rem;
+    font-size: 0.68rem;
+  }
+  @keyframes viz-ping {
+    70% { box-shadow: 0 0 0 8px rgb(61 220 151 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(61 220 151 / 0); }
+  }
+
+  /* sensors */
+  .viz-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .viz-row {
+    display: grid;
+    grid-template-columns: 1fr 5rem auto;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 1rem;
+    background: rgb(255 255 255 / 0.07);
+    padding: 0.85rem 1rem;
+  }
+  .viz-name { color: rgb(255 255 255 / 0.7); }
+  .viz-spark { height: 1.5rem; width: 100%; }
+  .viz-spark polyline { fill: none; stroke: #ff6a5a; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .viz-val { display: inline-flex; align-items: baseline; gap: 0.2rem; min-width: 4.2rem; justify-content: flex-end; }
+  .viz-val b { font-size: 1.15rem; font-variant-numeric: tabular-nums; transition: color 0.3s; }
+  .viz-val i { font-style: normal; opacity: 0.55; font-size: 0.7rem; }
+  .viz-alert {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    border-radius: 1rem;
+    background: rgb(255 90 74 / 0.16);
+    border: 1px solid rgb(255 90 74 / 0.35);
+    padding: 0.8rem 1rem;
+    line-height: 1.4;
+  }
+  .viz-alert--ai { background: rgb(124 108 255 / 0.18); border-color: rgb(124 108 255 / 0.4); }
+  .viz-alert-dot { margin-top: 0.3rem; height: 0.5rem; width: 0.5rem; flex-shrink: 0; border-radius: 9999px; background: #ff6a5a; }
+  .viz-alert--ai .viz-alert-dot { background: #a79bff; }
+
+  /* workflow */
+  .viz-canvas { flex: 1; width: 100%; min-height: 0; }
+  .flow-lines path { stroke-dasharray: 6 6; animation: flow-dash 1.4s linear infinite; }
+  @keyframes flow-dash { to { stroke-dashoffset: -24; } }
+  .flow-node rect { fill: rgb(255 255 255 / 0.09); stroke: rgb(255 255 255 / 0.22); }
+  .flow-node text { fill: #fff; font-size: 12px; font-weight: 600; }
+  .flow-a circle { fill: #ff6a5a; }
+  .flow-b rect { fill: rgb(124 108 255 / 0.3); stroke: rgb(167 155 255 / 0.7); }
+  .flow-b circle { fill: #a79bff; }
+  .flow-c circle { fill: #3ddc97; }
+
+  /* erp */
+  .erp-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .erp-tiles div { display: grid; border-radius: 1rem; background: rgb(255 255 255 / 0.07); padding: 0.8rem 1rem; }
+  .erp-tiles small { color: rgb(255 255 255 / 0.6); }
+  .erp-tiles b { font-size: 1.7rem; line-height: 1.1; }
+  .erp-tiles em { font-style: normal; font-size: 0.72rem; }
+  .erp-tiles .up { color: #3ddc97; }
+  .erp-tiles .down { color: #ff9a8f; }
+  .erp-chart { height: 5.5rem; width: 100%; }
+  .erp-line { stroke-dasharray: 600; stroke-dashoffset: 600; animation: erp-draw 3.2s ease-out infinite alternate; }
+  @keyframes erp-draw { to { stroke-dashoffset: 0; } }
+  .erp-table { width: 100%; border-collapse: collapse; }
+  .erp-table td { padding: 0.45rem 0; border-top: 1px solid rgb(255 255 255 / 0.1); color: rgb(255 255 255 / 0.75); }
+  .erp-table td:last-child { text-align: right; color: #fff; font-variant-numeric: tabular-nums; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viz-dot, .flow-lines path, .erp-line { animation: none; }
+    .erp-line { stroke-dashoffset: 0; }
+    .flow-pulses { display: none; }
+  }
+</style>
+
+<script>
+  // Ticks the "sensor" values every couple of seconds, like a live feed.
+  function initSensorViz() {
+    document.querySelectorAll<HTMLElement>('[data-viz-sensors]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const rows = Array.from(root.querySelectorAll<HTMLElement>('[data-sensor]'));
+      const timer = window.setInterval(() => {
+        if (!document.body.contains(root)) return window.clearInterval(timer);
+        if (document.hidden) return;
+        rows.forEach((row) => {
+          const base = Number(row.dataset.base);
+          const spread = Number(row.dataset.spread);
+          const next = base + (Math.random() - 0.5) * spread;
+          const el = row.querySelector<HTMLElement>('[data-val]');
+          if (el) el.textContent = base < 5 ? next.toFixed(2) : next.toFixed(1);
+        });
+      }, 1800);
+    });
+  }
+  document.addEventListener('astro:page-load', initSensorViz);
+</script>

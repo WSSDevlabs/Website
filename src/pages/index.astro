@@ -7,6 +7,7 @@ import Pill from '../components/ui/Pill.astro';
 import VideoMedia from '../components/media/VideoMedia.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import HomeSectors from '../components/sections/HomeSectors.astro';
+import AutomationVisuals from '../components/sections/AutomationVisuals.astro';
 import TrustedPartners from '../components/sections/TrustedPartners.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import { CLIPS } from '../data/media';
@@ -78,8 +79,10 @@ const STORY: Record<string, string> = {
     </Container>
   </section>
 
+  <TrustedPartners />
+
   <!-- Story band: three tall photos (reference layout), dark -->
-  <section class="rounded-b-[2.75rem] bg-charcoal py-20 text-white md:py-28" data-tight>
+  <section class="rounded-[2.75rem] bg-charcoal py-20 text-white md:py-28" data-tight>
     <Container>
       <div class="grid items-end gap-8 md:grid-cols-[1.2fr_0.8fr] md:gap-12">
         <div>
@@ -99,13 +102,13 @@ const STORY: Record<string, string> = {
       <div class="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
         {
           [
-            { clip: CLIPS.cropIrrigation, title: 'We listen on site', body: 'We walk the farm, the plant or the shop with you, and hear what really goes wrong.', tone: 'grayscale' },
-            { clip: CLIPS.dataHud, title: 'We connect the dots', body: 'Sensors, cameras and records come together on one screen you can read at a glance.', tone: '' },
-            { clip: CLIPS.opsCentre, title: 'We help you act', body: 'Alerts and simple reports tell you what to do next, so problems are small when you meet them.', tone: '' }
+            { kind: 'sensors', title: 'We listen on site', body: 'We walk the farm, the plant or the shop with you, and hear what really goes wrong. Sensors then read the numbers for you, all day, without anyone checking.' },
+            { kind: 'workflow', title: 'We connect the dots', body: 'Orders, alerts and messages flow through automations we set up, so the boring steps happen on their own and nothing gets missed.' },
+            { kind: 'erp', title: 'We help you act', body: 'Your records come together in one system with AI watching it, so you see what needs attention before it becomes a problem.' }
           ].map((card) => (
-            <article class="group">
+            <article>
               <div class="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-charcoal-soft">
-                <VideoMedia clip={card.clip} class:list={['h-full w-full transition-[filter] duration-700 group-hover:!filter-none', card.tone === 'grayscale' && 'grayscale']} />
+                <AutomationVisuals kind={card.kind as 'sensors' | 'workflow' | 'erp'} />
               </div>
               <h3 class="mt-5 text-lg font-bold tracking-tight">{card.title}</h3>
               <p class="mt-1.5 max-w-xs text-sm leading-relaxed text-white/60">{card.body}</p>
@@ -115,8 +118,6 @@ const STORY: Record<string, string> = {
       </div>
     </Container>
   </section>
-
-  <TrustedPartners />
 
   <!-- What we build: two small cards left, one large right -->
   <section class="rounded-t-[2.75rem] bg-paper-dim py-20 md:py-28">

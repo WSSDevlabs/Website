@@ -9,22 +9,16 @@ type Props = {
   title: string;
   description: string;
   path: string;
-  icon: string;
+  /** kept so the legal pages can still pass them; the page header no longer shows an icon or intro */
+  icon?: string;
   accent?: Accent;
   lastUpdated: Date;
-  intro: string;
+  intro?: string;
   toc: TocItem[];
 };
 
-const { title, description, path, icon, accent = 'blue', lastUpdated, intro, toc } = Astro.props;
+const { title, description, path, lastUpdated, toc } = Astro.props;
 
-const accentMap: Record<Accent, { bg: string; text: string; ring: string }> = {
-  blue: { bg: 'bg-accent-blue/15', text: 'text-accent-blue', ring: 'ring-accent-blue/25' },
-  red: { bg: 'bg-accent-red/15', text: 'text-accent-red', ring: 'ring-accent-red/25' },
-  yellow: { bg: 'bg-accent-yellow-vivid/15', text: 'text-accent-yellow', ring: 'ring-accent-yellow-vivid/25' },
-  green: { bg: 'bg-accent-green/15', text: 'text-accent-green', ring: 'ring-accent-green/25' }
-};
-const a = accentMap[accent];
 
 const formattedDate = lastUpdated.toLocaleDateString('en-MY', {
   year: 'numeric',
@@ -34,25 +28,19 @@ const formattedDate = lastUpdated.toLocaleDateString('en-MY', {
 ---
 
 <BaseLayout title={title} description={description} path={path}>
-  <section class="relative overflow-hidden bg-charcoal pt-28 pb-16 text-white md:pt-36 md:pb-20">
-    <div class="grain-overlay opacity-20" aria-hidden="true"></div>
+  <!-- Title block stays fixed in place while the policy text scrolls up over it -->
+  <section class="sticky top-0 z-0 flex min-h-[46vh] items-end bg-slate pb-24 pt-36 text-white md:min-h-[52vh] md:pb-28 md:pt-44" data-tight>
     <Container class="relative">
-      <div class:list={['inline-flex h-14 w-14 items-center justify-center rounded-2xl ring-1', a.bg, a.ring]}>
-        <svg class:list={['h-7 w-7', a.text]} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path stroke-linecap="round" stroke-linejoin="round" d={icon}></path>
-        </svg>
-      </div>
-      <h1 class="mt-6 font-display text-4xl font-black tracking-tight text-white sm:text-5xl">{title}</h1>
-      <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/65">{intro}</p>
+      <h1 class="font-display text-4xl font-black tracking-tight text-white sm:text-6xl">{title}</h1>
       <p class="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-white/60">
         Last updated: {formattedDate}
       </p>
     </Container>
   </section>
 
-  <section class="bg-paper">
+  <section class="relative z-10 -mt-10 rounded-t-[2.75rem] bg-paper" data-tight>
     <Container>
-      <div class="grid gap-12 py-14 md:py-20 lg:grid-cols-[260px_1fr]">
+      <div class="grid gap-12 pb-14 pt-12 md:pb-20 md:pt-14 lg:grid-cols-[260px_1fr]">
         <aside class="hidden lg:block">
           <div class="sticky top-28">
             <p class="text-xs font-bold uppercase tracking-widest text-ink-dim">On this page</p>

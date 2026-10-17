@@ -34,7 +34,6 @@
 /faq                                  /express#faq                                                         301
 
 # Consolidation, 2026-10-17: 91 pages cut to a core set
-/marketplace/*                        /resources                                                             301
 /labs                                 /resources                                                             301
 /testimonials                         /about                                                               301
 /coming-soon                          /                                                                    301
@@ -59,3 +58,46 @@
 /insights/maha-2026-tech-driven-food-security /insights 301
 /insights/visit-malaysia-2026-tourism-businesses-online /insights 301
 /systems                             /resources                                                           301
+
+# Old Marketplace detail pages -> the Marketplace coming-soon page (listed one by one: a /marketplace/* rule would also catch /marketplace itself)
+/marketplace/wss-eventspace /marketplace 301
+/marketplace/wss-medcare /marketplace 301
+/marketplace/wss-ticketflow /marketplace 301
+/marketplace/wss-buildright /marketplace 301
+/marketplace/wss-directory /marketplace 301
+/marketplace/wss-staffportal /marketplace 301
+/marketplace/wss-smartid /marketplace 301
+/marketplace/wss-epurs /marketplace 301
+/marketplace/wss-vims /marketplace 301
+/marketplace/wss-tams /marketplace 301
+/marketplace/wss-emers /marketplace 301
+/marketplace/wss-bats /marketplace 301
+/marketplace/wss-edupurs /marketplace 301
+/marketplace/wss-fabs /marketplace 301
+/marketplace/wss-kiosk /marketplace 301
+/marketplace/wss-guardtour /marketplace 301
+/marketplace/wss-rfidtracking /marketplace 301
+/marketplace/wss-pos /marketplace 301
+/marketplace/wss-smarthostel /marketplace 301
+/marketplace/wss-parcellocker /marketplace 301
+/marketplace/wss-ebusinesscard /marketplace 301
+/marketplace/wss-energysaving /marketplace 301
+/marketplace/wss-iotboard /marketplace 301
+/marketplace/wss-assetmanagement /marketplace 301
+/marketplace/wss-safepickup /marketplace 301
+/marketplace/wss-incidentsystem /marketplace 301
+/marketplace/wss-machinemonitoring /marketplace 301
+/marketplace/wss-eventgallery /marketplace 301
+/marketplace/wss-webportals /marketplace 301
+/marketplace/wss-servercloud /marketplace 301
+/marketplace/wss-training /marketplace 301
+/marketplace/wss-helpdesk /marketplace 301
+/marketplace/wss-vms /marketplace 301
+/marketplace/wss-epelanggan /marketplace 301
+/marketplace/wss-vrar /marketplace 301
+/marketplace/wss-digitalform /marketplace 301
+/marketplace/wss-aimeetingnotes /marketplace 301
+/marketplace/wss-aivoice /marketplace 301
+/marketplace/wss-aiphone /marketplace 301
+/marketplace/wss-digitalcontentai /marketplace 301
+/marketplace/wss-aikiosk /marketplace 301

@@ -77,22 +77,18 @@ const slides = [
 
 <style is:global>
   .banner-slide {
-    transition:
-      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.7s;
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
   }
   .banner-slide[data-state='active'] {
     transform: translateX(0);
-    opacity: 1;
   }
   .banner-slide[data-state='prev'] {
     transform: translateX(-100%);
-    opacity: 0;
     pointer-events: none;
   }
   .banner-slide[data-state='next'] {
     transform: translateX(100%);
-    opacity: 0;
     pointer-events: none;
     transition: none;
   }
@@ -112,7 +108,6 @@ const slides = [
       const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-banner-dot]'));
       if (slides.length < 2) return;
       let current = 0;
-      let paused = false;
       let timer = 0;
 
       const show = (next: number) => {
@@ -132,20 +127,14 @@ const slides = [
         current = next;
       };
 
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const start = () => {
         window.clearInterval(timer);
-        if (reduce) return;
         timer = window.setInterval(() => {
           if (!document.body.contains(root)) return window.clearInterval(timer);
-          if (!paused && !document.hidden) show((current + 1) % slides.length);
+          if (!document.hidden) show((current + 1) % slides.length);
         }, 3000);
       };
 
-      root.addEventListener('mouseenter', () => (paused = true));
-      root.addEventListener('mouseleave', () => (paused = false));
-      root.addEventListener('focusin', () => (paused = true));
-      root.addEventListener('focusout', () => (paused = false));
       dots.forEach((dot, i) =>
         dot.addEventListener('click', () => {
           show(i);

@@ -8,6 +8,7 @@
   --color-paper-deep: #e3e3de; /* inset panels, deepest light surface */
   --color-tint: #e6edfb; /* pastel blue card tint */
   --color-tint-ink: #1d3a8a;
+  --color-slate: #4e4f50; /* mid dark grey: header band on the legal pages */
   --color-ink: #121214; /* primary text — matte dark grey / near black */
   --color-ink-soft: #232427; /* dark highlight panel surface */
   --color-ink-dim: #5c5d61; /* body copy — neutral grey */
@@ -795,4 +796,9 @@ main > section:not(:first-of-type):not([data-tight]) {
   position: relative;
   z-index: 0;
   isolation: isolate;
+}
+
+/* Contact map in the site's grey theme: only the map tiles are desaturated, the red pin and controls keep their colour */
+.leaflet-tile-pane {
+  filter: grayscale(1) contrast(0.92) brightness(1.04);
 }
