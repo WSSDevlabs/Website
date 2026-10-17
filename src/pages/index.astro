@@ -6,6 +6,7 @@ import SectionHead from '../components/ui/SectionHead.astro';
 import Pill from '../components/ui/Pill.astro';
 import VideoMedia from '../components/media/VideoMedia.astro';
 import CTABand from '../components/sections/CTABand.astro';
+import HomeSectors from '../components/sections/HomeSectors.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import { CLIPS } from '../data/media';
 import { SECTORS, STACK_LAYERS } from '../data/sectors';
@@ -54,8 +55,6 @@ const STORY: Record<string, string> = {
   'web-software-app-development':
     'Your idea becomes a working system in steps you can see. We design it with you, build it around how you really work, launch it, and stay beside you afterwards, so nothing is left for you to figure out alone.'
 };
-// 7 cards in 2 rows on desktop: four across, then three with the last one double width
-const SPANS = ['', '', '', '', '', '', 'lg:col-span-2'];
 ---
 
 <BaseLayout
@@ -162,35 +161,7 @@ const SPANS = ['', '', '', '', '', '', 'lg:col-span-2'];
     </Container>
   </section>
 
-  <!-- Sectors bento -->
-  <section class="py-20 md:py-28">
-    <Container>
-      <SectionHead
-        centered
-        title="Technology for the work on the ground"
-        ctaLabel="All solutions"
-        ctaHref="/solutions"
-      />
-      <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          SECTORS.map((sector, i) => (
-              <a
-                href={`/solutions#${sector.slug}`}
-                class:list={['group flex flex-col rounded-[1.75rem] p-3 transition-transform duration-300 hover:-translate-y-1', i % 3 === 0 ? 'bg-tint' : 'bg-paper-dim', SPANS[i]]}
-              >
-                <div class="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-charcoal">
-                  <img src={sector.image} alt="" loading="lazy" width="1200" height="800" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                </div>
-                <div class="flex flex-1 flex-col p-4">
-                  <h3 class="text-base font-bold tracking-tight text-ink">{sector.name}</h3>
-                  <p class="mt-1.5 text-xs leading-relaxed text-ink-dim">{sector.summary}</p>
-                </div>
-              </a>
-          ))
-        }
-      </div>
-    </Container>
-  </section>
+  <HomeSectors />
 
   <!-- How a pilot works -->
   <section class="relative -mt-10 rounded-t-[2.75rem] bg-charcoal pb-20 pt-28 text-white md:-mt-14 md:pb-28 md:pt-36">

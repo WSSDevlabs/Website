@@ -2,7 +2,14 @@
 import Pill from '../ui/Pill.astro';
 ---
 
-<section class="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden bg-charcoal text-white" data-noreveal>
+<section
+  class="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden bg-charcoal text-white"
+  data-noreveal
+  data-hero-holo
+  data-bg="/images/hero/hero-bg.jpg"
+  data-depth="/images/hero/hero-depth.png"
+>
+  <!-- Plain photo: the fallback, and what shows while the 3D layer loads -->
   <img
     src="/images/hero/hero-bg.jpg"
     alt=""
@@ -11,6 +18,8 @@ import Pill from '../ui/Pill.astro';
     fetchpriority="high"
     class="absolute inset-0 -z-20 h-full w-full object-cover object-[47%_center] md:object-center"
   />
+  <!-- Pseudo-3D hologram layer: fades in over the photo once it is ready -->
+  <canvas data-hero-canvas class="absolute inset-0 -z-20 h-full w-full opacity-0 transition-opacity duration-700" aria-hidden="true"></canvas>
   <div class="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/40 to-black/70" aria-hidden="true"></div>
 
   <div class="relative mx-auto w-full max-w-7xl px-6 md:px-10">
@@ -32,7 +41,8 @@ import Pill from '../ui/Pill.astro';
     </div>
 
     <p
-      class="pointer-events-none -mx-1 select-none whitespace-nowrap pb-2 font-display text-[clamp(3.2rem,15.6vw,17rem)] font-bold leading-[0.82] tracking-[-0.05em] text-white md:pb-4"
+      data-holo-wordmark
+      class="pointer-events-none -mx-1 select-none whitespace-nowrap pb-2 font-display text-[clamp(3.2rem,15.6vw,17rem)] font-bold leading-[0.82] tracking-[-0.05em] text-white will-change-transform md:pb-4"
       aria-hidden="true"
       data-hero-item
       data-hero-delay="0.25"
@@ -41,3 +51,10 @@ import Pill from '../ui/Pill.astro';
     </p>
   </div>
 </section>
+
+<span data-red-cursor-page hidden></span>
+
+<script>
+  import '../../scripts/heroHolo';
+  import '../../scripts/redCursor';
+</script>
