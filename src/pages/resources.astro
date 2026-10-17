@@ -3,17 +3,14 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
 import SectionHead from '../components/ui/SectionHead.astro';
-import Pill from '../components/ui/Pill.astro';
-import VideoMedia from '../components/media/VideoMedia.astro';
 import CTABand from '../components/sections/CTABand.astro';
-import { CLIPS } from '../data/media';
+import NewsMagazine from '../components/sections/NewsMagazine.astro';
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 const fmt = (d: Date) => d.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
 const blogPosts = posts.slice(0, 3);
-const newsPosts = posts.slice(3);
 
 const consult = [
   {
@@ -67,31 +64,8 @@ const schema = {
   path="/resources"
   schema={schema}
 >
-  <!-- Hero -->
-  <section class="pb-6 pt-6 md:pb-10 md:pt-32" data-noreveal>
-    <Container>
-      <div class="relative isolate overflow-hidden rounded-[2.5rem] bg-charcoal px-6 py-16 text-white sm:px-12 md:py-24 lg:px-16">
-        <div class="absolute inset-0 -z-10 opacity-45">
-          <VideoMedia clip={CLIPS.network} eager class="h-full w-full !bg-transparent" />
-        </div>
-        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/30" aria-hidden="true"></div>
-        <div data-scene="network" data-scene-props='{"radius":2.4,"count":190}' class="pointer-events-none absolute -right-[10%] top-0 -z-10 hidden h-full w-[65%] md:block" aria-hidden="true"></div>
-
-        <div class="max-w-2xl">
-          <h1 data-hero-item data-hero-delay="0" class="font-display text-[clamp(2.4rem,1.3rem+4vw,4.6rem)] font-bold leading-[1.02] tracking-[-0.04em] text-white">
-            Know what to expect before you <span class="badge-highlight">begin</span>
-          </h1>
-          <p data-hero-item data-hero-delay="0.1" class="mt-6 text-base leading-relaxed text-white/70 sm:text-lg">
-            How we work with you, what you receive at the end, and what we are learning along the way.
-          </p>
-          <div data-hero-item data-hero-delay="0.2" class="mt-8 flex flex-wrap gap-3">
-            <Pill href="#consult" label="How consulting works" variant="light" />
-            <Pill href="#blog" label="Read the blog" variant="ghost" />
-          </div>
-        </div>
-      </div>
-    </Container>
-  </section>
+  <!-- News (magazine layout) -->
+  <NewsMagazine />
 
   <!-- Consult process -->
   <section id="consult" class="scroll-mt-24 py-16 md:py-24">
@@ -155,30 +129,6 @@ const schema = {
       </div>
     </Container>
   </section>
-
-  <!-- News -->
-  {
-    newsPosts.length > 0 && (
-      <section id="news" class="scroll-mt-24 rounded-t-[2.75rem] bg-tint py-16 md:py-24">
-        <Container>
-          <SectionHead title="News we are following, and what it means for businesses like yours." />
-          <ul class="mt-12 grid gap-3 md:grid-cols-2">
-            {newsPosts.map((post) => (
-              <li>
-                <a href={`/insights/${post.id}`} class="group flex items-center gap-4 rounded-[1.5rem] bg-white p-4 transition-transform duration-300 hover:-translate-y-0.5">
-                  <img src={post.data.coverImage} alt="" loading="lazy" width="160" height="160" class="h-20 w-20 shrink-0 rounded-2xl object-cover" />
-                  <span>
-                    <span class="block text-sm font-bold leading-snug text-ink group-hover:underline">{post.data.title}</span>
-                    <span class="mt-1 block text-xs text-ink-dim">{fmt(post.data.publishDate)}</span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-    )
-  }
 
   <CTABand
     title="Still have a question?"

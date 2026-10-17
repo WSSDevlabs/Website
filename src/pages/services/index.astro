@@ -53,26 +53,34 @@ const schema = {
   <!-- Intro: statement + key areas -->
   <section class="pb-16 pt-32 md:pb-24 md:pt-44" data-tight>
     <Container>
-      <SectionHead
-        title="Technology that is built around your site, your data and your team, then supported after launch."
-        body="Every business has its own story, and the right technology starts with understanding it. Here is what we can build alongside you, from the first idea to the day it quietly runs on its own."
-      />
-      <ul class="mt-10 flex flex-wrap gap-3" data-pill-cycle>
-        {
-          SERVICE_CATEGORIES.map((category, i) => (
-            <li>
-              <a
-                href={`/services/${category.slug}`}
-                data-pill
-                class:list={['inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-500', i === 0 ? 'bg-ink text-white' : 'bg-paper-dim text-ink']}
-              >
-                <span class="h-2 w-2 rounded-full bg-current opacity-60" aria-hidden="true"></span>
-                {category.title}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+        <div>
+          <h2 class="font-display text-[clamp(1.6rem,1.15rem+1.8vw,2.4rem)] font-medium leading-[1.18] tracking-[-0.025em] text-ink">
+            Technology that is built around your site, your data and your team, then supported after launch.
+          </h2>
+          <p class="mt-4 max-w-xl text-sm leading-relaxed text-ink-dim">
+            Every business has its own story, and the right technology starts with understanding it. Here is what we can build alongside you, from the first idea to the day it quietly runs on its own.
+          </p>
+        </div>
+
+        <!-- one column, on the right; the dark highlight moves down the list on its own -->
+        <ul class="flex flex-col gap-3 lg:ml-auto lg:w-full lg:max-w-md" data-pill-cycle>
+          {
+            SERVICE_CATEGORIES.map((category, i) => (
+              <li>
+                <a
+                  href={`/services/${category.slug}`}
+                  data-pill
+                  class:list={['flex w-full items-center gap-2.5 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-500', i === 0 ? 'bg-ink text-white' : 'bg-paper-dim text-ink']}
+                >
+                  <span class="h-2 w-2 shrink-0 rounded-full bg-current opacity-60" aria-hidden="true"></span>
+                  {category.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </Container>
   </section>
 
@@ -83,27 +91,31 @@ const schema = {
         centered
         title="Tailored services to build, connect and grow"
       />
-      <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+      <div class="acc mt-14" data-acc>
         {
           SERVICE_CATEGORIES.map((category, i) => (
             <a
               href={`/services/${category.slug}`}
-              class:list={[
-                'group flex flex-col rounded-[1.75rem] p-3 transition-transform duration-300 hover:-translate-y-1',
-                i === 0 ? 'bg-charcoal-soft text-white lg:col-span-3' : i === 1 ? 'bg-tint lg:col-span-3' : 'bg-white lg:col-span-2'
-              ]}
+              class="acc-card"
+              data-acc-card
+              data-active={i === 0 ? 'true' : 'false'}
+              data-tone={i % 5}
             >
-              <div class:list={['relative overflow-hidden rounded-[1.25rem] bg-charcoal', i < 2 ? 'aspect-[16/8]' : 'aspect-[16/10]']}>
-                <img src={IMAGES[category.slug]} alt="" loading="lazy" width="900" height="700" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <h3 class="acc-title">{category.title}</h3>
+
+              <div class="acc-body">
+                <p class="acc-text">{category.description}</p>
+                <div class="acc-img">
+                  <img src={IMAGES[category.slug]} alt="" loading="lazy" width="900" height="700" />
+                </div>
               </div>
-              <div class="flex flex-1 flex-col p-5">
-                <h3 class:list={['text-lg font-bold tracking-tight', i === 0 ? 'text-white' : 'text-ink']}>{category.title}</h3>
-                <p class:list={['mt-2 text-sm leading-relaxed', i === 0 ? 'text-white/60' : 'text-ink-dim']}>{category.description}</p>
-                <span class:list={['mt-5 inline-flex items-center gap-1.5 text-sm font-bold', i === 0 ? 'text-white' : 'text-ink']}>
-                  Explore
-                  <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+
+              <span class="acc-foot">
+                <span class="acc-more">Read more</span>
+                <span class="acc-arrow">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5 19.5 4.5m0 0H8.25m11.25 0v11.25" /></svg>
                 </span>
-              </div>
+              </span>
             </a>
           ))
         }
@@ -196,4 +208,160 @@ const schema = {
     });
   }
   document.addEventListener('astro:page-load', initPillCycle);
+</script>
+
+<style is:global>
+  /* One row of cards; the active card grows wide and shows its picture, the others stay compact. */
+  .acc {
+    display: flex;
+    gap: 1rem;
+    height: 27rem;
+  }
+  .acc-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    padding: 1.6rem;
+    color: #121214;
+    background: linear-gradient(160deg, #f4f4f1 0%, #e4e5e0 100%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.7);
+    transition:
+      flex-grow 0.75s cubic-bezier(0.65, 0, 0.35, 1),
+      background 0.5s;
+  }
+  .acc-card[data-tone='1'] { background: linear-gradient(160deg, #eef2fc 0%, #dde6f8 100%); }
+  .acc-card[data-tone='2'] { background: linear-gradient(160deg, #f6f1ea 0%, #e8e0d4 100%); }
+  .acc-card[data-tone='3'] { background: linear-gradient(160deg, #eef1ec 0%, #dde3d8 100%); }
+  .acc-card[data-tone='4'] { background: linear-gradient(160deg, #f2eff3 0%, #e3dde6 100%); }
+  .acc-card[data-active='true'] {
+    flex-grow: 3.6;
+    background: #ffffff;
+    box-shadow: 0 30px 60px -34px rgb(0 0 0 / 0.35), inset 0 0 0 1px rgb(0 0 0 / 0.05);
+  }
+
+  .acc-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 14rem;
+  }
+
+  /* picture + text appear only on the active card; fixed inner width so the text never re-wraps while the card grows */
+  .acc-body {
+    position: absolute;
+    left: 1.6rem;
+    right: 1.6rem;
+    top: 6.2rem;
+    bottom: 4.6rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: 1.4rem;
+    opacity: 0;
+    transform: translateX(1.2rem);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .acc-card[data-active='true'] .acc-body {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.35s;
+  }
+  .acc-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #4a4b4f;
+    overflow: hidden;
+  }
+  .acc-img {
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: #19191b;
+  }
+  .acc-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.8s;
+  }
+  .acc-card:hover .acc-img img { transform: scale(1.05); }
+
+  .acc-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+  }
+  .acc-more { font-size: 0.8rem; font-weight: 600; }
+  .acc-arrow {
+    display: flex;
+    height: 2.4rem;
+    width: 2.4rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgb(18 18 20 / 0.12);
+    color: #121214;
+    transition: background 0.4s, color 0.4s, transform 0.4s;
+  }
+  .acc-card[data-active='true'] .acc-arrow {
+    background: #121214;
+    color: #fff;
+  }
+  .acc-card:hover .acc-arrow { transform: translate(2px, -2px); }
+
+  @media (max-width: 1023px) {
+    .acc { flex-direction: column; height: auto; }
+    .acc-card, .acc-card[data-active='true'] { flex: none; padding-bottom: 1.2rem; }
+    .acc-body, .acc-card[data-active='true'] .acc-body {
+      position: static;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      grid-template-columns: 1fr;
+      margin: 1rem 0 1.4rem;
+      transition: none;
+    }
+    .acc-img { aspect-ratio: 16 / 9; }
+    .acc-card:not([data-active='true']) { background: linear-gradient(160deg, #f4f4f1 0%, #e4e5e0 100%); }
+    .acc-card[data-active='true'] { background: #fff; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .acc-card, .acc-body, .acc-img img, .acc-arrow { transition-duration: 0.01ms; transition-delay: 0s; }
+  }
+</style>
+
+<script>
+  function initAccordion() {
+    document.querySelectorAll<HTMLElement>('[data-acc]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-acc-card]'));
+      const desktop = () => window.matchMedia('(min-width: 1024px)').matches;
+      const activate = (card: HTMLElement) => {
+        cards.forEach((c) => (c.dataset.active = c === card ? 'true' : 'false'));
+      };
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => desktop() && activate(card));
+        card.addEventListener('focus', () => desktop() && activate(card));
+        // first tap opens a compact card; a tap on the open one follows the link
+        card.addEventListener('click', (event) => {
+          if (desktop() && card.dataset.active !== 'true') {
+            event.preventDefault();
+            activate(card);
+          }
+        });
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', initAccordion);
 </script>
