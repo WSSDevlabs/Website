@@ -30,7 +30,7 @@ const { title, subtitle, ctaLabel = 'Start a Project', ctaHref = '/contact', ima
           <div class="relative max-w-xl px-8 py-14 md:px-16 md:py-20">
             <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-ink">{title}</h2>
             {subtitle && <p class="mt-5 max-w-md text-base leading-relaxed text-ink-dim">{subtitle}</p>}
-            <Pill href={ctaHref} label={ctaLabel} class="mt-9" />
+            <Pill href={ctaHref} label={ctaLabel} variant="red" class="mt-9" />
           </div>
         </div>
       ) : (

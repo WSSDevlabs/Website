@@ -2,13 +2,14 @@
 type Props = {
   href: string;
   label: string;
-  variant?: 'dark' | 'light' | 'ghost';
+  variant?: 'dark' | 'light' | 'ghost' | 'red';
   class?: string;
   external?: boolean;
 };
 
 const { href, label, variant = 'dark', class: className = '', external = false } = Astro.props;
-const variantClass = variant === 'light' ? 'btn-arrow--light' : variant === 'ghost' ? 'btn-arrow--ghost' : '';
+const variantClass =
+  variant === 'light' ? 'btn-arrow--light' : variant === 'ghost' ? 'btn-arrow--ghost' : variant === 'red' ? 'btn-arrow--red' : '';
 ---
 
 <a

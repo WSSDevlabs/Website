@@ -105,7 +105,7 @@ const STORY: Record<string, string> = {
             { img: '/images/home/how-3.webp', pos: 'left top', alt: 'A business workspace with calendar, tasks and shortcuts in one place', title: 'We help you act', body: 'Your records come together in one system with AI watching it, so you see what needs attention before it becomes a problem.' }
           ].map((card) => (
             <article>
-              <div class="relative aspect-[16/9] overflow-hidden rounded-[1.75rem] bg-white">
+              <div class="relative aspect-[16/9] overflow-hidden bg-white">
                 <img src={card.img} alt={card.alt} loading="lazy" width="1500" height="900" class="h-full w-full object-cover" style={`object-position:${card.pos}`} />
               </div>
               <h3 class="mt-5 text-lg font-bold tracking-tight">{card.title}</h3>
@@ -126,8 +126,10 @@ const STORY: Record<string, string> = {
       width="1000"
       height="925"
       loading="lazy"
-      class="pointer-events-none absolute right-0 top-0 -z-10 h-[30rem] w-auto max-w-none -scale-x-100 object-cover object-top opacity-40 mix-blend-multiply md:h-[40rem] md:opacity-100"
+      class="pointer-events-none absolute right-0 top-0 -z-10 h-[42rem] w-auto max-w-none -scale-x-100 object-cover object-top opacity-40 mix-blend-multiply md:h-full md:min-h-[56rem] md:opacity-100"
     />
+    <!-- keeps the heading readable where the photo reaches under it -->
+    <div class="pointer-events-none absolute inset-y-0 left-0 -z-10 w-full bg-gradient-to-r from-paper-dim from-35% via-paper-dim/85 via-50% to-transparent to-72%" aria-hidden="true"></div>
     <Container>
       <SectionHead
         title="AI, IoT and systems, engineered as one stack. Field-tested ideas, built to last on your site."

@@ -749,6 +749,17 @@ main > section:not(:first-of-type):not([data-tight]) {
   .btn-arrow:hover .btn-arrow__dot {
     transform: translateX(3px);
   }
+  .btn-arrow--red {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+  .btn-arrow--red:hover {
+    background-color: var(--color-accent-dim);
+  }
+  .btn-arrow--red .btn-arrow__dot {
+    background-color: #fff;
+    color: var(--color-accent);
+  }
   .btn-arrow--light {
     background-color: #fff;
     color: var(--color-ink);
