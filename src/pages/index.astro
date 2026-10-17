@@ -7,7 +7,6 @@ import Pill from '../components/ui/Pill.astro';
 import VideoMedia from '../components/media/VideoMedia.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import HomeSectors from '../components/sections/HomeSectors.astro';
-import AutomationVisuals from '../components/sections/AutomationVisuals.astro';
 import TrustedPartners from '../components/sections/TrustedPartners.astro';
 import MarketplaceAndExpressBanner from '../components/sections/MarketplaceAndExpressBanner.astro';
 import { CLIPS } from '../data/media';
@@ -83,11 +82,10 @@ const STORY: Record<string, string> = {
 
   <!-- Story band: three tall photos (reference layout), dark -->
   <section class="rounded-[2.75rem] bg-charcoal py-20 text-white md:py-28" data-tight>
-    <Container>
+    <div class="mx-auto w-full max-w-[100rem] px-4 md:px-6">
       <div class="grid items-end gap-8 md:grid-cols-[1.2fr_0.8fr] md:gap-12">
         <div>
-          <p class="mono-label text-white/50">How we help</p>
-          <h2 class="mt-4 max-w-2xl font-display text-[clamp(2rem,1.2rem+3vw,3.8rem)] font-medium leading-[1.05] tracking-[-0.035em]">
+          <h2 class="max-w-2xl font-display text-[clamp(2rem,1.2rem+3vw,3.8rem)] font-medium leading-[1.05] tracking-[-0.035em]">
             Technology that makes hard days a little easier
           </h2>
         </div>
@@ -102,21 +100,21 @@ const STORY: Record<string, string> = {
       <div class="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
         {
           [
-            { kind: 'sensors', title: 'We listen on site', body: 'We walk the farm, the plant or the shop with you, and hear what really goes wrong. Sensors then read the numbers for you, all day, without anyone checking.' },
-            { kind: 'workflow', title: 'We connect the dots', body: 'Orders, alerts and messages flow through automations we set up, so the boring steps happen on their own and nothing gets missed.' },
-            { kind: 'erp', title: 'We help you act', body: 'Your records come together in one system with AI watching it, so you see what needs attention before it becomes a problem.' }
+            { img: '/images/home/how-1.webp', pos: 'left top', alt: 'A live dashboard reading sensor values', title: 'We listen on site', body: 'We walk the farm, the plant or the shop with you, and hear what really goes wrong. Sensors then read the numbers for you, all day, without anyone checking.' },
+            { img: '/images/home/how-2.webp', pos: 'center', alt: 'A workflow that connects apps and steps automatically', title: 'We connect the dots', body: 'Orders, alerts and messages flow through automations we set up, so the boring steps happen on their own and nothing gets missed.' },
+            { img: '/images/home/how-3.webp', pos: '30% top', alt: 'A business workspace with calendar, tasks and shortcuts in one place', title: 'We help you act', body: 'Your records come together in one system with AI watching it, so you see what needs attention before it becomes a problem.' }
           ].map((card) => (
             <article>
-              <div class="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-charcoal-soft">
-                <AutomationVisuals kind={card.kind as 'sensors' | 'workflow' | 'erp'} />
+              <div class="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-white">
+                <img src={card.img} alt={card.alt} loading="lazy" width="1400" height="1000" class="h-full w-full object-cover" style={`object-position:${card.pos}`} />
               </div>
               <h3 class="mt-5 text-lg font-bold tracking-tight">{card.title}</h3>
-              <p class="mt-1.5 max-w-xs text-sm leading-relaxed text-white/60">{card.body}</p>
+              <p class="mt-1.5 max-w-md text-sm leading-relaxed text-white/60">{card.body}</p>
             </article>
           ))
         }
       </div>
-    </Container>
+    </div>
   </section>
 
   <!-- What we build: two small cards left, one large right -->

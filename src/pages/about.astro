@@ -108,13 +108,6 @@ const SOLUTION_PHASES = [
   }
 ];
 
-const KEY_FEATURES = [
-  { title: 'Scalability', desc: 'Our solutions are designed to scale with the growth of your business, accommodating increasing data volumes and expanding device networks.' },
-  { title: 'Security', desc: 'We prioritize security at every stage, implementing robust measures to protect data and ensure compliance with industry standards.' },
-  { title: 'Real-time Analytics', desc: 'Our solutions provide real-time data analytics, enabling prompt decision-making and quick responses to changing conditions.' },
-  { title: 'Customizability', desc: 'Each solution is tailored to the specific needs of the client, ensuring maximum relevance and effectiveness.' },
-  { title: 'Integration Capabilities', desc: 'We ensure seamless integration with existing systems and technologies, enhancing overall operational efficiency.' }
-];
 ---
 
 <BaseLayout
@@ -124,31 +117,49 @@ const KEY_FEATURES = [
 >
 
   <!-- "About Us" intro block: banner, story, vision/mission + portrait -->
-  <section class="relative overflow-hidden pt-10 md:pt-32">
-    <!-- Vision / Mission with center founder frame -->
-    <Container class="relative pb-16 pt-16 md:pb-20 md:pt-20">
-      <div class="grid gap-6 lg:grid-cols-3 lg:items-center">
-        <div class="card p-8">
-          <h3 class="h-sub text-ink">Our Vision</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To be the team Malaysian operators call when a problem lives outside the office: in the field, on the plant floor or across a city.</p>
-        </div>
+  <section class="relative overflow-hidden pt-24 md:pt-40">
+    <!-- Hero panel (reference layout): headline + vision/mission on the left, founder portrait on the right -->
+    <Container class="relative pb-10 pt-6 md:pb-14 md:pt-0">
+      <div class="relative grid overflow-hidden rounded-[2.25rem] bg-paper-dim md:min-h-[34rem] md:grid-cols-[1.05fr_0.95fr] md:rounded-[2.75rem]">
+        <div class="relative z-10 flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-16">
+          <h2 class="font-display text-[clamp(2.2rem,1.3rem+3.4vw,4.2rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
+            Our vision.<br />
+            <span class="text-ink-dim">Our mission.</span>
+          </h2>
 
-        <!-- Center founder frame: circular, placeholder until a real photo is added -->
-        <div class="mx-auto flex flex-col items-center">
-          <div class="relative aspect-square w-full max-w-[220px] overflow-hidden rounded-full border-4 border-paper bg-paper-dim shadow-float">
-            <div class="flex h-full w-full items-center justify-center">
-              <svg class="h-20 w-20 text-ink-dim/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.964 0a9 9 0 1 0-11.964 0m11.964 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              </svg>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wide text-accent">Our Vision</p>
+              <p class="mt-2 text-sm leading-relaxed text-ink-dim">To be the team Malaysian operators call when a problem lives outside the office: in the field, on the plant floor or across a city.</p>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wide text-accent">Our Mission</p>
+              <p class="mt-2 text-sm leading-relaxed text-ink-dim">To apply software, apps, AI, IoT, analytics and marketing to real problems in agriculture, biomass, energy, cities and SMEs, and to train the people who run them, as one team from site visit to support.</p>
             </div>
           </div>
-          <p class="mt-4 font-semibold text-ink">Razali</p>
-          <p class="text-sm text-ink-dim">Founder of WSS DevLabs</p>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="/contact" class="inline-flex items-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105">Get in touch</a>
+            <a href="/solutions" class="inline-flex items-center rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-ink transition-transform hover:scale-105">View solutions</a>
+          </div>
         </div>
 
-        <div class="card p-8">
-          <h3 class="h-sub text-ink">Our Mission</h3>
-          <p class="mt-2.5 leading-relaxed text-ink-dim">To apply software, apps, AI, IoT, analytics and marketing to real problems in agriculture, biomass, energy, cities and SMEs, and to train the people who run them, as one team from site visit to support.</p>
+        <!-- Founder portrait: placeholder until the real photo is added (replace the block inside this div with an <img>) -->
+        <div class="relative min-h-[22rem] md:min-h-full" data-founder-photo>
+          <div class="absolute inset-0 bg-gradient-to-b from-paper-deep to-paper-dim" aria-hidden="true"></div>
+          <div class="absolute inset-0 flex items-end justify-center">
+            <svg class="h-[88%] w-auto text-ink-dim/25" viewBox="0 0 200 260" fill="currentColor" aria-hidden="true">
+              <circle cx="100" cy="82" r="48" />
+              <path d="M10 260c0-62 40-100 90-100s90 38 90 100z" />
+            </svg>
+          </div>
+
+          <!-- Name card -->
+          <div class="absolute bottom-4 left-4 right-4 rounded-[1.5rem] bg-white/85 p-5 backdrop-blur-md md:left-auto md:w-[19rem]">
+            <p class="text-[0.7rem] font-semibold text-ink-dim">Founder</p>
+            <p class="mt-0.5 font-display text-lg font-bold tracking-tight text-ink">Razali</p>
+            <p class="mt-1 text-xs leading-relaxed text-ink-dim">Builds it, ships it and supports it, so you always know who to call.</p>
+          </div>
         </div>
       </div>
     </Container>
@@ -299,26 +310,6 @@ const KEY_FEATURES = [
                   );
                 })}
               </ul>
-            </div>
-          ))
-        }
-      </div>
-    </Container>
-  </section>
-
-  <!-- Key Features of Our Solutions -->
-  <section class="py-16 md:py-24 bg-paper-dim border-t border-line/60">
-    <Container>
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="h-section" data-split>Key Features of Our Solutions</h2>
-      </div>
-
-      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {
-          KEY_FEATURES.map((f) => (
-            <div class="rounded-2xl border border-line bg-white p-5 shadow-sm">
-              <h3 class="text-sm font-bold text-ink">{f.title}</h3>
-              <p class="mt-2 text-xs leading-relaxed text-ink-dim">{f.desc}</p>
             </div>
           ))
         }
