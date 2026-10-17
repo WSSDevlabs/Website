@@ -4,8 +4,17 @@ import Container from '../../components/ui/Container.astro';
 import VideoMedia from '../../components/media/VideoMedia.astro';
 import FAQ from '../../components/sections/FAQ.astro';
 import CTABand from '../../components/sections/CTABand.astro';
+import Pill from '../../components/ui/Pill.astro';
 import { SECTORS, TRAINING_CLASSES } from '../../data/sectors';
 import { CLIPS } from '../../data/media';
+
+// Section tones cycle so no two neighbours match; the dark one is matte dark grey
+const TONES = [
+  { bg: 'bg-paper', dark: false, cell: 'bg-white', rule: 'bg-line' },
+  { bg: 'bg-paper-dim', dark: false, cell: 'bg-white', rule: 'bg-line' },
+  { bg: 'bg-tint', dark: false, cell: 'bg-white', rule: 'bg-white' },
+  { bg: 'bg-charcoal-soft', dark: true, cell: 'bg-white/[0.06]', rule: 'bg-white/10' }
+];
 
 const faqs = [
   {
@@ -61,22 +70,15 @@ const schema = {
       <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
         <div data-hero-item data-hero-delay="0">
           <p class="mono-label text-accent" data-scramble>Solutions by sector</p>
-          <h1 class="h-display mt-5 !text-[clamp(2.4rem,1.3rem+4vw,4.4rem)]">
+          <h1 class="mt-5 font-display text-[clamp(2.4rem,1.3rem+4vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
             AI, IoT and systems for the work <span class="badge-highlight">on the ground</span>
           </h1>
           <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-dim sm:text-lg">
             Pick your industry. Each section shows the problem we solve, what we build and what changes for you.
           </p>
           <div class="mt-8 flex flex-wrap gap-4">
-            <a href="#sectors" class="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:bg-black">
-              Browse sectors
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
-              </svg>
-            </a>
-            <a href="/systems" class="inline-flex items-center justify-center gap-2 rounded-full border border-line bg-white px-6 py-3.5 text-sm font-semibold text-ink transition-all hover:scale-105 hover:bg-paper-dim">
-              See systems and demos
-            </a>
+            <Pill href="#sectors" label="Browse sectors" />
+            <Pill href="/systems" label="See systems and demos" variant="light" />
           </div>
         </div>
 
@@ -106,7 +108,7 @@ const schema = {
   </section>
 
   <!-- Sector index -->
-  <section id="sectors" class="band-light border-y border-line/60 py-10 md:py-12">
+  <section id="sectors" class="bg-paper-dim py-10 md:py-12" data-tight>
     <Container>
       <ul class="flex flex-wrap gap-2.5">
         {
@@ -127,51 +129,49 @@ const schema = {
 
   <!-- One band per sector -->
   {
-    SECTORS.map((sector, i) => (
-      <section id={sector.slug} class:list={['scroll-mt-24 py-16 md:py-24', i % 2 === 0 ? 'bg-white' : 'band-light']}>
+    SECTORS.map((sector, i) => {
+      const tone = TONES[i % TONES.length];
+      const d = tone.dark;
+      return (
+      <section id={sector.slug} class:list={['scroll-mt-24 rounded-t-[2.75rem] py-16 md:py-24', i > 0 && '-mt-10 pt-24 md:-mt-12 md:pt-32', tone.bg, d && 'text-white']}>
         <Container>
           <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
-            <div class="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-line bg-charcoal" data-clip-reveal>
+            <div class="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-charcoal" data-clip-reveal>
               <VideoMedia clip={CLIPS[sector.clip]} class="h-full w-full" />
               <p class="absolute bottom-3 left-4 z-10 text-[0.68rem] text-white/70">Illustrative footage</p>
             </div>
             <div>
-              <p class="mono-label text-accent">0{i + 1} / {sector.name}</p>
-              <h2 class="h-section mt-4 font-black tracking-tight text-ink">
+              <p class:list={['mono-label', d ? 'text-white/60' : 'text-ink-dim']}>0{i + 1} / {sector.name}</p>
+              <h2 class:list={['mt-4 font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em]', d ? 'text-white' : 'text-ink']}>
                 {sector.titleLead} <span class="badge-highlight">{sector.titleHighlight}</span>
               </h2>
-              <p class="mt-5 text-base leading-relaxed text-ink-dim">{sector.intro}</p>
-              <p class="mt-4 text-sm font-semibold leading-relaxed text-ink">
+              <p class:list={['mt-5 text-base leading-relaxed', d ? 'text-white/65' : 'text-ink-dim']}>{sector.intro}</p>
+              <p class:list={['mt-4 text-sm font-semibold leading-relaxed', d ? 'text-white' : 'text-ink']}>
                 <span class="text-accent">The problem:</span> {sector.problem}
               </p>
               {sector.whyNow && (
-                <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+                <p class:list={['mt-4 text-sm leading-relaxed', d ? 'text-white/60' : 'text-ink-dim']}>
                   {sector.whyNow.text}{' '}
-                  <a href={sector.whyNow.href} class="font-bold text-ink underline underline-offset-4">{sector.whyNow.linkLabel}</a>
+                  <a href={sector.whyNow.href} class:list={['font-bold underline underline-offset-4', d ? 'text-white' : 'text-ink']}>{sector.whyNow.linkLabel}</a>
                 </p>
               )}
-              <a
-                href={`/contact?topic=${encodeURIComponent(sector.name)}`}
-                class="mt-7 inline-flex items-center justify-center rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:bg-black"
-              >
-                Consult with us
-              </a>
+              <Pill href={`/contact?topic=${encodeURIComponent(sector.name)}`} label="Consult with us" variant={d ? 'light' : 'dark'} class="mt-7" />
             </div>
           </div>
 
-          <div class="mt-14 grid gap-px overflow-hidden rounded-[2rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          <div class="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {sector.useCases.map((useCase, n) => (
-              <div class="flex flex-col bg-white p-6 sm:p-7">
+              <div class:list={['flex flex-col rounded-[1.75rem] p-6 sm:p-7', tone.cell]}>
                 <span class="font-feature text-sm font-semibold text-accent">0{n + 1}</span>
-                <h3 class="mt-2 text-lg font-bold tracking-tight text-ink">{useCase.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-ink-dim">{useCase.body}</p>
+                <h3 class:list={['mt-2 text-lg font-bold tracking-tight', d ? 'text-white' : 'text-ink']}>{useCase.title}</h3>
+                <p class:list={['mt-2 text-sm leading-relaxed', d ? 'text-white/60' : 'text-ink-dim']}>{useCase.body}</p>
               </div>
             ))}
           </div>
 
           <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {sector.outcomes.map((outcome) => (
-              <li class="flex gap-3 text-sm font-semibold leading-snug text-ink">
+              <li class:list={['flex gap-3 text-sm font-semibold leading-snug', d ? 'text-white' : 'text-ink']}>
                 <svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
@@ -181,7 +181,7 @@ const schema = {
           </ul>
 
           {sector.slug === 'sme-digital-shift' && (
-            <div id="training" class="mt-14 scroll-mt-24 rounded-[2rem] border border-line bg-paper-dim p-6 sm:p-8">
+            <div id="training" class="mt-14 scroll-mt-24 rounded-[1.75rem] bg-white p-6 sm:p-8">
               <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
                 <div>
                   <h3 class="h-sub font-black tracking-tight text-ink">Training and <span class="badge-highlight">classes</span></h3>
@@ -194,7 +194,7 @@ const schema = {
                 </div>
                 <div class="grid gap-4 sm:grid-cols-2">
                   {TRAINING_CLASSES.map((course) => (
-                    <div class="rounded-2xl border border-line bg-white p-5">
+                    <div class="rounded-2xl bg-paper-dim p-5">
                       <p class="text-xs font-bold uppercase tracking-wide text-accent">{course.length}</p>
                       <h4 class="mt-1.5 text-base font-bold tracking-tight text-ink">{course.title}</h4>
                       <p class="mt-1.5 text-sm leading-relaxed text-ink-dim">{course.body}</p>
@@ -206,7 +206,8 @@ const schema = {
           )}
         </Container>
       </section>
-    ))
+      );
+    })
   }
 
   <FAQ title="Questions about our solutions" items={faqs} />

@@ -224,3 +224,13 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - **Docs:** `docs/TECH-STACK.md` added.
 - **Verified:** `npm run build` (astro check 0 errors), 0 broken internal links. NOT verified: visual check of new bands/pages in a browser.
 - **Next:** founder reviews locally, says "push". Open: legal pages not merged, Marketplace wording left in terms/QuoteForm, services pages not merged further.
+
+## 2026-10-17 (later) — Reference-led UI redesign (uncommitted, not pushed)
+
+- Founder authorised a full UI redesign from 10 screenshots; **floating nav style stays**. Direction written to `docs/DESIGN.md` (Direction v2).
+- New: `Pill.astro`, `SectionHead.astro`, `HomeHero.astro`, `data/pilot.ts`; tokens/radii/buttons/eyebrow in `global.css`.
+- Rebuilt: home, `/solutions` (tone cycle incl. matte dark), `/services` index, `/insights` index (featured + grid + sidebar, no modal), `/contact`, banner + CTA band. Restyled: `/express` tiers, `/about` process band.
+- Fixed: Contact map used CARTO tiles that now show "API KEY REQUIRED"; switched to OpenStreetMap tiles.
+- Gotcha: an apostrophe right after a `class:list={[...]}>` expression in an .astro file (`>What's Included:`) made the Astro compiler run out of memory; use `&apos;`.
+- Verified: `npm run build` 0 errors, 22 pages, 0 broken links, no overflow at 375px on 10 pages (playwright-core + Edge in scratchpad).
+- Not yet redesigned in the new style: `/systems` body (DemoStage), category service pages, legal pages, footer. Home sections after the hero still use hotlinked Unsplash/Mixkit.

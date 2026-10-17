@@ -1,25 +1,23 @@
 ---
 import Container from '../ui/Container.astro';
+import Pill from '../ui/Pill.astro';
 ---
 
-<section class="band-light border-t border-line/60 py-14 md:py-20">
+<section class="py-6 md:py-10" data-tight>
   <Container>
-    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-      <div class="max-w-2xl">
-        <h2 class="h-section font-black tracking-tight text-ink">
-          Need a website or <span class="badge-highlight">marketing</span> too?
+    <div class="grid gap-8 rounded-[2.25rem] bg-tint p-8 md:grid-cols-[1.3fr_1fr] md:items-center md:p-12">
+      <div>
+        <p class="mono-label text-tint-ink">Also available</p>
+        <h2 class="mt-4 font-display text-[clamp(1.6rem,1.15rem+1.8vw,2.4rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
+          Need a website or marketing too?
         </h2>
-        <p class="mt-4 text-base leading-relaxed text-ink-dim">
+        <p class="mt-3 max-w-lg text-sm leading-relaxed text-ink-dim">
           We also build websites and apps, and run design and marketing. Fixed prices, live in days.
         </p>
       </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="/express" class="inline-flex items-center justify-center rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:scale-105 hover:bg-black">
-          See website packages
-        </a>
-        <a href="/systems" class="inline-flex items-center justify-center rounded-full border border-line bg-white px-6 py-3.5 text-sm font-semibold text-ink transition-all hover:scale-105 hover:bg-paper-dim">
-          Browse sample systems
-        </a>
+      <div class="flex flex-wrap gap-3 md:justify-end">
+        <Pill href="/express" label="Website packages" />
+        <Pill href="/systems" label="Sample systems" variant="light" />
       </div>
     </div>
   </Container>

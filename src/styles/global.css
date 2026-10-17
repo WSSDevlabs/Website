@@ -3,14 +3,16 @@
 
 @theme {
   /* ── Light cream & off-white theme with matte dark grey highlights ── */
-  --color-paper: #fcfbfa; /* page background — crisp light off-white */
-  --color-paper-dim: #f3f2ee; /* soft light cream surface */
-  --color-paper-deep: #e8e6df; /* inset panels, deepest light surface */
-  --color-ink: #19191b; /* primary text — matte dark grey / near black */
+  --color-paper: #f6f6f4; /* page background — soft light off-white */
+  --color-paper-dim: #eeeeeb; /* soft grey card surface */
+  --color-paper-deep: #e3e3de; /* inset panels, deepest light surface */
+  --color-tint: #e6edfb; /* pastel blue card tint */
+  --color-tint-ink: #1d3a8a;
+  --color-ink: #121214; /* primary text — matte dark grey / near black */
   --color-ink-soft: #232427; /* dark highlight panel surface */
   --color-ink-dim: #5c5d61; /* body copy — neutral grey */
   --color-muted: #8e8e8b; /* placeholders, tertiary */
-  --color-line: #e2dfd7; /* hairlines — crisp, clean border joints */
+  --color-line: #e4e4df; /* hairlines */
 
   /* Matte neutral dark: used sparingly as a highlight */
   --color-charcoal: #19191b;
@@ -63,8 +65,8 @@
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
-  --radius-3xl: 1.5rem;
-  --radius-4xl: 2rem;
+  --radius-3xl: 1.75rem;
+  --radius-4xl: 2.25rem;
 }
 
 @layer base {
@@ -89,7 +91,7 @@
     inset: 0;
     z-index: 999;
     pointer-events: none;
-    opacity: 0.025;
+    opacity: 0;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
@@ -146,36 +148,11 @@
     color: var(--color-ink);
   }
 
-  /* Red accent badge highlight for words in headers, with a subtle heartbeat pulse */
+  /* Headline emphasis: accent-coloured words, no pill (2026-10-17 redesign) */
   .badge-highlight {
-    display: inline-block;
-    background-color: var(--color-accent);
-    color: #ffffff;
-    padding: 0.12em 0.5em;
-    border-radius: 0.75rem;
-    font-weight: 800;
-    box-shadow: 0 4px 16px -2px rgba(217, 45, 32, 0.45);
-    animation: badge-heartbeat 2.4s ease-in-out infinite;
-  }
-
-  @media (min-width: 640px) {
-    .badge-highlight {
-      white-space: nowrap;
-    }
-  }
-
-  @keyframes badge-heartbeat {
-    0%, 100% { transform: scale(1); }
-    14% { transform: scale(1.06); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.04); }
-    56% { transform: scale(1); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .badge-highlight {
-      animation: none;
-    }
+    display: inline;
+    color: var(--color-accent);
+    font-weight: inherit;
   }
 
   .badge-highlight-dark {
@@ -229,12 +206,25 @@
     max-width: 42rem;
   }
 
+  /* Eyebrow: small dot + uppercase label, as in the reference layouts */
   .mono-label {
-    font-family: var(--font-mono);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
     font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+  }
+
+  .mono-label::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background-color: currentColor;
   }
 
   .stat-num {
@@ -308,21 +298,18 @@
   /* ── Cards ──────────────────────────────────────────────── */
   .card {
     position: relative;
-    border-radius: 0.5rem;
-    border: 1px solid var(--color-line);
-    background-color: var(--color-paper);
-    box-shadow: var(--shadow-card);
+    border-radius: 1.75rem;
+    border: 0;
+    background-color: var(--color-paper-dim);
+    box-shadow: none;
     transition:
       transform 0.35s var(--ease-out-expo),
-      box-shadow 0.35s var(--ease-out-expo),
-      border-color 0.35s var(--ease-out-expo);
+      background-color 0.35s var(--ease-out-expo);
   }
 
   @media (hover: hover) {
     .card-lift:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-card-hover);
-      border-color: color-mix(in srgb, var(--color-accent) 32%, var(--color-line));
+      transform: translateY(-4px);
     }
   }
 
@@ -726,6 +713,78 @@ main .card-lift:hover {
 }
 
 /* Roomier vertical rhythm between sections (the first section is the hero and keeps its own offset) */
-main > section:not(:first-of-type) {
-  padding-block: clamp(5rem, 3.5rem + 4.5vw, 9rem);
+main > section:not(:first-of-type):not([data-tight]) {
+  padding-block: clamp(4.5rem, 3rem + 4vw, 8rem);
+}
+
+
+/* ── Redesign components (2026-10-17) ─────────────────────── */
+@layer components {
+  /* Black pill button with a white circle arrow */
+  .btn-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    border-radius: 9999px;
+    background-color: var(--color-ink);
+    color: #fff;
+    padding: 0.35rem 0.35rem 0.35rem 1.4rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: transform 0.3s var(--ease-out-expo), background-color 0.3s;
+  }
+  .btn-arrow .btn-arrow__dot {
+    display: flex;
+    height: 2.4rem;
+    width: 2.4rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #fff;
+    color: var(--color-ink);
+    transition: transform 0.3s var(--ease-out-expo);
+  }
+  .btn-arrow:hover .btn-arrow__dot {
+    transform: translateX(3px);
+  }
+  .btn-arrow--light {
+    background-color: #fff;
+    color: var(--color-ink);
+  }
+  .btn-arrow--light .btn-arrow__dot {
+    background-color: var(--color-ink);
+    color: #fff;
+  }
+  .btn-arrow--ghost {
+    background-color: rgb(255 255 255 / 0.14);
+    color: #fff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .btn-arrow--ghost .btn-arrow__dot {
+    background-color: #fff;
+    color: var(--color-ink);
+  }
+
+  /* Rounded inset hero container */
+  .hero-frame {
+    margin: 0.75rem;
+    border-radius: 2.25rem;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .hero-frame {
+      margin: 1rem;
+      border-radius: 2.75rem;
+    }
+  }
+
+  /* Frosted stat chip over imagery */
+  .chip-glass {
+    border-radius: 1.5rem;
+    background: rgb(246 246 244 / 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--color-ink);
+  }
 }

@@ -1,5 +1,6 @@
 ---
 import Container from '../ui/Container.astro';
+import Pill from '../ui/Pill.astro';
 
 type Props = {
   title: string;
@@ -11,28 +12,14 @@ type Props = {
 const { title, subtitle, ctaLabel = 'Start a Project', ctaHref = '/contact' } = Astro.props;
 ---
 
-<section class="py-14 md:py-20">
+<section class="py-10 md:py-14" data-tight>
   <Container>
-    <div
-      class="relative overflow-hidden rounded-[0.875rem] bg-accent px-8 py-12 md:px-16 md:py-16"
-      style="background-image: radial-gradient(80% 120% at 15% 0%, rgb(255 255 255 / 0.14), transparent 55%), radial-gradient(70% 100% at 100% 100%, rgb(12 18 32 / 0.28), transparent 60%);"
-    >
-      <div class="grain-overlay" aria-hidden="true"></div>
-      <div class="relative flex flex-col items-start gap-10 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 class="h-section !text-white" data-split>{title}</h2>
-          {subtitle && <p class="mt-4 max-w-xl text-lg leading-relaxed text-white/75">{subtitle}</p>}
-        </div>
-        <a
-          href={ctaHref}
-          data-magnetic
-          class="inline-flex shrink-0 items-center gap-2.5 rounded-full bg-paper px-8 py-4 text-base font-semibold text-ink shadow-float transition-all duration-300 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-0.5 hover:shadow-[0_20px_48px_-12px_rgb(12_18_32/0.4)]"
-        >
-          {ctaLabel}
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
+    <div class="relative overflow-hidden rounded-[2.25rem] bg-charcoal px-8 py-14 text-white md:rounded-[2.75rem] md:px-16 md:py-20">
+      <div class="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/25 blur-3xl" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-2xl text-center">
+        <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-white">{title}</h2>
+        {subtitle && <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/65">{subtitle}</p>}
+        <Pill href={ctaHref} label={ctaLabel} variant="light" class="mt-9" />
       </div>
     </div>
   </Container>

@@ -1,242 +1,120 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
+import Pill from '../../components/ui/Pill.astro';
+import CTABand from '../../components/sections/CTABand.astro';
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 
-const estimateReadMinutes = (text: string) => Math.max(3, Math.round(text.split(/\s+/).length / 15));
+const fmt = (d: Date) => d.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+const [featured, ...rest] = posts;
 
-const feedItems = await Promise.all(
-  posts.map(async (post) => {
-    const { Content } = await render(post);
-    return {
-      id: post.id,
-      title: post.data.title,
-      excerpt: post.data.description,
-      category: post.data.tags[0] ?? 'Insight',
-      dateLabel: post.data.publishDate.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' }),
-      readMinutes: estimateReadMinutes(post.data.description),
-      image: post.data.coverImage,
-      sourceUrl: post.data.sourceUrl,
-      sourceLabel: post.data.sourceLabel,
-      Content
-    };
-  })
-);
-
-const [featured, ...rest] = feedItems;
-const latest = rest.slice(0, 4);
-const more = rest.slice(4, 7);
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
 ---
 
 <BaseLayout
   title="Insights: WSS DevLabs"
-  description="Practical, sourced notes on web development, SEO, and running a small business in Malaysia."
+  description="Practical, sourced notes on Malaysian policy, AI, IoT and technology for business."
   path="/insights"
 >
-  {featured && (
-    <section class="border-b border-line">
-      <Container class="pt-10 pb-10 md:pt-36 md:pb-14">
-        <div class="grid gap-6 lg:grid-cols-3">
-          <!-- Featured -->
-          <a
-            href={`/insights/${featured.id}`}
-            data-open-insight={featured.id}
-            class="group relative block w-full overflow-hidden rounded-3xl text-left lg:col-span-2"
-          >
-            <div class="relative aspect-[4/3] sm:aspect-[16/10]">
-              <img
-                src={featured.image}
-                alt={featured.title}
-                loading="eager"
-                width="900"
-                height="560"
-                class="h-full w-full object-cover transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-105"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/25 to-transparent" aria-hidden="true"></div>
-              <span class="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-paper/95 px-3 py-1.5 text-xs font-semibold text-ink">
-                <span class="h-1.5 w-1.5 rounded-full bg-accent-red" aria-hidden="true"></span>
-                {featured.category}
-              </span>
-              <div class="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                <h1 class="h-sub text-white">{featured.title}</h1>
-                <p class="mt-2 text-xs text-white/60">{featured.dateLabel} &middot; {featured.readMinutes} min read</p>
-              </div>
-            </div>
-          </a>
-
-          <!-- Latest post list -->
-          {latest.length > 0 && (
-            <div>
-              <h2 class="text-sm font-bold uppercase tracking-wide text-ink">Latest post</h2>
-              <div class="mt-5 space-y-5">
-                {
-                  latest.map((item) => (
-                    <a href={`/insights/${item.id}`} data-open-insight={item.id} class="group flex w-full items-start gap-3 text-left">
-                      <div class="h-16 w-16 shrink-0 overflow-hidden rounded-xl">
-                        <img src={item.image} alt={item.title} loading="lazy" width="100" height="100" class="h-full w-full object-cover" />
-                      </div>
-                      <div class="min-w-0">
-                        <p class="line-clamp-2 text-sm font-semibold leading-snug text-ink transition-colors group-hover:text-accent">{item.title}</p>
-                        <p class="mt-1.5 text-xs text-ink-dim">{item.dateLabel} &middot; {item.readMinutes} min read</p>
-                      </div>
-                    </a>
-                  ))
-                }
-              </div>
-            </div>
-          )}
-        </div>
-      </Container>
-    </section>
-  )}
-
-  <!-- More from WSS DevLabs: carousel -->
+  <!-- Featured post: rounded image hero -->
   {
-    more.length > 0 && (
-      <section class="border-b border-line bg-paper-dim">
-        <Container class="py-10 md:py-14">
-          <div class="flex items-center justify-between">
-            <h2 class="text-sm font-bold uppercase tracking-wide text-ink">More from WSS DevLabs</h2>
-            <div class="flex gap-2">
-              <button
-                type="button"
-                aria-label="Previous"
-                data-more-prev
-                class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-ink transition-colors hover:bg-ink hover:text-white"
-              >
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
-              </button>
-              <button
-                type="button"
-                aria-label="Next"
-                data-more-next
-                class="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper text-ink transition-colors hover:bg-ink hover:text-white"
-              >
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-              </button>
-            </div>
+    featured && (
+      <section class="px-3 pb-6 pt-24 md:px-4 md:pt-36" data-noreveal>
+        <a
+          href={`/insights/${featured.id}`}
+          class="group relative isolate flex min-h-[26rem] flex-col justify-end overflow-hidden rounded-[2.25rem] bg-charcoal p-8 text-white md:min-h-[34rem] md:rounded-[2.75rem] md:p-14"
+        >
+          <img src={featured.data.coverImage} alt="" loading="eager" width="1600" height="900" class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/30 to-black/10" aria-hidden="true"></div>
+          <p class="mono-label text-white/70">Featured post</p>
+          <h1 class="mt-4 max-w-3xl font-display text-[clamp(2rem,1.2rem+3.4vw,4rem)] font-bold leading-[1.04] tracking-[-0.035em]">
+            {featured.data.title}
+          </h1>
+          <p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">{featured.data.description}</p>
+          <div class="mt-7 flex flex-wrap items-center gap-4">
+            <span class="btn-arrow btn-arrow--light">
+              <span>Read more</span>
+              <span class="btn-arrow__dot">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </span>
+            </span>
+            <span class="text-xs text-white/60">{fmt(featured.data.publishDate)}</span>
           </div>
-
-          <div class="mt-8 mask-fade-x -mx-6 px-6 md:-mx-10 md:px-10">
-            <div class="flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" data-more-track>
-              {
-                more.map((item) => (
-                  <a href={`/insights/${item.id}`} data-open-insight={item.id} class="tilt-card card group w-[280px] shrink-0 snap-start overflow-hidden !rounded-3xl p-0 text-left sm:w-[320px]">
-                    <div class="relative h-44 overflow-hidden">
-                      <img src={item.image} alt={item.title} loading="lazy" width="640" height="400" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                      <span class="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-paper/95 px-2.5 py-1 text-[11px] font-semibold text-ink">
-                        <span class="h-1.5 w-1.5 rounded-full bg-accent-red" aria-hidden="true"></span>
-                        {item.category}
-                      </span>
-                    </div>
-                    <div class="flex flex-col p-5">
-                      <p class="text-sm font-semibold leading-snug text-ink transition-colors group-hover:text-accent">{item.title}</p>
-                      <p class="mt-2 line-clamp-2 text-xs leading-relaxed text-ink-dim">{item.excerpt}</p>
-                      <p class="mt-3 text-xs text-ink-dim">{item.dateLabel} &middot; {item.readMinutes} min read</p>
-                    </div>
-                  </a>
-                ))
-              }
-            </div>
-          </div>
-        </Container>
+        </a>
       </section>
     )
   }
 
-  <!-- Hidden per-post content, cloned into the modal on open -->
-  {feedItems.map((item) => (
-    <template data-insight-template={item.id} data-source-url={item.sourceUrl} data-source-label={item.sourceLabel}>
-      <p class="mono-label text-ink-dim">{item.category} &middot; {item.dateLabel} &middot; {item.readMinutes} min read</p>
-      <h2 class="mt-2 text-2xl font-bold leading-snug text-ink">{item.title}</h2>
-      <div class="prose prose-neutral mt-5 max-w-none text-sm leading-relaxed">
-        <item.Content />
-      </div>
-    </template>
-  ))}
-
-  <!-- Modal -->
-  <div id="insight-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-ink/60 p-4 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-labelledby="insight-modal-title">
-    <div class="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl bg-paper shadow-2xl">
-      <button type="button" id="insight-modal-close" aria-label="Close" class="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-line bg-paper text-ink-dim transition-colors hover:bg-paper-dim hover:text-ink">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
-      </button>
-      <div class="overflow-y-auto p-6 md:p-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div id="insight-modal-body"></div>
-        <div class="mt-8 border-t border-line pt-6">
-          <p class="text-xs text-ink-dim">Written after reading and studying the source below. Want the original?</p>
-          <a id="insight-modal-source" href="#" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 rounded-full border border-line bg-paper-dim px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
-            <span id="insight-modal-source-label">Visit the source</span>
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-          </a>
+  <!-- Latest posts + sidebar -->
+  <section class="py-14 md:py-20" data-tight>
+    <Container>
+      <div class="grid gap-6 lg:grid-cols-[1fr_20rem]">
+        <div class="rounded-[2rem] bg-paper-dim p-5 md:p-7">
+          <h2 class="font-display text-xl font-bold tracking-tight text-ink">Latest posts</h2>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {
+              rest.map((post) => (
+                <a href={`/insights/${post.id}`} class="group flex flex-col rounded-[1.5rem] bg-white p-3 transition-transform duration-300 hover:-translate-y-1">
+                  <div class="relative aspect-[4/3] overflow-hidden rounded-[1.1rem] bg-charcoal">
+                    <img src={post.data.coverImage} alt="" loading="lazy" width="600" height="450" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <span class="absolute left-2.5 top-2.5 rounded-full bg-white/90 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-ink">
+                      {post.data.tags[0] ?? 'Insight'}
+                    </span>
+                  </div>
+                  <div class="flex flex-1 flex-col p-3">
+                    <h3 class="text-sm font-bold leading-snug tracking-tight text-ink">{post.data.title}</h3>
+                    <p class="mt-auto pt-4 text-xs text-ink-dim">{fmt(post.data.publishDate)}</p>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
         </div>
+
+        <aside class="grid content-start gap-6">
+          <div class="rounded-[2rem] bg-paper-dim p-6">
+            <h2 class="font-display text-lg font-bold tracking-tight text-ink">Popular posts</h2>
+            <ul class="mt-5 space-y-4">
+              {
+                posts.slice(0, 4).map((post) => (
+                  <li>
+                    <a href={`/insights/${post.id}`} class="group flex items-center gap-3">
+                      <img src={post.data.coverImage} alt="" loading="lazy" width="120" height="120" class="h-14 w-14 shrink-0 rounded-xl object-cover" />
+                      <span>
+                        <span class="block text-sm font-semibold leading-snug text-ink group-hover:underline">{post.data.title}</span>
+                        <span class="mt-0.5 block text-xs text-ink-dim">{fmt(post.data.publishDate)}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="rounded-[2rem] bg-tint p-6">
+            <h2 class="font-display text-lg font-bold tracking-tight text-ink">Topics</h2>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {tags.map((tag) => <li class="rounded-full bg-white px-3.5 py-1.5 text-xs font-semibold text-ink">{tag}</li>)}
+            </ul>
+          </div>
+
+          <div class="rounded-[2rem] bg-charcoal-soft p-6 text-white">
+            <h2 class="font-display text-lg font-bold tracking-tight">Have a problem on site?</h2>
+            <p class="mt-2 text-sm leading-relaxed text-white/60">Tell us what goes wrong. We reply within one business day.</p>
+            <Pill href="/contact" label="Consult with us" variant="light" class="mt-5" />
+          </div>
+        </aside>
       </div>
-    </div>
-  </div>
+    </Container>
+  </section>
+
+  <CTABand
+    title="Want these ideas applied to your site?"
+    subtitle="Every project starts with a site visit and a small pilot."
+    ctaLabel="Consult with us"
+  />
 </BaseLayout>
-
-<script>
-  function initInsightModal() {
-    const modal = document.getElementById('insight-modal');
-    const body = document.getElementById('insight-modal-body');
-    const closeBtn = document.getElementById('insight-modal-close');
-    const sourceLink = document.getElementById('insight-modal-source') as HTMLAnchorElement | null;
-    const sourceLabel = document.getElementById('insight-modal-source-label');
-    if (!modal || !body || !closeBtn || !sourceLink || !sourceLabel || modal.dataset.bound) return;
-    modal.dataset.bound = '1';
-
-    const openers = document.querySelectorAll<HTMLElement>('[data-open-insight]');
-    openers.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const id = btn.dataset.openInsight;
-        const template = document.querySelector<HTMLTemplateElement>(`template[data-insight-template="${CSS.escape(id ?? '')}"]`);
-        if (!template) return;
-        e.preventDefault();
-        body.innerHTML = '';
-        body.appendChild(template.content.cloneNode(true));
-        sourceLink.href = template.dataset.sourceUrl ?? '#';
-        sourceLabel.textContent = template.dataset.sourceLabel ?? 'Visit the source';
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    const close = () => {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.body.style.overflow = '';
-    };
-
-    closeBtn.addEventListener('click', close);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) close();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) close();
-    });
-  }
-
-  initInsightModal();
-  document.addEventListener('astro:page-load', initInsightModal);
-
-  function initMoreCarousel() {
-    const track = document.querySelector<HTMLElement>('[data-more-track]');
-    if (!track || track.dataset.bound) return;
-    track.dataset.bound = '1';
-
-    const prev = document.querySelector<HTMLButtonElement>('[data-more-prev]');
-    const next = document.querySelector<HTMLButtonElement>('[data-more-next]');
-    const step = () => (track.firstElementChild as HTMLElement | null)?.getBoundingClientRect().width ?? 300;
-
-    prev?.addEventListener('click', () => track.scrollBy({ left: -(step() + 20), behavior: 'smooth' }));
-    next?.addEventListener('click', () => track.scrollBy({ left: step() + 20, behavior: 'smooth' }));
-  }
-
-  initMoreCarousel();
-  document.addEventListener('astro:page-load', initMoreCarousel);
-</script>

@@ -1,34 +1,159 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ServicesGrid from '../../components/sections/ServicesGrid.astro';
-import LatestProjects from '../../components/sections/LatestProjects.astro';
-import Differentiator from '../../components/sections/Differentiator.astro';
+import Container from '../../components/ui/Container.astro';
+import SectionHead from '../../components/ui/SectionHead.astro';
+import Pill from '../../components/ui/Pill.astro';
+import VideoMedia from '../../components/media/VideoMedia.astro';
 import CTABand from '../../components/sections/CTABand.astro';
+import { CLIPS } from '../../data/media';
+import { SERVICE_CATEGORIES } from '../../data/serviceCategories';
 
-const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const u = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=900&h=700&q=75`;
+const IMAGES: Record<string, string> = {
+  'artificial-intelligence-automation': u('1555255707-c07966088b7b'),
+  'iot-solutions-infrastructure': u('1581091226825-a6a2a5aee158'),
+  'web-software-app-development': u('1517180102446-f3ece451e9d8'),
+  'digital-design-media-marketing': u('1512941937669-90a1b58e7e9c'),
+  'digital-consulting-solutions': u('1551288049-bebda4e38f71')
+};
+
+const reasons = [
+  {
+    title: 'One Team, Every Need',
+    body: 'No juggling multiple vendors. One team covers your website, systems, and ongoing support, so nothing falls through the cracks.'
+  },
+  {
+    title: 'Built Around Your Brief',
+    body: 'We scope every project around what actually works for you, your budget, your timeline, your existing setup, never a rigid, one-size-fits-all package.'
+  },
+  {
+    title: 'Direct with the Builder',
+    body: 'You get straight answers from the people actually doing the work, no account-manager layers, no waiting days for a reply.'
+  },
+  {
+    title: 'Delivered Properly',
+    body: 'We stay flexible on how we get there, but never on quality, so what you receive works reliably from day one.'
+  }
+];
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', siteUrl).toString() },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: new URL('/services', siteUrl).toString() }
+    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: new URL('/services', Astro.site).toString() }
   ]
 };
 ---
 
 <BaseLayout
   title="Services: WSS DevLabs"
-  description="Web development, mobile apps, custom systems, AI, branding, marketing, redesigns, grants, and business launches. Whatever the digital need, one team handles it."
+  description="AI and automation, IoT, systems, web and mobile apps, design and marketing, and consulting. One team handles whatever the digital need."
   path="/services"
   schema={schema}
 >
+  <!-- Banner -->
+  <section class="px-3 pt-24 md:px-4 md:pt-36" data-noreveal>
+    <div class="relative isolate overflow-hidden rounded-[2.25rem] bg-charcoal px-8 py-20 text-white md:rounded-[2.75rem] md:px-16 md:py-28">
+      <div class="absolute inset-0 -z-10 opacity-50">
+        <VideoMedia clip={CLIPS.network} eager class="h-full w-full" />
+      </div>
+      <div class="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 to-black/20" aria-hidden="true"></div>
+      <p class="mono-label text-white/60">What we do</p>
+      <h1 class="mt-5 max-w-3xl font-display text-[clamp(2.6rem,1.4rem+4.6vw,5rem)] font-bold leading-[1] tracking-[-0.04em]">Services</h1>
+      <p class="mt-5 max-w-xl text-base leading-relaxed text-white/70">
+        AI, IoT and systems first. Websites, design, marketing and consulting are also available from the same team.
+      </p>
+    </div>
+  </section>
 
-  <ServicesGrid />
+  <!-- Intro: statement + key areas -->
+  <section class="py-16 md:py-24" data-tight>
+    <Container>
+      <SectionHead
+        label="What we do"
+        title="Technology that is built around your site, your data and your team, then supported after launch."
+        body="Pick a service below. Each page shows what is included, how we work and, where it applies, the price."
+      />
+      <ul class="mt-10 grid gap-3 sm:grid-cols-2 md:ml-[calc(38%+1.5rem)] md:grid-cols-1 lg:grid-cols-2">
+        {
+          SERVICE_CATEGORIES.map((category) => (
+            <li class="flex items-center gap-3 text-sm font-semibold text-ink">
+              <svg class="h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+              {category.title}
+            </li>
+          ))
+        }
+      </ul>
+    </Container>
+  </section>
 
-  <LatestProjects />
-  <Differentiator />
+  <!-- Service categories -->
+  <section class="rounded-t-[2.75rem] bg-paper-dim py-20 md:py-28">
+    <Container>
+      <SectionHead
+        centered
+        label="Our services"
+        title="Tailored services to build, connect and grow"
+        body="Five areas, one team. Start with the one that matches your problem."
+      />
+      <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+        {
+          SERVICE_CATEGORIES.map((category, i) => (
+            <a
+              href={`/services/${category.slug}`}
+              class:list={[
+                'group flex flex-col rounded-[1.75rem] p-3 transition-transform duration-300 hover:-translate-y-1',
+                i === 0 ? 'bg-charcoal-soft text-white lg:col-span-3' : i === 1 ? 'bg-tint lg:col-span-3' : 'bg-white lg:col-span-2'
+              ]}
+            >
+              <div class:list={['relative overflow-hidden rounded-[1.25rem] bg-charcoal', i < 2 ? 'aspect-[16/8]' : 'aspect-[16/10]']}>
+                <img src={IMAGES[category.slug]} alt="" loading="lazy" width="900" height="700" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              </div>
+              <div class="flex flex-1 flex-col p-5">
+                <p class:list={['text-xs font-bold uppercase tracking-wide', i === 0 ? 'text-white/50' : 'text-ink-dim']}>{category.tagline}</p>
+                <h3 class:list={['mt-2 text-lg font-bold tracking-tight', i === 0 ? 'text-white' : 'text-ink']}>{category.title}</h3>
+                <p class:list={['mt-2 text-sm leading-relaxed', i === 0 ? 'text-white/60' : 'text-ink-dim']}>{category.description}</p>
+                <span class:list={['mt-5 inline-flex items-center gap-1.5 text-sm font-bold', i === 0 ? 'text-white' : 'text-ink']}>
+                  Explore
+                  <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- Why choose us (dark, rounded top over the previous band) -->
+  <section class="relative -mt-10 rounded-t-[2.75rem] bg-charcoal-soft pb-20 pt-28 text-white md:-mt-14 md:pb-28 md:pt-36">
+    <Container>
+      <SectionHead dark label="Why choose us" title="One team, built around your brief, delivered properly." />
+      <div class="mt-14 grid gap-4 lg:grid-cols-[1fr_1.2fr]">
+        <div class="relative min-h-[22rem] overflow-hidden rounded-[1.75rem] bg-charcoal">
+          <VideoMedia clip={CLIPS.workshop} class="h-full w-full" />
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {
+            reasons.map((reason, i) => (
+              <div class="rounded-[1.75rem] bg-white/[0.07] p-6">
+                <span class="font-feature text-2xl font-semibold text-white">0{i + 1}</span>
+                <h3 class="mt-6 text-base font-bold tracking-tight text-white">{reason.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-white/60">{reason.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="mt-10 flex justify-center">
+        <Pill href="/express" label="See website packages" variant="light" />
+      </div>
+    </Container>
+  </section>
+
   <CTABand
     title="Ready to start your project?"
-    subtitle="Tell us what you're building, and we'll respond within one business day with a fixed-price proposal."
+    subtitle="Tell us what you are building, and we will respond within one business day."
   />
 </BaseLayout>

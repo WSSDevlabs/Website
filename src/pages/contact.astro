@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
+import Pill from '../components/ui/Pill.astro';
+import VideoMedia from '../components/media/VideoMedia.astro';
+import { CLIPS } from '../data/media';
 import { SITE } from '../data/site';
 ---
 
@@ -10,167 +13,164 @@ import { SITE } from '../data/site';
   path="/contact"
 >
 
-  <!-- Contact intro + form -->
-  <section class="border-b border-line">
-    <Container class="pt-10 pb-12 md:pt-36 md:pb-16">
-      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <!-- Left: heading + info -->
+  <!-- Heading -->
+  <section class="px-0 pb-6 pt-28 md:pt-40" data-tight>
+    <Container>
+      <div class="grid items-end gap-6 md:grid-cols-[1.2fr_1fr]">
         <div>
           <p class="mono-label text-ink-dim">Get in touch</p>
-          <h1 class="h-display mt-3 !text-[clamp(2rem,1.3rem+2.6vw,3.2rem)]" data-split>
-            We are always ready to help you and <span class="badge-highlight">answer your questions</span>
-          </h1>
-
-          <div class="mt-10 grid gap-8 sm:grid-cols-2">
-            <div>
-              <p class="mono-label text-ink-dim">Reach us</p>
-              <p class="mt-2 text-sm font-semibold text-ink">{SITE.phone}</p>
-            </div>
-            <div>
-              <p class="mono-label text-ink-dim">Our Location</p>
-              <p class="mt-2 text-sm font-semibold text-ink">{SITE.address}</p>
-            </div>
-            <div>
-              <p class="mono-label text-ink-dim">Email</p>
-              <p class="mt-2 text-sm font-semibold text-ink" data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]} />
-            </div>
-            <div>
-              <p class="mono-label text-ink-dim">Social Network</p>
-              <div class="mt-2 flex items-center gap-2">
-                {SITE.social.linkedin && (
-                  <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:bg-accent hover:text-white">
-                    <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
-                  </a>
-                )}
-                {SITE.social.instagram && (
-                  <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:bg-accent hover:text-white">
-                    <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" /></svg>
-                  </a>
-                )}
-                {SITE.social.facebook && (
-                  <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-dim transition-all hover:border-accent hover:bg-accent hover:text-white">
-                    <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
+          <h1 class="mt-4 font-display text-[clamp(2.8rem,1.6rem+5vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.045em] text-ink">Contact us</h1>
         </div>
+        <p class="max-w-sm text-sm leading-relaxed text-ink-dim md:ml-auto md:text-right">
+          We are always ready to help you and answer your questions. Tell us what goes wrong on site, and we reply within one business day.
+        </p>
+      </div>
+    </Container>
+  </section>
 
-        <!-- Right: dark quick-contact form -->
-        <!-- Right: Light quick-contact form with Date/Time picker -->
-        <div class="rounded-3xl border border-line bg-white p-8 md:p-10 shadow-card">
-          <p class="mono-label text-accent font-bold tracking-widest uppercase">FREE QUOTATION</p>
-          <h2 class="text-xl font-bold text-ink mt-1">Get In Touch</h2>
-          <p class="mt-1.5 text-sm text-ink-dim">Tell us what you're building and pick a preferred date &amp; time for an online consultation.</p>
+  <!-- Form + image -->
+  <section class="pb-10" data-tight>
+    <Container>
+      <div class="grid gap-4 lg:grid-cols-[1.25fr_1fr]">
+        <div class="rounded-[2rem] bg-paper-dim p-6 md:p-9">
+          <p class="text-sm font-bold text-ink">Free quotation</p>
+          <p class="mt-1 text-sm text-ink-dim">Tell us what you're building and pick a preferred date &amp; time for an online consultation.</p>
 
-          <form id="contact-form" class="mt-6 space-y-4" onsubmit="return false;">
+          <form id="contact-form" class="mt-7 space-y-4" onsubmit="return false;">
             <div class="grid gap-4 sm:grid-cols-2">
               <div>
-                <label for="c-name" class="mb-1.5 block text-xs font-semibold text-ink">Your Name <span class="text-accent-red">*</span></label>
-                <input id="c-name" type="text" placeholder="Full name" required class="w-full rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
+                <label for="c-name" class="mb-1.5 block text-xs font-semibold text-ink">Your name <span class="text-accent">*</span></label>
+                <input id="c-name" type="text" placeholder="Full name" required class="w-full rounded-2xl border-0 bg-white px-4 py-3.5 text-sm text-ink placeholder:text-ink-dim/50 focus:outline-none focus:ring-2 focus:ring-ink" />
               </div>
               <div>
-                <label for="c-email" class="mb-1.5 block text-xs font-semibold text-ink">Email <span class="text-accent-red">*</span></label>
-                <input id="c-email" type="email" placeholder="you@company.com" required class="w-full rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
+                <label for="c-email" class="mb-1.5 block text-xs font-semibold text-ink">Email <span class="text-accent">*</span></label>
+                <input id="c-email" type="email" placeholder="you@company.com" required class="w-full rounded-2xl border-0 bg-white px-4 py-3.5 text-sm text-ink placeholder:text-ink-dim/50 focus:outline-none focus:ring-2 focus:ring-ink" />
               </div>
             </div>
 
             <div>
-              <label for="c-subject" class="mb-1.5 block text-xs font-semibold text-ink">Service / Topic</label>
-              <input id="c-subject" type="text" placeholder="e.g. Buy-Once Marketplace System, Web App, Express Package" class="w-full rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
+              <label for="c-subject" class="mb-1.5 block text-xs font-semibold text-ink">Service / topic</label>
+              <input id="c-subject" type="text" placeholder="e.g. Machine monitoring, AI voice, Web app, Express package" class="w-full rounded-2xl border-0 bg-white px-4 py-3.5 text-sm text-ink placeholder:text-ink-dim/50 focus:outline-none focus:ring-2 focus:ring-ink" />
             </div>
 
-            <!-- Preferred Date & Time for Online Meeting -->
-            <div class="rounded-2xl border border-line bg-paper-dim/40 p-4">
-              <div class="mb-3 flex items-center justify-between">
-                <label class="text-xs font-bold text-ink flex items-center gap-1.5">
-                  <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span>Preferred Online Consultation Date &amp; Time</span>
-                </label>
-                <span class="text-[10px] font-semibold text-ink-dim uppercase">Google Meet</span>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="c-date" class="mb-1.5 block text-xs font-semibold text-ink">Preferred date <span class="font-normal text-ink-dim">(Google Meet)</span></label>
+                <input id="c-date" type="date" class="w-full rounded-2xl border-0 bg-white px-4 py-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ink" />
               </div>
-
-              <div class="grid gap-3 sm:grid-cols-2">
-                <div>
-                  <label for="c-date" class="mb-1 block text-[11px] font-medium text-ink-dim">Preferred Date</label>
-                  <input id="c-date" type="date" class="w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-xs text-ink focus:border-ink focus:outline-none" />
-                </div>
-                <div>
-                  <label for="c-time" class="mb-1 block text-[11px] font-medium text-ink-dim">Preferred Time Slot</label>
-                  <select id="c-time" class="w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-xs text-ink focus:border-ink focus:outline-none appearance-none cursor-pointer">
-                    <option value="">Select time slot</option>
-                    <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM – 12:00 PM)</option>
-                    <option value="Early Afternoon (02:00 PM - 04:00 PM)">Early Afternoon (02:00 PM – 04:00 PM)</option>
-                    <option value="Late Afternoon (04:00 PM - 06:00 PM)">Late Afternoon (04:00 PM – 06:00 PM)</option>
-                    <option value="Evening (08:00 PM - 10:00 PM)">Evening (08:00 PM – 10:00 PM)</option>
-                  </select>
-                </div>
+              <div>
+                <label for="c-time" class="mb-1.5 block text-xs font-semibold text-ink">Preferred time slot</label>
+                <select id="c-time" class="w-full cursor-pointer appearance-none rounded-2xl border-0 bg-white px-4 py-3.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-ink">
+                  <option value="">Select time slot</option>
+                  <option value="Morning (10:00 AM - 12:00 PM)">Morning (10:00 AM – 12:00 PM)</option>
+                  <option value="Early Afternoon (02:00 PM - 04:00 PM)">Early Afternoon (02:00 PM – 04:00 PM)</option>
+                  <option value="Late Afternoon (04:00 PM - 06:00 PM)">Late Afternoon (04:00 PM – 06:00 PM)</option>
+                  <option value="Evening (08:00 PM - 10:00 PM)">Evening (08:00 PM – 10:00 PM)</option>
+                </select>
               </div>
             </div>
 
             <div>
               <label for="c-message" class="mb-1.5 block text-xs font-semibold text-ink">What are you building?</label>
-              <textarea id="c-message" rows="3" placeholder="Tell us briefly about your requirements..." class="w-full resize-none rounded-xl border border-line bg-paper-dim/60 px-4 py-3 text-sm text-ink placeholder:text-ink-dim/50 focus:border-ink focus:bg-white focus:outline-none" />
+              <textarea id="c-message" rows="4" placeholder="Tell us briefly about your requirements..." class="w-full resize-none rounded-2xl border-0 bg-white px-4 py-3.5 text-sm text-ink placeholder:text-ink-dim/50 focus:outline-none focus:ring-2 focus:ring-ink"></textarea>
             </div>
 
-            <div id="c-success" class="hidden rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-4 py-3 text-sm font-semibold text-emerald-800">
+            <div id="c-success" class="hidden rounded-2xl bg-emerald-500/10 px-4 py-3 text-sm font-semibold text-emerald-800">
               Message sent! Our senior architect will confirm your consultation within one business hour.
             </div>
 
-            <button type="submit" id="c-submit" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-bold text-white shadow-md shadow-accent/25 transition-all hover:bg-accent-dim hover:scale-[1.01] active:scale-95">
-              Get My Free Quote
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            <button type="submit" id="c-submit" class="btn-arrow">
+              <span>Get my free quote</span>
+              <span class="btn-arrow__dot">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </span>
             </button>
           </form>
+        </div>
+
+        <div class="relative min-h-[22rem] overflow-hidden rounded-[2rem] bg-charcoal">
+          <VideoMedia clip={CLIPS.opsCentre} class="h-full w-full" />
+          <span class="chip-glass absolute left-4 top-4 px-4 py-2 text-xs font-semibold">Your site, our team</span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Contact details -->
+  <section class="py-12 md:py-16" data-tight>
+    <Container>
+      <div class="grid gap-8 text-center sm:grid-cols-3">
+        <div>
+          <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-paper-dim text-ink">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+          </span>
+          <p class="mt-4 text-sm font-bold text-ink">Call &amp; WhatsApp</p>
+          <p class="mt-1 text-sm text-ink-dim">{SITE.phone}</p>
+        </div>
+        <div>
+          <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-paper-dim text-ink">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+          </span>
+          <p class="mt-4 text-sm font-bold text-ink">Working hours</p>
+          <p class="mt-1 text-sm text-ink-dim">{SITE.hours}</p>
+        </div>
+        <div>
+          <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-paper-dim text-ink">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+          </span>
+          <p class="mt-4 text-sm font-bold text-ink">Write to us</p>
+          <p class="mt-1 text-sm text-ink-dim" data-email-user={SITE.email.split('@')[0]} data-email-domain={SITE.email.split('@')[1]}></p>
         </div>
       </div>
     </Container>
   </section>
 
   <!-- Map + location -->
-  <div class="border-b border-line">
-    <Container class="py-6">
-      <div class="grid gap-5 lg:grid-cols-[1fr_320px]">
-        <div class="perspective-wrap relative overflow-hidden rounded-[0.75rem] border border-line" data-reveal="tilt3d">
+  <section class="rounded-t-[2.75rem] bg-paper-dim py-14 md:py-20" data-tight>
+    <Container>
+      <div class="grid gap-4 lg:grid-cols-[1fr_320px]">
+        <div class="relative overflow-hidden rounded-[2rem]">
           <div
             id="contact-map"
             role="img"
             aria-label="Map showing WSS DevLabs location in Kuala Lumpur"
-            class="h-[320px] w-full bg-paper-dim md:h-[440px]"
-          />
+            class="h-[320px] w-full bg-paper-deep md:h-[440px]"
+          ></div>
         </div>
 
-        <!-- Dedicated location card, always visible (not floated over the map) -->
-        <div class="tilt-card card flex flex-col gap-4 p-6">
-          <div class="relative flex h-32 w-full items-center justify-center overflow-hidden rounded-xl border border-line bg-paper-dim">
-            <div class="dot-pattern mask-fade-edges absolute inset-0 opacity-60" aria-hidden="true"></div>
-            <svg class="relative h-9 w-9 text-ink-dim/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-            </svg>
-          </div>
+        <div class="flex flex-col gap-4 rounded-[2rem] bg-white p-7">
           <div>
-            <p class="mono-label text-ink-dim">Our Location</p>
-            <p class="mt-2 font-semibold text-ink">{SITE.name}</p>
+            <p class="mono-label text-ink-dim">Our location</p>
+            <p class="mt-3 font-semibold text-ink">{SITE.name}</p>
             <p class="mt-1 text-sm leading-relaxed text-ink-dim">{SITE.address}</p>
-            <p class="mono-label mt-3 !text-[0.62rem] text-accent">{SITE.hours}</p>
           </div>
-          <a
+          <div class="flex items-center gap-2">
+            {SITE.social.linkedin && (
+              <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="flex h-10 w-10 items-center justify-center rounded-full bg-paper-dim text-ink transition hover:bg-ink hover:text-white">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
+              </a>
+            )}
+            {SITE.social.instagram && (
+              <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="flex h-10 w-10 items-center justify-center rounded-full bg-paper-dim text-ink transition hover:bg-ink hover:text-white">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" /></svg>
+              </a>
+            )}
+            {SITE.social.facebook && (
+              <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="flex h-10 w-10 items-center justify-center rounded-full bg-paper-dim text-ink transition hover:bg-ink hover:text-white">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+              </a>
+            )}
+          </div>
+          <Pill
             href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(SITE.address)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-underline mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-accent"
-          >
-            Get directions
-            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
+            label="Get directions"
+            external
+            class="mt-auto self-start"
+          />
         </div>
       </div>
     </Container>
-  </div>
+  </section>
 
 </BaseLayout>
 
@@ -221,10 +221,8 @@ import { SITE } from '../data/site';
       zoomControl: false
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19
     }).addTo(map);
 

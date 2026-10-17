@@ -1,0 +1,51 @@
+---
+import VideoMedia from '../media/VideoMedia.astro';
+import Pill from '../ui/Pill.astro';
+import { CLIPS } from '../../data/media';
+import { SECTORS } from '../../data/sectors';
+---
+
+<section class="hero-frame relative isolate flex min-h-[92dvh] flex-col justify-end bg-charcoal text-white" data-noreveal>
+  <div class="absolute inset-0 -z-10">
+    <VideoMedia clip={CLIPS.windFarm} eager class="h-full w-full" />
+  </div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/75 via-black/20 to-black/35" aria-hidden="true"></div>
+
+  <!-- Oversized wordmark, as in the reference hero -->
+  <p
+    class="pointer-events-none absolute inset-x-0 top-24 -z-0 select-none text-center font-display text-[clamp(3.6rem,14.5vw,14rem)] font-black uppercase leading-[0.82] tracking-[-0.05em] text-white/95 md:top-28"
+    aria-hidden="true"
+    data-hero-item
+    data-hero-delay="0"
+  >
+    WSS DevLabs
+  </p>
+
+  <div class="relative mx-auto w-full max-w-7xl px-6 pb-8 pt-48 md:px-10 md:pb-12">
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl" data-hero-item data-hero-delay="0.1">
+        <p class="max-w-md text-sm leading-relaxed text-white/80">
+          Malaysian AI, IoT and systems company. We build intelligent solutions for farms, plants, cities and growing businesses.
+        </p>
+        <h1 class="mt-5 font-display text-[clamp(2.4rem,1.2rem+4.6vw,4.8rem)] font-bold uppercase leading-[0.98] tracking-[-0.035em] text-white">
+          AI, IoT and systems for real problems
+        </h1>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <Pill href="/solutions" label="Explore solutions" variant="light" />
+          <Pill href="/contact" label="Talk with us" variant="ghost" />
+        </div>
+      </div>
+
+      <div class="flex gap-3 self-start lg:self-end" data-hero-item data-hero-delay="0.2">
+        <div class="chip-glass w-40 px-5 py-5 sm:w-44">
+          <p class="font-feature text-3xl font-semibold leading-none">{SECTORS.length}</p>
+          <p class="mt-2 text-xs leading-snug text-ink-dim">Focus sectors, from farms to smart cities</p>
+        </div>
+        <div class="chip-glass w-40 px-5 py-5 sm:w-44">
+          <p class="font-feature text-3xl font-semibold leading-none">1</p>
+          <p class="mt-2 text-xs leading-snug text-ink-dim">Team, from site visit to support</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

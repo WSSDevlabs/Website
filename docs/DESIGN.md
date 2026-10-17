@@ -145,3 +145,16 @@ All technology choices are strictly performance-led:
 ### E. Content rules for this layer
 - No invented clients, results or event attendance. Use cases are written as "what we build"; event posts are analysis with cited sources, not first-person attendance claims.
 - Every new Insights post carries `sourceUrl` / `sourceLabel` and links to the matching sector page.
+
+---
+
+## Direction v2 (2026-10-17): reference-led redesign
+
+Founder supplied 10 reference screenshots and authorised a full UI change, with one exception: **the floating nav bar keeps its style** (items and icons may change).
+
+- **Surface:** soft off-white page (`--color-paper #f6f6f4`), grey card tone (`paper-dim #eeeeeb`), pastel blue tint (`--color-tint #e6edfb`), matte dark grey bands (`charcoal-soft`). No film grain, no drop shadows on cards.
+- **Shape:** cards 1.75rem, large panels and heroes 2.25 to 2.75rem, pills fully round. Dark bands overlap the previous section with a rounded top (`-mt-10`, `rounded-t-[2.75rem]`).
+- **Type:** Outfit display, medium to bold, tight tracking. Headline emphasis is accent-coloured text, not a pill. Eyebrow = dot + small uppercase label (`.mono-label`).
+- **Pattern:** two-column section head (label left, statement + pill CTA right) via `SectionHead.astro`; black pill button with circle arrow via `Pill.astro` / `.btn-arrow`; rounded inset hero (`.hero-frame`) with oversized wordmark; bento cards (image plus text) on grey or tint.
+- **Page mapping:** Home = wind-energy + solar bento; Solutions = real-estate catalogue + numbered sections; Services = coaching "tailored services" grid; Express = pricing (tint / dark centre / tint); Insights = blog featured + grid + sidebar; Contact = form card + image + three info icons.
+- **Variety rule:** neighbouring sections never share a background; at least one matte dark band per long page.
