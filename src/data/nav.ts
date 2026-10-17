@@ -14,7 +14,7 @@ export const NAV_GROUPS: NavGroup[] = [
     label: 'Solutions',
     links: [
       { label: 'WSS Express', href: '/express', badge: '3-7 Days' },
-      { label: 'Systems & Labs', href: '/systems' },
+      { label: 'Resources', href: '/resources' },
       { label: 'All Services', href: '/services' }
     ]
   },
@@ -29,7 +29,7 @@ export const NAV_GROUPS: NavGroup[] = [
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Express', href: '/express' },
-  { label: 'Systems', href: '/systems' },
+  { label: 'Resources', href: '/resources' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' }
 ];
@@ -42,14 +42,14 @@ export const FOOTER_SOLUTIONS_LINKS: NavLink[] = [
   { label: 'Waste-to-Energy', href: '/solutions#waste-to-energy' },
   { label: 'Websites, Apps & IoT', href: '/solutions#digital-foundations' },
   { label: 'SME Digital Shift & Training', href: '/solutions#sme-digital-shift' },
-  { label: 'Systems & Labs', href: '/systems' }
+  { label: 'Resources', href: '/resources' }
 ];
 
 export const FOOTER_COMPANY_LINKS: NavLink[] = [
   { label: 'About Us & Vision', href: '/about' },
   { label: 'All Services', href: '/services' },
   { label: 'Websites & Marketing (Express)', href: '/express' },
-  { label: 'Systems & Labs', href: '/systems' },
+  { label: 'Resources', href: '/resources' },
   { label: 'Insights & News', href: '/insights' },
   { label: 'Contact Us', href: '/contact' }
 ];

@@ -14,7 +14,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     title: 'Artificial Intelligence & Automation',
     tagline: 'Intelligence',
     description:
-      'LLM-powered features, RAG pipelines, and workflow automation, integrated where it meaningfully improves your product or team, not as a thin wrapper.',
+      'AI and automation can take the repetitive work off your team, answer your customers faster and help you make decisions with confidence. We start with the part of your day that feels heaviest, and build the help around it.',
     services: ['ai-development', 'custom-ml-model', 'ai-chatbot', 'ai-analytics', 'workflow-automation', 'computer-vision']
   },
   {
@@ -22,7 +22,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     title: 'IoT Solutions & Infrastructure',
     tagline: 'Connect',
     description:
-      'Connected devices, sensor networks, and the infrastructure to collect, monitor, and act on real-world data alongside your software.',
+      "IoT lets your equipment, buildings and fields tell you what is happening, without anyone having to check. You hear about a problem as it starts, save time and money, and make calmer decisions from real numbers.",
     services: ['iot-development']
   },
   {
@@ -30,7 +30,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     title: 'Systems, Web & Mobile App Development',
     tagline: 'Build',
     description:
-      'Custom-coded websites, mobile apps, and internal systems, built from scratch around your goals instead of bent to fit a template.',
+      "A good website, app or system should make your day easier, not add to it. We build the tools your customers and your team actually use, shaped around how your business really works, and we stay beside you after launch.",
     services: ['web-development', 'mobile-app-development', 'custom-systems', 'ui-ux-system-redesign']
   },
   {
@@ -38,7 +38,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     title: 'Digital Design & Media Marketing',
     tagline: 'Design & Grow',
     description:
-      'Interface design, brand identity, product photography, video, and the marketing campaigns that put it all in front of the right customers.',
+      "People decide quickly whether they trust a business. We help you look credible and be easy to remember, through design, photos, video and marketing, so the right customers find you and feel comfortable choosing you.",
     services: ['ui-ux-design', 'branding-services', 'product-photoshoot-marketing', 'media-creation', 'digital-marketing']
   },
   {
@@ -46,7 +46,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     title: 'Digital Consulting & Solutions',
     tagline: 'Grow & Care',
     description:
-      'Growth strategy, grant-funded project support, full business launch bundles, and the ongoing care that keeps everything running after launch.',
+      "Sometimes you do not need a new tool yet, just a clear plan and someone to talk it through. We help you find the right next step, apply for grants where they fit, launch properly, and keep everything running afterwards.",
     services: ['business-growth', 'grant-government-project-support', 'business-startup-package', 'maintenance-support']
   }
 ];

@@ -128,28 +128,25 @@ const websiteDesignPricingTables: PricingTable[] = [
     tiers: [
       { name: '1 Page', price: 'RM 1,799' },
       { name: '5 Pages', price: 'RM 2,599' },
-      { name: '5+ Pages', price: 'RM 2,799' },
-      { name: '10 Pages', price: 'RM 3,299' },
-      { name: '10+ Pages', price: 'RM 3,499' }
+      { name: '10 Pages', price: 'RM 3,299' }
     ],
     rows: [
-      { label: 'Domain', values: [true, true, true, true, true] },
-      { label: 'Web Pages Design', values: ['1 page', '5 pages', '5 pages', '10 pages', '10 pages'] },
-      { label: 'Web Storage', values: ['10 GB', '10 GB', '10 GB', '10 GB', '10 GB'] },
-      { label: 'Email Users', values: ['20 users', '20 users', '20 users', '20 users', '20 users'] },
-      { label: 'Mobile Responsive', values: [true, true, true, true, true] },
-      { label: 'Products Listing', values: [false, false, true, false, true] },
-      { label: 'Products Upload', values: [false, false, '20 products', false, '20 products'] },
-      { label: 'Animated Banner', values: ['1', '2', '2', '3', '3'] },
-      { label: 'Content Management System', values: [true, true, true, true, true] },
-      { label: 'Ownership & Access', values: [true, true, true, true, true] },
-      { label: 'SSL Certificate', values: [true, true, true, true, true] },
-      { label: 'Stock Photos', values: [true, true, true, true, true] },
-      { label: 'Technical Support', values: [true, true, true, true, true] },
-      { label: 'SEO Friendly', values: [true, true, true, true, true] }
+      { label: 'Domain', values: [true, true, true] },
+      { label: 'Web Pages Design', values: ['1 page', '5 pages', '10 pages'] },
+      { label: 'Web Storage', values: ['10 GB', '10 GB', '10 GB'] },
+      { label: 'Email Users', values: ['20 users', '20 users', '20 users'] },
+      { label: 'Mobile Responsive', values: [true, true, true] },
+      { label: 'Animated Banner', values: ['1', '2', '3'] },
+      { label: 'Content Management System', values: [true, true, true] },
+      { label: 'Ownership & Access', values: [true, true, true] },
+      { label: 'SSL Certificate', values: [true, true, true] },
+      { label: 'Stock Photos', values: [true, true, true] },
+      { label: 'Technical Support', values: [true, true, true] },
+      { label: 'SEO Friendly', values: [true, true, true] }
     ],
-    renewal: ['RM 549.00', 'RM 549.00', 'RM 549.00', 'RM 549.00', 'RM 549.00'],
-    hasCta: false
+    renewal: ['RM 549.00', 'RM 549.00', 'RM 549.00'],
+    hasCta: false,
+    popularIndex: 1
   },
   {
     title: 'Corporate Website Design Packages',
@@ -335,12 +332,12 @@ const websiteDesignPricingTables: PricingTable[] = [
       /* Multi-service grid layout */
       <Section rule class="bg-paper-dim">
         <Container>
-          <div class:list={['grid gap-6 items-start', services.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-2']} data-stagger>
+          <div class="-mx-6 flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto px-6 pb-4 md:-mx-10 md:px-10 [scrollbar-width:thin]" data-stagger>
             {services.map((service) => {
               const tone = GROUP_TONE[service.group];
               const [heroImg] = serviceImages[service.slug] ?? serviceImages['web-development'];
               return (
-                <div id={service.slug} data-stagger-child class:list={['scroll-mt-28 flex flex-col overflow-hidden rounded-3xl border bg-paper shadow-card', TONE_BORDER_CLASS[tone]]}>
+                <div id={service.slug} data-stagger-child class:list={['scroll-mt-28 flex w-[85vw] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border bg-paper shadow-card sm:w-[22rem] lg:w-[24rem]', TONE_BORDER_CLASS[tone]]}>
                   <div class="relative h-40 overflow-hidden">
                     <img src={heroImg} alt={service.title} class="h-full w-full object-cover" loading="lazy" width="1400" height="800" />
                     <div class="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" aria-hidden="true" />
@@ -355,21 +352,6 @@ const websiteDesignPricingTables: PricingTable[] = [
                     <h2 class="mt-2 text-xl font-bold tracking-tight text-ink">{service.title}</h2>
                     <p class="mt-3 text-sm leading-relaxed text-ink-dim">{service.valueProp}</p>
 
-                    {service.faq.length > 0 && (
-                      <div class="mt-5 space-y-2">
-                        {service.faq.map((f) => (
-                          <details class="group rounded-xl border border-line bg-paper-dim/60 p-3.5">
-                            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-ink">
-                              {f.question}
-                              <svg class="h-3.5 w-3.5 shrink-0 text-ink-dim transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                              </svg>
-                            </summary>
-                            <p class="mt-2 text-xs leading-relaxed text-ink-dim">{f.answer}</p>
-                          </details>
-                        ))}
-                      </div>
-                    )}
 
                     {service.slug === 'grant-government-project-support' && (
                       <p class="mt-3 text-center text-[11px] text-ink-dim">

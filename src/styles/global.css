@@ -788,3 +788,11 @@ main > section:not(:first-of-type):not([data-tight]) {
     color: var(--color-ink);
   }
 }
+
+/* Leaflet gives its panes and controls z-index up to 1000, which pushed the map above the fixed nav bar.
+   Keep the whole map in its own stacking context, below the nav (z-40). */
+.leaflet-container {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}

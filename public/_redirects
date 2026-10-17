@@ -34,9 +34,8 @@
 /faq                                  /express#faq                                                         301
 
 # Consolidation, 2026-10-17: 91 pages cut to a core set
-/marketplace                          /systems                                                             301
-/marketplace/*                        /systems                                                             301
-/labs                                 /systems                                                             301
+/marketplace/*                        /resources                                                             301
+/labs                                 /resources                                                             301
 /testimonials                         /about                                                               301
 /coming-soon                          /                                                                    301
 /wss-console                          /                                                                    301
@@ -59,3 +58,4 @@
 /insights/kl20-summit-2026-eight-priority-sectors /insights 301
 /insights/maha-2026-tech-driven-food-security /insights 301
 /insights/visit-malaysia-2026-tourism-businesses-online /insights 301
+/systems                             /resources                                                           301

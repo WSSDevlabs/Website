@@ -45,7 +45,17 @@ const schema = {
 };
 
 const pillars = SERVICE_CATEGORIES.slice(0, 3);
-const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', 'lg:col-span-2'];
+// Story-style blurbs for the home page (the category pages keep their own copy)
+const STORY: Record<string, string> = {
+  'artificial-intelligence-automation':
+    "You tell us about the repetitive work that eats your team's day. We learn how your business runs, build the AI and automation around it, test it on your own data, and hand it over so it keeps working while you get on with the business.",
+  'iot-solutions-infrastructure':
+    'We start on site, walking the floor with you. Then we place the sensors, bring everything onto one dashboard and set up alerts, so you hear about a problem the moment it starts, not days later.',
+  'web-software-app-development':
+    'Your idea becomes a working system in steps you can see. We design it with you, build it around how you really work, launch it, and stay beside you afterwards, so nothing is left for you to figure out alone.'
+};
+// 7 cards in 2 rows on desktop: four across, then three with the last one double width
+const SPANS = ['', '', '', '', '', '', 'lg:col-span-2'];
 ---
 
 <BaseLayout
@@ -60,43 +70,39 @@ const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', '
   <section class="py-20 md:py-28">
     <Container>
       <SectionHead
-        label="Why WSS DevLabs"
-        title="We reduce the guesswork on your site. One team senses, connects, understands and acts on your data, so you get one system that works."
-        body="Every solution starts as a pilot on your own site, sized to your budget, so you see real results before you commit."
+        title="Got a problem on your site? You're in the right place. We'll sort it out together, one step at a time."
+        body="Tell us what's not working. We'll listen first, then suggest a small trial on your own site, so you can see it work before you decide anything."
         ctaLabel="Consult with us"
         ctaHref="/contact"
       />
 
       <div class="mt-14 grid gap-4 md:grid-cols-[1fr_1.5fr]">
         <div class="flex flex-col justify-between rounded-[1.75rem] bg-paper-dim p-3">
-          <div class="relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-charcoal">
+          <div class="relative min-h-[16rem] flex-1 overflow-hidden rounded-[1.25rem] bg-charcoal">
             <VideoMedia clip={CLIPS.cropIrrigation} class="h-full w-full" />
           </div>
           <div class="p-5">
-            <p class="font-feature text-5xl font-semibold leading-none text-ink">{SECTORS.length}</p>
-            <p class="mt-2 text-sm font-semibold text-ink">Focus sectors</p>
-            <p class="mt-1 text-xs leading-relaxed text-ink-dim">Agriculture to smart cities, each with its own use cases.</p>
+            <p class="text-lg font-bold tracking-tight text-ink">Multiple sectors</p>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink-dim">How technology can help these sectors, with a range of tech and solutions.</p>
           </div>
         </div>
         <div class="flex flex-col justify-between rounded-[1.75rem] bg-tint p-3">
           <div class="relative aspect-[16/8] overflow-hidden rounded-[1.25rem] bg-charcoal">
             <VideoMedia clip={CLIPS.dataHud} class="h-full w-full" />
           </div>
-          <div class="grid gap-4 p-5 sm:grid-cols-[auto_1fr] sm:items-end sm:gap-10">
-            <div>
-              <p class="font-feature text-5xl font-semibold leading-none text-tint-ink">4</p>
-              <p class="mt-2 text-sm font-semibold text-ink">Layers per system</p>
-            </div>
-            <ul class="grid grid-cols-2 gap-x-6 gap-y-2 text-xs leading-relaxed text-ink-dim">
-              {
-                STACK_LAYERS.map((layer) => (
-                  <li>
-                    <span class="font-bold text-ink">{layer.label}.</span> {layer.verb}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
+          <ol class="relative grid gap-6 p-5 pt-8 sm:grid-cols-4 sm:gap-4">
+            <span class="absolute left-[calc(1.25rem+7px)] right-5 top-[calc(2rem+6px)] hidden h-[2px] bg-tint-ink/25 sm:block" aria-hidden="true"></span>
+            {
+              STACK_LAYERS.map((layer, i) => (
+                <li class="relative">
+                  <span class="relative z-10 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-tint-ink ring-4 ring-tint" aria-hidden="true"></span>
+                  <p class="mt-4 font-feature text-xs font-semibold text-tint-ink">0{i + 1}</p>
+                  <p class="mt-1 text-sm font-bold text-ink">{layer.label}</p>
+                  <p class="mt-1 text-xs leading-relaxed text-ink-dim">{layer.verb}</p>
+                </li>
+              ))
+            }
+          </ol>
         </div>
       </div>
     </Container>
@@ -106,7 +112,6 @@ const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', '
   <section class="rounded-t-[2.75rem] bg-paper-dim py-20 md:py-28">
     <Container>
       <SectionHead
-        label="What we build"
         title="AI, IoT and systems, engineered as one stack. Field-tested ideas, built to last on your site."
         ctaLabel="See services"
         ctaHref="/services"
@@ -132,7 +137,7 @@ const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', '
                 </span>
                 <div class="mt-10">
                   <h3 class="text-lg font-bold tracking-tight text-ink">{pillar.title}</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-ink-dim">{pillar.description}</p>
+                  <p class="mt-2 text-sm leading-relaxed text-ink-dim">{STORY[pillar.slug] ?? pillar.description}</p>
                 </div>
               </a>
             ))
@@ -145,7 +150,7 @@ const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', '
           <VideoMedia clip={CLIPS.opsCentre} class="!absolute inset-0 -z-10 h-full w-full" />
           <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/25 to-transparent" aria-hidden="true"></div>
           <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">{pillars[2].title}</h3>
-          <p class="mt-3 max-w-lg text-sm leading-relaxed text-white/75">{pillars[2].description}</p>
+          <p class="mt-3 max-w-lg text-sm leading-relaxed text-white/75">{STORY[pillars[2].slug] ?? pillars[2].description}</p>
           <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold">
             Learn more
             <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
@@ -162,26 +167,13 @@ const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', '
     <Container>
       <SectionHead
         centered
-        label="Solutions by sector"
         title="Technology for the work on the ground"
-        body="Pick your industry to see the problems we solve and the system behind each one."
         ctaLabel="All solutions"
         ctaHref="/solutions"
       />
       <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {
-          SECTORS.map((sector, i) =>
-            i === 0 ? (
-              <a
-                href={`/solutions#${sector.slug}`}
-                class:list={['group relative isolate flex min-h-[26rem] flex-col justify-end overflow-hidden rounded-[1.75rem] bg-charcoal p-7 text-white', SPANS[i]]}
-              >
-                <img src={sector.image} alt="" loading="lazy" width="1200" height="800" class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/20 to-transparent" aria-hidden="true"></div>
-                <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">{sector.name}</h3>
-                <p class="mt-2 max-w-md text-sm leading-relaxed text-white/75">{sector.summary}</p>
-              </a>
-            ) : (
+          SECTORS.map((sector, i) => (
               <a
                 href={`/solutions#${sector.slug}`}
                 class:list={['group flex flex-col rounded-[1.75rem] p-3 transition-transform duration-300 hover:-translate-y-1', i % 3 === 0 ? 'bg-tint' : 'bg-paper-dim', SPANS[i]]}
@@ -194,21 +186,19 @@ const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', '
                   <p class="mt-1.5 text-xs leading-relaxed text-ink-dim">{sector.summary}</p>
                 </div>
               </a>
-            )
-          )
+          ))
         }
       </div>
     </Container>
   </section>
 
   <!-- How a pilot works -->
-  <section class="relative -mt-10 rounded-t-[2.75rem] bg-charcoal-soft pb-20 pt-28 text-white md:-mt-14 md:pb-28 md:pt-36">
+  <section class="relative -mt-10 rounded-t-[2.75rem] bg-charcoal pb-20 pt-28 text-white md:-mt-14 md:pb-28 md:pt-36">
     <div class="pointer-events-none absolute inset-x-0 top-0 h-40 rounded-t-[2.75rem] bg-gradient-to-b from-white/[0.07] to-transparent" aria-hidden="true"></div>
     <Container class="relative">
       <SectionHead
         dark
-        label="How a pilot works (step by step)"
-        title="Start small. Prove it on your own site. Every solution begins as a pilot, so you see real data before you commit."
+        title="Every big change starts with one small step. We try it on your site first, so you see it work before you decide."
       />
       <div class="mt-14 grid gap-4 lg:grid-cols-[1fr_1.2fr]">
         <div class="relative min-h-[22rem] overflow-hidden rounded-[1.75rem] bg-charcoal">
@@ -230,15 +220,15 @@ const SPANS = ['lg:col-span-2 lg:row-span-2', '', '', '', '', 'lg:col-span-2', '
         </ol>
       </div>
       <div class="mt-8 flex justify-center">
-        <Pill href="/systems" label="See systems and demos" variant="light" />
+        <Pill href="/resources#consult" label="See how consulting works" variant="light" />
       </div>
     </Container>
   </section>
 
   <MarketplaceAndExpressBanner />
   <CTABand
-    title="Tell us what goes wrong on site."
-    subtitle="We reply within one business day, and the first site visit is how every project starts."
+    title="Let's turn your problem into a plan."
+    subtitle="Tell us what is slowing you down, even if you are not sure what the answer is yet. We reply within one business day, and we take it from there."
     ctaLabel="Consult with us"
   />
 </BaseLayout>

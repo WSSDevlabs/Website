@@ -1,0 +1,188 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import Pill from '../components/ui/Pill.astro';
+import VideoMedia from '../components/media/VideoMedia.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import { CLIPS } from '../data/media';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+const fmt = (d: Date) => d.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+const blogPosts = posts.slice(0, 3);
+const newsPosts = posts.slice(3);
+
+const consult = [
+  {
+    title: 'Tell us what is wrong',
+    body: 'Send a short message through the form or WhatsApp. A few lines about the problem is plenty, and we reply within one business day.'
+  },
+  {
+    title: 'Pick a time that suits you',
+    body: 'Choose a date and a time slot for an online chat over Google Meet, so it fits around your working day.'
+  },
+  {
+    title: 'We listen, then ask',
+    body: 'We hear your story first, then ask a few simple questions about your site, your team and your budget.'
+  },
+  {
+    title: 'You leave with a clear next step',
+    body: 'No hard sell. You walk away knowing what we would try first, how big it would be, and what it would cost.'
+  }
+];
+
+const docs = [
+  {
+    title: 'Clear guides, written for your team',
+    body: 'Before we leave, we write down how everything works, in plain language, so anyone on your team can pick it up on a busy day.'
+  },
+  {
+    title: 'Your data and your code stay yours',
+    body: 'Data lives in your own cloud account or on your own server, and custom code is handed over at the end of the project.'
+  },
+  {
+    title: 'Training that sticks',
+    body: 'We sit with your team and walk through their own tasks, so the system feels familiar before we step back.'
+  },
+  {
+    title: 'Support that does not vanish',
+    body: 'After launch we stay close for updates, fixes and retraining, so the system keeps up as your business changes.'
+  }
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Resources | WSS DevLabs',
+  description: 'How a consultation with WSS DevLabs works, what documentation you receive, and the latest blog posts and news.'
+};
+---
+
+<BaseLayout
+  title="Resources: Consult Process, Documentation, Blog and News | WSS DevLabs"
+  description="How a consultation with WSS DevLabs works, what documentation you receive at handover, and our latest blog posts and news."
+  path="/resources"
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="pb-6 pt-6 md:pb-10 md:pt-32" data-noreveal>
+    <Container>
+      <div class="relative isolate overflow-hidden rounded-[2.5rem] bg-charcoal px-6 py-16 text-white sm:px-12 md:py-24 lg:px-16">
+        <div class="absolute inset-0 -z-10 opacity-45">
+          <VideoMedia clip={CLIPS.network} eager class="h-full w-full !bg-transparent" />
+        </div>
+        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/30" aria-hidden="true"></div>
+        <div data-scene="network" data-scene-props='{"radius":2.4,"count":190}' class="pointer-events-none absolute -right-[10%] top-0 -z-10 hidden h-full w-[65%] md:block" aria-hidden="true"></div>
+
+        <div class="max-w-2xl">
+          <h1 data-hero-item data-hero-delay="0" class="font-display text-[clamp(2.4rem,1.3rem+4vw,4.6rem)] font-bold leading-[1.02] tracking-[-0.04em] text-white">
+            Know what to expect before you <span class="badge-highlight">begin</span>
+          </h1>
+          <p data-hero-item data-hero-delay="0.1" class="mt-6 text-base leading-relaxed text-white/70 sm:text-lg">
+            How we work with you, what you receive at the end, and what we are learning along the way.
+          </p>
+          <div data-hero-item data-hero-delay="0.2" class="mt-8 flex flex-wrap gap-3">
+            <Pill href="#consult" label="How consulting works" variant="light" />
+            <Pill href="#blog" label="Read the blog" variant="ghost" />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Consult process -->
+  <section id="consult" class="scroll-mt-24 py-16 md:py-24">
+    <Container>
+      <SectionHead
+        title="Here is how a conversation with us goes. No pressure, no jargon, and you decide each step."
+        ctaLabel="Book a consultation"
+        ctaHref="/contact"
+      />
+      <ol class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          consult.map((step, i) => (
+            <li class:list={['rounded-[1.75rem] p-7', i % 2 === 0 ? 'bg-paper-dim' : 'bg-tint']}>
+              <span class="font-feature text-3xl font-semibold text-ink">0{i + 1}</span>
+              <h3 class="mt-8 text-base font-bold uppercase tracking-wide text-ink">{step.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-dim">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </Container>
+  </section>
+
+  <!-- Documentation (dark band, rounded top over the previous section) -->
+  <section id="documentation" class="relative -mt-10 scroll-mt-24 rounded-t-[2.75rem] bg-charcoal pb-20 pt-28 text-white md:-mt-14 md:pb-28 md:pt-36">
+    <Container>
+      <SectionHead dark title="Nothing is left in our heads. Everything we build comes with the documents, training and support to keep it running." />
+      <div class="mt-14 grid gap-4 sm:grid-cols-2">
+        {
+          docs.map((doc, i) => (
+            <div class="rounded-[1.75rem] bg-white/[0.07] p-7">
+              <span class="font-feature text-sm font-semibold text-accent">0{i + 1}</span>
+              <h3 class="mt-4 text-lg font-bold tracking-tight text-white">{doc.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-white/60">{doc.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog" class="scroll-mt-24 py-16 md:py-24">
+    <Container>
+      <SectionHead title="From our blog. Plain-language notes on technology, policy and running a business in Malaysia." ctaLabel="All posts" ctaHref="/insights" />
+      <div class="mt-14 grid gap-4 md:grid-cols-3">
+        {
+          blogPosts.map((post) => (
+            <a href={`/insights/${post.id}`} class="group flex flex-col rounded-[1.75rem] bg-paper-dim p-3 transition-transform duration-300 hover:-translate-y-1">
+              <div class="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-charcoal">
+                <img src={post.data.coverImage} alt="" loading="lazy" width="800" height="500" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              </div>
+              <div class="flex flex-1 flex-col p-4">
+                <p class="text-[0.68rem] font-bold uppercase tracking-wide text-ink-dim">{post.data.tags[0] ?? 'Insight'}</p>
+                <h3 class="mt-2 text-base font-bold leading-snug tracking-tight text-ink">{post.data.title}</h3>
+                <p class="mt-auto pt-4 text-xs text-ink-dim">{fmt(post.data.publishDate)}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+
+  <!-- News -->
+  {
+    newsPosts.length > 0 && (
+      <section id="news" class="scroll-mt-24 rounded-t-[2.75rem] bg-tint py-16 md:py-24">
+        <Container>
+          <SectionHead title="News we are following, and what it means for businesses like yours." />
+          <ul class="mt-12 grid gap-3 md:grid-cols-2">
+            {newsPosts.map((post) => (
+              <li>
+                <a href={`/insights/${post.id}`} class="group flex items-center gap-4 rounded-[1.5rem] bg-white p-4 transition-transform duration-300 hover:-translate-y-0.5">
+                  <img src={post.data.coverImage} alt="" loading="lazy" width="160" height="160" class="h-20 w-20 shrink-0 rounded-2xl object-cover" />
+                  <span>
+                    <span class="block text-sm font-bold leading-snug text-ink group-hover:underline">{post.data.title}</span>
+                    <span class="mt-1 block text-xs text-ink-dim">{fmt(post.data.publishDate)}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+    )
+  }
+
+  <CTABand
+    title="Still have a question?"
+    subtitle="Ask us anything, big or small. We reply within one business day."
+    ctaLabel="Consult with us"
+  />
+</BaseLayout>

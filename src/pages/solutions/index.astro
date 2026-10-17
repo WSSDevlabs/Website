@@ -13,7 +13,7 @@ const TONES = [
   { bg: 'bg-paper', dark: false, cell: 'bg-white', rule: 'bg-line' },
   { bg: 'bg-paper-dim', dark: false, cell: 'bg-white', rule: 'bg-line' },
   { bg: 'bg-tint', dark: false, cell: 'bg-white', rule: 'bg-white' },
-  { bg: 'bg-charcoal-soft', dark: true, cell: 'bg-white/[0.06]', rule: 'bg-white/10' }
+  { bg: 'bg-charcoal', dark: true, cell: 'bg-white/[0.06]', rule: 'bg-white/10' }
 ];
 
 const faqs = [
@@ -63,67 +63,18 @@ const schema = {
   schema={schema}
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden pb-14 pt-8 md:pb-20 md:pt-36" data-noreveal>
+  <section class="relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-44" data-noreveal>
     <div class="absolute -top-40 right-[-10%] h-[32rem] w-[46rem] rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
     <div class="grid-pattern-blue mask-fade-edges absolute inset-0 opacity-15" aria-hidden="true"></div>
     <Container class="relative">
-      <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-        <div data-hero-item data-hero-delay="0">
-          <p class="mono-label text-accent" data-scramble>Solutions by sector</p>
-          <h1 class="mt-5 font-display text-[clamp(2.4rem,1.3rem+4vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
-            AI, IoT and systems for the work <span class="badge-highlight">on the ground</span>
-          </h1>
-          <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-dim sm:text-lg">
-            Pick your industry. Each section shows the problem we solve, what we build and what changes for you.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <Pill href="#sectors" label="Browse sectors" />
-            <Pill href="/systems" label="See systems and demos" variant="light" />
-          </div>
-        </div>
-
-        <div data-hero-item data-hero-delay="0.15" class="relative">
-          <div class="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-line bg-charcoal shadow-[0_30px_70px_-25px_rgba(25,25,27,0.45)]">
-            <VideoMedia clip={CLIPS.dotsSphere} eager class="h-full w-full opacity-70" />
-            <div data-scene="network" data-scene-props='{"radius":2.1,"linkOpacity":0.35}' class="absolute inset-0" aria-hidden="true"></div>
-            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent" aria-hidden="true"></div>
-            <div class="absolute inset-x-0 bottom-0 grid grid-cols-3 gap-px border-t border-white/10 bg-white/10 text-white backdrop-blur-md">
-              <div class="bg-charcoal/50 px-4 py-4">
-                <p class="font-feature text-2xl font-semibold">7</p>
-                <p class="mt-0.5 text-[0.7rem] text-white/60">Focus sectors</p>
-              </div>
-              <div class="bg-charcoal/50 px-4 py-4">
-                <p class="font-feature text-2xl font-semibold">4</p>
-                <p class="mt-0.5 text-[0.7rem] text-white/60">Layers per system</p>
-              </div>
-              <div class="bg-charcoal/50 px-4 py-4">
-                <p class="font-feature text-2xl font-semibold">1</p>
-                <p class="mt-0.5 text-[0.7rem] text-white/60">Team end to end</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div data-hero-item data-hero-delay="0" class="max-w-4xl">
+        <h1 class="font-display text-[clamp(2.4rem,1.3rem+4vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
+          AI, IoT and systems for the work <span class="badge-highlight">on the ground</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-dim sm:text-lg">
+          Pick your industry. Each section shows the problem we solve, what we build and what changes for you.
+        </p>
       </div>
-    </Container>
-  </section>
-
-  <!-- Sector index -->
-  <section id="sectors" class="bg-paper-dim py-10 md:py-12" data-tight>
-    <Container>
-      <ul class="flex flex-wrap gap-2.5">
-        {
-          SECTORS.map((sector) => (
-            <li>
-              <a
-                href={`#${sector.slug}`}
-                class="inline-flex items-center rounded-full border border-line bg-white px-5 py-2.5 text-sm font-semibold text-ink transition hover:border-ink hover:bg-ink hover:text-white"
-              >
-                {sector.name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </Container>
   </section>
 
@@ -141,8 +92,7 @@ const schema = {
               <p class="absolute bottom-3 left-4 z-10 text-[0.68rem] text-white/70">Illustrative footage</p>
             </div>
             <div>
-              <p class:list={['mono-label', d ? 'text-white/60' : 'text-ink-dim']}>0{i + 1} / {sector.name}</p>
-              <h2 class:list={['mt-4 font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em]', d ? 'text-white' : 'text-ink']}>
+              <h2 class:list={['font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em]', d ? 'text-white' : 'text-ink']}>
                 {sector.titleLead} <span class="badge-highlight">{sector.titleHighlight}</span>
               </h2>
               <p class:list={['mt-5 text-base leading-relaxed', d ? 'text-white/65' : 'text-ink-dim']}>{sector.intro}</p>
@@ -168,17 +118,6 @@ const schema = {
               </div>
             ))}
           </div>
-
-          <ul class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {sector.outcomes.map((outcome) => (
-              <li class:list={['flex gap-3 text-sm font-semibold leading-snug', d ? 'text-white' : 'text-ink']}>
-                <svg class="mt-0.5 h-5 w-5 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                </svg>
-                {outcome}
-              </li>
-            ))}
-          </ul>
 
           {sector.slug === 'sme-digital-shift' && (
             <div id="training" class="mt-14 scroll-mt-24 rounded-[1.75rem] bg-white p-6 sm:p-8">

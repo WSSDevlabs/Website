@@ -16,8 +16,9 @@ type NavGroup = {
 const navGroups: NavGroup[] = [
   { label: 'Home', href: '/', active: currentPath === '/', icon: 'home' },
   { label: 'Solutions', href: '/solutions', active: isActive('/solutions'), icon: 'globe' },
-  { label: 'Systems & Labs', href: '/systems', active: isActive('/systems'), icon: 'labs' },
+  { label: 'Resources', href: '/resources', active: isActive('/resources'), icon: 'labs' },
   { label: 'Services', href: '/services', active: isActive('/services') || isActive('/express'), icon: 'services' },
+  { label: 'Marketplace', href: '/marketplace', active: isActive('/marketplace'), icon: 'store' },
   { label: 'About', href: '/about', active: isActive('/about'), icon: 'user' }
 ];
 ---
@@ -36,10 +37,10 @@ const navGroups: NavGroup[] = [
       Solutions
     </a>
     <a
-      href="/systems"
+      href="/resources"
       class="rounded-lg border border-line bg-paper px-3 py-1 text-xs font-semibold text-ink"
     >
-      Systems
+      Resources
     </a>
     <a
       href={PRIMARY_CTA.href}

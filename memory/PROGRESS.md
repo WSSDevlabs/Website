@@ -234,3 +234,11 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - Gotcha: an apostrophe right after a `class:list={[...]}>` expression in an .astro file (`>What's Included:`) made the Astro compiler run out of memory; use `&apos;`.
 - Verified: `npm run build` 0 errors, 22 pages, 0 broken links, no overflow at 375px on 10 pages (playwright-core + Edge in scratchpad).
 - Not yet redesigned in the new style: `/systems` body (DemoStage), category service pages, legal pages, footer. Home sections after the hero still use hotlinked Unsplash/Mixkit.
+
+## 2026-10-17 (evening) — Section-by-section UI edits (founder-driven)
+
+- Home: full-screen hero (no wordmark/cards), friendlier copy, story-tone cards, 2-row sector grid, new pilot copy, new closing band. `/systems` replaced by `/resources` (consult process, documentation, blog, news); sample systems removed; `/marketplace` is now a Coming soon page with its own nav icon.
+- Services: banner and labels removed, pills cycle highlight every 2.2s, "friend who knows technology" band, signpost closing panel. Category pages: benefit-led intros, cards in one scrollable row at equal height, in-card FAQ removed, SME table cut to 1 / 5 / 10 pages.
+- Solutions: one-page layout, labels/stat panel/pills/outcome ticks removed. About: longer founding story, vision card text rewritten, "Why our clients" and checklist removed. Contact: heading only; Leaflet map no longer overlaps the fixed nav.
+- Darkest band colour (`bg-charcoal`) now used on home pilot, resources documentation, one solutions sector and about process.
+- Verified: build 0 errors, 24 pages, 0 broken links, no overflow at 375px.

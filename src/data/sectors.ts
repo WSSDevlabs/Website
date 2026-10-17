@@ -130,7 +130,7 @@ export const SECTORS: Sector[] = [
     related: [
       { label: 'AI & Automation services', href: '/services/artificial-intelligence-automation' },
       { label: 'IoT Solutions & Infrastructure', href: '/services/iot-solutions-infrastructure' },
-      { label: 'Ready-made systems', href: '/systems' }
+      { label: 'Consult process and guides', href: '/resources' }
     ],
     whyNow: {
       text: 'Budget 2027 gives the Ministry of Agriculture and Food Security RM6.92 billion, with local food production and farmer resilience as the stated priorities.',
@@ -626,7 +626,7 @@ export const SECTORS: Sector[] = [
         title: 'Ready-made business systems',
         body: 'POS, inventory, HR and more from the Marketplace. Buy once and own the code.',
         clip: 'officeDocs',
-        href: '/systems'
+        href: '/resources'
       },
       {
         title: 'Custom apps and systems',
@@ -658,7 +658,7 @@ export const SECTORS: Sector[] = [
     demos: ['cctv-analytics'],
     related: [
       { label: 'WSS Express websites', href: '/express' },
-      { label: 'The Marketplace', href: '/systems' },
+      { label: 'Consult process and guides', href: '/resources' },
       { label: 'Web, system & app development', href: '/services/web-software-app-development' }
     ],
     whyNow: {
@@ -763,7 +763,7 @@ export const SECTORS: Sector[] = [
     related: [
       { label: 'Digital consulting & solutions', href: '/services/digital-consulting-solutions' },
       { label: 'Digital design & media marketing', href: '/services/digital-design-media-marketing' },
-      { label: 'Ready-made systems', href: '/systems' }
+      { label: 'Consult process and guides', href: '/resources' }
     ],
     whyNow: {
       text: 'Budget 2027 includes an RM30 million MDEC fund to help 4,000 MSMEs adopt AI and automation. Application details are still to be announced.',
