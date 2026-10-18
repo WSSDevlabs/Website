@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import VideoMedia from '../../components/media/VideoMedia.astro';
-import FAQ from '../../components/sections/FAQ.astro';
 import CTABand from '../../components/sections/CTABand.astro';
 import Pill from '../../components/ui/Pill.astro';
 import { SECTORS, TRAINING_CLASSES } from '../../data/sectors';
@@ -14,29 +13,6 @@ const TONES = [
   { bg: 'bg-paper-dim', dark: false, cell: 'bg-white', rule: 'bg-line' },
   { bg: 'bg-tint', dark: false, cell: 'bg-white', rule: 'bg-white' },
   { bg: 'bg-charcoal', dark: true, cell: 'bg-white/[0.06]', rule: 'bg-white/10' }
-];
-
-const faqs = [
-  {
-    question: 'Do you only work with large companies?',
-    answer:
-      'No. We work with plantation groups and councils, and with SMEs that have one shop and a few cameras. Every project starts with a pilot sized to your budget.'
-  },
-  {
-    question: 'Do you supply hardware or only software?',
-    answer:
-      'Both. We specify, source and install sensors, gateways and cameras, then build the software, AI models and dashboards on top. You deal with one team.'
-  },
-  {
-    question: 'Who owns the data and the code?',
-    answer:
-      'You do. Data stays in your cloud account or on your own server, and custom code is handed over at the end of the project.'
-  },
-  {
-    question: 'Can you train our staff?',
-    answer:
-      'Yes. Training comes with every rollout, and we also run standalone classes on digital basics, AI tools at work and digital marketing.'
-  }
 ];
 
 const schema = {
@@ -69,11 +45,16 @@ const schema = {
     <Container class="relative">
       <div data-hero-item data-hero-delay="0" class="max-w-4xl">
         <h1 class="font-display text-[clamp(2.4rem,1.3rem+4vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
-          AI, IoT and systems for the work <span class="badge-highlight">on the ground</span>
+          One team that can work in <span class="badge-highlight">every industry</span>
         </h1>
-        <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-dim sm:text-lg">
-          Pick your industry. Each section shows the problem we solve, what we build and what changes for you.
-        </p>
+        <div class="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-ink-dim sm:text-lg">
+          <p>
+            Farms, plants, cities and shops have very different problems, but the same need: to see what is happening, understand it and act early. We bring one set of capabilities to all of them, and shape it around how each industry really works.
+          </p>
+          <p>
+            Our people have worked on the ground in agriculture, biomass, smart cities, energy, waste-to-energy and small business. We combine sensors and cameras, AI and automation, digital twins, apps and business systems, and training for your team, so you deal with one partner from the first site visit to the dashboard you use every day.
+          </p>
+        </div>
       </div>
     </Container>
   </section>
@@ -100,8 +81,8 @@ const schema = {
               </p>
               {sector.whyNow && (
                 <p class:list={['mt-4 text-sm leading-relaxed', d ? 'text-white/60' : 'text-ink-dim']}>
-                  {sector.whyNow.text}{' '}
-                  <a href={sector.whyNow.href} class:list={['font-bold underline underline-offset-4', d ? 'text-white' : 'text-ink']}>{sector.whyNow.linkLabel}</a>
+                  {sector.whyNow.text}
+                  <a href={sector.whyNow.href} class:list={['mt-2 block w-fit font-bold underline underline-offset-4', d ? 'text-white' : 'text-ink']}>{sector.whyNow.linkLabel}</a>
                 </p>
               )}
               <Pill href={`/contact?topic=${encodeURIComponent(sector.name)}`} label="Consult with us" variant={d ? 'light' : 'dark'} class="mt-7" />
@@ -148,7 +129,6 @@ const schema = {
     })
   }
 
-  <FAQ title="Questions about our solutions" items={faqs} />
   <CTABand
     title="Tell us what goes wrong on site."
     subtitle="We reply within one business day, and the first site visit is how every project starts."

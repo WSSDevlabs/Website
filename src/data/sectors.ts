@@ -620,7 +620,7 @@ export const SECTORS: Sector[] = [
         title: 'Websites in days',
         body: 'Fixed-price websites through WSS Express, with speed and search built in.',
         image: u('1563013544-824ae1b704d3'),
-        href: '/express'
+        href: '/services/web-software-app-development'
       },
       {
         title: 'Ready-made business systems',
@@ -657,7 +657,7 @@ export const SECTORS: Sector[] = [
     ],
     demos: ['cctv-analytics'],
     related: [
-      { label: 'WSS Express websites', href: '/express' },
+      { label: 'Website packages', href: '/services/web-software-app-development' },
       { label: 'Consult process and guides', href: '/resources' },
       { label: 'Web, system & app development', href: '/services/web-software-app-development' }
     ],

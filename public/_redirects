@@ -18,10 +18,10 @@
 /services/bespoke                     /services                                                            301
 
 # Status page merged into Express (2026-08-22)
-/status                               /express#builders                                                    301
+/status                               /services/web-software-app-development                                                    301
 
 # Pricing page removed (2026-08-26)
-/pricing                              /express                                                             301
+/pricing                              /services/web-software-app-development                                                             301
 
 # Work/case-study section removed (2026-08-26)
 /work                                 /about                                                               301
@@ -31,7 +31,7 @@
 /process                              /about#process                                                       301
 
 # FAQ page merged into Express (2026-08-26)
-/faq                                  /express#faq                                                         301
+/faq /about#faq 301
 
 # Consolidation, 2026-10-17: 91 pages cut to a core set
 /labs                                 /resources                                                             301
@@ -103,3 +103,6 @@
 /marketplace/wss-aiphone /store 302
 /marketplace/wss-digitalcontentai /store 302
 /marketplace/wss-aikiosk /store 302
+
+# WSS Express page removed (2026-10-18); the package tables live on the web development page
+/express /services/web-software-app-development 301

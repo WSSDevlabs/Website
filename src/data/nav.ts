@@ -13,7 +13,6 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     label: 'Solutions',
     links: [
-      { label: 'WSS Express', href: '/express', badge: '3-7 Days' },
       { label: 'Resources', href: '/resources' },
       { label: 'All Services', href: '/services' }
     ]
@@ -22,13 +21,13 @@ export const NAV_GROUPS: NavGroup[] = [
     label: 'Company',
     links: [
       { label: 'About & Builders', href: '/about' },
-      { label: 'FAQ', href: '/express#faq' }
+      { label: 'FAQ', href: '/about#faq' },
+      { label: 'Contact', href: '/contact' }
     ]
   }
 ];
 
 export const NAV_LINKS: NavLink[] = [
-  { label: 'Express', href: '/express' },
   { label: 'Resources', href: '/resources' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' }
@@ -48,7 +47,7 @@ export const FOOTER_SOLUTIONS_LINKS: NavLink[] = [
 export const FOOTER_COMPANY_LINKS: NavLink[] = [
   { label: 'About Us & Vision', href: '/about' },
   { label: 'All Services', href: '/services' },
-  { label: 'Websites & Marketing (Express)', href: '/express' },
+  { label: 'Website packages', href: '/services/web-software-app-development' },
   { label: 'Resources', href: '/resources' },
   { label: 'Insights & News', href: '/insights' },
   { label: 'Contact Us', href: '/contact' }
