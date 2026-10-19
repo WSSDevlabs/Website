@@ -124,24 +124,17 @@ const SOLUTION_PHASES = [
       <div class="relative grid overflow-hidden rounded-[2.25rem] bg-paper-dim md:min-h-[34rem] md:grid-cols-[1.05fr_0.95fr] md:rounded-[2.75rem]">
         <div class="relative z-10 flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-16">
           <h2 class="font-display text-[clamp(2.2rem,1.3rem+3.4vw,4.2rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
-            Our vision.<br />
-            <span class="text-ink-dim">Our mission.</span>
+            What we<br />
+            <span class="text-ink-dim">stand for.</span>
           </h2>
 
-          <div class="grid gap-5 sm:grid-cols-2">
-            <div>
-              <p class="text-xs font-bold uppercase tracking-wide text-accent">Our Vision</p>
-              <p class="mt-2 text-sm leading-relaxed text-ink-dim">To be the team Malaysian operators call when a problem lives outside the office: in the field, on the plant floor or across a city.</p>
-            </div>
-            <div>
-              <p class="text-xs font-bold uppercase tracking-wide text-accent">Our Mission</p>
-              <p class="mt-2 text-sm leading-relaxed text-ink-dim">To apply software, apps, AI, IoT, analytics and marketing to real problems in agriculture, biomass, energy, cities and SMEs, and to train the people who run them, as one team from site visit to support.</p>
-            </div>
-          </div>
+          <p class="max-w-md text-sm leading-relaxed text-ink-dim">
+            What we are aiming for, how we plan to get there, and the values we hold ourselves to on every project.
+          </p>
 
           <div class="flex flex-wrap gap-3">
             <a href="/contact" class="inline-flex items-center rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105">Get in touch</a>
-            <a href="/solutions" class="inline-flex items-center rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-ink transition-transform hover:scale-105">View solutions</a>
+            <a href="#mvv" class="inline-flex items-center rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-ink transition-transform hover:scale-105">Our mission and values</a>
           </div>
         </div>
 
@@ -163,6 +156,90 @@ const SOLUTION_PHASES = [
             <p class="mt-0.5 font-display text-lg font-bold tracking-tight text-ink">Razali</p>
             <p class="mt-1 text-xs leading-relaxed text-ink-dim">Builds it, ships it and supports it, so you always know who to call.</p>
           </div>
+        </div>
+      </div>
+    </Container>
+
+    <!-- Mission, Vision and Values: three cards with a colour-wash top and a hexagon badge -->
+    <Container class="pb-10 md:pb-16">
+      <div id="mvv" class="scroll-mt-28" data-mvv>
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-ink">Where we are going, and how we get there</h2>
+        </div>
+
+        <div class="mt-12 grid gap-4 md:grid-cols-3">
+          {
+            [
+              {
+                key: 'mission',
+                title: 'Mission',
+                wash: 'mvv-wash--blue',
+                icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-5.25a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Zm0-2.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z',
+                lead: 'Bring AI, IoT and simple systems to the people doing the real work.',
+                body: 'We start small, with a pilot on your own site, so you see real results before you commit. We explain every step in plain words, hand over everything we build, and stay until your team runs it with confidence.',
+                points: [
+                  ['Sense', 'Sensors, cameras and records show what is really happening.'],
+                  ['Understand', 'AI and dashboards turn the readings into answers.'],
+                  ['Act', 'Alerts, automation and training put the answers to work.'],
+                  ['Support', 'We stay close for updates, fixes and retraining.']
+                ]
+              },
+              {
+                key: 'vision',
+                title: 'Vision',
+                wash: 'mvv-wash--red',
+                icon: 'M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178ZM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+                lead: 'A Malaysia where every farm, plant, city and small business can see, understand and act early.',
+                body: 'We want to be the team operators call when a problem lives outside the office: in the field, on the plant floor or across a city. Technology that people own, trust and use every day.',
+                points: [
+                  ['Farms and plants', 'Less lost to weather, pests, waste and downtime.'],
+                  ['Cities and councils', 'Faults and floods seen before residents complain.'],
+                  ['Small businesses', 'Less retyping, more time for customers.'],
+                  ['Everyone', 'Technology people understand and are proud to run.']
+                ]
+              },
+              {
+                key: 'values',
+                title: 'Values',
+                wash: 'mvv-wash--amber',
+                icon: 'm12 3 2.472 5.008 5.528.803-4 3.9.944 5.504L12 15.6l-4.944 2.615.944-5.504-4-3.9 5.528-.803L12 3Z',
+                lead: 'The four promises behind every project.',
+                points: [
+                  ['Listen first', 'We hear the problem your way before we suggest anything.'],
+                  ['Plain words', 'No jargon. If we cannot explain it simply, we have not understood it.'],
+                  ['You own it', 'Code, data and documents are handed to you, with no lock-in.'],
+                  ['Stay after launch', 'We train your team and stay close for support and updates.']
+                ]
+              }
+            ].map((card, i) => (
+              <article class="mvv-card flex flex-col overflow-hidden rounded-[1.75rem] bg-white ring-1 ring-black/5" style={`--i:${i}`}>
+                <div class:list={['mvv-wash relative flex h-40 items-start justify-center pt-7', card.wash]}>
+                  <h3 class="font-display text-2xl font-bold uppercase tracking-[0.08em] text-white drop-shadow-sm">{card.title}</h3>
+                </div>
+                <div class="relative -mt-8 flex justify-center">
+                  <span class="mvv-hex flex h-[4.5rem] w-[4.5rem] items-center justify-center bg-white">
+                    <span class="mvv-hex flex h-[3.9rem] w-[3.9rem] items-center justify-center text-white" data-tone={card.key}>
+                      <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d={card.icon} /></svg>
+                    </span>
+                  </span>
+                </div>
+                <div class="flex flex-1 flex-col px-6 pb-8 pt-5 text-center">
+                  <p class="font-display text-lg font-semibold leading-snug tracking-tight text-ink">{card.lead}</p>
+                  {card.body && <p class="mt-3 text-sm leading-relaxed text-ink-dim">{card.body}</p>}
+                  {card.points && (
+                    <ul class="mt-4 space-y-3 text-left">
+                      {card.points.map(([head, text]) => (
+                        <li class="rounded-[1rem] bg-paper-dim px-4 py-3">
+                          <p class="text-sm font-bold text-ink">{head}</p>
+                          <p class="mt-0.5 text-xs leading-relaxed text-ink-dim">{text}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))
+          }
         </div>
       </div>
     </Container>
@@ -508,5 +585,31 @@ const SOLUTION_PHASES = [
   @media (prefers-reduced-motion: reduce) {
     .about-flow, .about-node circle, .about-draw { animation: none; }
     .about-draw { stroke-dashoffset: 0; }
+  }
+</style>
+
+<style is:global>
+  .mvv-hex { clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%); }
+  .mvv-hex[data-tone='mission'] { background: #2d5be3; }
+  .mvv-hex[data-tone='vision'] { background: #d92d20; }
+  .mvv-hex[data-tone='values'] { background: #e8890c; }
+  /* colour washes drawn with gradients, so there is no photo to load */
+  .mvv-wash { background-size: 160% 160%; animation: mvv-drift 12s ease-in-out infinite alternate; }
+  .mvv-wash--blue { background: radial-gradient(60% 80% at 20% 20%, #7fb4ff 0%, transparent 60%), radial-gradient(70% 90% at 85% 80%, #1f4fd8 0%, transparent 65%), #3b82f6; }
+  .mvv-wash--red { background: radial-gradient(60% 80% at 80% 20%, #ff9a8f 0%, transparent 60%), radial-gradient(70% 90% at 15% 85%, #b42318 0%, transparent 65%), #ef5a4c; }
+  .mvv-wash--amber { background: radial-gradient(60% 80% at 25% 25%, #ffd27a 0%, transparent 60%), radial-gradient(70% 90% at 85% 85%, #d9640a 0%, transparent 65%), #f59e0b; }
+  @keyframes mvv-drift { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+  .mvv-card {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+    animation: mvv-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+  .mvv-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px -34px rgb(0 0 0 / 0.4); }
+  .mvv-card:hover .mvv-hex[data-tone] svg { transform: scale(1.12) rotate(-6deg); }
+  .mvv-hex[data-tone] svg { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes mvv-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .mvv-wash, .mvv-card { animation: none; }
+    .mvv-card, .mvv-hex[data-tone] svg { transition: none; }
   }
 </style>
