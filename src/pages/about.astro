@@ -171,7 +171,7 @@ const SOLUTION_PHASES = [
     <div class="mx-auto w-full max-w-[100rem] px-3 pb-10 pt-6 md:px-6 md:pb-16 md:pt-10">
       <div class="relative">
         <h1 class="relative z-20 max-w-[90%] font-display text-[clamp(2.4rem,1.2rem+6.4vw,7.2rem)] font-black uppercase leading-[0.88] tracking-[-0.045em] text-ink md:-mb-[0.32em]">
-          Solving real problems, <span class="text-accent">start to finish</span>
+          Real problems, <span class="text-accent">real solutions</span>
         </h1>
 
         <div class="relative z-10 mt-4 grid gap-3 md:mt-0 md:grid-cols-[0.9fr_1.1fr] md:gap-4">
@@ -188,8 +188,45 @@ const SOLUTION_PHASES = [
 
           <!-- pictures -->
           <div class="grid gap-3 md:gap-4 md:grid-rows-[auto_1fr]">
-            <div class="relative hidden h-44 overflow-hidden rounded-[1.5rem] bg-white md:block">
-              <img src="/images/home/how-3.webp" alt="" width="1500" height="952" loading="lazy" class="absolute inset-0 h-full w-full object-cover object-left-top" />
+            <!-- Original illustration, drawn in code: sensors and cameras on the left send readings through a gateway to a dashboard on the right -->
+            <div class="about-strip relative hidden h-44 overflow-hidden rounded-[1.5rem] bg-charcoal md:block" aria-hidden="true">
+              <svg class="absolute inset-0 h-full w-full" viewBox="0 0 800 176" preserveAspectRatio="xMidYMid slice" fill="none">
+                <defs>
+                  <pattern id="aboutGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" stroke="rgb(255 255 255 / 0.05)" /></pattern>
+                  <linearGradient id="aboutLine" x1="0" x2="1"><stop offset="0" stop-color="#ff6a5a" /><stop offset="1" stop-color="#7aa2ff" /></linearGradient>
+                  <linearGradient id="aboutArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7aa2ff" stop-opacity="0.35" /><stop offset="1" stop-color="#7aa2ff" stop-opacity="0" /></linearGradient>
+                </defs>
+                <rect width="800" height="176" fill="url(#aboutGrid)" />
+
+                <!-- sensor and camera nodes -->
+                <g class="about-node" fill="#ff6a5a">
+                  <circle cx="70" cy="40" r="7" /><circle cx="70" cy="88" r="7" /><circle cx="70" cy="136" r="7" />
+                </g>
+                <g stroke="rgb(255 255 255 / 0.25)" stroke-width="1.5">
+                  <path class="about-flow" d="M77 40 C 180 40, 190 88, 290 88" />
+                  <path class="about-flow" d="M77 88 H290" />
+                  <path class="about-flow" d="M77 136 C 180 136, 190 88, 290 88" />
+                </g>
+
+                <!-- gateway -->
+                <rect x="290" y="64" width="64" height="48" rx="12" fill="rgb(255 255 255 / 0.08)" stroke="rgb(255 255 255 / 0.3)" />
+                <circle cx="322" cy="88" r="6" fill="#fff" />
+                <path d="M322 88 m-14 0 a14 14 0 0 1 28 0" stroke="rgb(255 255 255 / 0.35)" />
+                <path class="about-flow" d="M354 88 H470" stroke="url(#aboutLine)" stroke-width="2" />
+
+                <!-- moving readings -->
+                <circle r="3.5" fill="#fff"><animateMotion dur="3s" repeatCount="indefinite" path="M77 40 C 180 40, 190 88, 290 88" /></circle>
+                <circle r="3.5" fill="#fff"><animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M77 136 C 180 136, 190 88, 290 88" /></circle>
+                <circle r="3.5" fill="#fff"><animateMotion dur="2.4s" repeatCount="indefinite" path="M354 88 H470" /></circle>
+
+                <!-- dashboard -->
+                <rect x="470" y="22" width="270" height="132" rx="16" fill="rgb(255 255 255 / 0.06)" stroke="rgb(255 255 255 / 0.2)" />
+                <rect x="488" y="38" width="64" height="8" rx="4" fill="rgb(255 255 255 / 0.5)" />
+                <rect x="660" y="38" width="64" height="8" rx="4" fill="rgb(255 255 255 / 0.15)" />
+                <path d="M488 134 L520 112 L552 120 L584 90 L616 98 L648 70 L680 78 L724 52 V140 H488 Z" fill="url(#aboutArea)" />
+                <path class="about-draw" d="M488 134 L520 112 L552 120 L584 90 L616 98 L648 70 L680 78 L724 52" stroke="url(#aboutLine)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+                <circle cx="724" cy="52" r="5" fill="#fff" />
+              </svg>
             </div>
             <div class="relative min-h-[18rem] overflow-hidden rounded-[1.75rem] bg-charcoal md:min-h-[26rem]">
               <img src="/images/home/secbg2.webp" alt="The WSS DevLabs website shown on a laptop" width="1366" height="768" loading="lazy" class="absolute inset-0 h-full w-full object-cover object-left-top" />
@@ -458,3 +495,18 @@ const SOLUTION_PHASES = [
   }
   document.addEventListener('astro:page-load', initPhaseTimeline);
 </script>
+
+<style is:global>
+  .about-flow { stroke-dasharray: 5 6; animation: about-dash 1.6s linear infinite; }
+  @keyframes about-dash { to { stroke-dashoffset: -22; } }
+  .about-node circle { animation: about-pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .about-node circle:nth-child(2) { animation-delay: 0.4s; }
+  .about-node circle:nth-child(3) { animation-delay: 0.8s; }
+  @keyframes about-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.6; } }
+  .about-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: about-line 4s ease-out infinite; }
+  @keyframes about-line { 0% { stroke-dashoffset: 1; } 60%, 100% { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .about-flow, .about-node circle, .about-draw { animation: none; }
+    .about-draw { stroke-dashoffset: 0; }
+  }
+</style>
