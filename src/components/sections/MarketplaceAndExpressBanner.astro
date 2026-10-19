@@ -17,7 +17,7 @@ const slides = [
     body: 'A good business can still go unnoticed. We help the right customers find you and feel comfortable choosing you, with design, photos, video, search and ad campaigns that fit your budget. You always know what we are doing and why.',
     bg: 'bg-paper-dim',
     dark: false,
-    primary: { label: 'See marketing services', href: '/services/digital-design-media-marketing' },
+    primary: { label: 'See marketing services', href: '/services/digital-design-media-marketing', variant: 'blue' as const },
     secondary: { label: 'Talk to us', href: '/contact?topic=Marketing' }
   },
   {
@@ -25,7 +25,7 @@ const slides = [
     body: 'If your team spends hours on work a computer could do, that time can go back to your customers. We automate the repetitive tasks, then train your people to use the new tools with confidence, so the change feels like help, not extra work.',
     bg: 'bg-charcoal-soft',
     dark: true,
-    primary: { label: 'See automation', href: '/services/artificial-intelligence-automation' },
+    primary: { label: 'See automation', href: '/services/artificial-intelligence-automation', variant: 'red' as const },
     secondary: { label: 'Training for your team', href: '/solutions#training' }
   }
 ];
@@ -49,7 +49,7 @@ const slides = [
               <p class:list={['mt-3 max-w-xl text-sm leading-relaxed', slide.dark ? 'text-white/65' : 'text-ink-dim']}>{slide.body}</p>
             </div>
             <div class="flex flex-wrap gap-3 md:justify-end">
-              <Pill href={slide.primary.href} label={slide.primary.label} variant={slide.dark ? 'light' : 'dark'} />
+              <Pill href={slide.primary.href} label={slide.primary.label} variant={slide.primary.variant ?? (slide.dark ? 'light' : 'dark')} />
               <Pill href={slide.secondary.href} label={slide.secondary.label} variant={slide.dark ? 'ghost' : 'light'} />
             </div>
           </div>

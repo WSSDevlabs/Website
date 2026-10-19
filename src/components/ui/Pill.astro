@@ -2,25 +2,31 @@
 type Props = {
   href: string;
   label: string;
-  variant?: 'dark' | 'light' | 'ghost' | 'red';
+  variant?: 'dark' | 'light' | 'ghost' | 'red' | 'blue';
   class?: string;
   external?: boolean;
+  /** Arrow animation. Left out, one is picked from the label so neighbouring buttons differ. */
+  motion?: 'loop' | 'slide' | 'nudge' | 'pulse' | 'rotate' | 'none';
 };
 
-const { href, label, variant = 'dark', class: className = '', external = false } = Astro.props;
+const { href, label, variant = 'dark', class: className = '', external = false, motion } = Astro.props;
+const MOTIONS = ['loop', 'nudge', 'pulse', 'slide', 'rotate'] as const;
+const hash = [...label].reduce((sum, ch) => (sum * 31 + ch.charCodeAt(0)) >>> 0, 7);
+const chosen = motion ?? MOTIONS[hash % MOTIONS.length];
 const variantClass =
-  variant === 'light' ? 'btn-arrow--light' : variant === 'ghost' ? 'btn-arrow--ghost' : variant === 'red' ? 'btn-arrow--red' : '';
+  variant === 'light' ? 'btn-arrow--light' : variant === 'ghost' ? 'btn-arrow--ghost' : variant === 'red' ? 'btn-arrow--red' : variant === 'blue' ? 'btn-arrow--blue' : '';
 ---
 
 <a
   href={href}
   class:list={['btn-arrow', variantClass, className]}
+  data-motion={chosen}
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener noreferrer' : undefined}
 >
   <span>{label}</span>
   <span class="btn-arrow__dot">
-    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+    <svg class="btn-arrow__icon h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
     </svg>
   </span>

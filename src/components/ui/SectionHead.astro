@@ -9,9 +9,11 @@ type Props = {
   ctaHref?: string;
   centered?: boolean;
   dark?: boolean;
+  ctaVariant?: 'dark' | 'light' | 'ghost' | 'red' | 'blue';
 };
 
-const { label, title, body, ctaLabel, ctaHref, centered = false, dark = false } = Astro.props;
+const { label, title, body, ctaLabel, ctaHref, centered = false, dark = false, ctaVariant } = Astro.props;
+const pill = ctaVariant ?? (dark ? 'light' : 'dark');
 const labelCls = dark ? 'text-white/55' : 'text-ink-dim';
 const titleCls = dark ? 'text-white' : 'text-ink';
 const bodyCls = dark ? 'text-white/60' : 'text-ink-dim';
@@ -23,13 +25,13 @@ const bodyCls = dark ? 'text-white/60' : 'text-ink-dim';
       {label && <p class:list={['mono-label justify-center', labelCls]}>{label}</p>}
       <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em]" class:list={[label && 'mt-5', titleCls]}>{title}</h2>
       {body && <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed" class:list={[bodyCls]}>{body}</p>}
-      {ctaLabel && ctaHref && <Pill href={ctaHref} label={ctaLabel} variant={dark ? 'light' : 'dark'} class="mt-8" />}
+      {ctaLabel && ctaHref && <Pill href={ctaHref} label={ctaLabel} variant={pill} class="mt-8" />}
     </div>
   ) : !label ? (
     <div class="max-w-3xl">
       <h2 class="font-display text-[clamp(1.6rem,1.15rem+1.8vw,2.4rem)] font-medium leading-[1.18] tracking-[-0.025em]" class:list={[titleCls]}>{title}</h2>
       {body && <p class="mt-4 max-w-xl text-sm leading-relaxed" class:list={[bodyCls]}>{body}</p>}
-      {ctaLabel && ctaHref && <Pill href={ctaHref} label={ctaLabel} variant={dark ? 'light' : 'dark'} class="mt-7" />}
+      {ctaLabel && ctaHref && <Pill href={ctaHref} label={ctaLabel} variant={pill} class="mt-7" />}
     </div>
   ) : (
     <div class="grid gap-6 md:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] md:gap-12">
@@ -37,7 +39,7 @@ const bodyCls = dark ? 'text-white/60' : 'text-ink-dim';
       <div>
         <h2 class="font-display text-[clamp(1.6rem,1.15rem+1.8vw,2.4rem)] font-medium leading-[1.18] tracking-[-0.025em]" class:list={[titleCls]}>{title}</h2>
         {body && <p class="mt-4 max-w-xl text-sm leading-relaxed" class:list={[bodyCls]}>{body}</p>}
-        {ctaLabel && ctaHref && <Pill href={ctaHref} label={ctaLabel} variant={dark ? 'light' : 'dark'} class="mt-7" />}
+        {ctaLabel && ctaHref && <Pill href={ctaHref} label={ctaLabel} variant={pill} class="mt-7" />}
       </div>
     </div>
   )

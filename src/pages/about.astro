@@ -171,7 +171,7 @@ const SOLUTION_PHASES = [
     <div class="mx-auto w-full max-w-[100rem] px-3 pb-10 pt-6 md:px-6 md:pb-16 md:pt-10">
       <div class="relative">
         <h1 class="relative z-20 max-w-[90%] font-display text-[clamp(2.4rem,1.2rem+6.4vw,7.2rem)] font-black uppercase leading-[0.88] tracking-[-0.045em] text-ink md:-mb-[0.32em]">
-          One team, from <span class="text-accent">sensor to software</span>
+          Solving real problems, <span class="text-accent">start to finish</span>
         </h1>
 
         <div class="relative z-10 mt-4 grid gap-3 md:mt-0 md:grid-cols-[0.9fr_1.1fr] md:gap-4">
@@ -184,15 +184,12 @@ const SOLUTION_PHASES = [
               <p>Today we are a Malaysian team that wants to help everyone, from the single shop with a few cameras to the large plantation. We start small with a pilot, we explain things in plain words, and we hand over code you own, so you are never locked in.</p>
               <p>If something on your site keeps going wrong, we would love to hear about it. Often, one conversation is all it takes to see a way forward.</p>
             </div>
-            <div class="mt-6 flex items-center gap-3 text-xs font-semibold text-ink-dim">
-              <span class="h-2 w-2 rounded-full bg-accent"></span> Malaysia · AI, IoT &amp; systems
-            </div>
           </div>
 
           <!-- pictures -->
           <div class="grid gap-3 md:gap-4 md:grid-rows-[auto_1fr]">
-            <div class="relative hidden h-24 overflow-hidden rounded-[1.5rem] bg-charcoal md:block">
-              <img src="/images/hero/hero-bg.jpg" alt="" width="1100" height="614" loading="lazy" class="absolute inset-0 h-full w-full object-cover object-[50%_38%]" />
+            <div class="relative hidden h-44 overflow-hidden rounded-[1.5rem] bg-white md:block">
+              <img src="/images/home/how-3.webp" alt="" width="1500" height="952" loading="lazy" class="absolute inset-0 h-full w-full object-cover object-left-top" />
             </div>
             <div class="relative min-h-[18rem] overflow-hidden rounded-[1.75rem] bg-charcoal md:min-h-[26rem]">
               <img src="/images/home/secbg2.webp" alt="The WSS DevLabs website shown on a laptop" width="1366" height="768" loading="lazy" class="absolute inset-0 h-full w-full object-cover object-left-top" />
@@ -271,36 +268,75 @@ const SOLUTION_PHASES = [
     </Container>
   </section>
 
-  <!-- Solution Development Process (IoT/AI project deep-dive) -->
-  <section class="py-16 md:py-24 bg-paper">
+  <!-- Solution Development Process: horizontal timeline. The line fills as the active phase moves on, finished phases get a tick. -->
+  <section class="bg-paper py-16 md:py-24" data-phase-timeline>
     <Container>
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="h-section" data-split>The Solution Development Process</h2>
+        <p class="mt-4 text-sm leading-relaxed text-ink-dim">Six phases, from the first conversation to support that keeps going after launch. Tap a phase to see what happens in it.</p>
       </div>
 
-      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          SOLUTION_PHASES.map((phase, i) => (
-            <div class="rounded-3xl border border-line bg-white p-6 shadow-card">
-              <span class="font-feature text-2xl font-black text-accent">{String(i + 1).padStart(2, '0')}</span>
-              <h3 class="mt-2 text-base font-bold text-ink">{phase.title}</h3>
-              <ul class="mt-4 space-y-2.5">
-                {phase.items.map((item) => {
-                  const [head, ...rest] = item.split(': ');
-                  const desc = rest.join(': ');
-                  return (
-                    <li class="text-xs leading-relaxed text-ink-dim">
-                      <strong class="text-ink">{head}:</strong> {desc}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))
-        }
+      <!-- Timeline -->
+      <div class="relative mt-14 rounded-[1.75rem] bg-paper-dim px-4 pb-6 pt-8 sm:px-8">
+        <div class="relative">
+          <!-- base line and animated fill (they run between the first and last circle centres) -->
+          <div class="absolute left-[calc(100%/12)] right-[calc(100%/12)] top-5 h-1 -translate-y-1/2 rounded-full bg-ink/10" aria-hidden="true">
+            <div class="h-full w-0 rounded-full bg-accent transition-[width] duration-[900ms] ease-out" data-phase-fill></div>
+          </div>
+
+          <ol class="relative grid grid-cols-6">
+            {
+              SOLUTION_PHASES.map((phase, i) => (
+                <li class="flex flex-col items-center text-center">
+                  <button
+                    type="button"
+                    data-phase-node={i}
+                    aria-label={`Phase ${i + 1}: ${phase.title}`}
+                    class="phase-node group flex flex-col items-center gap-3 outline-none"
+                  >
+                    <span class="phase-dot relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink/15 bg-white text-sm font-bold text-ink-dim transition-all duration-500">
+                      <span class="phase-num">{i + 1}</span>
+                      <svg class="phase-check absolute h-5 w-5 scale-0 text-white transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                    </span>
+                    <span class="hidden px-1 text-[0.7rem] font-semibold leading-snug text-ink-dim transition-colors group-aria-selected:text-ink md:block">{phase.title}</span>
+                  </button>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        <!-- Detail of the selected phase -->
+        <div class="mt-8 border-t border-black/10 pt-6">
+          {
+            SOLUTION_PHASES.map((phase, i) => (
+              <div class="phase-panel" data-phase-panel={i} hidden={i !== 0}>
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="font-display text-xl font-bold tracking-tight text-ink">
+                    <span class="mr-2 font-feature text-accent">{String(i + 1).padStart(2, '0')}</span>{phase.title}
+                  </h3>
+                  <p class="text-xs font-semibold text-ink-dim">Phase {i + 1} of {SOLUTION_PHASES.length}</p>
+                </div>
+                <ul class="mt-5 grid gap-4 md:grid-cols-3">
+                  {phase.items.map((item) => {
+                    const [head, ...rest] = item.split(': ');
+                    const desc = rest.join(': ');
+                    return (
+                      <li class="phase-item rounded-[1.25rem] bg-white p-5 text-sm leading-relaxed text-ink-dim">
+                        <strong class="block text-ink">{head}</strong>
+                        {desc}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </Container>
   </section>
+
   <FaqSection />
 </BaseLayout>
 
@@ -325,4 +361,100 @@ const SOLUTION_PHASES = [
 
   initTimelineFill();
   document.addEventListener('astro:page-load', initTimelineFill);
+</script>
+
+<style is:global>
+  /* states: done (tick), current (filled red, ringed), later (muted) */
+  .phase-node[data-state='done'] .phase-dot {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+  .phase-node[data-state='done'] .phase-num { opacity: 0; }
+  .phase-node[data-state='done'] .phase-check { transform: scale(1); }
+  .phase-node[data-state='current'] .phase-dot {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: #fff;
+    transform: scale(1.12);
+    box-shadow: 0 0 0 6px rgb(18 18 20 / 0.1);
+  }
+  .phase-node[data-state='current'] span.hidden { color: var(--color-ink); }
+  .phase-node:hover .phase-dot { transform: scale(1.1); }
+  .phase-node:focus-visible .phase-dot { outline: 2px solid var(--color-ink); outline-offset: 3px; }
+
+  .phase-panel:not([hidden]) .phase-item {
+    animation: phase-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .phase-panel:not([hidden]) .phase-item:nth-child(2) { animation-delay: 0.08s; }
+  .phase-panel:not([hidden]) .phase-item:nth-child(3) { animation-delay: 0.16s; }
+  .phase-panel:not([hidden]) .phase-item:nth-child(4) { animation-delay: 0.24s; }
+  @keyframes phase-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .phase-panel .phase-item { animation: none !important; }
+    [data-phase-fill] { transition-duration: 0.01ms; }
+  }
+</style>
+
+<script>
+  // The active phase advances every 3.5 seconds once the timeline is on screen. Hovering or tapping a phase jumps to it.
+  function initPhaseTimeline() {
+    document.querySelectorAll<HTMLElement>('[data-phase-timeline]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const nodes = Array.from(root.querySelectorAll<HTMLElement>('[data-phase-node]'));
+      const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-phase-panel]'));
+      const fill = root.querySelector<HTMLElement>('[data-phase-fill]');
+      if (!nodes.length || !fill) return;
+      let current = 0;
+      let timer = 0;
+      let started = false;
+
+      const show = (index: number) => {
+        current = index;
+        nodes.forEach((node, i) => {
+          node.dataset.state = i < index ? 'done' : i === index ? 'current' : 'later';
+          node.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        });
+        panels.forEach((panel, i) => (panel.hidden = i !== index));
+        fill.style.width = `${(index / (nodes.length - 1)) * 100}%`;
+      };
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const play = () => {
+        window.clearInterval(timer);
+        if (reduce) return;
+        timer = window.setInterval(() => {
+          if (!document.body.contains(root)) return window.clearInterval(timer);
+          if (document.hidden) return;
+          show((current + 1) % nodes.length);
+        }, 3500);
+      };
+
+      nodes.forEach((node, i) => {
+        const pick = () => {
+          show(i);
+          play();
+        };
+        node.addEventListener('click', pick);
+        node.addEventListener('mouseenter', pick);
+      });
+
+      show(0);
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !started) {
+            started = true;
+            play();
+          }
+        },
+        { threshold: 0.35 }
+      );
+      io.observe(root);
+    });
+  }
+  document.addEventListener('astro:page-load', initPhaseTimeline);
 </script>

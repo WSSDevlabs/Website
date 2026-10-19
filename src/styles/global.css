@@ -760,6 +760,17 @@ main > section:not(:first-of-type):not([data-tight]) {
     background-color: #fff;
     color: var(--color-accent);
   }
+  .btn-arrow--blue {
+    background-color: var(--color-accent-blue);
+    color: #fff;
+  }
+  .btn-arrow--blue:hover {
+    background-color: var(--color-accent-blue-dim);
+  }
+  .btn-arrow--blue .btn-arrow__dot {
+    background-color: #fff;
+    color: var(--color-accent-blue);
+  }
   .btn-arrow--light {
     background-color: #fff;
     color: var(--color-ink);
@@ -813,4 +824,72 @@ main > section:not(:first-of-type):not([data-tight]) {
 /* Contact map in the site's grey theme: only the map tiles are desaturated, the red pin and controls keep their colour */
 .leaflet-tile-pane {
   filter: grayscale(1) contrast(0.92) brightness(1.04);
+}
+
+/* ── Button arrow animations (varied: loop, nudge, pulse, slide, rotate) ───────── */
+@layer components {
+  .btn-arrow {
+    --pulse: rgb(255 255 255 / 0.5);
+  }
+  .btn-arrow--light {
+    --pulse: rgb(18 18 20 / 0.4);
+  }
+  .btn-arrow__icon {
+    display: block;
+  }
+
+  /* loop: the arrow runs out to the right, then comes back in from the left, over and over */
+  .btn-arrow[data-motion='loop'] .btn-arrow__dot,
+  .btn-arrow[data-motion='slide'] .btn-arrow__dot {
+    overflow: hidden;
+  }
+  .btn-arrow[data-motion='loop'] .btn-arrow__icon {
+    animation: arrow-run 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  /* slide: the same left-to-right run, only while the pointer is over the button */
+  .btn-arrow[data-motion='slide']:hover .btn-arrow__icon {
+    animation: arrow-run 0.8s cubic-bezier(0.65, 0, 0.35, 1) 1;
+  }
+  @keyframes arrow-run {
+    0% { transform: translateX(0); }
+    42% { transform: translateX(170%); }
+    43% { transform: translateX(-170%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* nudge: the arrow bobs a few pixels to the right */
+  .btn-arrow[data-motion='nudge'] .btn-arrow__icon {
+    animation: arrow-nudge 1.5s ease-in-out infinite;
+  }
+  @keyframes arrow-nudge {
+    0%, 100% { transform: translateX(-2px); }
+    50% { transform: translateX(4px); }
+  }
+
+  /* pulse: a soft ring spreads out from the circle */
+  .btn-arrow[data-motion='pulse'] .btn-arrow__dot {
+    animation: arrow-pulse 2s ease-out infinite;
+  }
+  @keyframes arrow-pulse {
+    0% { box-shadow: 0 0 0 0 var(--pulse); }
+    70%, 100% { box-shadow: 0 0 0 11px transparent; }
+  }
+
+  /* rotate: on hover the arrow turns to point up and right, and the circle grows */
+  .btn-arrow[data-motion='rotate'] .btn-arrow__icon {
+    transition: transform 0.4s var(--ease-out-expo);
+  }
+  .btn-arrow[data-motion='rotate']:hover .btn-arrow__icon {
+    transform: rotate(-45deg);
+  }
+  .btn-arrow[data-motion='rotate']:hover .btn-arrow__dot {
+    transform: scale(1.12);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-arrow .btn-arrow__icon,
+    .btn-arrow .btn-arrow__dot {
+      animation: none !important;
+    }
+  }
 }

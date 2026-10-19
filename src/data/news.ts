@@ -143,6 +143,76 @@ export const NEWS = {
       image: u('1531746790731-6c087fecd65a', 1000, 1100),
       summary: 'Funds will help 4,000 small businesses adopt AI, with training for 5,000 AI professionals.',
       lang: 'EN'
+    },
+    {
+      title: 'Record RM510bil budget tabled',
+      source: 'The Star',
+      url: 'https://www.thestar.com.my/news/nation/2026/10/10/record-rm510bil-budget-tabled',
+      date: '10 Oct 2026',
+      tag: 'Budget 2027',
+      image: u('1554224155-6726b3ff858f', 1000, 1100),
+      summary: 'Total spending and investment of RM510 billion, with the deficit targeted at 3.3% of GDP.',
+      lang: 'EN'
+    },
+    {
+      title: 'Budget 2027: Record RM57b allocation to boost Malaysian MSMEs',
+      source: 'Malay Mail',
+      url: 'https://www.malaymail.com/news/malaysia/2026/10/17/budget-2027-record-rm57b-allocation-to-boost-malaysian-msmes-resilience-amid-global-economic-uncertainty/239404',
+      date: '17 Oct 2026',
+      tag: 'SME',
+      image: u('1556761175-5973dc0f32e7', 1000, 1100),
+      summary: 'A record financing guarantee amount for micro, small and medium enterprises.',
+      lang: 'EN'
+    },
+    {
+      title: 'Budget 2027: RM5 Bln To Boost Internet Connectivity, RM130 Mln For Creative Industry',
+      source: 'Bernama',
+      url: 'https://www.bernama.com/en/general/news.php?id=2618518',
+      date: 'Oct 2026',
+      tag: 'Digital',
+      image: u('1558494949-ef010cbdcc31', 1000, 1100),
+      summary: 'Money for rural and remote internet coverage, following the JENDELA plan.',
+      lang: 'EN'
+    },
+    {
+      title: 'Budget 2027: PETRA Allocated RM5.33 Bln To Strengthen Water And Energy Infrastructure',
+      source: 'Bernama',
+      url: 'https://www.bernama.com/en/general/news.php?id=2618016',
+      date: 'Oct 2026',
+      tag: 'Infrastructure',
+      image: u('1473341304170-971dccb5ac1e', 1000, 1100),
+      summary: 'Funding to strengthen water and energy infrastructure.',
+      lang: 'EN'
+    },
+    {
+      title: 'Pelaburan AI ubah peranan Malaysia dalam ekonomi digital dunia',
+      source: 'Berita Harian',
+      url: 'https://www.bharian.com.my/amp/bisnes/lain-lain/2026/07/1582995/pelaburan-ai-ubah-peranan-malaysia-dalam-ekonomi-digital-dunia',
+      date: 'Jul 2026',
+      tag: 'AI',
+      image: u('1518770660439-4636190af475', 1000, 1100),
+      summary: "How AI investment is changing Malaysia's role in the global digital economy.",
+      lang: 'BM'
+    },
+    {
+      title: "Ekonomi Malaysia semakin bergantung kepada 'kitaran AI'",
+      source: 'Berita Harian',
+      url: 'https://www.bharian.com.my/amp/bisnes/lain-lain/2026/08/1603104/ekonomi-malaysia-semakin-bergantung-kepada-kitaran-ai',
+      date: 'Aug 2026',
+      tag: 'Economy',
+      image: u('1639322537228-f710d846310a', 1000, 1100),
+      summary: 'The economy leans more and more on the global AI investment cycle.',
+      lang: 'BM'
+    },
+    {
+      title: 'Robot AI lebih cekap, penuhi keperluan industri',
+      source: 'Kosmo',
+      url: 'https://www.kosmo.com.my/2026/07/07/robot-ai-lebih-cekap-penuhi-keperluan-industri/',
+      date: '7 Jul 2026',
+      tag: 'Industry',
+      image: u('1485827404703-89b55fcc595e', 1000, 1100),
+      summary: 'New-generation robots use AI and computer vision to spot defects on the production line.',
+      lang: 'BM'
     }
   ] as NewsItem[]
 };

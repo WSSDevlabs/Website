@@ -126,9 +126,9 @@ const websiteDesignPricingTables: PricingTable[] = [
   {
     title: 'SME Website Design Packages',
     tiers: [
-      { name: '1 Page', price: 'RM 1,799' },
-      { name: '5 Pages', price: 'RM 2,599' },
-      { name: '10 Pages', price: 'RM 3,299' }
+      { name: '1 Page', price: 'RM 549' },
+      { name: '5 Pages', price: 'RM 999' },
+      { name: '10 Pages', price: 'RM 1,399' }
     ],
     rows: [
       { label: 'Domain', values: [true, true, true] },
@@ -151,45 +151,45 @@ const websiteDesignPricingTables: PricingTable[] = [
   {
     title: 'Corporate Website Design Packages',
     tiers: [
-      { name: 'Corporate', price: 'RM 4,299' },
-      { name: 'Advance', price: 'RM 5,299' },
-      { name: 'Premium', price: 'RM 6,399' },
-      { name: 'Champion', price: 'RM 7,399' }
+      { name: 'Corporate', price: 'RM 2,599' },
+      { name: 'Advance', price: 'RM 3,599' },
+      { name: 'Premium', price: 'RM 4,599' }
     ],
     rows: [
-      { label: 'Domain', values: [true, true, true, true] },
-      { label: 'Web Pages Design', values: ['15 pages', '20 pages', '25 pages', '30 pages'] },
-      { label: 'Web Storage', values: ['20 GB', '20 GB', '30 GB', '30 GB'] },
-      { label: 'Email Users', values: ['35 users', '35 users', 'Unlimited', 'Unlimited'] },
-      { label: 'Mobile Responsive', values: [true, true, true, true] },
-      { label: 'Customisable Design & Layout', values: [true, true, true, true] },
-      { label: 'Mega Menu', values: [true, true, true, true] },
-      { label: 'Products Upload', values: ['30', '30', '50', '50'] },
-      { label: 'Animated Banner', values: ['3', '5', '5', '5'] },
-      { label: 'Content Management System', values: [true, true, true, true] },
-      { label: 'Ownership & Access', values: [true, true, true, true] },
-      { label: 'SSL Certificate', values: [true, true, true, true] },
-      { label: 'Stock Photos', values: [true, true, true, true] },
-      { label: 'Technical Support', values: [true, true, true, true] },
-      { label: 'SEO Friendly', values: [true, true, true, true] }
+      { label: 'Domain', values: [true, true, true] },
+      { label: 'Web Pages Design', values: ['10 pages', '15 pages', '20 pages and more'] },
+      { label: 'Add more pages anytime (within the 1-year contract)', values: [true, true, true] },
+      { label: 'Web Storage', values: ['20 GB', '30 GB', '30 GB'] },
+      { label: 'Email Users', values: ['35 users', '35 users', 'Unlimited'] },
+      { label: 'Mobile Responsive', values: [true, true, true] },
+      { label: 'Customisable Design & Layout', values: [true, true, true] },
+      { label: 'Mega Menu', values: [true, true, true] },
+      { label: 'Products Upload', values: ['30', '50', '50'] },
+      { label: 'Animated Banner', values: ['3', '5', '5'] },
+      { label: 'Content Management System', values: [true, true, true] },
+      { label: 'Ownership & Access', values: [true, true, true] },
+      { label: 'SSL Certificate', values: [true, true, true] },
+      { label: 'Stock Photos', values: [true, true, true] },
+      { label: 'Technical Support', values: [true, true, true] },
+      { label: 'SEO Friendly', values: [true, true, true] }
     ],
-    renewal: ['RM 659.00', 'RM 659.00', 'RM 769.00', 'RM 769.00'],
-    hasCta: true
+    renewal: ['RM 659.00', 'RM 659.00', 'RM 769.00'],
+    hasCta: true,
+    popularIndex: 1
   },
   {
     title: 'UI & UX Design',
     tiers: [
-      { name: 'Seed', price: 'RM 1,500' },
-      { name: 'Grow', price: 'RM 4,500' },
-      { name: 'Bloom', price: 'RM 8,500' },
-      { name: 'Ultimate', price: 'RM 13,000' }
+      { name: 'Seed', price: 'RM 499' },
+      { name: 'Grow', price: 'RM 799' },
+      { name: 'Bloom', price: 'RM 999' }
     ],
     rows: [
-      { label: 'Number of Screens', values: ['5', '15', '30', '50'] },
-      { label: 'User Journey Mapping', values: [true, true, true, true] },
-      { label: 'Revisions', values: ['3', '3', '5', '5'] },
-      { label: 'Responsive Design', values: [false, false, false, false] },
-      { label: 'Technology', values: ['Figma', 'Figma', 'Figma', 'Figma'] }
+      { label: 'Number of Screens', values: ['5', '10', 'More than 10'] },
+      { label: 'User Journey Mapping', values: [true, true, true] },
+      { label: 'Revisions', values: ['3', '3', '5'] },
+      { label: 'Responsive Design', values: [false, false, false] },
+      { label: 'Technology', values: ['Figma', 'Figma', 'Figma'] }
     ],
     hasCta: true,
     popularIndex: 1
@@ -413,49 +413,66 @@ const websiteDesignPricingTables: PricingTable[] = [
               </p>
             </div>
 
-            <div class="grid gap-8 lg:grid-cols-2">
-              {spotlightPairs.map(({ svc, icon, tone }) => svc && (
-                <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <span class:list={['flex h-12 w-12 items-center justify-center rounded-2xl text-white', toneAccent[tone]]}>
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
-                    </svg>
-                  </span>
-                  <h3 class="mt-5 text-xl font-bold tracking-tight text-ink">{svc.title}</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-ink-dim">{svc.valueProp}</p>
-
-                  <p class="mono-label mt-6 text-ink-dim">What's Included</p>
-                  <ul class="mt-3 space-y-2.5">
-                    {svc.deliverables.map((item) => (
-                      <li class="flex items-start gap-2.5 text-sm text-ink-dim">
-                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            <div class="grid items-stretch gap-5 lg:grid-cols-2">
+              {spotlightPairs.map(({ svc, icon, tone }, idx) => svc && (
+                <article
+                  class:list={[
+                    'group flex flex-col rounded-[2rem] p-3 transition-transform duration-500 hover:-translate-y-1.5',
+                    idx === 1 ? 'bg-charcoal text-white shadow-[0_30px_70px_-36px_rgba(0,0,0,0.6)]' : 'bg-white ring-1 ring-black/5 shadow-[0_24px_60px_-40px_rgba(0,0,0,0.3)]'
+                  ]}
+                >
+                  <!-- plan-style head -->
+                  <div class="flex flex-col px-5 pb-5 pt-5 sm:px-7 sm:pt-7">
+                    <div class="flex items-center justify-between gap-3">
+                      <span class:list={['flex h-11 w-11 items-center justify-center rounded-2xl text-white', toneAccent[tone]]}>
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
                         </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <p class="mono-label mt-6 text-ink-dim">Our Approach</p>
-                  <ol class="mt-3 space-y-2">
-                    {svc.approach.map((step, i) => (
-                      <li class="flex items-start gap-2.5 text-sm text-ink-dim">
-                        <span class:list={['mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white', toneAccent[tone]]}>
-                          {i + 1}
-                        </span>
-                        {step}
-                      </li>
-                    ))}
-                  </ol>
-
-                  <div class="mt-6 flex flex-wrap gap-1.5">
-                    {svc.tools.map((tool) => (
-                      <span class="rounded-full border border-line bg-paper-dim px-3 py-1 text-[11px] font-medium text-ink-dim">
-                        {tool}
                       </span>
-                    ))}
+                      <span class:list={['rounded-full px-3 py-1 text-[0.68rem] font-semibold', idx === 1 ? 'bg-white/10 text-white/80' : 'bg-paper-dim text-ink-dim']}>
+                        {idx === 0 ? 'Websites' : 'Apps'}
+                      </span>
+                    </div>
+                    <h3 class:list={['mt-6 font-display text-[clamp(1.6rem,1.2rem+1.4vw,2.2rem)] font-semibold leading-tight tracking-[-0.03em]', idx === 1 ? 'text-white' : 'text-ink']}>{svc.title}</h3>
+                    <p class:list={['mt-3 text-sm leading-relaxed', idx === 1 ? 'text-white/60' : 'text-ink-dim']}>{svc.valueProp}</p>
+                    <a
+                      href={`/contact?topic=${encodeURIComponent(svc.title)}`}
+                      class:list={[
+                        'mt-6 inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.02]',
+                        idx === 1 ? 'bg-white text-ink' : 'bg-ink text-white'
+                      ]}
+                    >
+                      Ask about this
+                    </a>
                   </div>
-                </div>
+
+                  <!-- inner panel: what is included, then how we work -->
+                  <div class:list={['flex flex-1 flex-col rounded-[1.5rem] p-5 sm:p-7', idx === 1 ? 'bg-white text-ink' : 'bg-paper-dim']}>
+                    <p class="text-sm font-bold text-ink">Features:</p>
+                    <ul class="mt-4 space-y-3">
+                      {svc.deliverables.map((item) => (
+                        <li class="flex items-start gap-3 text-sm text-ink-dim">
+                          <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink text-white">
+                            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <p class="mt-7 text-sm font-bold text-ink">How we work:</p>
+                    <ol class="mt-4 space-y-3">
+                      {svc.approach.map((step, i) => (
+                        <li class="flex items-start gap-3 text-sm text-ink-dim">
+                          <span class:list={['mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white', toneAccent[tone]]}>
+                            {i + 1}
+                          </span>
+                          {step}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </article>
               ))}
             </div>
 
@@ -585,51 +602,19 @@ const websiteDesignPricingTables: PricingTable[] = [
     category.slug === 'digital-design-media-marketing' && (
       <Section rule class="bg-paper-dim">
         <Container>
-          <div class="mx-auto max-w-2xl text-center mb-12">
-            <h2 class="h-section">Core Services Delivered in the Copywriting Blueprint</h2>
+          <div class="mx-auto mb-10 max-w-2xl text-center">
+            <h2 class="h-section">Strategy that helps you grow</h2>
+            <p class="mt-4 text-sm leading-relaxed text-ink-dim">Marketing works best when it follows a plan. We help you choose where to start, what to measure and when to scale.</p>
           </div>
-
-          <div class="grid gap-8 lg:grid-cols-2">
-            <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
-              <p class="mono-label text-accent">1. Google Ads Campaign Management</p>
-              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
-                Acquiring high-intent local prospects through real-time bid adjustments, keyword monitoring, and structured ad intelligence.
-              </p>
-
-              <p class="mono-label mt-6 text-ink-dim">Ad Channel Coverage</p>
-              <div class="mt-3 flex flex-wrap gap-1.5">
-                {['Standard Search Ads', 'Display Network Retargeting', 'Google Shopping Ads', 'YouTube Video Ads'].map((ch) => (
-                  <span class="rounded-full border border-line bg-paper-dim px-3 py-1 text-[11px] font-medium text-ink-dim">{ch}</span>
-                ))}
-              </div>
-
-              <p class="mono-label mt-6 text-ink-dim">Campaign Packages</p>
-              <p class="mt-2 text-sm leading-relaxed text-ink-dim">
-                Structured tiers from <strong class="text-ink">RM 500/month</strong> to <strong class="text-ink">RM 2,000/month</strong> (subject to 8% SST), with setup fees from <strong class="text-ink">RM 500 – RM 1,500</strong>, minimum contract durations, and campaign limits depending on tier.
-              </p>
-            </div>
-
-            <div class="flex flex-col rounded-3xl border border-line bg-white p-8 shadow-card">
-              <p class="mono-label text-accent">2. Search Engine Optimisation (SEO)</p>
-              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
-                Positions your builds for long-term organic authority, helping clients convert search traffic without ongoing ad spend.
-              </p>
-
-              <p class="mono-label mt-6 text-ink-dim">Ongoing Monthly Packages</p>
-              <ul class="mt-3 space-y-2 text-sm text-ink-dim">
-                <li>· <strong class="text-ink">Starter</strong> — RM 1,200/month</li>
-                <li>· <strong class="text-ink">Basic</strong> — RM 1,500/month</li>
-                <li>· <strong class="text-ink">Premium</strong> — RM 1,900/month</li>
-              </ul>
-              <p class="mt-2 text-xs text-ink-dim">Guaranteed top-30 rankings for up to 20 keywords across 20 pages.</p>
-
-              <p class="mono-label mt-6 text-ink-dim">SEO Essential Setup (One-Time)</p>
-              <ul class="mt-3 space-y-2 text-sm text-ink-dim">
-                <li>· <strong class="text-ink">Basic</strong> — RM 4,000</li>
-                <li>· <strong class="text-ink">Advanced</strong> — RM 5,500</li>
-              </ul>
-              <p class="mt-2 text-xs text-ink-dim">Tag optimizations, performance checks, indexing setup, and 2 months of initial backlink/ranking support.</p>
-            </div>
+          <div class="mx-auto max-w-2xl rounded-[2rem] bg-white p-10 text-center ring-1 ring-black/5 sm:p-14">
+            <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-paper-dim text-ink">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            </span>
+            <p class="mt-6 font-display text-[clamp(1.6rem,1.2rem+1.6vw,2.2rem)] font-bold leading-tight tracking-[-0.03em] text-ink">Packages coming soon</p>
+            <p class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink-dim">
+              Our Google Ads and SEO packages are being prepared. Tell us what you want to achieve and we will talk it through with you in the meantime.
+            </p>
+            <a href="/contact?topic=Marketing" class="mt-7 inline-flex items-center justify-center rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105">Ask us about marketing</a>
           </div>
         </Container>
       </Section>
@@ -746,6 +731,11 @@ const websiteDesignPricingTables: PricingTable[] = [
                   </tbody>
                 </table>
               </div>
+              {table.title.startsWith('Corporate') && (
+                <p class="mx-auto mt-5 max-w-2xl text-center text-sm leading-relaxed text-ink-dim">
+                  Need more than 20 pages? Extra pages can be added at any time while your 1-year contract runs.
+                </p>
+              )}
             </Container>
           </Section>
         ))}
@@ -830,40 +820,76 @@ const websiteDesignPricingTables: PricingTable[] = [
     category.slug === 'digital-design-media-marketing' && (
       <Section rule class="bg-paper-dim/40">
         <Container>
-          <div class="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <h2 class="h-section">Why Branding Is a Business Decision, Not a Design One</h2>
-              <p class="mt-4 text-sm leading-relaxed text-ink-dim">
-                A logo is not a brand. Branding is the reason a customer trusts your price, remembers your name after
-                one visit, and picks you over a cheaper competitor who looks less put-together. Skipping it doesn't
-                save money — it just moves the cost into every sale you have to work harder to close.
-              </p>
-              <p class="mt-3 text-sm leading-relaxed text-ink-dim">
-                Consistent branding across your website, social pages, packaging, and ads compounds: every touchpoint
-                reinforces the last one instead of starting from zero, which is what actually drives repeat business
-                and referrals over time.
-              </p>
-            </div>
+          <div class="mx-auto max-w-3xl text-center">
+            <h2 class="h-section">Why Branding Is a Business Decision, Not a Design One</h2>
+            <p class="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-ink-dim">
+              A logo is not a brand. Branding is the reason a customer trusts your price, remembers your name after one visit, and picks you over a cheaper competitor who looks less put-together. Consistent branding across your website, social pages, packaging and ads compounds: every touchpoint reinforces the last one instead of starting from zero.
+            </p>
+          </div>
 
-            <div class="space-y-3">
-              {[
-                { title: 'Trust, before a word is spoken', desc: 'A consistent look tells a new customer you\'re established and reliable before they read a single review.' },
-                { title: 'Pricing power', desc: 'Businesses with a clear brand identity can charge more for the same product, because perceived value goes up.' },
-                { title: 'Lower marketing cost over time', desc: 'A recognizable brand needs fewer impressions to be remembered — every ad works a little harder.' }
-              ].map((item) => (
-                <div class="flex items-start gap-3 rounded-2xl border border-line bg-white p-4 shadow-sm">
-                  <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/10">
-                    <svg class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+          <div class="mt-14 grid items-stretch gap-4 lg:grid-cols-3 lg:gap-5">
+            {[
+              {
+                tag: 'Trust',
+                title: 'Trust, before a word is spoken',
+                desc: "A consistent look tells a new customer you're established and reliable before they read a single review.",
+                points: ['One logo, one colour set, one voice', 'Clear, honest messaging', 'Professional photos and video', 'The same look on every channel']
+              },
+              {
+                tag: 'Value',
+                title: 'Pricing power',
+                desc: 'Businesses with a clear brand identity can charge more for the same product, because perceived value goes up.',
+                points: ['A clear place in your market', 'Fewer discounts needed', 'Customers choose on more than price', 'Higher perceived quality'],
+                featured: true
+              },
+              {
+                tag: 'Cost',
+                title: 'Lower marketing cost over time',
+                desc: 'A recognizable brand needs fewer impressions to be remembered, so every ad works a little harder.',
+                points: ['Easier to remember', 'Fewer impressions to be recalled', 'More repeat customers', 'More referrals over time']
+              }
+            ].map((card, i) => (
+              card.featured ? (
+                <article class="brand-card brand-card--hero relative isolate flex flex-col overflow-hidden rounded-[2rem] bg-charcoal p-7 text-white lg:-my-3 lg:p-8">
+                  <div class="pointer-events-none absolute -right-16 -top-16 -z-10 h-56 w-56 rounded-full bg-accent/40 blur-3xl" aria-hidden="true"></div>
+                  <span class="w-fit rounded-full bg-white/10 px-3 py-1 text-[0.68rem] font-semibold text-white/80">{card.tag}</span>
+                  <h3 class="mt-4 font-display text-2xl font-semibold leading-tight tracking-tight">{card.title}</h3>
+                  <p class="mt-3 text-sm leading-relaxed text-white/65">{card.desc}</p>
+
+                  <!-- rising-value graphic: the line draws itself when the card scrolls into view -->
+                  <div class="my-6 flex flex-1 items-center justify-center rounded-[1.5rem] bg-gradient-to-br from-accent to-[#7a1c14] p-5">
+                    <svg class="brand-chart h-auto w-full max-w-[16rem]" viewBox="0 0 240 140" fill="none" aria-hidden="true">
+                      <path d="M10 120 H230" stroke="rgb(255 255 255 / 0.25)" stroke-width="1.5" />
+                      <path d="M10 100 C50 96, 70 80, 100 74 S160 50, 230 18" stroke="#fff" stroke-width="4" stroke-linecap="round" pathLength="1" class="brand-chart-line" />
+                      <circle cx="230" cy="18" r="7" fill="#fff" class="brand-chart-dot" />
+                      <text x="14" y="140" fill="rgb(255 255 255 / 0.7)" font-size="11" font-family="sans-serif">Brand strength</text>
                     </svg>
-                  </span>
-                  <div>
-                    <p class="text-sm font-bold text-ink">{item.title}</p>
-                    <p class="mt-1 text-xs leading-relaxed text-ink-dim">{item.desc}</p>
                   </div>
-                </div>
-              ))}
-            </div>
+
+                  <ul class="space-y-2.5 text-sm text-white/75">
+                    {card.points.map((point) => (
+                      <li class="flex items-center gap-2.5"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-white/60"></span>{point}</li>
+                    ))}
+                  </ul>
+                </article>
+              ) : (
+                <article class="brand-card flex flex-col rounded-[2rem] bg-white p-7 ring-1 ring-black/5 lg:p-8">
+                  <span class="w-fit rounded-full bg-paper-dim px-3 py-1 text-[0.68rem] font-semibold text-ink-dim">{card.tag}</span>
+                  <h3 class="mt-4 font-display text-2xl font-semibold leading-tight tracking-tight text-ink">{card.title}</h3>
+                  <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-dim">{card.desc}</p>
+                  <ul class="mt-8 space-y-2.5 border-t border-black/10 pt-6 text-sm text-ink-dim">
+                    {card.points.map((point) => (
+                      <li class="flex items-center gap-2.5">
+                        <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+                          <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                        </span>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              )
+            ))}
           </div>
         </Container>
       </Section>
@@ -957,5 +983,36 @@ const websiteDesignPricingTables: PricingTable[] = [
     .svc-edge {
       display: none;
     }
+  }
+</style>
+
+<style is:global>
+  .brand-card {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+  }
+  .brand-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px -34px rgb(0 0 0 / 0.35);
+  }
+  .brand-chart-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: brand-draw 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  .brand-chart-dot {
+    animation: brand-dot 2.6s ease-in-out infinite;
+  }
+  @keyframes brand-draw {
+    0% { stroke-dashoffset: 1; }
+    65%, 100% { stroke-dashoffset: 0; }
+  }
+  @keyframes brand-dot {
+    0%, 55% { opacity: 0; transform: scale(0.4); transform-origin: 230px 18px; }
+    75%, 100% { opacity: 1; transform: scale(1); transform-origin: 230px 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brand-chart-line { animation: none; stroke-dashoffset: 0; }
+    .brand-chart-dot { animation: none; }
+    .brand-card { transition: none; }
   }
 </style>

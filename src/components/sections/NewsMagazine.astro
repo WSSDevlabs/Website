@@ -1,8 +1,34 @@
 ---
 import Container from '../ui/Container.astro';
+import { getCollection } from 'astro:content';
 import { NEWS, type NewsItem } from '../../data/news';
 
 const { featured, side, fresh, popular, more } = NEWS;
+
+const blog = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+const fmtDate = (d: Date) => d.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+
+// one list for the scrolling row: our own blog posts first (newest first), then the news items
+const rowItems = [
+  ...blog.map((post) => ({
+    kind: 'blog' as const,
+    title: post.data.title,
+    url: `/insights/${post.id}`,
+    image: post.data.coverImage,
+    tag: post.data.tags[0] ?? 'Insight',
+    meta: `Our blog · ${fmtDate(post.data.publishDate)}`
+  })),
+  ...more.map((item) => ({
+    kind: 'news' as const,
+    title: item.title,
+    url: item.url,
+    image: item.image,
+    tag: item.tag,
+    meta: `${item.source} · ${item.date}`
+  }))
+];
 
 const label = (item: NewsItem) => `${item.source} · ${item.date}`;
 const external = { target: '_blank', rel: 'noopener noreferrer' } as const;
@@ -91,28 +117,79 @@ const external = { target: '_blank', rel: 'noopener noreferrer' } as const;
       <span class="h-px flex-1 bg-black/10"></span>
     </div>
 
-    <!-- Three tall picture cards -->
-    <div class="grid gap-4 md:grid-cols-3">
-      {
-        more.map((item, i) => (
-          <a
-            href={item.url}
-            {...external}
-            class="group relative isolate flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-[1.75rem] bg-charcoal p-5 text-white"
-          >
-            <img src={item.image} alt="" loading="lazy" width="1000" height="1100" class="absolute inset-0 -z-10 h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
-            <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/30 to-transparent" aria-hidden="true"></div>
-            {i === 0 && <span class="mb-3 w-fit -rotate-2 rounded-sm bg-accent px-2.5 py-1 text-xs font-extrabold uppercase tracking-wide">Breaking</span>}
-            <span class="mb-2 w-fit rounded-md bg-white/15 px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide backdrop-blur">{item.tag}</span>
-            <h3 class="font-display text-lg font-bold leading-tight tracking-tight">{item.title}</h3>
-            <p class="mt-2 text-xs text-white/60">{label(item)}</p>
-          </a>
-        ))
-      }
+    <!-- Scrolling row: our blog + more headlines. Drifts right to left, pauses on hover, edges blur. -->
+    <div class="nm-marquee relative -mx-3 overflow-hidden md:-mx-6" data-nm-marquee>
+      <div class="nm-track flex w-max gap-4 px-3 md:px-6">
+        {
+          [0, 1].flatMap((copy) => rowItems.map((item, i) => ({ item, i, copy }))).map(({ item, i, copy }) => (
+            <a
+              href={item.url}
+              {...(item.kind === 'news' ? external : {})}
+              aria-hidden={copy === 1 ? 'true' : undefined}
+              tabindex={copy === 1 ? -1 : undefined}
+              class="group relative isolate flex h-[22rem] w-[17rem] shrink-0 flex-col justify-end overflow-hidden rounded-[1.75rem] bg-charcoal p-5 text-white sm:w-[19rem]"
+            >
+              <img src={item.image} alt="" loading="lazy" width="1000" height="1100" class="absolute inset-0 -z-10 h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+              <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/30 to-transparent" aria-hidden="true"></div>
+              <span class:list={['mb-2 w-fit rounded-md px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide backdrop-blur', item.kind === 'blog' ? 'bg-accent' : 'bg-white/15']}>{item.kind === 'blog' ? `Blog · ${item.tag}` : item.tag}</span>
+              <h3 class="font-display text-lg font-bold leading-tight tracking-tight">{item.title}</h3>
+              <p class="mt-2 text-xs text-white/60">{item.meta}</p>
+            </a>
+          ))
+        }
+      </div>
+      <div class="nm-edge nm-edge--l" aria-hidden="true"></div>
+      <div class="nm-edge nm-edge--r" aria-hidden="true"></div>
     </div>
 
     <p class="mt-6 text-center text-xs text-ink-dim">
-      Headlines link to their original publishers (Berita Harian, Kosmo, The Star, Malay Mail). Summaries are ours. Pictures are illustrative.
+      Headlines link to their original publishers (Berita Harian, Kosmo, The Star, Malay Mail, Bernama). Summaries are ours. Pictures are illustrative.
     </p>
   </Container>
 </section>
+
+<style is:global>
+  .nm-track {
+    animation: nm-scroll var(--nm-speed, 80s) linear infinite;
+    will-change: transform;
+  }
+  .nm-marquee:hover .nm-track {
+    animation-play-state: paused;
+  }
+  @keyframes nm-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .nm-edge {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(3rem, 10vw, 9rem);
+    z-index: 5;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background: linear-gradient(to right, var(--color-paper), transparent);
+    -webkit-mask-image: linear-gradient(to right, #000 25%, transparent);
+    mask-image: linear-gradient(to right, #000 25%, transparent);
+  }
+  .nm-edge--l {
+    left: 0;
+  }
+  .nm-edge--r {
+    right: 0;
+    transform: scaleX(-1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nm-marquee {
+      overflow-x: auto;
+    }
+    .nm-track {
+      animation: none;
+    }
+    .nm-edge {
+      display: none;
+    }
+  }
+</style>

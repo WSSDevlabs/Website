@@ -4,6 +4,7 @@ import Container from '../../components/ui/Container.astro';
 import VideoMedia from '../../components/media/VideoMedia.astro';
 import CTABand from '../../components/sections/CTABand.astro';
 import Pill from '../../components/ui/Pill.astro';
+import BudgetBrief from '../../components/sections/BudgetBrief.astro';
 import { SECTORS, TRAINING_CLASSES } from '../../data/sectors';
 import { CLIPS } from '../../data/media';
 
@@ -38,26 +39,7 @@ const schema = {
   path="/solutions"
   schema={schema}
 >
-  <!-- Hero -->
-  <section class="relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-44" data-noreveal>
-    <div class="absolute -top-40 right-[-10%] h-[32rem] w-[46rem] rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
-    <div class="grid-pattern-blue mask-fade-edges absolute inset-0 opacity-15" aria-hidden="true"></div>
-    <Container class="relative">
-      <div data-hero-item data-hero-delay="0" class="max-w-4xl">
-        <h1 class="font-display text-[clamp(2.4rem,1.3rem+4vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
-          One team that can work in <span class="badge-highlight">every industry</span>
-        </h1>
-        <div class="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-ink-dim sm:text-lg">
-          <p>
-            Farms, plants, cities and shops have very different problems, but the same need: to see what is happening, understand it and act early. We bring one set of capabilities to all of them, and shape it around how each industry really works.
-          </p>
-          <p>
-            Our people have worked on the ground in agriculture, biomass, smart cities, energy, waste-to-energy and small business. We combine sensors and cameras, AI and automation, digital twins, apps and business systems, and training for your team, so you deal with one partner from the first site visit to the dashboard you use every day.
-          </p>
-        </div>
-      </div>
-    </Container>
-  </section>
+  <BudgetBrief />
 
   <!-- One band per sector -->
   {
@@ -89,8 +71,8 @@ const schema = {
             </div>
           </div>
 
-          <div class="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {sector.useCases.map((useCase, n) => (
+          <div class="mt-14 grid gap-3 md:grid-cols-3">
+            {sector.useCases.slice(0, 3).map((useCase, n) => (
               <div class:list={['flex flex-col rounded-[1.75rem] p-6 sm:p-7', tone.cell]}>
                 <span class="font-feature text-sm font-semibold text-accent">0{n + 1}</span>
                 <h3 class:list={['mt-2 text-lg font-bold tracking-tight', d ? 'text-white' : 'text-ink']}>{useCase.title}</h3>
