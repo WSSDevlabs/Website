@@ -3,6 +3,9 @@ import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import Section from '../../components/ui/Section.astro';
 import GrantSolutions from '../../components/sections/GrantSolutions.astro';
+import TrainingCourses from '../../components/sections/TrainingCourses.astro';
+import MarketingAds from '../../components/sections/MarketingAds.astro';
+import MarketingSeo from '../../components/sections/MarketingSeo.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import CTABand from '../../components/sections/CTABand.astro';
 import { SERVICE_CATEGORIES, getServicesForCategory } from '../../data/serviceCategories';
@@ -429,9 +432,6 @@ const websiteDesignPricingTables: PricingTable[] = [
                           <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
                         </svg>
                       </span>
-                      <span class:list={['rounded-full px-3 py-1 text-[0.68rem] font-semibold', idx === 1 ? 'bg-white/10 text-white/80' : 'bg-paper-dim text-ink-dim']}>
-                        {idx === 0 ? 'Websites' : 'Apps'}
-                      </span>
                     </div>
                     <h3 class:list={['mt-6 font-display text-[clamp(1.6rem,1.2rem+1.4vw,2.2rem)] font-semibold leading-tight tracking-[-0.03em]', idx === 1 ? 'text-white' : 'text-ink']}>{svc.title}</h3>
                     <p class:list={['mt-3 text-sm leading-relaxed', idx === 1 ? 'text-white/60' : 'text-ink-dim']}>{svc.valueProp}</p>
@@ -595,6 +595,15 @@ const websiteDesignPricingTables: PricingTable[] = [
           </Container>
         </Section>
       </Fragment>
+    )
+  }
+
+  {
+    category.slug === 'digital-design-media-marketing' && (
+      <>
+        <MarketingAds />
+        <MarketingSeo />
+      </>
     )
   }
 
@@ -926,6 +935,7 @@ const websiteDesignPricingTables: PricingTable[] = [
     )
   }
 
+  {category.slug === 'digital-consulting-solutions' && <TrainingCourses />}
   {services.some((s) => s.slug === 'grant-government-project-support') && !isSpotlight && <GrantSolutions />}
 
   <!-- ── Testimonials ───────────────────────────────────────── -->

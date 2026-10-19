@@ -1,0 +1,99 @@
+---
+import Container from '../ui/Container.astro';
+import Pill from '../ui/Pill.astro';
+
+// Written for WSS DevLabs in our own words. SEO takes time and nobody controls Google, so this section promises no rankings or timelines.
+const pillars = [
+  { tag: 'Step 1', title: 'Keyword research', body: 'We find the words your customers really type into Google, including the longer, less crowded phrases that are easier to win and often bring people who are ready to act.' },
+  { tag: 'Step 2', title: 'On-page work', body: 'We tidy up your own website: clear page titles, descriptions and headings, readable text with your key phrases in the right places, and fast, mobile-friendly pages.' },
+  { tag: 'Step 3', title: 'Off-page work', body: 'Search engines also look at what the rest of the web says about you. We build trust through quality links, listings and mentions that are real and relevant.' }
+];
+
+const checks = [
+  'Page titles and descriptions that say what each page is about',
+  'Headings that follow your key phrases and read naturally',
+  'Clean, readable web addresses',
+  'Text descriptions on images, for accessibility and search',
+  'Links between your own pages, so visitors and Google can find their way',
+  'A sitemap, and a robots file that tells Google what to skip',
+  'Broken links found and redirected to the right page',
+  'Your site submitted to Google Search Console'
+];
+---
+
+<section class="bg-white py-16 md:py-24" data-tight>
+  <Container>
+    <div class="mx-auto max-w-3xl text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-paper-dim px-3.5 py-1.5 text-xs font-semibold text-ink-dim"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span> SEO</span>
+      <h2 class="mt-5 font-display text-[clamp(2rem,1.3rem+3vw,3.4rem)] font-bold leading-[1.05] tracking-[-0.035em] text-ink">Be easier to find on Google, one step at a time</h2>
+      <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ink-dim">
+        Search engine optimisation is the slow, steady way to appear when customers search. It is not about tricks. It is about making your website clear for people and easy for search engines to understand, then building trust over time.
+      </p>
+    </div>
+
+    <ol class="seo-steps mt-14 grid gap-4 lg:grid-cols-3">
+      {
+        pillars.map((pillar, i) => (
+          <li class="seo-step relative flex flex-col rounded-[1.75rem] p-7" style={`--i:${i}`} data-tone={i}>
+            <span class="w-fit rounded-full bg-white/70 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-wide text-ink-dim">{pillar.tag}</span>
+            <h3 class="mt-4 font-display text-xl font-semibold tracking-tight text-ink">{pillar.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-dim">{pillar.body}</p>
+            <span class="seo-arrow absolute -right-4 top-1/2 z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-ink text-white lg:flex" aria-hidden="true" data-last={i === pillars.length - 1}>
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-4 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+      <div class="rounded-[1.75rem] bg-paper-dim p-7 sm:p-9">
+        <h3 class="font-display text-xl font-bold tracking-tight text-ink">What we look after on your website</h3>
+        <ul class="mt-6 grid gap-x-8 gap-y-3.5 sm:grid-cols-2">
+          {
+            checks.map((item) => (
+              <li class="flex items-start gap-3 text-sm leading-relaxed text-ink-dim">
+                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink text-white">
+                  <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative flex flex-col overflow-hidden rounded-[1.75rem] bg-charcoal p-7 text-white sm:p-9">
+        <div class="pointer-events-none absolute -bottom-16 -right-12 h-56 w-56 rounded-full bg-accent/30 blur-3xl" aria-hidden="true"></div>
+        <h3 class="relative font-display text-xl font-bold tracking-tight">Aim wider than a handful of keywords</h3>
+        <p class="relative mt-3 text-sm leading-relaxed text-white/65">
+          Chasing a few popular words is expensive and fragile. We map a wider set of related searches, grouped by what people really want, so more of the right visitors can find you.
+        </p>
+        <p class="relative mt-4 text-sm leading-relaxed text-white/65">
+          An honest note: nobody can promise a position on Google, and SEO takes months to show. We will tell you what we are doing, why, and what we are seeing, every step of the way.
+        </p>
+        <Pill href="/contact?topic=SEO" label="Talk about SEO" variant="light" class="relative mt-auto self-start pt-0" />
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style is:global>
+  .seo-step[data-tone='0'] { background: var(--color-paper-dim); }
+  .seo-step[data-tone='1'] { background: var(--color-tint); }
+  .seo-step[data-tone='2'] { background: #f2efe7; }
+  .seo-arrow[data-last='true'] { display: none; }
+  .seo-step {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: seo-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+  .seo-step:hover { transform: translateY(-6px); }
+  @keyframes seo-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .seo-step { animation: none; transition: none; }
+  }
+</style>
