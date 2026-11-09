@@ -678,9 +678,6 @@ const websiteDesignPricingTables: PricingTable[] = [
                             ]}
                           >
                             <p class="text-xl font-black">{tier.price}</p>
-                            <p class:list={['mt-0.5 text-[11px]', isPopular ? 'text-white/70' : 'text-ink-dim']}>
-                              Subject to 8% SST
-                            </p>
                           </td>
                         );
                       })}
@@ -713,9 +710,7 @@ const websiteDesignPricingTables: PricingTable[] = [
                         <td class="bg-charcoal p-4 text-sm font-semibold text-white">Subsequent Yearly Renewal</td>
                         {table.renewal.map((price) => (
                           <td class="border-l border-line p-4 text-center">
-                            <p class="text-sm font-bold text-ink">{price}</p>
-                            <p class="text-[10px] text-ink-dim">Subject to 8% SST</p>
-                          </td>
+                            <p class="text-sm font-bold text-ink">{price}</p>                          </td>
                         ))}
                       </tr>
                     )}
