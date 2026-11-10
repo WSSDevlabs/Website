@@ -1,20 +1,20 @@
-# Proposal â€” [Project Name]
-**Prepared for:** [Client] Â· **By:** WSS Devlabs Â· **Date:** [date] Â· **Valid:** 14 days
+# Proposal — [Project Name]
+**Prepared for:** [Client] · **By:** WSS Devlabs · **Date:** [date] · **Valid:** 14 days
 
 ## The problem
-[2â€“3 sentences, in the client's words, showing you understood the real pain â€” not the
+[2–3 sentences, in the client's words, showing you understood the real pain — not the
 feature they asked for.]
 
 ## What we'll build
 [One paragraph. Concrete. What exists at the end that doesn't exist now.]
 
 **Included:**
-- [Deliverable 1 â€” user-visible outcome, not tech jargon]
+- [Deliverable 1 — user-visible outcome, not tech jargon]
 - [Deliverable 2]
 - [Deliverable 3]
 
 **Not included (available as follow-up work):**
-- [Explicitly excluded item â€” this list prevents 80% of scope fights]
+- [Explicitly excluded item — this list prevents 80% of scope fights]
 
 ## Timeline
 | Milestone | What you'll see | When |
@@ -25,7 +25,7 @@ feature they asked for.]
 | Delivery | Live + handover docs | [date] |
 
 ## Investment
-[From /cfo â€” total, payment schedule tied to milestones above. 40â€“50% upfront.]
+[From /cfo — total, payment schedule tied to milestones above. 40–50% upfront.]
 
 ## How we work
 Weekly written status updates. One consolidated feedback round per milestone.

@@ -1,5 +1,5 @@
-# Meeting Minutes â€” [Client] Â· [Date]
-**Attendees:** [names] Â· **Re:** [project]
+# Meeting Minutes — [Client] · [Date]
+**Attendees:** [names] · **Re:** [project]
 
 ## Decisions
 | # | Decision | Decided by |
@@ -12,7 +12,7 @@
 | 1 | | | |
 
 ## Open questions
-- [Question â€” who owes the answer, by when]
+- [Question — who owes the answer, by when]
 
 ## Notes
 [Only what matters. Not a transcript.]

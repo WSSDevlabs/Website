@@ -1,6 +1,6 @@
-# Statement of Work â€” [Project Name]
+# Statement of Work — [Project Name]
 **Between:** WSS Devlabs ("Provider") and [Client legal name] ("Client")
-**Date:** [date] Â· **SOW #:** [n] Â· **Ref:** Proposal dated [date]
+**Date:** [date] · **SOW #:** [n] · **Ref:** Proposal dated [date]
 
 ## 1. Deliverables
 | # | Deliverable | Acceptance criterion |
@@ -8,7 +8,7 @@
 | 1 | | |
 
 ## 2. Explicitly excluded
-- [Item] â€” available as separate engagement
+- [Item] — available as separate engagement
 [This section prevents most disputes. Be exhaustive.]
 
 ## 3. Timeline
@@ -37,7 +37,7 @@ On full payment, deliverable code/assets transfer to Client. Provider retains ri
 to pre-existing tools and generic components used in delivery.
 
 ---
-*Draft prepared by WSS Devlabs. Not legal advice â€” review with counsel before signing
+*Draft prepared by WSS Devlabs. Not legal advice — review with counsel before signing
 if liability, IP, or jurisdiction terms matter to you.*
 
 **Client:** ______________ Date: ______

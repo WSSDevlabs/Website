@@ -1,14 +1,14 @@
-# Database arsenal â€” WSS Devlabs
+# Database arsenal — WSS Devlabs
 
 Read when the task is schema, migrations, queries, or data integrity.
 
 | Resource | Path / command |
 |----------|----------------|
-| Backend patterns (includes data layer) | `D:/WSSDevlabsEngine/WSSDevlabsEngine/everything-claude-code/skills/backend-patterns/SKILL.md` |
+| Backend patterns (includes data layer) | `C:/WSSDEVLABS/PROJECT/WSSDevlabsEnginedev/WSSDevlabsEngine/everything-claude-code/skills/backend-patterns/SKILL.md` |
 | Schema decisions | escalate to /tech (ADR in memory/DECISIONS.md) |
 
 ## House rules
-- Migrations only â€” never hand-edit a schema, even "just this once" on dev.
+- Migrations only — never hand-edit a schema, even "just this once" on dev.
   Every migration reversible or explicitly marked one-way with a backup step.
 - Money: integers in minor units (cents/sen) or DECIMAL. Never floats. Ever.
 - Timestamps: UTC in storage, timezone at display. `created_at`/`updated_at` on

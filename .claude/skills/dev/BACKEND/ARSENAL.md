@@ -1,12 +1,12 @@
-# Backend arsenal â€” WSS Devlabs
+# Backend arsenal — WSS Devlabs
 
 Read when the task is API, server logic, auth, jobs, or services.
 
 | Resource | Path / command |
 |----------|----------------|
-| Backend patterns (API design, caching, queues, auth) | `D:/WSSDevlabsEngine/WSSDevlabsEngine/everything-claude-code/skills/backend-patterns/SKILL.md` |
-| Security rules (validation, authz, secrets) | `D:/WSSDevlabsEngine/WSSDevlabsEngine/everything-claude-code/rules/security.md` |
-| Coding standards | `D:/WSSDevlabsEngine/WSSDevlabsEngine/everything-claude-code/skills/coding-standards/SKILL.md` |
+| Backend patterns (API design, caching, queues, auth) | `C:/WSSDEVLABS/PROJECT/WSSDevlabsEnginedev/WSSDevlabsEngine/everything-claude-code/skills/backend-patterns/SKILL.md` |
+| Security rules (validation, authz, secrets) | `C:/WSSDEVLABS/PROJECT/WSSDevlabsEnginedev/WSSDevlabsEngine/everything-claude-code/rules/security.md` |
+| Coding standards | `C:/WSSDEVLABS/PROJECT/WSSDevlabsEnginedev/WSSDevlabsEngine/everything-claude-code/skills/coding-standards/SKILL.md` |
 | Architecture questions | escalate to /tech |
 
 ## House rules

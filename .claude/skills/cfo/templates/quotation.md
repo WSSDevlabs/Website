@@ -1,8 +1,8 @@
-# Quotation â€” [Project Name]
-**For:** [Client] Â· **From:** WSS Devlabs Â· **Date:** [date] Â· **Quote #:** WSS-Q-[YYYY]-[NNN] Â· **Valid:** 14 days
+# Quotation — [Project Name]
+**For:** [Client] · **From:** WSS Devlabs · **Date:** [date] · **Quote #:** WSS-Q-[YYYY]-[NNN] · **Valid:** 14 days
 
 ## Scope summary
-[3â€“5 lines. Mirrors the proposal's "Included" list. Reference proposal date.]
+[3–5 lines. Mirrors the proposal's "Included" list. Reference proposal date.]
 
 ## Investment
 | Item | Amount |
@@ -14,14 +14,14 @@
 ## Payment schedule
 | Trigger | % | Amount | Due |
 |---------|---|--------|-----|
-| On approval (kickoff) | 40â€“50% | | On signing |
+| On approval (kickoff) | 40–50% | | On signing |
 | [Milestone 1 delivered] | | | Net 14 |
 | Final delivery & handover | | | Before credential/ownership transfer |
 
 ## Included / Not included
 Included: everything in Scope summary, [X] days post-delivery defect fixes,
 handover documentation.
-Not included: [hosting fees, third-party subscriptions, content creation, ...] â€”
+Not included: [hosting fees, third-party subscriptions, content creation, ...] —
 billed at cost or quoted separately.
 
 ## Assumptions
