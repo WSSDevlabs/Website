@@ -3,14 +3,28 @@ import Container from '../ui/Container.astro';
 import { BUDGET_FACTS, SECTOR_NOTES, FURTHER_READING, BEYOND_BUDGET } from '../../data/budget2027';
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
+
+// Bento layout for the sector cards: each sector gets its own size and look so the grid does not read as a wall of
+// identical boxes. Keyed by sector name; a sector missing here falls back to a plain card.
+type Look = 'split' | 'tall' | 'overlay' | 'top' | 'plain' | 'tint';
+const LAYOUT: Record<string, { span: string; look: Look; img?: string }> = {
+  'Agriculture and food': { span: 'md:col-span-2 lg:col-span-4', look: 'split', img: '/images/posters/rice-paddy.jpg' },
+  'Energy and green technology': { span: 'lg:col-span-2 lg:row-span-2', look: 'tall', img: '/images/posters/solar-rows.jpg' },
+  SMEs: { span: 'lg:col-span-2', look: 'tint' },
+  'Digital and AI': { span: 'lg:col-span-2', look: 'overlay', img: '/images/posters/server-lights.jpg' },
+  'Cities, flood and infrastructure': { span: 'lg:col-span-3', look: 'top', img: '/images/posters/street-rain.jpg' },
+  'Manufacturing and growth': { span: 'lg:col-span-3', look: 'top', img: '/images/posters/circuit-machine.jpg' },
+  'Health and wellbeing': { span: 'lg:col-span-2', look: 'plain' },
+  'Education and skills': { span: 'lg:col-span-2', look: 'top', img: '/images/posters/classroom.jpg' },
+  'Water and energy infrastructure': { span: 'lg:col-span-2', look: 'overlay', img: '/images/posters/substation.jpg' }
+};
 ---
 
 <section class="relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-44" data-noreveal>
   <div class="absolute -top-40 right-[-10%] h-[32rem] w-[46rem] rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
   <Container class="relative">
     <div data-hero-item data-hero-delay="0" class="max-w-4xl">
-      <p class="mono-label text-ink-dim">Belanjawan 2027 · Budget 2027</p>
-      <h1 class="mt-4 font-display text-[clamp(2.4rem,1.3rem+4vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
+      <h1 class="font-display text-[clamp(2.4rem,1.3rem+4vw,4.4rem)] font-bold leading-[1.02] tracking-[-0.04em] text-ink">
         What Budget 2027 means for <span class="badge-highlight">every industry</span>
       </h1>
       <p class="mt-6 max-w-2xl text-base leading-relaxed text-ink-dim sm:text-lg">
@@ -21,45 +35,81 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
     <!-- Headline figures -->
     <dl class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {
-        BUDGET_FACTS.map((fact) => (
-          <div class="flex flex-col rounded-[1.75rem] bg-paper-dim p-6">
-            <dt class="font-feature text-4xl font-semibold leading-none tracking-tight text-ink">{fact.value}</dt>
-            <dd class="mt-3 flex-1 text-sm leading-relaxed text-ink-dim">{fact.label}</dd>
-            <a href={fact.source.url} {...ext} class="mt-4 block w-fit text-xs font-bold text-ink underline underline-offset-4">Source: {fact.source.label} ↗</a>
+        BUDGET_FACTS.map((fact, i) => (
+          <div class:list={['relative flex flex-col overflow-hidden rounded-[1.75rem] p-6', i === 0 ? 'bg-charcoal text-white' : 'bg-paper-dim']}>
+            {i === 0 && <div class="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-accent/40 blur-3xl" aria-hidden="true"></div>}
+            <dt class:list={['relative font-feature text-4xl font-semibold leading-none tracking-tight', i === 0 ? 'text-white' : 'text-ink']}>{fact.value}</dt>
+            <dd class:list={['relative mt-3 flex-1 text-sm leading-relaxed', i === 0 ? 'text-white/65' : 'text-ink-dim']}>{fact.label}</dd>
+            <a href={fact.source.url} {...ext} class:list={['relative mt-4 block w-fit text-xs font-bold underline underline-offset-4', i === 0 ? 'text-white' : 'text-ink']}>Source: {fact.source.label} ↗</a>
           </div>
         ))
       }
     </dl>
     <p class="mt-3 text-xs text-ink-dim">The RM510bn total includes government-linked investment vehicles. RM459.8bn is the federal budget on its own.</p>
 
-    <!-- Sector by sector -->
-    <div class="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <!-- Sector by sector: bento grid, cards vary in width, height and look -->
+    <div class="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-6">
       {
-        SECTOR_NOTES.map((note, i) => (
-          <article class:list={['flex flex-col rounded-[1.75rem] p-6 sm:p-7', i % 3 === 1 ? 'bg-tint' : 'bg-white ring-1 ring-black/5']}>
-            <p class="text-xs font-bold uppercase tracking-wide text-accent">{note.sector}</p>
-            <p class="mt-3 font-feature text-4xl font-semibold leading-none tracking-tight text-ink">{note.figure}</p>
-            <h2 class="mt-3 text-base font-bold leading-snug tracking-tight text-ink">{note.headline}</h2>
-            <ul class="mt-3 space-y-2 text-sm leading-relaxed text-ink-dim">
-              {note.points.map((point) => <li class="flex gap-2.5"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink/30"></span><span>{point}</span></li>)}
-            </ul>
-            <div class="mt-5 space-y-1.5 border-t border-black/10 pt-4">
-              {
-                note.sources.map((source) => (
-                  <a href={source.url} {...ext} class="block text-xs font-bold text-ink underline underline-offset-4">
-                    {source.lang === 'BM' && <span class="mr-1.5 rounded bg-ink/10 px-1 py-px text-[0.6rem] no-underline">BM</span>}{source.label} ↗
+        SECTOR_NOTES.map((note) => {
+          const layout = LAYOUT[note.sector] ?? { span: 'lg:col-span-2', look: 'plain' as Look };
+          const { look, img } = layout;
+          const dark = look === 'overlay';
+          const body = (
+            <div class:list={['relative flex flex-1 flex-col p-6 sm:p-7', look === 'split' && 'sm:w-[55%]']}>
+              <p class:list={['text-xs font-bold uppercase tracking-wide', dark ? 'text-white/80' : 'text-accent']}>{note.sector}</p>
+              <p class:list={['mt-3 font-feature font-semibold leading-none tracking-tight', dark ? 'text-white' : 'text-ink', look === 'split' || look === 'tall' ? 'text-5xl' : 'text-4xl']}>{note.figure}</p>
+              <h2 class:list={['mt-3 text-base font-bold leading-snug tracking-tight', dark ? 'text-white' : 'text-ink']}>{note.headline}</h2>
+              <ul class:list={['mt-3 space-y-2 text-sm leading-relaxed', dark ? 'text-white/75' : 'text-ink-dim']}>
+                {note.points.map((point) => <li class="flex gap-2.5"><span class:list={['mt-2 h-1.5 w-1.5 shrink-0 rounded-full', dark ? 'bg-white/50' : 'bg-ink/30']}></span><span>{point}</span></li>)}
+              </ul>
+              <div class:list={['mt-auto space-y-1.5 border-t pt-4', dark ? 'border-white/20' : 'border-black/10']}>
+                <span class="block h-1"></span>
+                {note.sources.map((source) => (
+                  <a href={source.url} {...ext} class:list={['block text-xs font-bold underline underline-offset-4', dark ? 'text-white' : 'text-ink']}>
+                    {source.lang === 'BM' && <span class:list={['mr-1.5 rounded px-1 py-px text-[0.6rem] no-underline', dark ? 'bg-white/20' : 'bg-ink/10']}>BM</span>}{source.label} ↗
                   </a>
-                ))
-              }
+                ))}
+              </div>
+              {note.anchor && (
+                <a href={`#${note.anchor}`} class:list={['mt-4 inline-flex w-fit items-center gap-1.5 rounded-full px-4 py-2 text-sm font-bold transition-transform hover:scale-105', dark ? 'bg-white text-ink' : 'bg-ink text-white']}>
+                  How we help
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
+                </a>
+              )}
             </div>
-            {note.anchor && (
-              <a href={`#${note.anchor}`} class="mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-bold text-accent">
-                How we help
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
-              </a>
-            )}
-          </article>
-        ))
+          );
+          return (
+            <article
+              class:list={[
+                'bento-card group relative flex overflow-hidden rounded-[1.75rem]',
+                layout.span,
+                look === 'split' ? 'flex-col sm:flex-row' : 'flex-col',
+                look === 'tint' && 'bg-tint',
+                look === 'overlay' && 'min-h-[24rem] bg-charcoal',
+                (look === 'plain' || look === 'top' || look === 'tall' || look === 'split') && 'bg-white ring-1 ring-black/5'
+              ]}
+            >
+              {img && look === 'overlay' && (
+                <Fragment>
+                  <img src={img} alt="" loading="lazy" width="1280" height="720" class="bento-img absolute inset-0 h-full w-full object-cover" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/65 to-black/25" aria-hidden="true"></div>
+                </Fragment>
+              )}
+              {img && look === 'split' && (
+                <div class="relative h-56 overflow-hidden sm:order-2 sm:h-auto sm:w-[45%]">
+                  <img src={img} alt="" loading="lazy" width="1280" height="720" class="bento-img absolute inset-0 h-full w-full object-cover" />
+                </div>
+              )}
+              {img && (look === 'top' || look === 'tall') && (
+                <div class:list={['relative overflow-hidden', look === 'tall' ? 'h-64 lg:h-80' : 'h-44']}>
+                  <img src={img} alt="" loading="lazy" width="1280" height="720" class="bento-img absolute inset-0 h-full w-full object-cover" />
+                  <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" aria-hidden="true"></div>
+                </div>
+              )}
+              {body}
+            </article>
+          );
+        })
       }
     </div>
 
@@ -102,3 +152,25 @@ const ext = { target: '_blank', rel: 'noopener noreferrer' } as const;
     </div>
   </Container>
 </section>
+
+<style>
+  .bento-card {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s;
+  }
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 56px -34px rgb(0 0 0 / 0.35);
+  }
+  .bento-img {
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .bento-card:hover .bento-img {
+    transform: scale(1.05);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bento-card,
+    .bento-img {
+      transition: none;
+    }
+  }
+</style>

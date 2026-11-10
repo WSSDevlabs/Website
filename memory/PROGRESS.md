@@ -257,3 +257,11 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - **.gitignore:** ignores `WebsiteImage/*.pdf`, `WebsiteImage/images.jpg` (unrelated Sinar Wau files), Thumbs.db, desktop.ini, *.log, `.env.*`.
 - **Verified:** `npm run build` (astro check clean), 27 pages; SVGs + page screenshotted via headless Edge.
 - **Open:** 14 old commits (2026-08-22 to 2026-09-19) still carry `Co-Authored-By: Claude` trailers; removing needs history rewrite + force push, founder to decide.
+
+## 2026-11-11 (later) — About, FAQ, Budget, product photos (uncommitted)
+
+- **About MVV cards:** CSS subgrid (md+) so lead, description and the 4 point cards line up across Mission/Vision/Values; Values got a description.
+- **About sensor strip:** redrawn as a realistic scene (CCTV, cold-room probe, soil probe with live readings -> LoRa gateway -> "Site overview" dashboard with KPI tiles, alert, time axis).
+- **FAQ (`FaqSection.astro`):** category pills moved under the heading as an equal-width 2-col grid; 8 categories, 46 Q&As in a friendly customer-service tone covering the whole site. Grant/SST wording kept out on purpose. Warranty answer matches Terms (30-day bug-fix).
+- **Budget 2027 (`BudgetBrief.astro`, on /solutions):** "Belanjawan 2027 · Budget 2027" label removed; sector cards now a 6-col bento (split, tall, overlay, image-top, tint, plain) with local poster photos; first headline figure is a dark featured card.
+- **Industrial design cards:** SVG illustrations replaced with Unsplash stock photos; heading now "Product ideas we can build with you", badge "Idea 0N", note "Photos are for illustration only". 4 product SVGs deleted; `blueprint-hero.svg` kept as service hero.

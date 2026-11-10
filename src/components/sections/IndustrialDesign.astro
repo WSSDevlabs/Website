@@ -5,33 +5,34 @@ import { getServiceBySlug } from '../../data/services';
 
 const service = getServiceBySlug('industrial-design');
 
-// Studio concept products: rendered ideas that show the range of the service. None of these are for sale yet.
+// Product ideas that show the range of the service. None of these are for sale yet; the photos are stock
+// images (Unsplash licence) used for illustration, not pictures of our own prototypes.
 const concepts = [
   {
     name: 'Tuah',
     kind: 'Desk companion robot',
-    img: '/images/industrial/desk-robot.svg',
+    img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&h=900&q=80',
     desc: 'A palm-sized robot that sits beside your laptop. It runs focus timers, nudges you to sit up, and lights up when a new order or message lands in your system.',
     tags: ['ESP32', 'Screen face', 'Voice reminders', 'Connects to your dashboard']
   },
   {
     name: 'Sayong',
     kind: 'Heritage table lamp',
-    img: '/images/industrial/heritage-lamp.svg',
+    img: 'https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?auto=format&fit=crop&w=1200&h=900&q=80',
     desc: 'A lamp shaped after the labu sayong clay gourd of Perak, with pucuk rebung cut-outs that throw warm light across the room. Teak stand, brass collar, dimmable from the base or your phone.',
     tags: ['Malay heritage', 'Teak + clay', 'Warm 2700K LED', 'App + touch']
   },
   {
     name: 'Tunas',
     kind: 'Smart planter',
-    img: '/images/industrial/smart-planter.svg',
+    img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=1200&h=900&q=80',
     desc: 'A self-watering pot with a soil sensor and a small screen that tells you, in plain words, when the plant needs water. Built for offices, cafés and hotel lobbies.',
     tags: ['Soil moisture', 'Water reservoir', 'Low-power display', 'Alerts']
   },
   {
     name: 'Ladang',
     kind: 'Solar field sensor node',
-    img: '/images/industrial/field-node.svg',
+    img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&h=900&q=80',
     desc: 'A rugged, solar-powered box that sits on a pole in a plantation and reports soil and weather readings over LoRa. No wiring, no daily walk-arounds.',
     tags: ['IP67 enclosure', 'Solar', 'LoRa 8 km', 'Agriculture']
   }
@@ -51,9 +52,9 @@ const process = [
   <Container>
     <div class="mx-auto mb-12 max-w-2xl text-center">
       <p class="mono-label text-accent">From the studio</p>
-      <h2 class="h-section mt-3">Concept products we have designed</h2>
+      <h2 class="h-section mt-3">Product ideas we can build with you</h2>
       <p class="mt-4 text-sm leading-relaxed text-ink-dim">
-        These are our own concepts, drawn to show the kind of product we can take from idea to prototype. Have something like this in mind for your brand, your shop or your farm? We can build it with you.
+        A few of our own product ideas, to show the kind of thing we can take from sketch to working prototype. Have something like this in mind for your brand, your shop or your farm? We would love to build it with you.
       </p>
     </div>
 
@@ -64,14 +65,14 @@ const process = [
             <div class="relative aspect-[4/3] overflow-hidden bg-paper-dim">
               <img
                 src={item.img}
-                alt={`${item.name}: ${item.kind} concept render`}
+                alt={`Illustration photo for ${item.name}, a ${item.kind.toLowerCase()} idea`}
                 class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 loading="lazy"
                 width="800"
                 height="600"
               />
               <span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[0.68rem] font-semibold text-ink backdrop-blur">
-                Concept {String(i + 1).padStart(2, '0')}
+                Idea {String(i + 1).padStart(2, '0')}
               </span>
             </div>
             <div class="flex flex-1 flex-col p-6 sm:p-7">
@@ -88,6 +89,7 @@ const process = [
         ))
       }
     </div>
+    <p class="mt-5 text-center text-xs text-ink-dim">Photos are for illustration only. Each idea is designed from scratch for the client who commissions it.</p>
   </Container>
 </Section>
 

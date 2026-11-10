@@ -167,6 +167,7 @@ const SOLUTION_PHASES = [
           <h2 class="font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em] text-ink">Where we are going, and how we get there</h2>
         </div>
 
+        <!-- md+: each card is a subgrid over 8 shared rows (wash, badge, lead, body, 4 points) so every row lines up across the three cards -->
         <div class="mt-12 grid gap-4 md:grid-cols-3">
           {
             [
@@ -204,6 +205,7 @@ const SOLUTION_PHASES = [
                 wash: 'mvv-wash--amber',
                 icon: 'm12 3 2.472 5.008 5.528.803-4 3.9.944 5.504L12 15.6l-4.944 2.615.944-5.504-4-3.9 5.528-.803L12 3Z',
                 lead: 'The four promises behind every project.',
+                body: 'These are the habits you notice from the first chat to long after launch. They shape how we quote, build, hand over and support every project, from a single shop to a large plantation.',
                 points: [
                   ['Listen first', 'We hear the problem your way before we suggest anything.'],
                   ['Plain words', 'No jargon. If we cannot explain it simply, we have not understood it.'],
@@ -212,7 +214,7 @@ const SOLUTION_PHASES = [
                 ]
               }
             ].map((card, i) => (
-              <article class="mvv-card flex flex-col overflow-hidden rounded-[1.75rem] bg-white ring-1 ring-black/5" style={`--i:${i}`}>
+              <article class="mvv-card flex flex-col overflow-hidden rounded-[1.75rem] bg-white ring-1 ring-black/5 md:row-span-8 md:grid md:grid-rows-subgrid md:gap-y-0" style={`--i:${i}`}>
                 <div class:list={['mvv-wash relative flex h-40 items-start justify-center pt-7', card.wash]}>
                   <h3 class="font-display text-2xl font-bold uppercase tracking-[0.08em] text-white drop-shadow-sm">{card.title}</h3>
                 </div>
@@ -223,11 +225,10 @@ const SOLUTION_PHASES = [
                     </span>
                   </span>
                 </div>
-                <div class="flex flex-1 flex-col px-6 pb-8 pt-5 text-center">
-                  <p class="font-display text-lg font-semibold leading-snug tracking-tight text-ink">{card.lead}</p>
-                  {card.body && <p class="mt-3 text-sm leading-relaxed text-ink-dim">{card.body}</p>}
-                  {card.points && (
-                    <ul class="mt-4 space-y-3 text-left">
+                <p class="px-6 pt-5 text-center font-display text-lg font-semibold leading-snug tracking-tight text-ink">{card.lead}</p>
+                <p class="mt-3 px-6 text-center text-sm leading-relaxed text-ink-dim">{card.body}</p>
+                {card.points && (
+                    <ul class="mt-4 space-y-3 px-6 pb-8 text-left md:row-span-4 md:grid md:grid-rows-subgrid md:gap-y-3 md:space-y-0">
                       {card.points.map(([head, text]) => (
                         <li class="rounded-[1rem] bg-paper-dim px-4 py-3">
                           <p class="text-sm font-bold text-ink">{head}</p>
@@ -235,8 +236,7 @@ const SOLUTION_PHASES = [
                         </li>
                       ))}
                     </ul>
-                  )}
-                </div>
+                )}
               </article>
             ))
           }
@@ -265,44 +265,89 @@ const SOLUTION_PHASES = [
 
           <!-- pictures -->
           <div class="grid gap-3 md:gap-4 md:grid-rows-[auto_1fr]">
-            <!-- Original illustration, drawn in code: sensors and cameras on the left send readings through a gateway to a dashboard on the right -->
+            <!-- Original illustration, drawn in code: three real site devices (camera, cold-room probe, soil probe) send live readings through a LoRa gateway to the site dashboard. The device cards sit low because the big heading overlaps the top-left corner. -->
             <div class="about-strip relative hidden h-44 overflow-hidden rounded-[1.5rem] bg-charcoal md:block" aria-hidden="true">
-              <svg class="absolute inset-0 h-full w-full" viewBox="0 0 800 176" preserveAspectRatio="xMidYMid slice" fill="none">
+              <svg class="absolute inset-0 h-full w-full" viewBox="0 0 800 176" preserveAspectRatio="xMidYMid slice" fill="none" font-family="inherit">
                 <defs>
-                  <pattern id="aboutGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" stroke="rgb(255 255 255 / 0.05)" /></pattern>
-                  <linearGradient id="aboutLine" x1="0" x2="1"><stop offset="0" stop-color="#ff6a5a" /><stop offset="1" stop-color="#7aa2ff" /></linearGradient>
-                  <linearGradient id="aboutArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7aa2ff" stop-opacity="0.35" /><stop offset="1" stop-color="#7aa2ff" stop-opacity="0" /></linearGradient>
+                  <pattern id="aboutGrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" stroke="rgb(255 255 255 / 0.04)" /></pattern>
+                  <linearGradient id="aboutLine" x1="0" x2="1"><stop offset="0" stop-color="#7aa2ff" /><stop offset="1" stop-color="#4ad8a0" /></linearGradient>
+                  <linearGradient id="aboutArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ad8a0" stop-opacity="0.28" /><stop offset="1" stop-color="#4ad8a0" stop-opacity="0" /></linearGradient>
                 </defs>
                 <rect width="800" height="176" fill="url(#aboutGrid)" />
 
-                <!-- sensor and camera nodes -->
-                <g class="about-node" fill="#ff6a5a">
-                  <circle cx="70" cy="40" r="7" /><circle cx="70" cy="88" r="7" /><circle cx="70" cy="136" r="7" />
+                <!-- site devices with live readings -->
+                <g>
+                  <rect x="16" y="52" width="196" height="36" rx="10" fill="rgb(255 255 255 / 0.06)" stroke="rgb(255 255 255 / 0.14)" />
+                  <circle cx="38" cy="70" r="11" fill="rgb(122 162 255 / 0.18)" />
+                  <rect x="31.5" y="65.5" width="10" height="8" rx="1.5" stroke="#9db8ff" stroke-width="1.4" /><path d="M41.5 68 l4 -2.5 v7 l-4 -2.5" stroke="#9db8ff" stroke-width="1.4" stroke-linejoin="round" />
+                  <text x="56" y="66" font-size="8.5" fill="rgb(255 255 255 / 0.5)">CCTV · main gate</text>
+                  <text x="56" y="80" font-size="11" font-weight="700" fill="#fff">2 people detected</text>
+
+                  <rect x="16" y="92" width="196" height="36" rx="10" fill="rgb(255 255 255 / 0.06)" stroke="rgb(255 106 90 / 0.45)" />
+                  <circle cx="38" cy="110" r="11" fill="rgb(255 106 90 / 0.18)" />
+                  <path d="M38 103.5 v7.5" stroke="#ff8a7d" stroke-width="2.6" stroke-linecap="round" /><circle cx="38" cy="113.5" r="3.2" fill="#ff8a7d" />
+                  <text x="56" y="106" font-size="8.5" fill="rgb(255 255 255 / 0.5)">Cold room probe</text>
+                  <text x="56" y="120" font-size="11" font-weight="700" fill="#fff">4.6 °C</text>
+                  <text x="96" y="120" font-size="8.5" font-weight="700" fill="#ff8a7d">above 4 °C</text>
+
+                  <rect x="16" y="132" width="196" height="36" rx="10" fill="rgb(255 255 255 / 0.06)" stroke="rgb(255 255 255 / 0.14)" />
+                  <circle cx="38" cy="150" r="11" fill="rgb(74 216 160 / 0.18)" />
+                  <path d="M38 157 v-7 M38 151 c-5.5 0 -7 -3.5 -7 -7 c4.5 0 7 2.5 7 7 M38 150 c4 0 6 -2.5 6 -6 c-4 0 -6 2.5 -6 6" stroke="#6fe3b4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                  <text x="56" y="146" font-size="8.5" fill="rgb(255 255 255 / 0.5)">Soil probe · plot B</text>
+                  <text x="56" y="160" font-size="11" font-weight="700" fill="#fff">Moisture 41%</text>
                 </g>
-                <g stroke="rgb(255 255 255 / 0.25)" stroke-width="1.5">
-                  <path class="about-flow" d="M77 40 C 180 40, 190 88, 290 88" />
-                  <path class="about-flow" d="M77 88 H290" />
-                  <path class="about-flow" d="M77 136 C 180 136, 190 88, 290 88" />
+                <g class="about-node">
+                  <circle cx="200" cy="70" r="3" fill="#4ad8a0" /><circle cx="200" cy="110" r="3" fill="#ff6a5a" /><circle cx="200" cy="150" r="3" fill="#4ad8a0" />
+                </g>
+                <g stroke="rgb(255 255 255 / 0.22)" stroke-width="1.3">
+                  <path class="about-flow" d="M212 70 C 250 70, 256 110, 292 110" />
+                  <path class="about-flow" d="M212 110 H292" />
+                  <path class="about-flow" d="M212 150 C 250 150, 256 110, 292 110" />
                 </g>
 
-                <!-- gateway -->
-                <rect x="290" y="64" width="64" height="48" rx="12" fill="rgb(255 255 255 / 0.08)" stroke="rgb(255 255 255 / 0.3)" />
-                <circle cx="322" cy="88" r="6" fill="#fff" />
-                <path d="M322 88 m-14 0 a14 14 0 0 1 28 0" stroke="rgb(255 255 255 / 0.35)" />
-                <path class="about-flow" d="M354 88 H470" stroke="url(#aboutLine)" stroke-width="2" />
+                <!-- LoRa gateway -->
+                <path d="M350 86 V62" stroke="rgb(255 255 255 / 0.55)" stroke-width="2.4" stroke-linecap="round" />
+                <circle cx="350" cy="60" r="2.6" fill="#fff" />
+                <path d="M357 60 a8 8 0 0 1 0 10 M362 56 a14 14 0 0 1 0 18" stroke="#7aa2ff" stroke-width="1.3" stroke-linecap="round" opacity="0.8" />
+                <rect x="292" y="86" width="72" height="46" rx="9" fill="#2a2b2f" stroke="rgb(255 255 255 / 0.25)" />
+                <rect x="292" y="86" width="72" height="9" rx="4.5" fill="rgb(255 255 255 / 0.08)" />
+                <circle cx="304" cy="118" r="2.4" fill="#4ad8a0" /><circle cx="313" cy="118" r="2.4" fill="#4ad8a0" /><circle cx="322" cy="118" r="2.4" fill="#f2c14e" />
+                <path d="M336 114 h18 M336 120 h18" stroke="rgb(255 255 255 / 0.25)" stroke-width="1.5" stroke-linecap="round" />
+                <text x="328" y="146" text-anchor="middle" font-size="8" font-weight="700" letter-spacing="1.2" fill="rgb(255 255 255 / 0.45)">LORA GATEWAY</text>
+                <path class="about-flow" d="M364 109 H448" stroke="url(#aboutLine)" stroke-width="1.8" />
 
                 <!-- moving readings -->
-                <circle r="3.5" fill="#fff"><animateMotion dur="3s" repeatCount="indefinite" path="M77 40 C 180 40, 190 88, 290 88" /></circle>
-                <circle r="3.5" fill="#fff"><animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M77 136 C 180 136, 190 88, 290 88" /></circle>
-                <circle r="3.5" fill="#fff"><animateMotion dur="2.4s" repeatCount="indefinite" path="M354 88 H470" /></circle>
+                <circle r="3" fill="#fff"><animateMotion dur="2.6s" repeatCount="indefinite" path="M212 70 C 250 70, 256 110, 292 110" /></circle>
+                <circle r="3" fill="#ff8a7d"><animateMotion dur="2.6s" begin="0.8s" repeatCount="indefinite" path="M212 110 H292" /></circle>
+                <circle r="3" fill="#fff"><animateMotion dur="2.6s" begin="1.6s" repeatCount="indefinite" path="M212 150 C 250 150, 256 110, 292 110" /></circle>
+                <circle r="3" fill="#fff"><animateMotion dur="2s" repeatCount="indefinite" path="M364 109 H448" /></circle>
 
-                <!-- dashboard -->
-                <rect x="470" y="22" width="270" height="132" rx="16" fill="rgb(255 255 255 / 0.06)" stroke="rgb(255 255 255 / 0.2)" />
-                <rect x="488" y="38" width="64" height="8" rx="4" fill="rgb(255 255 255 / 0.5)" />
-                <rect x="660" y="38" width="64" height="8" rx="4" fill="rgb(255 255 255 / 0.15)" />
-                <path d="M488 134 L520 112 L552 120 L584 90 L616 98 L648 70 L680 78 L724 52 V140 H488 Z" fill="url(#aboutArea)" />
-                <path class="about-draw" d="M488 134 L520 112 L552 120 L584 90 L616 98 L648 70 L680 78 L724 52" stroke="url(#aboutLine)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
-                <circle cx="724" cy="52" r="5" fill="#fff" />
+                <!-- site dashboard -->
+                <rect x="448" y="12" width="338" height="154" rx="14" fill="#202124" stroke="rgb(255 255 255 / 0.16)" />
+                <circle cx="463" cy="26" r="3" fill="#ff6a5a" opacity="0.7" /><circle cx="473" cy="26" r="3" fill="#f2c14e" opacity="0.7" /><circle cx="483" cy="26" r="3" fill="#4ad8a0" opacity="0.7" />
+                <text x="496" y="29" font-size="9" font-weight="600" fill="rgb(255 255 255 / 0.7)">Site overview</text>
+                <circle cx="742" cy="26" r="2.6" fill="#4ad8a0" class="about-live" />
+                <text x="772" y="29" text-anchor="end" font-size="8.5" font-weight="700" fill="#4ad8a0">LIVE</text>
+
+                <rect x="458" y="38" width="100" height="34" rx="7" fill="rgb(255 255 255 / 0.05)" />
+                <text x="466" y="50" font-size="7.5" fill="rgb(255 255 255 / 0.5)">Devices online</text>
+                <text x="466" y="65" font-size="12" font-weight="800" fill="#fff">24 / 24</text>
+                <rect x="564" y="38" width="100" height="34" rx="7" fill="rgb(255 255 255 / 0.05)" />
+                <text x="572" y="50" font-size="7.5" fill="rgb(255 255 255 / 0.5)">Readings today</text>
+                <text x="572" y="65" font-size="12" font-weight="800" fill="#fff">18,240</text>
+                <rect x="670" y="38" width="106" height="34" rx="7" fill="rgb(255 106 90 / 0.12)" stroke="rgb(255 106 90 / 0.4)" />
+                <text x="678" y="50" font-size="7.5" fill="rgb(255 255 255 / 0.55)">Alert sent · WhatsApp</text>
+                <text x="678" y="65" font-size="10.5" font-weight="800" fill="#ff8a7d">Cold room 4.6 °C</text>
+
+                <g stroke="rgb(255 255 255 / 0.07)" stroke-width="1"><path d="M480 86 H776 M480 106 H776 M480 126 H776 M480 146 H776" /></g>
+                <g font-size="7" fill="rgb(255 255 255 / 0.4)">
+                  <text x="474" y="88" text-anchor="end">6°</text><text x="474" y="108" text-anchor="end">4°</text><text x="474" y="128" text-anchor="end">2°</text>
+                  <text x="482" y="159">06:00</text><text x="560" y="159">09:00</text><text x="638" y="159">12:00</text><text x="716" y="159">15:00</text>
+                </g>
+                <path d="M480 106 H776" stroke="#ff6a5a" stroke-width="1" stroke-dasharray="3 3" opacity="0.6" />
+                <path d="M480 128 L505 126 L530 129 L555 124 L580 127 L605 122 L630 125 L655 119 L680 116 L705 112 L730 108 L755 103 L776 100 V146 H480 Z" fill="url(#aboutArea)" />
+                <path class="about-draw" d="M480 128 L505 126 L530 129 L555 124 L580 127 L605 122 L630 125 L655 119 L680 116 L705 112 L730 108 L755 103 L776 100" stroke="url(#aboutLine)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+                <circle cx="776" cy="100" r="3.6" fill="#ff8a7d" />
               </svg>
             </div>
             <div class="relative min-h-[18rem] overflow-hidden rounded-[1.75rem] bg-charcoal md:min-h-[26rem]">
@@ -581,9 +626,10 @@ const SOLUTION_PHASES = [
   .about-node circle:nth-child(3) { animation-delay: 0.8s; }
   @keyframes about-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.6; } }
   .about-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: about-line 4s ease-out infinite; }
+  .about-live { animation: about-pulse 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
   @keyframes about-line { 0% { stroke-dashoffset: 1; } 60%, 100% { stroke-dashoffset: 0; } }
   @media (prefers-reduced-motion: reduce) {
-    .about-flow, .about-node circle, .about-draw { animation: none; }
+    .about-flow, .about-node circle, .about-draw, .about-live { animation: none; }
     .about-draw { stroke-dashoffset: 0; }
   }
 </style>

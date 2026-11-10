@@ -2,46 +2,75 @@
 import Container from '../ui/Container.astro';
 import Pill from '../ui/Pill.astro';
 
-// Updated 2026-10-18 to match the site as it is now: AI, IoT and systems first, websites and marketing as the side offer,
-// pilot-first process, Marketplace coming soon at /store, and the Express page folded into the web development page.
+// Updated 2026-11-11: covers the whole site (AI/IoT/systems, web and apps, design and marketing,
+// industrial design, training, Marketplace, support). Tone: a friendly customer-service reply, plain words.
+// Grant and SST wording was removed by the founder on purpose; keep it out unless they ask.
 const categories = [
   { id: 'about', label: 'About us' },
   { id: 'solutions', label: 'AI, IoT & systems' },
   { id: 'process', label: 'How we work' },
   { id: 'pricing', label: 'Pricing & payment' },
-  { id: 'web', label: 'Websites & marketing' },
-  { id: 'ownership', label: 'Data, code & support' }
+  { id: 'web', label: 'Websites & apps' },
+  { id: 'design', label: 'Design & marketing' },
+  { id: 'products', label: 'Products & training' },
+  { id: 'ownership', label: 'Data & support' }
 ];
 
 const faqs = [
-  { cat: 'about', q: 'What does WSS DevLabs do?', a: 'We are a Malaysian AI, IoT and systems company. We build intelligent solutions for farms, plants, cities and growing businesses, from sensors and cameras to AI, automation and business systems. We also build websites and apps and run design and marketing when clients need them.' },
-  { cat: 'about', q: 'Who do you work with?', a: 'Everyone from a single shop with a few cameras to a large plantation or a council. Every project starts with a small pilot sized to your budget, so size is never a barrier.' },
-  { cat: 'about', q: 'Where are you based?', a: 'We are based in Kuala Lumpur, Malaysia, and work on site with clients across Malaysia. We also work remotely with clients across Southeast Asia.' },
-  { cat: 'about', q: 'Who will I actually be working with?', a: 'You work directly with Razali, the founder, and the people building your project. There are no account managers or middlemen between you and the person doing the work.' },
+  { cat: 'about', q: 'What does WSS DevLabs do?', a: 'Happy you asked! We are a Malaysian AI, IoT and systems company. We help farms, plants, cities and growing businesses with sensors, cameras, AI, automation and business systems. We also build websites and apps, design products, and run branding and marketing when you need it, all from one team.' },
+  { cat: 'about', q: 'Who do you work with?', a: 'Pretty much everyone, from a single shop with a few cameras to a large plantation or a local council. Every project starts small and is sized to your budget, so you never need to be a big company to work with us.' },
+  { cat: 'about', q: 'Where are you based?', a: 'We are based in Kuala Lumpur and happily travel to sites across Malaysia. We also work remotely with clients around Southeast Asia, so distance is rarely a problem.' },
+  { cat: 'about', q: 'Who will I actually be working with?', a: 'You will work directly with Razali, our founder, and the people building your project. No account managers, no being passed around. When you message us, the person who replies knows your project.' },
+  { cat: 'about', q: 'What are your working hours?', a: 'We are around Monday to Friday, 9am to 6pm Malaysia time. Messages sent after hours or on weekends are answered the next business day, and urgent issues for live support clients are handled as agreed in their plan.' },
+  { cat: 'about', q: 'How can I reach you?', a: 'Whichever way is easiest for you. WhatsApp or call us at +6011-2720-5895, email info@wssdevlabs.com, or fill in the form on our Contact page. We reply within one business day.' },
 
-  { cat: 'solutions', q: 'What AI and automation can you build?', a: 'Detection and monitoring models (for example wildlife and plant disease detection), chatbots grounded in your own content, analytics dashboards, and automations that take repetitive work off your team. We choose the simplest approach that solves your problem.' },
-  { cat: 'solutions', q: 'What does your IoT work include?', a: 'Sensors, gateways and cameras, the network that connects them, and the dashboard and alerts on top. We plan systems to keep working when the internet drops, by storing readings on the device and sending them later.' },
-  { cat: 'solutions', q: 'Which industries do you serve?', a: 'Agriculture, biomass, smart cities, energy and sustainability, waste-to-energy, digital foundations for businesses, and SME digital shift including staff training. See the Solutions page for each one.' },
-  { cat: 'solutions', q: 'Do you supply hardware as well as software?', a: 'Yes. We specify, source and install sensors, gateways and cameras, then build the software, AI models and dashboards on top, so you deal with one team.' },
+  { cat: 'solutions', q: 'What AI and automation can you build?', a: 'Things like detection and monitoring models (for example wildlife or plant disease detection), chatbots that answer from your own content, analytics dashboards, and automations that take repetitive work off your team. We always pick the simplest approach that solves your problem, not the flashiest one.' },
+  { cat: 'solutions', q: 'What does your IoT work include?', a: 'Everything from the sensor to the screen: sensors, gateways and cameras, the network that connects them, and the dashboard and alerts on top. Systems are planned to keep working when the internet drops, by storing readings on the device and sending them later.' },
+  { cat: 'solutions', q: 'Which industries do you serve?', a: 'Agriculture, biomass, smart cities, energy and sustainability, waste-to-energy, websites and apps for businesses, and SME digital shift including staff training. Each one has its own section on our Solutions page if you would like a closer look.' },
+  { cat: 'solutions', q: 'Do you supply hardware as well as software?', a: 'Yes, and that is one of the things clients like most. We specify, source and install sensors, gateways and cameras, then build the software, AI models and dashboards on top, so you only ever deal with one team.' },
+  { cat: 'solutions', q: 'Can you work with the machines and cameras I already have?', a: 'Very often, yes. We can read data from many existing machines, meters and CCTV systems instead of replacing them. Tell us what you have and we will let you know honestly what can be reused.' },
+  { cat: 'solutions', q: 'Do I need technical staff to use what you build?', a: 'Not at all. Dashboards and alerts are designed for the people doing the real work, in plain words. We also train your team and stay close afterwards, so nobody is left figuring things out alone.' },
 
-  { cat: 'process', q: 'How does a project start?', a: 'With a conversation. Send us a short message through the contact form or WhatsApp, and we reply within one business day. We can then talk over Google Meet or visit your site, listen first, and agree on the one problem to solve first.' },
-  { cat: 'process', q: 'What is a pilot?', a: 'A small trial on one site, block or line, run for a few weeks, so you judge the result on your own data before you commit. If it earns its keep, we scale it with a fixed scope, timeline and price.' },
-  { cat: 'process', q: 'How long does a project take?', a: 'Pilots usually run a few weeks. Websites take 4 to 8 weeks, or 3 to 7 days for our fixed-price packages. Mobile apps, custom systems and larger IoT or AI projects vary, and we give you a timeline in the proposal before you start.' },
-  { cat: 'process', q: 'What happens after launch?', a: 'We train your team, hand over clear documentation and stay close for support, updates and retraining. A monthly maintenance retainer covers monitoring, security patches and updates if you want one.' },
+  { cat: 'process', q: 'How does a project start?', a: 'With a friendly chat. Send us a short message through the contact form or WhatsApp and we will reply within one business day. Then we can talk over Google Meet or visit your site, listen first, and agree on the one problem worth solving first.' },
+  { cat: 'process', q: 'What is a pilot?', a: 'A small trial on one site, block or line, run for a few weeks, so you can judge the result on your own data before committing to more. If it earns its keep, we scale it up with a fixed scope, timeline and price.' },
+  { cat: 'process', q: 'How long does a project take?', a: 'Pilots usually run a few weeks. Websites take about 4 to 8 weeks, or 3 to 7 days for our fixed-price packages. Mobile apps, custom systems and larger IoT or AI projects vary, and you will see a clear timeline in the proposal before anything starts.' },
+  { cat: 'process', q: 'Will I see progress along the way?', a: 'Yes, always. We work in small steps and show you each one, so you can comment early instead of waiting until the end. If anything changes, you will hear it from us first.' },
+  { cat: 'process', q: 'What do I need to prepare before we start?', a: 'Just a rough idea of the problem and what a good result looks like to you. Logos, photos, documents or data help if you have them, but do not worry if you do not. We will guide you through what is needed, one step at a time.' },
+  { cat: 'process', q: 'What happens after launch?', a: 'We train your team, hand over clear documentation and stay close for support, updates and retraining. If you would like ongoing care, a monthly maintenance plan covers monitoring, security updates and small changes.' },
 
-  { cat: 'pricing', q: 'How are projects priced?', a: 'Custom work gets a fixed-price proposal after a scoping call or site visit. Website packages have listed prices. Some systems are quoted individually because they depend on your site and data.' },
-  { cat: 'pricing', q: 'Can I pay in milestones?', a: 'Yes. Standard terms are 50% on kickoff and 50% on delivery. Larger projects use a milestone schedule written into the proposal.' },
-  { cat: 'pricing', q: 'Is there a monthly fee?', a: 'No hidden monthly fees. You pay for the work you agree, plus any hosting or maintenance retainer you choose. Website packages also list their renewal costs openly.' },
+  { cat: 'pricing', q: 'How are projects priced?', a: 'Custom work gets a fixed-price proposal after a scoping call or site visit, so you know the full cost before we begin. Website and UI/UX packages have listed prices. Some systems are quoted individually because they depend on your site and data.' },
+  { cat: 'pricing', q: 'Can I pay in milestones?', a: 'Of course. Our standard terms are 50% when we kick off and 50% on delivery. Larger projects follow a milestone schedule written clearly into the proposal.' },
+  { cat: 'pricing', q: 'Is there a monthly fee?', a: 'No hidden monthly fees, promise. You pay for the work you agree to, plus any hosting or maintenance plan you choose. Website packages list their yearly renewal costs openly too.' },
+  { cat: 'pricing', q: 'Do I have to commit before getting a proposal?', a: 'Not at all. Tell us about your problem, and we will send a written proposal with the scope, deliverables, timeline and a fixed price for you to review, with no obligation to go ahead.' },
+  { cat: 'pricing', q: 'What if my budget is small?', a: 'That is completely fine, and very common. We can start with a small pilot or the one feature that matters most, then grow it when you are ready. Just tell us your budget and we will tell you honestly what it can do.' },
+  { cat: 'pricing', q: 'What if the scope changes halfway?', a: 'It happens, and that is okay. We will explain what the change means for time and cost before doing any extra work, and nothing is added to your bill without your agreement.' },
 
-  { cat: 'web', q: 'What website packages do you offer?', a: 'SME packages come in three sizes: 1 page (RM549), 5 pages (RM999) and 10 pages (RM1,399). Corporate packages come in three tiers: RM2,599 for 10 pages, RM3,599 for 15 pages and RM4,599 for 20 pages and more, with extra pages addable anytime during the 1-year contract. Full comparison tables are on the web development page.' },
-  { cat: 'web', q: 'Do you build mobile apps and custom systems?', a: 'Yes. We build cross-platform apps and native iOS or Android when performance needs it, plus custom systems that replace spreadsheets and rigid off-the-shelf software.' },
-  { cat: 'web', q: 'Do you do digital marketing and SEO?', a: 'Yes, and our Google Ads and SEO packages are coming soon. Until they are published, tell us what you want to achieve and we will talk it through and quote it with you.' },
-  { cat: 'web', q: 'What about the Marketplace?', a: 'Our Marketplace website is in process and shows a Coming soon page for now. If you want one of the systems we have built, ask us and we will send a quote.' },
+  { cat: 'web', q: 'What website packages do you offer?', a: 'SME packages come in three sizes: 1 page (RM549), 5 pages (RM999) and 10 pages (RM1,399). Corporate packages come in three tiers: RM2,599 for 10 pages, RM3,599 for 15 pages and RM4,599 for 20 pages and more, with extra pages you can add anytime during the 1-year contract. The full comparison tables are on our Systems, Web & Mobile App Development page.' },
+  { cat: 'web', q: 'What is included in a website package?', a: 'Every package includes a domain, web storage, email users, a mobile-friendly design, a content management system, SSL certificate, stock photos, technical support and an SEO-friendly setup. You also get full ownership and access to your site.' },
+  { cat: 'web', q: 'How much does a custom website or app cost?', a: 'Custom web and mobile app projects start from RM 2,000. The final price depends on what you need, and you will get a fixed quote after a short chat about your goals.' },
+  { cat: 'web', q: 'Do you build mobile apps and custom systems?', a: 'Yes. We build cross-platform apps, and native iOS or Android apps when performance calls for it. We also build custom systems that replace messy spreadsheets and rigid off-the-shelf software with something shaped around how your team really works.' },
+  { cat: 'web', q: 'Can you redesign my existing website or system?', a: 'Absolutely. We start with an honest look at what is slowing you down, then redesign around how people actually use it. Your existing content, links and search rankings are carefully carried over so nothing important is lost.' },
+  { cat: 'web', q: 'Will my website show up on Google?', a: 'Every site we build is set up to be search-friendly from day one: fast loading, mobile-friendly and properly structured. If you want to climb higher for specific keywords, our SEO service can help you get there.' },
 
-  { cat: 'ownership', q: 'Who owns the data and the code?', a: 'You do. Data stays in your own cloud account or on your own server, and custom code, documentation and credentials are handed over at the end of the project. No lock-in.' },
-  { cat: 'ownership', q: 'Can I update the website myself?', a: 'If you need that, we include a content management system or editing flow suited to your team, so you do not have to call us for every small change.' },
-  { cat: 'ownership', q: 'What technology do you use?', a: 'It depends on the project. For websites we use modern, fast tools such as Astro and TypeScript. For apps, React Native or Flutter. For systems, IoT and AI, we pick what fits your site and budget, and we explain our choices in plain words.' },
-  { cat: 'ownership', q: 'Where do you host websites?', a: 'We deploy to Cloudflare Pages by default because it is fast and global. We can also deploy to Vercel, AWS or your own server if you prefer.' }
+  { cat: 'design', q: 'Do you offer UI/UX design on its own?', a: 'Yes. Our UI and UX packages start at RM 499 for 5 screens (Seed), RM 799 for 10 screens (Grow) and RM 999 for more than 10 screens (Bloom), all designed in Figma with user journey mapping included.' },
+  { cat: 'design', q: 'Can you help with branding?', a: 'We would love to. We help with logos, colours, fonts and a consistent look across your website, social pages, packaging and ads, so customers remember you and trust you from the first glance.' },
+  { cat: 'design', q: 'Do you do product photos and videos?', a: 'Yes. We plan and shoot product photos and videos for your website, marketplace listings and social media, then edit them so they are ready to post.' },
+  { cat: 'design', q: 'Do you do digital marketing and SEO?', a: 'Yes, we do. Our Google Ads and SEO packages are coming soon. Until they are published, just tell us what you want to achieve and we will talk it through and prepare a quote for you.' },
+  { cat: 'design', q: 'Can you manage our social media?', a: 'We can help plan your content, create the posts and keep your pages consistent. Let us know which platforms you use and how often you want to post, and we will suggest a plan that fits.' },
+
+  { cat: 'products', q: 'Do you design physical products?', a: 'Yes! Our Industrial & Product Design service takes an idea from first sketch to a working prototype: smart desk gadgets, IoT devices, lighting with a local story and rugged enclosures for sensors in the field. Form, electronics and app are designed together, so everything fits.' },
+  { cat: 'products', q: 'I only have a rough idea. Can you still help?', a: 'Definitely, that is where most products start. Bring a napkin sketch or even just a description. We turn it into renders first, so you can see it before spending on prototypes.' },
+  { cat: 'products', q: 'Do you manufacture the products?', a: 'We build prototypes and small batches with local fabricators, and prepare the production files and supplier hand-off for larger runs. You also own the CAD files, renders and firmware at the end of the project.' },
+  { cat: 'products', q: 'Do you run training for staff?', a: 'Yes. We run four courses: AI tools at work, Digital marketing for owners, LinkedIn for business, and Automate your daily work. Format, length and price are agreed with you after a short chat, so the training fits your team.' },
+  { cat: 'products', q: 'What about the Marketplace?', a: 'Our Marketplace is on its way and shows a Coming soon page for now. If you are interested in one of the systems we have already built, just ask and we will happily send you a quote.' },
+  { cat: 'products', q: 'Where can I read more about your work?', a: 'Our Insights page has articles on topics like Budget 2027, what a website should cost in Malaysia and how businesses move from basic AI use to real results. Feel free to browse, or ask us anything directly.' },
+
+  { cat: 'ownership', q: 'Who owns the data and the code?', a: 'You do, always. Data stays in your own cloud account or on your own server, and custom code, documentation and credentials are handed over at the end of the project. No lock-in.' },
+  { cat: 'ownership', q: 'Can I update the website myself?', a: 'Yes. We include a content management system or simple editing flow suited to your team, so you can change text and photos yourself without calling us for every small update.' },
+  { cat: 'ownership', q: 'What technology do you use?', a: 'It depends on the project. For websites we use modern, fast tools such as Astro and TypeScript. For apps, React Native or Flutter. For systems, IoT and AI, we choose what fits your site and budget, and we always explain our choices in plain words.' },
+  { cat: 'ownership', q: 'Where do you host websites?', a: 'We deploy to Cloudflare Pages by default because it is fast and reliable worldwide. If you prefer, we can also deploy to Vercel, AWS or your own server.' },
+  { cat: 'ownership', q: 'Is my data kept safe?', a: 'We take it seriously. Access is limited to the people who need it, connections are encrypted, and we follow Malaysia\'s PDPA when handling personal data. You can read more in our Privacy Policy.' },
+  { cat: 'ownership', q: 'What if something breaks after launch?', a: 'Just let us know on WhatsApp or email and we will look into it. Every project comes with a 30-day bug-fix warranty after handover, covering anything we built, at no extra charge. Clients on a maintenance plan also get ongoing help, regular updates and monitoring.' }
 ];
 ---
 
@@ -63,6 +92,23 @@ const faqs = [
             </p>
           </div>
 
+          <!-- category pills: equal-width grid under the heading -->
+          <div class="grid grid-cols-2 gap-2" role="tablist" aria-label="FAQ categories">
+            {
+              categories.map((cat, i) => (
+                <button
+                  type="button"
+                  role="tab"
+                  data-faq-tab={cat.id}
+                  aria-selected={i === 0 ? 'true' : 'false'}
+                  class="faq-tab w-full rounded-full bg-paper-dim px-3 py-2.5 text-center text-xs font-semibold text-ink-dim transition-colors duration-300 hover:text-ink aria-selected:bg-ink aria-selected:text-white sm:text-sm"
+                >
+                  {cat.label}
+                </button>
+              ))
+            }
+          </div>
+
           <div class="relative overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-tint to-white p-6 ring-1 ring-black/5 sm:p-8">
             <div class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent-blue/10 blur-3xl" aria-hidden="true"></div>
             <h3 class="relative font-display text-xl font-semibold tracking-tight text-ink">Still have a question?</h3>
@@ -82,21 +128,6 @@ const faqs = [
             <input id="faq-search" type="search" placeholder="Search questions..." aria-label="Search questions" class="min-w-0 flex-1 bg-transparent px-1 py-2.5 text-sm text-ink placeholder:text-ink-dim/50 focus:outline-none" />
           </div>
 
-          <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="FAQ categories">
-            {
-              categories.map((cat, i) => (
-                <button
-                  type="button"
-                  role="tab"
-                  data-faq-tab={cat.id}
-                  aria-selected={i === 0 ? 'true' : 'false'}
-                  class="faq-tab rounded-full bg-paper-dim px-4 py-2 text-xs font-semibold text-ink-dim transition-colors duration-300 hover:text-ink aria-selected:bg-ink aria-selected:text-white sm:text-sm"
-                >
-                  {cat.label}
-                </button>
-              ))
-            }
-          </div>
 
           <ul class="mt-5 space-y-3" id="faq-list">
             {
