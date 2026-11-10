@@ -2,6 +2,7 @@
 import Section from '../ui/Section.astro';
 import Container from '../ui/Container.astro';
 import { getServiceBySlug } from '../../data/services';
+import CadViewer from './CadViewer.astro';
 
 const service = getServiceBySlug('industrial-design');
 
@@ -46,6 +47,8 @@ const process = [
   { step: 'Production', desc: 'Design for manufacture, supplier hand-off and small-batch runs.' }
 ];
 ---
+
+<CadViewer />
 
 <!-- Concept products -->
 <Section rule>

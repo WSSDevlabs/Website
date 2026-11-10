@@ -1,0 +1,411 @@
+---
+import Section from '../ui/Section.astro';
+import Container from '../ui/Container.astro';
+
+// Parts of the Tuah desk robot concept. Same ids are used by the 3D script below; sizes match blueprint-hero.svg.
+const parts = [
+  { id: 'head', name: 'Head shell', material: 'PC/ABS, matte white', size: '120 × 72 × 60 mm' },
+  { id: 'screen', name: 'Face display', material: '2.4" IPS screen, glass cover', size: '100 × 53 mm' },
+  { id: 'antenna', name: 'LED antenna', material: 'Aluminium rod, RGB LED', size: 'Ø10 × 28 mm' },
+  { id: 'neck', name: 'Tilt joint', material: 'Steel pin, ±15° tilt', size: 'Ø14 × 12 mm' },
+  { id: 'body', name: 'Body shell', material: 'PC/ABS, speaker grille', size: '66 × 56 × 48 mm' },
+  { id: 'arms', name: 'Arms', material: 'TPU soft-touch', size: '14 × 34 mm' },
+  { id: 'base', name: 'Base and LED ring', material: 'PC/ABS, light pipe, ESP32 inside', size: '96 × 26 × 56 mm' }
+];
+---
+
+<Section rule class="bg-paper-dim">
+  <Container>
+    <div class="mx-auto mb-10 max-w-2xl text-center">
+      <p class="mono-label text-accent">Try it yourself</p>
+      <h2 class="h-section mt-3">Turn it, zoom in, take it apart</h2>
+      <p class="mt-4 text-sm leading-relaxed text-ink-dim">
+        This is how a product looks on our screen before anything is printed. Drag to rotate the Tuah desk robot, explode it into parts, and click any part to see what it is made of.
+      </p>
+    </div>
+
+    <div class="cad grid overflow-hidden rounded-[2rem] bg-[#16181c] text-white shadow-[0_30px_70px_-40px_rgba(0,0,0,0.6)] lg:grid-cols-[minmax(0,1fr)_17rem]" data-cad>
+      <!-- viewport -->
+      <div class="relative">
+        <!-- toolbar -->
+        <div class="absolute inset-x-3 top-3 z-10 flex flex-wrap items-center gap-2 sm:inset-x-4 sm:top-4">
+          <div class="cad-group" role="group" aria-label="View">
+            <button type="button" class="cad-btn" data-view="iso" aria-pressed="true">Iso</button>
+            <button type="button" class="cad-btn" data-view="front" aria-pressed="false">Front</button>
+            <button type="button" class="cad-btn" data-view="side" aria-pressed="false">Side</button>
+            <button type="button" class="cad-btn" data-view="top" aria-pressed="false">Top</button>
+          </div>
+          <div class="cad-group" role="group" aria-label="Display">
+            <button type="button" class="cad-btn" data-mode="edges" aria-pressed="true">Shaded + edges</button>
+            <button type="button" class="cad-btn" data-mode="shaded" aria-pressed="false">Shaded</button>
+            <button type="button" class="cad-btn" data-mode="wire" aria-pressed="false">Wireframe</button>
+            <button type="button" class="cad-btn" data-mode="xray" aria-pressed="false">X-ray</button>
+          </div>
+          <div class="cad-group" role="group" aria-label="Tools">
+            <button type="button" class="cad-btn" data-explode aria-pressed="false">Explode</button>
+            <button type="button" class="cad-btn" data-spin aria-pressed="false">Auto-rotate</button>
+          </div>
+        </div>
+
+        <div class="cad-canvas relative h-[26rem] w-full sm:h-[32rem] lg:h-[36rem]" data-canvas data-lenis-prevent>
+          <div class="absolute inset-0 flex items-center justify-center text-xs text-white/40" data-loading>Loading 3D model…</div>
+        </div>
+
+        <!-- footer hint + status -->
+        <div class="pointer-events-none absolute inset-x-3 bottom-3 flex flex-wrap items-end justify-between gap-2 sm:inset-x-4 sm:bottom-4">
+          <p class="rounded-full bg-black/50 px-3 py-1.5 text-[11px] text-white/70 backdrop-blur" data-hint>
+            Drag to rotate · Click, then scroll to zoom · Right-drag to pan
+          </p>
+          <p class="rounded-full bg-black/50 px-3 py-1.5 font-mono text-[11px] text-white/60 backdrop-blur" aria-live="polite" data-status>TUAH · REV A · 7 parts</p>
+        </div>
+      </div>
+
+      <!-- model tree + properties -->
+      <aside class="border-t border-white/10 bg-[#1c1f24] p-5 lg:border-l lg:border-t-0">
+        <p class="font-mono text-[11px] uppercase tracking-[0.15em] text-white/45">Model tree</p>
+        <ul class="mt-3 grid grid-cols-2 gap-1 lg:grid-cols-1">
+          {
+            parts.map((part) => (
+              <li>
+                <button type="button" class="cad-part" data-part={part.id} aria-pressed="false">
+                  <span class="h-2 w-2 shrink-0 rounded-sm bg-white/40" aria-hidden="true"></span>
+                  {part.name}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-5 rounded-xl bg-black/25 p-4" data-props>
+          <p class="font-mono text-[11px] uppercase tracking-[0.15em] text-white/45">Properties</p>
+          <p class="mt-2 text-sm font-semibold" data-prop-name>Select a part</p>
+          <dl class="mt-2 space-y-1.5 text-xs text-white/65">
+            <div class="flex justify-between gap-3"><dt class="text-white/40">Material</dt><dd class="text-right" data-prop-material>—</dd></div>
+            <div class="flex justify-between gap-3"><dt class="text-white/40">Size</dt><dd class="text-right" data-prop-size>—</dd></div>
+          </dl>
+        </div>
+        <p class="mt-4 text-[11px] leading-relaxed text-white/40">Concept model for illustration. Real projects get full CAD files you own.</p>
+      </aside>
+
+      <script type="application/json" data-parts set:html={JSON.stringify(parts)} />
+    </div>
+  </Container>
+</Section>
+
+<style is:global>
+  .cad-group { display: flex; gap: 2px; border-radius: 9999px; background: rgb(0 0 0 / 0.5); padding: 3px; backdrop-filter: blur(8px); }
+  .cad-btn { border-radius: 9999px; padding: 0.35rem 0.7rem; font-size: 11px; font-weight: 600; color: rgb(255 255 255 / 0.7); transition: background 0.25s, color 0.25s; }
+  .cad-btn:hover { color: #fff; }
+  .cad-btn[aria-pressed='true'] { background: #fff; color: #121214; }
+  .cad-part { display: flex; width: 100%; align-items: center; gap: 0.5rem; border-radius: 0.6rem; padding: 0.45rem 0.6rem; text-align: left; font-size: 12px; color: rgb(255 255 255 / 0.75); transition: background 0.2s, color 0.2s; }
+  .cad-part:hover { background: rgb(255 255 255 / 0.06); color: #fff; }
+  .cad-part[aria-pressed='true'] { background: rgb(90 209 255 / 0.15); color: #fff; }
+  .cad-part[aria-pressed='true'] span { background: #5ad1ff; }
+  .cad-canvas canvas { display: block; touch-action: pan-y; outline: none; }
+  .cad-canvas.is-active canvas { cursor: grab; }
+  .cad-canvas.is-active canvas:active { cursor: grabbing; }
+</style>
+
+<script>
+  // three.js CAD-style viewer. Loaded only when the section scrolls near the screen.
+  // `THREE` is used for types only; the runtime module is `T`, imported lazily below.
+  import type * as THREE from 'three';
+  type Part = { id: string; name: string; material: string; size: string };
+
+  async function initCad(root: HTMLElement) {
+    const T = await import('three');
+    const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls.js');
+    const { RoundedBoxGeometry } = await import('three/examples/jsm/geometries/RoundedBoxGeometry.js');
+    const { RoomEnvironment } = await import('three/examples/jsm/environments/RoomEnvironment.js');
+    const { gsap } = await import('gsap');
+    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+    gsap.registerPlugin(ScrollTrigger);
+
+    const host = root.querySelector<HTMLElement>('[data-canvas]')!;
+    const status = root.querySelector<HTMLElement>('[data-status]')!;
+    const partsInfo: Part[] = JSON.parse(root.querySelector('[data-parts]')!.textContent || '[]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const renderer = new T.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = T.ACESFilmicToneMapping;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = T.PCFSoftShadowMap;
+    host.querySelector('[data-loading]')?.remove();
+    host.appendChild(renderer.domElement);
+    renderer.domElement.setAttribute('aria-label', '3D model of the Tuah desk robot. Use the buttons to change the view.');
+    renderer.domElement.setAttribute('role', 'img');
+
+    const scene = new T.Scene();
+    scene.background = new T.Color('#16181c');
+    const pmrem = new T.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+    const camera = new T.PerspectiveCamera(35, 1, 0.1, 100);
+    camera.position.set(5.4, 3.9, 6.9);
+
+    const key = new T.DirectionalLight('#ffffff', 1.6);
+    key.position.set(3, 6, 4);
+    key.castShadow = true;
+    key.shadow.mapSize.set(1024, 1024);
+    key.shadow.radius = 6;
+    scene.add(key, new T.AmbientLight('#ffffff', 0.25));
+
+    // floor grid like a CAD workplane
+    const grid = new T.GridHelper(10, 40, '#3a4150', '#262b33');
+    (grid.material as THREE.Material).transparent = true;
+    (grid.material as THREE.Material).opacity = 0.7;
+    scene.add(grid);
+    const floor = new T.Mesh(new T.PlaneGeometry(10, 10), new T.ShadowMaterial({ opacity: 0.35 }));
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    // ---- model -------------------------------------------------------------
+    const shell = new T.MeshPhysicalMaterial({ color: '#f2f4f7', roughness: 0.42, clearcoat: 0.4, clearcoatRoughness: 0.5 });
+    const dark = new T.MeshPhysicalMaterial({ color: '#0e1115', roughness: 0.15, metalness: 0.1, clearcoat: 1 });
+    const metal = new T.MeshStandardMaterial({ color: '#a9b1bb', roughness: 0.3, metalness: 0.9 });
+    const glow = new T.MeshStandardMaterial({ color: '#5ad1ff', emissive: '#5ad1ff', emissiveIntensity: 2.2 });
+    const red = new T.MeshStandardMaterial({ color: '#e8553f', emissive: '#e8553f', emissiveIntensity: 0.9, roughness: 0.3 });
+    const soft = new T.MeshStandardMaterial({ color: '#e3e7ec', roughness: 0.8 });
+
+    const model = new T.Group();
+    scene.add(model);
+    const groups = new Map<string, THREE.Group>();
+    const home = new Map<string, THREE.Vector3>();
+    const exploded: Record<string, [number, number, number]> = {
+      head: [0, 0.75, 0], screen: [0, 0.75, 0.55], antenna: [0, 1.35, 0], neck: [0, 0.38, 0], body: [0, 0, 0], arms: [0, 0, 0], base: [0, -0.45, 0]
+    };
+    const armOffset = 0.55; // arms move sideways when exploded
+    const add = (id: string, mesh: THREE.Mesh, at: [number, number, number]) => {
+      let g = groups.get(id);
+      if (!g) {
+        g = new T.Group();
+        g.userData.id = id;
+        groups.set(id, g);
+        model.add(g);
+      }
+      mesh.position.set(...at);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      mesh.userData.part = id;
+      g.add(mesh);
+      return mesh;
+    };
+
+    add('base', new T.Mesh(new RoundedBoxGeometry(1.92, 0.52, 1.12, 6, 0.24), shell), [0, 0.26, 0]);
+    add('base', new T.Mesh(new T.BoxGeometry(1.4, 0.06, 0.02), glow), [0, 0.3, 0.565]);
+    add('body', new T.Mesh(new RoundedBoxGeometry(1.32, 1.12, 0.96, 8, 0.4), shell), [0, 1.08, 0]);
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
+      add('body', new T.Mesh(new T.CylinderGeometry(0.035, 0.035, 0.02, 12).rotateX(Math.PI / 2), dark), [-0.14 + c * 0.14, 1.18 - r * 0.13, 0.485]);
+    }
+    const armL = add('arms', new T.Mesh(new T.CapsuleGeometry(0.14, 0.42, 8, 16), soft), [-0.78, 1.0, 0]);
+    armL.rotation.z = -0.28;
+    const armR = add('arms', new T.Mesh(new T.CapsuleGeometry(0.14, 0.42, 8, 16), soft), [0.78, 1.0, 0]);
+    armR.rotation.z = 0.28;
+    add('neck', new T.Mesh(new T.CylinderGeometry(0.14, 0.14, 0.26, 24), metal), [0, 1.74, 0]);
+    add('head', new T.Mesh(new RoundedBoxGeometry(2.4, 1.44, 1.2, 8, 0.5), shell), [0, 2.55, 0]);
+    add('screen', new T.Mesh(new RoundedBoxGeometry(1.98, 1.06, 0.06, 6, 0.03), dark), [0, 2.55, 0.6]);
+    add('screen', new T.Mesh(new T.CapsuleGeometry(0.1, 0.2, 6, 12), glow), [-0.36, 2.62, 0.64]);
+    add('screen', new T.Mesh(new T.CapsuleGeometry(0.1, 0.2, 6, 12), glow), [0.36, 2.62, 0.64]);
+    add('screen', new T.Mesh(new T.TorusGeometry(0.16, 0.025, 8, 24, Math.PI).rotateZ(Math.PI), glow), [0, 2.36, 0.64]);
+    add('antenna', new T.Mesh(new T.CylinderGeometry(0.035, 0.035, 0.46, 12), metal), [0, 3.47, 0]);
+    add('antenna', new T.Mesh(new T.SphereGeometry(0.13, 24, 16), red), [0, 3.74, 0]);
+
+    groups.forEach((g, id) => home.set(id, g.position.clone()));
+
+    // edges for the CAD look
+    const edgeMat = new T.LineBasicMaterial({ color: '#0b0d10', transparent: true, opacity: 0.55 });
+    const edges: THREE.LineSegments[] = [];
+    model.traverse((o) => {
+      if ((o as THREE.Mesh).isMesh) {
+        const line = new T.LineSegments(new T.EdgesGeometry((o as THREE.Mesh).geometry, 30), edgeMat);
+        o.add(line);
+        edges.push(line);
+      }
+    });
+
+    const box = new T.Box3().setFromObject(model);
+    const target = box.getCenter(new T.Vector3());
+
+    // ---- controls --------------------------------------------------------------
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.copy(target);
+    controls.enableDamping = true;
+    controls.minDistance = 3;
+    controls.maxDistance = 14;
+    controls.enableZoom = false; // turned on after a click, so page scrolling is never hijacked
+    controls.maxPolarAngle = Math.PI * 0.495;
+    renderer.domElement.style.touchAction = 'pan-y';
+    controls.update();
+
+    const activate = (on: boolean) => {
+      controls.enableZoom = on;
+      host.classList.toggle('is-active', on);
+    };
+    renderer.domElement.addEventListener('pointerdown', () => activate(true));
+    renderer.domElement.addEventListener('pointerleave', () => activate(false));
+
+    // ---- buttons ---------------------------------------------------------------
+    const press = (selector: string, el: Element) =>
+      root.querySelectorAll(selector).forEach((b) => b.setAttribute('aria-pressed', String(b === el)));
+
+    const views: Record<string, [number, number, number]> = {
+      iso: [5.4, 3.9, 6.9], front: [0, 2, 9], side: [9, 2, 0], top: [0.001, 10.5, 0.6]
+    };
+    root.querySelectorAll<HTMLElement>('[data-view]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        press('[data-view]', btn);
+        const [x, y, z] = views[btn.dataset.view!];
+        gsap.to(camera.position, { x, y, z, duration: reduced ? 0 : 1, ease: 'power3.inOut', onUpdate: () => controls.update() });
+        gsap.to(controls.target, { x: target.x, y: target.y, z: target.z, duration: reduced ? 0 : 1, ease: 'power3.inOut' });
+      })
+    );
+
+    const allMats = [shell, dark, metal, glow, red, soft];
+    const setMode = (mode: string) => {
+      allMats.forEach((m) => {
+        m.wireframe = mode === 'wire';
+        m.transparent = mode === 'xray';
+        m.opacity = mode === 'xray' ? 0.28 : 1;
+        m.depthWrite = mode !== 'xray';
+        m.needsUpdate = true;
+      });
+      edges.forEach((e) => (e.visible = mode === 'edges' || mode === 'xray'));
+      edgeMat.color.set(mode === 'xray' ? '#5ad1ff' : '#0b0d10');
+      edgeMat.opacity = mode === 'xray' ? 0.9 : 0.55;
+    };
+    root.querySelectorAll<HTMLElement>('[data-mode]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        press('[data-mode]', btn);
+        setMode(btn.dataset.mode!);
+      })
+    );
+    setMode('edges');
+
+    let isExploded = false;
+    const explodeBtn = root.querySelector<HTMLElement>('[data-explode]')!;
+    explodeBtn.addEventListener('click', () => {
+      isExploded = !isExploded;
+      explodeBtn.setAttribute('aria-pressed', String(isExploded));
+      groups.forEach((g, id) => {
+        const h = home.get(id)!;
+        const [dx, dy, dz] = isExploded ? exploded[id] : [0, 0, 0];
+        gsap.to(g.position, { x: h.x + dx, y: h.y + dy, z: h.z + dz, duration: reduced ? 0 : 1.1, ease: 'power3.inOut' });
+      });
+      [armL, armR].forEach((arm, i) => {
+        const side = i === 0 ? -1 : 1;
+        gsap.to(arm.position, { x: side * (0.78 + (isExploded ? armOffset : 0)), duration: reduced ? 0 : 1.1, ease: 'power3.inOut' });
+      });
+      status.textContent = isExploded ? 'TUAH · REV A · exploded view' : 'TUAH · REV A · 7 parts';
+    });
+
+    const spinBtn = root.querySelector<HTMLElement>('[data-spin]')!;
+    spinBtn.addEventListener('click', () => {
+      controls.autoRotate = !controls.autoRotate;
+      controls.autoRotateSpeed = 1.6;
+      spinBtn.setAttribute('aria-pressed', String(controls.autoRotate));
+    });
+
+    // ---- selection ---------------------------------------------------------------
+    const propName = root.querySelector<HTMLElement>('[data-prop-name]')!;
+    const propMat = root.querySelector<HTMLElement>('[data-prop-material]')!;
+    const propSize = root.querySelector<HTMLElement>('[data-prop-size]')!;
+    const highlight = new T.MeshStandardMaterial({ color: '#5ad1ff', emissive: '#1a6f8f', emissiveIntensity: 0.6, roughness: 0.4 });
+    const original = new Map<THREE.Mesh, THREE.Material>();
+    let selected = '';
+    const select = (id: string) => {
+      selected = selected === id ? '' : id;
+      original.forEach((mat, mesh) => (mesh.material = mat));
+      original.clear();
+      root.querySelectorAll('[data-part]').forEach((b) => b.setAttribute('aria-pressed', String((b as HTMLElement).dataset.part === selected)));
+      const info = partsInfo.find((p) => p.id === selected);
+      propName.textContent = info ? info.name : 'Select a part';
+      propMat.textContent = info ? info.material : '—';
+      propSize.textContent = info ? info.size : '—';
+      if (!selected) return;
+      groups.get(selected)?.traverse((o) => {
+        const mesh = o as THREE.Mesh;
+        if (mesh.isMesh && mesh.material !== glow) {
+          original.set(mesh, mesh.material as THREE.Material);
+          mesh.material = highlight;
+        }
+      });
+      status.textContent = `Selected: ${info?.name ?? ''}`;
+    };
+    root.querySelectorAll<HTMLElement>('[data-part]').forEach((b) => b.addEventListener('click', () => select(b.dataset.part!)));
+
+    const ray = new T.Raycaster();
+    const pointer = new T.Vector2();
+    let downAt = { x: 0, y: 0 };
+    renderer.domElement.addEventListener('pointerdown', (e) => (downAt = { x: e.clientX, y: e.clientY }));
+    renderer.domElement.addEventListener('pointerup', (e) => {
+      if (Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 5) return; // it was a drag
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointer.set(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
+      ray.setFromCamera(pointer, camera);
+      const hit = ray.intersectObjects(model.children, true).find((h) => (h.object as THREE.Mesh).isMesh);
+      if (hit) select(hit.object.userData.part);
+    });
+
+    // ---- scroll: the model turns as the section passes through the screen ----------
+    if (!reduced) {
+      ScrollTrigger.create({
+        trigger: root,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.6,
+        onUpdate: (self) => { model.rotation.y = -0.9 + self.progress * 1.8; }
+      });
+    }
+
+    // ---- size + loop ---------------------------------------------------------------
+    const resize = () => {
+      const w = host.clientWidth;
+      const h = host.clientHeight;
+      renderer.setSize(w, h, false);
+      renderer.domElement.style.width = '100%';
+      renderer.domElement.style.height = '100%';
+      camera.aspect = w / h;
+      camera.position.multiplyScalar(1); // keep framing
+      camera.fov = w < 640 ? 45 : 35;
+      camera.updateProjectionMatrix();
+    };
+    new ResizeObserver(resize).observe(host);
+    resize();
+
+    let visible = true;
+    new IntersectionObserver(([entry]) => (visible = entry.isIntersecting)).observe(host);
+    const loop = () => {
+      if (!document.body.contains(host)) {
+        renderer.dispose();
+        controls.dispose();
+        return;
+      }
+      requestAnimationFrame(loop);
+      if (!visible) return;
+      controls.update();
+      renderer.render(scene, camera);
+    };
+    loop();
+  }
+
+  function bootCad() {
+    document.querySelectorAll<HTMLElement>('[data-cad]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          io.disconnect();
+          initCad(root).catch(() => {
+            const loading = root.querySelector('[data-loading]');
+            if (loading) loading.textContent = '3D preview could not load on this device.';
+          });
+        },
+        { rootMargin: '300px' }
+      );
+      io.observe(root);
+    });
+  }
+  document.addEventListener('astro:page-load', bootCad);
+</script>

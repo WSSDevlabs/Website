@@ -1,0 +1,201 @@
+---
+import Container from '../ui/Container.astro';
+// Three sample website previews, drawn in HTML/CSS (no screenshots), shown as browser windows that fan out in 3D
+// as the section scrolls in (GSAP ScrollTrigger) and tilt with the mouse. On phones they become a swipeable row.
+const sites = [
+  { key: 'cafe', url: 'kopikampung.my', name: 'Kopi Kampung', kind: 'Café website with online menu' },
+  { key: 'agri', url: 'agrisense.app', name: 'AgriSense', kind: 'Farm IoT dashboard' },
+  { key: 'clinic', url: 'kliniksihat.com.my', name: 'Klinik Sihat', kind: 'Clinic booking site' }
+];
+---
+
+<section class="wp3d relative overflow-hidden bg-charcoal py-20 text-white md:py-28" data-wp3d>
+  <div class="pointer-events-none absolute -left-40 top-10 h-96 w-96 rounded-full bg-accent-blue/25 blur-3xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-accent/25 blur-3xl" aria-hidden="true"></div>
+  <Container class="relative">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="mono-label text-white/60">Website previews</p>
+      <h2 class="mt-3 font-display text-[clamp(1.9rem,1.3rem+2.4vw,3rem)] font-bold leading-[1.08] tracking-[-0.03em]">Websites that feel alive</h2>
+      <p class="mt-4 text-sm leading-relaxed text-white/60">
+        Smooth scrolling, motion that guides the eye and 3D touches where they help. Here are three sample previews of the kind of site we design and build. Move your mouse over them.
+      </p>
+    </div>
+
+    <div class="wp3d-stage mt-14" data-stage>
+      <div class="wp3d-rig" data-rig>
+        {
+          sites.map((site, i) => (
+            <figure class:list={['wp3d-frame', `wp3d-frame--${site.key}`]} data-frame={i}>
+              <div class="wp3d-chrome">
+                <span class="wp3d-dot bg-[#ff5f57]"></span><span class="wp3d-dot bg-[#febc2e]"></span><span class="wp3d-dot bg-[#28c840]"></span>
+                <span class="wp3d-url">{site.url}</span>
+              </div>
+              <div class="wp3d-view">
+                <div class="wp3d-page">
+                  {site.key === 'cafe' && (
+                    <div class="bg-[#f6efe6] text-[#3b2417]">
+                      <div class="flex items-center justify-between px-5 py-3 text-[9px] font-semibold"><span class="font-display text-[12px] font-black">Kopi Kampung</span><span class="flex gap-3 opacity-70"><span>Menu</span><span>Lokasi</span><span>Tempah</span></span></div>
+                      <div class="relative mx-4 overflow-hidden rounded-2xl bg-gradient-to-br from-[#c9733c] via-[#9b4a22] to-[#4a2312] px-5 py-8 text-white">
+                        <div class="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-[#f2c14e]/40 blur-xl"></div>
+                        <p class="text-[8px] uppercase tracking-[0.2em] opacity-80">Sejak 1987 · Ipoh</p>
+                        <p class="mt-2 font-display text-[22px] font-black leading-[1]">Kopi pagi,<br />cerita petang.</p>
+                        <span class="mt-4 inline-block rounded-full bg-white px-3 py-1.5 text-[9px] font-bold text-[#3b2417]">Lihat menu</span>
+                      </div>
+                      <div class="grid grid-cols-3 gap-2 px-4 py-4">
+                        {['Kopi O', 'Teh Tarik', 'Roti Bakar'].map((item, n) => (
+                          <div class="rounded-xl bg-white p-2.5 shadow-sm">
+                            <div class:list={['mb-2 h-10 rounded-lg', ['bg-[#4a2312]', 'bg-[#d79a5a]', 'bg-[#f2c14e]'][n]]}></div>
+                            <p class="text-[9px] font-bold">{item}</p>
+                            <p class="text-[8px] opacity-60">RM {['2.50', '3.00', '4.50'][n]}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div class="mx-4 mb-4 rounded-xl bg-[#3b2417] p-4 text-white"><p class="text-[10px] font-bold">Buka setiap hari</p><p class="text-[8px] opacity-70">7 pagi – 6 petang · WhatsApp untuk tempahan</p></div>
+                      <div class="grid grid-cols-2 gap-2 px-4 pb-6">
+                        <div class="h-20 rounded-xl bg-[#e3d3bf]"></div><div class="h-20 rounded-xl bg-[#d9c2a5]"></div>
+                      </div>
+                    </div>
+                  )}
+                  {site.key === 'agri' && (
+                    <div class="flex min-h-full bg-[#0f1418] text-white">
+                      <div class="w-14 shrink-0 space-y-3 border-r border-white/10 p-3"><div class="h-6 w-6 rounded-lg bg-[#4ad8a0]"></div>{[0, 1, 2, 3].map(() => <div class="h-1.5 w-6 rounded bg-white/20"></div>)}</div>
+                      <div class="flex-1 p-4">
+                        <p class="text-[11px] font-bold">Ladang Blok B</p>
+                        <p class="text-[8px] text-white/50">Live · 24 sensors online</p>
+                        <div class="mt-3 grid grid-cols-3 gap-2">
+                          {[['Soil', '41%', '#4ad8a0'], ['Temp', '31°C', '#f2c14e'], ['Rain', '12mm', '#7aa2ff']].map(([l, v, c]) => (
+                            <div class="rounded-lg bg-white/5 p-2"><p class="text-[7px] text-white/50">{l}</p><p class="text-[13px] font-black" style={`color:${c}`}>{v}</p></div>
+                          ))}
+                        </div>
+                        <div class="mt-3 rounded-lg bg-white/5 p-2">
+                          <svg viewBox="0 0 200 60" class="h-20 w-full" fill="none"><path d="M0 50 L20 44 L40 46 L60 34 L80 38 L100 26 L120 30 L140 18 L160 22 L180 12 L200 14" stroke="#4ad8a0" stroke-width="2" /><path d="M0 50 L20 44 L40 46 L60 34 L80 38 L100 26 L120 30 L140 18 L160 22 L180 12 L200 14 V60 H0Z" fill="#4ad8a0" opacity="0.15" /></svg>
+                        </div>
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                          <div class="rounded-lg bg-[#e8553f]/15 p-2 ring-1 ring-[#e8553f]/40"><p class="text-[7px] text-white/60">Alert</p><p class="text-[9px] font-bold text-[#ff8a7d]">Pump 2 offline</p></div>
+                          <div class="rounded-lg bg-white/5 p-2"><p class="text-[7px] text-white/60">Next irrigation</p><p class="text-[9px] font-bold">06:30 tomorrow</p></div>
+                        </div>
+                        <div class="mt-3 grid grid-cols-6 gap-1">{Array.from({ length: 24 }).map((_, n) => <div class="h-4 rounded-sm" style={`background:rgba(74,216,160,${0.15 + ((n * 37) % 70) / 100})`}></div>)}</div>
+                        <div class="mt-3 h-16 rounded-lg bg-white/5"></div>
+                      </div>
+                    </div>
+                  )}
+                  {site.key === 'clinic' && (
+                    <div class="bg-white text-[#0f2a4a]">
+                      <div class="flex items-center justify-between px-5 py-3 text-[9px] font-semibold"><span class="flex items-center gap-1.5 text-[12px] font-black"><span class="flex h-4 w-4 items-center justify-center rounded bg-[#2d5be3] text-[9px] text-white">+</span>Klinik Sihat</span><span class="rounded-full bg-[#2d5be3] px-2.5 py-1 text-white">Book now</span></div>
+                      <div class="mx-4 rounded-2xl bg-gradient-to-br from-[#e8f0ff] to-[#d6e4ff] p-5">
+                        <p class="font-display text-[20px] font-black leading-[1.05]">See a doctor<br />today, not next week.</p>
+                        <div class="mt-3 flex flex-wrap gap-1.5">{['9:00', '10:30', '11:15', '2:00', '4:45'].map((t, n) => <span class:list={['rounded-full px-2 py-1 text-[8px] font-semibold', n === 2 ? 'bg-[#2d5be3] text-white' : 'bg-white']}>{t}</span>)}</div>
+                      </div>
+                      <div class="grid grid-cols-3 gap-2 px-4 py-4">
+                        {['Dr. Aisyah', 'Dr. Kumar', 'Dr. Lim'].map((d, n) => (
+                          <div class="rounded-xl border border-[#e3e9f5] p-2 text-center">
+                            <div class:list={['mx-auto mb-1.5 h-9 w-9 rounded-full', ['bg-[#ffd8c2]', 'bg-[#c9a27a]', 'bg-[#f3d9b1]'][n]]}></div>
+                            <p class="text-[8px] font-bold">{d}</p><p class="text-[7px] opacity-60">{['GP', 'Paeds', 'Dental'][n]}</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div class="mx-4 mb-4 flex items-center justify-between rounded-xl bg-[#0f2a4a] p-3 text-white"><p class="text-[9px] font-bold">Queue now: 3 patients</p><span class="rounded-full bg-[#28c840] px-2 py-0.5 text-[8px] font-bold">Open</span></div>
+                      <div class="space-y-2 px-4 pb-6">{[0, 1, 2].map(() => <div class="h-6 rounded-lg bg-[#f2f5fb]"></div>)}</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <figcaption class="wp3d-cap"><span class="font-semibold text-white">{site.name}</span> · {site.kind}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+
+    <p class="mt-10 text-center text-xs text-white/45">Sample previews for illustration. Every real site is designed around your own brand and content.</p>
+  </Container>
+</section>
+
+<style is:global>
+  .wp3d-stage { perspective: 1800px; }
+  .wp3d-rig { position: relative; height: clamp(20rem, 34vw, 30rem); transform-style: preserve-3d; transition: transform 0.4s ease-out; }
+  .wp3d-frame {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: min(46%, 34rem);
+    margin-left: calc(min(46%, 34rem) / -2);
+    border-radius: 0.9rem;
+    background: #222428;
+    box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.75), 0 0 0 1px rgb(255 255 255 / 0.08);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .wp3d-chrome { display: flex; align-items: center; gap: 5px; padding: 0.55rem 0.75rem; }
+  .wp3d-dot { height: 8px; width: 8px; border-radius: 9999px; }
+  .wp3d-url { margin-left: 0.6rem; flex: 1; border-radius: 9999px; background: rgb(255 255 255 / 0.08); padding: 0.15rem 0.7rem; font-size: 9px; color: rgb(255 255 255 / 0.55); }
+  .wp3d-view { aspect-ratio: 16 / 10.5; overflow: hidden; border-radius: 0 0 0.9rem 0.9rem; }
+  .wp3d-page { animation: wp3d-scroll 16s ease-in-out infinite; }
+  .wp3d-frame--agri .wp3d-page { animation-delay: -5s; }
+  .wp3d-frame--clinic .wp3d-page { animation-delay: -10s; }
+  @keyframes wp3d-scroll {
+    0%, 12% { transform: translateY(0); }
+    45%, 60% { transform: translateY(-38%); }
+    92%, 100% { transform: translateY(0); }
+  }
+  .wp3d-cap { position: absolute; left: 0; right: 0; top: calc(100% + 0.9rem); text-align: center; font-size: 11px; color: rgb(255 255 255 / 0.55); }
+  /* fallback layout before GSAP runs (and with reduced motion): a gentle fan */
+  .wp3d-frame[data-frame='0'] { transform: translateX(-62%) translateZ(-160px) rotateY(24deg); }
+  .wp3d-frame[data-frame='1'] { transform: translateZ(40px); z-index: 2; }
+  .wp3d-frame[data-frame='2'] { transform: translateX(62%) translateZ(-160px) rotateY(-24deg); }
+
+  @media (max-width: 767px) {
+    .wp3d-stage { perspective: none; margin-left: -1.5rem; margin-right: -1.5rem; }
+    .wp3d-rig { display: flex; height: auto; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 1.5rem 3rem; scrollbar-width: none; }
+    .wp3d-rig::-webkit-scrollbar { display: none; }
+    .wp3d-frame, .wp3d-frame[data-frame] { position: relative; left: auto; margin-left: 0; width: 82vw; flex-shrink: 0; scroll-snap-align: center; transform: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wp3d-page { animation: none; }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initWp3d() {
+    document.querySelectorAll<HTMLElement>('[data-wp3d]').forEach((root) => {
+      if (root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const rig = root.querySelector<HTMLElement>('[data-rig]')!;
+      const frames = Array.from(root.querySelectorAll<HTMLElement>('[data-frame]'));
+      const mm = gsap.matchMedia();
+
+      mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
+        // stacked and flat -> fanned out in 3D, scrubbed by scroll
+        const end = [
+          { xPercent: -62, z: -160, rotationY: 24, rotationX: 4, y: 0, scale: 1 },
+          { xPercent: 0, z: 40, rotationY: 0, rotationX: 4, y: -10, scale: 1 },
+          { xPercent: 62, z: -160, rotationY: -24, rotationX: 4, y: 0, scale: 1 }
+        ];
+        frames.forEach((f, i) => gsap.set(f, { xPercent: 0, z: -40 * Math.abs(i - 1), rotationY: 0, rotationX: 18, y: 70 + i * 8, scale: 0.82, transformOrigin: '50% 60%' }));
+        const tl = gsap.timeline({ scrollTrigger: { trigger: root, start: 'top 75%', end: 'center 55%', scrub: 0.8 } });
+        frames.forEach((f, i) => tl.to(f, { ...end[i], ease: 'power2.out' }, 0));
+
+        // mouse tilt on the whole rig
+        const onMove = (e: PointerEvent) => {
+          const r = root.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          gsap.to(rig, { rotationY: x * 10, rotationX: -y * 6, duration: 0.8, ease: 'power3.out' });
+        };
+        const onLeave = () => gsap.to(rig, { rotationY: 0, rotationX: 0, duration: 1, ease: 'power3.out' });
+        root.addEventListener('pointermove', onMove);
+        root.addEventListener('pointerleave', onLeave);
+
+        return () => {
+          root.removeEventListener('pointermove', onMove);
+          root.removeEventListener('pointerleave', onLeave);
+        };
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', initWp3d);
+</script>

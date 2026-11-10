@@ -265,3 +265,11 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - **FAQ (`FaqSection.astro`):** category pills moved under the heading as an equal-width 2-col grid; 8 categories, 46 Q&As in a friendly customer-service tone covering the whole site. Grant/SST wording kept out on purpose. Warranty answer matches Terms (30-day bug-fix).
 - **Budget 2027 (`BudgetBrief.astro`, on /solutions):** "Belanjawan 2027 · Budget 2027" label removed; sector cards now a 6-col bento (split, tall, overlay, image-top, tint, plain) with local poster photos; first headline figure is a dark featured card.
 - **Industrial design cards:** SVG illustrations replaced with Unsplash stock photos; heading now "Product ideas we can build with you", badge "Idea 0N", note "Photos are for illustration only". 4 product SVGs deleted; `blueprint-hero.svg` kept as service hero.
+
+## 2026-11-11 (night) — Real tool slideshow, CAD viewer, 3D website preview
+
+- **Slideshow (`ToolSlideshow.astro` + `src/data/toolShowcase.ts`):** "Real tools, real hardware" on all 6 service category pages; 24 open-licensed images in `public/images/tools/` (ThingsBoard docs repo Apache-2.0; Wikimedia Commons, licence + author credited on every slide). IoT: ThingsBoard x3, ChirpStack, Grafana, LoRaWAN gateway, Raspberry Pi 4, soil sensor. Autoplay 5 s, arrows, thumbnails, swipe, keys.
+- **CAD viewer (`CadViewer.astro`, on Industrial Design):** three.js Tuah robot, orbit/zoom/pan, Iso/Front/Side/Top, Shaded+edges/Shaded/Wireframe/X-ray, Explode, Auto-rotate, model tree + properties, rotates with page scroll. Wheel zoom only after clicking the canvas (`data-lenis-prevent`), so page scroll is never hijacked. three loads lazily when near the screen.
+- **Website preview (`WebsitePreview3D.astro`, on Systems/Web page):** 3 HTML-drawn sample sites (Kopi Kampung, AgriSense, Klinik Sihat) in browser frames that fan out in 3D on scroll (GSAP ScrollTrigger) and tilt with the mouse; swipe row on mobile.
+- **Verified:** build 0 errors; Edge + playwright: no console errors, CAD buttons work, 0 px horizontal overflow at 390 px.
+- **Deploy:** Cloudflare Pages auto-deploys `main` to wssdevlabs.com (confirmed live).

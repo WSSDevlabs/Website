@@ -8,6 +8,9 @@ import MarketingAds from '../../components/sections/MarketingAds.astro';
 import MarketingSeo from '../../components/sections/MarketingSeo.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import CTABand from '../../components/sections/CTABand.astro';
+import ToolSlideshow from '../../components/sections/ToolSlideshow.astro';
+import WebsitePreview3D from '../../components/sections/WebsitePreview3D.astro';
+import { TOOL_SLIDES } from '../../data/toolShowcase';
 import IndustrialDesign from '../../components/sections/IndustrialDesign.astro';
 import { SERVICE_CATEGORIES, getServicesForCategory } from '../../data/serviceCategories';
 import { TESTIMONIALS } from '../../data/testimonials';
@@ -398,6 +401,10 @@ const websiteDesignPricingTables: PricingTable[] = [
       </Section>
     )
   }
+
+  {TOOL_SLIDES[category.slug] && <ToolSlideshow slides={TOOL_SLIDES[category.slug]} />}
+
+  {category.slug === 'web-software-app-development' && <WebsitePreview3D />}
 
   {
     category.slug === 'web-software-app-development' && (() => {
