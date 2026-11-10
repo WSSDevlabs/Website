@@ -249,3 +249,11 @@ Verified at various points throughout: `astro check` 0 errors repeatedly; a full
 - `src/scripts/redCursor.ts`: red dot + trailing ring on the home page (fine pointer only).
 - Home sectors section is now a coverflow deck (`HomeSectors.astro`): centre card in colour, others metallic grey, click/hover/arrows/swipe/keys to select.
 - Verified in Edge: build 0 errors, 24 pages, 0 broken links, no overflow at 375px.
+
+## 2026-11-11 — Industrial & Product Design service added
+
+- **New category:** `/services/industrial-product-design` (6th category, between Digital Design and Consulting); service slug `industrial-design` in `services.json`; listed on home services list (05), `/services` accordion and services popup.
+- **Showcase:** `src/components/sections/IndustrialDesign.astro`: 4 concept products (Tuah desk robot, Sayong labu-sayong heritage lamp, Tunas smart planter, Ladang solar LoRa field node) + 5-step process + deliverables. Illustrations are hand-written SVGs in `public/images/industrial/` (incl. `blueprint-hero.svg`). Concepts only, not for sale.
+- **.gitignore:** ignores `WebsiteImage/*.pdf`, `WebsiteImage/images.jpg` (unrelated Sinar Wau files), Thumbs.db, desktop.ini, *.log, `.env.*`.
+- **Verified:** `npm run build` (astro check clean), 27 pages; SVGs + page screenshotted via headless Edge.
+- **Open:** 14 old commits (2026-08-22 to 2026-09-19) still carry `Co-Authored-By: Claude` trailers; removing needs history rewrite + force push, founder to decide.

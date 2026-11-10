@@ -645,6 +645,50 @@
         "Edge inference"
       ],
       "faq": []
+    },
+    {
+      "slug": "industrial-design",
+      "title": "Industrial & Product Design",
+      "group": "Build",
+      "shortDescription": "Physical products designed from first sketch to working prototype: smart devices, IoT enclosures, lighting and consumer gadgets.",
+      "valueProp": "One team designs the shape, the electronics and the app behind it, so your product idea becomes something you can hold, test and show investors or buyers.",
+      "problem": "Most product ideas stall between the sketch and the factory. Designers draw it, engineers redraw it, and the electronics never quite fit the casing. We keep form, hardware and software in the same room from day one.",
+      "deliverables": [
+        "Concept sketches and 3D renders",
+        "CAD models ready for 3D printing, CNC or injection moulding",
+        "Working prototypes with electronics fitted",
+        "Embedded firmware and companion app where the product is smart",
+        "Design for manufacture and small-batch production support"
+      ],
+      "approach": [
+        "Brief: who uses it, where, and what it must do",
+        "Sketch and render concepts to choose a direction",
+        "CAD and 3D-printed looks-like / works-like prototypes",
+        "Fit electronics, firmware and app, then test with real users",
+        "Refine for manufacture and hand over production files"
+      ],
+      "tools": [
+        "Fusion 360",
+        "SolidWorks",
+        "Blender",
+        "KiCad",
+        "ESP32",
+        "3D printing"
+      ],
+      "faq": [
+        {
+          "question": "Can you design a product that does not exist yet?",
+          "answer": "Yes, that is most of what this service is. Bring a rough idea or a napkin sketch; we turn it into renders first so you can see it before spending on prototypes."
+        },
+        {
+          "question": "Do you manufacture the product?",
+          "answer": "We build prototypes and small batches in-house or with local fabricators, and prepare the production files and supplier hand-off for larger runs."
+        },
+        {
+          "question": "Who owns the design?",
+          "answer": "You do. CAD files, renders and firmware source are handed over at the end of the project, as written in the agreement."
+        }
+      ]
     }
   ]
 }

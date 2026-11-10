@@ -8,29 +8,28 @@ const { cfAnalyticsToken } = Astro.props;
 
 <div
   id="cookie-consent"
-  class="fixed inset-x-4 bottom-4 z-50 hidden max-w-xl rounded-2xl border border-line bg-paper p-5 shadow-lg md:inset-x-auto md:left-6"
+  class="fixed inset-x-3 bottom-3 z-50 hidden max-w-md rounded-2xl border border-line bg-paper p-4 shadow-lg pb-[max(1rem,env(safe-area-inset-bottom))] md:inset-x-auto md:bottom-6 md:left-6 md:p-5"
   role="dialog"
   aria-live="polite"
   aria-label="Cookie consent"
   data-cf-token={cfAnalyticsToken || ''}
 >
-  <p class="text-sm text-ink-dim">
-    We use privacy-friendly analytics to understand site usage. No tracking cookies, no cross-site
-    profiling. Analytics only runs after you click Allow. See our{' '}
-    <a href="/cookies" class="underline hover:text-accent">Cookie Policy</a>.
+  <p class="text-xs leading-relaxed text-ink-dim md:text-sm">
+    We use privacy-friendly analytics. No tracking cookies. It only runs if you click Allow.{' '}
+    <a href="/cookies" class="underline hover:text-accent">Cookie Policy</a>
   </p>
-  <div class="mt-4 flex gap-3">
+  <div class="mt-3 grid grid-cols-2 gap-2 md:flex md:gap-3">
     <button
       id="cookie-accept"
       type="button"
-      class="rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper hover:bg-accent"
+      class="rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-paper hover:bg-accent"
     >
-      Allow cookies
+      Allow
     </button>
     <button
       id="cookie-dismiss"
       type="button"
-      class="rounded-full px-4 py-2 text-sm font-medium text-ink-dim hover:text-ink"
+      class="rounded-full border border-line px-4 py-2.5 text-sm font-medium text-ink-dim hover:text-ink"
     >
       Reject
     </button>

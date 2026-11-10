@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="t">
+  <title id="t">Concept render: Tuah, a small desk companion robot with a screen face, sitting on a wooden desk</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef1f6"/>
+      <stop offset="1" stop-color="#dde3ec"/>
+    </linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c49469"/>
+      <stop offset="1" stop-color="#9c6c45"/>
+    </linearGradient>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#f1f3f6"/>
+      <stop offset="1" stop-color="#cfd5dd"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d2229"/>
+      <stop offset="1" stop-color="#0d1014"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7d8792"/>
+      <stop offset="0.5" stop-color="#b9c1ca"/>
+      <stop offset="1" stop-color="#6f7983"/>
+    </linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="chip" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1b2433" flood-opacity="0.16"/></filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="400" cy="250" r="230" fill="#ffffff" opacity="0.55"/>
+  <rect y="455" width="800" height="145" fill="url(#desk)"/>
+  <rect y="455" width="800" height="4" fill="#d8ad84"/>
+
+  <!-- mug -->
+  <ellipse cx="150" cy="470" rx="52" ry="8" fill="#000" opacity="0.18" filter="url(#blur)"/>
+  <path d="M110 380 h80 v78 a14 14 0 0 1 -14 14 h-52 a14 14 0 0 1 -14 -14z" fill="#e8553f"/>
+  <path d="M190 398 h10 a18 18 0 0 1 0 36 h-10" fill="none" stroke="#e8553f" stroke-width="9"/>
+  <ellipse cx="150" cy="380" rx="40" ry="7" fill="#7a3a24"/>
+  <path d="M136 350 q-8 -12 2 -24 M156 352 q-8 -12 2 -24" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- robot shadow -->
+  <ellipse cx="400" cy="472" rx="150" ry="16" fill="#000" opacity="0.25" filter="url(#blur)"/>
+
+  <!-- base with LED ring -->
+  <rect x="295" y="408" width="210" height="58" rx="29" fill="url(#shell)"/>
+  <rect x="325" y="438" width="150" height="7" rx="3.5" fill="#5ad1ff" filter="url(#glow)"/>
+  <rect x="325" y="438" width="150" height="7" rx="3.5" fill="#9be5ff"/>
+
+  <!-- arms -->
+  <rect x="290" y="318" width="34" height="78" rx="17" fill="url(#shell)" transform="rotate(14 307 357)"/>
+  <rect x="476" y="318" width="34" height="78" rx="17" fill="url(#shell)" transform="rotate(-14 493 357)"/>
+
+  <!-- body -->
+  <rect x="318" y="296" width="164" height="128" rx="52" fill="url(#shell)"/>
+  <g fill="#aab2bc">
+    <circle cx="384" cy="360" r="3.2"/><circle cx="400" cy="360" r="3.2"/><circle cx="416" cy="360" r="3.2"/>
+    <circle cx="392" cy="374" r="3.2"/><circle cx="408" cy="374" r="3.2"/>
+    <circle cx="384" cy="388" r="3.2"/><circle cx="400" cy="388" r="3.2"/><circle cx="416" cy="388" r="3.2"/>
+  </g>
+  <circle cx="452" cy="322" r="6" fill="#2ecc8f"/>
+
+  <!-- neck -->
+  <rect x="384" y="276" width="32" height="30" rx="6" fill="url(#metal)"/>
+
+  <!-- head -->
+  <rect x="262" y="122" width="276" height="166" rx="72" fill="url(#shell)"/>
+  <rect x="288" y="146" width="224" height="118" rx="52" fill="url(#screen)"/>
+  <path d="M310 170 q40 -18 110 -16" stroke="#ffffff" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.08"/>
+  <g filter="url(#glow)" fill="#5ad1ff" opacity="0.9">
+    <rect x="344" y="182" width="28" height="44" rx="14"/>
+    <rect x="428" y="182" width="28" height="44" rx="14"/>
+  </g>
+  <g fill="#bdf0ff">
+    <rect x="344" y="182" width="28" height="44" rx="14"/>
+    <rect x="428" y="182" width="28" height="44" rx="14"/>
+  </g>
+  <path d="M384 240 q16 12 32 0" stroke="#5ad1ff" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <ellipse cx="322" cy="236" rx="12" ry="7" fill="#ff6a8a" opacity="0.35"/>
+  <ellipse cx="478" cy="236" rx="12" ry="7" fill="#ff6a8a" opacity="0.35"/>
+
+  <!-- antenna -->
+  <rect x="396" y="92" width="8" height="34" rx="4" fill="url(#metal)"/>
+  <circle cx="400" cy="88" r="13" fill="#e8553f" filter="url(#glow)" opacity="0.6"/>
+  <circle cx="400" cy="88" r="11" fill="#e8553f"/>
+  <circle cx="396" cy="84" r="3.5" fill="#ffffff" opacity="0.7"/>
+
+  <!-- floating UI chips -->
+  <g filter="url(#chip)">
+    <rect x="560" y="150" width="176" height="52" rx="26" fill="#ffffff"/>
+    <circle cx="588" cy="176" r="12" fill="#5ad1ff" opacity="0.25"/>
+    <circle cx="588" cy="176" r="6" fill="#1aa6d9"/>
+    <text x="608" y="182" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#16191e">Focus 25:00</text>
+  </g>
+  <g filter="url(#chip)">
+    <rect x="586" y="226" width="150" height="46" rx="23" fill="#16191e"/>
+    <text x="608" y="255" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#ffffff">Sit up, boss</text>
+  </g>
+  <g filter="url(#chip)">
+    <rect x="70" y="200" width="150" height="46" rx="23" fill="#ffffff"/>
+    <text x="94" y="229" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" fill="#16191e">3 new orders</text>
+  </g>
+
+  <text x="40" y="565" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#ffffff" opacity="0.85">CONCEPT 01 · TUAH DESK COMPANION</text>
+</svg>

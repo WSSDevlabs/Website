@@ -42,6 +42,14 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     services: ['ui-ux-design', 'branding-services', 'product-photoshoot-marketing', 'media-creation', 'digital-marketing']
   },
   {
+    slug: 'industrial-product-design',
+    title: 'Industrial & Product Design',
+    tagline: 'Make',
+    description:
+      'Some ideas need to be held, not just clicked. We design physical products from the first sketch to a working prototype: smart desk gadgets, IoT devices, lighting with a local story, and the enclosures that protect your sensors in the field.',
+    services: ['industrial-design']
+  },
+  {
     slug: 'digital-consulting-solutions',
     title: 'Digital Consulting & Solutions',
     tagline: 'Grow & Care',

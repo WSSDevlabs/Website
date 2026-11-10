@@ -23,3 +23,14 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .gstack/
+
+# local scratch / unrelated working files (not website assets)
+WebsiteImage/*.pdf
+WebsiteImage/images.jpg
+
+# OS / tooling
+Thumbs.db
+desktop.ini
+*.log
+.env.*
+!.env.example

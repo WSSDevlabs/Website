@@ -8,6 +8,7 @@ import MarketingAds from '../../components/sections/MarketingAds.astro';
 import MarketingSeo from '../../components/sections/MarketingSeo.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import CTABand from '../../components/sections/CTABand.astro';
+import IndustrialDesign from '../../components/sections/IndustrialDesign.astro';
 import { SERVICE_CATEGORIES, getServicesForCategory } from '../../data/serviceCategories';
 import { TESTIMONIALS } from '../../data/testimonials';
 import { GROUP_TONE, TONE_TEXT_CLASS, TONE_BORDER_CLASS, TONE_BG_SOFT_CLASS } from '../../lib/tone';
@@ -105,6 +106,7 @@ const serviceImages: Record<string, [string, string]> = {
     'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1400&h=800&q=80',
     'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=700&h=460&q=80',
   ],
+  'industrial-design': ['/images/industrial/blueprint-hero.svg', '/images/industrial/desk-robot.svg'],
 };
 
 const toneAccent: Record<string, string> = {
@@ -678,9 +680,6 @@ const websiteDesignPricingTables: PricingTable[] = [
                             ]}
                           >
                             <p class="text-xl font-black">{tier.price}</p>
-                            <p class:list={['mt-0.5 text-[11px]', isPopular ? 'text-white/70' : 'text-ink-dim']}>
-                              Subject to 8% SST
-                            </p>
                           </td>
                         );
                       })}
@@ -713,9 +712,7 @@ const websiteDesignPricingTables: PricingTable[] = [
                         <td class="bg-charcoal p-4 text-sm font-semibold text-white">Subsequent Yearly Renewal</td>
                         {table.renewal.map((price) => (
                           <td class="border-l border-line p-4 text-center">
-                            <p class="text-sm font-bold text-ink">{price}</p>
-                            <p class="text-[10px] text-ink-dim">Subject to 8% SST</p>
-                          </td>
+                            <p class="text-sm font-bold text-ink">{price}</p>                          </td>
                         ))}
                       </tr>
                     )}
@@ -935,6 +932,7 @@ const websiteDesignPricingTables: PricingTable[] = [
     )
   }
 
+  {category.slug === 'industrial-product-design' && <IndustrialDesign />}
   {category.slug === 'digital-consulting-solutions' && <TrainingCourses />}
   {services.some((s) => s.slug === 'grant-government-project-support') && !isSpotlight && <GrantSolutions />}
 

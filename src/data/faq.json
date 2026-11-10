@@ -2,7 +2,7 @@
   "home": [
     {
       "question": "What kinds of projects do you take on?",
-      "answer": "Websites, mobile apps, custom systems, AI features, marketing, branding, product photography, UI/UX redesigns, and grant-funded builds. If it is digital, we probably do it."
+      "answer": "Websites, mobile apps, custom systems, AI features, marketing, branding, product photography, and UI/UX redesigns. If it is digital, we probably do it."
     },
     {
       "question": "I need something that does not fit neatly into one service, what do I do?",
@@ -43,10 +43,6 @@
     {
       "question": "How long does a typical project take?",
       "answer": "Launch sites typically deliver in 1 to 2 weeks, Expand in 2 to 4 weeks, Grow in 4 to 8 weeks, and Custom projects are scoped individually based on complexity."
-    },
-    {
-      "question": "Can I use a government grant to pay for my website?",
-      "answer": "Often, yes. The MSME Digital Grant MADANI matches 50% of eligible digital spending, up to RM5,000, for Malaysian SMEs registered at least 6 months with SSM. It's first-come, first-served, and a business can only claim it once, so we recommend checking eligibility early. We provide the invoice and documentation you need to apply, ask us during your quote."
     }
   ]
 }
